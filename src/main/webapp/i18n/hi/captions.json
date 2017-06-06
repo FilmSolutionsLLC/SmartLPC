@@ -1,0 +1,24 @@
+{
+    "smartLpcApp": {
+        "captions" : {
+            "home": {
+                "title": "Captions",
+                "createLabel": "नया Captions बनाएँ",
+                "createOrEditLabel": "Captions बनाएँ या संपादित करें",
+                "search": "Captions खोजें"
+            },
+            "created": "एक नया Captions [identifier: {{ param }}] तैयार है",
+            "updated": "एक Captions [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Captions [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "Captions [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "Captions"
+            },
+            "captionText": "CaptionText",
+            "captionDttm": "CaptionDttm",
+            "project": "Project"
+        }
+    }
+}

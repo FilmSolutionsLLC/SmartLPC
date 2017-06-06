@@ -1,0 +1,24 @@
+{
+    "smartLpcApp": {
+        "captions" : {
+            "home": {
+                "title": "Captions",
+                "createLabel": "Maak een nieuwe Captions",
+                "createOrEditLabel": "Maak of wijzig een Captions",
+                "search": "Search for Captions"
+            },
+            "created": "A new Captions is created with identifier {{ param }}",
+            "updated": "A Captions is updated with identifier {{ param }}",
+            "deleted": "A Captions is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Bent u zeker dat u Captions {{ id }} wilt verwijderen?"
+            },
+            "detail": {
+                "title": "Captions"
+            },
+            "captionText": "CaptionText",
+            "captionDttm": "CaptionDttm",
+            "project": "Project"
+        }
+    }
+}

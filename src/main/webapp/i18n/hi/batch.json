@@ -1,0 +1,30 @@
+{
+    "smartLpcApp": {
+        "batch" : {
+            "home": {
+                "title": "Batches",
+                "createLabel": "नया Batch बनाएँ",
+                "createOrEditLabel": "Batch बनाएँ या संपादित करें",
+                "search": "Batch खोजें"
+            },
+            "created": "एक नया Batch [identifier: {{ param }}] तैयार है",
+            "updated": "एक Batch [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Batch [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "Batch [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "Batch"
+            },
+            "name": "Name",
+            "createdTime": "CreatedTime",
+            "updatedTime": "UpdatedTime",
+            "coverImageId": "CoverImageId",
+            "isAsset": "IsAsset",
+            "isHidden": "IsHidden",
+            "project": "Project",
+            "createdByAdminUser": "CreatedByAdminUser",
+            "updatedByAdminUser": "UpdatedByAdminUser"
+        }
+    }
+}

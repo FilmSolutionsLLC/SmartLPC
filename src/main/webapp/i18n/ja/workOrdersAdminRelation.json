@@ -1,0 +1,24 @@
+{
+    "smartLpcApp": {
+        "workOrdersAdminRelation" : {
+            "home": {
+                "title": "WorkOrdersAdminRelations",
+                "createLabel": "WorkOrdersAdminRelation を追加",
+                "createOrEditLabel": "WorkOrdersAdminRelationを追加または編集",
+                "search": "Search for WorkOrdersAdminRelation"
+            },
+            "created": "A new WorkOrdersAdminRelation is created with identifier {{ param }}",
+            "updated": "A WorkOrdersAdminRelation is updated with identifier {{ param }}",
+            "deleted": "A WorkOrdersAdminRelation is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "WorkOrdersAdminRelation {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "WorkOrdersAdminRelation"
+            },
+            "workOrder": "WorkOrder",
+            "admin_user": "Admin_user",
+            "relation_type": "Relation_type"
+        }
+    }
+}

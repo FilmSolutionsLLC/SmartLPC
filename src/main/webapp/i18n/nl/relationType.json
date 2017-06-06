@@ -1,0 +1,22 @@
+{
+    "smartLpcApp": {
+        "relationType" : {
+            "home": {
+                "title": "RelationTypes",
+                "createLabel": "Maak een nieuwe RelationType",
+                "createOrEditLabel": "Maak of wijzig een RelationType",
+                "search": "Search for RelationType"
+            },
+            "created": "A new RelationType is created with identifier {{ param }}",
+            "updated": "A RelationType is updated with identifier {{ param }}",
+            "deleted": "A RelationType is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Bent u zeker dat u RelationType {{ id }} wilt verwijderen?"
+            },
+            "detail": {
+                "title": "RelationType"
+            },
+            "relation": "Relation"
+        }
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "smartLpcApp": {
+        "captions" : {
+            "home": {
+                "title": "Captions",
+                "createLabel": "Captions を追加",
+                "createOrEditLabel": "Captionsを追加または編集",
+                "search": "Search for Captions"
+            },
+            "created": "A new Captions is created with identifier {{ param }}",
+            "updated": "A Captions is updated with identifier {{ param }}",
+            "deleted": "A Captions is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Captions {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "Captions"
+            },
+            "captionText": "CaptionText",
+            "captionDttm": "CaptionDttm",
+            "project": "Project"
+        }
+    }
+}

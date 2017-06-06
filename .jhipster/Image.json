@@ -1,0 +1,77 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "batch",
+            "otherEntityName": "batch",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "createdByUser",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "updatedByUser",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "captionId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "commentDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "releaseTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "ingestTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "quickpickSelectedTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "createdTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "updatedTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "photographer",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "video",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "hidden",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "webUpload",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20161028170510",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "image",
+    "pagination": "pagination"
+}

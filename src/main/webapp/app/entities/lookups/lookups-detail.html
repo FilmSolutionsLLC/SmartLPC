@@ -1,0 +1,28 @@
+
+<div>
+    <h2><span translate="smartLpcApp.lookups.detail.title">Lookups</span> {{vm.lookups.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span translate="smartLpcApp.lookups.tableName">TableName</dt></dt>
+        <dd>
+            <span>{{vm.lookups.tableName}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.lookups.fieldName">FieldName</dt></dt>
+        <dd>
+            <span>{{vm.lookups.fieldName}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.lookups.textValue">TextValue</dt></dt>
+        <dd>
+            <span>{{vm.lookups.textValue}}<span>
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

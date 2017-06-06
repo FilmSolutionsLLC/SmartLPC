@@ -1,0 +1,24 @@
+{
+    "smartLpcApp": {
+        "storage_Servers" : {
+            "home": {
+                "title": "Storage_Servers",
+                "createLabel": "Storage_Servers を追加",
+                "createOrEditLabel": "Storage_Serversを追加または編集",
+                "search": "Search for Storage_Servers"
+            },
+            "created": "A new Storage_Servers is created with identifier {{ param }}",
+            "updated": "A Storage_Servers is updated with identifier {{ param }}",
+            "deleted": "A Storage_Servers is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Storage_Servers {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "Storage_Servers"
+            },
+            "name": "Name",
+            "ipAddress": "IpAddress",
+            "remote": "Remote"
+        }
+    }
+}

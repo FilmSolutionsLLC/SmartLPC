@@ -1,0 +1,28 @@
+
+<div>
+    <h2><span translate="smartLpcApp.workOrdersAdminRelation.detail.title">WorkOrdersAdminRelation</span> {{vm.workOrdersAdminRelation.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span translate="smartLpcApp.workOrdersAdminRelation.workOrder">workOrder</span></dt>
+        <dd>
+            <a ui-sref="work-order-detail({id:vm.workOrdersAdminRelation.workOrder.id})">{{vm.workOrdersAdminRelation.workOrder.id}}</a>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.workOrdersAdminRelation.admin_user">admin_user</span></dt>
+        <dd>
+            {{vm.workOrdersAdminRelation.admin_user.firstName}}
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.workOrdersAdminRelation.relation_type">relation_type</span></dt>
+        <dd>
+            <a ui-sref="relation-type-detail({id:vm.workOrdersAdminRelation.relation_type.id})">{{vm.workOrdersAdminRelation.relation_type.relation}}</a>
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

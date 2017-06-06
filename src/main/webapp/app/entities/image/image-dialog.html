@@ -1,0 +1,136 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myImageLabel" translate="smartLpcApp.image.home.createOrEditLabel">Create or edit a Image</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.image.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.image.captionId" for="field_captionId">CaptionId</label>
+            <input type="number" class="form-control" name="captionId" id="field_captionId"
+                    ng-model="vm.image.captionId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.image.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.image.name"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.image.commentDescription" for="field_commentDescription">CommentDescription</label>
+            <input type="text" class="form-control" name="commentDescription" id="field_commentDescription"
+                    ng-model="vm.image.commentDescription"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.image.releaseTime" for="field_releaseTime">ReleaseTime</label>
+                <div class="input-group">
+                    <input id="field_releaseTime" type="text" class="form-control" name="releaseTime" datetime-picker="{{dateformat}}" ng-model="vm.image.releaseTime" is-open="vm.datePickerOpenStatus.releaseTime"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('releaseTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.image.ingestTime" for="field_ingestTime">IngestTime</label>
+                <div class="input-group">
+                    <input id="field_ingestTime" type="text" class="form-control" name="ingestTime" datetime-picker="{{dateformat}}" ng-model="vm.image.ingestTime" is-open="vm.datePickerOpenStatus.ingestTime"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('ingestTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.image.quickpickSelectedTime" for="field_quickpickSelectedTime">QuickpickSelectedTime</label>
+                <div class="input-group">
+                    <input id="field_quickpickSelectedTime" type="text" class="form-control" name="quickpickSelectedTime" datetime-picker="{{dateformat}}" ng-model="vm.image.quickpickSelectedTime" is-open="vm.datePickerOpenStatus.quickpickSelectedTime"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('quickpickSelectedTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.image.createdTime" for="field_createdTime">CreatedTime</label>
+                <div class="input-group">
+                    <input id="field_createdTime" type="text" class="form-control" name="createdTime" datetime-picker="{{dateformat}}" ng-model="vm.image.createdTime" is-open="vm.datePickerOpenStatus.createdTime"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.image.updatedTime" for="field_updatedTime">UpdatedTime</label>
+                <div class="input-group">
+                    <input id="field_updatedTime" type="text" class="form-control" name="updatedTime" datetime-picker="{{dateformat}}" ng-model="vm.image.updatedTime" is-open="vm.datePickerOpenStatus.updatedTime"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('updatedTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.image.photographer" for="field_photographer">Photographer</label>
+            <input type="text" class="form-control" name="photographer" id="field_photographer"
+                    ng-model="vm.image.photographer"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.image.video" for="field_video">Video</label>
+            <input type="checkbox" class="form-control" name="video" id="field_video"
+                    ng-model="vm.image.video"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.image.hidden" for="field_hidden">Hidden</label>
+            <input type="checkbox" class="form-control" name="hidden" id="field_hidden"
+                    ng-model="vm.image.hidden"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.image.webUpload" for="field_webUpload">WebUpload</label>
+            <input type="checkbox" class="form-control" name="webUpload" id="field_webUpload"
+                    ng-model="vm.image.webUpload"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="smartLpcApp.image.batch" for="field_batch">batch</label>
+            <select class="form-control" id="field_batch" name="batch" ng-model="vm.image.batch" ng-options="batch as batch.name for batch in vm.batchs track by batch.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.image.createdByUser" for="field_createdByUser">createdByUser</label>
+            <select class="form-control" id="field_createdByUser" name="createdByUser" ng-model="vm.image.createdByUser" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.image.updatedByUser" for="field_updatedByUser">updatedByUser</label>
+            <select class="form-control" id="field_updatedByUser" name="updatedByUser" ng-model="vm.image.updatedByUser" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

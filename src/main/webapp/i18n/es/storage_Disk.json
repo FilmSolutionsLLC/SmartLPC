@@ -1,0 +1,29 @@
+{
+    "smartLpcApp": {
+        "storage_Disk" : {
+            "home": {
+                "title": "Storage_Disks",
+                "createLabel": "Crear nuevo Storage_Disk",
+                "createOrEditLabel": "Crear o editar Storage_Disk",
+                "search": "Search for Storage_Disk"
+            },
+            "created": "Un nuevo Storage_Disk ha sido creado con el identificador {{ param }}",
+            "updated": "Un Storage_Disk ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Storage_Disk ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Storage_Disk {{ id }}?"
+            },
+            "detail": {
+                "title": "Storage_Disk"
+            },
+            "name": "Name",
+            "size": "Size",
+            "used": "Used",
+            "available": "Available",
+            "usePercent": "UsePercent",
+            "lastUpdated": "LastUpdated",
+            "reserved": "Reserved",
+            "server": "Server"
+        }
+    }
+}

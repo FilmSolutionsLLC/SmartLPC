@@ -1,0 +1,27 @@
+{
+    "smartLpcApp": {
+        "testEntity" : {
+            "home": {
+                "title": "TestEntities",
+                "createLabel": "Create a new TestEntity",
+                "createOrEditLabel": "Create or edit a TestEntity",
+                "search": "Search for TestEntity"
+            },
+            "created": "A new TestEntity is created with identifier {{ param }}",
+            "updated": "A TestEntity is updated with identifier {{ param }}",
+            "deleted": "A TestEntity is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete TestEntity {{ id }}?"
+            },
+            "detail": {
+                "title": "TestEntity"
+            },
+            "name": "Name",
+            "age": "Age",
+            "city": "City",
+            "currentDateTime": "CurrentDateTime",
+            "currentDate": "CurrentDate",
+            "test": "Test"
+        }
+    }
+}

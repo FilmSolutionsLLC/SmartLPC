@@ -1,0 +1,170 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myProjectRolesLabel" translate="smartLpcApp.projectRoles.home.createOrEditLabel">Create or edit a ProjectRoles</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.projectRoles.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.soloKillPct" for="field_soloKillPct">SoloKillPct</label>
+            <input type="number" class="form-control" name="soloKillPct" id="field_soloKillPct"
+                    ng-model="vm.projectRoles.soloKillPct"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.groupKillPct" for="field_groupKillPct">GroupKillPct</label>
+            <input type="number" class="form-control" name="groupKillPct" id="field_groupKillPct"
+                    ng-model="vm.projectRoles.groupKillPct"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.miniFullDt" for="field_miniFullDt">MiniFullDt</label>
+                <div class="input-group">
+                    <input id="field_miniFullDt" type="text" class="form-control" name="miniFullDt" uib-datepicker-popup="{{dateformat}}" ng-model="vm.projectRoles.miniFullDt" is-open="vm.datePickerOpenStatus.miniFullDt"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('miniFullDt')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.fullFinalDt" for="field_fullFinalDt">FullFinalDt</label>
+                <div class="input-group">
+                    <input id="field_fullFinalDt" type="text" class="form-control" name="fullFinalDt" uib-datepicker-popup="{{dateformat}}" ng-model="vm.projectRoles.fullFinalDt" is-open="vm.datePickerOpenStatus.fullFinalDt"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fullFinalDt')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.disabled" for="field_disabled">Disabled</label>
+            <input type="checkbox" class="form-control" name="disabled" id="field_disabled"
+                    ng-model="vm.projectRoles.disabled"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.characterName" for="field_characterName">CharacterName</label>
+            <input type="text" class="form-control" name="characterName" id="field_characterName"
+                    ng-model="vm.projectRoles.characterName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.startDate" for="field_startDate">StartDate</label>
+                <div class="input-group">
+                    <input id="field_startDate" type="text" class="form-control" name="startDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.projectRoles.startDate" is-open="vm.datePickerOpenStatus.startDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.daysWorking" for="field_daysWorking">DaysWorking</label>
+            <input type="number" class="form-control" name="daysWorking" id="field_daysWorking"
+                    ng-model="vm.projectRoles.daysWorking"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.excSologroup" for="field_excSologroup">ExcSologroup</label>
+            <input type="checkbox" class="form-control" name="excSologroup" id="field_excSologroup"
+                    ng-model="vm.projectRoles.excSologroup"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.notes" for="field_notes">Notes</label>
+            <input type="text" class="form-control" name="notes" id="field_notes"
+                    ng-model="vm.projectRoles.notes"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.tagName" for="field_tagName">TagName</label>
+            <input type="text" class="form-control" name="tagName" id="field_tagName"
+                    ng-model="vm.projectRoles.tagName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.hotkeyValue" for="field_hotkeyValue">HotkeyValue</label>
+            <input type="text" class="form-control" name="hotkeyValue" id="field_hotkeyValue"
+                    ng-model="vm.projectRoles.hotkeyValue"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.expireDate" for="field_expireDate">ExpireDate</label>
+                <div class="input-group">
+                    <input id="field_expireDate" type="text" class="form-control" name="expireDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.projectRoles.expireDate" is-open="vm.datePickerOpenStatus.expireDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('expireDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.tertiaryKillPct" for="field_tertiaryKillPct">TertiaryKillPct</label>
+            <input type="number" class="form-control" name="tertiaryKillPct" id="field_tertiaryKillPct"
+                    ng-model="vm.projectRoles.tertiaryKillPct"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.createdDate" for="field_createdDate">CreatedDate</label>
+                <div class="input-group">
+                    <input id="field_createdDate" type="text" class="form-control" name="createdDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.projectRoles.createdDate" is-open="vm.datePickerOpenStatus.createdDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectRoles.updatedDate" for="field_updatedDate">UpdatedDate</label>
+                <div class="input-group">
+                    <input id="field_updatedDate" type="text" class="form-control" name="updatedDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.projectRoles.updatedDate" is-open="vm.datePickerOpenStatus.updatedDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('updatedDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label translate="smartLpcApp.projectRoles.project" for="field_project">project</label>
+            <select class="form-control" id="field_project" name="project" ng-model="vm.projectRoles.project" ng-options="projects as projects.name for projects in vm.projectss track by projects.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projectRoles.contact" for="field_contact">contact</label>
+            <select class="form-control" id="field_contact" name="contact" ng-model="vm.projectRoles.contact" ng-options="contacts as contacts.fullName for contacts in vm.contactss track by contacts.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projectRoles.createdByAdminUser" for="field_createdByAdminUser">createdByAdminUser</label>
+            <select class="form-control" id="field_createdByAdminUser" name="createdByAdminUser" ng-model="vm.projectRoles.createdByAdminUser" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projectRoles.updatedByAdminUser" for="field_updatedByAdminUser">updatedByAdminUser</label>
+            <select class="form-control" id="field_updatedByAdminUser" name="updatedByAdminUser" ng-model="vm.projectRoles.updatedByAdminUser" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

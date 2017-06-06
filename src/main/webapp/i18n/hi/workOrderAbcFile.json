@@ -1,0 +1,25 @@
+{
+    "smartLpcApp": {
+        "workOrderAbcFile" : {
+            "home": {
+                "title": "WorkOrderAbcFiles",
+                "createLabel": "नया WorkOrderAbcFile बनाएँ",
+                "createOrEditLabel": "WorkOrderAbcFile बनाएँ या संपादित करें",
+                "search": "WorkOrderAbcFile खोजें"
+            },
+            "created": "एक नया WorkOrderAbcFile [identifier: {{ param }}] तैयार है",
+            "updated": "एक WorkOrderAbcFile [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "WorkOrderAbcFile [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "WorkOrderAbcFile [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "WorkOrderAbcFile"
+            },
+            "file_count": "File_count",
+            "file_size": "File_size",
+            "workOrder": "WorkOrder",
+            "file_type": "File_type"
+        }
+    }
+}

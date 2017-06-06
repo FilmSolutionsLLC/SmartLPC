@@ -1,0 +1,25 @@
+{
+    "smartLpcApp": {
+        "workOrderAbcFile" : {
+            "home": {
+                "title": "WorkOrderAbcFiles",
+                "createLabel": "WorkOrderAbcFile erstellen",
+                "createOrEditLabel": "WorkOrderAbcFile erstellen oder bearbeiten",
+                "search": "Suche nach WorkOrderAbcFile"
+            },
+            "created": "WorkOrderAbcFile erstellt mit ID {{ param }}",
+            "updated": "WorkOrderAbcFile aktualisiert mit ID {{ param }}",
+            "deleted": "WorkOrderAbcFile gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll WorkOrderAbcFile {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "WorkOrderAbcFile"
+            },
+            "file_count": "File_count",
+            "file_size": "File_size",
+            "workOrder": "WorkOrder",
+            "file_type": "File_type"
+        }
+    }
+}

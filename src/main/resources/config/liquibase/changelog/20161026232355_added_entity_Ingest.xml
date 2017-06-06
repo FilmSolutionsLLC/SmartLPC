@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle"/>
+
+    <!--
+        Added the entity Ingest.
+    -->
+    <changeSet id="20161026232355" author="jhipster">
+        <createTable tableName="ingest">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ingest_start_time" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="ingest_completed_time" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="total_images" type="integer">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="total_done" type="double">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="completed" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="user_id" type="bigint"/>
+            <column name="action_id" type="bigint"/>
+            <column name="server_id" type="bigint"/>
+            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="ingest" columnName="ingest_start_time" columnDataType="datetime"/>
+        <dropDefaultValue tableName="ingest" columnName="ingest_completed_time" columnDataType="datetime"/>
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="ingest"
+                                 constraintName="fk_ingest_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="action_id"
+                                 baseTableName="ingest"
+                                 constraintName="fk_ingest_action_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="lookups"/>
+
+        <addForeignKeyConstraint baseColumnNames="server_id"
+                                 baseTableName="ingest"
+                                 constraintName="fk_ingest_server_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="storage_servers"/>
+
+    </changeSet>
+</databaseChangeLog>

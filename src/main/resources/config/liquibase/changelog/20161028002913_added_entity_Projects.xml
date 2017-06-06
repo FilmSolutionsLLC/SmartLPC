@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle"/>
+
+    <!--
+        Added the entity Projects.
+    -->
+    <changeSet id="20161028002913" author="jhipster">
+        <createTable tableName="projects">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="full_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="run_of_show_flag" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="template" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="lab_flag" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="alfresco_title_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="alfresco_title_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="start_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="end_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="actors_with_rights" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="days_shooting" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="weeks_shooting" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="notes" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="sensitive_viewing" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="production_company_notes" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="production_company_shipping_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="processing_deliveries" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="processing_special_instructions" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="processing_watermark" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="processing_copyright" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="lab_proof_notes" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="lab_last_proof_image_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="lab_last_proof_page_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="lab_image_number_schema" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="lab_folder_batch_schema" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="photo_lab_info" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="project_unit_photo_notes" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="project_info_notes" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="created_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="updated_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="legacy_director" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="legacy_executive_producer" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="legacy_executive_producer_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="legacy_executive_producer_3" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="legacy_executive_producer_4" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="legacy_producer" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="legacy_producer_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="legacy_producer_3" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="legacy_producer_4" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="legacy_additional_talent" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="theme_id" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="spt_photo_subtype" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="photo_credit" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="shoot_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="shoot_date_override" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="unit_photographer_override" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="use_setup" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="use_exif" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="tag_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="tagreport_index" type="integer">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="login_message" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="login_message_active" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="top_level_albums" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="enable_tertiary" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="invoice_created" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="price" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="fox_title" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="is_asset" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="full_rejection" type="integer">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="disabled" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="reminder_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="photo_credit_override" type="bit">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="status_id" type="bigint"/>
+            <column name="type_id" type="bigint"/>
+            <column name="production_company_contact_id" type="bigint"/>
+            <column name="parent_company_contact_id" type="bigint"/>
+            <column name="processing_original_file_type_id" type="bigint"/>
+            <column name="created_by_admin_user_id" type="bigint"/>
+            <column name="updated_by_admin_user_id" type="bigint"/>
+            <column name="department_id" type="bigint"/>
+            <column name="project_type_id" type="bigint"/>
+            <column name="owner_id" type="bigint"/>
+            <column name="image_location_id" type="bigint"/>
+            <column name="image_location_remote_id" type="bigint"/>
+            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
+        </createTable>
+        
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="projects"
+                                 constraintName="fk_projects_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="lookups"/>
+
+        <addForeignKeyConstraint baseColumnNames="type_id"
+                                 baseTableName="projects"
+                                 constraintName="fk_projects_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="lookups"/>
+
+        <addForeignKeyConstraint baseColumnNames="production_company_contact_id"
+                                 baseTableName="projects"
+                                 constraintName="fk_projects_productioncompanycontact_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contacts"/>
+
+        <addForeignKeyConstraint baseColumnNames="parent_company_contact_id"
+                                 baseTableName="projects"
+                                 constraintName="fk_projects_parentcompanycontact_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contacts"/>
+
+        <addForeignKeyConstraint baseColumnNames="processing_original_file_type_id"
+                                 baseTableName="projects"
+                                 constraintName="fk_projects_processingoriginalfiletype_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="lookups"/>
+
+        <addForeignKeyConstraint baseColumnNames="created_by_admin_user_id"
+                                 baseTableName="projects"
+                                 constraintName="fk_projects_createdbyadminuser_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="updated_by_admin_user_id"
+                                 baseTableName="projects"
+                                 constraintName="fk_projects_updatedbyadminuser_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="department_id"
+                                 baseTableName="projects"
+                                 constraintName="fk_projects_department_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="departments"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_type_id"
+                                 baseTableName="projects"
+                                 constraintName="fk_projects_projecttype_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="lookups"/>
+
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="projects"
+                                 constraintName="fk_projects_owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contacts"/>
+
+        <addForeignKeyConstraint baseColumnNames="image_location_id"
+                                 baseTableName="projects"
+                                 constraintName="fk_projects_imagelocation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="storage_disk"/>
+
+        <addForeignKeyConstraint baseColumnNames="image_location_remote_id"
+                                 baseTableName="projects"
+                                 constraintName="fk_projects_imagelocationremote_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="storage_disk"/>
+
+    </changeSet>
+</databaseChangeLog>

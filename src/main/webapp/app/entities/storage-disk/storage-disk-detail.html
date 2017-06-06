@@ -1,0 +1,53 @@
+
+<div>
+    <h2><span translate="smartLpcApp.storage_Disk.detail.title">Storage_Disk</span> {{vm.storage_Disk.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span translate="smartLpcApp.storage_Disk.name">Name</dt></dt>
+        <dd>
+            <span>{{vm.storage_Disk.name}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.storage_Disk.size">Size</dt></dt>
+        <dd>
+            <span>{{vm.storage_Disk.size}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.storage_Disk.used">Used</dt></dt>
+        <dd>
+            <span>{{vm.storage_Disk.used}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.storage_Disk.available">Available</dt></dt>
+        <dd>
+            <span>{{vm.storage_Disk.available}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.storage_Disk.usePercent">UsePercent</dt></dt>
+        <dd>
+            <span>{{vm.storage_Disk.usePercent}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.storage_Disk.lastUpdated">LastUpdated</dt></dt>
+        <dd>
+            <span>{{vm.storage_Disk.lastUpdated | date:'mediumDate'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.storage_Disk.reserved">Reserved</dt></dt>
+        <dd>
+            <span>{{vm.storage_Disk.reserved}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.storage_Disk.server">server</span></dt>
+        <dd>
+            <a ui-sref="storage-servers-detail({id:vm.storage_Disk.server.id})">{{vm.storage_Disk.server.name}}</a>
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

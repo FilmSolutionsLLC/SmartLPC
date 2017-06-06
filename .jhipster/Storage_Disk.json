@@ -1,0 +1,45 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "server",
+            "otherEntityName": "storage_Servers",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "size",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "used",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "available",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "usePercent",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "lastUpdated",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "reserved",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20161026220656",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "storage_disk",
+    "pagination": "pager"
+}

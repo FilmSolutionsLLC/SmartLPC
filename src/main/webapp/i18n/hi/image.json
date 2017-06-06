@@ -1,0 +1,36 @@
+{
+    "smartLpcApp": {
+        "image" : {
+            "home": {
+                "title": "Images",
+                "createLabel": "नया Image बनाएँ",
+                "createOrEditLabel": "Image बनाएँ या संपादित करें",
+                "search": "Image खोजें"
+            },
+            "created": "एक नया Image [identifier: {{ param }}] तैयार है",
+            "updated": "एक Image [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Image [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "Image [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "Image"
+            },
+            "captionId": "CaptionId",
+            "name": "Name",
+            "commentDescription": "CommentDescription",
+            "releaseTime": "ReleaseTime",
+            "ingestTime": "IngestTime",
+            "quickpickSelectedTime": "QuickpickSelectedTime",
+            "createdTime": "CreatedTime",
+            "updatedTime": "UpdatedTime",
+            "photographer": "Photographer",
+            "video": "Video",
+            "hidden": "Hidden",
+            "webUpload": "WebUpload",
+            "batch": "Batch",
+            "createdByUser": "CreatedByUser",
+            "updatedByUser": "UpdatedByUser"
+        }
+    }
+}

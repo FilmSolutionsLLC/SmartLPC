@@ -1,0 +1,24 @@
+{
+    "smartLpcApp": {
+        "storage_Servers" : {
+            "home": {
+                "title": "Storage_Servers",
+                "createLabel": "Maak een nieuwe Storage_Servers",
+                "createOrEditLabel": "Maak of wijzig een Storage_Servers",
+                "search": "Search for Storage_Servers"
+            },
+            "created": "A new Storage_Servers is created with identifier {{ param }}",
+            "updated": "A Storage_Servers is updated with identifier {{ param }}",
+            "deleted": "A Storage_Servers is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Bent u zeker dat u Storage_Servers {{ id }} wilt verwijderen?"
+            },
+            "detail": {
+                "title": "Storage_Servers"
+            },
+            "name": "Name",
+            "ipAddress": "IpAddress",
+            "remote": "Remote"
+        }
+    }
+}

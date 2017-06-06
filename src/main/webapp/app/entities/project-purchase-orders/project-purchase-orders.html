@@ -1,0 +1,97 @@
+<div>
+    <h2 translate="smartLpcApp.projectPurchaseOrders.home.title">ProjectPurchaseOrders</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="project-purchase-orders.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs"  translate="smartLpcApp.projectPurchaseOrders.home.createLabel">
+                        Create new ProjectPurchaseOrders
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'smartLpcApp.projectPurchaseOrders.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="po_number"><span translate="smartLpcApp.projectPurchaseOrders.po_number">Po_number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="po_notes"><span translate="smartLpcApp.projectPurchaseOrders.po_notes">Po_notes</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="qb_rid"><span translate="smartLpcApp.projectPurchaseOrders.qb_rid">Qb_rid</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="created_date"><span translate="smartLpcApp.projectPurchaseOrders.created_date">Created_date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updated_date"><span translate="smartLpcApp.projectPurchaseOrders.updated_date">Updated_date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="project.name"><span translate="smartLpcApp.projectPurchaseOrders.project">project</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="created_by_admin_user.firstName"><span translate="smartLpcApp.projectPurchaseOrders.created_by_admin_user">created_by_admin_user</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updated_by_admin_user.firstName"><span translate="smartLpcApp.projectPurchaseOrders.updated_by_admin_user">updated_by_admin_user</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="projectPurchaseOrders in vm.projectPurchaseOrders track by projectPurchaseOrders.id">
+                    <td><a ui-sref="project-purchase-orders-detail({id:projectPurchaseOrders.id})">{{projectPurchaseOrders.id}}</a></td>
+                    <td>{{projectPurchaseOrders.po_number}}</td>
+                    <td>{{projectPurchaseOrders.po_notes}}</td>
+                    <td>{{projectPurchaseOrders.qb_rid}}</td>
+                    <td>{{projectPurchaseOrders.created_date | date:'medium'}}</td>
+                    <td>{{projectPurchaseOrders.updated_date | date:'medium'}}</td>
+                    <td>
+                        <a ui-sref="projects-detail({id:projectPurchaseOrders.project.id})">{{projectPurchaseOrders.project.name}}</a>
+                    </td>
+                    <td>
+                        {{projectPurchaseOrders.created_by_admin_user.firstName}}
+                    </td>
+                    <td>
+                        {{projectPurchaseOrders.updated_by_admin_user.firstName}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="project-purchase-orders-detail({id:projectPurchaseOrders.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="project-purchase-orders.edit({id:projectPurchaseOrders.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="project-purchase-orders.delete({id:projectPurchaseOrders.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

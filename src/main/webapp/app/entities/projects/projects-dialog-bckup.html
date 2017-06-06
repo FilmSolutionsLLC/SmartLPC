@@ -1,0 +1,498 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myProjectsLabel" translate="smartLpcApp.projects.home.createOrEditLabel">Create or edit a Projects</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.projects.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.projects.name"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.fullName" for="field_fullName">FullName</label>
+            <input type="text" class="form-control" name="fullName" id="field_fullName"
+                    ng-model="vm.projects.fullName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.runOfShowFlag" for="field_runOfShowFlag">RunOfShowFlag</label>
+            <input type="checkbox" class="form-control" name="runOfShowFlag" id="field_runOfShowFlag"
+                    ng-model="vm.projects.runOfShowFlag"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.template" for="field_template">Template</label>
+            <input type="checkbox" class="form-control" name="template" id="field_template"
+                    ng-model="vm.projects.template"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.labFlag" for="field_labFlag">LabFlag</label>
+            <input type="checkbox" class="form-control" name="labFlag" id="field_labFlag"
+                    ng-model="vm.projects.labFlag"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.alfrescoTitle1" for="field_alfrescoTitle1">AlfrescoTitle1</label>
+            <input type="text" class="form-control" name="alfrescoTitle1" id="field_alfrescoTitle1"
+                    ng-model="vm.projects.alfrescoTitle1"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.alfrescoTitle2" for="field_alfrescoTitle2">AlfrescoTitle2</label>
+            <input type="text" class="form-control" name="alfrescoTitle2" id="field_alfrescoTitle2"
+                    ng-model="vm.projects.alfrescoTitle2"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.startDate" for="field_startDate">StartDate</label>
+                <div class="input-group">
+                    <input id="field_startDate" type="text" class="form-control" name="startDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.projects.startDate" is-open="vm.datePickerOpenStatus.startDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.endDate" for="field_endDate">EndDate</label>
+                <div class="input-group">
+                    <input id="field_endDate" type="text" class="form-control" name="endDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.projects.endDate" is-open="vm.datePickerOpenStatus.endDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('endDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.actorsWithRights" for="field_actorsWithRights">ActorsWithRights</label>
+            <input type="number" class="form-control" name="actorsWithRights" id="field_actorsWithRights"
+                    ng-model="vm.projects.actorsWithRights"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.daysShooting" for="field_daysShooting">DaysShooting</label>
+            <input type="number" class="form-control" name="daysShooting" id="field_daysShooting"
+                    ng-model="vm.projects.daysShooting"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.weeksShooting" for="field_weeksShooting">WeeksShooting</label>
+            <input type="number" class="form-control" name="weeksShooting" id="field_weeksShooting"
+                    ng-model="vm.projects.weeksShooting"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.notes" for="field_notes">Notes</label>
+            <input type="text" class="form-control" name="notes" id="field_notes"
+                    ng-model="vm.projects.notes"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.sensitiveViewing" for="field_sensitiveViewing">SensitiveViewing</label>
+            <input type="checkbox" class="form-control" name="sensitiveViewing" id="field_sensitiveViewing"
+                    ng-model="vm.projects.sensitiveViewing"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.productionCompanyNotes" for="field_productionCompanyNotes">ProductionCompanyNotes</label>
+            <input type="text" class="form-control" name="productionCompanyNotes" id="field_productionCompanyNotes"
+                    ng-model="vm.projects.productionCompanyNotes"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.productionCompanyShippingNumber" for="field_productionCompanyShippingNumber">ProductionCompanyShippingNumber</label>
+            <input type="text" class="form-control" name="productionCompanyShippingNumber" id="field_productionCompanyShippingNumber"
+                    ng-model="vm.projects.productionCompanyShippingNumber"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.processingDeliveries" for="field_processingDeliveries">ProcessingDeliveries</label>
+            <input type="text" class="form-control" name="processingDeliveries" id="field_processingDeliveries"
+                    ng-model="vm.projects.processingDeliveries"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.processingSpecialInstructions" for="field_processingSpecialInstructions">ProcessingSpecialInstructions</label>
+            <input type="text" class="form-control" name="processingSpecialInstructions" id="field_processingSpecialInstructions"
+                    ng-model="vm.projects.processingSpecialInstructions"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.processingWatermark" for="field_processingWatermark">ProcessingWatermark</label>
+            <input type="text" class="form-control" name="processingWatermark" id="field_processingWatermark"
+                    ng-model="vm.projects.processingWatermark"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.processingCopyright" for="field_processingCopyright">ProcessingCopyright</label>
+            <input type="text" class="form-control" name="processingCopyright" id="field_processingCopyright"
+                    ng-model="vm.projects.processingCopyright"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.labProofNotes" for="field_labProofNotes">LabProofNotes</label>
+            <input type="text" class="form-control" name="labProofNotes" id="field_labProofNotes"
+                    ng-model="vm.projects.labProofNotes"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.labLastProofImageNumber" for="field_labLastProofImageNumber">LabLastProofImageNumber</label>
+            <input type="text" class="form-control" name="labLastProofImageNumber" id="field_labLastProofImageNumber"
+                    ng-model="vm.projects.labLastProofImageNumber"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.labLastProofPageNumber" for="field_labLastProofPageNumber">LabLastProofPageNumber</label>
+            <input type="text" class="form-control" name="labLastProofPageNumber" id="field_labLastProofPageNumber"
+                    ng-model="vm.projects.labLastProofPageNumber"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.labImageNumberSchema" for="field_labImageNumberSchema">LabImageNumberSchema</label>
+            <input type="text" class="form-control" name="labImageNumberSchema" id="field_labImageNumberSchema"
+                    ng-model="vm.projects.labImageNumberSchema"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.labFolderBatchSchema" for="field_labFolderBatchSchema">LabFolderBatchSchema</label>
+            <input type="text" class="form-control" name="labFolderBatchSchema" id="field_labFolderBatchSchema"
+                    ng-model="vm.projects.labFolderBatchSchema"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.photoLabInfo" for="field_photoLabInfo">PhotoLabInfo</label>
+            <input type="text" class="form-control" name="photoLabInfo" id="field_photoLabInfo"
+                    ng-model="vm.projects.photoLabInfo"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.projectUnitPhotoNotes" for="field_projectUnitPhotoNotes">ProjectUnitPhotoNotes</label>
+            <input type="text" class="form-control" name="projectUnitPhotoNotes" id="field_projectUnitPhotoNotes"
+                    ng-model="vm.projects.projectUnitPhotoNotes"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.projectInfoNotes" for="field_projectInfoNotes">ProjectInfoNotes</label>
+            <input type="text" class="form-control" name="projectInfoNotes" id="field_projectInfoNotes"
+                    ng-model="vm.projects.projectInfoNotes"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.createdDate" for="field_createdDate">CreatedDate</label>
+                <div class="input-group">
+                    <input id="field_createdDate" type="text" class="form-control" name="createdDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.projects.createdDate" is-open="vm.datePickerOpenStatus.createdDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.updatedDate" for="field_updatedDate">UpdatedDate</label>
+                <div class="input-group">
+                    <input id="field_updatedDate" type="text" class="form-control" name="updatedDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.projects.updatedDate" is-open="vm.datePickerOpenStatus.updatedDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('updatedDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.legacyDirector" for="field_legacyDirector">LegacyDirector</label>
+            <input type="text" class="form-control" name="legacyDirector" id="field_legacyDirector"
+                    ng-model="vm.projects.legacyDirector"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.legacyExecutiveProducer" for="field_legacyExecutiveProducer">LegacyExecutiveProducer</label>
+            <input type="text" class="form-control" name="legacyExecutiveProducer" id="field_legacyExecutiveProducer"
+                    ng-model="vm.projects.legacyExecutiveProducer"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.legacyExecutiveProducer2" for="field_legacyExecutiveProducer2">LegacyExecutiveProducer2</label>
+            <input type="text" class="form-control" name="legacyExecutiveProducer2" id="field_legacyExecutiveProducer2"
+                    ng-model="vm.projects.legacyExecutiveProducer2"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.legacyExecutiveProducer3" for="field_legacyExecutiveProducer3">LegacyExecutiveProducer3</label>
+            <input type="text" class="form-control" name="legacyExecutiveProducer3" id="field_legacyExecutiveProducer3"
+                    ng-model="vm.projects.legacyExecutiveProducer3"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.legacyExecutiveProducer4" for="field_legacyExecutiveProducer4">LegacyExecutiveProducer4</label>
+            <input type="text" class="form-control" name="legacyExecutiveProducer4" id="field_legacyExecutiveProducer4"
+                    ng-model="vm.projects.legacyExecutiveProducer4"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.legacyProducer" for="field_legacyProducer">LegacyProducer</label>
+            <input type="text" class="form-control" name="legacyProducer" id="field_legacyProducer"
+                    ng-model="vm.projects.legacyProducer"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.legacyProducer2" for="field_legacyProducer2">LegacyProducer2</label>
+            <input type="text" class="form-control" name="legacyProducer2" id="field_legacyProducer2"
+                    ng-model="vm.projects.legacyProducer2"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.legacyProducer3" for="field_legacyProducer3">LegacyProducer3</label>
+            <input type="text" class="form-control" name="legacyProducer3" id="field_legacyProducer3"
+                    ng-model="vm.projects.legacyProducer3"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.legacyProducer4" for="field_legacyProducer4">LegacyProducer4</label>
+            <input type="text" class="form-control" name="legacyProducer4" id="field_legacyProducer4"
+                    ng-model="vm.projects.legacyProducer4"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.legacyAdditionalTalent" for="field_legacyAdditionalTalent">LegacyAdditionalTalent</label>
+            <input type="text" class="form-control" name="legacyAdditionalTalent" id="field_legacyAdditionalTalent"
+                    ng-model="vm.projects.legacyAdditionalTalent"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.themeId" for="field_themeId">ThemeId</label>
+            <input type="checkbox" class="form-control" name="themeId" id="field_themeId"
+                    ng-model="vm.projects.themeId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.sptPhotoSubtype" for="field_sptPhotoSubtype">SptPhotoSubtype</label>
+            <input type="text" class="form-control" name="sptPhotoSubtype" id="field_sptPhotoSubtype"
+                    ng-model="vm.projects.sptPhotoSubtype"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.photoCredit" for="field_photoCredit">PhotoCredit</label>
+            <input type="text" class="form-control" name="photoCredit" id="field_photoCredit"
+                    ng-model="vm.projects.photoCredit"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.shootDate" for="field_shootDate">ShootDate</label>
+                <div class="input-group">
+                    <input id="field_shootDate" type="text" class="form-control" name="shootDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.projects.shootDate" is-open="vm.datePickerOpenStatus.shootDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('shootDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.shootDateOverride" for="field_shootDateOverride">ShootDateOverride</label>
+            <input type="checkbox" class="form-control" name="shootDateOverride" id="field_shootDateOverride"
+                    ng-model="vm.projects.shootDateOverride"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.unitPhotographerOverride" for="field_unitPhotographerOverride">UnitPhotographerOverride</label>
+            <input type="checkbox" class="form-control" name="unitPhotographerOverride" id="field_unitPhotographerOverride"
+                    ng-model="vm.projects.unitPhotographerOverride"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.useSetup" for="field_useSetup">UseSetup</label>
+            <input type="checkbox" class="form-control" name="useSetup" id="field_useSetup"
+                    ng-model="vm.projects.useSetup"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.useExif" for="field_useExif">UseExif</label>
+            <input type="checkbox" class="form-control" name="useExif" id="field_useExif"
+                    ng-model="vm.projects.useExif"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.tagDate" for="field_tagDate">TagDate</label>
+                <div class="input-group">
+                    <input id="field_tagDate" type="text" class="form-control" name="tagDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.projects.tagDate" is-open="vm.datePickerOpenStatus.tagDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('tagDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.tagreportIndex" for="field_tagreportIndex">TagreportIndex</label>
+            <input type="number" class="form-control" name="tagreportIndex" id="field_tagreportIndex"
+                    ng-model="vm.projects.tagreportIndex"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.loginMessage" for="field_loginMessage">LoginMessage</label>
+            <input type="text" class="form-control" name="loginMessage" id="field_loginMessage"
+                    ng-model="vm.projects.loginMessage"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.loginMessageActive" for="field_loginMessageActive">LoginMessageActive</label>
+            <input type="checkbox" class="form-control" name="loginMessageActive" id="field_loginMessageActive"
+                    ng-model="vm.projects.loginMessageActive"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.topLevelAlbums" for="field_topLevelAlbums">TopLevelAlbums</label>
+            <input type="checkbox" class="form-control" name="topLevelAlbums" id="field_topLevelAlbums"
+                    ng-model="vm.projects.topLevelAlbums"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.enableTertiary" for="field_enableTertiary">EnableTertiary</label>
+            <input type="checkbox" class="form-control" name="enableTertiary" id="field_enableTertiary"
+                    ng-model="vm.projects.enableTertiary"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.invoiceCreated" for="field_invoiceCreated">InvoiceCreated</label>
+            <input type="number" class="form-control" name="invoiceCreated" id="field_invoiceCreated"
+                    ng-model="vm.projects.invoiceCreated"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.price" for="field_price">Price</label>
+            <input type="text" class="form-control" name="price" id="field_price"
+                    ng-model="vm.projects.price"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.foxTitle" for="field_foxTitle">FoxTitle</label>
+            <input type="text" class="form-control" name="foxTitle" id="field_foxTitle"
+                    ng-model="vm.projects.foxTitle"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.isAsset" for="field_isAsset">IsAsset</label>
+            <input type="checkbox" class="form-control" name="isAsset" id="field_isAsset"
+                    ng-model="vm.projects.isAsset"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.fullRejection" for="field_fullRejection">FullRejection</label>
+            <input type="number" class="form-control" name="fullRejection" id="field_fullRejection"
+                    ng-model="vm.projects.fullRejection"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.disabled" for="field_disabled">Disabled</label>
+            <input type="checkbox" class="form-control" name="disabled" id="field_disabled"
+                    ng-model="vm.projects.disabled"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.reminderDate" for="field_reminderDate">ReminderDate</label>
+                <div class="input-group">
+                    <input id="field_reminderDate" type="text" class="form-control" name="reminderDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.projects.reminderDate" is-open="vm.datePickerOpenStatus.reminderDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('reminderDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projects.photoCreditOverride" for="field_photoCreditOverride">PhotoCreditOverride</label>
+            <input type="checkbox" class="form-control" name="photoCreditOverride" id="field_photoCreditOverride"
+                    ng-model="vm.projects.photoCreditOverride"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="smartLpcApp.projects.status" for="field_status">status</label>
+            <select class="form-control" id="field_status" name="status" ng-model="vm.projects.status" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projects.type" for="field_type">type</label>
+            <select class="form-control" id="field_type" name="type" ng-model="vm.projects.type" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projects.productionCompanyContact" for="field_productionCompanyContact">productionCompanyContact</label>
+            <select class="form-control" id="field_productionCompanyContact" name="productionCompanyContact" ng-model="vm.projects.productionCompanyContact" ng-options="contacts as contacts.fullName for contacts in vm.contactss track by contacts.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projects.parentCompanyContact" for="field_parentCompanyContact">parentCompanyContact</label>
+            <select class="form-control" id="field_parentCompanyContact" name="parentCompanyContact" ng-model="vm.projects.parentCompanyContact" ng-options="contacts as contacts.fullName for contacts in vm.contactss track by contacts.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projects.processingOriginalFileType" for="field_processingOriginalFileType">processingOriginalFileType</label>
+            <select class="form-control" id="field_processingOriginalFileType" name="processingOriginalFileType" ng-model="vm.projects.processingOriginalFileType" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projects.createdByAdminUser" for="field_createdByAdminUser">createdByAdminUser</label>
+            <select class="form-control" id="field_createdByAdminUser" name="createdByAdminUser" ng-model="vm.projects.createdByAdminUser" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projects.updatedByAdminUser" for="field_updatedByAdminUser">updatedByAdminUser</label>
+            <select class="form-control" id="field_updatedByAdminUser" name="updatedByAdminUser" ng-model="vm.projects.updatedByAdminUser" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projects.department" for="field_department">department</label>
+            <select class="form-control" id="field_department" name="department" ng-model="vm.projects.department" ng-options="departments as departments.departmentName for departments in vm.departmentss track by departments.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projects.projectType" for="field_projectType">projectType</label>
+            <select class="form-control" id="field_projectType" name="projectType" ng-model="vm.projects.projectType" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projects.owner" for="field_owner">owner</label>
+            <select class="form-control" id="field_owner" name="owner" ng-model="vm.projects.owner" ng-options="contacts as contacts.fullName for contacts in vm.contactss track by contacts.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projects.imageLocation" for="field_imageLocation">imageLocation</label>
+            <select class="form-control" id="field_imageLocation" name="imageLocation" ng-model="vm.projects.imageLocation" ng-options="storage_Disk as storage_Disk.name for storage_Disk in vm.storage_disks track by storage_Disk.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projects.imageLocationRemote" for="field_imageLocationRemote">imageLocationRemote</label>
+            <select class="form-control" id="field_imageLocationRemote" name="imageLocationRemote" ng-model="vm.projects.imageLocationRemote" ng-options="storage_Disk as storage_Disk.name for storage_Disk in vm.storage_disks track by storage_Disk.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

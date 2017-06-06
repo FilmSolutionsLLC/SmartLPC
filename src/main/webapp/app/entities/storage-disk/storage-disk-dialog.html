@@ -1,0 +1,78 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myStorage_DiskLabel" translate="smartLpcApp.storage_Disk.home.createOrEditLabel">Create or edit a Storage_Disk</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.storage_Disk.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.storage_Disk.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.storage_Disk.name"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.storage_Disk.size" for="field_size">Size</label>
+            <input type="number" class="form-control" name="size" id="field_size"
+                    ng-model="vm.storage_Disk.size"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.storage_Disk.used" for="field_used">Used</label>
+            <input type="number" class="form-control" name="used" id="field_used"
+                    ng-model="vm.storage_Disk.used"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.storage_Disk.available" for="field_available">Available</label>
+            <input type="number" class="form-control" name="available" id="field_available"
+                    ng-model="vm.storage_Disk.available"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.storage_Disk.usePercent" for="field_usePercent">UsePercent</label>
+            <input type="number" class="form-control" name="usePercent" id="field_usePercent"
+                    ng-model="vm.storage_Disk.usePercent"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.storage_Disk.lastUpdated" for="field_lastUpdated">LastUpdated</label>
+                <div class="input-group">
+                    <input id="field_lastUpdated" type="text" class="form-control" name="lastUpdated" uib-datepicker-popup="{{dateformat}}" ng-model="vm.storage_Disk.lastUpdated" is-open="vm.datePickerOpenStatus.lastUpdated"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastUpdated')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.storage_Disk.reserved" for="field_reserved">Reserved</label>
+            <input type="checkbox" class="form-control" name="reserved" id="field_reserved"
+                    ng-model="vm.storage_Disk.reserved"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="smartLpcApp.storage_Disk.server" for="field_server">server</label>
+            <select class="form-control" id="field_server" name="server" ng-model="vm.storage_Disk.server" ng-options="storage_Servers as storage_Servers.name for storage_Servers in vm.storage_serverss track by storage_Servers.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

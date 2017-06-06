@@ -1,0 +1,27 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+
+        <h4>Project Template</h4>
+
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <input placeholder="Search Project" type="text" ng-model="vm.selected" typeahead-editable="false"
+                   uib-typeahead="states as states.name for states in vm.projects | filter:$viewValue | limitTo:100"
+                   class="form-control"
+                   typeahead-min-length="0" typeahead-no-results="noResults" name="states" id="states"
+                   ng-change="vm.projects({{states.id}})">
+
+            <span ng-if="noResults" uib-dropdown uib-dropdown-toggle auto-close="disabled" is-open="true">
+            <ul class="uib-dropdown-menu">
+                <li>
+                    <a href>no results</a>
+                </li>
+            </ul>
+            </span>
+        </div>
+    </div>
+</form>

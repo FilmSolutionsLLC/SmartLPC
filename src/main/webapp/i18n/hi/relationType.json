@@ -1,0 +1,22 @@
+{
+    "smartLpcApp": {
+        "relationType" : {
+            "home": {
+                "title": "RelationTypes",
+                "createLabel": "नया RelationType बनाएँ",
+                "createOrEditLabel": "RelationType बनाएँ या संपादित करें",
+                "search": "RelationType खोजें"
+            },
+            "created": "एक नया RelationType [identifier: {{ param }}] तैयार है",
+            "updated": "एक RelationType [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "RelationType [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "RelationType [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "RelationType"
+            },
+            "relation": "Relation"
+        }
+    }
+}

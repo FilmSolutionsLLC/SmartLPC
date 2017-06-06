@@ -1,0 +1,76 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myProjectLabTasksLabel" translate="smartLpcApp.projectLabTasks.home.createOrEditLabel">Create or edit a ProjectLabTasks</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.projectLabTasks.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectLabTasks.createdDate" for="field_createdDate">CreatedDate</label>
+                <div class="input-group">
+                    <input id="field_createdDate" type="text" class="form-control" name="createdDate" datetime-picker="{{dateformat}}" ng-model="vm.projectLabTasks.createdDate" is-open="vm.datePickerOpenStatus.createdDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectLabTasks.updatedDate" for="field_updatedDate">UpdatedDate</label>
+                <div class="input-group">
+                    <input id="field_updatedDate" type="text" class="form-control" name="updatedDate" datetime-picker="{{dateformat}}" ng-model="vm.projectLabTasks.updatedDate" is-open="vm.datePickerOpenStatus.updatedDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('updatedDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.projectLabTasks.qb_rid" for="field_qb_rid">Qb_rid</label>
+            <input type="number" class="form-control" name="qb_rid" id="field_qb_rid"
+                    ng-model="vm.projectLabTasks.qb_rid"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="smartLpcApp.projectLabTasks.project" for="field_project">project</label>
+            <select class="form-control" id="field_project" name="project" ng-model="vm.projectLabTasks.project" ng-options="projects as projects.name for projects in vm.projectss track by projects.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projectLabTasks.task_name" for="field_task_name">task_name</label>
+            <select class="form-control" id="field_task_name" name="task_name" ng-model="vm.projectLabTasks.task_name" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projectLabTasks.created_by_admin_user" for="field_created_by_admin_user">created_by_admin_user</label>
+            <select class="form-control" id="field_created_by_admin_user" name="created_by_admin_user" ng-model="vm.projectLabTasks.created_by_admin_user" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.projectLabTasks.updated_by_admin_user" for="field_updated_by_admin_user">updated_by_admin_user</label>
+            <select class="form-control" id="field_updated_by_admin_user" name="updated_by_admin_user" ng-model="vm.projectLabTasks.updated_by_admin_user" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

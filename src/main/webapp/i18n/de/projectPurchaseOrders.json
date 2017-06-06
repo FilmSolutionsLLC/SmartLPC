@@ -1,0 +1,29 @@
+{
+    "smartLpcApp": {
+        "projectPurchaseOrders" : {
+            "home": {
+                "title": "ProjectPurchaseOrders",
+                "createLabel": "ProjectPurchaseOrders erstellen",
+                "createOrEditLabel": "ProjectPurchaseOrders erstellen oder bearbeiten",
+                "search": "Suche nach ProjectPurchaseOrders"
+            },
+            "created": "ProjectPurchaseOrders erstellt mit ID {{ param }}",
+            "updated": "ProjectPurchaseOrders aktualisiert mit ID {{ param }}",
+            "deleted": "ProjectPurchaseOrders gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll ProjectPurchaseOrders {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "ProjectPurchaseOrders"
+            },
+            "po_number": "Po_number",
+            "po_notes": "Po_notes",
+            "qb_rid": "Qb_rid",
+            "created_date": "Created_date",
+            "updated_date": "Updated_date",
+            "project": "Project",
+            "created_by_admin_user": "Created_by_admin_user",
+            "updated_by_admin_user": "Updated_by_admin_user"
+        }
+    }
+}

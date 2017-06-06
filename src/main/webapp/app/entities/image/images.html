@@ -1,0 +1,111 @@
+<div>
+    <h2 translate="smartLpcApp.image.home.title">Images</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="image.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs"  translate="smartLpcApp.image.home.createLabel">
+                        Create new Image
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'smartLpcApp.image.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="captionId"><span translate="smartLpcApp.image.captionId">CaptionId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span translate="smartLpcApp.image.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="commentDescription"><span translate="smartLpcApp.image.commentDescription">CommentDescription</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="releaseTime"><span translate="smartLpcApp.image.releaseTime">ReleaseTime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ingestTime"><span translate="smartLpcApp.image.ingestTime">IngestTime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="quickpickSelectedTime"><span translate="smartLpcApp.image.quickpickSelectedTime">QuickpickSelectedTime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdTime"><span translate="smartLpcApp.image.createdTime">CreatedTime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updatedTime"><span translate="smartLpcApp.image.updatedTime">UpdatedTime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="photographer"><span translate="smartLpcApp.image.photographer">Photographer</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="video"><span translate="smartLpcApp.image.video">Video</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="hidden"><span translate="smartLpcApp.image.hidden">Hidden</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="webUpload"><span translate="smartLpcApp.image.webUpload">WebUpload</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="batch.name"><span translate="smartLpcApp.image.batch">batch</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdByUser.firstName"><span translate="smartLpcApp.image.createdByUser">createdByUser</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updatedByUser.firstName"><span translate="smartLpcApp.image.updatedByUser">updatedByUser</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="image in vm.images track by image.id">
+                    <td><a ui-sref="image-detail({id:image.id})">{{image.id}}</a></td>
+                    <td>{{image.captionId}}</td>
+                    <td>{{image.name}}</td>
+                    <td>{{image.commentDescription}}</td>
+                    <td>{{image.releaseTime | date:'medium'}}</td>
+                    <td>{{image.ingestTime | date:'medium'}}</td>
+                    <td>{{image.quickpickSelectedTime | date:'medium'}}</td>
+                    <td>{{image.createdTime | date:'medium'}}</td>
+                    <td>{{image.updatedTime | date:'medium'}}</td>
+                    <td>{{image.photographer}}</td>
+                    <td>{{image.video}}</td>
+                    <td>{{image.hidden}}</td>
+                    <td>{{image.webUpload}}</td>
+                    <td>
+                        <a ui-sref="batch-detail({id:image.batch.id})">{{image.batch.name}}</a>
+                    </td>
+                    <td>
+                        {{image.createdByUser.firstName}}
+                    </td>
+                    <td>
+                        {{image.updatedByUser.firstName}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="image-detail({id:image.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="image.edit({id:image.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="image.delete({id:image.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

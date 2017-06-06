@@ -1,0 +1,30 @@
+{
+    "smartLpcApp": {
+        "contactRelationships" : {
+            "home": {
+                "title": "ContactRelationships",
+                "createLabel": "Crear nuevo ContactRelationships",
+                "createOrEditLabel": "Crear o editar ContactRelationships",
+                "search": "Search for ContactRelationships"
+            },
+            "created": "Un nuevo ContactRelationships ha sido creado con el identificador {{ param }}",
+            "updated": "Un ContactRelationships ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un ContactRelationships ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar ContactRelationships {{ id }}?"
+            },
+            "detail": {
+                "title": "ContactRelationships"
+            },
+            "isPrimaryContact": "IsPrimaryContact",
+            "createdDate": "CreatedDate",
+            "updatedDate": "UpdatedDate",
+            "createdByAdminUser": "CreatedByAdminUser",
+            "updatedByAdminUser": "UpdatedByAdminUser",
+            "contact_a": "Contact_a",
+            "contact_b": "Contact_b",
+            "contact_a_qb_rid": "Contact_a_qb_rid",
+            "contact_b_qb_rid": "Contact_b_qb_rid"
+        }
+    }
+}

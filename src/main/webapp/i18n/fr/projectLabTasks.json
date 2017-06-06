@@ -1,0 +1,28 @@
+{
+    "smartLpcApp": {
+        "projectLabTasks" : {
+            "home": {
+                "title": "ProjectLabTasks",
+                "createLabel": "Créer un nouveau ProjectLabTasks",
+                "createOrEditLabel": "Créer ou éditer un ProjectLabTasks",
+                "search": "Recherche pour ProjectLabTasks"
+            },
+            "created": "Un nouveau ProjectLabTasks a été créé avec l'identifiant {{ param }}",
+            "updated": "Le ProjectLabTasks avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le ProjectLabTasks avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le ProjectLabTasks {{ id }} ?"
+            },
+            "detail": {
+                "title": "ProjectLabTasks"
+            },
+            "createdDate": "CreatedDate",
+            "updatedDate": "UpdatedDate",
+            "qb_rid": "Qb_rid",
+            "project": "Project",
+            "task_name": "Task_name",
+            "created_by_admin_user": "Created_by_admin_user",
+            "updated_by_admin_user": "Updated_by_admin_user"
+        }
+    }
+}

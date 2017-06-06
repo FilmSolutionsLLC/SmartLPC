@@ -1,0 +1,47 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "project",
+            "otherEntityName": "projects",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "task_name",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "created_by_admin_user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "updated_by_admin_user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "createdDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "updatedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "qb_rid",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20161209202615",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "project_lab_tasks",
+    "pagination": "pagination"
+}

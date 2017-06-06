@@ -1,0 +1,29 @@
+{
+    "smartLpcApp": {
+        "ingest" : {
+            "home": {
+                "title": "Ingests",
+                "createLabel": "Ingest erstellen",
+                "createOrEditLabel": "Ingest erstellen oder bearbeiten",
+                "search": "Suche nach Ingest"
+            },
+            "created": "Ingest erstellt mit ID {{ param }}",
+            "updated": "Ingest aktualisiert mit ID {{ param }}",
+            "deleted": "Ingest gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Ingest {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Ingest"
+            },
+            "ingestStartTime": "IngestStartTime",
+            "ingestCompletedTime": "IngestCompletedTime",
+            "totalImages": "TotalImages",
+            "totalDone": "TotalDone",
+            "completed": "Completed",
+            "user": "User",
+            "action": "Action",
+            "server": "Server"
+        }
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "smartLpcApp": {
+        "workOrdersAdminRelation" : {
+            "home": {
+                "title": "WorkOrdersAdminRelations",
+                "createLabel": "Créer un nouveau WorkOrdersAdminRelation",
+                "createOrEditLabel": "Créer ou éditer un WorkOrdersAdminRelation",
+                "search": "Recherche pour WorkOrdersAdminRelation"
+            },
+            "created": "Un nouveau WorkOrdersAdminRelation a été créé avec l'identifiant {{ param }}",
+            "updated": "Le WorkOrdersAdminRelation avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le WorkOrdersAdminRelation avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le WorkOrdersAdminRelation {{ id }} ?"
+            },
+            "detail": {
+                "title": "WorkOrdersAdminRelation"
+            },
+            "workOrder": "WorkOrder",
+            "admin_user": "Admin_user",
+            "relation_type": "Relation_type"
+        }
+    }
+}

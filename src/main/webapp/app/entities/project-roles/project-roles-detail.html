@@ -1,0 +1,113 @@
+
+<div>
+    <h2><span translate="smartLpcApp.projectRoles.detail.title">ProjectRoles</span> {{vm.projectRoles.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span translate="smartLpcApp.projectRoles.soloKillPct">SoloKillPct</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.soloKillPct}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.groupKillPct">GroupKillPct</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.groupKillPct}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.miniFullDt">MiniFullDt</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.miniFullDt | date:'mediumDate'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.fullFinalDt">FullFinalDt</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.fullFinalDt | date:'mediumDate'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.disabled">Disabled</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.disabled}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.characterName">CharacterName</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.characterName}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.startDate">StartDate</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.daysWorking">DaysWorking</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.daysWorking}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.excSologroup">ExcSologroup</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.excSologroup}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.notes">Notes</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.notes}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.tagName">TagName</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.tagName}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.hotkeyValue">HotkeyValue</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.hotkeyValue}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.expireDate">ExpireDate</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.expireDate | date:'mediumDate'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.tertiaryKillPct">TertiaryKillPct</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.tertiaryKillPct}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.createdDate">CreatedDate</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.createdDate | date:'mediumDate'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.updatedDate">UpdatedDate</dt></dt>
+        <dd>
+            <span>{{vm.projectRoles.updatedDate | date:'mediumDate'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.project">project</span></dt>
+        <dd>
+            <a ui-sref="projects-detail({id:vm.projectRoles.project.id})">{{vm.projectRoles.project.name}}</a>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.contact">contact</span></dt>
+        <dd>
+            <a ui-sref="contacts-detail({id:vm.projectRoles.contact.id})">{{vm.projectRoles.contact.fullName}}</a>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.createdByAdminUser">createdByAdminUser</span></dt>
+        <dd>
+            {{vm.projectRoles.createdByAdminUser.firstName}}
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectRoles.updatedByAdminUser">updatedByAdminUser</span></dt>
+        <dd>
+            {{vm.projectRoles.updatedByAdminUser.firstName}}
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

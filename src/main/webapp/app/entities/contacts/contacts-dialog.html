@@ -1,0 +1,376 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myContactsLabel" translate="smartLpcApp.contacts.home.createOrEditLabel">Create or
+            edit a Contacts</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="form-group col-lg-3">
+                <label translate="smartLpcApp.contacts.type" for="field_type">type</label>
+                <select class="form-control" id="field_type" name="type" ng-model="vm.contacts.type"
+                        ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-lg-3">
+                <label class="control-label" translate="smartLpcApp.contacts.fullName"
+                       for="field_fullName">FullName</label>
+                <input type="text" class="form-control" name="fullName" id="field_fullName"
+                       ng-model="vm.contacts.fullName"
+                />
+            </div>
+            <div class="form-group col-lg-3">
+                <label class="control-label" translate="smartLpcApp.contacts.title" for="field_title">Title</label>
+                <input type="text" class="form-control" name="title" id="field_title"
+                       ng-model="vm.contacts.title"
+                />
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="form-group  col-lg-3">
+                <label translate="smartLpcApp.contacts.companyContact" for="field_companyContact">companyContact</label>
+                <select class="form-control" id="field_companyContact" name="companyContact"
+                        ng-model="vm.contacts.companyContact"
+                        ng-options="contacts as contacts.fullName for contacts in vm.contactss track by contacts.id">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group col-lg-3 ">
+                <label translate="smartLpcApp.contacts.defaultDepartment"
+                       for="field_defaultDepartment">defaultDepartment</label>
+                <select class="form-control" id="field_defaultDepartment" name="defaultDepartment"
+                        ng-model="vm.contacts.defaultDepartment"
+                        ng-options="departments as departments.departmentName for departments in vm.departmentss track by departments.id">
+                    <option value=""></option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="form-group col-lg-3">
+                <label class="control-label" translate="smartLpcApp.contacts.phoneOffice"
+                       for="field_phoneOffice">PhoneOffice</label>
+                <input type="text" class="form-control" name="phoneOffice" id="field_phoneOffice"
+                       ng-model="vm.contacts.phoneOffice"
+                />
+            </div>
+            <div class="form-group col-lg-3">
+                <label class="control-label" translate="smartLpcApp.contacts.phoneAlternate" for="field_phoneAlternate">PhoneAlternate</label>
+                <input type="text" class="form-control" name="phoneAlternate" id="field_phoneAlternate"
+                       ng-model="vm.contacts.phoneAlternate"
+                />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-lg-3">
+                <label class="control-label" translate="smartLpcApp.contacts.phoneMobile"
+                       for="field_phoneMobile">PhoneMobile</label>
+                <input type="text" class="form-control" name="phoneMobile" id="field_phoneMobile"
+                       ng-model="vm.contacts.phoneMobile"
+                />
+            </div>
+            <div class="form-group col-lg-3">
+                <label class="control-label" translate="smartLpcApp.contacts.phoneFax"
+                       for="field_phoneFax">PhoneFax</label>
+                <input type="text" class="form-control" name="phoneFax" id="field_phoneFax"
+                       ng-model="vm.contacts.phoneFax"
+                />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-lg-3">
+                <label class="control-label" translate="smartLpcApp.contacts.email" for="field_email">Email</label>
+                <input type="text" class="form-control" name="email" id="field_email"
+                       ng-model="vm.contacts.email"
+                />
+            </div>
+            <div class="form-group col-lg-3">
+                <label class="control-label" translate="smartLpcApp.contacts.email2" for="field_email2">Email2</label>
+                <input type="text" class="form-control" name="email2" id="field_email2"
+                       ng-model="vm.contacts.email2"
+                />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group  col-sm-12">
+                <label class="control-label" translate="smartLpcApp.contacts.streetAddress" for="field_streetAddress">StreetAddress</label>
+                <input type="text" class="form-control" name="streetAddress" id="field_streetAddress"
+                       ng-model="vm.contacts.streetAddress"
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <label class="control-label" translate="smartLpcApp.contacts.city" for="field_city">City</label>
+                <input type="text" class="form-control" name="city" id="field_city"
+                       ng-model="vm.contacts.city"
+                />
+            </div>
+            <div class="form-group col-sm-3">
+                <label class="control-label" translate="smartLpcApp.contacts.state" for="field_state">State</label>
+                <input type="text" class="form-control" name="state" id="field_state"
+                       ng-model="vm.contacts.state"
+                />
+            </div>
+            <div class="form-group col-sm-3">
+                <label class="control-label" translate="smartLpcApp.contacts.zipcode"
+                       for="field_zipcode">Zipcode</label>
+                <input type="text" class="form-control" name="zipcode" id="field_zipcode"
+                       ng-model="vm.contacts.zipcode"
+                />
+            </div>
+            <div class="form-group col-sm-3">
+                <label class="control-label" translate="smartLpcApp.contacts.country"
+                       for="field_country">Country</label>
+                <input type="text" class="form-control" name="country" id="field_country"
+                       ng-model="vm.contacts.country"
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-3">
+                <label class="control-label" translate="smartLpcApp.contacts.username"
+                       for="field_username">Username</label>
+                <input type="text" class="form-control" name="username" id="field_username"
+                       ng-model="vm.contacts.username"
+                />
+            </div>
+            <div class="form-group col-lg-3">
+                <label class="control-label" translate="smartLpcApp.contacts.password"
+                       for="field_password">Password</label>
+                <input type="text" class="form-control" name="password" id="field_password"
+                       ng-model="vm.contacts.password"
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-6">
+                <label class="control-label" translate="smartLpcApp.contacts.website"
+                       for="field_website">Website</label>
+                <input type="text" class="form-control" name="website" id="field_website"
+                       ng-model="vm.contacts.website"
+                />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-lg-12">
+                <label class="control-label" translate="smartLpcApp.contacts.notes" for="field_notes">Notes</label>
+                <input type="text" class="form-control" name="notes" id="field_notes"
+                       ng-model="vm.contacts.notes"
+                />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-lg-4">
+                <label class="control-label" translate="smartLpcApp.contacts.globalRestartColumns"
+                       for="field_globalRestartColumns">GlobalRestartColumns</label>
+                <input type="number" class="form-control" name="globalRestartColumns" id="field_globalRestartColumns"
+                       ng-model="vm.contacts.globalRestartColumns"
+                />
+            </div>
+            <div class="form-group col-lg-4">
+                <label class="control-label" translate="smartLpcApp.contacts.globalRestartImagesPerPage"
+                       for="field_globalRestartImagesPerPage">GlobalRestartImagesPerPage</label>
+                <input type="number" class="form-control" name="globalRestartImagesPerPage"
+                       id="field_globalRestartImagesPerPage"
+                       ng-model="vm.contacts.globalRestartImagesPerPage"
+                />
+            </div>
+            <div class="form-group col-lg-4">
+                <label class="control-label" translate="smartLpcApp.contacts.globalRestartImageSize"
+                       for="field_globalRestartImageSize">GlobalRestartImageSize</label>
+                <input type="text" class="form-control" name="globalRestartImageSize" id="field_globalRestartImageSize"
+                       ng-model="vm.contacts.globalRestartImageSize"
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-2">
+                <label class="control-label" translate="smartLpcApp.contacts.dashboard"
+                       for="field_dashboard">Dashboard</label>
+                <input type="checkbox" class="form-control" name="dashboard" id="field_dashboard"
+                       ng-model="vm.contacts.dashboard"
+                />
+            </div>
+            <div class="form-group col-lg-2">
+                <label class="control-label" translate="smartLpcApp.contacts.internalAccessOnly"
+                       for="field_internalAccessOnly">InternalAccessOnly</label>
+                <input type="checkbox" class="form-control" name="internalAccessOnly" id="field_internalAccessOnly"
+                       ng-model="vm.contacts.internalAccessOnly"
+                />
+            </div>
+        </div>
+        <hr>
+        <h4>Related Contacts</h4>
+        <a href="" ng-click="vm.addRelated()"><span class=" glyphicon glyphicon-plus-sign"
+                                                    style="color: #0000FF"></span></a>
+        <fieldset data-ng-repeat="item in related">
+
+            <div class="row">
+                <div class="col-md-1">
+                    <input type="checkbox"/> Primary
+                </div>
+                <div class="col-md-11" align="right">
+                    <a href="" ng-click="vm.removeRelated($index)"><span class=" glyphicon glyphicon-trash"
+                                                                         style="color: #c10009"></span></a>
+                </div>
+
+            </div>
+            <div class="row">
+                <label class="col-md-1 control-label">Name</label>
+
+
+                <div class="col-md-3">
+                    <div class="input-group">
+
+                            <span class="input-group-btn">
+                                @*OPEN DIALONG BOX FOR CONTACTS WHEN THIS BUTTON CLICKED *@
+                                <button href="#myModal2" id="openBtn" data-toggle="modal" class="btn btn-default"><span
+                                    class="caret"></span></button>
+                            </span>
+                        <input type="text" class="form-control" ng-model="contacts.company_contact"
+                               ng-value="">
+                    </div>
+
+                </div>
+
+                <label class="col-md-1 control-label">Type</label>
+
+
+                <div class="col-md-3">
+
+                    <input  type="text" class="form-control" ng-model="contacts.company_contact"
+                           ng-value="">
+
+                </div>
+
+                <label class="col-md-1 control-label">Company</label>
+
+
+                <div class="col-md-3">
+
+                    <input type="text" class="form-control" ng-model="contacts.company_contact"
+                           ng-value="">
+
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-1 control-label">Main</label>
+
+
+                <div class="col-md-3">
+
+                    <input  type="text" class="form-control" ng-model="contacts.company_contact"
+                           ng-value="">
+
+                </div>
+                <label class="col-md-1 control-label">Email</label>
+
+
+                <div class="col-md-3">
+
+                    <input type="text" class="form-control" ng-model="contacts.company_contact"
+                           ng-value="">
+
+                </div>
+                <label class="col-md-1 control-label">Mobile</label>
+
+
+                <div class="col-md-3">
+
+                    <input type="text" class="form-control" ng-model="contacts.company_contact"
+                           ng-value="">
+
+                </div>
+            </div>
+            <div class="row">
+
+                <label class="col-md-1 control-label">Asst/Notes</label>
+
+
+                <div class="col-md-11">
+
+                    <input id="address" type="text" class="form-control" ng-model="contacts.company_contact"
+                           ng-value="">
+
+                </div>
+
+            </div>
+            <br>
+        </fieldset>
+        <!--    <div id="relatedContacts">
+                <div class="row">
+                    <div class="form-group col-xs-3">
+                        <label class="control-label input-sm" translate="smartLpcApp.contacts.fullName">FullName</label>
+
+                        <select class="form-control input-sm" name="companyContact"
+                                ng-model="vm.contacts.companyContact"
+                                ng-options="contacts as contacts.fullName for contacts in vm.contactss track by contacts.id">
+                            <option value=""></option>
+                        </select>
+
+                    </div>
+                    <div class="form-group col-xs-3">
+                        <label class="control-label input-sm">Type</label>
+                        <input type="text" class="form-control input-sm"/>
+                    </div>
+                    <div class="form-group col-xs-3">
+                        <label class="control-label input-sm">Company</label>
+                        <input type="text" class="form-control input-sm"/>
+                    </div>
+                    <div class="form-group col-xs-3">
+                        <label class="control-label input-sm">Is Primary</label>
+                        <input type="checkbox" class="form-control input-sm"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-3 ">
+                        <label class="control-label input-sm">Main</label>
+                        <input type="text" class="form-control input-sm"/>
+                    </div>
+                    <div class="form-group col-xs-3">
+                        <label class="control-label input-sm">E-Mail</label>
+                        <input type="text" class="form-control input-sm"/>
+                    </div>
+                    <div class="form-group col-xs-3">
+                        <label class="control-label input-sm">Mobile</label>
+                        <input type="text" class="form-control input-sm"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-9">
+                        <label class="control-label input-sm">Asst/Notes</label>
+                        <input type="text" class="form-control input-sm"/>
+                    </div>
+                </div>
+
+
+            </div>-->
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+            translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+
+
+</form>

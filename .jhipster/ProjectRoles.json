@@ -1,0 +1,99 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "project",
+            "otherEntityName": "projects",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "contact",
+            "otherEntityName": "contacts",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "fullName"
+        },
+        {
+            "relationshipName": "createdByAdminUser",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "updatedByAdminUser",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "soloKillPct",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "groupKillPct",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "miniFullDt",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "fullFinalDt",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "disabled",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "characterName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "daysWorking",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "excSologroup",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "notes",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tagName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hotkeyValue",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "expireDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "tertiaryKillPct",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20161101184146",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "project_roles",
+    "pagination": "pagination"
+}

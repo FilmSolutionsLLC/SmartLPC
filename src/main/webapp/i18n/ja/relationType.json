@@ -1,0 +1,22 @@
+{
+    "smartLpcApp": {
+        "relationType" : {
+            "home": {
+                "title": "RelationTypes",
+                "createLabel": "RelationType を追加",
+                "createOrEditLabel": "RelationTypeを追加または編集",
+                "search": "Search for RelationType"
+            },
+            "created": "A new RelationType is created with identifier {{ param }}",
+            "updated": "A RelationType is updated with identifier {{ param }}",
+            "deleted": "A RelationType is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "RelationType {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "RelationType"
+            },
+            "relation": "Relation"
+        }
+    }
+}

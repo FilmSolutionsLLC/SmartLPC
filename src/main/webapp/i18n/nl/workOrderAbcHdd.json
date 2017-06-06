@@ -1,0 +1,25 @@
+{
+    "smartLpcApp": {
+        "workOrderAbcHdd" : {
+            "home": {
+                "title": "WorkOrderAbcHdds",
+                "createLabel": "Maak een nieuwe WorkOrderAbcHdd",
+                "createOrEditLabel": "Maak of wijzig een WorkOrderAbcHdd",
+                "search": "Search for WorkOrderAbcHdd"
+            },
+            "created": "A new WorkOrderAbcHdd is created with identifier {{ param }}",
+            "updated": "A WorkOrderAbcHdd is updated with identifier {{ param }}",
+            "deleted": "A WorkOrderAbcHdd is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Bent u zeker dat u WorkOrderAbcHdd {{ id }} wilt verwijderen?"
+            },
+            "detail": {
+                "title": "WorkOrderAbcHdd"
+            },
+            "size": "Size",
+            "drive_number": "Drive_number",
+            "workOrder": "WorkOrder",
+            "hdd_to": "Hdd_to"
+        }
+    }
+}

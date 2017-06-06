@@ -1,0 +1,33 @@
+
+<div>
+    <h2><span translate="smartLpcApp.workOrderAbcHdd.detail.title">WorkOrderAbcHdd</span> {{vm.workOrderAbcHdd.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span translate="smartLpcApp.workOrderAbcHdd.size">Size</dt></dt>
+        <dd>
+            <span>{{vm.workOrderAbcHdd.size}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.workOrderAbcHdd.drive_number">Drive_number</dt></dt>
+        <dd>
+            <span>{{vm.workOrderAbcHdd.drive_number}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.workOrderAbcHdd.workOrder">workOrder</span></dt>
+        <dd>
+            <a ui-sref="work-order-detail({id:vm.workOrderAbcHdd.workOrder.id})">{{vm.workOrderAbcHdd.workOrder.id}}</a>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.workOrderAbcHdd.hdd_to">hdd_to</span></dt>
+        <dd>
+            <a ui-sref="lookups-detail({id:vm.workOrderAbcHdd.hdd_to.id})">{{vm.workOrderAbcHdd.hdd_to.text_value}}</a>
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

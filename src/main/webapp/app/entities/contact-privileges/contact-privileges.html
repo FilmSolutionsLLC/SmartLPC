@@ -1,0 +1,191 @@
+<div>
+    <h2 translate="smartLpcApp.contactPrivileges.home.title">ContactPrivileges</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="contact-privileges.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs"  translate="smartLpcApp.contactPrivileges.home.createLabel">
+                        Create new ContactPrivileges
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'smartLpcApp.contactPrivileges.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span translate="smartLpcApp.contactPrivileges.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="title"><span translate="smartLpcApp.contactPrivileges.title">Title</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span translate="smartLpcApp.contactPrivileges.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="author"><span translate="smartLpcApp.contactPrivileges.author">Author</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="exec"><span translate="smartLpcApp.contactPrivileges.exec">Exec</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="captioning"><span translate="smartLpcApp.contactPrivileges.captioning">Captioning</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="downloadType"><span translate="smartLpcApp.contactPrivileges.downloadType">DownloadType</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="email"><span translate="smartLpcApp.contactPrivileges.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="print"><span translate="smartLpcApp.contactPrivileges.print">Print</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lockApproveRestriction"><span translate="smartLpcApp.contactPrivileges.lockApproveRestriction">LockApproveRestriction</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="priorityPix"><span translate="smartLpcApp.contactPrivileges.priorityPix">PriorityPix</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="releaseExclude"><span translate="smartLpcApp.contactPrivileges.releaseExclude">ReleaseExclude</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="viewSensitive"><span translate="smartLpcApp.contactPrivileges.viewSensitive">ViewSensitive</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="watermark"><span translate="smartLpcApp.contactPrivileges.watermark">Watermark</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="watermarkInnerTransparency"><span translate="smartLpcApp.contactPrivileges.watermarkInnerTransparency">WatermarkInnerTransparency</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="watermarkOuterTransparency"><span translate="smartLpcApp.contactPrivileges.watermarkOuterTransparency">WatermarkOuterTransparency</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="internal"><span translate="smartLpcApp.contactPrivileges.internal">Internal</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="vendor"><span translate="smartLpcApp.contactPrivileges.vendor">Vendor</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="restartRole"><span translate="smartLpcApp.contactPrivileges.restartRole">RestartRole</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="restartImage"><span translate="smartLpcApp.contactPrivileges.restartImage">RestartImage</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="restartPage"><span translate="smartLpcApp.contactPrivileges.restartPage">RestartPage</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastLoginDt"><span translate="smartLpcApp.contactPrivileges.lastLoginDt">LastLoginDt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastLogoutDt"><span translate="smartLpcApp.contactPrivileges.lastLogoutDt">LastLogoutDt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="disabled"><span translate="smartLpcApp.contactPrivileges.disabled">Disabled</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="welcomeMessage"><span translate="smartLpcApp.contactPrivileges.welcomeMessage">WelcomeMessage</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="isABCViewer"><span translate="smartLpcApp.contactPrivileges.isABCViewer">IsABCViewer</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="talentManagement"><span translate="smartLpcApp.contactPrivileges.talentManagement">TalentManagement</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="signoffManagement"><span translate="smartLpcApp.contactPrivileges.signoffManagement">SignoffManagement</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="datgeditManagement"><span translate="smartLpcApp.contactPrivileges.datgeditManagement">DatgeditManagement</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span translate="smartLpcApp.contactPrivileges.createdDate">CreatedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updatedDate"><span translate="smartLpcApp.contactPrivileges.updatedDate">UpdatedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="expireDate"><span translate="smartLpcApp.contactPrivileges.expireDate">ExpireDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="restartFilter"><span translate="smartLpcApp.contactPrivileges.restartFilter">RestartFilter</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="restartColumns"><span translate="smartLpcApp.contactPrivileges.restartColumns">RestartColumns</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="restartImagesPerPage"><span translate="smartLpcApp.contactPrivileges.restartImagesPerPage">RestartImagesPerPage</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="restartImageSize"><span translate="smartLpcApp.contactPrivileges.restartImageSize">RestartImageSize</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="restartTime"><span translate="smartLpcApp.contactPrivileges.restartTime">RestartTime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="showFinalizations"><span translate="smartLpcApp.contactPrivileges.showFinalizations">ShowFinalizations</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="readOnly"><span translate="smartLpcApp.contactPrivileges.readOnly">ReadOnly</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="hasVideo"><span translate="smartLpcApp.contactPrivileges.hasVideo">HasVideo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="globalAlbum"><span translate="smartLpcApp.contactPrivileges.globalAlbum">GlobalAlbum</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="seesUntagged"><span translate="smartLpcApp.contactPrivileges.seesUntagged">SeesUntagged</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="loginCount"><span translate="smartLpcApp.contactPrivileges.loginCount">LoginCount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="exclusives"><span translate="smartLpcApp.contactPrivileges.exclusives">Exclusives</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="defaultAlbum"><span translate="smartLpcApp.contactPrivileges.defaultAlbum">DefaultAlbum</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="critiqueIt"><span translate="smartLpcApp.contactPrivileges.critiqueIt">CritiqueIt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="adhocLink"><span translate="smartLpcApp.contactPrivileges.adhocLink">AdhocLink</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="retouch"><span translate="smartLpcApp.contactPrivileges.retouch">Retouch</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fileUpload"><span translate="smartLpcApp.contactPrivileges.fileUpload">FileUpload</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="deleteAssets"><span translate="smartLpcApp.contactPrivileges.deleteAssets">DeleteAssets</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="project.name"><span translate="smartLpcApp.contactPrivileges.project">project</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contact.fullName"><span translate="smartLpcApp.contactPrivileges.contact">contact</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdByAdminUser.firstName"><span translate="smartLpcApp.contactPrivileges.createdByAdminUser">createdByAdminUser</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updatedByAdminUser.firstName"><span translate="smartLpcApp.contactPrivileges.updatedByAdminUser">updatedByAdminUser</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="contactPrivileges in vm.contactPrivileges track by contactPrivileges.id">
+                    <td><a ui-sref="contact-privileges-detail({id:contactPrivileges.id})">{{contactPrivileges.id}}</a></td>
+                    <td>{{contactPrivileges.name}}</td>
+                    <td>{{contactPrivileges.title}}</td>
+                    <td>{{contactPrivileges.description}}</td>
+                    <td>{{contactPrivileges.author}}</td>
+                    <td>{{contactPrivileges.exec}}</td>
+                    <td>{{contactPrivileges.captioning}}</td>
+                    <td>{{contactPrivileges.downloadType}}</td>
+                    <td>{{contactPrivileges.email}}</td>
+                    <td>{{contactPrivileges.print}}</td>
+                    <td>{{contactPrivileges.lockApproveRestriction}}</td>
+                    <td>{{contactPrivileges.priorityPix}}</td>
+                    <td>{{contactPrivileges.releaseExclude}}</td>
+                    <td>{{contactPrivileges.viewSensitive}}</td>
+                    <td>{{contactPrivileges.watermark}}</td>
+                    <td>{{contactPrivileges.watermarkInnerTransparency}}</td>
+                    <td>{{contactPrivileges.watermarkOuterTransparency}}</td>
+                    <td>{{contactPrivileges.internal}}</td>
+                    <td>{{contactPrivileges.vendor}}</td>
+                    <td>{{contactPrivileges.restartRole}}</td>
+                    <td>{{contactPrivileges.restartImage}}</td>
+                    <td>{{contactPrivileges.restartPage}}</td>
+                    <td>{{contactPrivileges.lastLoginDt | date:'medium'}}</td>
+                    <td>{{contactPrivileges.lastLogoutDt | date:'medium'}}</td>
+                    <td>{{contactPrivileges.disabled}}</td>
+                    <td>{{contactPrivileges.welcomeMessage}}</td>
+                    <td>{{contactPrivileges.isABCViewer}}</td>
+                    <td>{{contactPrivileges.talentManagement}}</td>
+                    <td>{{contactPrivileges.signoffManagement}}</td>
+                    <td>{{contactPrivileges.datgeditManagement}}</td>
+                    <td>{{contactPrivileges.createdDate | date:'medium'}}</td>
+                    <td>{{contactPrivileges.updatedDate | date:'medium'}}</td>
+                    <td>{{contactPrivileges.expireDate | date:'medium'}}</td>
+                    <td>{{contactPrivileges.restartFilter}}</td>
+                    <td>{{contactPrivileges.restartColumns}}</td>
+                    <td>{{contactPrivileges.restartImagesPerPage}}</td>
+                    <td>{{contactPrivileges.restartImageSize}}</td>
+                    <td>{{contactPrivileges.restartTime}}</td>
+                    <td>{{contactPrivileges.showFinalizations}}</td>
+                    <td>{{contactPrivileges.readOnly}}</td>
+                    <td>{{contactPrivileges.hasVideo}}</td>
+                    <td>{{contactPrivileges.globalAlbum}}</td>
+                    <td>{{contactPrivileges.seesUntagged}}</td>
+                    <td>{{contactPrivileges.loginCount}}</td>
+                    <td>{{contactPrivileges.exclusives}}</td>
+                    <td>{{contactPrivileges.defaultAlbum}}</td>
+                    <td>{{contactPrivileges.critiqueIt}}</td>
+                    <td>{{contactPrivileges.adhocLink}}</td>
+                    <td>{{contactPrivileges.retouch}}</td>
+                    <td>{{contactPrivileges.fileUpload}}</td>
+                    <td>{{contactPrivileges.deleteAssets}}</td>
+                    <td>
+                        <a ui-sref="projects-detail({id:contactPrivileges.project.id})">{{contactPrivileges.project.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="contacts-detail({id:contactPrivileges.contact.id})">{{contactPrivileges.contact.fullName}}</a>
+                    </td>
+                    <td>
+                        {{contactPrivileges.createdByAdminUser.firstName}}
+                    </td>
+                    <td>
+                        {{contactPrivileges.updatedByAdminUser.firstName}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="contact-privileges-detail({id:contactPrivileges.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="contact-privileges.edit({id:contactPrivileges.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="contact-privileges.delete({id:contactPrivileges.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

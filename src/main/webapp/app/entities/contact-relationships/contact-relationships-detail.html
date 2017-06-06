@@ -1,0 +1,58 @@
+
+<div>
+    <h2><span translate="smartLpcApp.contactRelationships.detail.title">ContactRelationships</span> {{vm.contactRelationships.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span translate="smartLpcApp.contactRelationships.isPrimaryContact">IsPrimaryContact</span></dt>
+        <dd>
+            <span>{{vm.contactRelationships.isPrimaryContact}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.contactRelationships.createdDate">CreatedDate</span></dt>
+        <dd>
+            <span>{{vm.contactRelationships.createdDate | date:'mediumDate'}}</span>
+        </dd>
+        <hr>
+        <span><span translate="smartLpcApp.contactRelationships.updatedDate">UpdatedDate</span></dt>
+        <dd>
+            <span>{{vm.contactRelationships.updatedDate | date:'mediumDate'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.contactRelationships.createdByAdminUser">createdByAdminUser</span></dt>
+        <dd>
+            {{vm.contactRelationships.createdByAdminUser.firstName}}
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.contactRelationships.updatedByAdminUser">updatedByAdminUser</span></dt>
+        <dd>
+            {{vm.contactRelationships.updatedByAdminUser.firstName}}
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.contactRelationships.contact_a">contact_a</span></dt>
+        <dd>
+            <a ui-sref="contacts-detail({id:vm.contactRelationships.contact_a.id})">{{vm.contactRelationships.contact_a.fullName}}</a>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.contactRelationships.contact_b">contact_b</span></dt>
+        <dd>
+            <a ui-sref="contacts-detail({id:vm.contactRelationships.contact_b.id})">{{vm.contactRelationships.contact_b.fullName}}</a>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.contactRelationships.contact_a_qb_rid">contact_a_qb_rid</span></dt>
+        <dd>
+            <a ui-sref="contacts-detail({id:vm.contactRelationships.contact_a_qb_rid.id})">{{vm.contactRelationships.contact_a_qb_rid.fullName}}</a>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.contactRelationships.contact_b_qb_rid">contact_b_qb_rid</span></dt>
+        <dd>
+            <a ui-sref="contacts-detail({id:vm.contactRelationships.contact_b_qb_rid.id})">{{vm.contactRelationships.contact_b_qb_rid.fullName}}</a>
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

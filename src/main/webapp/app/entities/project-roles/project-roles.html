@@ -1,0 +1,123 @@
+<div>
+    <h2 translate="smartLpcApp.projectRoles.home.title">ProjectRoles</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="project-roles.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs"  translate="smartLpcApp.projectRoles.home.createLabel">
+                        Create new ProjectRoles
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'smartLpcApp.projectRoles.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="soloKillPct"><span translate="smartLpcApp.projectRoles.soloKillPct">SoloKillPct</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="groupKillPct"><span translate="smartLpcApp.projectRoles.groupKillPct">GroupKillPct</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="miniFullDt"><span translate="smartLpcApp.projectRoles.miniFullDt">MiniFullDt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fullFinalDt"><span translate="smartLpcApp.projectRoles.fullFinalDt">FullFinalDt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="disabled"><span translate="smartLpcApp.projectRoles.disabled">Disabled</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="characterName"><span translate="smartLpcApp.projectRoles.characterName">CharacterName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="startDate"><span translate="smartLpcApp.projectRoles.startDate">StartDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="daysWorking"><span translate="smartLpcApp.projectRoles.daysWorking">DaysWorking</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="excSologroup"><span translate="smartLpcApp.projectRoles.excSologroup">ExcSologroup</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="notes"><span translate="smartLpcApp.projectRoles.notes">Notes</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tagName"><span translate="smartLpcApp.projectRoles.tagName">TagName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="hotkeyValue"><span translate="smartLpcApp.projectRoles.hotkeyValue">HotkeyValue</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="expireDate"><span translate="smartLpcApp.projectRoles.expireDate">ExpireDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tertiaryKillPct"><span translate="smartLpcApp.projectRoles.tertiaryKillPct">TertiaryKillPct</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span translate="smartLpcApp.projectRoles.createdDate">CreatedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updatedDate"><span translate="smartLpcApp.projectRoles.updatedDate">UpdatedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="project.name"><span translate="smartLpcApp.projectRoles.project">project</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contact.fullName"><span translate="smartLpcApp.projectRoles.contact">contact</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdByAdminUser.firstName"><span translate="smartLpcApp.projectRoles.createdByAdminUser">createdByAdminUser</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updatedByAdminUser.firstName"><span translate="smartLpcApp.projectRoles.updatedByAdminUser">updatedByAdminUser</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="projectRoles in vm.projectRoles track by projectRoles.id">
+                    <td><a ui-sref="project-roles-detail({id:projectRoles.id})">{{projectRoles.id}}</a></td>
+                    <td>{{projectRoles.soloKillPct}}</td>
+                    <td>{{projectRoles.groupKillPct}}</td>
+                        <td>{{projectRoles.miniFullDt | date:'mediumDate'}}</td>
+                        <td>{{projectRoles.fullFinalDt | date:'mediumDate'}}</td>
+                    <td>{{projectRoles.disabled}}</td>
+                    <td>{{projectRoles.characterName}}</td>
+                        <td>{{projectRoles.startDate | date:'mediumDate'}}</td>
+                    <td>{{projectRoles.daysWorking}}</td>
+                    <td>{{projectRoles.excSologroup}}</td>
+                    <td>{{projectRoles.notes}}</td>
+                    <td>{{projectRoles.tagName}}</td>
+                    <td>{{projectRoles.hotkeyValue}}</td>
+                        <td>{{projectRoles.expireDate | date:'mediumDate'}}</td>
+                    <td>{{projectRoles.tertiaryKillPct}}</td>
+                        <td>{{projectRoles.createdDate | date:'mediumDate'}}</td>
+                        <td>{{projectRoles.updatedDate | date:'mediumDate'}}</td>
+                    <td>
+                        <a ui-sref="projects-detail({id:projectRoles.project.id})">{{projectRoles.project.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="contacts-detail({id:projectRoles.contact.id})">{{projectRoles.contact.fullName}}</a>
+                    </td>
+                    <td>
+                        {{projectRoles.createdByAdminUser.firstName}}
+                    </td>
+                    <td>
+                        {{projectRoles.updatedByAdminUser.firstName}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="project-roles-detail({id:projectRoles.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="project-roles.edit({id:projectRoles.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="project-roles.delete({id:projectRoles.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

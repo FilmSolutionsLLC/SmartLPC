@@ -1,0 +1,29 @@
+{
+    "smartLpcApp": {
+        "ingest" : {
+            "home": {
+                "title": "Ingests",
+                "createLabel": "Ingest を追加",
+                "createOrEditLabel": "Ingestを追加または編集",
+                "search": "Search for Ingest"
+            },
+            "created": "A new Ingest is created with identifier {{ param }}",
+            "updated": "A Ingest is updated with identifier {{ param }}",
+            "deleted": "A Ingest is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Ingest {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "Ingest"
+            },
+            "ingestStartTime": "IngestStartTime",
+            "ingestCompletedTime": "IngestCompletedTime",
+            "totalImages": "TotalImages",
+            "totalDone": "TotalDone",
+            "completed": "Completed",
+            "user": "User",
+            "action": "Action",
+            "server": "Server"
+        }
+    }
+}

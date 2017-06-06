@@ -1,0 +1,31 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "workOrder",
+            "otherEntityName": "workOrder",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "hdd_to",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "text_value"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "size",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "drive_number",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170106192843",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "work_order_abc_hdd",
+    "pagination": "pagination"
+}

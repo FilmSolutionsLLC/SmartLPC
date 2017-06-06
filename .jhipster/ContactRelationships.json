@@ -1,0 +1,59 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "createdByAdminUser",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "updatedByAdminUser",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "contact_a",
+            "otherEntityName": "contacts",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "fullName"
+        },
+        {
+            "relationshipName": "contact_b",
+            "otherEntityName": "contacts",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "fullName"
+        },
+        {
+            "relationshipName": "contact_a_qb_rid",
+            "otherEntityName": "contacts",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "fullName"
+        },
+        {
+            "relationshipName": "contact_b_qb_rid",
+            "otherEntityName": "contacts",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "fullName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "isPrimaryContact",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20161028215557",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "contact_relationships",
+    "pagination": "pagination"
+}

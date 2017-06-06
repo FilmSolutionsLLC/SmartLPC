@@ -1,0 +1,31 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "workOrder",
+            "otherEntityName": "workOrder",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "file_type",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "text_value"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "file_count",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "file_size",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170106192607",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "work_order_abc_file",
+    "pagination": "pagination"
+}

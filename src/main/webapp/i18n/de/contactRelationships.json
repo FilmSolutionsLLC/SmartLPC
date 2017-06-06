@@ -1,0 +1,30 @@
+{
+    "smartLpcApp": {
+        "contactRelationships" : {
+            "home": {
+                "title": "ContactRelationships",
+                "createLabel": "ContactRelationships erstellen",
+                "createOrEditLabel": "ContactRelationships erstellen oder bearbeiten",
+                "search": "Suche nach ContactRelationships"
+            },
+            "created": "ContactRelationships erstellt mit ID {{ param }}",
+            "updated": "ContactRelationships aktualisiert mit ID {{ param }}",
+            "deleted": "ContactRelationships gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll ContactRelationships {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "ContactRelationships"
+            },
+            "isPrimaryContact": "IsPrimaryContact",
+            "createdDate": "CreatedDate",
+            "updatedDate": "UpdatedDate",
+            "createdByAdminUser": "CreatedByAdminUser",
+            "updatedByAdminUser": "UpdatedByAdminUser",
+            "contact_a": "Contact_a",
+            "contact_b": "Contact_b",
+            "contact_a_qb_rid": "Contact_a_qb_rid",
+            "contact_b_qb_rid": "Contact_b_qb_rid"
+        }
+    }
+}

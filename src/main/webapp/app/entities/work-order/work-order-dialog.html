@@ -1,0 +1,438 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myWorkOrderLabel" translate="smartLpcApp.workOrder.home.createOrEditLabel">Create or edit a WorkOrder</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.workOrder.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.isPrint" for="field_isPrint">IsPrint</label>
+            <input type="checkbox" class="form-control" name="isPrint" id="field_isPrint"
+                    ng-model="vm.workOrder.isPrint"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.isProof" for="field_isProof">IsProof</label>
+            <input type="checkbox" class="form-control" name="isProof" id="field_isProof"
+                    ng-model="vm.workOrder.isProof"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.isAbc" for="field_isAbc">IsAbc</label>
+            <input type="checkbox" class="form-control" name="isAbc" id="field_isAbc"
+                    ng-model="vm.workOrder.isAbc"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.isTracking" for="field_isTracking">IsTracking</label>
+            <input type="checkbox" class="form-control" name="isTracking" id="field_isTracking"
+                    ng-model="vm.workOrder.isTracking"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.requestDate" for="field_requestDate">RequestDate</label>
+                <div class="input-group">
+                    <input id="field_requestDate" type="text" class="form-control" name="requestDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.workOrder.requestDate" is-open="vm.datePickerOpenStatus.requestDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('requestDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.requestDescription" for="field_requestDescription">RequestDescription</label>
+            <input type="text" class="form-control" name="requestDescription" id="field_requestDescription"
+                    ng-model="vm.workOrder.requestDescription"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.auditedFlag" for="field_auditedFlag">AuditedFlag</label>
+            <input type="number" class="form-control" name="auditedFlag" id="field_auditedFlag"
+                    ng-model="vm.workOrder.auditedFlag"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.poRecord" for="field_poRecord">PoRecord</label>
+            <input type="text" class="form-control" name="poRecord" id="field_poRecord"
+                    ng-model="vm.workOrder.poRecord"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.invoiced" for="field_invoiced">Invoiced</label>
+            <input type="number" class="form-control" name="invoiced" id="field_invoiced"
+                    ng-model="vm.workOrder.invoiced"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.invoiceNumber" for="field_invoiceNumber">InvoiceNumber</label>
+            <input type="text" class="form-control" name="invoiceNumber" id="field_invoiceNumber"
+                    ng-model="vm.workOrder.invoiceNumber"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.isAltCredit" for="field_isAltCredit">IsAltCredit</label>
+            <input type="checkbox" class="form-control" name="isAltCredit" id="field_isAltCredit"
+                    ng-model="vm.workOrder.isAltCredit"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.overwrite" for="field_overwrite">Overwrite</label>
+            <input type="text" class="form-control" name="overwrite" id="field_overwrite"
+                    ng-model="vm.workOrder.overwrite"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.printSet" for="field_printSet">PrintSet</label>
+            <input type="text" class="form-control" name="printSet" id="field_printSet"
+                    ng-model="vm.workOrder.printSet"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.printQuantity" for="field_printQuantity">PrintQuantity</label>
+            <input type="text" class="form-control" name="printQuantity" id="field_printQuantity"
+                    ng-model="vm.workOrder.printQuantity"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.printDaysFrom" for="field_printDaysFrom">PrintDaysFrom</label>
+            <input type="text" class="form-control" name="printDaysFrom" id="field_printDaysFrom"
+                    ng-model="vm.workOrder.printDaysFrom"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.printDaysTo" for="field_printDaysTo">PrintDaysTo</label>
+            <input type="text" class="form-control" name="printDaysTo" id="field_printDaysTo"
+                    ng-model="vm.workOrder.printDaysTo"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.printPagesFrom" for="field_printPagesFrom">PrintPagesFrom</label>
+            <input type="text" class="form-control" name="printPagesFrom" id="field_printPagesFrom"
+                    ng-model="vm.workOrder.printPagesFrom"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.printPagesTo" for="field_printPagesTo">PrintPagesTo</label>
+            <input type="text" class="form-control" name="printPagesTo" id="field_printPagesTo"
+                    ng-model="vm.workOrder.printPagesTo"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.reminderDate1" for="field_reminderDate1">ReminderDate1</label>
+                <div class="input-group">
+                    <input id="field_reminderDate1" type="text" class="form-control" name="reminderDate1" uib-datepicker-popup="{{dateformat}}" ng-model="vm.workOrder.reminderDate1" is-open="vm.datePickerOpenStatus.reminderDate1"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('reminderDate1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.reminderMsg1" for="field_reminderMsg1">ReminderMsg1</label>
+            <input type="text" class="form-control" name="reminderMsg1" id="field_reminderMsg1"
+                    ng-model="vm.workOrder.reminderMsg1"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.reminderDate2" for="field_reminderDate2">ReminderDate2</label>
+                <div class="input-group">
+                    <input id="field_reminderDate2" type="text" class="form-control" name="reminderDate2" uib-datepicker-popup="{{dateformat}}" ng-model="vm.workOrder.reminderDate2" is-open="vm.datePickerOpenStatus.reminderDate2"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('reminderDate2')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.reminderMsg2" for="field_reminderMsg2">ReminderMsg2</label>
+            <input type="text" class="form-control" name="reminderMsg2" id="field_reminderMsg2"
+                    ng-model="vm.workOrder.reminderMsg2"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.reminderDate3" for="field_reminderDate3">ReminderDate3</label>
+                <div class="input-group">
+                    <input id="field_reminderDate3" type="text" class="form-control" name="reminderDate3" uib-datepicker-popup="{{dateformat}}" ng-model="vm.workOrder.reminderDate3" is-open="vm.datePickerOpenStatus.reminderDate3"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('reminderDate3')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.reminderMsg3" for="field_reminderMsg3">ReminderMsg3</label>
+            <input type="text" class="form-control" name="reminderMsg3" id="field_reminderMsg3"
+                    ng-model="vm.workOrder.reminderMsg3"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.processingDateRecieved" for="field_processingDateRecieved">ProcessingDateRecieved</label>
+                <div class="input-group">
+                    <input id="field_processingDateRecieved" type="text" class="form-control" name="processingDateRecieved" uib-datepicker-popup="{{dateformat}}" ng-model="vm.workOrder.processingDateRecieved" is-open="vm.datePickerOpenStatus.processingDateRecieved"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('processingDateRecieved')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.processingHDDid" for="field_processingHDDid">ProcessingHDDid</label>
+            <input type="text" class="form-control" name="processingHDDid" id="field_processingHDDid"
+                    ng-model="vm.workOrder.processingHDDid"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.processingDateShipped" for="field_processingDateShipped">ProcessingDateShipped</label>
+                <div class="input-group">
+                    <input id="field_processingDateShipped" type="text" class="form-control" name="processingDateShipped" uib-datepicker-popup="{{dateformat}}" ng-model="vm.workOrder.processingDateShipped" is-open="vm.datePickerOpenStatus.processingDateShipped"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('processingDateShipped')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.processingNote" for="field_processingNote">ProcessingNote</label>
+            <input type="text" class="form-control" name="processingNote" id="field_processingNote"
+                    ng-model="vm.workOrder.processingNote"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.processingLocation" for="field_processingLocation">ProcessingLocation</label>
+            <input type="text" class="form-control" name="processingLocation" id="field_processingLocation"
+                    ng-model="vm.workOrder.processingLocation"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.processingImageRange" for="field_processingImageRange">ProcessingImageRange</label>
+            <input type="text" class="form-control" name="processingImageRange" id="field_processingImageRange"
+                    ng-model="vm.workOrder.processingImageRange"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.processingImageQty" for="field_processingImageQty">ProcessingImageQty</label>
+            <input type="text" class="form-control" name="processingImageQty" id="field_processingImageQty"
+                    ng-model="vm.workOrder.processingImageQty"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.dueToClientReminder" for="field_dueToClientReminder">DueToClientReminder</label>
+                <div class="input-group">
+                    <input id="field_dueToClientReminder" type="text" class="form-control" name="dueToClientReminder" uib-datepicker-popup="{{dateformat}}" ng-model="vm.workOrder.dueToClientReminder" is-open="vm.datePickerOpenStatus.dueToClientReminder"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dueToClientReminder')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.dueToMounterReminder" for="field_dueToMounterReminder">DueToMounterReminder</label>
+                <div class="input-group">
+                    <input id="field_dueToMounterReminder" type="text" class="form-control" name="dueToMounterReminder" uib-datepicker-popup="{{dateformat}}" ng-model="vm.workOrder.dueToMounterReminder" is-open="vm.datePickerOpenStatus.dueToMounterReminder"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dueToMounterReminder')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.recievedFromMounterReminder" for="field_recievedFromMounterReminder">RecievedFromMounterReminder</label>
+                <div class="input-group">
+                    <input id="field_recievedFromMounterReminder" type="text" class="form-control" name="recievedFromMounterReminder" uib-datepicker-popup="{{dateformat}}" ng-model="vm.workOrder.recievedFromMounterReminder" is-open="vm.datePickerOpenStatus.recievedFromMounterReminder"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('recievedFromMounterReminder')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.abcInstruction" for="field_abcInstruction">AbcInstruction</label>
+            <input type="text" class="form-control" name="abcInstruction" id="field_abcInstruction"
+                    ng-model="vm.workOrder.abcInstruction"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.abcRawDvd" for="field_abcRawDvd">AbcRawDvd</label>
+            <input type="number" class="form-control" name="abcRawDvd" id="field_abcRawDvd"
+                    ng-model="vm.workOrder.abcRawDvd"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.abcTalentCount" for="field_abcTalentCount">AbcTalentCount</label>
+            <input type="number" class="form-control" name="abcTalentCount" id="field_abcTalentCount"
+                    ng-model="vm.workOrder.abcTalentCount"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.kickBack" for="field_kickBack">KickBack</label>
+            <input type="text" class="form-control" name="kickBack" id="field_kickBack"
+                    ng-model="vm.workOrder.kickBack"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.createdDate" for="field_createdDate">CreatedDate</label>
+                <div class="input-group">
+                    <input id="field_createdDate" type="text" class="form-control" name="createdDate" datetime-picker="{{dateformat}}" ng-model="vm.workOrder.createdDate" is-open="vm.datePickerOpenStatus.createdDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.updatedDate" for="field_updatedDate">UpdatedDate</label>
+                <div class="input-group">
+                    <input id="field_updatedDate" type="text" class="form-control" name="updatedDate" datetime-picker="{{dateformat}}" ng-model="vm.workOrder.updatedDate" is-open="vm.datePickerOpenStatus.updatedDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('updatedDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.completionDate" for="field_completionDate">CompletionDate</label>
+                <div class="input-group">
+                    <input id="field_completionDate" type="text" class="form-control" name="completionDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.workOrder.completionDate" is-open="vm.datePickerOpenStatus.completionDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('completionDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.durationOfService" for="field_durationOfService">DurationOfService</label>
+            <input type="text" class="form-control" name="durationOfService" id="field_durationOfService"
+                    ng-model="vm.workOrder.durationOfService"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.workOrder.processingProofShipped" for="field_processingProofShipped">ProcessingProofShipped</label>
+                <div class="input-group">
+                    <input id="field_processingProofShipped" type="text" class="form-control" name="processingProofShipped" uib-datepicker-popup="{{dateformat}}" ng-model="vm.workOrder.processingProofShipped" is-open="vm.datePickerOpenStatus.processingProofShipped"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('processingProofShipped')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.type" for="field_type">type</label>
+            <select class="form-control" id="field_type" name="type" ng-model="vm.workOrder.type" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.status" for="field_status">status</label>
+            <select class="form-control" id="field_status" name="status" ng-model="vm.workOrder.status" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.printSize" for="field_printSize">printSize</label>
+            <select class="form-control" id="field_printSize" name="printSize" ng-model="vm.workOrder.printSize" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.printSurface" for="field_printSurface">printSurface</label>
+            <select class="form-control" id="field_printSurface" name="printSurface" ng-model="vm.workOrder.printSurface" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.printBleed" for="field_printBleed">printBleed</label>
+            <select class="form-control" id="field_printBleed" name="printBleed" ng-model="vm.workOrder.printBleed" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.filenamePosition" for="field_filenamePosition">filenamePosition</label>
+            <select class="form-control" id="field_filenamePosition" name="filenamePosition" ng-model="vm.workOrder.filenamePosition" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.photoCredit" for="field_photoCredit">photoCredit</label>
+            <select class="form-control" id="field_photoCredit" name="photoCredit" ng-model="vm.workOrder.photoCredit" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.creditLocation" for="field_creditLocation">creditLocation</label>
+            <select class="form-control" id="field_creditLocation" name="creditLocation" ng-model="vm.workOrder.creditLocation" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.project" for="field_project">project</label>
+            <select class="form-control" id="field_project" name="project" ng-model="vm.workOrder.project" ng-options="projects as projects.name for projects in vm.projectss track by projects.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.assignedToUser" for="field_assignedToUser">assignedToUser</label>
+            <select class="form-control" id="field_assignedToUser" name="assignedToUser" ng-model="vm.workOrder.assignedToUser" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.requestor" for="field_requestor">requestor</label>
+            <select class="form-control" id="field_requestor" name="requestor" ng-model="vm.workOrder.requestor" ng-options="contacts as contacts.fullName for contacts in vm.contactss track by contacts.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.createdBy" for="field_createdBy">createdBy</label>
+            <select class="form-control" id="field_createdBy" name="createdBy" ng-model="vm.workOrder.createdBy" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.updatedBy" for="field_updatedBy">updatedBy</label>
+            <select class="form-control" id="field_updatedBy" name="updatedBy" ng-model="vm.workOrder.updatedBy" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.isFilename" for="field_isFilename">isFilename</label>
+            <select class="form-control" id="field_isFilename" name="isFilename" ng-model="vm.workOrder.isFilename" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.processing_pko_flag" for="field_processing_pko_flag">processing_pko_flag</label>
+            <select class="form-control" id="field_processing_pko_flag" name="processing_pko_flag" ng-model="vm.workOrder.processing_pko_flag" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.priority" for="field_priority">priority</label>
+            <select class="form-control" id="field_priority" name="priority" ng-model="vm.workOrder.priority" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.workOrder.auditedBy" for="field_auditedBy">auditedBy</label>
+            <select class="form-control" id="field_auditedBy" name="auditedBy" ng-model="vm.workOrder.auditedBy" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

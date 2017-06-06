@@ -1,0 +1,29 @@
+{
+    "smartLpcApp": {
+        "storage_Disk" : {
+            "home": {
+                "title": "Storage_Disks",
+                "createLabel": "नया Storage_Disk बनाएँ",
+                "createOrEditLabel": "Storage_Disk बनाएँ या संपादित करें",
+                "search": "Storage_Disk खोजें"
+            },
+            "created": "एक नया Storage_Disk [identifier: {{ param }}] तैयार है",
+            "updated": "एक Storage_Disk [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Storage_Disk [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "Storage_Disk [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "Storage_Disk"
+            },
+            "name": "Name",
+            "size": "Size",
+            "used": "Used",
+            "available": "Available",
+            "usePercent": "UsePercent",
+            "lastUpdated": "LastUpdated",
+            "reserved": "Reserved",
+            "server": "Server"
+        }
+    }
+}

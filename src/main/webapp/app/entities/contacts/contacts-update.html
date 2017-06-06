@@ -1,0 +1,445 @@
+<h2 align="center">Contacts</h2>
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="row">
+        <div class="col-xs-12">
+
+            <button type="submit" class="btn btn-xs btn btn-primary"
+                    ng-disabled="editForm.$invalid || isSaving">Save
+            </button>
+
+            <button type="button" class="btn btn-xs btn btn-primary" ng-click="vm.testFunction()">Save
+                and Add
+            </button>
+
+            <button type="button" ui-sref="contacts.project-permission" class="btn btn-xs btn btn-primary">Project
+                Permissions
+            </button>
+            <td><a href="#" class="btn btn-xs btn btn-danger">Close</a></td>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="form-group">
+            <label class="col-md-1 control-label small" for="field_type">Type</label>
+            <div class="col-xs-2">
+                <div class="input-group">
+
+
+                        <span class="input-group-btn">
+                             <button type="button" ui-sref="lookups.new" data-toggle="modal"
+                                     class="btn btn-success btn-sm"><span
+                                 class="glyphicon glyphicon-plus"></span></button>
+                         </span>
+                    <select class="form-control input-sm" id="field_type" name="type"
+                            ng-model="vm.contactDTO.contacts.type"
+                            ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id"></select>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="form-group">
+            <label class="col-xs-1 control-label small" for="field_fullName">Name
+            </label>
+            <div class="col-xs-2">
+
+
+                <input type="text" class="form-control input-sm" name="fullName" id="field_fullName"
+                       ng-model="vm.contactDTO.contacts.fullName"
+                />
+            </div>
+
+
+            <label class="col-xs-1 control-label small" for="field_title">Title
+            </label>
+            <div class="col-xs-2">
+
+
+                <input type="text" class="form-control input-sm" name="title" id="field_title"
+                       ng-model="vm.contactDTO.contacts.title"
+                />
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <label class="col-md-1 control-label small" for="field_vm.contacts.contactCompany">Contacts Company</label>
+
+
+        <div class="col-md-2">
+            <div class="input-group">
+
+                               <span class="input-group-btn">
+                                   <button type="button" class="btn btn-primary btn-sm"
+                                           ng-click="vm.openModal('field_vm.contacts.contactCompany')">
+                                       <span class="glyphicon glyphicon-list-alt"></span></button>
+                                </span>
+                <input id="field_vm.contacts.contactCompany" name="companyContact"
+                       ng-model="vm.contactDTO.contacts.companyContact.fullName"
+                       class="form-control input-sm">
+            </div>
+        </div>
+
+
+        <label class="col-md-1 control-label small" for="field_defaultDepartment">Department</label>
+        <div class="col-sm-2">
+            <div class="input-group">
+
+                        <span class="input-group-btn">
+                             <button type="button" ui-sref="departments.new" id="openBtn" data-toggle="modal"
+                                     class="btn btn-success btn-sm"><span
+                                 class="glyphicon glyphicon-plus"></span></button>
+                         </span>
+                <select class="form-control input-sm"
+                        ng-options="departments as departments.departmentName for departments in vm.departmentss track by departments.id"
+                        id="field_defaultDepartment" name="defaultDepartment"
+                        ng-model="vm.contactDTO.contacts.defaultDepartment"></select>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <label class="col-xs-1 control-label small">
+            Office <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+        </label>
+        <div class="col-xs-2">
+
+
+            <input type="text" class="form-control input-sm" name="phoneOffice" id="field_phoneOffice"
+                   ng-model="vm.contactDTO.contacts.phoneOffice"
+            />
+
+        </div>
+        <label class="col-xs-1 control-label small">
+            Alt <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+        </label>
+        <div class="col-xs-2">
+
+
+            <input type="text" class="form-control input-sm" name="phoneAlternate" id="field_phoneAlternate"
+                   ng-model="vm.contactDTO.contacts.phoneAlternate"
+            />
+
+        </div>
+    </div>
+
+    <div class="row">
+        <label class="col-xs-1 control-label small">
+            Mobile
+        </label>
+        <div class="col-xs-2">
+
+            <input type="text" class="form-control input-sm" name="phoneMobile" id="field_phoneMobile"
+                   ng-model="vm.contactDTO.contacts.phoneMobile"
+            />
+        </div>
+        <label class="col-xs-1 control-label small  ">
+            Fax <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+        </label>
+        <div class="col-xs-2">
+
+
+            <input type="text" class="form-control input-sm" name="phoneFax" id="field_phoneFax"
+                   ng-model="vm.contactDTO.contacts.phoneFax"
+            />
+
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-xs-1 control-label small">Email #1
+        </label>
+        <div class="col-xs-2">
+
+            <input type="text" class="form-control input-sm" name="email" id="field_email"
+                   ng-model="vm.contactDTO.contacts.email"
+            />
+
+        </div>
+        <label class="col-xs-1 control-label small">Email #2
+        </label>
+        <div class="col-xs-2">
+
+
+            <input type="text" class="form-control input-sm" name="email2" id="field_email2"
+                   ng-model="vm.contactDTO.contacts.email2"
+            />
+
+        </div>
+    </div>
+
+    <div class="row">
+        <label class="col-xs-1 control-label small">Address
+        </label>
+        <div class="col-xs-2">
+
+
+            <input type="text" class="form-control input-sm" name="streetAddress" id="field_streetAddress"
+                   ng-model="vm.contactDTO.contacts.streetAddress"
+            />
+
+        </div>
+        <label class="col-xs-1 control-label small">City
+        </label>
+        <div class="col-xs-2">
+
+
+            <input type="text" class="form-control input-sm" name="city" id="field_city"
+                   ng-model="vm.contactDTO.contacts.city"
+            />
+
+        </div>
+        <label class="col-xs-1 control-label small">State
+        </label>
+        <div class="col-xs-1">
+
+            <input type="text" class="form-control input-sm" name="state" id="field_state"
+                   ng-model="vm.contactDTO.contacts.state"
+            />
+        </div>
+        <label class="col-xs-1 control-label small">Zip Code
+        </label>
+        <div class="col-xs-1">
+
+
+            <input type="text" class="form-control input-sm" name="zipcode" id="field_zipcode"
+                   ng-model="vm.contactDTO.contacts.zipcode"
+            />
+        </div>
+        <label class="col-xs-1 control-label small">Country
+        </label>
+        <div class="col-xs-1">
+
+
+            <input type="text" class="form-control input-sm" name="country" id="field_country"
+                   ng-model="vm.contactDTO.contacts.country"
+            />
+
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-xs-1 control-label small">Username
+        </label>
+        <div class="col-xs-2">
+
+
+            <input type="text" class="form-control input-sm" name="username" id="field_username"
+                   ng-model="vm.contactDTO.contacts.username"
+            />
+
+        </div>
+        <label class="col-xs-1 control-label small">Password
+        </label>
+        <div class="col-xs-2">
+
+            <input type="text" class="form-control input-sm" name="password" id="field_password"
+                   ng-model="vm.contactDTO.contacts.password"
+            />
+
+        </div>
+    </div>
+
+    <div class="row">
+        <label class="col-xs-1 control-label small">Website
+        </label>
+        <div class="col-xs-2">
+
+            <input type="text" class="form-control input-sm" name="website" id="field_website"
+                   ng-model="vm.contactDTO.contacts.website"
+            />
+        </div>
+    </div>
+
+    <div class="row">
+        <label class="col-xs-1 control-label small">Notes
+        </label>
+        <div class="col-xs-11">
+
+                <textarea class="form-control input-sm" rows="1" name="notes" id="field_notes"
+                          ng-model="vm.contactDTO.contacts.notes"></textarea>
+
+
+        </div>
+    </div>
+    <hr>
+    <h4>Exclusives</h4>
+    <div class="row">
+        <label class="col-xs-3 control-label small">Global Restart Columns
+        </label>
+        <div class="col-xs-2">
+
+
+            <input type="number" class="form-control input-sm" name="globalRestartColumns"
+                   id="field_globalRestartColumns"
+                   ng-model="vm.contactDTO.contacts.globalRestartColumns"
+            />
+        </div>
+        <label class="small"> <input type="checkbox" ng-model="vm.contacts.dashboard">
+            &nbspDashboard &nbsp </label>
+
+
+    </div>
+    <div class="row">
+        <label class="col-xs-3 control-label small">Global Restart Image Size
+        </label>
+        <div class="col-xs-2">
+
+
+            <input type="text" class="form-control input-sm" name="globalRestartImageSize"
+                   id="field_globalRestartImageSize"
+                   ng-model="vm.contactDTO.contacts.globalRestartImageSize"
+            />
+        </div>
+        <label class="small"> <input type="checkbox" ng-model="vm.contacts.internalAccessOnly">
+            &nbspIn-house access only &nbsp </label>
+        <!-- <label><input type="checkbox" class="form-control" name="internalAccessOnly"
+                       id="field_internalAccessOnly"
+                       ng-model="vm.contacts.internalAccessOnly"
+         />&nbspIn-house access only &nbsp </label>-->
+
+    </div>
+    <div class="row">
+        <label class="col-xs-3 control-label small">Global Restart Images Per Page
+        </label>
+        <div class="col-xs-2">
+
+            <input type="number" class="form-control input-sm" name="globalRestartImagesPerPage"
+                   id="field_globalRestartImagesPerPage"
+                   ng-model="vm.contacts.globalRestartImagesPerPage"
+            />
+
+        </div>
+        <label class="small"> <input type="checkbox">
+            &nbspBlock / Unblock Users &nbsp</label>
+    </div>
+
+    <hr>
+    <h4>Related Contacts &nbsp; &nbsp; <a href="" ng-click="vm.addRelated()"><span
+        class=" glyphicon glyphicon-plus-sign small text-primary "></span></a></h4>
+    <div id="relatedContact">
+        <!--<fieldset data-ng-repeat="item in related">-->
+        <div
+            ng-repeat="rcontacts in vm.contactDTO.contactRelationships">
+            <div class="row">
+                <div class="col-xs-2">
+                    <label class="small"> <input type="checkbox"
+                                                 ng-model="rcontacts.isPrimaryContact">
+                        &nbspPrimary &nbsp</label>
+                </div>
+                <div class="col-xs-10" align="right">
+                    <a href="" ng-click="vm.removeRelated($index)"><span
+                        class=" glyphicon glyphicon-trash text-danger small"></span></a>
+                </div>
+
+            </div>
+            <br>
+            <div class="row">
+                <label class="col-xs-1 control-label small">Name</label>
+
+
+                <div class="col-xs-2">
+                    <div class="input-group">
+
+                               <span class="input-group-btn">
+                                   <button type="button" class="btn btn-primary btn-sm"
+                                           ng-click="vm.openModal('relatedContact')"><span
+                                       class="glyphicon glyphicon-list-alt"></span></button>
+                                </span>
+                        <input id="field_relatedContact" type="text" name="companyContact"
+                               ng-model="rcontacts.contact_b.fullName"
+                               class="form-control input-sm" readonly>
+
+
+                    </div>
+
+                </div>
+
+                <label class="col-xs-1 control-label small">Type</label>
+
+
+                <div class="col-xs-2">
+
+                    <input type="text" class="form-control input-sm"
+                           ng-model="rcontacts.contact_b.type.textValue" readonly>
+
+                </div>
+
+                <label class="col-xs-1 control-label small">Company</label>
+
+
+                <div class="col-xs-2">
+
+                    <input type="text" id="field_contacts.company_contact" class="form-control input-sm"
+                           ng-model="rcontacts.contact_b.companyContact.fullName" readonly>
+
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-xs-1 control-label small">Main</label>
+
+
+                <div class="col-xs-2">
+
+                    <input type="text" class="form-control input-sm"
+                           ng-model="rcontacts.contact_b.phoneOffice" readonly>
+
+                </div>
+                <label class="col-xs-1 control-label small">Email</label>
+
+
+                <div class="col-xs-2">
+
+                    <input type="text" class="form-control input-sm"
+                           ng-model="rcontacts.contact_b.email" readonly>
+
+                </div>
+                <label class="col-xs-1 control-label small">Mobile</label>
+
+
+                <div class="col-xs-2">
+
+                    <input type="text" class="form-control input-sm"
+                           ng-model="rcontacts.contact_b.phoneMobile" readonly>
+
+                </div>
+            </div>
+            <div class="row">
+
+                <label class="col-xs-1 control-label small">Asst/Notes</label>
+
+
+                <div class="col-xs-11">
+
+                    <input id="address" type="text" class="form-control input-sm"
+                           ng-model="rcontacts.contact_b.phoneMobile.notes" readonly>
+
+                </div>
+
+            </div>
+            <br>
+        </div>
+    </div>
+
+
+</form>
+
+
+<button type="submit"
+        onclick="window.history.back()"
+        class="btn btn-info btn-sm">
+    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+</button>
+
+
+

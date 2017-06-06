@@ -1,0 +1,30 @@
+{
+    "smartLpcApp": {
+        "contactRelationships" : {
+            "home": {
+                "title": "ContactRelationships",
+                "createLabel": "नया ContactRelationships बनाएँ",
+                "createOrEditLabel": "ContactRelationships बनाएँ या संपादित करें",
+                "search": "ContactRelationships खोजें"
+            },
+            "created": "एक नया ContactRelationships [identifier: {{ param }}] तैयार है",
+            "updated": "एक ContactRelationships [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "ContactRelationships [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "ContactRelationships [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "ContactRelationships"
+            },
+            "isPrimaryContact": "IsPrimaryContact",
+            "createdDate": "CreatedDate",
+            "updatedDate": "UpdatedDate",
+            "createdByAdminUser": "CreatedByAdminUser",
+            "updatedByAdminUser": "UpdatedByAdminUser",
+            "contact_a": "Contact_a",
+            "contact_b": "Contact_b",
+            "contact_a_qb_rid": "Contact_a_qb_rid",
+            "contact_b_qb_rid": "Contact_b_qb_rid"
+        }
+    }
+}

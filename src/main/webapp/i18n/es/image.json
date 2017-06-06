@@ -1,0 +1,36 @@
+{
+    "smartLpcApp": {
+        "image" : {
+            "home": {
+                "title": "Images",
+                "createLabel": "Crear nuevo Image",
+                "createOrEditLabel": "Crear o editar Image",
+                "search": "Search for Image"
+            },
+            "created": "Un nuevo Image ha sido creado con el identificador {{ param }}",
+            "updated": "Un Image ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Image ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Image {{ id }}?"
+            },
+            "detail": {
+                "title": "Image"
+            },
+            "captionId": "CaptionId",
+            "name": "Name",
+            "commentDescription": "CommentDescription",
+            "releaseTime": "ReleaseTime",
+            "ingestTime": "IngestTime",
+            "quickpickSelectedTime": "QuickpickSelectedTime",
+            "createdTime": "CreatedTime",
+            "updatedTime": "UpdatedTime",
+            "photographer": "Photographer",
+            "video": "Video",
+            "hidden": "Hidden",
+            "webUpload": "WebUpload",
+            "batch": "Batch",
+            "createdByUser": "CreatedByUser",
+            "updatedByUser": "UpdatedByUser"
+        }
+    }
+}

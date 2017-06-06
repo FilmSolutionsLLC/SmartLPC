@@ -1,0 +1,280 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myContactsLabel" translate="smartLpcApp.contacts.home.createOrEditLabel">Create or edit a Contacts</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.contacts.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.username" for="field_username">Username</label>
+            <input type="text" class="form-control" name="username" id="field_username"
+                    ng-model="vm.contacts.username"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.password" for="field_password">Password</label>
+            <input type="text" class="form-control" name="password" id="field_password"
+                    ng-model="vm.contacts.password"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.fullName" for="field_fullName">FullName</label>
+            <input type="text" class="form-control" name="fullName" id="field_fullName"
+                    ng-model="vm.contacts.fullName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.title" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                    ng-model="vm.contacts.title"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.email" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                    ng-model="vm.contacts.email"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.email2" for="field_email2">Email2</label>
+            <input type="text" class="form-control" name="email2" id="field_email2"
+                    ng-model="vm.contacts.email2"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.phoneOffice" for="field_phoneOffice">PhoneOffice</label>
+            <input type="text" class="form-control" name="phoneOffice" id="field_phoneOffice"
+                    ng-model="vm.contacts.phoneOffice"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.phoneAlternate" for="field_phoneAlternate">PhoneAlternate</label>
+            <input type="text" class="form-control" name="phoneAlternate" id="field_phoneAlternate"
+                    ng-model="vm.contacts.phoneAlternate"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.phoneMobile" for="field_phoneMobile">PhoneMobile</label>
+            <input type="text" class="form-control" name="phoneMobile" id="field_phoneMobile"
+                    ng-model="vm.contacts.phoneMobile"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.phoneFax" for="field_phoneFax">PhoneFax</label>
+            <input type="text" class="form-control" name="phoneFax" id="field_phoneFax"
+                    ng-model="vm.contacts.phoneFax"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.streetAddress" for="field_streetAddress">StreetAddress</label>
+            <input type="text" class="form-control" name="streetAddress" id="field_streetAddress"
+                    ng-model="vm.contacts.streetAddress"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.streetAddress2" for="field_streetAddress2">StreetAddress2</label>
+            <input type="text" class="form-control" name="streetAddress2" id="field_streetAddress2"
+                    ng-model="vm.contacts.streetAddress2"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.streetAddress3" for="field_streetAddress3">StreetAddress3</label>
+            <input type="text" class="form-control" name="streetAddress3" id="field_streetAddress3"
+                    ng-model="vm.contacts.streetAddress3"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.city" for="field_city">City</label>
+            <input type="text" class="form-control" name="city" id="field_city"
+                    ng-model="vm.contacts.city"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.state" for="field_state">State</label>
+            <input type="text" class="form-control" name="state" id="field_state"
+                    ng-model="vm.contacts.state"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.zipcode" for="field_zipcode">Zipcode</label>
+            <input type="text" class="form-control" name="zipcode" id="field_zipcode"
+                    ng-model="vm.contacts.zipcode"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.country" for="field_country">Country</label>
+            <input type="text" class="form-control" name="country" id="field_country"
+                    ng-model="vm.contacts.country"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.website" for="field_website">Website</label>
+            <input type="text" class="form-control" name="website" id="field_website"
+                    ng-model="vm.contacts.website"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.notes" for="field_notes">Notes</label>
+            <input type="text" class="form-control" name="notes" id="field_notes"
+                    ng-model="vm.contacts.notes"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.sourceId" for="field_sourceId">SourceId</label>
+            <input type="text" class="form-control" name="sourceId" id="field_sourceId"
+                    ng-model="vm.contacts.sourceId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.createdDate" for="field_createdDate">CreatedDate</label>
+                <div class="input-group">
+                    <input id="field_createdDate" type="text" class="form-control" name="createdDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.contacts.createdDate" is-open="vm.datePickerOpenStatus.createdDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.updatedDate" for="field_updatedDate">UpdatedDate</label>
+                <div class="input-group">
+                    <input id="field_updatedDate" type="text" class="form-control" name="updatedDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.contacts.updatedDate" is-open="vm.datePickerOpenStatus.updatedDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('updatedDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.globalRestartColumns" for="field_globalRestartColumns">GlobalRestartColumns</label>
+            <input type="number" class="form-control" name="globalRestartColumns" id="field_globalRestartColumns"
+                    ng-model="vm.contacts.globalRestartColumns"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.globalRestartImagesPerPage" for="field_globalRestartImagesPerPage">GlobalRestartImagesPerPage</label>
+            <input type="number" class="form-control" name="globalRestartImagesPerPage" id="field_globalRestartImagesPerPage"
+                    ng-model="vm.contacts.globalRestartImagesPerPage"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.globalRestartImageSize" for="field_globalRestartImageSize">GlobalRestartImageSize</label>
+            <input type="text" class="form-control" name="globalRestartImageSize" id="field_globalRestartImageSize"
+                    ng-model="vm.contacts.globalRestartImageSize"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.globalRestartTime" for="field_globalRestartTime">GlobalRestartTime</label>
+            <input type="number" class="form-control" name="globalRestartTime" id="field_globalRestartTime"
+                    ng-model="vm.contacts.globalRestartTime"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.dashboard" for="field_dashboard">Dashboard</label>
+            <input type="checkbox" class="form-control" name="dashboard" id="field_dashboard"
+                    ng-model="vm.contacts.dashboard"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.internalAccessOnly" for="field_internalAccessOnly">InternalAccessOnly</label>
+            <input type="checkbox" class="form-control" name="internalAccessOnly" id="field_internalAccessOnly"
+                    ng-model="vm.contacts.internalAccessOnly"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.adhocExpiresIn" for="field_adhocExpiresIn">AdhocExpiresIn</label>
+            <input type="number" class="form-control" name="adhocExpiresIn" id="field_adhocExpiresIn"
+                    ng-model="vm.contacts.adhocExpiresIn"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.adhocLimitViews" for="field_adhocLimitViews">AdhocLimitViews</label>
+            <input type="number" class="form-control" name="adhocLimitViews" id="field_adhocLimitViews"
+                    ng-model="vm.contacts.adhocLimitViews"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.adhocDownload" for="field_adhocDownload">AdhocDownload</label>
+            <input type="number" class="form-control" name="adhocDownload" id="field_adhocDownload"
+                    ng-model="vm.contacts.adhocDownload"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.adhocWatermarkText" for="field_adhocWatermarkText">AdhocWatermarkText</label>
+            <input type="text" class="form-control" name="adhocWatermarkText" id="field_adhocWatermarkText"
+                    ng-model="vm.contacts.adhocWatermarkText"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.loginIp" for="field_loginIp">LoginIp</label>
+            <input type="text" class="form-control" name="loginIp" id="field_loginIp"
+                    ng-model="vm.contacts.loginIp"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.loginAttempt" for="field_loginAttempt">LoginAttempt</label>
+            <input type="number" class="form-control" name="loginAttempt" id="field_loginAttempt"
+                    ng-model="vm.contacts.loginAttempt"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.attemptBasedLogin" for="field_attemptBasedLogin">AttemptBasedLogin</label>
+            <input type="checkbox" class="form-control" name="attemptBasedLogin" id="field_attemptBasedLogin"
+                    ng-model="vm.contacts.attemptBasedLogin"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contacts.ipBasedLogin" for="field_ipBasedLogin">IpBasedLogin</label>
+            <input type="checkbox" class="form-control" name="ipBasedLogin" id="field_ipBasedLogin"
+                    ng-model="vm.contacts.ipBasedLogin"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="smartLpcApp.contacts.type" for="field_type">type</label>
+            <select class="form-control" id="field_type" name="type" ng-model="vm.contacts.type" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.contacts.defaultDepartment" for="field_defaultDepartment">defaultDepartment</label>
+            <select class="form-control" id="field_defaultDepartment" name="defaultDepartment" ng-model="vm.contacts.defaultDepartment" ng-options="departments as departments.departmentName for departments in vm.departmentss track by departments.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.contacts.createdByAdmin" for="field_createdByAdmin">createdByAdmin</label>
+            <select class="form-control" id="field_createdByAdmin" name="createdByAdmin" ng-model="vm.contacts.createdByAdmin" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.contacts.updatedByAdmin" for="field_updatedByAdmin">updatedByAdmin</label>
+            <select class="form-control" id="field_updatedByAdmin" name="updatedByAdmin" ng-model="vm.contacts.updatedByAdmin" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.contacts.companyContact" for="field_companyContact">companyContact</label>
+            <select class="form-control" id="field_companyContact" name="companyContact" ng-model="vm.contacts.companyContact" ng-options="contacts as contacts.fullName for contacts in vm.contactss track by contacts.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,31 @@
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <include file="classpath:config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161026215228_added_entity_Lookups.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161026215642_added_entity_Storage_Servers.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161026220656_added_entity_Storage_Disk.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161026232355_added_entity_Ingest.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161027003503_added_entity_Departments.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161027174247_added_entity_Contacts.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161028002913_added_entity_Projects.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161028005920_added_entity_Batch.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161028164126_added_entity_Captions.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161028170510_added_entity_Image.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161028190043_added_entity_WorkOrder.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161028215557_added_entity_ContactRelationships.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161101184146_added_entity_ProjectRoles.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161209202615_added_entity_ProjectLabTasks.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161228224043_added_entity_RelationType.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170106190405_added_entity_ProjectPurchaseOrders.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170106192126_added_entity_WorkOrdersAdminRelation.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170106192607_added_entity_WorkOrderAbcFile.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170106192843_added_entity_WorkOrderAbcHdd.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170117002717_added_entity_ContactPrivileges.xml" relativeToChangelogFile="false"/>
+    &lt;!&ndash; jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here &ndash;&gt;
+</databaseChangeLog>
+-->

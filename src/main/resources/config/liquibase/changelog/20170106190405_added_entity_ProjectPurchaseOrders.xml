@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle"/>
+
+    <!--
+        Added the entity ProjectPurchaseOrders.
+    -->
+    <changeSet id="20170106190405" author="jhipster">
+        <createTable tableName="project_purchase_orders">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="po_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="po_notes" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="qb_rid" type="integer">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="created_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="updated_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="project_id" type="bigint"/>
+            <column name="created_by_admin_user_id" type="bigint"/>
+            <column name="updated_by_admin_user_id" type="bigint"/>
+            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="project_purchase_orders" columnName="created_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="project_purchase_orders" columnName="updated_date" columnDataType="datetime"/>
+        
+        <addForeignKeyConstraint baseColumnNames="project_id"
+                                 baseTableName="project_purchase_orders"
+                                 constraintName="fk_projectpurchaseorders_project_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projects"/>
+
+        <addForeignKeyConstraint baseColumnNames="created_by_admin_user_id"
+                                 baseTableName="project_purchase_orders"
+                                 constraintName="fk_projectpurchaseorders_created_by_admin_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="updated_by_admin_user_id"
+                                 baseTableName="project_purchase_orders"
+                                 constraintName="fk_projectpurchaseorders_updated_by_admin_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+    </changeSet>
+</databaseChangeLog>

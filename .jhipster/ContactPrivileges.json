@@ -1,0 +1,235 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "project",
+            "otherEntityName": "projects",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "contact",
+            "otherEntityName": "contacts",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "fullName"
+        },
+        {
+            "relationshipName": "createdByAdminUser",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "updatedByAdminUser",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "author",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "exec",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "captioning",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "downloadType",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "print",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "lockApproveRestriction",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "priorityPix",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "releaseExclude",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "viewSensitive",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "watermark",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "watermarkInnerTransparency",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "watermarkOuterTransparency",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "internal",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "vendor",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "restartRole",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "restartImage",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "restartPage",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "lastLoginDt",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "lastLogoutDt",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "disabled",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "welcomeMessage",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "isABCViewer",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "talentManagement",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "signoffManagement",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "datgeditManagement",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "updatedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "expireDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "restartFilter",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "restartColumns",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "restartImagesPerPage",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "restartImageSize",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "restartTime",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "showFinalizations",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "readOnly",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "hasVideo",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "globalAlbum",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "seesUntagged",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "loginCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "exclusives",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "defaultAlbum",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "critiqueIt",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "adhocLink",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "retouch",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "fileUpload",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "deleteAssets",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170117002717",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "contact_privileges",
+    "pagination": "pagination"
+}

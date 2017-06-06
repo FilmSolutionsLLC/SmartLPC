@@ -1,0 +1,29 @@
+{
+    "smartLpcApp": {
+        "ingest" : {
+            "home": {
+                "title": "Ingests",
+                "createLabel": "नया Ingest बनाएँ",
+                "createOrEditLabel": "Ingest बनाएँ या संपादित करें",
+                "search": "Ingest खोजें"
+            },
+            "created": "एक नया Ingest [identifier: {{ param }}] तैयार है",
+            "updated": "एक Ingest [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Ingest [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "Ingest [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "Ingest"
+            },
+            "ingestStartTime": "IngestStartTime",
+            "ingestCompletedTime": "IngestCompletedTime",
+            "totalImages": "TotalImages",
+            "totalDone": "TotalDone",
+            "completed": "Completed",
+            "user": "User",
+            "action": "Action",
+            "server": "Server"
+        }
+    }
+}

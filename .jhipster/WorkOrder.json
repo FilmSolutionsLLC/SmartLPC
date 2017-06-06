@@ -1,0 +1,285 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "type",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "status",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "printSize",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "printSurface",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "printBleed",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "filenamePosition",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "photoCredit",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "creditLocation",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "project",
+            "otherEntityName": "projects",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "assignedToUser",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "requestor",
+            "otherEntityName": "contacts",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "fullName"
+        },
+        {
+            "relationshipName": "createdBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "updatedBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "isFilename",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "processing_pko_flag",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "priority",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "auditedBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "isPrint",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "isProof",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "isAbc",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "isTracking",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "requestDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "requestDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "auditedFlag",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "poRecord",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "invoiced",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "invoiceNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isAltCredit",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "overwrite",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "printSet",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "printQuantity",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "printDaysFrom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "printDaysTo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "printPagesFrom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "printPagesTo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "reminderDate1",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "reminderMsg1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "reminderDate2",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "reminderMsg2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "reminderDate3",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "reminderMsg3",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "processingDateRecieved",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "processingHDDid",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "processingDateShipped",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "processingNote",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "processingLocation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "processingImageRange",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "processingImageQty",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dueToClientReminder",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dueToMounterReminder",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "recievedFromMounterReminder",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "abcInstruction",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "abcRawDvd",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "abcTalentCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "kickBack",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "updatedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "completionDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "durationOfService",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "processingProofShipped",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20161028190043",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "work_order",
+    "pagination": "pagination"
+}

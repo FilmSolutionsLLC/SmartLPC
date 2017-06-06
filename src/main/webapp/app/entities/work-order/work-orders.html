@@ -1,0 +1,128 @@
+<div>
+    <h3 translate="smartLpcApp.workOrder.home.title" align="center">WorkOrders</h3>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary btn-sm" ui-sref="work-order.add">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs" translate="smartLpcApp.workOrder.home.createLabel">
+                        Create new WorkOrder
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right">
+                        <input type="text" class="form-control input-sm" ng-model="vm.searchQuery" id="searchQuery"
+                               placeholder="{{ 'smartLpcApp.workOrder.home.search' | translate }}">
+                        <span class="input-group-btn width-min">
+                            <button class="btn btn-info btn-sm" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info btn-sm" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+
+
+                <th jh-sort-by="id" class="small"><span translate="global.field.id">ID</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="project.name" class="small"><span
+                    translate="smartLpcApp.workOrder.project">project</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="poRecord" class="small"><span translate="smartLpcApp.workOrder.poRecord">PoRecord</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="requestDate" class="small"><span translate="smartLpcApp.workOrder.requestDate">RequestDate</span>
+                    <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="type.textValue" class="small"><span
+                    translate="smartLpcApp.workOrder.type">type</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="requestDescription" class="small"><span
+                    translate="smartLpcApp.workOrder.requestDescription">RequestDescription</span>
+                    <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="status.textValue" class="small"><span
+                    translate="smartLpcApp.workOrder.status">status</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="durationOfService" class="small"><span
+                    translate="smartLpcApp.workOrder.durationOfService">DurationOfService</span>
+                    <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="invoiced" class="small"><span translate="smartLpcApp.workOrder.invoiced">Invoiced</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="assignedToUser.firstName" class="small"><span
+                    translate="smartLpcApp.workOrder.assignedToUser">assignedToUser</span>
+                    <span class="glyphicon glyphicon-sort"></span></th>
+
+
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--            <tr ng-repeat="workOrder in vm.workOrders track by workOrder.id" class="warning">-->
+            <tr ng-repeat="workOrder in vm.workOrders track by workOrder.id"
+                ng-class="{verify: workOrder.status.id == 104, notstarted: workOrder.status.id == 103}">
+
+                <td class="small"><a ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a></td>
+                <td class="small">
+                    <a ui-sref="projects-detail({id:workOrder.project.id})">{{workOrder.project.name}}</a>
+                </td>
+                <td class="small">{{workOrder.poRecord}}</td>
+                <td class="small">{{workOrder.requestDate | date:'mediumDate'}}</td>
+                <td class="small">
+                    <a ui-sref="lookups-detail({id:workOrder.type.id})">{{workOrder.type.textValue}}</a>
+                </td>
+                <td class="small">{{workOrder.requestDescription}}</td>
+                <td class="small">
+                    <a ui-sref="lookups-detail({id:workOrder.status.id})">{{workOrder.status.textValue}}</a>
+                </td>
+                <td class="small">{{workOrder.durationOfService}}</td>
+                <td class="small">{{workOrder.invoiced}}</td>
+                <td class="small">
+                    {{workOrder.assignedToUser.fullName}}
+                </td>
+
+
+                <td class="text-right small">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                ui-sref="work-order-detail({id:workOrder.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
+                        </button>
+                        <button type="submit"
+                                ui-sref="work-order.edit({id:workOrder.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>-->
+                        </button>
+                        <button type="submit"
+                                ui-sref="work-order.delete({id:workOrder.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>-->
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page"
+                        ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

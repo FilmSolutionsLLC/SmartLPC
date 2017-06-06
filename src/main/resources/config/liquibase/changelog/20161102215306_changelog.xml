@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+   <changeSet author="macbookpro (generated)" id="1478123590877-1">
+      <addColumn tableName="contact_relationships">
+         <column name="contacta_id" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1478123590877-2">
+      <addColumn tableName="contact_relationships">
+         <column name="contactb_id" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1478123590877-3">
+      <addColumn tableName="test_entity">
+         <column name="current_date" type="date"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1478123590877-4">
+      <addColumn tableName="test_entity">
+         <column name="current_date_time" type="datetime"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1478123590877-5">
+      <addForeignKeyConstraint baseColumnNames="contactb_id"
+                               baseTableName="contact_relationships"
+                               constraintName="FK_8k5xcadwu72poxiku8v8ev3ca"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="contacts"/>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1478123590877-6">
+      <addForeignKeyConstraint baseColumnNames="contacta_id"
+                               baseTableName="contact_relationships"
+                               constraintName="FK_92h31rfv1genkkpr1pb7rqfm1"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="contacts"/>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1478123590877-7">
+      <dropForeignKeyConstraint baseTableName="contact_relationships"
+                                constraintName="fk_contactrelationships_contacta_id"/>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1478123590877-8">
+      <dropForeignKeyConstraint baseTableName="contact_relationships"
+                                constraintName="fk_contactrelationships_contactb_id"/>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1478123590877-9">
+      <dropColumn columnName="contact_a_id" tableName="contact_relationships"/>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1478123590877-10">
+      <dropColumn columnName="contact_b_id" tableName="contact_relationships"/>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1478123590877-11">
+      <dropNotNullConstraint columnDataType="varchar(100)"
+                             columnName="email"
+                             tableName="jhi_user"/>
+   </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,48 @@
+
+<div>
+    <h2><span translate="smartLpcApp.projectLabTasks.detail.title">ProjectLabTasks</span> {{vm.projectLabTasks.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span translate="smartLpcApp.projectLabTasks.createdDate">CreatedDate</dt></dt>
+        <dd>
+            <span>{{vm.projectLabTasks.createdDate | date:'medium'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectLabTasks.updatedDate">UpdatedDate</dt></dt>
+        <dd>
+            <span>{{vm.projectLabTasks.updatedDate | date:'medium'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectLabTasks.qb_rid">Qb_rid</dt></dt>
+        <dd>
+            <span>{{vm.projectLabTasks.qb_rid}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectLabTasks.project">project</span></dt>
+        <dd>
+            <a ui-sref="projects-detail({id:vm.projectLabTasks.project.id})">{{vm.projectLabTasks.project.name}}</a>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectLabTasks.task_name">task_name</span></dt>
+        <dd>
+            <a ui-sref="lookups-detail({id:vm.projectLabTasks.task_name.id})">{{vm.projectLabTasks.task_name.textValue}}</a>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectLabTasks.created_by_admin_user">created_by_admin_user</span></dt>
+        <dd>
+            {{vm.projectLabTasks.created_by_admin_user.firstName}}
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.projectLabTasks.updated_by_admin_user">updated_by_admin_user</span></dt>
+        <dd>
+            {{vm.projectLabTasks.updated_by_admin_user.firstName}}
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

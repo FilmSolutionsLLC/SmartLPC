@@ -1,0 +1,53 @@
+
+<div>
+    <h2><span translate="smartLpcApp.ingest.detail.title">Ingest</span> {{vm.ingest.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span translate="smartLpcApp.ingest.ingestStartTime">IngestStartTime</dt></dt>
+        <dd>
+            <span>{{vm.ingest.ingestStartTime | date:'medium'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.ingest.ingestCompletedTime">IngestCompletedTime</dt></dt>
+        <dd>
+            <span>{{vm.ingest.ingestCompletedTime | date:'medium'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.ingest.totalImages">TotalImages</dt></dt>
+        <dd>
+            <span>{{vm.ingest.totalImages}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.ingest.totalDone">TotalDone</dt></dt>
+        <dd>
+            <span>{{vm.ingest.totalDone}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.ingest.completed">Completed</dt></dt>
+        <dd>
+            <span>{{vm.ingest.completed}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.ingest.user">user</span></dt>
+        <dd>
+            {{vm.ingest.user.firstName}}
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.ingest.action">action</span></dt>
+        <dd>
+            <a ui-sref="lookups-detail({id:vm.ingest.action.id})">{{vm.ingest.action.textValue}}</a>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.ingest.server">server</span></dt>
+        <dd>
+            <a ui-sref="storage-servers-detail({id:vm.ingest.server.id})">{{vm.ingest.server.ipAddress}}</a>
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

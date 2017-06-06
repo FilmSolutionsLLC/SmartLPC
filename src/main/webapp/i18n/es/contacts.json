@@ -1,0 +1,62 @@
+{
+    "smartLpcApp": {
+        "contacts" : {
+            "home": {
+                "title": "Contacts",
+                "createLabel": "Crear nuevo Contacts",
+                "createOrEditLabel": "Crear o editar Contacts",
+                "search": "Search for Contacts"
+            },
+            "created": "Un nuevo Contacts ha sido creado con el identificador {{ param }}",
+            "updated": "Un Contacts ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Contacts ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Contacts {{ id }}?"
+            },
+            "detail": {
+                "title": "Contacts"
+            },
+            "username": "Username",
+            "password": "Password",
+            "fullName": "FullName",
+            "title": "Title",
+            "email": "Email",
+            "email2": "Email2",
+            "phoneOffice": "PhoneOffice",
+            "phoneAlternate": "PhoneAlternate",
+            "phoneMobile": "PhoneMobile",
+            "phoneFax": "PhoneFax",
+            "streetAddress": "StreetAddress",
+            "streetAddress2": "StreetAddress2",
+            "streetAddress3": "StreetAddress3",
+            "city": "City",
+            "state": "State",
+            "zipcode": "Zipcode",
+            "country": "Country",
+            "website": "Website",
+            "notes": "Notes",
+            "sourceId": "SourceId",
+            "createdDate": "CreatedDate",
+            "updatedDate": "UpdatedDate",
+            "globalRestartColumns": "GlobalRestartColumns",
+            "globalRestartImagesPerPage": "GlobalRestartImagesPerPage",
+            "globalRestartImageSize": "GlobalRestartImageSize",
+            "globalRestartTime": "GlobalRestartTime",
+            "dashboard": "Dashboard",
+            "internalAccessOnly": "InternalAccessOnly",
+            "adhocExpiresIn": "AdhocExpiresIn",
+            "adhocLimitViews": "AdhocLimitViews",
+            "adhocDownload": "AdhocDownload",
+            "adhocWatermarkText": "AdhocWatermarkText",
+            "loginIp": "LoginIp",
+            "loginAttempt": "LoginAttempt",
+            "attemptBasedLogin": "AttemptBasedLogin",
+            "ipBasedLogin": "IpBasedLogin",
+            "type": "Type",
+            "defaultDepartment": "DefaultDepartment",
+            "createdByAdmin": "CreatedByAdmin",
+            "updatedByAdmin": "UpdatedByAdmin",
+            "companyContact": "CompanyContact"
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ipAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "remote",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20161026215642",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "storage_servers",
+    "pagination": "pager"
+}

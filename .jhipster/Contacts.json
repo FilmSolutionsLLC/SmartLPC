@@ -1,0 +1,185 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "type",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "defaultDepartment",
+            "otherEntityName": "departments",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "departmentName"
+        },
+        {
+            "relationshipName": "createdByAdmin",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "updatedByAdmin",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "companyContact",
+            "otherEntityName": "contacts",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "fullName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "username",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "password",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fullName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneOffice",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneAlternate",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneMobile",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneFax",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "streetAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "streetAddress2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "streetAddress3",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "zipcode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "country",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "website",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "notes",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sourceId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "globalRestartColumns",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "globalRestartImagesPerPage",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "globalRestartImageSize",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "globalRestartTime",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "dashboard",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "internalAccessOnly",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "adhocExpiresIn",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "adhocLimitViews",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "adhocDownload",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "adhocWatermarkText",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "loginIp",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "loginAttempt",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "attemptBasedLogin",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "ipBasedLogin",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20161027174247",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "contacts",
+    "pagination": "pagination"
+}

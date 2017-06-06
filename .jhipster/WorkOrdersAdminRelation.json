@@ -1,0 +1,28 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "workOrder",
+            "otherEntityName": "workOrder",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "admin_user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "relation_type",
+            "otherEntityName": "relationType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "relation"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20170106192126",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "work_orders_admin_relation",
+    "pagination": "pagination"
+}

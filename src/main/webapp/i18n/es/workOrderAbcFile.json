@@ -1,0 +1,25 @@
+{
+    "smartLpcApp": {
+        "workOrderAbcFile" : {
+            "home": {
+                "title": "WorkOrderAbcFiles",
+                "createLabel": "Crear nuevo WorkOrderAbcFile",
+                "createOrEditLabel": "Crear o editar WorkOrderAbcFile",
+                "search": "Search for WorkOrderAbcFile"
+            },
+            "created": "Un nuevo WorkOrderAbcFile ha sido creado con el identificador {{ param }}",
+            "updated": "Un WorkOrderAbcFile ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un WorkOrderAbcFile ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar WorkOrderAbcFile {{ id }}?"
+            },
+            "detail": {
+                "title": "WorkOrderAbcFile"
+            },
+            "file_count": "File_count",
+            "file_size": "File_size",
+            "workOrder": "WorkOrder",
+            "file_type": "File_type"
+        }
+    }
+}

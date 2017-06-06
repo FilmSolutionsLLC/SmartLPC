@@ -1,0 +1,10 @@
+version: '2'
+services:
+    smartlpc-elasticsearch:
+        container_name: smartlpc-elasticsearch
+        image: elasticsearch:1.7.5
+        # volumes:
+        #     - ~/volumes/jhipster/SmartLPC/elasticsearch/:/usr/share/elasticsearch/data/
+        ports:
+            - 9200:9200
+            - 9300:9300

@@ -1,0 +1,30 @@
+{
+    "smartLpcApp": {
+        "contactRelationships" : {
+            "home": {
+                "title": "ContactRelationships",
+                "createLabel": "Maak een nieuwe ContactRelationships",
+                "createOrEditLabel": "Maak of wijzig een ContactRelationships",
+                "search": "Search for ContactRelationships"
+            },
+            "created": "A new ContactRelationships is created with identifier {{ param }}",
+            "updated": "A ContactRelationships is updated with identifier {{ param }}",
+            "deleted": "A ContactRelationships is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Bent u zeker dat u ContactRelationships {{ id }} wilt verwijderen?"
+            },
+            "detail": {
+                "title": "ContactRelationships"
+            },
+            "isPrimaryContact": "IsPrimaryContact",
+            "createdDate": "CreatedDate",
+            "updatedDate": "UpdatedDate",
+            "createdByAdminUser": "CreatedByAdminUser",
+            "updatedByAdminUser": "UpdatedByAdminUser",
+            "contact_a": "Contact_a",
+            "contact_b": "Contact_b",
+            "contact_a_qb_rid": "Contact_a_qb_rid",
+            "contact_b_qb_rid": "Contact_b_qb_rid"
+        }
+    }
+}

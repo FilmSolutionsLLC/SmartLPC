@@ -1,0 +1,126 @@
+<div>
+    <h3 translate="smartLpcApp.contacts.home.title" align="center">Contacts</h3>
+
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary btn-sm" ui-sref="contacts.add">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs" translate="smartLpcApp.contacts.home.createLabel">
+                        Create new Contacts
+                    </span>
+                </button>
+
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right">
+                        <input type="text" class="form-control input-sm" ng-model="vm.searchQuery" id="searchQuery"
+                               placeholder="{{ 'smartLpcApp.contacts.home.search' | translate }}">
+                        <span class="input-group-btn width-min">
+                            <button class="btn btn-info btn-sm" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info btn-sm" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+
+    </div>
+    <br>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                <th jh-sort-by="id"><span translate="global.field.id" class="small">ID</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+
+                <th jh-sort-by="fullName"><span translate="smartLpcApp.contacts.fullName" class="small">FullName</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="title"><span translate="smartLpcApp.contacts.title" class="small">Title</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="email"><span translate="smartLpcApp.contacts.email" class="small">Email</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+
+                <th jh-sort-by="phoneOffice"><span translate="smartLpcApp.contacts.phoneOffice" class="small">PhoneOffice</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="phoneMobile"><span translate="smartLpcApp.contacts.phoneMobile" class="small">PhoneMobile</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="type.textValue"><span translate="smartLpcApp.contacts.type"
+                                                      class="small">type</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="companyContact.fullName"><span translate="smartLpcApp.contacts.companyContact"
+                                                               class="small">companyContact</span>
+                    <span class="glyphicon glyphicon-sort"></span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="contacts in vm.contacts track by contacts.id">
+                <td class="small"><a ui-sref="contacts-detail({id:contacts.id})">{{contacts.id}}</a></td>
+
+                <td class="small">{{contacts.fullName}}</td>
+                <td class="small">{{contacts.title}}</td>
+                <td class="small">{{contacts.email}}</td>
+
+                <td class="small">{{contacts.phoneOffice}}</td>
+
+                <td class="small">{{contacts.phoneMobile}}</td>
+
+                <td class="small">
+                    <a ui-sref="lookups-detail({id:contacts.type.id})">{{contacts.type.textValue}}</a>
+                </td>
+
+                <td class="small">
+                    <a ui-sref="contacts-detail({id:contacts.companyContact.id})">{{contacts.companyContact.fullName}}</a>
+                </td>
+                <td class="text-right small">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                ui-sref="contacts-detail({id:contacts.id})" ui-sref-opts="{reload: true, notify: true}"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
+                        </button>
+                        <button type="submit"
+                                ui-sref="contacts.edit({id:contacts.id})" ui-sref-opts="{reload: true, notify: true}"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>-->
+                        </button>
+                        <button type="submit"
+                                ui-sref="contacts.delete({id:contacts.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>-->
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page"
+                        ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+
+
+<br/>
+
+
+
+
+

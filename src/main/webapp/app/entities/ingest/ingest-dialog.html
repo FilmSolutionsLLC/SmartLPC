@@ -1,0 +1,94 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myIngestLabel" translate="smartLpcApp.ingest.home.createOrEditLabel">Create or edit a Ingest</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.ingest.id" readonly />
+        </div>
+       <!-- <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.ingest.ingestStartTime" for="field_ingestStartTime">IngestStartTime</label>
+                <div class="input-group">
+                    <input id="field_ingestStartTime" type="text" class="form-control" name="ingestStartTime" datetime-picker="{{dateformat}}" ng-model="vm.ingest.ingestStartTime" is-open="vm.datePickerOpenStatus.ingestStartTime"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('ingestStartTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.ingest.ingestCompletedTime" for="field_ingestCompletedTime">IngestCompletedTime</label>
+                <div class="input-group">
+                    <input id="field_ingestCompletedTime" type="text" class="form-control" name="ingestCompletedTime" datetime-picker="{{dateformat}}" ng-model="vm.ingest.ingestCompletedTime" is-open="vm.datePickerOpenStatus.ingestCompletedTime"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('ingestCompletedTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.ingest.totalImages" for="field_totalImages">TotalImages</label>
+            <input type="number" class="form-control" name="totalImages" id="field_totalImages"
+                    ng-model="vm.ingest.totalImages"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.ingest.totalDone" for="field_totalDone">TotalDone</label>
+            <input type="number" class="form-control" name="totalDone" id="field_totalDone"
+                    ng-model="vm.ingest.totalDone"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.ingest.completed" for="field_completed">Completed</label>
+            <input type="checkbox" class="form-control" name="completed" id="field_completed"
+                    ng-model="vm.ingest.completed"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="smartLpcApp.ingest.user" for="field_user">user</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.ingest.user" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.ingest.action" for="field_action">action</label>
+            <select class="form-control" id="field_action" name="action" ng-model="vm.ingest.action" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.ingest.server" for="field_server">server</label>
+            <select class="form-control" id="field_server" name="server" ng-model="vm.ingest.server" ng-options="storage_Servers as storage_Servers.ipAddress for storage_Servers in vm.storage_serverss track by storage_Servers.id">
+                <option value=""></option>
+            </select>
+        </div>-->
+        <div class="form-group">
+            <label translate="smartLpcApp.ingest.server" for="field_server">server</label>
+            <select class="form-control" id="field_server" name="server" ng-model="vm.ingest.server" ng-options="storage_Servers as storage_Servers.ipAddress for storage_Servers in vm.storage_serverss track by storage_Servers.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.ingest.action" for="field_action">action</label>
+            <select class="form-control" id="field_action" name="action" ng-model="vm.ingest.action" ng-options="lookups as lookups.textValue for lookups in vm.lookupss track by lookups.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

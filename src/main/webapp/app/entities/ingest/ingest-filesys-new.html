@@ -1,0 +1,92 @@
+<h4 align="center"><strong>To be Ingested</strong></h4>
+
+<hr>
+<div class="table-responsive">
+    <table class="jh-table table table-striped">
+        <thead>
+        <th class="small">Source</th>
+        <th class="small">Project</th>
+        <th class="small">Status</th>
+        <th class="small">Total Files</th>
+
+        <th class="small">Total Images Per Folder</th>
+
+        <th class="small">Errors/Warnings</th>
+
+        <th class="small">Action</th>
+        <th class="small">Watermark</th>
+        <th class="small">Priority</th>
+
+        <th></th>
+
+        </thead>
+
+        <tbody>
+
+
+        <tr ng-repeat="ingests in vm.newIngests.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+
+
+            <td ng-init="vm.ingest.sourceIP=ingests.sourceIP" class="small">{{ingests.sourceIP}}</td>
+
+            <td ng-init="vm.ingest.project=ingests.project" class="small">{{ingests.project}}</td>
+            <td ng-init="vm.ingest.status=ingests.status" class="small  col-sm-1">{{ingests.status}}</td>
+            <td ng-init="vm.ingest.totalFiles=ingests.totalFiles" class="small">{{ingests.totalFiles}}</td>
+
+            <td ng-init="vm.ingest.totalFiles=ingests.lightroomExports" class="small  col-sm-2">
+                <div ng-repeat="item in ingests.lightroomExports">{{item}}</div>
+            </td>
+
+
+            <td ng-if="ingests.status == 'ERROR'" class="text-danger small" class="small"><strong>Error:</strong>
+                {{ingests.error}}
+            </td>
+            <td ng-if="ingests.status == 'WARNING'" class="text-warning small" class="small">Warning: <strong>{{ingests.error}}</strong>
+            </td>
+            <td ng-if="ingests.status == 'NOT STARTED'" class="text-warning small" class="small">{{ingests.error}}</td>
+
+
+            <!--<td class="small"><select ng-if="ingests.exists == true" ng-model="ingests.action"
+                                      ng-options="a as a for a in vm.ingestActions" class="small"></select></td>
+
+-->
+            <td class="small"><select ng-if="ingests.exists == true" ng-model="ingests.action"
+                                      ng-init="ingests.action = vm.ingestActions[0]"
+                                      ng-options="a as a for a in vm.ingestActions"
+                                      class="small"></select></td>
+
+            <td class="small col-sm-2"><select ng-if="ingests.exists == true" ng-model="ingests.logo" class="small"
+                                               ng-init="ingests.logo = vm.logos[0]"
+                                               ng-options="b as b for b in vm.logos"></select></td>
+
+            <td class="small"><select ng-if="ingests.exists == true" ng-model="ingests.priority"
+                                      ng-init="ingests.priority = vm.priority[1]"
+                                      ng-options="c as c for c in vm.priority"
+                                      class="small"></select></td>
+
+
+            <td class="small">
+                <form name="editForm" role="form" novalidate ng-submit="vm.save(ingests)">
+
+                    <button type="submit" ng-if="ingests.exists == true" class="btn btn-primary btn-xs">Start
+                    </button>
+                    <button type="button" ng-click="vm.warning" ng-if="ingests.exists == false"
+                            class="btn btn-primary btn-xs disabled">Start
+                    </button>
+                </form>
+            </td>
+
+
+        </tr>
+        </tbody>
+
+    </table>
+
+    <div class="text-center">
+
+        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="currentPage" max-size="maxSize"
+                        boundary-links="true" rotate="false" num-pages="numPages"
+                        items-per-page="itemsPerPage"></uib-pagination>
+        <pre>Page: {{currentPage}} / {{numPages}}</pre>
+    </div>
+</div>

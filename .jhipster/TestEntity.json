@@ -1,0 +1,37 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "test",
+            "otherEntityName": "testEntity",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "age",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "currentDateTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "currentDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20161027004428",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "test_entity",
+    "pagination": "pager"
+}

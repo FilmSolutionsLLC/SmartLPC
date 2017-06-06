@@ -1,0 +1,24 @@
+{
+    "smartLpcApp": {
+        "captions" : {
+            "home": {
+                "title": "Captions",
+                "createLabel": "Créer un nouveau Captions",
+                "createOrEditLabel": "Créer ou éditer un Captions",
+                "search": "Recherche pour Captions"
+            },
+            "created": "Un nouveau Captions a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Captions avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Captions avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Captions {{ id }} ?"
+            },
+            "detail": {
+                "title": "Captions"
+            },
+            "captionText": "CaptionText",
+            "captionDttm": "CaptionDttm",
+            "project": "Project"
+        }
+    }
+}

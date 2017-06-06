@@ -1,0 +1,48 @@
+
+<div>
+    <h2><span translate="smartLpcApp.departments.detail.title">Departments</span> {{vm.departments.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span translate="smartLpcApp.departments.departmentName">DepartmentName</dt></dt>
+        <dd>
+            <span>{{vm.departments.departmentName}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.departments.companyId">CompanyId</dt></dt>
+        <dd>
+            <span>{{vm.departments.companyId}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.departments.createdDate">CreatedDate</dt></dt>
+        <dd>
+            <span>{{vm.departments.createdDate | date:'mediumDate'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.departments.updatedDate">UpdatedDate</dt></dt>
+        <dd>
+            <span>{{vm.departments.updatedDate | date:'mediumDate'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.departments.logo">Logo</dt></dt>
+        <dd>
+            <span>{{vm.departments.logo}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.departments.urlOverride">UrlOverride</dt></dt>
+        <dd>
+            <span>{{vm.departments.urlOverride}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="smartLpcApp.departments.selfProject">SelfProject</dt></dt>
+        <dd>
+            <span>{{vm.departments.selfProject}}<span>
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

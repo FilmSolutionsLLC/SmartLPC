@@ -1,0 +1,24 @@
+{
+    "smartLpcApp": {
+        "workOrdersAdminRelation" : {
+            "home": {
+                "title": "WorkOrdersAdminRelations",
+                "createLabel": "नया WorkOrdersAdminRelation बनाएँ",
+                "createOrEditLabel": "WorkOrdersAdminRelation बनाएँ या संपादित करें",
+                "search": "WorkOrdersAdminRelation खोजें"
+            },
+            "created": "एक नया WorkOrdersAdminRelation [identifier: {{ param }}] तैयार है",
+            "updated": "एक WorkOrdersAdminRelation [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "WorkOrdersAdminRelation [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "WorkOrdersAdminRelation [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "WorkOrdersAdminRelation"
+            },
+            "workOrder": "WorkOrder",
+            "admin_user": "Admin_user",
+            "relation_type": "Relation_type"
+        }
+    }
+}

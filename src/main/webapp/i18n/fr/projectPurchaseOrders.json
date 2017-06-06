@@ -1,0 +1,29 @@
+{
+    "smartLpcApp": {
+        "projectPurchaseOrders" : {
+            "home": {
+                "title": "ProjectPurchaseOrders",
+                "createLabel": "Créer un nouveau ProjectPurchaseOrders",
+                "createOrEditLabel": "Créer ou éditer un ProjectPurchaseOrders",
+                "search": "Recherche pour ProjectPurchaseOrders"
+            },
+            "created": "Un nouveau ProjectPurchaseOrders a été créé avec l'identifiant {{ param }}",
+            "updated": "Le ProjectPurchaseOrders avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le ProjectPurchaseOrders avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le ProjectPurchaseOrders {{ id }} ?"
+            },
+            "detail": {
+                "title": "ProjectPurchaseOrders"
+            },
+            "po_number": "Po_number",
+            "po_notes": "Po_notes",
+            "qb_rid": "Qb_rid",
+            "created_date": "Created_date",
+            "updated_date": "Updated_date",
+            "project": "Project",
+            "created_by_admin_user": "Created_by_admin_user",
+            "updated_by_admin_user": "Updated_by_admin_user"
+        }
+    }
+}

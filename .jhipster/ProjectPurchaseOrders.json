@@ -1,0 +1,49 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "project",
+            "otherEntityName": "projects",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "created_by_admin_user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "updated_by_admin_user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "po_number",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "po_notes",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "qb_rid",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "created_date",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "updated_date",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20170106190405",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "project_purchase_orders",
+    "pagination": "pagination"
+}

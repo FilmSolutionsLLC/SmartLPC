@@ -1,0 +1,30 @@
+{
+    "smartLpcApp": {
+        "batch" : {
+            "home": {
+                "title": "Batches",
+                "createLabel": "Batch を追加",
+                "createOrEditLabel": "Batchを追加または編集",
+                "search": "Search for Batch"
+            },
+            "created": "A new Batch is created with identifier {{ param }}",
+            "updated": "A Batch is updated with identifier {{ param }}",
+            "deleted": "A Batch is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Batch {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "Batch"
+            },
+            "name": "Name",
+            "createdTime": "CreatedTime",
+            "updatedTime": "UpdatedTime",
+            "coverImageId": "CoverImageId",
+            "isAsset": "IsAsset",
+            "isHidden": "IsHidden",
+            "project": "Project",
+            "createdByAdminUser": "CreatedByAdminUser",
+            "updatedByAdminUser": "UpdatedByAdminUser"
+        }
+    }
+}

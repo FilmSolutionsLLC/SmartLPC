@@ -1,0 +1,107 @@
+<div>
+    <h3 translate="smartLpcApp.ingest.home.title" align="center">Ingests</h3>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary btn-sm" ui-sref="ingest.new">
+                    <span class="glyphicon glyphicon-plus small"></span>
+                    <span class="hidden-xs small" translate="smartLpcApp.ingest.home.createLabel">
+                        Create new Ingest
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right">
+                        <input type="text" class="form-control input-sm" ng-model="vm.searchQuery" id="searchQuery"
+                               placeholder="{{ 'smartLpcApp.ingest.home.search' | translate }}">
+                        <span class="input-group-btn width-min">
+                            <button class="btn btn-info btn-sm" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info btn-sm" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                <th jh-sort-by="id"><span translate="global.field.id" class="small">ID</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="project.id">Project<span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="status">Status <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="ingestStartTime"><span translate="smartLpcApp.ingest.ingestStartTime" class="small">IngestStartTime</span>
+                    <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="totalImages"><span translate="smartLpcApp.ingest.totalImages"
+                                                   class="small">TotalImages</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+
+                <th jh-sort-by="server"><span translate="smartLpcApp.ingest.server"
+                                              class="small">server</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="action"><span translate="smartLpcApp.ingest.action"
+                                              class="small">action</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="user.firstName">Owner <span class="glyphicon glyphicon-sort"></span></th>
+
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="ingest in vm.ingests track by ingest.id">
+                <td class="small"><a ui-sref="ingest-detail({id:ingest.id})">{{ingest.id}}</a></td>
+                <td class="small"><a ui-sref="projects-detail({id:ingest.projects.id})">{{ingest.projects.name}}</a>
+                </td>
+                <td class="small">{{ingest.status}}</td>
+                <td class="small">{{ingest.ingestStartTime | date:'medium'}}</td>
+
+                <td class="small">{{ingest.totalImages}}</td>
+
+
+                <td class="small">{{ingest.action}}</a></td>
+                <td class="small">{{ingest.server}}</a> </td>
+
+                <td class="small">{{ingest.adminOwner.firstName}}</td>
+
+                <td class="text-right small">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                ui-sref="ingest-detail({id:ingest.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
+                        </button>
+                        <button type="submit"
+                                ui-sref="ingest.edit({id:ingest.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>-->
+                        </button>
+                        <button type="submit"
+                                ui-sref="ingest.delete({id:ingest.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>-->
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page"
+                        ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

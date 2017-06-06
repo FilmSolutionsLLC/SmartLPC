@@ -1,0 +1,41 @@
+{
+    "smartLpcApp": {
+        "projectRoles" : {
+            "home": {
+                "title": "ProjectRoles",
+                "createLabel": "Crear nuevo ProjectRoles",
+                "createOrEditLabel": "Crear o editar ProjectRoles",
+                "search": "Search for ProjectRoles"
+            },
+            "created": "Un nuevo ProjectRoles ha sido creado con el identificador {{ param }}",
+            "updated": "Un ProjectRoles ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un ProjectRoles ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar ProjectRoles {{ id }}?"
+            },
+            "detail": {
+                "title": "ProjectRoles"
+            },
+            "soloKillPct": "SoloKillPct",
+            "groupKillPct": "GroupKillPct",
+            "miniFullDt": "MiniFullDt",
+            "fullFinalDt": "FullFinalDt",
+            "disabled": "Disabled",
+            "characterName": "CharacterName",
+            "startDate": "StartDate",
+            "daysWorking": "DaysWorking",
+            "excSologroup": "ExcSologroup",
+            "notes": "Notes",
+            "tagName": "TagName",
+            "hotkeyValue": "HotkeyValue",
+            "expireDate": "ExpireDate",
+            "tertiaryKillPct": "TertiaryKillPct",
+            "createdDate": "CreatedDate",
+            "updatedDate": "UpdatedDate",
+            "project": "Project",
+            "contact": "Contact",
+            "createdByAdminUser": "CreatedByAdminUser",
+            "updatedByAdminUser": "UpdatedByAdminUser"
+        }
+    }
+}

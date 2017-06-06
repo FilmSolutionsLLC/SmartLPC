@@ -1,0 +1,49 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "action",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "server",
+            "otherEntityName": "storage_Servers",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "ipAddress"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "ingestStartTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "ingestCompletedTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "totalImages",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "totalDone",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "completed",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20161026232355",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "ingest",
+    "pagination": "pagination"
+}

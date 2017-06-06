@@ -1,0 +1,38 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "departmentName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "companyId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "logo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "urlOverride",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "selfProject",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20161027003503",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "departments",
+    "pagination": "pager"
+}

@@ -1,0 +1,24 @@
+{
+    "smartLpcApp": {
+        "lookups" : {
+            "home": {
+                "title": "Lookups",
+                "createLabel": "नया Lookups बनाएँ",
+                "createOrEditLabel": "Lookups बनाएँ या संपादित करें",
+                "search": "Lookups खोजें"
+            },
+            "created": "एक नया Lookups [identifier: {{ param }}] तैयार है",
+            "updated": "एक Lookups [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Lookups [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "Lookups [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "Lookups"
+            },
+            "tableName": "TableName",
+            "fieldName": "FieldName",
+            "textValue": "TextValue"
+        }
+    }
+}

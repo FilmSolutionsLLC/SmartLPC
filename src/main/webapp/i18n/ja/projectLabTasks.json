@@ -1,0 +1,28 @@
+{
+    "smartLpcApp": {
+        "projectLabTasks" : {
+            "home": {
+                "title": "ProjectLabTasks",
+                "createLabel": "ProjectLabTasks を追加",
+                "createOrEditLabel": "ProjectLabTasksを追加または編集",
+                "search": "Search for ProjectLabTasks"
+            },
+            "created": "A new ProjectLabTasks is created with identifier {{ param }}",
+            "updated": "A ProjectLabTasks is updated with identifier {{ param }}",
+            "deleted": "A ProjectLabTasks is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "ProjectLabTasks {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "ProjectLabTasks"
+            },
+            "createdDate": "CreatedDate",
+            "updatedDate": "UpdatedDate",
+            "qb_rid": "Qb_rid",
+            "project": "Project",
+            "task_name": "Task_name",
+            "created_by_admin_user": "Created_by_admin_user",
+            "updated_by_admin_user": "Updated_by_admin_user"
+        }
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "project",
+            "otherEntityName": "projects",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "captionText",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "captionDttm",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20161028164126",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "captions",
+    "pagination": "pagination"
+}

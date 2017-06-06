@@ -1,0 +1,28 @@
+{
+    "smartLpcApp": {
+        "projectLabTasks" : {
+            "home": {
+                "title": "ProjectLabTasks",
+                "createLabel": "नया ProjectLabTasks बनाएँ",
+                "createOrEditLabel": "ProjectLabTasks बनाएँ या संपादित करें",
+                "search": "ProjectLabTasks खोजें"
+            },
+            "created": "एक नया ProjectLabTasks [identifier: {{ param }}] तैयार है",
+            "updated": "एक ProjectLabTasks [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "ProjectLabTasks [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "ProjectLabTasks [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "ProjectLabTasks"
+            },
+            "createdDate": "CreatedDate",
+            "updatedDate": "UpdatedDate",
+            "qb_rid": "Qb_rid",
+            "project": "Project",
+            "task_name": "Task_name",
+            "created_by_admin_user": "Created_by_admin_user",
+            "updated_by_admin_user": "Updated_by_admin_user"
+        }
+    }
+}

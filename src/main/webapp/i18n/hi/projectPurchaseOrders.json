@@ -1,0 +1,29 @@
+{
+    "smartLpcApp": {
+        "projectPurchaseOrders" : {
+            "home": {
+                "title": "ProjectPurchaseOrders",
+                "createLabel": "नया ProjectPurchaseOrders बनाएँ",
+                "createOrEditLabel": "ProjectPurchaseOrders बनाएँ या संपादित करें",
+                "search": "ProjectPurchaseOrders खोजें"
+            },
+            "created": "एक नया ProjectPurchaseOrders [identifier: {{ param }}] तैयार है",
+            "updated": "एक ProjectPurchaseOrders [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "ProjectPurchaseOrders [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "ProjectPurchaseOrders [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "ProjectPurchaseOrders"
+            },
+            "po_number": "Po_number",
+            "po_notes": "Po_notes",
+            "qb_rid": "Qb_rid",
+            "created_date": "Created_date",
+            "updated_date": "Updated_date",
+            "project": "Project",
+            "created_by_admin_user": "Created_by_admin_user",
+            "updated_by_admin_user": "Updated_by_admin_user"
+        }
+    }
+}

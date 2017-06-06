@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+   <changeSet author="macbookpro (generated)" id="1481848172711-1">
+      <addColumn tableName="contact_relationships">
+         <column name="contact_a_qb_rid_id" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1481848172711-2">
+      <addColumn tableName="contact_relationships">
+         <column name="contact_b_qb_rid_id" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1481848172711-3">
+      <addColumn tableName="contact_relationships">
+         <column name="contacta_id" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1481848172711-4">
+      <addColumn tableName="contact_relationships">
+         <column name="contactb_id" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1481848172711-5">
+      <addForeignKeyConstraint baseColumnNames="contact_a_qb_rid_id"
+                               baseTableName="contact_relationships"
+                               constraintName="FK_3xx0h70e44h7km0jkrhm199nw"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="contacts"/>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1481848172711-6">
+      <addForeignKeyConstraint baseColumnNames="contactb_id"
+                               baseTableName="contact_relationships"
+                               constraintName="FK_8k5xcadwu72poxiku8v8ev3ca"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="contacts"/>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1481848172711-7">
+      <addForeignKeyConstraint baseColumnNames="contacta_id"
+                               baseTableName="contact_relationships"
+                               constraintName="FK_92h31rfv1genkkpr1pb7rqfm1"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="contacts"/>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1481848172711-8">
+      <addForeignKeyConstraint baseColumnNames="contact_b_qb_rid_id"
+                               baseTableName="contact_relationships"
+                               constraintName="FK_pgfdw3qpf4sixeq2w3mqh621s"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="contacts"/>
+   </changeSet>
+   <changeSet author="macbookpro (generated)" id="1481848172711-9">
+      <dropNotNullConstraint columnDataType="varchar(100)"
+                             columnName="email"
+                             tableName="jhi_user"/>
+   </changeSet>
+</databaseChangeLog>

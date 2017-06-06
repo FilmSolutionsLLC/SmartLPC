@@ -1,0 +1,27 @@
+{
+    "smartLpcApp": {
+        "testEntity" : {
+            "home": {
+                "title": "TestEntities",
+                "createLabel": "नया TestEntity बनाएँ",
+                "createOrEditLabel": "TestEntity बनाएँ या संपादित करें",
+                "search": "TestEntity खोजें"
+            },
+            "created": "एक नया TestEntity [identifier: {{ param }}] तैयार है",
+            "updated": "एक TestEntity [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "TestEntity [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "TestEntity [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "TestEntity"
+            },
+            "name": "Name",
+            "age": "Age",
+            "city": "City",
+            "currentDateTime": "CurrentDateTime",
+            "currentDate": "CurrentDate",
+            "test": "Test"
+        }
+    }
+}

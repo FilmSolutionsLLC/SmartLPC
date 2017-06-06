@@ -1,0 +1,28 @@
+{
+    "smartLpcApp": {
+        "departments" : {
+            "home": {
+                "title": "Departments",
+                "createLabel": "Créer un nouveau Departments",
+                "createOrEditLabel": "Créer ou éditer un Departments",
+                "search": "Recherche pour Departments"
+            },
+            "created": "Un nouveau Departments a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Departments avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Departments avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Departments {{ id }} ?"
+            },
+            "detail": {
+                "title": "Departments"
+            },
+            "departmentName": "DepartmentName",
+            "companyId": "CompanyId",
+            "createdDate": "CreatedDate",
+            "updatedDate": "UpdatedDate",
+            "logo": "Logo",
+            "urlOverride": "UrlOverride",
+            "selfProject": "SelfProject"
+        }
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "smartLpcApp": {
+        "workOrderAbcHdd" : {
+            "home": {
+                "title": "WorkOrderAbcHdds",
+                "createLabel": "नया WorkOrderAbcHdd बनाएँ",
+                "createOrEditLabel": "WorkOrderAbcHdd बनाएँ या संपादित करें",
+                "search": "WorkOrderAbcHdd खोजें"
+            },
+            "created": "एक नया WorkOrderAbcHdd [identifier: {{ param }}] तैयार है",
+            "updated": "एक WorkOrderAbcHdd [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "WorkOrderAbcHdd [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "WorkOrderAbcHdd [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "WorkOrderAbcHdd"
+            },
+            "size": "Size",
+            "drive_number": "Drive_number",
+            "workOrder": "WorkOrder",
+            "hdd_to": "Hdd_to"
+        }
+    }
+}

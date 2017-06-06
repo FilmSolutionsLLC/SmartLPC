@@ -1,0 +1,25 @@
+{
+    "smartLpcApp": {
+        "workOrderAbcFile" : {
+            "home": {
+                "title": "WorkOrderAbcFiles",
+                "createLabel": "WorkOrderAbcFile を追加",
+                "createOrEditLabel": "WorkOrderAbcFileを追加または編集",
+                "search": "Search for WorkOrderAbcFile"
+            },
+            "created": "A new WorkOrderAbcFile is created with identifier {{ param }}",
+            "updated": "A WorkOrderAbcFile is updated with identifier {{ param }}",
+            "deleted": "A WorkOrderAbcFile is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "WorkOrderAbcFile {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "WorkOrderAbcFile"
+            },
+            "file_count": "File_count",
+            "file_size": "File_size",
+            "workOrder": "WorkOrder",
+            "file_type": "File_type"
+        }
+    }
+}

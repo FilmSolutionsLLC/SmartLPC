@@ -1,0 +1,105 @@
+<div>
+    <h2 translate="smartLpcApp.contactRelationships.home.title">ContactRelationships</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="contact-relationships.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs"  translate="smartLpcApp.contactRelationships.home.createLabel">
+                        Create new ContactRelationships
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'smartLpcApp.contactRelationships.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="isPrimaryContact"><span translate="smartLpcApp.contactRelationships.isPrimaryContact">IsPrimaryContact</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span translate="smartLpcApp.contactRelationships.createdDate">CreatedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updatedDate"><span translate="smartLpcApp.contactRelationships.updatedDate">UpdatedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdByAdminUser.firstName"><span translate="smartLpcApp.contactRelationships.createdByAdminUser">createdByAdminUser</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updatedByAdminUser.firstName"><span translate="smartLpcApp.contactRelationships.updatedByAdminUser">updatedByAdminUser</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contact_a.fullName"><span translate="smartLpcApp.contactRelationships.contact_a">contact_a</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contact_b.fullName"><span translate="smartLpcApp.contactRelationships.contact_b">contact_b</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contact_a_qb_rid.fullName"><span translate="smartLpcApp.contactRelationships.contact_a_qb_rid">contact_a_qb_rid</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contact_b_qb_rid.fullName"><span translate="smartLpcApp.contactRelationships.contact_b_qb_rid">contact_b_qb_rid</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="contactRelationships in vm.contactRelationships track by contactRelationships.id">
+                    <td><a ui-sref="contact-relationships-detail({id:contactRelationships.id})">{{contactRelationships.id}}</a></td>
+                    <td>{{contactRelationships.isPrimaryContact}}</td>
+                        <td>{{contactRelationships.createdDate | date:'mediumDate'}}</td>
+                        <td>{{contactRelationships.updatedDate | date:'mediumDate'}}</td>
+                    <td>
+                        {{contactRelationships.createdByAdminUser.firstName}}
+                    </td>
+                    <td>
+                        {{contactRelationships.updatedByAdminUser.firstName}}
+                    </td>
+                    <td>
+                        <a ui-sref="contacts-detail({id:contactRelationships.contact_a.id})">{{contactRelationships.contact_a.fullName}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="contacts-detail({id:contactRelationships.contact_b.id})">{{contactRelationships.contact_b.fullName}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="contacts-detail({id:contactRelationships.contact_a_qb_rid.id})">{{contactRelationships.contact_a_qb_rid.fullName}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="contacts-detail({id:contactRelationships.contact_b_qb_rid.id})">{{contactRelationships.contact_b_qb_rid.fullName}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="contact-relationships-detail({id:contactRelationships.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="contact-relationships.edit({id:contactRelationships.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="contact-relationships.delete({id:contactRelationships.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+{
+    "smartLpcApp": {
+        "departments" : {
+            "home": {
+                "title": "Departments",
+                "createLabel": "नया Departments बनाएँ",
+                "createOrEditLabel": "Departments बनाएँ या संपादित करें",
+                "search": "Departments खोजें"
+            },
+            "created": "एक नया Departments [identifier: {{ param }}] तैयार है",
+            "updated": "एक Departments [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Departments [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "Departments [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "Departments"
+            },
+            "departmentName": "DepartmentName",
+            "companyId": "CompanyId",
+            "createdDate": "CreatedDate",
+            "updatedDate": "UpdatedDate",
+            "logo": "Logo",
+            "urlOverride": "UrlOverride",
+            "selfProject": "SelfProject"
+        }
+    }
+}

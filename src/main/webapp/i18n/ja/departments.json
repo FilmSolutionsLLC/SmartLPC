@@ -1,0 +1,28 @@
+{
+    "smartLpcApp": {
+        "departments" : {
+            "home": {
+                "title": "Departments",
+                "createLabel": "Departments を追加",
+                "createOrEditLabel": "Departmentsを追加または編集",
+                "search": "Search for Departments"
+            },
+            "created": "A new Departments is created with identifier {{ param }}",
+            "updated": "A Departments is updated with identifier {{ param }}",
+            "deleted": "A Departments is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Departments {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "Departments"
+            },
+            "departmentName": "DepartmentName",
+            "companyId": "CompanyId",
+            "createdDate": "CreatedDate",
+            "updatedDate": "UpdatedDate",
+            "logo": "Logo",
+            "urlOverride": "UrlOverride",
+            "selfProject": "SelfProject"
+        }
+    }
+}

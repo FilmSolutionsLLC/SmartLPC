@@ -1,0 +1,27 @@
+{
+    "smartLpcApp": {
+        "testEntity" : {
+            "home": {
+                "title": "TestEntities",
+                "createLabel": "TestEntity を追加",
+                "createOrEditLabel": "TestEntityを追加または編集",
+                "search": "Search for TestEntity"
+            },
+            "created": "A new TestEntity is created with identifier {{ param }}",
+            "updated": "A TestEntity is updated with identifier {{ param }}",
+            "deleted": "A TestEntity is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "TestEntity {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "TestEntity"
+            },
+            "name": "Name",
+            "age": "Age",
+            "city": "City",
+            "currentDateTime": "CurrentDateTime",
+            "currentDate": "CurrentDate",
+            "test": "Test"
+        }
+    }
+}

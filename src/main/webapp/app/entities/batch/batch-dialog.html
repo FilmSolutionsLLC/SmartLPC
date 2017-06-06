@@ -1,0 +1,88 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myBatchLabel" translate="smartLpcApp.batch.home.createOrEditLabel">Create or edit a Batch</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.batch.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.batch.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.batch.name"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.batch.createdTime" for="field_createdTime">CreatedTime</label>
+                <div class="input-group">
+                    <input id="field_createdTime" type="text" class="form-control" name="createdTime" uib-datepicker-popup="{{dateformat}}" ng-model="vm.batch.createdTime" is-open="vm.datePickerOpenStatus.createdTime"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.batch.updatedTime" for="field_updatedTime">UpdatedTime</label>
+                <div class="input-group">
+                    <input id="field_updatedTime" type="text" class="form-control" name="updatedTime" uib-datepicker-popup="{{dateformat}}" ng-model="vm.batch.updatedTime" is-open="vm.datePickerOpenStatus.updatedTime"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('updatedTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.batch.coverImageId" for="field_coverImageId">CoverImageId</label>
+            <input type="number" class="form-control" name="coverImageId" id="field_coverImageId"
+                    ng-model="vm.batch.coverImageId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.batch.isAsset" for="field_isAsset">IsAsset</label>
+            <input type="checkbox" class="form-control" name="isAsset" id="field_isAsset"
+                    ng-model="vm.batch.isAsset"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.batch.isHidden" for="field_isHidden">IsHidden</label>
+            <input type="checkbox" class="form-control" name="isHidden" id="field_isHidden"
+                    ng-model="vm.batch.isHidden"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="smartLpcApp.batch.project" for="field_project">project</label>
+            <select class="form-control" id="field_project" name="project" ng-model="vm.batch.project" ng-options="projects as projects.name for projects in vm.projectss track by projects.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.batch.createdByAdminUser" for="field_createdByAdminUser">createdByAdminUser</label>
+            <select class="form-control" id="field_createdByAdminUser" name="createdByAdminUser" ng-model="vm.batch.createdByAdminUser" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.batch.updatedByAdminUser" for="field_updatedByAdminUser">updatedByAdminUser</label>
+            <select class="form-control" id="field_updatedByAdminUser" name="updatedByAdminUser" ng-model="vm.batch.updatedByAdminUser" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

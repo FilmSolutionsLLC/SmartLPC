@@ -1,0 +1,331 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "status",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "type",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "productionCompanyContact",
+            "otherEntityName": "contacts",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "fullName"
+        },
+        {
+            "relationshipName": "parentCompanyContact",
+            "otherEntityName": "contacts",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "fullName"
+        },
+        {
+            "relationshipName": "processingOriginalFileType",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "createdByAdminUser",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "updatedByAdminUser",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "department",
+            "otherEntityName": "departments",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "departmentName"
+        },
+        {
+            "relationshipName": "projectType",
+            "otherEntityName": "lookups",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "textValue"
+        },
+        {
+            "relationshipName": "owner",
+            "otherEntityName": "contacts",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "fullName"
+        },
+        {
+            "relationshipName": "imageLocation",
+            "otherEntityName": "storage_Disk",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "imageLocationRemote",
+            "otherEntityName": "storage_Disk",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fullName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "runOfShowFlag",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "template",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "labFlag",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "alfrescoTitle1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "alfrescoTitle2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "endDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "actorsWithRights",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "daysShooting",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "weeksShooting",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "notes",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sensitiveViewing",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "productionCompanyNotes",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "productionCompanyShippingNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "processingDeliveries",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "processingSpecialInstructions",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "processingWatermark",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "processingCopyright",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "labProofNotes",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "labLastProofImageNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "labLastProofPageNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "labImageNumberSchema",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "labFolderBatchSchema",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "photoLabInfo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectUnitPhotoNotes",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectInfoNotes",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "legacyDirector",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "legacyExecutiveProducer",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "legacyExecutiveProducer2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "legacyExecutiveProducer3",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "legacyExecutiveProducer4",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "legacyProducer",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "legacyProducer2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "legacyProducer3",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "legacyProducer4",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "legacyAdditionalTalent",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "themeId",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "sptPhotoSubtype",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "photoCredit",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "shootDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "shootDateOverride",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "unitPhotographerOverride",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "useSetup",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "useExif",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "tagDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "tagreportIndex",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "loginMessage",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "loginMessageActive",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "topLevelAlbums",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "enableTertiary",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "invoiceCreated",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "foxTitle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isAsset",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "fullRejection",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "disabled",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "reminderDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "photoCreditOverride",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20161028002913",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "projects",
+    "pagination": "pagination"
+}

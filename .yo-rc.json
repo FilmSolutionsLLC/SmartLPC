@@ -1,0 +1,37 @@
+{
+  "generator-jhipster": {
+    "jhipsterVersion": "3.0.0",
+    "baseName": "SmartLPC",
+    "packageName": "com.fps",
+    "packageFolder": "com/fps",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "elasticsearch",
+    "buildTool": "maven",
+    "enableSocialSignIn": false,
+    "jwtSecretKey": "6f46f1e5f7ab4fa9df0741b134aae8913b78b5d4",
+    "useSass": false,
+    "applicationType": "monolith",
+    "testFrameworks": [
+      "gatling"
+    ],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": [
+      "en",
+      "zh-cn",
+      "nl",
+      "fr",
+      "de",
+      "hi",
+      "ja",
+      "es"
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+    "smartLpcApp": {
+        "contactRelationships" : {
+            "home": {
+                "title": "ContactRelationships",
+                "createLabel": "ContactRelationships を追加",
+                "createOrEditLabel": "ContactRelationshipsを追加または編集",
+                "search": "Search for ContactRelationships"
+            },
+            "created": "A new ContactRelationships is created with identifier {{ param }}",
+            "updated": "A ContactRelationships is updated with identifier {{ param }}",
+            "deleted": "A ContactRelationships is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "ContactRelationships {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "ContactRelationships"
+            },
+            "isPrimaryContact": "IsPrimaryContact",
+            "createdDate": "CreatedDate",
+            "updatedDate": "UpdatedDate",
+            "createdByAdminUser": "CreatedByAdminUser",
+            "updatedByAdminUser": "UpdatedByAdminUser",
+            "contact_a": "Contact_a",
+            "contact_b": "Contact_b",
+            "contact_a_qb_rid": "Contact_a_qb_rid",
+            "contact_b_qb_rid": "Contact_b_qb_rid"
+        }
+    }
+}

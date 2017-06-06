@@ -1,0 +1,99 @@
+<div>
+    <h2 translate="smartLpcApp.batch.home.title">Batches</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="batch.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs"  translate="smartLpcApp.batch.home.createLabel">
+                        Create new Batch
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'smartLpcApp.batch.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span translate="smartLpcApp.batch.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdTime"><span translate="smartLpcApp.batch.createdTime">CreatedTime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updatedTime"><span translate="smartLpcApp.batch.updatedTime">UpdatedTime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="coverImageId"><span translate="smartLpcApp.batch.coverImageId">CoverImageId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="isAsset"><span translate="smartLpcApp.batch.isAsset">IsAsset</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="isHidden"><span translate="smartLpcApp.batch.isHidden">IsHidden</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="project.name"><span translate="smartLpcApp.batch.project">project</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdByAdminUser.firstName"><span translate="smartLpcApp.batch.createdByAdminUser">createdByAdminUser</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="updatedByAdminUser.firstName"><span translate="smartLpcApp.batch.updatedByAdminUser">updatedByAdminUser</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="batch in vm.batches track by batch.id">
+                    <td><a ui-sref="batch-detail({id:batch.id})">{{batch.id}}</a></td>
+                    <td>{{batch.name}}</td>
+                        <td>{{batch.createdTime | date:'mediumDate'}}</td>
+                        <td>{{batch.updatedTime | date:'mediumDate'}}</td>
+                    <td>{{batch.coverImageId}}</td>
+                    <td>{{batch.isAsset}}</td>
+                    <td>{{batch.isHidden}}</td>
+                    <td>
+                        <a ui-sref="projects-detail({id:batch.project.id})">{{batch.project.name}}</a>
+                    </td>
+                    <td>
+                        {{batch.createdByAdminUser.firstName}}
+                    </td>
+                    <td>
+                        {{batch.updatedByAdminUser.firstName}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="batch-detail({id:batch.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="batch.edit({id:batch.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="batch.delete({id:batch.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

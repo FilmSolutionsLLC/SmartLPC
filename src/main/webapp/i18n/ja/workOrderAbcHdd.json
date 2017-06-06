@@ -1,0 +1,25 @@
+{
+    "smartLpcApp": {
+        "workOrderAbcHdd" : {
+            "home": {
+                "title": "WorkOrderAbcHdds",
+                "createLabel": "WorkOrderAbcHdd を追加",
+                "createOrEditLabel": "WorkOrderAbcHddを追加または編集",
+                "search": "Search for WorkOrderAbcHdd"
+            },
+            "created": "A new WorkOrderAbcHdd is created with identifier {{ param }}",
+            "updated": "A WorkOrderAbcHdd is updated with identifier {{ param }}",
+            "deleted": "A WorkOrderAbcHdd is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "WorkOrderAbcHdd {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "WorkOrderAbcHdd"
+            },
+            "size": "Size",
+            "drive_number": "Drive_number",
+            "workOrder": "WorkOrder",
+            "hdd_to": "Hdd_to"
+        }
+    }
+}

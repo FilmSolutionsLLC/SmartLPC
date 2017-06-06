@@ -1,0 +1,97 @@
+/* Custom container */
+.container-full {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.verticaltext {
+    transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+
+    bottom: 45%;
+    position: absolute;
+    color: #ed217c;
+}
+
+.letterP4 {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    color: #000;
+    font-size: 15px;
+    height: 200px;
+    width: 200px;
+    float: left;
+    vertical-align: top;
+}
+
+.vertical {
+    width: 1px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.vertical-text {
+    transform: rotate(-90deg);
+    transform-origin: left top 0;
+}
+
+.table-borderless tbody tr td,
+.table-borderless tbody tr th,
+.table-borderless thead tr th,
+.table-borderless thead tr td,
+.table-borderless tfoot tr th,
+.table-borderless tfoot tr td {
+    border: none;
+}
+
+.extra-small {
+    font-size: 70%;
+}
+
+.verify {
+    background-color: orange;
+}
+
+.notstarted {
+    background-color: yellow;
+}
+
+.rush {
+    background-color: red;
+}
+
+.kickback {
+    background-color: blue;
+}
+
+.owners {
+    background-color: skyblue;
+}
+
+.left {
+    width: 30%;
+    float: left;
+    text-align: right;
+}
+
+.right {
+    width: 65%;
+    margin-left: 10px;
+    float: left;
+}
+
+.progress {
+    height: 1em;
+}
+
+.progress-bar {
+    transition: width 1s ease-in-out;
+}
+
+
+/* Put your css in here */
+

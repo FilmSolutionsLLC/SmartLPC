@@ -1,0 +1,370 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myContactPrivilegesLabel" translate="smartLpcApp.contactPrivileges.home.createOrEditLabel">Create or edit a ContactPrivileges</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.contactPrivileges.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.contactPrivileges.name"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.title" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                    ng-model="vm.contactPrivileges.title"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.contactPrivileges.description"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.author" for="field_author">Author</label>
+            <input type="text" class="form-control" name="author" id="field_author"
+                    ng-model="vm.contactPrivileges.author"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.exec" for="field_exec">Exec</label>
+            <input type="checkbox" class="form-control" name="exec" id="field_exec"
+                    ng-model="vm.contactPrivileges.exec"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.captioning" for="field_captioning">Captioning</label>
+            <input type="checkbox" class="form-control" name="captioning" id="field_captioning"
+                    ng-model="vm.contactPrivileges.captioning"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.downloadType" for="field_downloadType">DownloadType</label>
+            <input type="number" class="form-control" name="downloadType" id="field_downloadType"
+                    ng-model="vm.contactPrivileges.downloadType"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.email" for="field_email">Email</label>
+            <input type="checkbox" class="form-control" name="email" id="field_email"
+                    ng-model="vm.contactPrivileges.email"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.print" for="field_print">Print</label>
+            <input type="checkbox" class="form-control" name="print" id="field_print"
+                    ng-model="vm.contactPrivileges.print"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.lockApproveRestriction" for="field_lockApproveRestriction">LockApproveRestriction</label>
+            <input type="checkbox" class="form-control" name="lockApproveRestriction" id="field_lockApproveRestriction"
+                    ng-model="vm.contactPrivileges.lockApproveRestriction"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.priorityPix" for="field_priorityPix">PriorityPix</label>
+            <input type="checkbox" class="form-control" name="priorityPix" id="field_priorityPix"
+                    ng-model="vm.contactPrivileges.priorityPix"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.releaseExclude" for="field_releaseExclude">ReleaseExclude</label>
+            <input type="checkbox" class="form-control" name="releaseExclude" id="field_releaseExclude"
+                    ng-model="vm.contactPrivileges.releaseExclude"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.viewSensitive" for="field_viewSensitive">ViewSensitive</label>
+            <input type="checkbox" class="form-control" name="viewSensitive" id="field_viewSensitive"
+                    ng-model="vm.contactPrivileges.viewSensitive"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.watermark" for="field_watermark">Watermark</label>
+            <input type="checkbox" class="form-control" name="watermark" id="field_watermark"
+                    ng-model="vm.contactPrivileges.watermark"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.watermarkInnerTransparency" for="field_watermarkInnerTransparency">WatermarkInnerTransparency</label>
+            <input type="number" class="form-control" name="watermarkInnerTransparency" id="field_watermarkInnerTransparency"
+                    ng-model="vm.contactPrivileges.watermarkInnerTransparency"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.watermarkOuterTransparency" for="field_watermarkOuterTransparency">WatermarkOuterTransparency</label>
+            <input type="number" class="form-control" name="watermarkOuterTransparency" id="field_watermarkOuterTransparency"
+                    ng-model="vm.contactPrivileges.watermarkOuterTransparency"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.internal" for="field_internal">Internal</label>
+            <input type="checkbox" class="form-control" name="internal" id="field_internal"
+                    ng-model="vm.contactPrivileges.internal"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.vendor" for="field_vendor">Vendor</label>
+            <input type="checkbox" class="form-control" name="vendor" id="field_vendor"
+                    ng-model="vm.contactPrivileges.vendor"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.restartRole" for="field_restartRole">RestartRole</label>
+            <input type="text" class="form-control" name="restartRole" id="field_restartRole"
+                    ng-model="vm.contactPrivileges.restartRole"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.restartImage" for="field_restartImage">RestartImage</label>
+            <input type="text" class="form-control" name="restartImage" id="field_restartImage"
+                    ng-model="vm.contactPrivileges.restartImage"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.restartPage" for="field_restartPage">RestartPage</label>
+            <input type="number" class="form-control" name="restartPage" id="field_restartPage"
+                    ng-model="vm.contactPrivileges.restartPage"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.lastLoginDt" for="field_lastLoginDt">LastLoginDt</label>
+                <div class="input-group">
+                    <input id="field_lastLoginDt" type="text" class="form-control" name="lastLoginDt" datetime-picker="{{dateformat}}" ng-model="vm.contactPrivileges.lastLoginDt" is-open="vm.datePickerOpenStatus.lastLoginDt"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastLoginDt')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.lastLogoutDt" for="field_lastLogoutDt">LastLogoutDt</label>
+                <div class="input-group">
+                    <input id="field_lastLogoutDt" type="text" class="form-control" name="lastLogoutDt" datetime-picker="{{dateformat}}" ng-model="vm.contactPrivileges.lastLogoutDt" is-open="vm.datePickerOpenStatus.lastLogoutDt"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastLogoutDt')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.disabled" for="field_disabled">Disabled</label>
+            <input type="checkbox" class="form-control" name="disabled" id="field_disabled"
+                    ng-model="vm.contactPrivileges.disabled"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.welcomeMessage" for="field_welcomeMessage">WelcomeMessage</label>
+            <input type="checkbox" class="form-control" name="welcomeMessage" id="field_welcomeMessage"
+                    ng-model="vm.contactPrivileges.welcomeMessage"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.isABCViewer" for="field_isABCViewer">IsABCViewer</label>
+            <input type="checkbox" class="form-control" name="isABCViewer" id="field_isABCViewer"
+                    ng-model="vm.contactPrivileges.isABCViewer"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.talentManagement" for="field_talentManagement">TalentManagement</label>
+            <input type="checkbox" class="form-control" name="talentManagement" id="field_talentManagement"
+                    ng-model="vm.contactPrivileges.talentManagement"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.signoffManagement" for="field_signoffManagement">SignoffManagement</label>
+            <input type="checkbox" class="form-control" name="signoffManagement" id="field_signoffManagement"
+                    ng-model="vm.contactPrivileges.signoffManagement"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.datgeditManagement" for="field_datgeditManagement">DatgeditManagement</label>
+            <input type="checkbox" class="form-control" name="datgeditManagement" id="field_datgeditManagement"
+                    ng-model="vm.contactPrivileges.datgeditManagement"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.createdDate" for="field_createdDate">CreatedDate</label>
+                <div class="input-group">
+                    <input id="field_createdDate" type="text" class="form-control" name="createdDate" datetime-picker="{{dateformat}}" ng-model="vm.contactPrivileges.createdDate" is-open="vm.datePickerOpenStatus.createdDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.updatedDate" for="field_updatedDate">UpdatedDate</label>
+                <div class="input-group">
+                    <input id="field_updatedDate" type="text" class="form-control" name="updatedDate" datetime-picker="{{dateformat}}" ng-model="vm.contactPrivileges.updatedDate" is-open="vm.datePickerOpenStatus.updatedDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('updatedDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.expireDate" for="field_expireDate">ExpireDate</label>
+                <div class="input-group">
+                    <input id="field_expireDate" type="text" class="form-control" name="expireDate" datetime-picker="{{dateformat}}" ng-model="vm.contactPrivileges.expireDate" is-open="vm.datePickerOpenStatus.expireDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('expireDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.restartFilter" for="field_restartFilter">RestartFilter</label>
+            <input type="text" class="form-control" name="restartFilter" id="field_restartFilter"
+                    ng-model="vm.contactPrivileges.restartFilter"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.restartColumns" for="field_restartColumns">RestartColumns</label>
+            <input type="number" class="form-control" name="restartColumns" id="field_restartColumns"
+                    ng-model="vm.contactPrivileges.restartColumns"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.restartImagesPerPage" for="field_restartImagesPerPage">RestartImagesPerPage</label>
+            <input type="number" class="form-control" name="restartImagesPerPage" id="field_restartImagesPerPage"
+                    ng-model="vm.contactPrivileges.restartImagesPerPage"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.restartImageSize" for="field_restartImageSize">RestartImageSize</label>
+            <input type="text" class="form-control" name="restartImageSize" id="field_restartImageSize"
+                    ng-model="vm.contactPrivileges.restartImageSize"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.restartTime" for="field_restartTime">RestartTime</label>
+            <input type="number" class="form-control" name="restartTime" id="field_restartTime"
+                    ng-model="vm.contactPrivileges.restartTime"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.showFinalizations" for="field_showFinalizations">ShowFinalizations</label>
+            <input type="checkbox" class="form-control" name="showFinalizations" id="field_showFinalizations"
+                    ng-model="vm.contactPrivileges.showFinalizations"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.readOnly" for="field_readOnly">ReadOnly</label>
+            <input type="checkbox" class="form-control" name="readOnly" id="field_readOnly"
+                    ng-model="vm.contactPrivileges.readOnly"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.hasVideo" for="field_hasVideo">HasVideo</label>
+            <input type="checkbox" class="form-control" name="hasVideo" id="field_hasVideo"
+                    ng-model="vm.contactPrivileges.hasVideo"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.globalAlbum" for="field_globalAlbum">GlobalAlbum</label>
+            <input type="checkbox" class="form-control" name="globalAlbum" id="field_globalAlbum"
+                    ng-model="vm.contactPrivileges.globalAlbum"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.seesUntagged" for="field_seesUntagged">SeesUntagged</label>
+            <input type="checkbox" class="form-control" name="seesUntagged" id="field_seesUntagged"
+                    ng-model="vm.contactPrivileges.seesUntagged"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.loginCount" for="field_loginCount">LoginCount</label>
+            <input type="number" class="form-control" name="loginCount" id="field_loginCount"
+                    ng-model="vm.contactPrivileges.loginCount"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.exclusives" for="field_exclusives">Exclusives</label>
+            <input type="checkbox" class="form-control" name="exclusives" id="field_exclusives"
+                    ng-model="vm.contactPrivileges.exclusives"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.defaultAlbum" for="field_defaultAlbum">DefaultAlbum</label>
+            <input type="number" class="form-control" name="defaultAlbum" id="field_defaultAlbum"
+                    ng-model="vm.contactPrivileges.defaultAlbum"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.critiqueIt" for="field_critiqueIt">CritiqueIt</label>
+            <input type="checkbox" class="form-control" name="critiqueIt" id="field_critiqueIt"
+                    ng-model="vm.contactPrivileges.critiqueIt"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.adhocLink" for="field_adhocLink">AdhocLink</label>
+            <input type="checkbox" class="form-control" name="adhocLink" id="field_adhocLink"
+                    ng-model="vm.contactPrivileges.adhocLink"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.retouch" for="field_retouch">Retouch</label>
+            <input type="checkbox" class="form-control" name="retouch" id="field_retouch"
+                    ng-model="vm.contactPrivileges.retouch"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.fileUpload" for="field_fileUpload">FileUpload</label>
+            <input type="checkbox" class="form-control" name="fileUpload" id="field_fileUpload"
+                    ng-model="vm.contactPrivileges.fileUpload"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="smartLpcApp.contactPrivileges.deleteAssets" for="field_deleteAssets">DeleteAssets</label>
+            <input type="checkbox" class="form-control" name="deleteAssets" id="field_deleteAssets"
+                    ng-model="vm.contactPrivileges.deleteAssets"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="smartLpcApp.contactPrivileges.project" for="field_project">project</label>
+            <select class="form-control" id="field_project" name="project" ng-model="vm.contactPrivileges.project" ng-options="projects as projects.name for projects in vm.projectss track by projects.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.contactPrivileges.contact" for="field_contact">contact</label>
+            <select class="form-control" id="field_contact" name="contact" ng-model="vm.contactPrivileges.contact" ng-options="contacts as contacts.fullName for contacts in vm.contactss track by contacts.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.contactPrivileges.createdByAdminUser" for="field_createdByAdminUser">createdByAdminUser</label>
+            <select class="form-control" id="field_createdByAdminUser" name="createdByAdminUser" ng-model="vm.contactPrivileges.createdByAdminUser" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="smartLpcApp.contactPrivileges.updatedByAdminUser" for="field_updatedByAdminUser">updatedByAdminUser</label>
+            <select class="form-control" id="field_updatedByAdminUser" name="updatedByAdminUser" ng-model="vm.contactPrivileges.updatedByAdminUser" ng-options="user as user.firstName for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,41 @@
+{
+    "smartLpcApp": {
+        "projectRoles" : {
+            "home": {
+                "title": "ProjectRoles",
+                "createLabel": "ProjectRoles を追加",
+                "createOrEditLabel": "ProjectRolesを追加または編集",
+                "search": "Search for ProjectRoles"
+            },
+            "created": "A new ProjectRoles is created with identifier {{ param }}",
+            "updated": "A ProjectRoles is updated with identifier {{ param }}",
+            "deleted": "A ProjectRoles is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "ProjectRoles {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "ProjectRoles"
+            },
+            "soloKillPct": "SoloKillPct",
+            "groupKillPct": "GroupKillPct",
+            "miniFullDt": "MiniFullDt",
+            "fullFinalDt": "FullFinalDt",
+            "disabled": "Disabled",
+            "characterName": "CharacterName",
+            "startDate": "StartDate",
+            "daysWorking": "DaysWorking",
+            "excSologroup": "ExcSologroup",
+            "notes": "Notes",
+            "tagName": "TagName",
+            "hotkeyValue": "HotkeyValue",
+            "expireDate": "ExpireDate",
+            "tertiaryKillPct": "TertiaryKillPct",
+            "createdDate": "CreatedDate",
+            "updatedDate": "UpdatedDate",
+            "project": "Project",
+            "contact": "Contact",
+            "createdByAdminUser": "CreatedByAdminUser",
+            "updatedByAdminUser": "UpdatedByAdminUser"
+        }
+    }
+}

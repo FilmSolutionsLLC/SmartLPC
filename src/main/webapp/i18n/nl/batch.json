@@ -1,0 +1,30 @@
+{
+    "smartLpcApp": {
+        "batch" : {
+            "home": {
+                "title": "Batches",
+                "createLabel": "Maak een nieuwe Batch",
+                "createOrEditLabel": "Maak of wijzig een Batch",
+                "search": "Search for Batch"
+            },
+            "created": "A new Batch is created with identifier {{ param }}",
+            "updated": "A Batch is updated with identifier {{ param }}",
+            "deleted": "A Batch is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Bent u zeker dat u Batch {{ id }} wilt verwijderen?"
+            },
+            "detail": {
+                "title": "Batch"
+            },
+            "name": "Name",
+            "createdTime": "CreatedTime",
+            "updatedTime": "UpdatedTime",
+            "coverImageId": "CoverImageId",
+            "isAsset": "IsAsset",
+            "isHidden": "IsHidden",
+            "project": "Project",
+            "createdByAdminUser": "CreatedByAdminUser",
+            "updatedByAdminUser": "UpdatedByAdminUser"
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "tableName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fieldName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "textValue",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20161026215228",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "lookups",
+    "pagination": "pagination"
+}

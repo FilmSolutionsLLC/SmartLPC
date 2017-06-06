@@ -1,0 +1,79 @@
+<!--<div class="modal-header">
+
+</div>-->
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <h4>Search <strong>Projects/Contacts</strong></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title"></h4>
+
+        <div class="row">
+            <div class="col-xs-5">
+
+                <input id="search.query" name="textinput" type="text" placeholder="Search By Name"
+                       class="form-control input-sm" ng-model="vm.search.query">
+
+            </div>
+            <div class="btn-group" data-toggle="buttons">
+
+                <button type="button" class="btn btn-success active btn-sm"
+                        ng-click="vm.searchContacts(vm.search.query)">Contact
+                </button>
+                <button type="button" class="btn btn-success btn-sm" ng-click="vm.searchProjects(vm.search.query)">
+                    Project
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" ng-click="vm.searchBoth(vm.search.query)">All
+                    Tables
+                </button>
+
+
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-xs-5">
+
+                <input id="textinput" name="textinput" type="text" placeholder="Additional Filter"
+                       class="form-control input-sm" ng-model="vm.search.filter">
+
+            </div>
+        </div>
+        <hr>
+
+        <h4>Search <strong>Work Order Report</strong></h4>
+
+        <div class="row">
+            <div class="col-xs-4">
+                <select class="form-control input-sm" id="sel1">
+                    <option>Project Name</option>
+                    <option>Work Order ID</option>
+                    <option>PO Record</option>
+                    <option>Requestor Name</option>
+                    <option>Work Description</option>
+                    <option>Invoice</option>
+                </select>
+
+            </div>
+            <div class="col-xs-5">
+                <input name="textinput" type="text" class="form-control input-sm" ng-model="vm.search.query1">
+            </div>
+        </div>
+        <br>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" ng-click="vm.clear()">
+                <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+                translate="entity.action.cancel">Cancel</span>
+            </button>
+
+            <button type="button"
+                    ng-click="vm.searchWorkOrder(vm.search.query1)"
+                    ng-disabled="editForm.$invalid || isSaving"
+                    class="btn btn-primary btn-sm">
+                <span class="glyphicon glyphicon-search"></span>&nbsp; Search
+            </button>
+        </div>
+    </div>
+</form>

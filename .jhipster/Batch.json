@@ -1,0 +1,53 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "project",
+            "otherEntityName": "projects",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "createdByAdminUser",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipName": "updatedByAdminUser",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "firstName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdTime",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedTime",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "coverImageId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "isAsset",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "isHidden",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20161028005920",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "batch",
+    "pagination": "pagination"
+}

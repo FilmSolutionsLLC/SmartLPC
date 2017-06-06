@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.close()">&times;</button>
+    <h3 class="modal-title" id="myContactsLabel">Progress</h3>
+</div>
+<div class="modal-header">
+
+    <div class="" align="center"><span class="fileTransfer"></span></div>
+    <br>
+    <div class="col-md-12">
+        <uib-progressbar class="progress-striped active" max="vm.currentIngest.totalImages"
+                         value="vm.currentIngest.totalDone" type="success">
+        </uib-progressbar>
+        <h5 class="strong" align="center"><i>{{vm.currentIngest.totalDone}} of {{vm.currentIngest.totalImages}} done</i>
+        </h5>
+    </div>
+
+    <div class="col-md-8">
+
+        <h5>Ingest Name: <strong>/{{vm.currentIngest.alfrescoTitle1}}/{{vm.currentIngest.alfrescoTitle2}}</strong>
+        </h5>
+        <h5>Ingest Source: <strong>{{vm.currentIngest.sourceDrive}} </strong></h5>
+        <h5>Ingest Destination: <strong>{{vm.currentIngest.destinationDrive}} </strong></h5>
+        <h5>Ingest Action: <strong>{{vm.currentIngest.action}} </strong></h5>
+        <h5>Ingest Owner: <strong>{{vm.currentIngest.adminOwner.fullName}} </strong></h5>
+    </div>
+
+
+    <div class="col-md-2 pull-right">
+        <button type="button" class="btn btn-danger btn-xs" ng-click="vm.close()">Close</button>
+    </div>
+
+</div>

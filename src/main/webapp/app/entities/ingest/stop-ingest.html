@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.close()">&times;</button>
+    <h3 class="modal-title" id="myContactsLabel">Kill Ingest</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-8">
+
+            <h5>Process ID: <strong>{{vm.currentIngest.pid}} </strong></h5>
+            <h5>Ingest Name: <strong>/{{vm.currentIngest.alfrescoTitle1}}/{{vm.currentIngest.alfrescoTitle2}}</strong>
+            </h5>
+            <h5>Ingest Source: <strong>{{vm.currentIngest.sourceDrive}} </strong></h5>
+            <h5>Ingest Destination: <strong>{{vm.currentIngest.destinationDrive}} </strong></h5>
+            <h5>Ingest Action: <strong>{{vm.currentIngest.action}} </strong></h5>
+            <h5>Ingest Owner: <strong>{{vm.currentIngest.adminOwner.firstName}} </strong></h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-right">
+            <h4>Are you sure you want to STOP this Ingest ? </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-right">
+            <button type="button" class="btn btn-success btn-sm" ng-click="vm.kill(vm.currentIngest)">Yes</button>
+
+            <button type="button" class="btn btn-danger btn-sm active" ng-click="vm.close()">No</button>
+        </div>
+    </div>
+</div>

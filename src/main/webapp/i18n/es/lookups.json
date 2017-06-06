@@ -1,0 +1,24 @@
+{
+    "smartLpcApp": {
+        "lookups" : {
+            "home": {
+                "title": "Lookups",
+                "createLabel": "Crear nuevo Lookups",
+                "createOrEditLabel": "Crear o editar Lookups",
+                "search": "Search for Lookups"
+            },
+            "created": "Un nuevo Lookups ha sido creado con el identificador {{ param }}",
+            "updated": "Un Lookups ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Lookups ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Lookups {{ id }}?"
+            },
+            "detail": {
+                "title": "Lookups"
+            },
+            "tableName": "TableName",
+            "fieldName": "FieldName",
+            "textValue": "TextValue"
+        }
+    }
+}
