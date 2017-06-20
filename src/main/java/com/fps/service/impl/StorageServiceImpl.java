@@ -2,7 +2,6 @@ package com.fps.service.impl;
 
 import com.fps.service.StorageService;
 import com.fps.service.exception.StorageException;
-
 import com.fps.service.util.StorageProperties;
 import org.elasticsearch.common.inject.Inject;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +23,7 @@ public class StorageServiceImpl implements StorageService {
         this.rootLocation = Paths.get(properties.getLocation());
     }
 
+
     @Override
     public void store(MultipartFile file) {
         try {
@@ -36,5 +36,6 @@ public class StorageServiceImpl implements StorageService {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }
     }
+
 
 }

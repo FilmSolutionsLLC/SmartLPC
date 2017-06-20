@@ -44,4 +44,6 @@ public interface IngestFileSystemService {
     void resume(Ingests ingests);
 
     public Ingests progress(Long id);
+
+    public Boolean idleservers();
 }

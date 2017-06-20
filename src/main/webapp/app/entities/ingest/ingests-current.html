@@ -10,14 +10,18 @@
         <th class="small">Ingest Start Time</th>
         <th class="small">Status</th>
         <th class="small">Total Files</th>
-        <th class="small">Process ID</th>
-        <th class="small">Ingest Source</th>
+
 
         <th class="small">Ingest Processor</th>
+        <th class="small">Ingest Source</th>
+
 
         <th class="small">Ingest Destination</th>
         <th class="small">Ingest Action</th>
+        <th class="small">Priority</th>
+
         <th class="small">Admin Owner</th>
+
 
         <th></th>
         <th></th>
@@ -40,22 +44,35 @@
 
             <td ng-init="vm.ingest.totalFiles=ingests.totalFiles" class="small">{{ingests.totalImages}}</td>
 
-            <td ng-init="vm.ingest.pid=ingests.pid" class="small">{{ingests.pid}}</td>
-
-
-            <td ng-init="vm.ingest.sourceDrive=ingests.sourceDrive" class="small">{{ingests.sourceDrive}}</td>
             <td ng-init="vm.ingest.ingestProcessor=ingests.ingestProcessor" class="small">{{ingests.ingestProcessor}}
             </td>
+
+            <td ng-init="vm.ingest.sourceDrive=ingests.sourceDrive" class="small">{{ingests.sourceServer}}</td>
+
             <td ng-init="vm.ingest.destinationDrive=ingests.destinationDrive" class="small">
-                {{ingests.destinationDrive}}
+                {{ingests.destinationServer}}
             </td>
-            <td ng-init="vm.ingest.action=ingests.action" class="small">{{ingests.action}}</td>
+            <!--<td ng-init="vm.ingest.action=ingests.action" class="small">
+                <div ng-show="vm.ingest.action==0">Ingest Only</div>
+                <div ng-show="vm.ingest.action==1">Convert from Zooms</div>
+                <div ng-show="vm.ingest.action==2">Convert from SuperZooms</div>
+                <div ng-show="vm.ingest.action==3">Convert from Masters</div>
+            </td>
+
+            <td ng-init="vm.ingest.priority=ingests.priority" class="small">
+                <div ng-if="vm.ingest.priority == 0">HIGH</div>
+                <div ng-if="vm.ingest.priority == 1">NORMAL</div>
+                <div ng-if="vm.ingest.priority == 2">LOW</div>
+            </td>-->
+            <td ng-init="vm.ingest.action=ingests.action" class="small">{{vm.ingest.action}}</td>
+            <td ng-init="vm.ingest.priority=ingests.priority" class="small">{{vm.ingest.priority}}</td>
             <td ng-init="vm.ingest.adminOwner.login=ingests.adminOwner.login" class="small">
                 <a ui-sref="user-management-detail({login:ingests.adminOwner.login})">{{ingests.adminOwner.fullName}}</a>
             </td>
 
             <td class="small">
-                <button type="button" class="btn btn-primary btn-xs" ng-click="vm.progress(ingests.id)">Progress</button>
+                <button type="button" class="btn btn-primary btn-xs" ng-click="vm.progress(ingests.id)">Progress
+                </button>
             </td>
             <td class="small">
                 <div ng-if="ingests.status == 'RESUME' || ingests.status != 'PAUSED'">

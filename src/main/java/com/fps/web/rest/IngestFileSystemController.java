@@ -241,6 +241,12 @@ public class IngestFileSystemController {
     }
 
 
+    /**
+     * Get all logos from central logo location
+     *
+     * @return
+     * @throws URISyntaxException
+     */
     @RequestMapping(value = "/logos/ingest",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -250,6 +256,22 @@ public class IngestFileSystemController {
         List<String> logo = ingestFileSystemService.getLogos();
 
         return logo;
+    }
+
+    /**
+     * Check for free servers
+     *
+     * @return
+     * @throws URISyntaxException
+     */
+    @RequestMapping(value = "/filesystem/highpriority",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public Boolean freeservers()
+        throws URISyntaxException {
+        final Boolean freeServer = ingestFileSystemService.idleservers();
+        return freeServer;
     }
 
 

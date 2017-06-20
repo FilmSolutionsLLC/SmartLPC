@@ -63,15 +63,17 @@ public class Ingests implements Serializable {
     @Column(name = "ingest_processor")
     private String ingestProcessor;
 
-    @Column(name = "source_drive")
-    private String sourceDrive;
 
-    @Column(name = "destination_drive")
-    private String destinationDrive;
+    @Column(name = "source_server")
+    private String sourceServer;
 
-    @Column(name = "remote_drive")
-    private String remoteDrive;
 
+    @Column(name = "source_path")
+    private String sourcePath;
+
+
+    @Column(name = "destination_server")
+    private String destinationServer;
 
     @Column(name = "status")
     private String status;
@@ -182,29 +184,30 @@ public class Ingests implements Serializable {
         this.ingestProcessor = ingestProcessor;
     }
 
-    public String getSourceDrive() {
-        return sourceDrive;
+    public String getSourceServer() {
+        return sourceServer;
     }
 
-    public void setSourceDrive(String sourceDrive) {
-        this.sourceDrive = sourceDrive;
+    public void setSourceServer(String sourceServer) {
+        this.sourceServer = sourceServer;
     }
 
-    public String getDestinationDrive() {
-        return destinationDrive;
+    public String getSourcePath() {
+        return sourcePath;
     }
 
-    public void setDestinationDrive(String destinationDrive) {
-        this.destinationDrive = destinationDrive;
+    public void setSourcePath(String sourcePath) {
+        this.sourcePath = sourcePath;
     }
 
-    public String getRemoteDrive() {
-        return remoteDrive;
+    public String getDestinationServer() {
+        return destinationServer;
     }
 
-    public void setRemoteDrive(String remoteDrive) {
-        this.remoteDrive = remoteDrive;
+    public void setDestinationServer(String destinationServer) {
+        this.destinationServer = destinationServer;
     }
+
 
     public String getStatus() {
         return status;
@@ -262,8 +265,7 @@ public class Ingests implements Serializable {
         return Objects.hashCode(id);
     }
 
-
-    public Ingests(Long project_id, ZonedDateTime ingestStartTime, ZonedDateTime ingestCompletedTime, Integer totalImages, Double totalDone, String alfrescoTitle1, String alfrescoTitle2, Boolean watermark, String wmFile, Integer action, String ingestProcessor, String sourceDrive, String destinationDrive, String remoteDrive, String status, User adminOwner, String pid, Integer priority) {
+    public Ingests(Long project_id, ZonedDateTime ingestStartTime, ZonedDateTime ingestCompletedTime, Integer totalImages, Double totalDone, String alfrescoTitle1, String alfrescoTitle2, Boolean watermark, String wmFile, Integer action, String ingestProcessor, String sourceServer, String sourcePath, String destinationServer, String status, User adminOwner, String pid, Integer priority) {
         this.project_id = project_id;
         this.ingestStartTime = ingestStartTime;
         this.ingestCompletedTime = ingestCompletedTime;
@@ -275,14 +277,15 @@ public class Ingests implements Serializable {
         this.wmFile = wmFile;
         this.action = action;
         this.ingestProcessor = ingestProcessor;
-        this.sourceDrive = sourceDrive;
-        this.destinationDrive = destinationDrive;
-        this.remoteDrive = remoteDrive;
+        this.sourceServer = sourceServer;
+        this.sourcePath = sourcePath;
+        this.destinationServer = destinationServer;
         this.status = status;
         this.adminOwner = adminOwner;
         this.pid = pid;
         this.priority = priority;
     }
+
 
 
 }

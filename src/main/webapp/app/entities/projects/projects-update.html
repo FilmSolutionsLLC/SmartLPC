@@ -3,13 +3,22 @@
 <form name="editForm" role="form" novalidate ng-submit="vm.save()">
     <jhi-alert-error></jhi-alert-error>
     <div class="row">
-        <button type="submit" class="btn btn-xs btn btn-primary"
+        <button type="submit" class="btn btn-xs btn btn-success"
                 ng-disabled="editForm.$invalid || isSaving">Save
         </button>
+
+
         <button ng-click="vm.alert()" type="button" class="btn btn-xs btn btn-primary">Save and Close
         </button>
         <button type="button" class="btn btn-xs btn btn-primary">Save
             and Add
+        </button>
+        <button type="button" class="btn btn-xs btn btn-primary">Disable
+        </button>
+        <button type="button" class="btn btn-xs btn btn-success"
+                ng-click="vm.getCount(vm.projectsDTO.projects)">GB Count
+        </button>
+        <button type="button" class="btn btn-xs btn btn-primary">Delete
         </button>
         <a href="#" class="btn btn-xs btn btn-danger">Close</a>
 
@@ -967,9 +976,35 @@
     <h4> Name/ID/Password</h4>
 
 
-    <h5>TALENTS <a href="" ng-click="vm.addTalent()"><span
-        class=" glyphicon glyphicon-plus-sign text-danger small"></span></a></h5>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>TALENTS <a href="" ng-click="vm.addTalent()"><span
+                class=" glyphicon glyphicon-plus-sign text-danger small"></span></a></h5>
+        </div>
+        <div class="pull-right">
+            <div class="btn-toolbar btn-toolbar-xs" role="toolbar">
 
+                <button type="button" class="btn btn-primary btn-xs" ng-click="vm.getTags(vm.projectsDTO.projects.id)">
+                    View/Edit Tags
+                </button>
+
+                <button type="button" class="btn btn-primary btn-xs" ng-click="vm.getPrivileges(vm.projectsDTO.projects.id)">
+                    View/Edit Privileges
+                </button>
+
+                <button type="button" class="btn btn-primary btn-xs" ng-click="vm.getAlbums(vm.projectsDTO.projects.id)">
+                    View/Edit Albums
+                </button>
+
+                <button type="button" class="btn btn-primary btn-xs">Disable Ext. Users</button>
+
+                <button type="button" class="btn btn-primary btn-xs">Enable Ext. Users</button>
+
+                <button type="button" class="btn btn-danger btn-xs">Clear All Restart</button>
+            </div>
+        </div>
+    </div>
+    </div>
     <table class="jh-table table table-striped">
         <tr>
             <th class="small">#</th>
@@ -1021,8 +1056,12 @@
             <td><input class="input-xs" type="checkbox"
                        ng-model="tags.disabled"></td>
 
-            <td><a href="" ng-click="vm.removeTalent($index)"><span
-                class=" glyphicon glyphicon-trash small text-danger"></span></a></td>
+            <td>
+                <a href="" ng-click="vm.removeTalent($index)"><span
+                    class=" glyphicon glyphicon-info-sign small text-primary"></span></a>
+                |
+                <a href="" ng-click="vm.removeTalent($index)"><span
+                    class=" glyphicon glyphicon-trash small text-danger"></span></a></td>
         </tr>
     </table>
 

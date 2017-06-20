@@ -10,14 +10,14 @@
     function IngestFileSysController(entity, $http, $scope, $state, Ingest, IngestSearch, AlertService) {
         var vm = this;
 
-        vm.ingestActions = ["Run Ingest Only", "Convert from Masters", "Convert from SuperZooms", "Convert from Zooms"];
+        vm.ingestActions = ["Run Ingest Only", "Convert from Zooms", "Convert from SuperZooms", "Convert from Masters"];
         vm.priority = ["LOW", "NORMAL", "HIGH"];
 
 
         vm.newIngests = [];
         $http({
             method: 'GET',
-            url: '/api/filesystem/ingest'
+            url: 'api/filesystem/ingest'
         }).then(function successCallback(response) {
             vm.newIngests = response.data;
             console.log(JSON.stringify(vm.newIngests));
@@ -70,6 +70,33 @@
             vm.ingest.exists = true;
             console.log("starting ingest : " + JSON.stringify(ingests));
 
+            if (ingests.priority == "HIGH") {
+                console.log("priority has been set high");
+                if (confirm("Are you sure you want to set HIGH priority?") == true) {
+                    console.log("u pressed okay")
+                    // call  /filesystem/highpriority
+                    $http({
+                        method: 'GET',
+                        url: 'api/filesystem/highpriority'
+                    }).then(function successCallback(response) {
+                        vm.flag = angular.fromJson(response.data);
+                        console.log(vm.flag);
+                        if (angular.equals(vm.flag, 'true')) {
+                            console.log("we got true : " + vm.flag)
+                        } else {
+                            console.log("we got false : " + vm.flag)
+                            // show warning...nothing free // tell them to pause on of the ingest
+                            alert("No Server free for Ingest." +
+                                "Pause or Kill one of the Ingest(or just wait)")
+                        }
+                    }, function errorCallback(response) {
+
+                    });
+
+                } else {
+                    console.log("u pressed cancel");
+                }
+            }
             $http({
                 method: 'POST',
                 url: '/api/filesystem/ingest',

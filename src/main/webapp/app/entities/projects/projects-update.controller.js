@@ -662,5 +662,101 @@
          };
 
          */
+        vm.getCount = function (projects) {
+            // console.log("Drive ID : " + JSON.stringify(diskID));
+            $http({
+                method: 'POST',
+                url: 'api/count',
+                data: projects
+            }).then(function successCallback(response) {
+
+                vm.count = response.data;
+                console.log(vm.res);
+
+                alert(vm.count);
+            }, function errorCallback(response) {
+
+            });
+
+        }
+
+
+        vm.getTags = function (id) {
+            console.log("id of textbox : " + id);
+            //var ctrl = angular.element(id).data('$ngModelController');
+
+            var modalInstance = $uibModal.open({
+
+                templateUrl: 'app/entities/projects/update-tags.html',
+                controller: 'UpdateTagsController',
+                size: 'md',
+                scope: $scope,
+                controllerAs: 'vm',
+                resolve: {
+                    id: function () {
+                        return id;
+                    },
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('contacts');
+                        $translatePartialLoader.addPart('projects');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }
+            });
+        }
+        vm.getPrivileges = function (id) {
+            console.log("id of textbox : " + id);
+            //var ctrl = angular.element(id).data('$ngModelController');
+
+            var modalInstance = $uibModal.open({
+
+                templateUrl: 'app/entities/projects/update-privileges.html',
+                controller: 'UpdatePrivilegesController',
+                size: 'md',
+                scope: $scope,
+                controllerAs: 'vm',
+                resolve: {
+                    id: function () {
+                        return id;
+                    },
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('contacts');
+                        $translatePartialLoader.addPart('projects');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }
+            });
+        }
+        vm.getAlbums = function (id) {
+            console.log("id of textbox : " + id);
+            //var ctrl = angular.element(id).data('$ngModelController');
+
+            var modalInstance = $uibModal.open({
+
+                templateUrl: 'app/entities/projects/update-albums.html',
+                controller: 'UpdateAlbumsController',
+                size: 'md',
+                scope: $scope,
+                controllerAs: 'vm',
+                resolve: {
+                    id: function () {
+                        return id;
+                    },
+                    projectID: function () {
+                        return vm.projectsDTO.projects.id;
+                    },
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('contacts');
+                        $translatePartialLoader.addPart('projects');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }
+            });
+        };
+
+
     }
 })();

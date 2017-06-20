@@ -89,6 +89,8 @@
 
             });
         };
+
+
         vm.stop = function (currentIngest) {
             console.log(JSON.stringify(currentIngest));
             var modalInstance = $uibModal.open({

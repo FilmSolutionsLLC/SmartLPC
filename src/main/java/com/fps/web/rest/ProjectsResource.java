@@ -3,12 +3,11 @@ package com.fps.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.fps.config.util.CurrentTenantIdentifierResolverImpl;
 import com.fps.domain.*;
-import com.fps.elastics.search.ProjectRolesSearchRepository;
 import com.fps.repository.*;
-import com.fps.security.SecurityUtils;
 import com.fps.service.ProjectsService;
 import com.fps.web.rest.dto.ProjectsDTO;
 import com.fps.web.rest.dto.ProjectsViewDTO;
+import com.fps.web.rest.dto.TalentInfoDTO;
 import com.fps.web.rest.util.HeaderUtil;
 import com.fps.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -26,8 +25,6 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
 import java.util.*;
 
 /**
@@ -58,10 +55,6 @@ public class ProjectsResource {
     private ContactPrivilegesRepository contactPrivilegesRepository;
 
     @Inject
-    private ProjectRolesSearchRepository projectRolesSearchRepository;
-
-
-    @Inject
     private CurrentTenantIdentifierResolverImpl currentTenantIdentifierResolver;
 
     final static private String MASTER = "master";
@@ -81,69 +74,12 @@ public class ProjectsResource {
     @Timed
     public ResponseEntity<Projects> createProjects(@RequestBody ProjectsDTO projectsDTO) throws URISyntaxException {
 
-        Projects projects = projectsDTO.getProjects();
-        currentTenantIdentifierResolver.setTenant(SLAVE);
-        final User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
-        projects.setCreatedDate(LocalDate.now());
-        projects.setCreatedByAdminUser(user);
-        log.debug("REST request to save Projects : {}", projects);
-        if (projects.getId() != null) {
+
+        if (projectsDTO.getProjects().getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("projects", "idexists", "A new projects cannot already have an ID")).body(null);
         }
 
-        currentTenantIdentifierResolver.setTenant(MASTER);
-        Projects result = projectsService.save(projects);
-
-        Set<ProjectRoles> projectRoleses = new HashSet<>();
-        Set<ProjectPurchaseOrders> projectPurchaseOrderses = new HashSet<>();
-        Set<ProjectLabTasks> projectLabTaskses = new HashSet<>();
-        Set<ContactPrivileges> contactPrivilegeses = new HashSet<>();
-
-        if (projects.isRunOfShowFlag()) {
-            log.info("PROJECT PURCHASE ORDERS");
-
-            for (ProjectPurchaseOrders projectPurchaseOrders : projectsDTO.getProjectPurchaseOrderses()) {
-
-                projectPurchaseOrders.setProject(projects);
-                projectPurchaseOrders.setCreated_by_admin_user(user);
-                projectPurchaseOrders.setCreated_date(ZonedDateTime.now());
-                projectPurchaseOrderses.add(projectPurchaseOrders);
-                log.info(projectPurchaseOrders.toString());
-
-            }
-            projectPurchaseOrdersRepository.save(projectPurchaseOrderses);
-
-
-        }
-        if (projects.isLabFlag()) {
-            log.info("PROJECT LAB TASKS");
-
-            for (ProjectLabTasks projectLabTasks : projectsDTO.getProjectLabTaskses()) {
-                projectLabTasks.setProject(projects);
-                projectLabTasks.setCreated_by_admin_user(user);
-                projectLabTasks.setCreatedDate(ZonedDateTime.now());
-                log.info(projectLabTasks.toString());
-                projectLabTaskses.add(projectLabTasks);
-            }
-            projectLabTasksRepository.save(projectLabTaskses);
-        }
-        log.info("PROJECT ROLES");
-        for (ProjectRoles projectRoles : projectsDTO.getProjectRoles()) {
-            projectRoles.setProject(projects);
-            projectRoles.setCreatedDate(LocalDate.now());
-            projectRoles.setCreatedByAdminUser(user);
-            projectRoleses.add(projectRoles);
-            log.info(projectRoles.toString());
-        }
-        projectRolesRepository.save(projectRoleses);
-        log.info("PROJECT EXECS");
-        for (ContactPrivileges contactPrivileges : projectsDTO.getContactPrivileges()) {
-            contactPrivileges.setCreatedByAdminUser(user);
-            contactPrivileges.setProject(projects);
-            contactPrivileges.setCreatedDate(ZonedDateTime.now());
-            contactPrivilegeses.add(contactPrivileges);
-        }
-        contactPrivilegesRepository.save(contactPrivilegeses);
+        Projects result = projectsService.save(projectsDTO);
 
         return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("projects", result.getId().toString()))
@@ -166,80 +102,8 @@ public class ProjectsResource {
     @Transactional
     public ResponseEntity<Projects> updateProjects(@RequestBody ProjectsDTO projectsDTO) throws URISyntaxException {
 
-        currentTenantIdentifierResolver.setTenant(SLAVE);
-        final User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        Projects result = projectsService.update(projectsDTO);
 
-        Projects projects = projectsDTO.getProjects();
-        projects.setUpdatedDate(LocalDate.now());
-        projects.setUpdatedByAdminUser(user);
-        log.debug("REST request to update Projects : {}", projects);
-        currentTenantIdentifierResolver.setTenant(MASTER);
-        log.info("===========================");
-        log.info("Size of all Related");
-
-        log.info(" Lab Tasks : " + projectsDTO.getProjectLabTaskses().size());
-        log.info(" Purchase Orders : " + projectsDTO.getProjectPurchaseOrderses().size());
-        log.info(" Project Roles : " + projectsDTO.getProjectRoles().size());
-        log.info(" Execs: " + projectsDTO.getContactPrivileges().size());
-
-        Projects result = projectsService.update(projects);
-
-
-        Set<ProjectRoles> projectRoleses = new HashSet<>();
-        Set<ProjectPurchaseOrders> projectPurchaseOrderses = new HashSet<>();
-        Set<ProjectLabTasks> projectLabTaskses = new HashSet<>();
-        Set<ContactPrivileges> contactPrivilegeses = new HashSet<>();
-
-        if (projects.isRunOfShowFlag()) {
-            log.info("PROJECT PURCHASE ORDERS");
-
-            for (ProjectPurchaseOrders projectPurchaseOrders : projectsDTO.getProjectPurchaseOrderses()) {
-
-                projectPurchaseOrders.setProject(result);
-                projectPurchaseOrders.setUpdated_by_admin_user(user);
-                projectPurchaseOrders.setUpdated_date(ZonedDateTime.now());
-                projectPurchaseOrderses.add(projectPurchaseOrders);
-                log.info(projectPurchaseOrders.toString());
-
-            }
-            projectPurchaseOrdersRepository.save(projectPurchaseOrderses);
-
-
-        }
-        if (projects.isLabFlag()) {
-            log.info("PROJECT LAB TASKS");
-            if (projectsDTO.getProjectLabTaskses().size() > 0) {
-                for (ProjectLabTasks projectLabTasks : projectsDTO.getProjectLabTaskses()) {
-                    projectLabTasks.setProject(result);
-                    projectLabTasks.setUpdated_by_admin_user(user);
-                    projectLabTasks.setUpdatedDate(ZonedDateTime.now());
-                    log.info(projectLabTasks.toString());
-                    projectLabTaskses.add(projectLabTasks);
-                }
-                projectLabTasksRepository.save(projectLabTaskses);
-            }
-        }
-        log.info("PROJECT ROLES");
-        if (projectsDTO.getProjectRoles().size() > 0) {
-            for (ProjectRoles projectRoles : projectsDTO.getProjectRoles()) {
-                projectRoles.setProject(result);
-                projectRoles.setUpdatedDate(LocalDate.now());
-                projectRoles.setUpdatedByAdminUser(user);
-                projectRoleses.add(projectRoles);
-                log.info(projectRoles.toString());
-            }
-            projectRolesRepository.save(projectRoleses);
-        }
-        log.info("PROJECT EXECS");
-        if (projectsDTO.getContactPrivileges().size() > 0) {
-            for (ContactPrivileges contactPrivileges : projectsDTO.getContactPrivileges()) {
-                contactPrivileges.setUpdatedByAdminUser(user);
-                contactPrivileges.setProject(result);
-                contactPrivileges.setUpdatedDate(ZonedDateTime.now());
-                contactPrivilegeses.add(contactPrivileges);
-            }
-            contactPrivilegesRepository.save(contactPrivilegeses);
-        }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("projects", result.getId().toString()))
             .body(result);
@@ -441,4 +305,84 @@ public class ProjectsResource {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @RequestMapping(value = "/count",
+        method = RequestMethod.POST, produces = "text/plain")
+    @Timed
+    public String getGBCount(@RequestBody Projects projects) throws URISyntaxException, IOException {
+
+        final String gbCount = projectsService.getGbCount(projects);
+
+/*        return Optional.ofNullable(gbCount)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));*/
+
+        return gbCount;
+    }
+
+
+    @RequestMapping(value = "/talents",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<TalentInfoDTO>> talentInfoss(@RequestParam Long id, @RequestParam String type) {
+
+
+        log.info("ID : " + id);
+        log.info("Type : " + type);
+
+
+        final List<TalentInfoDTO> talentInfo = projectsService.talentInfos(id, type);
+
+
+        return Optional.ofNullable(talentInfo)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
+    }
+
+    @RequestMapping(value = "/remove",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public void removeTalentInfo(@RequestParam Long id, @RequestParam String type) {
+
+
+        log.info("Remove with ID : " + id);
+        log.info("Type : " + type);
+        projectsService.removeTalentInfo(id, type);
+
+    }
+
+    @RequestMapping(value = "/update/album",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public void updateAlbum(@RequestBody TalentInfoDTO album) {
+
+
+        log.info("Update Album  : " + album.getId());
+
+        projectsService.updateAlbum(album);
+
+    }
+
+
+    @RequestMapping(value = "/insert/album",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public void insertAlbum(@RequestBody TalentInfoDTO album) {
+
+
+        log.info("Insert Album for Project  : " + album.getId());
+
+        projectsService.insertAlbum(album);
+
+    }
+
 }

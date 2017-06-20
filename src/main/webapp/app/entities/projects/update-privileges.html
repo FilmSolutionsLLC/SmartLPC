@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <button type="button" class="close danger" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.close()">&times;</button>
+
+    <div class="btn-toolbar btn-toolbar-xs" role="toolbar">
+
+        <button type="button" class="btn btn-success btn-xs">
+            Add Record
+        </button>
+    </div>
+</div>
+<div class="modal-body">
+    <table class="jh-table table table-striped">
+        <tr>
+            <th class="small"></th>
+            <th class="small">Full Name</th>
+            <th class="small">Username</th>
+        </tr>
+
+        <tr ng-repeat="tags in vm.privileges.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy : 'type'">
+            <td class="small">
+                <button type="button" class="btn btn-primary btn-xs">Select</button>
+            </td>
+            <td class="small">{{tags.type}}</td>
+            <td class="small">{{tags.value}}</td>
+        </tr>
+    </table>
+    <div class="text-center">
+        <h5>Page: {{currentPage}} / {{numPages}} of Albums</h5>
+        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="currentPage" max-size="maxSize"
+                        boundary-links="true" rotate="false" num-pages="numPages"
+                        items-per-page="itemsPerPage"></uib-pagination>
+    </div>
+</div>
+
+

@@ -322,4 +322,32 @@ public class ProjectRoles implements Serializable {
             ", updatedByAdminUser=" + updatedByAdminUser +
             '}';
     }
+
+    public ProjectRoles() {
+    }
+
+    public ProjectRoles(Projects project, String relationship_type, Float soloKillPct, Float groupKillPct, LocalDate miniFullDt, LocalDate fullFinalDt, Boolean disabled, String characterName, LocalDate startDate, Integer daysWorking, Boolean excSologroup, String notes, String tagName, String hotkeyValue, LocalDate expireDate, Float tertiaryKillPct, LocalDate createdDate, LocalDate updatedDate, String welcomeMessage, Contacts contact, User createdByAdminUser, User updatedByAdminUser) {
+        this.project = project;
+        this.relationship_type = relationship_type;
+        this.soloKillPct = soloKillPct;
+        this.groupKillPct = groupKillPct;
+        this.miniFullDt = miniFullDt;
+        this.fullFinalDt = fullFinalDt;
+        this.disabled = disabled;
+        this.characterName = characterName;
+        this.startDate = startDate;
+        this.daysWorking = daysWorking;
+        this.excSologroup = excSologroup;
+        this.notes = notes;
+        this.tagName = tagName;
+        this.hotkeyValue = hotkeyValue;
+        this.expireDate = expireDate;
+        this.tertiaryKillPct = tertiaryKillPct;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+        this.welcomeMessage = welcomeMessage;
+        this.contact = contact;
+        this.createdByAdminUser = createdByAdminUser;
+        this.updatedByAdminUser = updatedByAdminUser;
+    }
 }

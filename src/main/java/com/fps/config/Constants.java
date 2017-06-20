@@ -25,6 +25,16 @@ public final class Constants {
     // Slave Database Call
     public static final String SLAVE_DATABASE = "slave";
 
+    public static final String PKO_TAG = "PKO_Tag";
+    public static final String SENSITIVE = "Sensitive";
+    public static final String MISC_UNKOWN = "Misc_Unknown";
+    public static final String BACKGROUND = "Background";
+    public static final String CREW = "Crew";
+    public static final String ENSEMBLE = "Ensemble";
+    public static final String EQUIPMENT = "Equipment";
+
+    public static final String[] HOTKEYS = {"6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+
 
     public static final String OPEN_WORK_ORDERS = "open_work_orders";
     public static final String OPEN_WORK_ORDERS_GROUPED = "open_work_orders_grouped";

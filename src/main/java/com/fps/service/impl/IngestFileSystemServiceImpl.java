@@ -84,8 +84,8 @@ public class IngestFileSystemServiceImpl implements IngestFileSystemService {
         //final List<Lookups> scratchServers = lookupsRepository.findByTableNameAndFieldName(Constants.CONFIG, Constants.SCRATCH_SERVER);
 
         // Scan Scratch Server for to be ingested projects
-        final Lookups sourceServer = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.SCRATCH_SERVER);
-
+        final Lookups sourceServer = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.INGEST_SERVER);
+        final Lookups sourcePath = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.INGEST_QUEUE);
 
         final String source = sourceServer.getTextValue();
         final Lookups ingest_new = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.INGEST_NEW);
@@ -175,21 +175,8 @@ public class IngestFileSystemServiceImpl implements IngestFileSystemService {
                             ingests.setAlfrescoTitle2(TITLE_2);
                             ingests.setTotalImages(Integer.valueOf(totalImages));
                             ingests.setStatus(Constants.NOTSTARTED);
-                            ingests.setSourceDrive(source);
-
-                            // set image location from database.if not avaiable set NA
-                            if (projects.getImages_location() != null && !projects.getImages_location().isEmpty()) {
-                                ingests.setDestinationDrive(projects.getImages_location());
-                            } else {
-                                ingests.setDestinationDrive("NA");
-                            }
-                            // set remote location as well
-                            if (projects.getImages_location_remote() != null && !projects.getImages_location_remote().isEmpty()) {
-                                ingests.setRemoteDrive(projects.getImages_location_remote());
-                            } else {
-                                ingests.setRemoteDrive("NA");
-                            }
-
+                            ingests.setSourceServer(source);
+                            ingests.setSourcePath(sourcePath.getTextValue());
 
                             // save ingest in DB
                             Ingests currentSaved = ingestsRepository.save(ingests);
@@ -242,34 +229,15 @@ public class IngestFileSystemServiceImpl implements IngestFileSystemService {
             case Constants.RUN_INGEST_ONLY:
                 ingest.setAction(0);
                 break;
-            case Constants.CONVERT_FROM_MASTERS:
+            case Constants.CONVERT_FROM_ZOOMS:
                 ingest.setAction(1);
                 break;
             case Constants.CONVERT_FROM_SUPERZOOMS:
                 ingest.setAction(2);
                 break;
-            case Constants.CONVERT_FROM_ZOOMS:
+            case Constants.CONVERT_FROM_MASTERS:
                 ingest.setAction(3);
                 break;
-        }
-        /// create table for ingest servers and check for timestamp
-        // get all servers with available values as 1.
-        // for loop them and check for timestamp and idle time not more than 10mins or else declare them dead 0
-        final List<IngestServer> ingestServers = ingestServerRepository.findByAvailable(1);
-
-        for (IngestServer ingestServer : ingestServers) {
-            ZonedDateTime lastUsed = ingestServer.getLastUsed();
-            ZonedDateTime currentTime = ZonedDateTime.now();
-
-            long difference = datetimeDifference(lastUsed, currentTime, ChronoUnit.MINUTES);
-            log.info("LAST USED TIMESTAMP : " + lastUsed);
-            log.info(("CURRENT TIMESTAMP  : " + currentTime));
-            log.info("CURRENT SERVER IDLE TIME MINUTES : " + difference);
-            if (difference > 5) {
-                log.info("Idle for more than 5 minutes");
-            } else {
-                log.info("Perfect Server : " + ingestServer.getDns());
-            }
         }
 
 
@@ -288,23 +256,25 @@ public class IngestFileSystemServiceImpl implements IngestFileSystemService {
         // check for
         if (ingestFileSystem.getLogo().equals("NONE")) {
             ingest.setWatermark(false);
+            ingest.setWmFile("");
         } else {
             ingest.setWatermark(true);
             ingest.setWmFile(ingestFileSystem.getLogo());
         }
 
 
-        final Lookups ingestScriptServer = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.SCRIPT_SERVER);
-        final Lookups ingestScriptLocation = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.SCRIPT_LOCATION);
+        final Lookups ingestScriptServer = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.JC_SERVER);
+        final Lookups ingestTouchFileLocation = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.JC_QUEUED);
         final Lookups username = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.USERNAME);
 
         final String tokenFile = ingest.getPriority() + (".").concat(String.valueOf(ingest.getId()));
 
-        final String sshCommand = "ssh " + username.getTextValue() + "@" + ingestScriptServer.getTextValue() + " " + ingestScriptLocation.getTextValue() + " " + ingestFileSystem.getIngestID();
+        //final String sshCommand = "ssh " + username.getTextValue() + "@" + ingestScriptServer.getTextValue() + " " + ingestScriptLocation.getTextValue() + " " + ingestFileSystem.getIngestID();
 
-        log.info("ssh command : " + sshCommand);
+        //log.info("ssh command : " + sshCommand);
 
-        final String createFileCommand = "ssh " + username.getTextValue() + "@" + ingestScriptServer.getTextValue() + " touch -a " + tokenFile;
+        final String createFileCommand = "ssh " + username.getTextValue() + "@" + ingestScriptServer.getTextValue() + " touch -a " + ingestTouchFileLocation.getTextValue() + "/" + tokenFile;
+        log.info("createFileCommand command : " + createFileCommand);
         try {
             final Integer fileCreated = shellCommandRunner.executeForStatusCode(createFileCommand);
             if (fileCreated == 0) {
@@ -368,21 +338,43 @@ public class IngestFileSystemServiceImpl implements IngestFileSystemService {
         log.debug("Request to stop / kill ingest :{}", ingests);
 
         final Lookups username = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.USERNAME);
-        final String sshCommand = "ssh " + username.getTextValue() + "@" + ingests.getIngestProcessor();
-        final String killCommand = sshCommand.concat(" kill -1 ").concat(ingests.getPid());
+        final Lookups ingestScriptServer = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.JC_SERVER);
+        final Lookups ingestTouchFileLocation = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.JC_QUEUED);
 
-        final Integer killed = shellCommandRunner.executeForStatusCode(killCommand);
-        if (killed == 0) {
+        final String sshCommand = "ssh " + username.getTextValue() + "@" + ingests.getIngestProcessor();
+
+
+        final String removeTouchFileCommand =
+            "ssh " + username.getTextValue() + "@" + ingestScriptServer.getTextValue() +
+                " rm " + ingestTouchFileLocation.getTextValue() + "/" + ingests.getPriority() + "." + ingests.getId();
+
+
+        // remove touch file
+        final Integer fileRemoved = shellCommandRunner.executeForStatusCode(removeTouchFileCommand);
+
+        if (fileRemoved == 0) {
+            // success
             ingests.setIngestCompletedTime(ZonedDateTime.now());
             ingests.setStatus(Constants.KILLED);
             currentTenantIdentifierResolver.setTenant(Constants.MASTER_DATABASE);
             ingestsRepository.save(ingests);
-            System.out.print("kill command : " + killCommand);
-            // clear script execute
-            final Lookups clearscript = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.INGEST_CLEANUP);
-            final String cleanupCommand = sshCommand.concat(" ").concat(clearscript.getTextValue().concat(" ") + (ingests.getId()));
-            final Integer cleaned = shellCommandRunner.executeForStatusCode(cleanupCommand);
+        } else {
+            final String killCommand = sshCommand.concat(" kill -1 ").concat(ingests.getPid());
 
+
+            final Integer killed = shellCommandRunner.executeForStatusCode(killCommand);
+            if (killed == 0) {
+                ingests.setIngestCompletedTime(ZonedDateTime.now());
+                ingests.setStatus(Constants.KILLED);
+                currentTenantIdentifierResolver.setTenant(Constants.MASTER_DATABASE);
+                ingestsRepository.save(ingests);
+                System.out.print("kill command : " + killCommand);
+                // clear script execute
+                final Lookups clearscript = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.INGEST_CLEANUP);
+                final String cleanupCommand = sshCommand.concat(" ").concat(clearscript.getTextValue().concat(" ") + (ingests.getId()));
+                final Integer cleaned = shellCommandRunner.executeForStatusCode(cleanupCommand);
+
+            }
         }
 
     }
@@ -553,6 +545,39 @@ public class IngestFileSystemServiceImpl implements IngestFileSystemService {
         // return ingests;
     }
 
+    /// create table for ingest servers and check for timestamp
+    // get all servers with available values as 1.
+    // for loop them and check for timestamp and idle time not more than 10mins or else declare them dead 0
+
+    /**
+     * @return
+     */
+    public Boolean idleservers() {
+
+        final List<IngestServer> ingestServers = ingestServerRepository.findByAvailable(1);
+
+        int count = 0;
+        for (IngestServer ingestServer : ingestServers) {
+            ZonedDateTime lastUsed = ingestServer.getLastUsed();
+            ZonedDateTime currentTime = ZonedDateTime.now();
+
+            long difference = datetimeDifference(lastUsed, currentTime, ChronoUnit.MINUTES);
+            log.info("LAST USED TIMESTAMP : " + lastUsed);
+            log.info(("CURRENT TIMESTAMP  : " + currentTime));
+            log.info("CURRENT SERVER IDLE TIME MINUTES : " + difference);
+            if (difference > 5) {
+                log.info("Idle for more than 5 minutes");
+            } else {
+                count++;
+                log.info("Perfect Server : " + ingestServer.getDns());
+            }
+        }
+        if (count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     private static long datetimeDifference(ZonedDateTime z1, ZonedDateTime z2, ChronoUnit chronoUnit) {
         return chronoUnit.between(z1, z2);

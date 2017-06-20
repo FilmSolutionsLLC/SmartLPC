@@ -1,6 +1,8 @@
 package com.fps.service;
 
 import com.fps.domain.Projects;
+import com.fps.web.rest.dto.ProjectsDTO;
+import com.fps.web.rest.dto.TalentInfoDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,19 +17,19 @@ public interface ProjectsService {
     /**
      * Save a projects.
      *
-     * @param projects the entity to save
+     * @param projectsDTO the entity to save
      * @return the persisted entity
      */
-    Projects save(Projects projects);
+    Projects save(ProjectsDTO projectsDTO);
 
 
     /**
      * Update a projects.
      *
-     * @param projects the entity to update
+     * @param projectsDTO the entity to update
      * @return the persisted entity
      */
-    Projects update(Projects projects);
+    Projects update(ProjectsDTO projectsDTO);
 
 
     /**
@@ -70,4 +72,15 @@ public interface ProjectsService {
 
 
     Integer saveLogo(byte[] logo);
+
+    String getGbCount(Projects projects);
+
+
+    List<TalentInfoDTO> talentInfos(Long id, String type);
+
+    void removeTalentInfo(Long id, String type);
+
+    void updateAlbum(TalentInfoDTO talentInfoDTO);
+
+    void insertAlbum(TalentInfoDTO talentInfoDTO);
 }
