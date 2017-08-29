@@ -84,6 +84,7 @@ public class Projects implements Serializable {
     @Column(name = "processing_copyright")
     private String processingCopyright;
 
+
     @Column(name = "lab_proof_notes")
     private String labProofNotes;
 

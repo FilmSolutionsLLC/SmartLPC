@@ -19,7 +19,10 @@
             'angular-loading-bar',
             'angularjs-dropdown-multiselect',
             'btorfs.multiselect',
-            'flow'
+            'flow',
+            'ui.select', 
+            'ngSanitize',
+            'AngularPrint'
         ])
         .run(run);
 

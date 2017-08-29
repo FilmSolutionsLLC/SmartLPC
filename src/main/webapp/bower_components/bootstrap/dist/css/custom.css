@@ -95,3 +95,81 @@
 
 /* Put your css in here */
 
+.wrapper {
+  width: 200px;
+  position: relative;
+}
+.wrapper .selected-items-box {
+  cursor: pointer;
+  border: solid 1px #ddd;
+  padding:10px;
+  background-color: #333;
+  color: #FFFFFF;
+}
+.selected-items-box .items-list {
+  list-style-type: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.selected-items-box .items-list li {
+  display: inline;
+}
+
+.wrapper .list {
+  display: none;
+  height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-left: solid 1px #C7C6C7;
+  border-right: solid 1px #C7C6C7;
+  border-bottom: solid 1px #C7C6C7;
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+}
+.list .items-list {
+  list-style-type: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.list .items-list li {
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  border-bottom: solid 1px #C7C6C7;
+  padding: 5px;
+  background-color: #fff;
+}
+.header-fixed {
+    width: 100% 
+}
+
+.header-fixed > thead,
+.header-fixed > tbody,
+.header-fixed > thead > tr,
+.header-fixed > tbody > tr,
+.header-fixed > thead > tr > th,
+.header-fixed > tbody > tr > td {
+    display: block;
+}
+
+.header-fixed > tbody > tr:after,
+.header-fixed > thead > tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.header-fixed > tbody {
+    overflow-y: auto;
+    height: 500px;
+}
+
+.header-fixed > tbody > tr > td,
+.header-fixed > thead > tr > th {
+    width: 6.66%;
+    float: left;
+}

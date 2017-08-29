@@ -8,6 +8,8 @@
     stateConfig.$inject = ['$stateProvider'];
 
     function stateConfig($stateProvider) {
+    	
+
         $stateProvider
             .state('work-order', {
                 parent: 'entity',
@@ -217,31 +219,18 @@
                     }
                 }
             })
-            /*  .state('work-order.edit', {
-             parent: 'work-order',
-             url: '/{id}/edit',
-             data: {
-             authorities: ['ROLE_USER']
-             },
-             onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
-             $uibModal.open({
-             templateUrl: 'app/entities/work-order/work-order-dialog.html',
-             controller: 'WorkOrderDialogController',
-             controllerAs: 'vm',
-             backdrop: 'static',
-             size: 'lg',
-             resolve: {
-             entity: ['WorkOrder', function (WorkOrder) {
-             return WorkOrder.get({id: $stateParams.id});
-             }]
-             }
-             }).result.then(function () {
-             $state.go('work-order', null, {reload: true});
-             }, function () {
-             $state.go('^');
-             });
-             }]
-             })*/
+            /*
+			 * .state('work-order.edit', { parent: 'work-order', url:
+			 * '/{id}/edit', data: { authorities: ['ROLE_USER'] }, onEnter:
+			 * ['$stateParams', '$state', '$uibModal', function ($stateParams,
+			 * $state, $uibModal) { $uibModal.open({ templateUrl:
+			 * 'app/entities/work-order/work-order-dialog.html', controller:
+			 * 'WorkOrderDialogController', controllerAs: 'vm', backdrop:
+			 * 'static', size: 'lg', resolve: { entity: ['WorkOrder', function
+			 * (WorkOrder) { return WorkOrder.get({id: $stateParams.id}); }] }
+			 * }).result.then(function () { $state.go('work-order', null,
+			 * {reload: true}); }, function () { $state.go('^'); }); }] })
+			 */
             .state('work-order.edit', {
                 parent: 'work-order',
                 url: '/{id}/edit',
@@ -297,9 +286,45 @@
                     authorities: ['ROLE_USER'],
                     pageTitle: 'smartLpcApp.projectinfo.home.title'
                 },
+               /* views: {
+                    'content@': {
+                        templateUrl: 'app/entities/work-order/work-order-audit.html',
+                        controller: 'WorkOrderAuditController',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('workOrder');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }*/
+                views: {
+                    'content@': {       
+                        controller: 'ProjectInfoRouter',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('workOrder');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }
+                
+            })
+            .state('work-order-audit', {
+                parent: 'entity',
+                url: '/work-order-audit',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'smartLpcApp.projectinfo.home.title'
+                },
                 views: {
                     'content@': {
-                        templateUrl: 'app/entities/work-order/projectInfo.html',
+                        templateUrl: 'app/entities/work-order/work-order-audit.html',
                         controller: 'WorkOrderAuditController',
                         controllerAs: 'vm'
                     }
@@ -493,6 +518,48 @@
                     'content@': {
                         templateUrl: 'app/entities/work-order/work-order-my-open.html',
                         controller: 'WorkOrderMyOpenController',
+                        controllerAs: 'vm'
+                    }
+                },
+                params: {
+                    page: {
+                        value: '1',
+                        squash: true
+                    },
+                    sort: {
+                        value: 'id,asc',
+                        squash: true
+                    },
+                    search: null
+                },
+                resolve: {
+                    pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                        return {
+                            page: PaginationUtil.parsePage($stateParams.page),
+                            sort: $stateParams.sort,
+                            predicate: PaginationUtil.parsePredicate($stateParams.sort),
+                            ascending: PaginationUtil.parseAscending($stateParams.sort),
+                            search: $stateParams.search
+                        };
+                    }],
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('workOrder');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }
+            })
+            .state('work-order-processing', {
+                parent: 'entity',
+                url: '/processing/work-order?page&sort&search',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'smartLpcApp.workOrder.home.title'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'app/entities/work-order/work-order-processing-log.html',
+                        controller: 'WorkOrderProcessingController',
                         controllerAs: 'vm'
                     }
                 },

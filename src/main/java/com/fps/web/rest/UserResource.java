@@ -3,8 +3,10 @@ package com.fps.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.fps.config.Constants;
 import com.fps.config.util.CurrentTenantIdentifierResolverImpl;
+import com.fps.domain.AdminDropdown;
 import com.fps.domain.Authority;
 import com.fps.domain.User;
+import com.fps.repository.AdminDropdownRepository;
 import com.fps.repository.AuthorityRepository;
 import com.fps.repository.UserRepository;
 import com.fps.elastics.search.UserSearchRepository;
@@ -30,6 +32,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -73,6 +76,9 @@ public class UserResource {
     private UserRepository userRepository;
 
     @Inject
+    private AdminDropdownRepository admindropdownRepository;
+    
+    @Inject
     private MailService mailService;
 
 
@@ -89,6 +95,7 @@ public class UserResource {
     private CurrentTenantIdentifierResolverImpl currentTenantIdentifierResolver;
 
 
+    
     /**
      * POST  /users  : Creates a new user.
      * <p>
@@ -255,4 +262,59 @@ public class UserResource {
             .stream(userSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
     }
+    
+   
+    	@RequestMapping(value = "/all/users",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+        @Timed
+        @Transactional(readOnly = true)
+        public List<ManagedUserDTO> getAllUsersNoPaing()
+            throws URISyntaxException {
+            currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
+            List<User> users = userRepository.findAll();
+            List<ManagedUserDTO> managedUserDTOs = users.stream()
+                .map(ManagedUserDTO::new)
+                .collect(Collectors.toList());
+            
+            return managedUserDTOs;
+        }
+
+    	
+    	/*@RequestMapping(value = "/wo/users/{dropdown}",
+                method = RequestMethod.GET,
+                produces = MediaType.APPLICATION_JSON_VALUE)
+            @Timed
+            @Transactional(readOnly = true)
+            public List<ManagedUserDTO> getWorkOrderAdmins(@PathVariable("dropdown") String dropdownName)
+                throws URISyntaxException {
+                currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
+                
+                List<AdminDropdown> users = admindropdownRepository.findByDropdownName(dropdownName);
+                List<User> admins= new ArrayList<User>();
+                for(AdminDropdown user: users){
+                	admins.add(user.getAdmin());
+                }
+                
+                List<ManagedUserDTO> managedUserDTOs = admins.stream()
+                    .map(ManagedUserDTO::new)
+                    .collect(Collectors.toList());
+                
+                return managedUserDTOs;
+            }*/
+    	
+    	@RequestMapping(value = "/wo/allusers",
+                method = RequestMethod.GET,
+                produces = MediaType.APPLICATION_JSON_VALUE)
+            @Timed
+            @Transactional(readOnly = true)
+            public List<AdminDropdown> getAllWorkOrderAdmins()
+                throws URISyntaxException {
+                currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
+                List<AdminDropdown> users = admindropdownRepository.findAll();
+                return users;
+            }
+    	
+    	
+
 }

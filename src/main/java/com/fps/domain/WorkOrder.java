@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A WorkOrder.
@@ -217,6 +218,7 @@ public class WorkOrder implements Serializable {
     @ManyToOne
     @JoinColumn(name = "audited_by")
     private User auditedBy;
+
 
     public Long getId() {
         return id;
@@ -705,8 +707,9 @@ public class WorkOrder implements Serializable {
     public void setAuditedBy(User user) {
         this.auditedBy = user;
     }
+ 
 
-    @Override
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

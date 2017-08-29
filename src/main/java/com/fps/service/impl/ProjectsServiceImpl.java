@@ -353,6 +353,8 @@ public class ProjectsServiceImpl implements ProjectsService {
         projectsRepository.delete(id);
 
         projectsSearchRepository.delete(id);
+        
+        // call project deleter shell file and run it
     }
 
     /**
@@ -393,6 +395,7 @@ public class ProjectsServiceImpl implements ProjectsService {
 
 
     public Integer saveLogo(byte[] logo) {
+		final Lookups logoLocation = lookupsRepository.findByConfigAndKey(Constants.CONFIG, Constants.LOGOS);
         Random rnd = new Random();
         String filmSolutions = "filmsolutions";
         char[] text = new char[10];
@@ -402,7 +405,7 @@ public class ProjectsServiceImpl implements ProjectsService {
             }
             ByteArrayInputStream bufByteArrayInputStream = new ByteArrayInputStream(logo);
             BufferedImage bufferedImage = ImageIO.read(bufByteArrayInputStream);
-            File file = new File(LOGO_LOCATION + text.toString() + ".jpg");
+            File file = new File(logoLocation.getTextValue() + text.toString() + ".jpg");
             ImageIO.write(bufferedImage, "jpg", file);
             return 1;
         } catch (Exception e) {
@@ -512,4 +515,16 @@ public class ProjectsServiceImpl implements ProjectsService {
         jdbcTemplate.update(sql, new Object[]{user.getLogin(), album.getId(), album.getType(), user.getLogin().concat(";RW"), album.getValue(), 2, user.getLogin(), new Timestamp(System.currentTimeMillis())});
         log.info("Album inserted for project with  ID : ");
     }
+
+
+	@Override
+	public void rename(Long id, String alfrescoTitle1, String alfrescoTitle2) {
+		// TODO Auto-generated method stub
+		// rename project and call script of rename
+		log.info("Project ID : "+id);
+		log.info("Alfresco Title 1 : "+alfrescoTitle1);
+		log.info("Alfresco Title 2 : "+alfrescoTitle2);
+		
+
+	}
 }

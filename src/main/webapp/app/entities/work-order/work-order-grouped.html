@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary btn-sm" ui-sref="work-order.new">
+                <button class="btn btn-primary btn-sm" ui-sref="work-order.add">
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs" translate="smartLpcApp.workOrder.home.createLabel">
                         Create new WorkOrder
@@ -33,7 +33,7 @@
     </div>
     <br/>
     <div class="table-responsive">
-        <table class="jh-table table table-hover">
+        <table class="jh-table table table-condensed">
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
 

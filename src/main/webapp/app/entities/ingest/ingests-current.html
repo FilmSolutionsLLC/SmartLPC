@@ -20,6 +20,9 @@
         <th class="small">Ingest Action</th>
         <th class="small">Priority</th>
 
+
+        <th class="small">Error</th>
+
         <th class="small">Admin Owner</th>
 
 
@@ -52,20 +55,35 @@
             <td ng-init="vm.ingest.destinationDrive=ingests.destinationDrive" class="small">
                 {{ingests.destinationServer}}
             </td>
-            <!--<td ng-init="vm.ingest.action=ingests.action" class="small">
-                <div ng-show="vm.ingest.action==0">Ingest Only</div>
-                <div ng-show="vm.ingest.action==1">Convert from Zooms</div>
-                <div ng-show="vm.ingest.action==2">Convert from SuperZooms</div>
-                <div ng-show="vm.ingest.action==3">Convert from Masters</div>
+
+            <td ng-init="vm.ingest.action=ingests.action" class="small">
+
+                <div ng-switch on="ingests.action">
+                    <div ng-switch-when="0">Ingest Only</div>
+                    <div ng-switch-when="1">Zooms Convert</div>
+                    <div ng-switch-when="2">SuperZooms Convert</div>
+                    <div ng-switch-when="3">Masters Convert</div>
+                </div>
             </td>
 
             <td ng-init="vm.ingest.priority=ingests.priority" class="small">
-                <div ng-if="vm.ingest.priority == 0">HIGH</div>
-                <div ng-if="vm.ingest.priority == 1">NORMAL</div>
-                <div ng-if="vm.ingest.priority == 2">LOW</div>
-            </td>-->
-            <td ng-init="vm.ingest.action=ingests.action" class="small">{{vm.ingest.action}}</td>
-            <td ng-init="vm.ingest.priority=ingests.priority" class="small">{{vm.ingest.priority}}</td>
+                <div ng-switch on="ingests.priority">
+                    <div ng-switch-when="0">High</div>
+                    <div ng-switch-when="1">Normal</div>
+                    <div ng-switch-when="2">Low</div>
+                </div>
+            </td>
+
+
+            <td ng-init="vm.ingest.errorCode=ingests.errorCode" class="small">
+                <div ng-switch on="ingests.errorCode">
+                    <div ng-switch-when="0">No Error</div>
+                    <div ng-switch-when="1" class="text-danger">Mount failed</div>
+                    <div ng-switch-when="2" class="text-danger">Insufficient free space</div>
+                    <div ng-switch-when="3" class="text-danger">JobId is Invalid</div>
+                    <div ng-switch-when="4" class="text-danger">SuperZooms location does not exist</div>
+                </div>
+            </td>
             <td ng-init="vm.ingest.adminOwner.login=ingests.adminOwner.login" class="small">
                 <a ui-sref="user-management-detail({login:ingests.adminOwner.login})">{{ingests.adminOwner.fullName}}</a>
             </td>

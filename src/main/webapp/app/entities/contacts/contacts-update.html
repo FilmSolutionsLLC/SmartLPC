@@ -12,11 +12,12 @@
             <button type="button" class="btn btn-xs btn btn-primary" ng-click="vm.testFunction()">Save
                 and Add
             </button>
-
-            <button type="button" ui-sref="contacts.project-permission" class="btn btn-xs btn btn-primary">Project
+		
+            <button type="button" ui-sref="contacts.project-permission({id:vm.contactDTO.contacts.id})" ui-sref-opts="{reload: true}"  class="btn btn-xs btn btn-primary">Project
                 Permissions
             </button>
-            <td><a href="#" class="btn btn-xs btn btn-danger">Close</a></td>
+            <!-- <a href="#" class="btn btn-xs btn btn-danger">Close</a> -->
+            <button type="button" class="btn btn-xs btn btn-danger" onclick="window.history.back()">Close</button>
         </div>
     </div>
 

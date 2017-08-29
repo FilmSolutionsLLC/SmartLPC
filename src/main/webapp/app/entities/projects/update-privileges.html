@@ -19,14 +19,14 @@
 
         <tr ng-repeat="tags in vm.privileges.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy : 'type'">
             <td class="small">
-                <button type="button" class="btn btn-primary btn-xs">Select</button>
+                <button type="button" class="btn btn-primary btn-xs" ng-click="vm.editPrivilege(tags.id)">Select</button>
             </td>
             <td class="small">{{tags.type}}</td>
             <td class="small">{{tags.value}}</td>
         </tr>
     </table>
     <div class="text-center">
-        <h5>Page: {{currentPage}} / {{numPages}} of Albums</h5>
+        <h5>Page: {{currentPage}} / {{numPages}} of Contact Privileges</h5>
         <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="currentPage" max-size="maxSize"
                         boundary-links="true" rotate="false" num-pages="numPages"
                         items-per-page="itemsPerPage"></uib-pagination>

@@ -26,7 +26,7 @@ public class ProjectRoles implements Serializable {
 
     @Column(name = "relationship_type")
     private String relationship_type;
-
+    
     @Column(name = "solo_kill_pct")
     private Float soloKillPct;
 
@@ -83,7 +83,7 @@ public class ProjectRoles implements Serializable {
 
     @ManyToOne
     private Contacts contact;
-
+    
     @ManyToOne
     private User createdByAdminUser;
 

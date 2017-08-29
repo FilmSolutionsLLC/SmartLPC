@@ -1,8 +1,9 @@
 package com.fps.repository;
 
 import com.fps.domain.ContactPrivileges;
-
+import com.fps.domain.Contacts;
 import com.fps.domain.Projects;
+
 import org.springframework.data.jpa.repository.*;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,4 +26,7 @@ public interface ContactPrivilegesRepository extends JpaRepository<ContactPrivil
 
     @Transactional
     void deleteByProject(Projects projects);
+    
+    List<ContactPrivileges> findByContact(Contacts contact);
+    
 }

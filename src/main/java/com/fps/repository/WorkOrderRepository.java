@@ -55,8 +55,7 @@ public interface WorkOrderRepository extends JpaRepository<WorkOrder, Long> {
 
 
     //PRCESSING LOG
-    @Query("select workOrder from WorkOrder workOrder where workOrder.type.id = 96")
-    List<WorkOrder> findByType();
-
+    @Query("select workOrder from WorkOrder workOrder where workOrder.processing_pko_flag.id = 219 ORDER BY workOrder.id DESC")
+    Page<WorkOrder> findByProcessing_pko_flag(Pageable pageable);
 
 }

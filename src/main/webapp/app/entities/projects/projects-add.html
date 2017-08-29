@@ -8,1211 +8,1327 @@
 <h2 align="center">Project</h2>
 <br>
 <form name="editForm" role="form" novalidate ng-submit="vm.save()">
-    <jhi-alert-error></jhi-alert-error>
-    <div class="row">
-        <button type="submit" class="btn btn-xs btn btn-primary"
-                ng-disabled="editForm.$invalid || isSaving">Save
-        </button>
-        <button ng-click="vm.alert()" type="button" class="btn btn-xs btn btn-primary">Save and Close
-        </button>
-        <button type="button" class="btn btn-xs btn btn-primary">Save
-            and Add
-        </button>
-        <a href="#" class="btn btn-xs btn btn-danger">Close</a>
-
-    </div>
-    <br>
-
-
-    <div class="row">
-
-        <label class="col-xs-1 control-label small" for="field_name">Project Name</label>
-
-        <div class="col-xs-2">
-            <input id="field_name" name="textinput" type="text" placeholder=""
-                   class="form-control input-sm text-uppercase"
-                   ng-model="vm.projects.name"
-                   ng-change="vm.setProjectName()">
-        </div>
-
-        <div class="col-md-8">
-            <label class="small"><input type="checkbox" id="field.runOfShowFlag" ng-model="vm.projects.runOfShowFlag"
-                                        ng-init="vm.projects.runOfShowFlag=false">
-                &nbspRun of Show &nbsp </label>
-
-            <label class="small"><input type="checkbox" id="labCheck" ng-model="vm.projects.labFlag"
-                                        ng-init="vm.projects.labFlag=false">
-                &nbspThe Lab &nbsp</label>
-
-            <label class="small"><input type="checkbox" ng-model="vm.projects.template"
-                                        ng-init="vm.projects.template=false">
-                &nbspTemplate &nbsp</label>
-            <label class="small"><input type="checkbox" ng-model="vm.projects.galleryview"
-                                        ng-init="vm.projects.galleryview=false">
-                &nbspGallery View &nbsp</label>
-            <label class="small"><input type="checkbox" ng-model="vm.projects.topLevelAlbums"
-                                        ng-init="vm.projects.topLevelAlbums=false">
-                &nbspTop level Albums &nbsp</label>
-            <label class="small"><input type="checkbox" ng-model="vm.projects.isAsset"
-                                        ng-init="vm.projects.isAsset=false" readonly>
-                &nbspAssets Project &nbsp</label>
-            <label class="small"><input type="checkbox" ng-model="vm.projects.groupPlus"
-                                        ng-init="vm.projects.groupPlus=false">
-                &nbspGroup +</label>
-        </div>
-
-    </div>
-
-
-    <div class="row">
-        <label class="col-md-1 control-label small" for="field_fullName">FullName/New Name</label>
-        <div class="col-sm-2">
-            <input id="field_fullName" type="text" ng-model="vm.projects.fullName"
-                   class="form-control input-sm">
-        </div>
-
-        <label class="col-md-1 control-label small" for="field_vm.projects.owner">Owner</label>
-        <div class="col-md-2">
-            <div class="input-group">
-
-                         <span class="input-group-btn">
-
-                              <button type="button" ng-click="vm.openModal('field_vm.projects.owner')"
-                                      class="btn btn-primary btn-sm"><span
-                                  class="glyphicon glyphicon-list-alt"></span></button>
-                          </span>
-                <input id="field_vm.projects.owner" type="text" class="form-control input-sm"
-                       ng-model="vm.projects.owner.fullName">
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="row">
-        <label class="col-md-1 control-label small" for="field_alfrescoTitle1">Alfresco Title 1</label>
-        <div class="col-sm-2">
-            <input id="field_alfrescoTitle1" name="textinput" type="text" ng-model="vm.projects.alfrescoTitle1"
-                   class="form-control input-sm">
-        </div>
-
-        <label class="col-md-1 control-label small" for="field_alfrescoTitle2">Alfresco Title 2</label>
-        <div class="col-sm-2">
-            <input id="field_alfrescoTitle2" name="textinput" type="text" ng-model="vm.projects.alfrescoTitle2"
-                   class="form-control input-sm text-capitalize">
-        </div>
-
-    </div>
-
-
-    <div class="row">
-        <label class="col-md-1 control-label small" for="field_imageLocation">Image Location</label>
-        <div class="col-sm-2">
-            <div class="input-group">
-
-                        <span class="input-group-btn">
-                             <button type="button" ui-sref="storage-disk.new" data-toggle="modal"
-                                     class="btn btn-success btn-sm"><span
-                                 class="glyphicon glyphicon-plus "></span></button>
-                         </span>
-                <select class="form-control input-sm" id="field_imageLocation" name="imageLocation"
-                        ng-model="vm.projects.imageLocation"
-                        ng-options="storage_Disk as storage_Disk.name for storage_Disk in vm.storage_disks track by storage_Disk.id">
-                    <option value=""></option>
-                </select>
-            </div>
-
-        </div>
-
-        <label class="col-md-1 control-label small" for="field_defaultDepartment">Department</label>
-        <div class="col-sm-2">
-            <div class="input-group">
-
-                        <span class="input-group-btn">
-                             <button type="button" ui-sref="departments.new" id="openBtn" data-toggle="modal"
-                                     class="btn btn-success btn-sm"><span
-                                 class="glyphicon glyphicon-plus "></span></button>
-                         </span>
-                <select class="form-control input-sm"
-                        ng-options="departments as departments.departmentName for departments in vm.departmentss track by departments.id"
-                        id="field_defaultDepartment" name="defaultDepartment"
-                        ng-model="vm.projects.defaultDepartment"></select>
-            </div>
-
-        </div>
-    </div>
-
-
-    <div class="row">
-
-        <label class="col-md-1 control-label small" for="field_status">Status</label>
-        <div class="col-sm-2">
-            <div class="input-group">
-
-                        <span class="input-group-btn">
-                             <button href="#addDepartment" type="button" id="openBtn" data-toggle="modal"
-                                     class="btn btn-success btn-sm"><span
-                                 class="glyphicon glyphicon-plus "></span></button>
-                         </span>
-                <select class="form-control input-sm" name="status" id="field_status"
-                        ng-model="vm.projects.status"
-                        ng-options="lookups as lookups.textValue for lookups in vm.status track by lookups.id"></select>
-            </div>
-        </div>
-        <label class="col-md-1 control-label small" for="field_type">Type</label>
-        <div class="col-sm-2">
-            <div class="input-group">
-
-                        <span class="input-group-btn">
-                             <button href="#addDepartment" type="button" id="openBtn" data-toggle="modal"
-                                     class="btn btn-success btn-sm"><span
-                                 class="glyphicon glyphicon-plus "></span></button>
-                         </span>
-                <select class="form-control input-sm" name="type" id="field_type"
-                        ng-model="vm.projects.type"
-                        ng-options="lookups as lookups.textValue for lookups in vm.projectType track by lookups.id"></select>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="row">
-        <label class="col-md-1 control-label small" for="field_actorsWithRights">Actors With Rights</label>
-        <div class="col-sm-2">
-            <input id="field_actorsWithRights" name="actorsWithRights" type="text"
-                   ng-model="vm.projects.actorsWithRights"
-                   class="form-control input-sm">
-        </div>
-
-        <label class="col-md-1 control-label small" for="field_daysShooting">Days Shooting</label>
-        <div class="col-sm-2">
-            <input id="field_daysShooting" name="daysShooting" type="text" ng-model="vm.projects.daysShooting"
-                   class="form-control input-sm">
-        </div>
-
-    </div>
-
-
-    <div class="row">
-        <label class="col-md-1 control-label small" for="field_weeksShooting">Weeks Shooting</label>
-        <div class="col-sm-2">
-            <input id="field_weeksShooting" name="weeksShooting" type="text" placeholder=""
-                   ng-model="vm.projects.weeksShooting"
-                   class="form-control input-sm">
-        </div>
-
-        <label class="col-md-1 control-label small" for="field_startDate">Start Date</label>
-        <div class="col-sm-2">
-            <input name="startDate" type="date" id="field_startDate" ng-model="vm.projects.startDate"
-                   class="form-control input-sm">
-        </div>
-
-        <label class="col-md-1 control-label small" for="field_endDate">End Date</label>
-        <div class="col-sm-2">
-            <input name="endDate" type="date" id="field_endDate" placeholder="" ng-model="vm.projects.endDate"
-                   class="form-control input-sm">
-        </div>
-
-
-        <label class="col-md-1 control-label small" for="field_reminderDate">Reminder</label>
-        <div class="col-sm-2">
-            <input name="reminderDate" type="date" id="field_reminderDate" ng-model="vm.projects.reminderDate"
-                   class="form-control input-sm">
-        </div>
-    </div>
-
-    <div class="row">
-        <label class="col-md-1 control-label small" for="field_invoiceCreated">Invoice Created</label>
-        <div class="col-sm-2">
-            <select class="form-control input-sm" id="field_invoiceCreated" ng-model="vm.projects.invoiceCreated">
-                <option value="387">Yes</option>
-                <option value="388">No</option>
-                <option value="389">N/A</option>
-            </select>
-        </div>
-
-
-        <label class="col-md-1 control-label small" for="field_price">Price</label>
-        <div class="col-sm-2">
-            <input id="field_price" name="price" type="text" placeholder="" ng-model="vm.projects.price"
-                   class="form-control input-sm">
-        </div>
-
-        <label class="col-md-1 control-label small" for="field_foxTitle">WPR#(FOX)</label>
-        <div class="col-sm-2">
-            <input id="field_foxTitle" name="foxTitle" type="text" placeholder="" ng-model="vm.projects.foxTitle"
-                   class="form-control input-sm">
-        </div>
-
-    </div>
-    <div class="row">
-        <label class="col-md-1 control-label small" for="field_projectHistory">Project History</label>
-        <div class="col-sm-11">
-            <input id="field_projectHistory" name="projectHistory" type="text" ng-model="vm.projects.notes"
-                   class="form-control input-sm">
-        </div>
-    </div>
-    <div class="row">
-        <label class="col-md-1 control-label small" for="file">Project Logo</label>
-        <div class="col-sm-3">
-            <div class="input-group">
-
-
-                <input type="file" id="file" name="file" class="form-control input-sm"/>
-                <span class="input-group-btn">
-                    <button type="button" ng-click="addImages()" class="btn btn-success btn-sm"><span
-                        class="glyphicon glyphicon-upload "></span>Upload</button>
-                  </span>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-xs-3">
-            <label class="small">
-                <input type="checkbox" ng-model="vm.projects.unitPhotographerOverride">
-                &nbspUse Unit Photographer &nbsp
-            </label>
-        </div>
-        <div class="col-xs-2">
-            <label class="small">
-                <input type="checkbox" ng-model="vm.projects.photoCreditOverride">
-
-                &nbspUse Alt. Photographer &nbsp
-            </label>
-        </div>
-        <div ng-show="vm.projects.photoCreditOverride">
-            <label class="col-xs-2 control-label small" for="field_photoCredit">Alt.Photographer</label>
-            <div class="col-xs-2">
-                <input name="photoCredit" id="field_photoCredit" type="text" ng-model="vm.projects.photoCredit"
-                       class="form-control input-sm">
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-md-2 col-xs-offset-3">
-            <label class="small">
-                <input type="checkbox" ng-model="vm.projects.shootDateOverride">
-                &nbspUse Shoot Date &nbsp
-            </label>
-        </div>
-        <div ng-show="vm.projects.shootDateOverride">
-            <label class="col-xs-2 control-label small" for="field_shootDate">Shoot Date</label>
-            <div class="col-xs-2">
-                <input name="shootDate" id="field_shootDate" type="date" ng-model="vm.projects.shootDate"
-                       class="form-control input-sm">
-            </div>
-        </div>
-    </div>
-
-    <br>
-    <div class="row">
-
-        <div class="col-md-3">
-            <label class="small"><input type="checkbox" ng-model="vm.projects.loginMessageActive">&nbsp&nbspEnable
-                Reviewer Login Message
-                &nbsp</label>
-        </div>
-        <label class="col-md-2 control-label small" for="field_loginMessage">
-            Reviewer Login Message</label>
-        <div class="col-md-7">
-            <textarea class="form-control input-sm" ng-model="vm.projects.loginMessage" rows="1"
-                      id="field_loginMessage"></textarea>
-        </div>
-    </div>
-
-
-    <!--   RUN OF SHOW-->
-
-
-    <hr>
-    <div id="runOfShow" ng-show="vm.projects.runOfShowFlag">
-
-        <h4>Run of Show Purchase Orders &nbsp; &nbsp; <a ng-click="vm.runShowAdd()"><span
-            class=" glyphicon glyphicon-plus-sign small text-primary "></span></a></h4>
-
-
-        <fieldset data-ng-repeat="item in runShow">
-            <div class="row">
-                <div class="col-lg-2">
-                    <div class="input-group">
-
-                        </small><span class="input-group-addon input-sm"><small>PO {{$index}}</small></span>
-
-                        <input type="text" class="form-control input-sm"
-                               ng-model="vm.projectPurchaseOrderses[$index].po_number">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <input type="text" class="form-control input-sm"
-                           ng-model="vm.projectPurchaseOrderses[$index].po_notes">
-                </div>
-
-                <div class="col-lg-1">
-                            <span class="glyphicon glyphicon-trash text-danger small"
-                                  ng-click="vm.runShowRemove()"></span>
-                </div>
-            </div>
-
-        </fieldset>
-
-    </div>
-    <hr>
-
-
-    <div id="labTasks" ng-show="vm.projects.labFlag">
-        <h4>Project Processing Profile</h4>
-        <div class="row">
-            <label class="col-md-2 control-label small" for="textinput">Deliveries</label>
-            <div class="col-xs-2">
-
-                <input id="field_processingDeliveries" name="textinput" type="text" placeholder=""
-                       class="form-control input-sm" ng-model="vm.projects.processingDeliveries">
-
-            </div>
-        </div>
-        <div class="row">
-            <label class="col-md-2 control-label small" for="textinput">Special Instructions</label>
-            <div class="col-xs-2">
-
-                <input id="field_processingSpecialInstructions" name="textinput" type="text"
-                       class="form-control input-sm" ng-model="vm.projects.processingSpecialInstructions">
-
-            </div>
-        </div>
-        <div class="row">
-            <label class="col-md-2 control-label small" for="textinput">Watermark</label>
-            <div class="col-xs-2">
-
-                <input id="field_processingWatermark" name="textinput" type="text"
-                       class="form-control input-sm" ng-model="vm.projects.processingWatermark">
-
-            </div>
-        </div>
-        <div class="row">
-            <label class="col-md-2 control-label small" for="textinput">Copyright</label>
-            <div class="col-xs-2">
-
-                <input id="field_processingCopyright" name="textinput" type="text"
-                       class="form-control input-sm" ng-model="vm.projects.processingCopyright">
-
-            </div>
-        </div>
-        <div class="row">
-            <label class="col-md-2 control-label small" for="textinput">Original File Type</label>
-            <div class="col-xs-2">
-                <select class="form-control input-sm" name="type"
-                        ng-model="vm.projects.fileType"
-                        ng-options="lookups as lookups.textValue for lookups in vm.fileType track by lookups.id"></select>
-            </div>
-        </div>
-
-
-        <h4>Lab Tasks &nbsp; &nbsp; <a href="" ng-click="vm.addlab()"><span
-            class=" glyphicon glyphicon-plus-sign small text-primary "></span></a></h4>
-        <div id="labs">
-
-            <div class="row">
-                <div class="col-lg-9">
-                    <fieldset data-ng-repeat="item in related">
-                        <div class="row">
-
-                            <div class="col-lg-7">
-                                <div class="input-group">
-
-                                    <span class="input-group-addon input-sm" id="sizing-addon2">{{$index}}</span>
-
-                                    <select class="form-control input-sm" id="field_task_name" name="task_name"
-                                            ng-model="vm.projectLabTaskses[$index].task_name"
-                                            ng-options="lookups as lookups.textValue for lookups in vm.labTask track by lookups.id">
-                                        <option value=""></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-1">
-                                <a href="" ng-click="vm.removelab($index)"><span
-                                    class=" glyphicon glyphicon-trash text-danger"></span></a>
-                            </div>
-
-
-                        </div>
-                    </fieldset>
-
-                </div>
-                <div class="col-lg-3">
-                    <div class="row">
-                        <input type="text"
-                               class="form-control input-sm" ng-model="vm.projects.labProofNotes">
-                        <h6>Proof/5x7 Notes</h6>
-                    </div>
-                    <div class="row">
-                        <input type="text"
-                               class="form-control input-sm" ng-model="vm.projects.labLastProofImageNumber">
-                        <h6>Last Proof Image Number</h6>
-                    </div>
-                    <div class="row">
-                        <input type="text" placeholder=""
-                               class="form-control input-sm" ng-model="vm.projects.labLastProofPageNumber">
-                        <h6>Last Proof Page Number</h6>
-                    </div>
-                    <div class="row">
-                        <input type="text"
-                               class="form-control input-sm" ng-model="vm.projects.labImageNumberSchema">
-                        <h6>Image Number Schema</h6>
-                    </div>
-                    <div class="row">
-                        <input type="text"
-                               class="form-control input-sm" ng-model="vm.projects.labFolderBatchSchema">
-                        <h6>Folder/Batch Schema</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <hr>
-
-
-    <h4>Project Information</h4>
-
-    <div class="row">
-        <label class="col-md-1 control-label text-danger small" for="field_vm.projects.mainContact">Main Contact</label>
-        <div class="col-md-2">
-            <div class="input-group">
-
-                    <span class="input-group-btn">
-
-                        <button type="button" id="" ng-click="vm.openModal('field_vm.projects.mainContact')"
-                                class="btn btn-primary btn-sm"><span
-                            class="glyphicon glyphicon-list-alt"></span></button>
-                    </span>
-                <input id="field_vm.projects.mainContact" type="text" class="form-control input-sm"
-                       ng-model="vm.projectRoles[0].contact.fullName" readonly>
-            </div>
-
-        </div>
-        <label class="col-md-1 control-label small">Title</label>
-        <div class="col-xs-2">
-
-            <input name="text" type="text"
-                   class="form-control input-sm" ng-model="vm.projectRoles[0].contact.title" readonly>
-
-        </div>
-    </div>
-    <div class="row">
-        <label class="col-xs-1 control-label small">
-            Office <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-        </label>
-        <div class="col-xs-2">
-
-            <input name="text" type="text"
-                   class="form-control input-sm" ng-model="vm.projectRoles[0].contact.phoneOffice" readonly>
-
-        </div>
-        <label class="col-xs-1 control-label small">
-            Mobile</span>
-        </label>
-        <div class="col-xs-2">
-
-            <input name="text" type="text"
-                   class="form-control input-sm" ng-model="vm.projectRoles[0].contact.phoneMobile" readonly>
-
-        </div>
-    </div>
-    <div class="row">
-        <label class="col-md-1 control-label small">Email</label>
-        <div class="col-xs-2">
-
-            <input name="text" type="text" placeholder=""
-                   class="form-control input-sm" ng-model="vm.projectRoles[0].contact.email" readonly>
-
-        </div>
-    </div>
-    <div class="row">
-
-        <label class="col-md-1 control-label small">Notes</label>
-        <div class="col-xs-7">
-            <textarea class="form-control input-sm" rows="1" ng-model="vm.projectRoles[0].contact.notes"></textarea>
-
-        </div>
-
-    </div>
-    <br>
-
-
-    <div class="row">
-        <label class="col-md-1 control-label text-danger small" for="field_vm.projects.unitPublicist">Unit
-            Publicist</label>
-        <div class="col-md-2">
-            <div class="input-group">
-
-                    <span class="input-group-btn">
-
-                        <button type="button" ng-click="vm.openModal('field_vm.projects.unitPublicist')"
-                                class="btn btn-primary btn-sm"><span
-                            class="glyphicon glyphicon-list-alt"></span></button>
-                    </span>
-                <input id="field_vm.projects.unitPublicist" type="text" class="form-control input-sm"
-                       ng-model="vm.projectRoles[1].contact.fullName" readonly>
-            </div>
-
-        </div>
-        <label class="col-md-1 control-label small">Title</label>
-        <div class="col-xs-2">
-
-            <input name="text" type="text"
-                   class="form-control input-sm" ng-model="vm.projectRoles[1].contact.title" readonly>
-
-        </div>
-    </div>
-    <div class="row">
-        <label class="col-xs-1 control-label small">
-            Office <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-        </label>
-        <div class="col-xs-2">
-
-            <input name="text" type="text"
-                   class="form-control input-sm" ng-model="vm.projectRoles[1].contact.phoneOffice" readonly>
-
-        </div>
-        <label class="col-xs-1 control-label small">
-            Mobile</span>
-        </label>
-        <div class="col-xs-2">
-
-            <input name="text" type="text"
-                   class="form-control input-sm" ng-model="vm.projectRoles[1].contact.phoneMobile" readonly>
-
-        </div>
-    </div>
-    <div class="row">
-        <label class="col-md-1 control-label small">Email</label>
-        <div class="col-xs-2">
-
-            <input name="text" type="text" placeholder=""
-                   class="form-control input-sm" ng-model="vm.projectRoles[1].contact.email" readonly>
-
-        </div>
-    </div>
-    <div class="row">
-
-        <label class="col-md-1 control-label small">Notes</label>
-        <div class="col-xs-7">
-            <textarea class="form-control input-sm" rows="1" ng-model="vm.projectRoles[1].contact.notes"></textarea>
-
-        </div>
-
-    </div>
-    <br>
-
-
-    <div class="row">
-        <label class="col-md-1 control-label text-danger small" for="field_vm.projects.unitPhotographer">Unit
-            Photographer</label>
-        <div class="col-md-2">
-            <div class="input-group">
-
-                    <span class="input-group-btn">
-
-                        <button type="button" ng-click="vm.openModal('field_vm.projects.unitPhotographer')"
-                                class="btn btn-primary btn-sm"><span
-                            class="glyphicon glyphicon-list-alt"></span></button>
-                    </span>
-                <input id="field_vm.projects.unitPhotographer" type="text" class="form-control input-sm"
-                       ng-model="vm.projectRoles[2].contact.fullName" readonly>
-            </div>
-
-        </div>
-        <label class="col-md-1 control-label small">Title</label>
-        <div class="col-xs-2">
-
-            <input name="text" type="text"
-                   class="form-control input-sm" ng-model="vm.projectRoles[2].contact.title" readonly>
-
-        </div>
-    </div>
-    <div class="row">
-        <label class="col-xs-1 control-label small">
-            Office <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-        </label>
-        <div class="col-xs-2">
-
-            <input name="text" type="text"
-                   class="form-control input-sm" ng-model="vm.projectRoles[2].contact.phoneOffice" readonly>
-
-        </div>
-        <label class="col-xs-1 control-label small">
-            Mobile</span>
-        </label>
-        <div class="col-xs-2">
-
-            <input name="text" type="text"
-                   class="form-control input-sm" ng-model="vm.projectRoles[2].contact.phoneMobile" readonly>
-
-        </div>
-    </div>
-    <div class="row">
-        <label class="col-md-1 control-label small">Email</label>
-        <div class="col-xs-2">
-
-            <input name="text" type="text" placeholder=""
-                   class="form-control input-sm" ng-model="vm.projectRoles[2].contact.email" readonly>
-
-        </div>
-    </div>
-    <div class="row">
-
-        <label class="col-md-1 control-label small">Notes</label>
-        <div class="col-xs-7">
-            <textarea class="form-control input-sm" rows="1" ng-model="vm.projectRoles[2].contact.notes"></textarea>
-
-        </div>
-
-    </div>
-    <br>
-
-
-    <div class="row">
-        <label class="col-md-1 control-label text-danger small" for="field_vm.projects.labInfo">Lab Information</label>
-        <div class="col-md-2">
-            <div class="input-group">
-
-                    <span class="input-group-btn">
-
-                        <button type="button" ng-click="vm.openModal('field_vm.projects.labInfo')"
-                                class="btn btn-primary btn-sm"><span
-                            class="glyphicon glyphicon-list-alt"></span></button>
-                    </span>
-                <input id="field_vm.projects.labInfo" type="text" class="form-control input-sm"
-                       ng-model="vm.projectRoles[3].contact.fullName" readonly>
-            </div>
-
-        </div>
-    </div>
-    <div class="row">
-        <label class="col-xs-1 control-label small">
-            Office <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-        </label>
-        <div class="col-xs-2">
-
-            <input type="text"
-                   class="form-control input-sm" ng-model="vm.projectRoles[3].contact.phoneOffice" readonly>
-
-        </div>
-        <label class="col-md-1 control-label small">Email</label>
-        <div class="col-xs-2">
-
-            <input type="text"
-                   class="form-control input-sm" ng-model="vm.projectRoles[3].contact.email" readonly>
-
-        </div>
-    </div>
-    <div class="row">
-        <label class="col-xs-1 control-label small">Address
-        </label>
-        <div class="col-xs-2">
-
-
-            <input type="text" class="form-control input-sm"
-                   ng-model="vm.projectRoles[3].contact.streetAddress" readonly>
-
-        </div>
-        <label class="col-xs-1 control-label small">City
-        </label>
-        <div class="col-xs-2">
-
-
-            <input type="text" class="form-control input-sm"
-                   ng-model="vm.projectRoles[3].contact.city" readonly/>
-
-        </div>
-        <label class="col-xs-1 control-label small">State
-        </label>
-        <div class="col-xs-1">
-
-            <input type="text" class="form-control input-sm"
-                   ng-model="vm.projectRoles[3].contact.state" readonly/>
-        </div>
-        <label class="col-xs-1 control-label small">Zip Code
-        </label>
-        <div class="col-xs-1">
-
-
-            <input type="text" class="form-control input-sm"
-                   ng-model="vm.projectRoles[3].contact.zipcode" readonly/>
-        </div>
-        <label class="col-xs-1 control-label small">Country
-        </label>
-        <div class="col-xs-1">
-
-
-            <input type="text" class="form-control input-sm"
-                   ng-model="vm.projectRoles[3].contact.country" readonly/>
-
-        </div>
-    </div>
-    <div class="row">
-
-        <label class="col-md-1 control-label small" for="textinput">Contact Notes</label>
-        <div class="col-xs-7">
-            <textarea class="form-control input-sm" rows="1" ng-model="vm.projectRoles[3].contact.notes"
-                      readonly></textarea>
-
-        </div>
-
-    </div>
-    <br>
-    <div class="row">
-
-        <label class="col-md-1 control-label small" for="textinput">Notes</label>
-        <div class="col-xs-7">
-            <textarea class="form-control input-sm" rows="1" ng-model="vm.projectRoles[3].notes"></textarea>
-
-        </div>
-
-    </div>
-
-    <hr>
-    <div class="row">
-
-        <label class="col-md-1 control-label small" for="textinput">Director</label>
-        <div class="col-xs-2">
-            <input type="text"
-                   class="form-control input-sm" ng-model="vm.projects.legacyDirector">
-
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <label class="col-md-1 control-label small" for="textinput">Executive Producer</label>
-        <div class="col-xs-2">
-            <input type="text" placeholder=""
-                   class="form-control input-sm" ng-model="vm.projects.legacyExecutiveProducer">
-
-        </div>
-        <label class="col-md-1 control-label small" for="textinput">Executive Producer</label>
-        <div class="col-xs-2">
-            <input type="text" placeholder=""
-                   class="form-control input-sm" ng-model="vm.projects.legacyExecutiveProducer2">
-
-        </div>
-
-    </div>
-    <div class="row">
-
-        <label class="col-md-1 control-label small" for="textinput">Executive Producer</label>
-        <div class="col-xs-2">
-            <input type="text" placeholder=""
-                   class="form-control input-sm" ng-model="vm.projects.legacyExecutiveProducer3">
-
-        </div>
-        <label class="col-md-1 control-label small" for="textinput">Executive Producer</label>
-        <div class="col-xs-2">
-            <input type="text" placeholder=""
-                   class="form-control input-sm" ng-model="vm.projects.legacyExecutiveProducer4">
-
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <label class="col-md-1 control-label small" for="textinput">Producer</label>
-        <div class="col-xs-2">
-            <input name="legacyProducer" id="field_legacyProducer"
-                   ng-model="vm.projects.legacyProducer" type="text" placeholder=""
-                   class="form-control input-sm">
-
-        </div>
-        <label class="col-md-1 control-label small" for="textinput">Producer</label>
-        <div class="col-xs-2">
-            <input name="legacyProducer2" id="field_legacyProducer2"
-                   ng-model="vm.projects.legacyProducer2" type="text" placeholder=""
-                   class="form-control input-sm">
-
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <label class="col-md-1 control-label small" for="textinput">Producer</label>
-        <div class="col-xs-2">
-            <input name="legacyProducer3" id="field_legacyProducer3"
-                   ng-model="vm.projects.legacyProducer3" type="text" placeholder=""
-                   class="form-control input-sm">
-
-        </div>
-        <label class="col-md-1 control-label small" for="textinput">Producer</label>
-        <div class="col-xs-2">
-            <input name="legacyProducer4" id="field_legacyProducer4"
-                   ng-model="vm.projects.legacyProducer4" type="text" placeholder=""
-                   class="form-control input-sm">
-
-        </div>
-
-    </div>
-    <div class="row">
-
-        <label class="col-md-1 control-label small" for="textinput">Notes</label>
-        <div class="col-xs-7">
-            <textarea class="form-control input-sm" rows="1" id="textinput"
-                      ng-model="vm.projects.legacyNameNotes"></textarea>
-
-
-        </div>
-    </div>
-    <hr>
-
-
-    <h4>Production Company Information</h4>
-
-    <div class="row">
-        <label class="col-md-1 control-label text-danger small" for="field_vm.projects.productCompany">Name</label>
-        <div class="col-md-2">
-            <div class="input-group">
-
-                    <span class="input-group-btn">
-                        <button type="button" ng-click="vm.openModal('field_vm.projects.productCompany')"
-                                class="btn btn-primary btn-sm"><span
-                            class="glyphicon glyphicon-list-alt"></span></button>
-                    </span>
-                <input id="field_vm.projects.productCompany" type="text" class="form-control input-sm"
-                       ng-model="vm.projects.productionCompanyContact.fullName" readonly>
-            </div>
-
-        </div>
-    </div>
-    <div class="row">
-        <label class="col-xs-1 control-label small">
-            Main <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-        </label>
-        <div class="col-xs-2">
-
-            <input type="text"
-                   class="form-control input-sm" ng-model="vm.projects.productionCompanyContact.phoneOffice" readonly>
-
-        </div>
-        <label class="col-md-1 control-label small">Alt</label>
-        <div class="col-xs-2">
-
-            <input type="text"
-                   class="form-control input-sm" ng-model="vm.projects.productionCompanyContact.phoneAlternate"
-                   readonly>
-
-        </div>
-        <label class="col-md-1 control-label small">Fax</label>
-        <div class="col-xs-2">
-
-            <input type="text"
-                   class="form-control input-sm" ng-model="vm.projects.productionCompanyContact.phoneFax" readonly>
-
-        </div>
-    </div>
-    <div class="row">
-        <label class="col-xs-1 control-label small">Address
-        </label>
-        <div class="col-xs-2">
-
-
-            <input type="text" class="form-control input-sm"
-                   ng-model="vm.projects.productionCompanyContact.streetAddress" readonly/>
-
-        </div>
-        <label class="col-xs-1 control-label small">City
-        </label>
-        <div class="col-xs-2">
-
-
-            <input type="text" class="form-control input-sm"
-                   ng-model="vm.projects.productionCompanyContact.city" readonly/>
-
-        </div>
-        <label class="col-xs-1 control-label small">State
-        </label>
-        <div class="col-xs-1">
-
-            <input type="text" class="form-control input-sm"
-                   ng-model="vm.projects.productionCompanyContact.state" readonly/>
-        </div>
-        <label class="col-xs-1 control-label small">Zip Code
-        </label>
-        <div class="col-xs-1">
-
-
-            <input type="text" class="form-control input-sm"
-                   ng-model="vm.projects.productionCompanyContact.zipcode" readonly/>
-        </div>
-        <label class="col-xs-1 control-label small">Country
-        </label>
-        <div class="col-xs-1">
-
-
-            <input type="text" class="form-control input-sm"
-                   ng-model="vm.projects.productionCompanyContact.country" readonly/>
-
-        </div>
-    </div>
-    <div class="row">
-
-        <label class="col-md-1 control-label small">Notes</label>
-        <div class="col-xs-7">
-            <textarea class="form-control input-sm" rows="1"
-                      ng-model="vm.projects.productionCompanyContact.notes"></textarea>
-
-        </div>
-
-    </div>
-    <br>
-    <div class="row">
-
-        <label class="col-md-1 control-label small">FEDEX</label>
-        <div class="col-xs-7">
-            <input type="text" class="form-control input-sm"/>
-
-        </div>
-
-    </div>
-
-    <hr>
-
-    <br>
-
-
-    <h4> Name/ID/Password</h4>
-
-
-    <h5>TALENTS <a href="" ng-click="vm.addTalent()"><span
-        class=" glyphicon glyphicon-plus-sign text-danger small"></span></a></h5>
-
-    <table class="jh-table table table-striped">
-        <tr>
-            <th></th>
-            <th class="small">Username</th>
-            <th class="small">Password</th>
-            <th class="small col-xs-1">Solo</th>
-            <th class="small col-xs-1">Group</th>
-            <th class="small col-xs-1">Group +</th>
-            <th class="small">Character Name</th>
-            <th class="small">Disabled</th>
-            <th></th>
-        </tr>
-        <tr data-ng-repeat="choice in talents">
-
-            <td class="col-xs-1">
-
-                <div class="input-group">
-
-                                    <span class="input-group-btn input-xs">
-                                        <button type="button" ng-click="vm.openModal('field_vm.projects.talents')"
-                                                class="btn btn-primary btn-xs"><span
-                                            class="glyphicon glyphicon-list-alt btn-xs"></span></button>
-                                    </span>
-                    <input type="text" id="field_vm.projects.talents" class="input-xs"
-                           ng-model="vm.talents[$index].contact.fullName"/>
-                </div>
-
-            </td>
-
-            <td><input class="input-xs" type="text" ng-model="vm.talents[$index].contact.username"></td>
-            <td><input class="input-xs" type="text" ng-model="vm.talents[$index].contact.password"/></td>
-
-
-            <td class="col-xs-1"><input class="input-xs" style="width: 50px" id="field_vm.projectRoles.soloKillPct"
-                                        type="text"
-                                        ng-model="vm.talents[$index].soloKillPct"></td>
-
-            <td><input class="input-xs" id="field_vm.projectRoles[$index].groupKillPct" style="width: 50px" type="text"
-                       ng-model="vm.talents[$index].groupKillPct">
-            </td>
-            <td><input class=" input-xs" id="field_groupPlus" style="width: 50px" type="text"></td>
-
-            <td><input class="input-xs" id="field_vm.projectRoles[$index].characterName" type="text"
-                       ng-model="vm.talents[$index].characterName"></td>
-
-            <td><input class="input-xs" type="checkbox"
-                       ng-model="vm.talents[$index].disabled"></td>
-
-            <td><a href="" ng-click="vm.removeTalent($index)"><span
-                class=" glyphicon glyphicon-trash small text-danger"></span></a></td>
-        </tr>
-    </table>
-
-
-    <hr>
-
-
-    <h5>EXECS <a href="" ng-click="vm.addExec()"><span class=" glyphicon glyphicon-plus-sign text-danger small"></span></a>
-    </h5>
-
-
-    <table class="table table-hover">
-        <tr>
-            <th class="small"><a href ng-click="vm.openMultipleExecs('multipleExecs')">Add Multiple Execs</a></th>
-            <th class="small">Username</th>
-            <th class="small">Password</th>
-            <th class="small">Download</th>
-            <th class="small">Print</th>
-            <th class="small">Caption</th>
-            <th class="small">Email</th>
-            <th class="small">Talent-MGMT</th>
-            <th class="small">SO-MGMT</th>
-            <th class="small">PP</th>
-            <th class="small">Rel/Ex</th>
-            <th class="small">Ven</th>
-            <th class="small">L/A</th>
-            <th class="small">Sens</th>
-            <th class="small">Exclusives</th>
-            <th class="small">Sees UnPub</th>
-            <th class="small">Vid</th>
-            <th class="small">Disabled</th>
-            <th class="small"></th>
-        </tr>
-        <tr data-ng-repeat="choice in execs">
-            <td class="col-xs-1">
-
-                <div class="input-group">
-
-                                    <span class="input-group-btn input-xs">
-                                        <button type="button" ng-click="vm.openModal('field_vm.projects.execs')"
-                                                class="btn btn-primary btn-xs"><span
-                                            class="glyphicon glyphicon-list-alt btn-xs"></span></button>
-                                    </span>
-                    <input type="text" id="field_vm.projects.execs" class="input-xs"
-                           ng-model="vm.execss[$index].contact.fullName"/>
-                </div>
-
-            </td>
-            <td><input type="text" ng-model="vm.execss[$index].contact.username"/></td>
-            <td><input type="text" ng-model="vm.execss[$index].contact.password"/></td>
-            <td><select ng-model="vm.execss[$index].downloadType">
-                <option value="0">NONE</option>
-                <option value="1">ALL</option>
-                <option value="2">Locked Approved</option>
-            </select></td>
-            <td><input type="checkbox" ng-model="vm.execss[$index].print"/></td>
-            <td><input type="checkbox" ng-model="vm.execss[$index].captioning"/></td>
-            <td><input type="checkbox" ng-model="vm.execss[$index].email"/></td>
-            <td><input type="checkbox" ng-model="vm.execss[$index].talentManagement"/></td>
-            <td><input type="checkbox" ng-model="vm.execss[$index].signoffManagement"/></td>
-            <td><input type="checkbox"/></td>
-            <td><input type="checkbox" ng-model="vm.execss[$index].releaseExclude"/></td>
-            <td><input type="checkbox" ng-model="vm.execss[$index].vendor"/></td>
-            <td><input type="checkbox" ng-model="vm.execss[$index].lockApproveRestriction"/></td>
-            <td><input type="checkbox" ng-model="vm.execss[$index].viewSensitive"/></td>
-            <td><select ng-model="vm.execss[$index].exclusives">
-                <option value="0">NONE</option>
-                <option value="1">BASIC</option>
-                <option value="2">MASTER</option>
-            </select></td>
-
-            <td><input type="checkbox" ng-model="vm.execss[$index].seesUntagged"/></td>
-            <td><input type="checkbox" ng-model="vm.execss[$index].hasVideo"/></td>
-            <td><input type="checkbox" ng-model="vm.execss[$index].disabled"/></td>
-
-            <td><a href="" ng-click="vm.removeExec($index)"><span class=" glyphicon glyphicon-trash text-danger"></span></a>
-            </td>
-        </tr>
-
-    </table>
-    <hr>
-
-    EXPANDED TALENT INFORMATION
-    <fieldset data-ng-repeat="choice in talents">
-
-        <div class="row">
-            <label class="col-md-1 control-label small">Talent {{$index}}</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" readonly
-                       ng-model="vm.talents[$index].contact.fullName">
-            </div>
-            <label class="col-md-1 control-label small">Character</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" readonly>
-            </div>
-            <label class="col-md-1 control-label small">StartDate</label>
-            <div class="col-sm-2">
-                <input type="date" class="form-control input-sm">
-            </div>
-            <label class="col-md-1 control-label small">Days</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm">
-            </div>
-        </div>
-        <div class="row">
-            <label class="col-md-1 control-label small">Contact</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm"
-                       ng-model="vm.talents[$index].contact.companyContact.fullName" readonly>
-            </div>
-            <label class="col-md-1 control-label small">Type</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" ng-model="vm.talents[$index].contact.type.textValue"
-                       readonly>
-            </div>
-            <label class="col-md-1 control-label small">Company</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" readonly>
-            </div>
-
-        </div>
-        <div class="row">
-            <label class="col-md-1 control-label small">Phone</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" ng-model="vm.talents[$index].contact.phoneCompany"
-                       readonly>
-            </div>
-            <label class="col-md-1 control-label small">Email</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" ng-model="vm.talents[$index].contact.email" readonly>
-            </div>
-            <label class="col-md-1 control-label small">Mobile</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" ng-model="vm.talents[$index].contact.phoneMobile"
-                       readonly>
-            </div>
-
-        </div>
-        <div class="row">
-            <label class="col-md-1 control-label small">Asst/Notes</label>
-            <div class="col-sm-11">
-                <input type="text" class="form-control input-xs" ng-model="vm.talents[$index].contact.notes" readonly>
-            </div>
-        </div>
-        <div class="row">
-            <label class="col-md-1 control-label small">Notes</label>
-            <div class="col-sm-11">
-                <input type="text" class="form-control input-sm">
-            </div>
-        </div>
-        <br>
-    </fieldset>
-    <hr>
-    <h4>Parent Company Information</h4>
-    <div class="row">
-        <label class="col-md-1 control-label text-danger small" for="field_vm.projects.parentInfo">Name</label>
-        <div class="col-md-3">
-            <div class="input-group">
-
-                        <span class="input-group-btn">
-
-                            <button type="button" ng-click="vm.openModal('field_vm.projects.parentInfo')"
-                                    class="btn btn-primary btn-sm"><span
-                                class="glyphicon glyphicon-list-alt"></span></button>
-                        </span>
-                <input type="text" id="field_vm.projects.parentInfo" class="form-control input-sm"
-                       ng-model="vm.projects.parentCompanyContact.fullName">
-            </div>
-        </div>
-    </div>
-    <br>
+	<jhi-alert-error></jhi-alert-error>
+	<div class="row">
+		<button type="submit" class="btn btn-xs btn btn-primary"
+			ng-disabled="editForm.$invalid || isSaving">Save</button>
+		<button ng-click="vm.alert()" type="button"
+			class="btn btn-xs btn btn-primary">Save and Close</button>
+		<button type="button" class="btn btn-xs btn btn-primary">Save
+			and Add</button>
+		<a href="#" class="btn btn-xs btn btn-danger">Close</a>
+
+	</div>
+	<br>
+
+
+	<div class="row">
+
+		<label class="col-xs-1 control-label small" for="field_name">Project
+			Name</label>
+
+		<div class="col-xs-2">
+			<input id="field_name" name="textinput" type="text" placeholder=""
+				class="form-control input-sm text-uppercase"
+				ng-model="vm.projects.name" ng-change="vm.setProjectName()">
+		</div>
+
+		<div class="col-md-8">
+			<label class="small"><input type="checkbox"
+				id="field.runOfShowFlag" ng-model="vm.projects.runOfShowFlag"
+				ng-init="vm.projects.runOfShowFlag=false"> &nbspRun of Show
+				&nbsp </label> <label class="small"><input type="checkbox"
+				id="labCheck" ng-model="vm.projects.labFlag"
+				ng-init="vm.projects.labFlag=false"> &nbspThe Lab &nbsp</label> <label
+				class="small"><input type="checkbox"
+				ng-model="vm.projects.template" ng-init="vm.projects.template=false">
+				&nbspTemplate &nbsp</label> <label class="small"><input
+				type="checkbox" ng-model="vm.projects.galleryview"
+				ng-init="vm.projects.galleryview=false"> &nbspGallery View
+				&nbsp</label> <label class="small"><input type="checkbox"
+				ng-model="vm.projects.topLevelAlbums"
+				ng-init="vm.projects.topLevelAlbums=false"> &nbspTop level
+				Albums &nbsp</label> <label class="small"><input type="checkbox"
+				ng-model="vm.projects.isAsset" ng-init="vm.projects.isAsset=false"
+				readonly> &nbspAssets Project &nbsp</label> <label class="small"><input
+				type="checkbox" ng-model="vm.projects.groupPlus"
+				ng-init="vm.projects.groupPlus=false"> &nbspGroup +</label>
+		</div>
+
+	</div>
+
+
+	<div class="row">
+		<label class="col-md-1 control-label small" for="field_fullName">FullName/New
+			Name</label>
+		<div class="col-sm-2">
+			<input id="field_fullName" type="text"
+				ng-model="vm.projects.fullName" class="form-control input-sm">
+		</div>
+
+		<label class="col-md-1 control-label small"
+			for="field_vm.projects.owner">Owner</label>
+		<div class="col-md-2">
+			<div class="input-group">
+
+				<span class="input-group-btn">
+
+					<button type="button"
+						ng-click="vm.openModal('field_vm.projects.owner')"
+						class="btn btn-primary btn-sm">
+						<span class="glyphicon glyphicon-list-alt"></span>
+					</button>
+				</span> <input id="field_vm.projects.owner" type="text"
+					class="form-control input-sm" ng-model="vm.projects.owner.fullName">
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<div class="row">
+		<label class="col-md-1 control-label small" for="field_alfrescoTitle1">Alfresco
+			Title 1</label>
+		<div class="col-sm-2">
+			<input id="field_alfrescoTitle1" name="textinput" type="text"
+				ng-model="vm.projects.alfrescoTitle1" class="form-control input-sm">
+		</div>
+
+		<label class="col-md-1 control-label small" for="field_alfrescoTitle2">Alfresco
+			Title 2</label>
+		<div class="col-sm-2">
+			<input id="field_alfrescoTitle2" name="textinput" type="text"
+				ng-model="vm.projects.alfrescoTitle2"
+				class="form-control input-sm text-capitalize">
+		</div>
+
+	</div>
+
+
+	<div class="row">
+		<label class="col-md-1 control-label small" for="field_imageLocation">Image
+			Location</label>
+		<div class="col-sm-2">
+			<div class="input-group">
+
+				<span class="input-group-btn">
+					<button type="button" ui-sref="storage-disk.new"
+						data-toggle="modal" class="btn btn-success btn-sm">
+						<span class="glyphicon glyphicon-plus "></span>
+					</button>
+				</span> <select class="form-control input-sm" id="field_imageLocation"
+					name="imageLocation" ng-model="vm.projects.imageLocation"
+					ng-options="storage_Disk as storage_Disk.name for storage_Disk in vm.storage_disks track by storage_Disk.id">
+					<option value=""></option>
+				</select>
+			</div>
+
+		</div>
+
+		<label class="col-md-1 control-label small"
+			for="field_defaultDepartment">Department</label>
+		<div class="col-sm-2">
+			<div class="input-group">
+
+				<span class="input-group-btn">
+					<button type="button" ui-sref="departments.new" id="openBtn"
+						data-toggle="modal" class="btn btn-success btn-sm">
+						<span class="glyphicon glyphicon-plus "></span>
+					</button>
+				</span> <select class="form-control input-sm"
+					ng-options="departments as departments.departmentName for departments in vm.departmentss track by departments.id"
+					id="field_defaultDepartment" name="defaultDepartment"
+					ng-model="vm.projects.defaultDepartment"></select>
+			</div>
+
+		</div>
+	</div>
+
+
+	<div class="row">
+
+		<label class="col-md-1 control-label small" for="field_status">Status</label>
+		<div class="col-sm-2">
+			<div class="input-group">
+
+				<span class="input-group-btn">
+					<button href="#addDepartment" type="button" id="openBtn"
+						data-toggle="modal" class="btn btn-success btn-sm">
+						<span class="glyphicon glyphicon-plus "></span>
+					</button>
+				</span> <select class="form-control input-sm" name="status"
+					id="field_status" ng-model="vm.projects.status"
+					ng-options="lookups as lookups.textValue for lookups in vm.status track by lookups.id"></select>
+			</div>
+		</div>
+		<label class="col-md-1 control-label small" for="field_type">Type</label>
+		<div class="col-sm-2">
+			<div class="input-group">
+
+				<span class="input-group-btn">
+					<button href="#addDepartment" type="button" id="openBtn"
+						data-toggle="modal" class="btn btn-success btn-sm">
+						<span class="glyphicon glyphicon-plus "></span>
+					</button>
+				</span> <select class="form-control input-sm" name="type" id="field_type"
+					ng-model="vm.projects.type"
+					ng-options="lookups as lookups.textValue for lookups in vm.projectType track by lookups.id"></select>
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<div class="row">
+		<label class="col-md-1 control-label small"
+			for="field_actorsWithRights">Actors With Rights</label>
+		<div class="col-sm-2">
+			<input id="field_actorsWithRights" name="actorsWithRights"
+				type="text" ng-model="vm.projects.actorsWithRights"
+				class="form-control input-sm">
+		</div>
+
+		<label class="col-md-1 control-label small" for="field_daysShooting">Days
+			Shooting</label>
+		<div class="col-sm-2">
+			<input id="field_daysShooting" name="daysShooting" type="text"
+				ng-model="vm.projects.daysShooting" class="form-control input-sm">
+		</div>
+
+	</div>
+
+
+	<div class="row">
+		<label class="col-md-1 control-label small" for="field_weeksShooting">Weeks
+			Shooting</label>
+		<div class="col-sm-2">
+			<input id="field_weeksShooting" name="weeksShooting" type="text"
+				placeholder="" ng-model="vm.projects.weeksShooting"
+				class="form-control input-sm">
+		</div>
+
+		<label class="col-md-1 control-label small" for="field_startDate">Start
+			Date</label>
+		<div class="col-sm-2">
+			<input name="startDate" type="date" id="field_startDate"
+				ng-model="vm.projects.startDate" class="form-control input-sm">
+		</div>
+
+		<label class="col-md-1 control-label small" for="field_endDate">End
+			Date</label>
+		<div class="col-sm-2">
+			<input name="endDate" type="date" id="field_endDate" placeholder=""
+				ng-model="vm.projects.endDate" class="form-control input-sm">
+		</div>
+
+
+		<label class="col-md-1 control-label small" for="field_reminderDate">Reminder</label>
+		<div class="col-sm-2">
+			<input name="reminderDate" type="date" id="field_reminderDate"
+				ng-model="vm.projects.reminderDate" class="form-control input-sm">
+		</div>
+	</div>
+
+	<div class="row">
+		<label class="col-md-1 control-label small" for="field_invoiceCreated">Invoice
+			Created</label>
+		<div class="col-sm-2">
+			<select class="form-control input-sm" id="field_invoiceCreated"
+				ng-model="vm.projects.invoiceCreated">
+				<option value="387">Yes</option>
+				<option value="388">No</option>
+				<option value="389">N/A</option>
+			</select>
+		</div>
+
+
+		<label class="col-md-1 control-label small" for="field_price">Price</label>
+		<div class="col-sm-2">
+			<input id="field_price" name="price" type="text" placeholder=""
+				ng-model="vm.projects.price" class="form-control input-sm">
+		</div>
+
+		<label class="col-md-1 control-label small" for="field_foxTitle">WPR#(FOX)</label>
+		<div class="col-sm-2">
+			<input id="field_foxTitle" name="foxTitle" type="text" placeholder=""
+				ng-model="vm.projects.foxTitle" class="form-control input-sm">
+		</div>
+
+	</div>
+	<div class="row">
+		<label class="col-md-1 control-label small" for="field_projectHistory">Project
+			History</label>
+		<div class="col-sm-11">
+			<input id="field_projectHistory" name="projectHistory" type="text"
+				ng-model="vm.projects.notes" class="form-control input-sm">
+		</div>
+	</div>
+	<div class="row">
+		<label class="col-md-1 control-label small" for="file">Project
+			Logo</label>
+		<div class="col-sm-3">
+			<div class="input-group">
+
+
+				<input type="file" id="file" name="file"
+					class="form-control input-sm" /> <span class="input-group-btn">
+					<button type="button" ng-click="addImages()"
+						class="btn btn-success btn-sm">
+						<span class="glyphicon glyphicon-upload "></span>Upload
+					</button>
+				</span>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="row">
+
+		<div class="col-xs-3">
+			<label class="small"> <input type="checkbox"
+				ng-model="vm.projects.unitPhotographerOverride"> &nbspUse
+				Unit Photographer &nbsp
+			</label>
+		</div>
+		<div class="col-xs-2">
+			<label class="small"> <input type="checkbox"
+				ng-model="vm.projects.photoCreditOverride"> &nbspUse Alt.
+				Photographer &nbsp
+			</label>
+		</div>
+		<div ng-show="vm.projects.photoCreditOverride">
+			<label class="col-xs-2 control-label small" for="field_photoCredit">Alt.Photographer</label>
+			<div class="col-xs-2">
+				<input name="photoCredit" id="field_photoCredit" type="text"
+					ng-model="vm.projects.photoCredit" class="form-control input-sm">
+			</div>
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="col-md-2 col-xs-offset-3">
+			<label class="small"> <input type="checkbox"
+				ng-model="vm.projects.shootDateOverride"> &nbspUse Shoot
+				Date &nbsp
+			</label>
+		</div>
+		<div ng-show="vm.projects.shootDateOverride">
+			<label class="col-xs-2 control-label small" for="field_shootDate">Shoot
+				Date</label>
+			<div class="col-xs-2">
+				<input name="shootDate" id="field_shootDate" type="date"
+					ng-model="vm.projects.shootDate" class="form-control input-sm">
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="row">
+
+		<div class="col-md-3">
+			<label class="small"><input type="checkbox"
+				ng-model="vm.projects.loginMessageActive">&nbsp&nbspEnable
+				Reviewer Login Message &nbsp</label>
+		</div>
+		<label class="col-md-2 control-label small" for="field_loginMessage">
+			Reviewer Login Message</label>
+		<div class="col-md-7">
+			<textarea class="form-control input-sm"
+				ng-model="vm.projects.loginMessage" rows="1" id="field_loginMessage"></textarea>
+		</div>
+	</div>
+
+
+	<!--   RUN OF SHOW-->
+
+
+	<hr>
+	<div id="runOfShow" ng-show="vm.projects.runOfShowFlag">
+
+		<h4>
+			Run of Show Purchase Orders &nbsp; &nbsp; <a
+				ng-click="vm.runShowAdd()"><span
+				class=" glyphicon glyphicon-plus-sign small text-primary "></span></a>
+		</h4>
+
+
+		<fieldset data-ng-repeat="item in runShow">
+			<div class="row">
+				<div class="col-lg-2">
+					<div class="input-group">
+
+						</small><span class="input-group-addon input-sm"><small>PO
+								{{$index}}</small></span> <input type="text" class="form-control input-sm"
+							ng-model="vm.projectPurchaseOrderses[$index].po_number">
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<input type="text" class="form-control input-sm"
+						ng-model="vm.projectPurchaseOrderses[$index].po_notes">
+				</div>
+
+				<div class="col-lg-1">
+					<span class="glyphicon glyphicon-trash text-danger small"
+						ng-click="vm.runShowRemove()"></span>
+				</div>
+			</div>
+
+		</fieldset>
+
+	</div>
+	<hr>
+
+
+	<div id="labTasks" ng-show="vm.projects.labFlag">
+		<h4>Project Processing Profile</h4>
+		<div class="row">
+			<label class="col-md-2 control-label small" for="textinput">Deliveries</label>
+			<div class="col-xs-2">
+
+				<input id="field_processingDeliveries" name="textinput" type="text"
+					placeholder="" class="form-control input-sm"
+					ng-model="vm.projects.processingDeliveries">
+
+			</div>
+		</div>
+		<div class="row">
+			<label class="col-md-2 control-label small" for="textinput">Special
+				Instructions</label>
+			<div class="col-xs-2">
+
+				<input id="field_processingSpecialInstructions" name="textinput"
+					type="text" class="form-control input-sm"
+					ng-model="vm.projects.processingSpecialInstructions">
+
+			</div>
+		</div>
+		<div class="row">
+			<label class="col-md-2 control-label small" for="textinput">Watermark</label>
+			<div class="col-xs-2">
+
+				<input id="field_processingWatermark" name="textinput" type="text"
+					class="form-control input-sm"
+					ng-model="vm.projects.processingWatermark">
+
+			</div>
+		</div>
+		<div class="row">
+			<label class="col-md-2 control-label small" for="textinput">Copyright</label>
+			<div class="col-xs-2">
+
+				<input id="field_processingCopyright" name="textinput" type="text"
+					class="form-control input-sm"
+					ng-model="vm.projects.processingCopyright">
+
+			</div>
+		</div>
+		<div class="row">
+			<label class="col-md-2 control-label small" for="textinput">Original
+				File Type</label>
+			<div class="col-xs-2">
+				<select class="form-control input-sm" name="type"
+					ng-model="vm.projects.fileType"
+					ng-options="lookups as lookups.textValue for lookups in vm.fileType track by lookups.id"></select>
+			</div>
+		</div>
+
+
+		<h4>
+			Lab Tasks &nbsp; &nbsp; <a href="" ng-click="vm.addlab()"><span
+				class=" glyphicon glyphicon-plus-sign small text-primary "></span></a>
+		</h4>
+		<div id="labs">
+
+			<div class="row">
+				<div class="col-lg-9">
+					<fieldset data-ng-repeat="item in related">
+						<div class="row">
+
+							<div class="col-lg-7">
+								<div class="input-group">
+
+									<span class="input-group-addon input-sm" id="sizing-addon2">{{$index}}</span>
+
+									<select class="form-control input-sm" id="field_task_name"
+										name="task_name"
+										ng-model="vm.projectLabTaskses[$index].task_name"
+										ng-options="lookups as lookups.textValue for lookups in vm.labTask track by lookups.id">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-1">
+								<a href="" ng-click="vm.removelab($index)"><span
+									class=" glyphicon glyphicon-trash text-danger"></span></a>
+							</div>
+
+
+						</div>
+					</fieldset>
+
+				</div>
+				<div class="col-lg-3">
+					<div class="row">
+						<input type="text" class="form-control input-sm"
+							ng-model="vm.projects.labProofNotes">
+						<h6>Proof/5x7 Notes</h6>
+					</div>
+					<div class="row">
+						<input type="text" class="form-control input-sm"
+							ng-model="vm.projects.labLastProofImageNumber">
+						<h6>Last Proof Image Number</h6>
+					</div>
+					<div class="row">
+						<input type="text" placeholder="" class="form-control input-sm"
+							ng-model="vm.projects.labLastProofPageNumber">
+						<h6>Last Proof Page Number</h6>
+					</div>
+					<div class="row">
+						<input type="text" class="form-control input-sm"
+							ng-model="vm.projects.labImageNumberSchema">
+						<h6>Image Number Schema</h6>
+					</div>
+					<div class="row">
+						<input type="text" class="form-control input-sm"
+							ng-model="vm.projects.labFolderBatchSchema">
+						<h6>Folder/Batch Schema</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<hr>
+
+
+	<h4>Project Information</h4>
+
+	<div class="row">
+		<label class="col-md-1 control-label text-danger small"
+			for="field_vm.projects.mainContact">Main Contact</label>
+		<div class="col-md-2">
+			<div class="input-group">
+
+				<span class="input-group-btn">
+
+					<button type="button" id=""
+						ng-click="vm.openModal('field_vm.projects.mainContact')"
+						class="btn btn-primary btn-sm">
+						<span class="glyphicon glyphicon-list-alt"></span>
+					</button>
+				</span> <input id="field_vm.projects.mainContact" type="text"
+					class="form-control input-sm"
+					ng-model="vm.projectRoles[0].contact.fullName" readonly>
+			</div>
+
+		</div>
+		<label class="col-md-1 control-label small">Title</label>
+		<div class="col-xs-2">
+
+			<input name="text" type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[0].contact.title" readonly>
+
+		</div>
+	</div>
+	<div class="row">
+		<label class="col-xs-1 control-label small"> Office <span
+			class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+		</label>
+		<div class="col-xs-2">
+
+			<input name="text" type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[0].contact.phoneOffice" readonly>
+
+		</div>
+		<label class="col-xs-1 control-label small"> Mobile</span>
+		</label>
+		<div class="col-xs-2">
+
+			<input name="text" type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[0].contact.phoneMobile" readonly>
+
+		</div>
+	</div>
+	<div class="row">
+		<label class="col-md-1 control-label small">Email</label>
+		<div class="col-xs-2">
+
+			<input name="text" type="text" placeholder=""
+				class="form-control input-sm"
+				ng-model="vm.projectRoles[0].contact.email" readonly>
+
+		</div>
+	</div>
+	<div class="row">
+
+		<label class="col-md-1 control-label small">Notes</label>
+		<div class="col-xs-7">
+			<textarea class="form-control input-sm" rows="1"
+				ng-model="vm.projectRoles[0].contact.notes"></textarea>
+
+		</div>
+
+	</div>
+	<br>
+
+
+	<div class="row">
+		<label class="col-md-1 control-label text-danger small"
+			for="field_vm.projects.unitPublicist">Unit Publicist</label>
+		<div class="col-md-2">
+			<div class="input-group">
+
+				<span class="input-group-btn">
+
+					<button type="button"
+						ng-click="vm.openModal('field_vm.projects.unitPublicist')"
+						class="btn btn-primary btn-sm">
+						<span class="glyphicon glyphicon-list-alt"></span>
+					</button>
+				</span> <input id="field_vm.projects.unitPublicist" type="text"
+					class="form-control input-sm"
+					ng-model="vm.projectRoles[1].contact.fullName" readonly>
+			</div>
+
+		</div>
+		<label class="col-md-1 control-label small">Title</label>
+		<div class="col-xs-2">
+
+			<input name="text" type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[1].contact.title" readonly>
+
+		</div>
+	</div>
+	<div class="row">
+		<label class="col-xs-1 control-label small"> Office <span
+			class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+		</label>
+		<div class="col-xs-2">
+
+			<input name="text" type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[1].contact.phoneOffice" readonly>
+
+		</div>
+		<label class="col-xs-1 control-label small"> Mobile</span>
+		</label>
+		<div class="col-xs-2">
+
+			<input name="text" type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[1].contact.phoneMobile" readonly>
+
+		</div>
+	</div>
+	<div class="row">
+		<label class="col-md-1 control-label small">Email</label>
+		<div class="col-xs-2">
+
+			<input name="text" type="text" placeholder=""
+				class="form-control input-sm"
+				ng-model="vm.projectRoles[1].contact.email" readonly>
+
+		</div>
+	</div>
+	<div class="row">
+
+		<label class="col-md-1 control-label small">Notes</label>
+		<div class="col-xs-7">
+			<textarea class="form-control input-sm" rows="1"
+				ng-model="vm.projectRoles[1].contact.notes"></textarea>
+
+		</div>
+
+	</div>
+	<br>
+
+
+	<div class="row">
+		<label class="col-md-1 control-label text-danger small"
+			for="field_vm.projects.unitPhotographer">Unit Photographer</label>
+		<div class="col-md-2">
+			<div class="input-group">
+
+				<span class="input-group-btn">
+
+					<button type="button"
+						ng-click="vm.openModal('field_vm.projects.unitPhotographer')"
+						class="btn btn-primary btn-sm">
+						<span class="glyphicon glyphicon-list-alt"></span>
+					</button>
+				</span> <input id="field_vm.projects.unitPhotographer" type="text"
+					class="form-control input-sm"
+					ng-model="vm.projectRoles[2].contact.fullName" readonly>
+			</div>
+
+		</div>
+		<label class="col-md-1 control-label small">Title</label>
+		<div class="col-xs-2">
+
+			<input name="text" type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[2].contact.title" readonly>
+
+		</div>
+	</div>
+	<div class="row">
+		<label class="col-xs-1 control-label small"> Office <span
+			class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+		</label>
+		<div class="col-xs-2">
+
+			<input name="text" type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[2].contact.phoneOffice" readonly>
+
+		</div>
+		<label class="col-xs-1 control-label small"> Mobile</span>
+		</label>
+		<div class="col-xs-2">
+
+			<input name="text" type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[2].contact.phoneMobile" readonly>
+
+		</div>
+	</div>
+	<div class="row">
+		<label class="col-md-1 control-label small">Email</label>
+		<div class="col-xs-2">
+
+			<input name="text" type="text" placeholder=""
+				class="form-control input-sm"
+				ng-model="vm.projectRoles[2].contact.email" readonly>
+
+		</div>
+	</div>
+	<div class="row">
+
+		<label class="col-md-1 control-label small">Notes</label>
+		<div class="col-xs-7">
+			<textarea class="form-control input-sm" rows="1"
+				ng-model="vm.projectRoles[2].contact.notes"></textarea>
+
+		</div>
+
+	</div>
+	<br>
+
+
+	<div class="row">
+		<label class="col-md-1 control-label text-danger small"
+			for="field_vm.projects.labInfo">Lab Information</label>
+		<div class="col-md-2">
+			<div class="input-group">
+
+				<span class="input-group-btn">
+
+					<button type="button"
+						ng-click="vm.openModal('field_vm.projects.labInfo')"
+						class="btn btn-primary btn-sm">
+						<span class="glyphicon glyphicon-list-alt"></span>
+					</button>
+				</span> <input id="field_vm.projects.labInfo" type="text"
+					class="form-control input-sm"
+					ng-model="vm.projectRoles[3].contact.fullName" readonly>
+			</div>
+
+		</div>
+	</div>
+	<div class="row">
+		<label class="col-xs-1 control-label small"> Office <span
+			class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+		</label>
+		<div class="col-xs-2">
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[3].contact.phoneOffice" readonly>
+
+		</div>
+		<label class="col-md-1 control-label small">Email</label>
+		<div class="col-xs-2">
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[3].contact.email" readonly>
+
+		</div>
+	</div>
+	<div class="row">
+		<label class="col-xs-1 control-label small">Address </label>
+		<div class="col-xs-2">
+
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[3].contact.streetAddress" readonly>
+
+		</div>
+		<label class="col-xs-1 control-label small">City </label>
+		<div class="col-xs-2">
+
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[3].contact.city" readonly />
+
+		</div>
+		<label class="col-xs-1 control-label small">State </label>
+		<div class="col-xs-1">
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[3].contact.state" readonly />
+		</div>
+		<label class="col-xs-1 control-label small">Zip Code </label>
+		<div class="col-xs-1">
+
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[3].contact.zipcode" readonly />
+		</div>
+		<label class="col-xs-1 control-label small">Country </label>
+		<div class="col-xs-1">
+
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projectRoles[3].contact.country" readonly />
+
+		</div>
+	</div>
+	<div class="row">
+
+		<label class="col-md-1 control-label small" for="textinput">Contact
+			Notes</label>
+		<div class="col-xs-7">
+			<textarea class="form-control input-sm" rows="1"
+				ng-model="vm.projectRoles[3].contact.notes" readonly></textarea>
+
+		</div>
+
+	</div>
+	<br>
+	<div class="row">
+
+		<label class="col-md-1 control-label small" for="textinput">Notes</label>
+		<div class="col-xs-7">
+			<textarea class="form-control input-sm" rows="1"
+				ng-model="vm.projectRoles[3].notes"></textarea>
+
+		</div>
+
+	</div>
+
+	<hr>
+	<div class="row">
+
+		<label class="col-md-1 control-label small" for="textinput">Director</label>
+		<div class="col-xs-2">
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projects.legacyDirector">
+
+		</div>
+
+	</div>
+
+	<div class="row">
+
+		<label class="col-md-1 control-label small" for="textinput">Executive
+			Producer</label>
+		<div class="col-xs-2">
+			<input type="text" placeholder="" class="form-control input-sm"
+				ng-model="vm.projects.legacyExecutiveProducer">
+
+		</div>
+		<label class="col-md-1 control-label small" for="textinput">Executive
+			Producer</label>
+		<div class="col-xs-2">
+			<input type="text" placeholder="" class="form-control input-sm"
+				ng-model="vm.projects.legacyExecutiveProducer2">
+
+		</div>
+
+	</div>
+	<div class="row">
+
+		<label class="col-md-1 control-label small" for="textinput">Executive
+			Producer</label>
+		<div class="col-xs-2">
+			<input type="text" placeholder="" class="form-control input-sm"
+				ng-model="vm.projects.legacyExecutiveProducer3">
+
+		</div>
+		<label class="col-md-1 control-label small" for="textinput">Executive
+			Producer</label>
+		<div class="col-xs-2">
+			<input type="text" placeholder="" class="form-control input-sm"
+				ng-model="vm.projects.legacyExecutiveProducer4">
+
+		</div>
+
+	</div>
+
+	<div class="row">
+
+		<label class="col-md-1 control-label small" for="textinput">Producer</label>
+		<div class="col-xs-2">
+			<input name="legacyProducer" id="field_legacyProducer"
+				ng-model="vm.projects.legacyProducer" type="text" placeholder=""
+				class="form-control input-sm">
+
+		</div>
+		<label class="col-md-1 control-label small" for="textinput">Producer</label>
+		<div class="col-xs-2">
+			<input name="legacyProducer2" id="field_legacyProducer2"
+				ng-model="vm.projects.legacyProducer2" type="text" placeholder=""
+				class="form-control input-sm">
+
+		</div>
+
+	</div>
+
+	<div class="row">
+
+		<label class="col-md-1 control-label small" for="textinput">Producer</label>
+		<div class="col-xs-2">
+			<input name="legacyProducer3" id="field_legacyProducer3"
+				ng-model="vm.projects.legacyProducer3" type="text" placeholder=""
+				class="form-control input-sm">
+
+		</div>
+		<label class="col-md-1 control-label small" for="textinput">Producer</label>
+		<div class="col-xs-2">
+			<input name="legacyProducer4" id="field_legacyProducer4"
+				ng-model="vm.projects.legacyProducer4" type="text" placeholder=""
+				class="form-control input-sm">
+
+		</div>
+
+	</div>
+	<div class="row">
+
+		<label class="col-md-1 control-label small" for="textinput">Notes</label>
+		<div class="col-xs-7">
+			<textarea class="form-control input-sm" rows="1" id="textinput"
+				ng-model="vm.projects.legacyNameNotes"></textarea>
+
+
+		</div>
+	</div>
+	<hr>
+
+
+	<h4>Production Company Information</h4>
+
+	<div class="row">
+		<label class="col-md-1 control-label text-danger small"
+			for="field_vm.projects.productCompany">Name</label>
+		<div class="col-md-2">
+			<div class="input-group">
+
+				<span class="input-group-btn">
+					<button type="button"
+						ng-click="vm.openModal('field_vm.projects.productCompany')"
+						class="btn btn-primary btn-sm">
+						<span class="glyphicon glyphicon-list-alt"></span>
+					</button>
+				</span> <input id="field_vm.projects.productCompany" type="text"
+					class="form-control input-sm"
+					ng-model="vm.projects.productionCompanyContact.fullName" readonly>
+			</div>
+
+		</div>
+	</div>
+	<div class="row">
+		<label class="col-xs-1 control-label small"> Main <span
+			class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+		</label>
+		<div class="col-xs-2">
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projects.productionCompanyContact.phoneOffice" readonly>
+
+		</div>
+		<label class="col-md-1 control-label small">Alt</label>
+		<div class="col-xs-2">
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projects.productionCompanyContact.phoneAlternate"
+				readonly>
+
+		</div>
+		<label class="col-md-1 control-label small">Fax</label>
+		<div class="col-xs-2">
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projects.productionCompanyContact.phoneFax" readonly>
+
+		</div>
+	</div>
+	<div class="row">
+		<label class="col-xs-1 control-label small">Address </label>
+		<div class="col-xs-2">
+
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projects.productionCompanyContact.streetAddress"
+				readonly />
+
+		</div>
+		<label class="col-xs-1 control-label small">City </label>
+		<div class="col-xs-2">
+
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projects.productionCompanyContact.city" readonly />
+
+		</div>
+		<label class="col-xs-1 control-label small">State </label>
+		<div class="col-xs-1">
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projects.productionCompanyContact.state" readonly />
+		</div>
+		<label class="col-xs-1 control-label small">Zip Code </label>
+		<div class="col-xs-1">
+
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projects.productionCompanyContact.zipcode" readonly />
+		</div>
+		<label class="col-xs-1 control-label small">Country </label>
+		<div class="col-xs-1">
+
+
+			<input type="text" class="form-control input-sm"
+				ng-model="vm.projects.productionCompanyContact.country" readonly />
+
+		</div>
+	</div>
+	<div class="row">
+
+		<label class="col-md-1 control-label small">Notes</label>
+		<div class="col-xs-7">
+			<textarea class="form-control input-sm" rows="1"
+				ng-model="vm.projects.productionCompanyContact.notes"></textarea>
+
+		</div>
+
+	</div>
+	<br>
+	<div class="row">
+
+		<label class="col-md-1 control-label small">FEDEX</label>
+		<div class="col-xs-7">
+			<input type="text" class="form-control input-sm" />
+
+		</div>
+
+	</div>
+
+	<hr>
+
+	<br>
+
+
+	<h4>Name/ID/Password</h4>
+
+
+	<h5>
+		TALENTS <a href="" ng-click="vm.addTalent()"><span
+			class=" glyphicon glyphicon-plus-sign text-danger small"></span></a>
+	</h5>
+
+	<table class="jh-table table table-striped">
+		<tr>
+			<th></th>
+			<th class="small">Username</th>
+			<th class="small">Password</th>
+			<th class="small col-xs-1">Solo</th>
+			<th class="small col-xs-1">Group</th>
+			<th class="small col-xs-1">Group +</th>
+			<th class="small">Character Name</th>
+			<th class="small">Disabled</th>
+			<th></th>
+		</tr>
+		<tr data-ng-repeat="choice in talents">
+
+			<td class="col-xs-1">
+
+				<div class="input-group">
+
+					<span class="input-group-btn input-xs">
+						<button type="button"
+							ng-click="vm.openModal('field_vm.projects.talents')"
+							class="btn btn-primary btn-xs">
+							<span class="glyphicon glyphicon-list-alt btn-xs"></span>
+						</button>
+					</span> <input type="text" id="field_vm.projects.talents" class="input-xs"
+						ng-model="vm.talents[$index].contact.fullName" />
+				</div>
+
+			</td>
+
+			<td><input class="input-xs" type="text"
+				ng-model="vm.talents[$index].contact.username"></td>
+			<td><input class="input-xs" type="text"
+				ng-model="vm.talents[$index].contact.password" /></td>
+
+
+			<td class="col-xs-1"><input class="input-xs" style="width: 50px"
+				id="field_vm.projectRoles.soloKillPct" type="text"
+				ng-model="vm.talents[$index].soloKillPct"></td>
+
+			<td><input class="input-xs"
+				id="field_vm.projectRoles[$index].groupKillPct" style="width: 50px"
+				type="text" ng-model="vm.talents[$index].groupKillPct"></td>
+			<td><input class=" input-xs" id="field_groupPlus"
+				style="width: 50px" type="text"></td>
+
+			<td><input class="input-xs"
+				id="field_vm.projectRoles[$index].characterName" type="text"
+				ng-model="vm.talents[$index].characterName"></td>
+
+			<td><input class="input-xs" type="checkbox"
+				ng-model="vm.talents[$index].disabled"></td>
+
+			<td><a href="" ng-click="vm.removeTalent($index)"><span
+					class=" glyphicon glyphicon-trash small text-danger"></span></a></td>
+		</tr>
+	</table>
+
+
+	<hr>
+
+
+	<h5>
+		EXECS <a href="" ng-click="vm.addExec()"><span
+			class=" glyphicon glyphicon-plus-sign text-danger small"></span></a>
+	</h5>
+
+
+	<table class="table table-hover">
+		<tr>
+			<th class="small"><a href
+				ng-click="vm.openMultipleExecs('multipleExecs')">Add Multiple
+					Execs</a></th>
+			<th class="small">Username</th>
+			<th class="small">Password</th>
+			<th class="small">Download</th>
+			<th class="small">Print</th>
+			<th class="small">Caption</th>
+			<th class="small">Email</th>
+			<th class="small">Talent-MGMT</th>
+			<th class="small">SO-MGMT</th>
+			<th class="small">PP</th>
+			<th class="small">Rel/Ex</th>
+			<th class="small">Ven</th>
+			<th class="small">L/A</th>
+			<th class="small">Sens</th>
+			<th class="small">Exclusives</th>
+			<th class="small">Sees UnPub</th>
+			<th class="small">Vid</th>
+			<th class="small">Disabled</th>
+			<th class="small"></th>
+		</tr>
+		<tr data-ng-repeat="choice in execs" >
+			<td class="col-xs-1">
+
+				<div class="input-group">
+
+					<span class="input-group-btn input-xs">
+						<button type="button"
+							ng-click="vm.openModal('field_vm.projects.execs')"
+							class="btn btn-primary btn-xs">
+							<span class="glyphicon glyphicon-list-alt btn-xs"></span>
+						</button>
+					</span> <input type="text" id="field_vm.projects.execs" class="input-xs"
+						ng-model="vm.execss[$index].contact.fullName" />
+				</div>
+
+			</td>
+			<td><input type="text"
+				ng-model="vm.execss[$index].contact.username" /></td>
+			<td><input type="text"
+				ng-model="vm.execss[$index].contact.password" /></td>
+			<td><select ng-model="vm.execss[$index].downloadType">
+					<option value="0">NONE</option>
+					<option value="1">ALL</option>
+					<option value="2">Locked Approved</option>
+			</select></td>
+			<td><input type="checkbox" ng-model="vm.execss[$index].print" /></td>
+			<td><input type="checkbox" ng-model="vm.execss[$index].captioning" /></td>
+			<td><input type="checkbox" ng-model="vm.execss[$index].email" /></td>
+			<td><input type="checkbox" ng-model="vm.execss[$index].talentManagement" /></td>
+			<td><input type="checkbox" ng-model="vm.execss[$index].signoffManagement" /></td>
+			<td><input type="checkbox" ng-model="vm.execss[$index].priorityPix"/></td>
+			<td><input type="checkbox" ng-model="vm.execss[$index].releaseExclude" /></td>
+			<td><input type="checkbox" ng-model="vm.execss[$index].vendor" /></td>
+			<td><input type="checkbox" ng-model="vm.execss[$index].lockApproveRestriction" /></td>
+			<td><input type="checkbox" ng-model="vm.execss[$index].viewSensitive" /></td>
+			<td><select ng-model="vm.execss[$index].exclusives">
+					<option value="0">NONE</option>
+					<option value="1">BASIC</option>
+					<option value="2">MASTER</option>
+			</select></td>
+
+			<td><input type="checkbox" ng-model="vm.execss[$index].seesUntagged" /></td>
+			<td><input type="checkbox" ng-model="vm.execss[$index].hasVideo" /></td>
+			<td><input type="checkbox" ng-model="vm.execss[$index].disabled" /></td>
+
+			<td><a href="" ng-click="vm.removeExec($index)"><span
+					class=" glyphicon glyphicon-trash text-danger"></span></a></td>
+		</tr>
+
+	</table>
+	<hr>
+
+	EXPANDED TALENT INFORMATION
+	<fieldset data-ng-repeat="choice in talents">
+
+		<div class="row">
+			<label class="col-md-1 control-label small">Talent {{$index}}</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm" readonly
+					ng-model="vm.talents[$index].contact.fullName">
+			</div>
+			<label class="col-md-1 control-label small">Character</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm" readonly>
+			</div>
+			<label class="col-md-1 control-label small">StartDate</label>
+			<div class="col-sm-2">
+				<input type="date" class="form-control input-sm">
+			</div>
+			<label class="col-md-1 control-label small">Days</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm">
+			</div>
+		</div>
+
+		<!--         display related contact info here if isPrimary or display contacts own info -->
+
+		<!-- 		<div class="row">
+			<label class="col-md-1 control-label small">Contact</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm"
+					ng-model="vm.talents[$index].contact.companyContact.fullName"
+					readonly>
+			</div>
+			<label class="col-md-1 control-label small">Type</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm"
+					ng-model="vm.talents[$index].contact.type.textValue" readonly>
+			</div>
+			<label class="col-md-1 control-label small">Company</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm" readonly>
+			</div>
+
+		</div>
+		<div class="row">
+			<label class="col-md-1 control-label small">Phone</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm"
+					ng-model="vm.talents[$index].contact.phoneCompany" readonly>
+			</div>
+			<label class="col-md-1 control-label small">Email</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm"
+					ng-model="vm.talents[$index].contact.email" readonly>
+			</div>
+			<label class="col-md-1 control-label small">Mobile</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm"
+					ng-model="vm.talents[$index].contact.phoneMobile" readonly>
+			</div>
+
+		</div>
+		<div class="row">
+			<label class="col-md-1 control-label small">Asst/Notes</label>
+			<div class="col-sm-11">
+				<input type="text" class="form-control input-xs"
+					ng-model="vm.talents[$index].contact.notes" readonly>
+			</div>
+		</div>
+		<div class="row">
+			<label class="col-md-1 control-label small">Notes</label>
+			<div class="col-sm-11">
+				<input type="text" class="form-control input-sm">
+			</div>
+		</div> -->
+
+
+
+
+		<div class="row">
+			<label class="col-md-1 control-label small">Contact</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm"
+					ng-model="vm.relatedContact[$index].fullName"
+					readonly>
+			</div>
+			<label class="col-md-1 control-label small">Type</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm"
+					ng-model="vm.relatedContact[$index].type.textValue" readonly>
+			</div>
+			<label class="col-md-1 control-label small">Company</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm" ng-model="vm.relatedContact[$index].companyContact.fullName" readonly>
+			</div>
+
+		</div>
+		<div class="row">
+			<label class="col-md-1 control-label small">Phone</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm"
+					ng-model="vm.relatedContact[$index].phoneCompany" readonly>
+			</div>
+			<label class="col-md-1 control-label small">Email</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm"
+					ng-model="vm.relatedContact[$index].email" readonly>
+			</div>
+			<label class="col-md-1 control-label small">Mobile</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control input-sm"
+					ng-model="vm.relatedContact[$index].phoneMobile" readonly>
+			</div>
+
+		</div>
+		<div class="row">
+			<label class="col-md-1 control-label small">Asst/Notes</label>
+			<div class="col-sm-11">
+				<input type="text" class="form-control input-sm"
+					ng-model="vm.relatedContact[$index].notes" readonly>
+			</div>
+		</div>
+		<div class="row">
+			<label class="col-md-1 control-label small">Notes</label>
+			<div class="col-sm-11">
+				<input type="text" class="form-control input-sm">
+			</div>
+		</div>
+
+
+
+		<br>
+	</fieldset>
+	<hr>
+	<h4>Parent Company Information</h4>
+	<div class="row">
+		<label class="col-md-1 control-label text-danger small"
+			for="field_vm.projects.parentInfo">Name</label>
+		<div class="col-md-3">
+			<div class="input-group">
+
+				<span class="input-group-btn">
+
+					<button type="button"
+						ng-click="vm.openModal('field_vm.projects.parentInfo')"
+						class="btn btn-primary btn-sm">
+						<span class="glyphicon glyphicon-list-alt"></span>
+					</button>
+				</span> <input type="text" id="field_vm.projects.parentInfo"
+					class="form-control input-sm"
+					ng-model="vm.projects.parentCompanyContact.fullName">
+			</div>
+		</div>
+	</div>
+	<br>
 </form>

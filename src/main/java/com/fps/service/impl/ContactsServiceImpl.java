@@ -113,6 +113,7 @@ public class ContactsServiceImpl implements ContactsService {
     public Page<Contacts> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Contacts for query {}", query);
         return contactsSearchRepository.search(queryStringQuery(query), pageable);
+        //return contactsSearchRepository.findByFullNameContaining(queryStringQuery(query), pageable);
     }
 
     /**

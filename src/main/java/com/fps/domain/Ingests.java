@@ -88,6 +88,10 @@ public class Ingests implements Serializable {
     private Integer priority;
 
 
+    @Column(name = "error_code")
+    private Integer errorCode;
+
+
     public Long getId() {
         return id;
     }
@@ -241,6 +245,14 @@ public class Ingests implements Serializable {
         this.priority = priority;
     }
 
+    public Integer getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(Integer errorCode) {
+        this.errorCode = errorCode;
+    }
+
     public Ingests() {
     }
 
@@ -265,7 +277,7 @@ public class Ingests implements Serializable {
         return Objects.hashCode(id);
     }
 
-    public Ingests(Long project_id, ZonedDateTime ingestStartTime, ZonedDateTime ingestCompletedTime, Integer totalImages, Double totalDone, String alfrescoTitle1, String alfrescoTitle2, Boolean watermark, String wmFile, Integer action, String ingestProcessor, String sourceServer, String sourcePath, String destinationServer, String status, User adminOwner, String pid, Integer priority) {
+    public Ingests(Long project_id, ZonedDateTime ingestStartTime, ZonedDateTime ingestCompletedTime, Integer totalImages, Double totalDone, String alfrescoTitle1, String alfrescoTitle2, Boolean watermark, String wmFile, Integer action, String ingestProcessor, String sourceServer, String sourcePath, String destinationServer, String status, User adminOwner, String pid, Integer priority, Integer error_code) {
         this.project_id = project_id;
         this.ingestStartTime = ingestStartTime;
         this.ingestCompletedTime = ingestCompletedTime;
@@ -284,8 +296,19 @@ public class Ingests implements Serializable {
         this.adminOwner = adminOwner;
         this.pid = pid;
         this.priority = priority;
+        this.errorCode = error_code;
     }
 
+	@Override
+	public String toString() {
+		return "Ingests [id=" + id + ", project_id=" + project_id + ", ingestStartTime=" + ingestStartTime
+				+ ", ingestCompletedTime=" + ingestCompletedTime + ", totalImages=" + totalImages + ", totalDone="
+				+ totalDone + ", alfrescoTitle1=" + alfrescoTitle1 + ", alfrescoTitle2=" + alfrescoTitle2
+				+ ", watermark=" + watermark + ", wmFile=" + wmFile + ", action=" + action + ", ingestProcessor="
+				+ ingestProcessor + ", sourceServer=" + sourceServer + ", sourcePath=" + sourcePath
+				+ ", destinationServer=" + destinationServer + ", status=" + status + ", adminOwner=" + adminOwner
+				+ ", pid=" + pid + ", priority=" + priority + ", errorCode=" + errorCode + "]";
+	}
 
 
 }

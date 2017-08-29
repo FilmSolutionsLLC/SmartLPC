@@ -384,5 +384,32 @@ public class ProjectsResource {
         projectsService.insertAlbum(album);
 
     }
+    
+    @RequestMapping(value = "/project/delete",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+        @Timed
+    public Integer deleteProjectPassword(@RequestBody String password){
+    	if(password.equals("13qe!#QE")){
+    		return 1;
+    	}else{
+    		return 0;
+    	}
+    }
+    
+    @RequestMapping(value = "/rename",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+        @Timed
+        public void renameProject(@RequestParam Long id, @RequestParam String alfrescoTitle1,@RequestParam String alfrescoTitle2 ) {
 
+
+            log.info("Rename with ID : " + id);
+           
+            projectsService.rename(id, alfrescoTitle1, alfrescoTitle2);
+
+        }
+    
+    
+    
 }

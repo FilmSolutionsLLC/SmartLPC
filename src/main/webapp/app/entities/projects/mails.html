@@ -1,0 +1,78 @@
+<div class="modal-header">
+	<button type="button" class="close danger" data-dismiss="modal"
+		aria-hidden="true" ng-click="vm.close()">&times;</button>
+	<div ng-show="vm.keyCount < 50">
+		<h4 class="modal-title" id="myContactsLabel">Talents</h4>
+	</div>
+	<div ng-show="vm.keyCount > 50">
+		<h4 class="modal-title" id="myContactsLabel">Execs</h4>
+	</div>
+</div>
+<div class="modal-body">
+	<div class="container-fluid">
+		<div class="row">
+
+
+			<div class="col-xs-12 no-padding-right">
+				<h4>
+					<strong>Mail Box</strong>
+				</h4>
+
+				<table class="jhi-table table table-striped">
+					<tr>
+						<td class="small">TO</td>
+						<td class="small">
+
+							<div ng-show="vm.individual">
+
+								<input type="text" class="form-control input-sm"
+									ng-model="vm.tempTO" readonly>
+
+							</div>
+
+
+							<div ng-show="!vm.individual">
+
+								<div ng-show="vm.keyCount < 50">
+									<ui-select multiple ng-model="vm.mailerList" theme="bootstrap"
+										ng-disabled="ctrl.disabled" close-on-select="false"
+										style="width: 750px;" title="Choose a color"> <ui-select-match
+										placeholder="Select talents...">{{$item.contact.fullName}}</ui-select-match>
+									<ui-select-choices
+										repeat="tags in vm.talent |  filter: { relationship_type: 'PKO_Tag'} | filter:$select.search">{{tags.contact.fullName}}</ui-select-choices>
+									</ui-select>
+								</div>
+								<div ng-show="vm.keyCount > 50">
+									<ui-select multiple ng-model="vm.mailerList" theme="bootstrap"
+										ng-disabled="ctrl.disabled" close-on-select="false"
+										style="width: 750px;" title="Choose a color"> <ui-select-match
+										placeholder="Select execs...">{{$item.contact.fullName}}</ui-select-match>
+									<ui-select-choices
+										repeat="tags in vm.talent | filter:$select.search">{{tags.contact.fullName}}</ui-select-choices>
+									</ui-select>
+								</div>
+							</div>
+						</td>
+
+					</tr>
+
+					<tr>
+						<td class="small">SUBJECT</td>
+						<td class="small"><input type="text"
+							class="form-control input-sm" ng-model="vm.mailer.subject"></td>
+					</tr>
+					<tr>
+						<td class="small">BODY</td>
+						<td class="small"><textarea class="form-control input-sm"
+								rows="14" ng-model="vm.mailer.body"> </textarea></td>
+					</tr>
+
+
+				</table>
+				<h5>{{vm.currentAccount.fullName}}</h5>
+				<button type="button" class="btn btn-danger btn-xs pull-right"
+					ng-click="vm.save()">Send</button>
+			</div>
+		</div>
+	</div>
+</div>

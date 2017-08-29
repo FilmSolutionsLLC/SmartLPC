@@ -83,4 +83,7 @@ public interface ProjectsService {
     void updateAlbum(TalentInfoDTO talentInfoDTO);
 
     void insertAlbum(TalentInfoDTO talentInfoDTO);
+    
+    void rename(Long id,String alfrescoTitle1,String alfrescoTitle2);
+    
 }

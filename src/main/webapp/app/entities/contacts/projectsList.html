@@ -56,7 +56,7 @@
                         <td class="small"><input type="checkbox" ng-model="vm.lockApproveRestriction"
                                                  ng-init="vm.lockApproveRestriction=false"></td>
                         <td class="extra-small">Download Privilege :</td>
-                        <td class="small"><select ng-model="vm.downloadType = 0">
+                        <td class="small"><select ng-model="vm.downloadType"  ng-init="vm.downloadType = 0">
                             <option value="0" selected>NONE</option>
                             <option value="1">ALL</option>
                             <option value="2">Locked Approved</option>

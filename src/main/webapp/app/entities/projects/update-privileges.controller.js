@@ -7,11 +7,10 @@
     angular
         .module('smartLpcApp')
         .controller('UpdatePrivilegesController', UpdatePrivilegesController);
-    UpdatePrivilegesController.$inject = ['id', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModalInstance', '$scope', '$state', 'Projects'];
+    UpdatePrivilegesController.$inject = ['id', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModal', '$scope', '$state', 'Projects','$uibModalInstance'];
 
-    function UpdatePrivilegesController(id, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModalInstance, $scope, $state, Projects) {
-
-
+    function UpdatePrivilegesController(id, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModal, $scope, $state, Projects,$uibModalInstance) {
+    	
         var vm = this;
 
         $http({
@@ -65,8 +64,8 @@
 
             var modalInstance = $uibModal.open({
 
-                templateUrl: 'app/entities/projects/update-albums.html',
-                controller: 'UpdateAlbumsController',
+            	templateUrl: 'app/entities/contacts/project-permission.html',
+                controller: 'ProjectPermission',
                 size: 'md',
                 scope: $scope,
                 controllerAs: 'vm',
@@ -74,9 +73,7 @@
                     id: function () {
                         return id;
                     },
-                    projectID: function () {
-                        return vm.projectsDTO.projects.id;
-                    },
+                 
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('contacts');
                         $translatePartialLoader.addPart('projects');

@@ -1,168 +1,223 @@
 <div class="modal-header">
-    <button type="button" class="close danger" data-dismiss="modal" aria-hidden="true"
-            ng-click="vm.close()">&times;</button>
+	<button type="button" class="close danger" data-dismiss="modal"
+		aria-hidden="true" ng-click="vm.close()">&times;</button>
 
-    <div class="btn-toolbar btn-toolbar-xs" role="toolbar">
+	<div class="btn-toolbar btn-toolbar-xs" role="toolbar">
 
-        <button type="button" class="btn btn-success btn-xs">
-            Add Record
-        </button>
-    </div>
+		<button type="button" class="btn btn-success btn-xs">Update</button>
+		<button type="button" class="btn btn-danger btn-xs">Close</button>
+	</div>
 </div>
 <div class="modal-body">
-    <div class="col-md-6">
-        <fieldset>
-            <legend><h5><strong>Permission(s)</strong></h5></legend>
-            <table class="table table-borderless">
-                <tr>
-                    <td class="extra-small">User Can be Exec:</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.exec" ng-init="vm.exec=false"></td>
-                    <td class="extra-small">Internal Film Solutions User :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.internal" ng-init="vm.internal=false">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="extra-small">Image Captioning Allowed :</td>
-                    <td><input type="checkbox" ng-model="vm.captioning" ng-init="vm.captioning=false"></td>
-                    <td class="extra-small">Is Vendor :</td>
-                    <td><input type="checkbox" ng-model="vm.vendor" ng-init="vm.vendor=false"></td>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+
+				<div class="row">
+					<div class="pull-left">
+						<h5>
+							<strong>{{vm.contactPrivileges.contact.fullName}}</strong>
+						</h5>
+					</div>
+					<div class="pull-right">
+						<h5>
+							<strong>Permission(s)</strong>
+						</h5>
+					</div>
+				</div>
+				<div class="row">
+					<table class="table table-striped">
+						<tr>
+							<td class="extra-small">User Can be Exec</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.exec"
+								ng-init="vm.contactPrivileges.exec"></td>
+							<td class="extra-small">Internal Film Solutions User</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.internal"
+								ng-init="vm.contactPrivileges.internal"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">Image Captioning Allowed</td>
+							<td><input type="checkbox"
+								ng-model="vm.contactPrivileges.captioning"
+								ng-init="vm.contactPrivileges.captioning"></td>
+							<td class="extra-small">Is Vendor</td>
+							<td><input type="checkbox"
+								ng-model="vm.contactPrivileges.vendor"
+								ng-init="vm.contactPrivileges.vendor"></td>
 
 
-                </tr>
+						</tr>
 
-                <tr>
-                    <td class="extra-small">User can Email :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.email" ng-init="vm.email=false"></td>
-                    <td class="extra-small">User can Print :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.print" ng-init="vm.print=false"></td>
-                </tr>
-                <tr>
-                    <td class="extra-small">User can see only Locked Approved :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.lockApproveRestriction"
-                                             ng-init="vm.lockApproveRestriction=false"></td>
-                    <td class="extra-small">Download Privilege :</td>
-                    <td class="small"><select ng-model="vm.downloadType = 0">
-                        <option value="0" selected>NONE</option>
-                        <option value="1">ALL</option>
-                        <option value="2">Locked Approved</option>
-                    </select></td>
-                </tr>
-                <tr>
-                    <td class="extra-small">Has Watermark :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.watermark"
-                                             ng-init="vm.watermark=false">
-                    </td>
-                    <td class="extra-small">Enable Priority Pix :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.priorityPix"
-                                             ng-init="vm.priorityPix=false"></td>
-                </tr>
-                <tr>
-                    <td class="extra-small">Watermark tranparency (outer):</td>
-                    <td class="small"><input type="text" class="input-xs"
-                                             ng-model="vm.watermarkOuterTransparency"
-                                             ng-init="vm.watermarkOuterTransparency=0"></td>
-                    <td class="extra-small">Enable Release All/Exclude All :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.releaseExclude"
-                                             ng-init="vm.releaseExclude=false"></td>
-                </tr>
-                <tr>
-                    <td class="extra-small">Watermark tranparency (inner):</td>
-                    <td class="small"><input type="text" class="input-xs"
-                                             ng-model="vm.watermarkInnerTransparency"
-                                             ng-init="vm.watermarkInnerTransparency=0"></td>
-                    <td class="extra-small">Can See Sensitive Images :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.viewSensitive"
-                                             ng-init="vm.viewSensitive=false">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="extra-small">Exclusives Management :</td>
-                    <td class="small">
-                        <select ng-model="vm.exclusives" ng-init="vm.exclusives = 0">
-                            <option value="0" class="extra-small" selected>NONE</option>
-                            <option value="1" class="extra-small">BASIC</option>
-                            <option value="2" class="extra-small">MASTER</option>
-                        </select></td>
-                    <td class="extra-small">Can See Unpublished/Hidden :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.seesUntagged"
-                                             ng-model="vm.seesUntagged=false"></td>
-                </tr>
-                <tr>
-                    <td class="extra-small">View Only (ABC) :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.viewOnly" ng-init="vm.viewOnly=false">
-                    </td>
-                    <td class="extra-small">Disabled :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.disabled" ng-init="vm.disabled=false">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="extra-small">Welcome Message (ABC) :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.welcomeMessage"
-                                             ng-init="vm.welcomeMessage=false"></td>
-                    <td class="extra-small">Expire Date :</td>
-                    <td class="small"><input type="date" class="input-xs" ng-model="vm.expireDate"></td>
-                </tr>
-                <tr>
-                    <td class="extra-small">Has Talent Management (ABC) :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.talentManagement"
-                                             ng-init="vm.talentManagement=false">
-                    </td>
-                    <td class="extra-small">Can see finalized Images: :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.showFinalizations"
-                                             ng-init="vm.showFinalizations=false">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="extra-small">Has SignOff Management (ABC) :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.signoffManagement"
-                                             ng-init="vm.signoffManagement=false"></td>
-                    <td class="extra-small">Read Only :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.readOnly" ng-init="vm.readOnly=false">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="extra-small">Has Wide Edit Management (ABC) :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.datgeditManagement"
-                                             ng-init="vm.datgeditManagement=false">
-                    </td>
-                    <td class="extra-small">Global Album Permissions :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.globalAlbum"
-                                             ng-init="vm.globalAlbum=false"></td>
-                </tr>
-                <tr>
-                    <td class="extra-small">Critique It :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.critique" ng-init="vm.critique=false">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="extra-small">Has Video :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.hasVideo" ng-init="vm.hasVideo=false">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="extra-small">Adhoc Link :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.adhocLink"
-                                             ng-init="vm.adhocLink=false">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="extra-small">Retouch :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.retouch" ng-init="vm.retouch=false">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="extra-small">File Upload :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.fileUpload"
-                                             ng-init="vm.fileUpload=false">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="extra-small">Delete Assets :</td>
-                    <td class="small"><input type="checkbox" ng-model="vm.deleteAssets"
-                                             ng-init="vm.deleteAssets=false"></td>
-                </tr>
-            </table>
+						<tr>
+							<td class="extra-small">User can Email</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.email"
+								ng-init="vm.contactPrivileges.email"></td>
+							<td class="extra-small">User can Print</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.print"
+								ng-init="vm.contactPrivileges.print"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">User can see only Locked Approved</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.lockApproveRestriction"
+								ng-init="vm.contactPrivileges.lockApproveRestriction"></td>
+							<td class="extra-small">Download Privilege</td>
+							<td class="small">
+								<!-- <select
+							ng-model="vm.contactPrivileges.downloadType"
+							ng-init="vm.contactPrivileges.downloadType">
+								<option value="0" selected>NONE</option>
+								<option value="1">ALL</option>
+								<option value="2">Locked Approved</option>
+						</select> --> <select ng-model="vm.contactPrivileges.downloadType"
+								ng-options="excl.id as excl.value for excl in vm.downloadType">
+									<option>{{excl.value}}</option>
+							</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="extra-small">Has Watermark</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.watermark"
+								ng-init="vm.contactPrivileges.watermark"></td>
+							<td class="extra-small">Enable Priority Pix</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.priorityPix"
+								ng-init="vm.contactPrivileges.priorityPix"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">Watermark tranparency (outer)</td>
+							<td class="small"><input type="text" class="input-xs"
+								ng-model="vm.contactPrivileges.watermarkOuterTransparency"
+								ng-init="vm.contactPrivileges.watermarkOuterTransparency"></td>
+							<td class="extra-small">Enable Release All/Exclude All</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.releaseExclude"
+								ng-init="vm.contactPrivileges.releaseExclude"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">Watermark tranparency (inner)</td>
+							<td class="small"><input type="text" class="input-xs"
+								ng-model="vm.contactPrivileges.watermarkInnerTransparency"
+								ng-init="vm.contactPrivileges.watermarkInnerTransparency"></td>
+							<td class="extra-small">Can See Sensitive Images</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.viewSensitive"
+								ng-init="vm.contactPrivileges.viewSensitive"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">Exclusives Management</td>
+							<td class="small">
+								<!-- <select
+							ng-model="vm.contactPrivileges.exclusives"
+							ng-init="vm.contactPrivileges.exclusives">
+								<option value="0" class="extra-small" selected>NONE</option>
+								<option value="1" class="extra-small">BASIC</option>
+								<option value="2" class="extra-small">MASTER</option>
+						</select> --> <select ng-model="vm.contactPrivileges.exclusives"
+								ng-options="excl.id as excl.value for excl in vm.exclusives">
+									<option>{{excl.value}}</option>
+							</select>
 
-        </fieldset>
-    </div>
+							</td>
+							<td class="extra-small">Can See Unpublished/Hidden</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.seesUntagged"
+								ng-model="vm.contactPrivileges.seesUntagged"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">View Only (ABC)</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.viewOnly"
+								ng-init="vm.contactPrivileges.viewOnly"></td>
+							<td class="extra-small">Disabled</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.disabled"
+								ng-init="vm.contactPrivileges.disabled"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">Welcome Message (ABC)</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.welcomeMessage"
+								ng-init="vm.contactPrivileges.welcomeMessage"></td>
+							<td class="extra-small">Expire Date</td>
+							<td class="small"><input type="date" class="input-xs"
+								ng-model="vm.contactPrivileges.expireDate"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">Has Talent Management (ABC)</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.talentManagement"
+								ng-init="vm.contactPrivileges.talentManagement"></td>
+							<td class="extra-small">Can see finalized Images</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.showFinalizations"
+								ng-init="vm.contactPrivileges.showFinalizations"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">Has SignOff Management (ABC)</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.signoffManagement"
+								ng-init="vm.contactPrivileges.signoffManagement"></td>
+							<td class="extra-small">Read Only :</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.readOnly"
+								ng-init="vm.contactPrivileges.readOnly"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">Has Wide Edit Management (ABC)</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.datgeditManagement"
+								ng-init="vm.contactPrivileges.datgeditManagement"></td>
+							<td class="extra-small">Global Album Permissions</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.globalAlbum"
+								ng-init="vm.contactPrivileges.globalAlbum"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">Critique It</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.critique"
+								ng-init="vm.contactPrivileges.critique"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">Has Video</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.hasVideo"
+								ng-init="vm.contactPrivileges.hasVideo"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">Adhoc Link</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.adhocLink"
+								ng-init="vm.contactPrivileges.adhocLink"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">Retouch</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.retouch"
+								ng-init="vm.contactPrivileges.retouch"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">File Upload</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.fileUpload"
+								ng-init="vm.contactPrivileges.fileUpload"></td>
+						</tr>
+						<tr>
+							<td class="extra-small">Delete Assets</td>
+							<td class="small"><input type="checkbox"
+								ng-model="vm.contactPrivileges.deleteAssets"
+								ng-init="vm.contactPrivileges.deleteAssets"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </div>

@@ -15,7 +15,7 @@ public interface IngestsRepository extends JpaRepository<Ingests, Long> {
 
     //Ingests findByIngestJobAndStatus(String ingestJob, String status);
 
-    Ingests findByAlfrescoTitle1AndAlfrescoTitle2(String alfrescoTitle1, String alfrescoTitle2);
+    Ingests findByAlfrescoTitle1AndAlfrescoTitle2AndStatus(String alfrescoTitle1, String alfrescoTitle2,String status);
 
     List<Ingests> findByStatus(String status);
 

@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <button type="button" class="close danger" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.close()" >&times;</button>
+
+    <div class="btn-toolbar btn-toolbar-xs" role="toolbar">
+
+        <button type="button" class="btn btn-success btn-xs" ng-click="vm.rename()">
+           Update
+        </button>
+    </div>
+</div>
+<div class="modal-body">
+       
+            <h5 class="small">Project Name:<b>{{vm.proj.name}}</b></h5>
+            <h5 class="small">Full_Name/New_Name:<b>{{vm.proj.fullName}}</b></h5>
+            <h5 class="small">Old Alfresco Title 1:<b>{{vm.proj.alfrescoTitle1}}</b></h5>
+            <h5 class="small">Old Alfresco Title 2:<b>{{vm.proj.alfrescoTitle2}}</b></h5>
+            <h5 class="small">New Alfresco Title 1:<input type="text" class="input-xs" ng-model="title1"></h5>
+            <h5 class="small">New Alfresco Title 2:<input type="text" class="input-xs" ng-model="title2"></h5>
+                
+</div>

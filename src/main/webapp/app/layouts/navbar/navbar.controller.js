@@ -17,13 +17,38 @@
         vm.logout = logout;
         vm.$state = $state;
 
+
         function login () {
+        	
             LoginService.open();
+            
         }
 
         function logout () {
             Auth.logout();
             $state.go('home');
         }
+        
+        console.log("Navbar Controller")
+//        vm.currentAccount = null;
+//		Principal.identity().then(function(account) {
+//			vm.currentAccount = account;
+//
+//			console.log("Current User : " + JSON.stringify(vm.currentAccount));
+//		});
+//		
+//		
+//		
+//		$rootScope.$watch(function() {
+//			return $rootScope.currentUserGlobal;
+//		}, function() {
+//			if ($rootScope.relationships == null) {
+//				console.log("null rootscope");
+//
+//			} else {
+//				console.log("not null");
+//
+//			}
+//		});
     }
 })();

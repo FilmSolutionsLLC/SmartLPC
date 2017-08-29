@@ -1,474 +1,467 @@
 <nav class="navbar navbar-default" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-click="vm.navCollapsed = !vm.navCollapsed">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#/"><span translate="global.title">SmartLPC</span> <span
-                class="navbar-version">v{{VERSION}}</span></a>
-        </div>
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle"
+				ng-click="vm.navCollapsed = !vm.navCollapsed">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<!-- <h5 class="navbar-brand">{{vm.account.login}}</h5> -->
+			<!-- <a class="navbar-brand" href="#/"><span translate="global.title">SmartLPC</span>
+				<span class="navbar-version">v{{VERSION}}</span></a>
+		 -->
+		</div>
 
 
-        <div class="collapse navbar-collapse" id="navbar-collapse" uib-collapse="vm.navCollapsed"
-             ng-switch="vm.isAuthenticated()">
+		<div class="collapse navbar-collapse" id="navbar-collapse"
+			uib-collapse="vm.navCollapsed" ng-switch="vm.isAuthenticated()">
 
-            <ul class="nav navbar-nav navbar-right">
-
-
-                <li ui-sref-active="active">
-                    <a ui-sref="home" ng-click="vm.navCollapsed = true">
-                        <span class="glyphicon glyphicon-home text-success"></span>
-                        <span class="hidden-sm text-success" translate="global.menu.home">Home</span>
-                    </a>
-                </li>
+			<ul class="nav navbar-nav navbar-right">
 
 
-                <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown
-                    class="dropdown pointer" has-authority="ROLE_ADMIN">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu" data-toggle="tooltip" data-placement="top" title="Only for IT">
-                        <span>
-                            <span class="glyphicon glyphicon-th-list"></span>
-                            <span class="hidden-sm" translate="global.menu.entities.main">
-                                Entities
-                            </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active"><a ui-sref="lookups" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.lookups">Lookups</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="storage-servers" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.storageServers">Storage Servers</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="storage-disk" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.storageDisk">Storage Disk</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="ingest" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.ingest">Ingest</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="departments" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.departments">Departments</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="contacts" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.contacts">Contacts</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="projects" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.projects">Projects</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="batch" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.batch">Batch</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="captions" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.captions">Captions</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="image" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.image">Image</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="work-order" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.workOrder">Work Order</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="contact-relationships" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span
-                                translate="global.menu.entities.contactRelationships">Contact Relationships</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="projects" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.projects">Projects</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="project-roles" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.projectRoles">Project Roles</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="project-lab-tasks" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.projectLabTasks">Project Lab Tasks</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="contact-relationships" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span
-                                translate="global.menu.entities.contactRelationships">Contact Relationships</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="relation-type" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.relationType">Relation Type</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="project-purchase-orders" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span
-                                translate="global.menu.entities.projectPurchaseOrders">Project Purchase Orders</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="work-orders-admin-relation" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.workOrdersAdminRelation">Work Orders Admin Relation</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="work-order-abc-file" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.workOrderAbcFile">Work Order Abc File</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="work-order-abc-hdd" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.workOrderAbcHdd">Work Order Abc Hdd</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="contact-privileges" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.contactPrivileges">Contact Privileges</span></a>
-                        </li>
-                        <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
-                    </ul>
-                </li>
-
-                <li has-authority="ROLE_USER">
-                    <a ui-sref="projectinfo" ng-click="vm.navCollapsed = true">
-                        <span class="glyphicon glyphicon-info-sign"></span>
-                        <span class="hidden-sm" translate="global.menu.entities.pic">Project Information Center</span>
-                    </a>
-                </li>
+				<li ui-sref-active="active"><a ui-sref="home"
+					ng-click="vm.navCollapsed = true"> <span
+						class="glyphicon glyphicon-home text-success"></span> <span
+						class="hidden-sm text-success" translate="global.menu.home">Home</span>
+				</a></li>
 
 
+				<!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+				<li ng-class="{active: vm.$state.includes('entity')}"
+					ng-switch-when="true" uib-dropdown class="dropdown pointer"
+					has-authority="ROLE_ADMIN"><a class="dropdown-toggle"
+					uib-dropdown-toggle href="" id="entity-menu" data-toggle="tooltip"
+					data-placement="top" title="Only for IT"> <span> <span
+							class="glyphicon glyphicon-th-list"></span> <span
+							class="hidden-sm" translate="global.menu.entities.main">
+								Entities </span> <b class="caret"></b>
+					</span>
+				</a>
+					<ul class="dropdown-menu" uib-dropdown-menu>
+						<li ui-sref-active="active"><a ui-sref="lookups"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.lookups">Lookups</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="storage-servers"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.storageServers">Storage
+									Servers</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="storage-disk"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.storageDisk">Storage Disk</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="ingest"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.ingest">Ingest</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="departments"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.departments">Departments</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="contacts"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.contacts">Contacts</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="projects"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.projects">Projects</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="batch"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.batch">Batch</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="captions"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.captions">Captions</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="image"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.image">Image</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="work-order"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.workOrder">Work Order</span></a></li>
+						<li ui-sref-active="active"><a
+							ui-sref="contact-relationships" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.contactRelationships">Contact
+									Relationships</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="projects"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.projects">Projects</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="project-roles"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.projectRoles">Project
+									Roles</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="project-lab-tasks"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.projectLabTasks">Project
+									Lab Tasks</span></a></li>
+						<li ui-sref-active="active"><a
+							ui-sref="contact-relationships" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.contactRelationships">Contact
+									Relationships</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="relation-type"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.relationType">Relation
+									Type</span></a></li>
+						<li ui-sref-active="active"><a
+							ui-sref="project-purchase-orders" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.projectPurchaseOrders">Project
+									Purchase Orders</span></a></li>
+						<li ui-sref-active="active"><a
+							ui-sref="work-orders-admin-relation" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.workOrdersAdminRelation">Work
+									Orders Admin Relation</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="work-order-abc-file"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.workOrderAbcFile">Work
+									Order Abc File</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="work-order-abc-hdd"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.workOrderAbcHdd">Work
+									Order Abc Hdd</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="contact-privileges"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span
+								translate="global.menu.entities.contactPrivileges">Contact
+									Privileges</span></a></li>
+						<!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+					</ul></li>
 
-                <li ng-class="" ng-switch-when="true" uib-dropdown
-                    class="dropdown pointer" has-authority="ROLE_USER">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="contact-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-th-list"></span>
-                            <span class="hidden-sm" translate="global.menu.entities.contacts">
-                                Contacts
-                            </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active"><a ui-sref="contacts" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-eye-open"></span>
-                            &#xA0;<span translate="global.menu.entities.viewcontacts">View Contacts</span></a>
-                        </li>
-                        <li ui-sref-active=""><a ui-sref="contacts.add" data-toggle="collapse"
-                                                 data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-plus-sign"></span>
-                            &#xA0;<span translate="global.menu.entities.addcontact">Add Contact</span></a>
-                        </li>
-                    </ul>
-                </li>
+				<li has-authority="ROLE_USER"><a ui-sref="projectinfo"
+					ng-click="vm.navCollapsed = true"> <span
+						class="glyphicon glyphicon-info-sign"></span> <span
+						class="hidden-sm" translate="global.menu.entities.pic">Project
+							Information Center</span>
+				</a></li>
 
 
 
-                <li ng-class="" ng-switch-when="true" uib-dropdown
-                    class="dropdown pointer" has-authority="ROLE_USER">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="project-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-th-list"></span>
-                            <span class="hidden-sm" translate="global.menu.entities.projects">
-                                Projects
-                            </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active"><a ui-sref="projects" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-eye-open"></span>
-                            &#xA0;<span translate="global.menu.entities.project.view">View All</span></a>
-                        </li>
-                        <li ui-sref-active=""><a ui-sref="projects.add" data-toggle="collapse"
-                                                 data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-plus-sign"></span>
-                            &#xA0;<span translate="global.menu.entities.project.add">Add Project</span></a>
-                        </li>
-                        <li ui-sref-active=""><a ui-sref="projects.template" data-toggle="collapse"
-                                                 data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-plus-sign"></span>
-                            &#xA0;<span translate="global.menu.entities.project.template">Add from Template</span></a>
-                        </li>
-                        <li ui-sref-active=""><a ui-sref="projects.multiple" data-toggle="collapse"
-                                                 data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-plus-sign"></span>
-                            &#xA0;<span
-                                translate="global.menu.entities.project.multiple">Multiple Project/User Assignment</span></a>
-                        </li>
-                    </ul>
-                </li>
+				<li ng-class="" ng-switch-when="true" uib-dropdown
+					class="dropdown pointer" has-authority="ROLE_USER"><a
+					class="dropdown-toggle" uib-dropdown-toggle href=""
+					id="contact-menu"> <span> <span
+							class="glyphicon glyphicon-th-list"></span> <span
+							class="hidden-sm" translate="global.menu.entities.contacts">
+								Contacts </span> <b class="caret"></b>
+					</span>
+				</a>
+					<ul class="dropdown-menu" uib-dropdown-menu>
+						<li ui-sref-active="active"><a ui-sref="contacts"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
+								translate="global.menu.entities.viewcontacts">View
+									Contacts</span></a></li>
+						<li ui-sref-active=""><a ui-sref="contacts.add"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-plus-sign"></span> &#xA0;<span
+								translate="global.menu.entities.addcontact">Add Contact</span></a></li>
+					</ul></li>
 
-                <li ng-class="" ng-switch-when="true" uib-dropdown
-                    class="dropdown pointer" has-authority="ROLE_USER">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="ingest-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-save"></span>
-                            <span class="hidden-sm" translate="global.menu.entities.ingest">
-                                Ingest
-                            </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active"><a ui-sref="ingest.toIngest" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-plus-sign"></span>
-                            &#xA0;<span translate="global.menu.entities.in.start">Start Ingest</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="contacts" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-list-alt"></span>
-                            &#xA0;<span translate="global.menu.entities.in.untagged">Untagged Images Report</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="contacts" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-list-alt"></span>
-                            &#xA0;<span translate="global.menu.entities.in.auto">Auto Tag Report(Beta)</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="ingest.current" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-eye-open"></span>
-                            &#xA0;<span translate="global.menu.entities.in.current">View Running Ingests</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="ingest" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-eye-open"></span>
-                            &#xA0;<span translate="global.menu.entities.in.view">View All Ingests</span></a>
-                        </li>
-                        <!-- <li ui-sref-active="active"><a ui-sref="ingest.toIngest" data-toggle="collapse"
+
+
+				<li ng-class="" ng-switch-when="true" uib-dropdown
+					class="dropdown pointer" has-authority="ROLE_USER"><a
+					class="dropdown-toggle" uib-dropdown-toggle href=""
+					id="project-menu"> <span> <span
+							class="glyphicon glyphicon-th-list"></span> <span
+							class="hidden-sm" translate="global.menu.entities.projects">
+								Projects </span> <b class="caret"></b>
+					</span>
+				</a>
+					<ul class="dropdown-menu" uib-dropdown-menu>
+						<li ui-sref-active="active"><a ui-sref="projects"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
+								translate="global.menu.entities.project.view">View All</span></a></li>
+						<li ui-sref-active=""><a ui-sref="projects.add"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-plus-sign"></span> &#xA0;<span
+								translate="global.menu.entities.project.add">Add Project</span></a>
+						</li>
+						<li ui-sref-active=""><a ui-sref="projects.template"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-plus-sign"></span> &#xA0;<span
+								translate="global.menu.entities.project.template">Add
+									from Template</span></a></li>
+						<li ui-sref-active=""><a ui-sref="projects.multiple"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-plus-sign"></span> &#xA0;<span
+								translate="global.menu.entities.project.multiple">Multiple
+									Project/User Assignment</span></a></li>
+					</ul></li>
+
+				<li ng-class="" ng-switch-when="true" uib-dropdown
+					class="dropdown pointer" has-authority="ROLE_USER"><a
+					class="dropdown-toggle" uib-dropdown-toggle href=""
+					id="ingest-menu"> <span> <span
+							class="glyphicon glyphicon-save"></span> <span class="hidden-sm"
+							translate="global.menu.entities.ingest"> Ingest </span> <b
+							class="caret"></b>
+					</span>
+				</a>
+					<ul class="dropdown-menu" uib-dropdown-menu>
+						<li ui-sref-active="active"><a ui-sref="ingest.toIngest"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-plus-sign"></span> &#xA0;<span
+								translate="global.menu.entities.in.start">Start Ingest</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="contacts"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-list-alt"></span> &#xA0;<span
+								translate="global.menu.entities.in.untagged">Untagged
+									Images Report</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="contacts"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-list-alt"></span> &#xA0;<span
+								translate="global.menu.entities.in.auto">Auto Tag
+									Report(Beta)</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="ingest.current"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
+								translate="global.menu.entities.in.current">View Running
+									Ingests</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="ingest"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
+								translate="global.menu.entities.in.view">View All Ingests</span></a>
+						</li>
+						<!-- <li ui-sref-active="active"><a ui-sref="ingest.toIngest" data-toggle="collapse"
                                                         data-target=".navbar-collapse.in"><span
                              class="glyphicon glyphicon-eye-open"></span>
                              &#xA0;View FS Ingests</a>
                          </li>-->
 
 
-                    </ul>
-
-                </li>
+					</ul></li>
 
 
-                <li ng-class="" ng-switch-when="true" uib-dropdown
-                    class="dropdown pointer disabled" has-authority="ROLE_USER">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="teleport-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-transfer"></span>
-                            <span class="hidden-sm" translate="global.menu.entities.teleport">
-                                Teleport
-                            </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu " uib-dropdown-menu>
-                        <li class="disabled" ui-sref-active="disabled"><a ui-sref="ingest.new" data-toggle="collapse"
-                                                         data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-plus-sign"></span>
-                            &#xA0;<span translate="global.menu.entities.tele.start">Start Teleport</span></a>
-                        </li>
-                        <li class="disabled" ui-sref-active="disabled"><a ui-sref="contacts" data-toggle="collapse"
-                                                         data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-eye-open"></span>
-                            &#xA0;<span translate="global.menu.entities.tele.current">View Running Teleports</span></a>
-                        </li>
-                        <li class="disabled" ui-sref-active="disabled"><a ui-sref="ingest" data-toggle="collapse"
-                                                         data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-eye-open"></span>
-                            &#xA0;<span translate="global.menu.entities.tele.view">View All Teleports</span></a>
-                        </li>
+				<li ng-class="" ng-switch-when="true" uib-dropdown
+					class="dropdown pointer disabled" has-authority="ROLE_USER"><a
+					class="dropdown-toggle" uib-dropdown-toggle href=""
+					id="teleport-menu"> <span> <span
+							class="glyphicon glyphicon-transfer"></span> <span
+							class="hidden-sm" translate="global.menu.entities.teleport">
+								Teleport </span> <b class="caret"></b>
+					</span>
+				</a>
+					<ul class="dropdown-menu " uib-dropdown-menu>
+						<li class="disabled" ui-sref-active="disabled"><a
+							ui-sref="ingest.new" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-plus-sign"></span> &#xA0;<span
+								translate="global.menu.entities.tele.start">Start
+									Teleport</span></a></li>
+						<li class="disabled" ui-sref-active="disabled"><a
+							ui-sref="contacts" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
+								translate="global.menu.entities.tele.current">View
+									Running Teleports</span></a></li>
+						<li class="disabled" ui-sref-active="disabled"><a
+							ui-sref="ingest" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
+								translate="global.menu.entities.tele.view">View All
+									Teleports</span></a></li>
 
-                    </ul>
-
-                </li>
-
-
-                <li ng-class="" ng-switch-when="true" uib-dropdown
-                    class="dropdown pointer" has-authority="ROLE_USER">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="workorder-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-th-list"></span>
-                            <span class="hidden-sm" translate="global.menu.entities.workOrder">
-                                Work Order
-                            </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active"><a ui-sref="work-order.add" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-plus-sign"></span>
-                            &#xA0;<span translate="global.menu.entities.work.add">Add Work Order</span></a>
-                        </li>
-                        <hr>
-                        <li ui-sref-active="active"><a ui-sref="work-order-open" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-eye-open"></span>
-                            &#xA0;<span translate="global.menu.entities.work.open">Open Work Orders</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="work-order-grouped" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-eye-open"></span>
-                            &#xA0;<span
-                                translate="global.menu.entities.work.opengrp">Open Work Orders(GROUPED)</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="work-order-processing-log" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-eye-open"></span>
-                            &#xA0;<span translate="global.menu.entities.work.log">Processing Log</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="work-order" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-eye-open"></span>
-                            &#xA0;<span translate="global.menu.entities.work.all">All Work Orders</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="projectinfo" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-eye-open"></span>
-                            &#xA0;<span translate="global.menu.entities.work.audit">To Audit</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="work-order-invoice" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-eye-open"></span>
-                            &#xA0;<span translate="global.menu.entities.work.invoice">To Invoice</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="work-order-included-comp" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-eye-open"></span>
-                            &#xA0;<span translate="global.menu.entities.work.include">Included/Comp</span></a>
-                        </li>
-                        <li ui-sref-active="active"><a ui-sref="work-order-my-open" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-eye-open"></span>
-                            &#xA0;<span translate="global.menu.entities.work.myopen">My Open Work Orders</span></a>
-                        </li>
-
-                    </ul>
-
-                </li>
+					</ul></li>
 
 
-                <li ng-class="" ng-switch-when="true" uib-dropdown
-                    class="dropdown pointer" has-authority="ROLE_USER">
-                    <a ui-sref="search" ng-click="vm.navCollapsed = true">
-                        <span class="glyphicon glyphicon-search text-danger"></span>
-                    </a>
-                </li>
+				<li ng-class="" ng-switch-when="true" uib-dropdown
+					class="dropdown pointer" has-authority="ROLE_USER"><a
+					class="dropdown-toggle" uib-dropdown-toggle href=""
+					id="workorder-menu"> <span> <span
+							class="glyphicon glyphicon-th-list"></span> <span
+							class="hidden-sm" translate="global.menu.entities.workOrder">
+								Work Order </span> <b class="caret"></b>
+					</span>
+				</a>
+					<ul class="dropdown-menu" uib-dropdown-menu>
+						<li ui-sref-active="active"><a ui-sref="work-order.add"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-plus-sign"></span> &#xA0;<span
+								translate="global.menu.entities.work.add">Add Work Order</span></a>
+						</li>
+						<hr>
+						<li ui-sref-active="active"><a ui-sref="work-order-open"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
+								translate="global.menu.entities.work.open">Open Work
+									Orders</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="work-order-grouped"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
+								translate="global.menu.entities.work.opengrp">Open Work
+									Orders(GROUPED)</span></a></li>
+						<li ui-sref-active="active"><a
+							ui-sref="work-order-processing" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
+								translate="global.menu.entities.work.log">Processing Log</span></a>
+						</li>
+						<li ui-sref-active="active"><a ui-sref="work-order"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
+								translate="global.menu.entities.work.all">All Work Orders</span></a>
+						</li>
+						<li ui-sref-active="active"><a ui-sref="work-order-audit"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
+								translate="global.menu.entities.work.audit">To Audit</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="work-order-invoice"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
+								translate="global.menu.entities.work.invoice">To Invoice</span></a>
+						</li>
+						<li ui-sref-active="active"><a
+							ui-sref="work-order-included-comp" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
+								translate="global.menu.entities.work.include">Included/Comp</span></a>
+						</li>
+						<li ui-sref-active="active"><a ui-sref="work-order-my-open"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
+								translate="global.menu.entities.work.myopen">My Open Work
+									Orders</span></a></li>
+
+					</ul></li>
+
+
+				<li ng-class="" ng-switch-when="true" uib-dropdown
+					class="dropdown pointer" has-authority="ROLE_USER"><a
+					ui-sref="search" ng-click="vm.navCollapsed = true"> <span
+						class="glyphicon glyphicon-search text-danger"></span>
+				</a></li>
 
 
 
-                <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-user"></span>
-                            <span class="hidden-sm" translate="global.menu.account.main">
-                                Account
-                            </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="settings" data-toggle="collapse"
-                                                                             data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-wrench"></span>
-                            &#xA0;<span translate="global.menu.account.settings">Settings</span></a></li>
-                        <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="password" data-toggle="collapse"
-                                                                             data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-lock"></span>
-                            &#xA0;<span translate="global.menu.account.password">Password</span></a></li>
-                        <li ui-sref-active="active" ng-switch-when="true"><a href="" ng-click="vm.logout()" id="logout"
-                                                                             data-toggle="collapse"
-                                                                             data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-log-out"></span>
-                            &#xA0;<span translate="global.menu.account.logout">Sign out</span></a></li>
-                        <li ui-sref-active="active" ng-switch-when="false"><a href="" ng-click="vm.login()" id="login"
-                                                                              data-toggle="collapse"
-                                                                              data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-log-in"></span>
-                            &#xA0;<span translate="global.menu.account.login">Sign in</span></a></li>
-                        <li ui-sref-active="active" ng-switch-when="false"><a ui-sref="register" data-toggle="collapse"
-                                                                              data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-plus-sign"></span>
-                            &#xA0;<span translate="global.menu.account.register">Register</span></a></li>
-                    </ul>
-                </li>
+				<li ng-class="{active: vm.$state.includes('account')}" uib-dropdown
+					class="dropdown pointer"><a class="dropdown-toggle"
+					uib-dropdown-toggle href="" id="account-menu"> <span> <span
+							class="glyphicon glyphicon-user"></span> <span class="hidden-sm"
+							translate="global.menu.account.main"> Account </span> <b
+							class="caret"></b>
+					</span>
+				</a>
+					<ul class="dropdown-menu" uib-dropdown-menu>
+						<li ui-sref-active="active" ng-switch-when="true"><a
+							ui-sref="settings" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-wrench"></span> &#xA0;<span
+								translate="global.menu.account.settings">Settings</span></a></li>
+						<li ui-sref-active="active" ng-switch-when="true"><a
+							ui-sref="password" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-lock"></span> &#xA0;<span
+								translate="global.menu.account.password">Password</span></a></li>
+								
+						<li ui-sref-active="active" ng-switch-when="true"><a href=""
+							ng-click="vm.logout()" id="logout" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-log-out"></span> &#xA0;<span
+								translate="global.menu.account.logout">Sign out</span></a></li>
+								
+						<li ui-sref-active="active" ng-switch-when="false"><a href=""
+							ng-click="vm.login()" id="login" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-log-in"></span> &#xA0;<span
+								translate="global.menu.account.login">Sign in</span></a></li>
+								
+								
+						<li ui-sref-active="active" ng-switch-when="false"><a
+							ui-sref="register" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-plus-sign"></span> &#xA0;<span
+								translate="global.menu.account.register">Register</span></a></li>
+					</ul></li>
 
 
-                <li ng-class="{active: vm.vm.$state.includes('admin')}" ng-switch-when="true" has-authority="ROLE_ADMIN"
-                    uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="admin-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-tower"></span>
-                            <span class="hidden-sm" translate="global.menu.admin.main">Administration</span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active"><a ui-sref="user-management" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-user"></span>
-                            &#xA0;<span translate="global.menu.admin.userManagement">User management</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="jhi-metrics" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-dashboard"></span>
-                            &#xA0;<span translate="global.menu.admin.metrics">Metrics</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="jhi-health" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-heart"></span>
-                            &#xA0;<span translate="global.menu.admin.health">Health</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="jhi-configuration" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-list-alt"></span>
-                            &#xA0;<span translate="global.menu.admin.configuration">Configuration</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="audits" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-bell"></span>
-                            &#xA0;<span translate="global.menu.admin.audits">Audits</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="logs" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-tasks"></span>
-                            &#xA0;<span translate="global.menu.admin.logs">Logs</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="docs" data-toggle="collapse"
-                                                       data-target=".navbar-collapse.in"><span
-                            class="glyphicon glyphicon-book"></span>
-                            &#xA0;<span translate="global.menu.admin.apidocs">API</span></a></li>
-                        <!-- ng-hide="vm.inProduction"  jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
-                    </ul>
-                </li>
+				<li ng-class="{active: vm.vm.$state.includes('admin')}"
+					ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown
+					class="dropdown pointer"><a class="dropdown-toggle"
+					uib-dropdown-toggle href="" id="admin-menu"> <span> <span
+							class="glyphicon glyphicon-tower"></span> <span class="hidden-sm"
+							translate="global.menu.admin.main">Administration</span> <b
+							class="caret"></b>
+					</span>
+				</a>
+					<ul class="dropdown-menu" uib-dropdown-menu>
+						<li ui-sref-active="active"><a ui-sref="user-management"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-user"></span> &#xA0;<span
+								translate="global.menu.admin.userManagement">User
+									management</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="jhi-metrics"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-dashboard"></span> &#xA0;<span
+								translate="global.menu.admin.metrics">Metrics</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="jhi-health"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-heart"></span> &#xA0;<span
+								translate="global.menu.admin.health">Health</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="jhi-configuration"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-list-alt"></span> &#xA0;<span
+								translate="global.menu.admin.configuration">Configuration</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="audits"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-bell"></span> &#xA0;<span
+								translate="global.menu.admin.audits">Audits</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="logs"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-tasks"></span> &#xA0;<span
+								translate="global.menu.admin.logs">Logs</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="docs"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-book"></span> &#xA0;<span
+								translate="global.menu.admin.apidocs">API</span></a></li>
+						<!-- ng-hide="vm.inProduction"  jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+					</ul></li>
 
 
-                <li ui-sref-active="active" uib-dropdown class="dropdown pointer"
-                    ng-controller="JhiLanguageController as languageVm" has-authority="ROLE_ADMIN">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" ng-if="languageVm.languages.length > 1">
-                        <span>
-                            <span class="glyphicon glyphicon-flag"></span>
-                            <span class="hidden-sm" translate="global.menu.language">Language</span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu ng-if="languageVm.languages.length > 1">
-                        <li active-menu="{{language}}" ng-repeat="language in languageVm.languages">
-                            <a href="" ng-click="languageVm.changeLanguage(language)" data-toggle="collapse"
-                               data-target=".navbar-collapse.in">{{language | findLanguageFromKey}}</a>
-                        </li>
-                    </ul>
-                </li>
+				<li ui-sref-active="active" uib-dropdown class="dropdown pointer"
+					ng-controller="JhiLanguageController as languageVm"
+					has-authority="ROLE_ADMIN"><a class="dropdown-toggle"
+					uib-dropdown-toggle href="" ng-if="languageVm.languages.length > 1">
+						<span> <span class="glyphicon glyphicon-flag"></span> <span
+							class="hidden-sm" translate="global.menu.language">Language</span>
+							<b class="caret"></b>
+					</span>
+				</a>
+					<ul class="dropdown-menu" uib-dropdown-menu
+						ng-if="languageVm.languages.length > 1">
+						<li active-menu="{{language}}"
+							ng-repeat="language in languageVm.languages"><a href=""
+							ng-click="languageVm.changeLanguage(language)"
+							data-toggle="collapse" data-target=".navbar-collapse.in">{{language
+								| findLanguageFromKey}}</a></li>
+					</ul></li>
 
-
-            </ul>
-        </div>
-    </div>
+				<li ng-class="" ng-switch-when="true" uib-dropdown
+					class="dropdown pointer" has-authority="ROLE_USER"><a
+					ui-sref="chat" ng-click="vm.navCollapsed = true"> <span
+						class="glyphicon glyphicon-envelope text-success"></span>
+				</a></li>
+				
+			</ul>
+		</div>
+	</div>
 </nav>

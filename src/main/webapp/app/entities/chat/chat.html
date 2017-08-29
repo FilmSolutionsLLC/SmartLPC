@@ -1,0 +1,58 @@
+<div>
+	<h3 align="center">Chat</h3>
+	<h4 align="center">
+		{{vm.currentAccount.fullName}} <span
+			class=" glyphicon glyphicon-record text-success small"></span>
+	</h4>
+	<hr>
+
+	<form name="addForm" role="form" novalidate>
+
+
+
+		<div class="row">
+			<div class="col-xs-12">
+				<input type="text" class="form-control input-sm" name="message"
+					ng-model="vm.chat.message" />
+			</div>
+
+
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-xs-1 pull-left">
+				<button type="submit" class="btn btn-sm btn btn-primary"
+					ng-click="vm.send()">Send</button>
+			</div>
+		</div>
+	</form>
+	<div>
+		<h5 id="messages"></h5>
+
+
+
+	<!-- 	<div ng-if="vm.chatOwner">
+			<h5 id="messages" class="text-danger"></h5>
+		</div>
+		<div ng-if="!vm.chatOwner">
+			<h5 id="messages" class="text-success"></h5>
+		</div>
+
+		<div ng-repeat='chat in vm.chats'>
+
+			<h4>{{chat.owner}}</h4>
+			<h5>{{chat.message}}</h5>
+			<div ng-if="vm.chatOwner">
+					<h5 class="text-danger">{{chat.message}}</h5>
+			</div>
+			<div ng-if="!vm.chatOwner">
+					<h5 class="text-primary">{{chat.message}}</h5>
+			</div>
+		</div> -->
+	</div>
+</div>
+
+
+
+
+

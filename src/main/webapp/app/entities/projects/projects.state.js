@@ -196,7 +196,12 @@
              })*/
             .state('projects.edit', {
                 parent: 'projects',
-                url: '/{id}/edit',
+                url: '/{id}/edit?page',
+                params: {
+                    page: {
+                        value: '1'
+                    }
+                },
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'smartLpcApp.projects.detail.title'
