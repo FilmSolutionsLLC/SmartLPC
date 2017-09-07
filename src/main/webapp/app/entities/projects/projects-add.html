@@ -110,9 +110,9 @@
 		<label class="col-md-1 control-label small" for="field_imageLocation">Image
 			Location</label>
 		<div class="col-sm-2">
-			<div class="input-group">
+		
 
-				<span class="input-group-btn">
+				<!-- <span class="input-group-btn">
 					<button type="button" ui-sref="storage-disk.new"
 						data-toggle="modal" class="btn btn-success btn-sm">
 						<span class="glyphicon glyphicon-plus "></span>
@@ -121,8 +121,11 @@
 					name="imageLocation" ng-model="vm.projects.imageLocation"
 					ng-options="storage_Disk as storage_Disk.name for storage_Disk in vm.storage_disks track by storage_Disk.id">
 					<option value=""></option>
-				</select>
-			</div>
+				</select> -->
+				<input id="field_imageLocation" name="textinput" type="text"
+					ng-model="vm.projects.imageLocation.name"
+					class="form-control input-sm" readonly>
+		
 
 		</div>
 
@@ -1125,7 +1128,7 @@
 			<th class="small">Disabled</th>
 			<th class="small"></th>
 		</tr>
-		<tr data-ng-repeat="choice in execs" >
+		<tr data-ng-repeat="choice in execs">
 			<td class="col-xs-1">
 
 				<div class="input-group">
@@ -1151,22 +1154,30 @@
 					<option value="2">Locked Approved</option>
 			</select></td>
 			<td><input type="checkbox" ng-model="vm.execss[$index].print" /></td>
-			<td><input type="checkbox" ng-model="vm.execss[$index].captioning" /></td>
+			<td><input type="checkbox"
+				ng-model="vm.execss[$index].captioning" /></td>
 			<td><input type="checkbox" ng-model="vm.execss[$index].email" /></td>
-			<td><input type="checkbox" ng-model="vm.execss[$index].talentManagement" /></td>
-			<td><input type="checkbox" ng-model="vm.execss[$index].signoffManagement" /></td>
-			<td><input type="checkbox" ng-model="vm.execss[$index].priorityPix"/></td>
-			<td><input type="checkbox" ng-model="vm.execss[$index].releaseExclude" /></td>
+			<td><input type="checkbox"
+				ng-model="vm.execss[$index].talentManagement" /></td>
+			<td><input type="checkbox"
+				ng-model="vm.execss[$index].signoffManagement" /></td>
+			<td><input type="checkbox"
+				ng-model="vm.execss[$index].priorityPix" /></td>
+			<td><input type="checkbox"
+				ng-model="vm.execss[$index].releaseExclude" /></td>
 			<td><input type="checkbox" ng-model="vm.execss[$index].vendor" /></td>
-			<td><input type="checkbox" ng-model="vm.execss[$index].lockApproveRestriction" /></td>
-			<td><input type="checkbox" ng-model="vm.execss[$index].viewSensitive" /></td>
+			<td><input type="checkbox"
+				ng-model="vm.execss[$index].lockApproveRestriction" /></td>
+			<td><input type="checkbox"
+				ng-model="vm.execss[$index].viewSensitive" /></td>
 			<td><select ng-model="vm.execss[$index].exclusives">
 					<option value="0">NONE</option>
 					<option value="1">BASIC</option>
 					<option value="2">MASTER</option>
 			</select></td>
 
-			<td><input type="checkbox" ng-model="vm.execss[$index].seesUntagged" /></td>
+			<td><input type="checkbox"
+				ng-model="vm.execss[$index].seesUntagged" /></td>
 			<td><input type="checkbox" ng-model="vm.execss[$index].hasVideo" /></td>
 			<td><input type="checkbox" ng-model="vm.execss[$index].disabled" /></td>
 
@@ -1259,8 +1270,7 @@
 			<label class="col-md-1 control-label small">Contact</label>
 			<div class="col-sm-2">
 				<input type="text" class="form-control input-sm"
-					ng-model="vm.relatedContact[$index].fullName"
-					readonly>
+					ng-model="vm.relatedContact[$index].fullName" readonly>
 			</div>
 			<label class="col-md-1 control-label small">Type</label>
 			<div class="col-sm-2">
@@ -1269,7 +1279,9 @@
 			</div>
 			<label class="col-md-1 control-label small">Company</label>
 			<div class="col-sm-2">
-				<input type="text" class="form-control input-sm" ng-model="vm.relatedContact[$index].companyContact.fullName" readonly>
+				<input type="text" class="form-control input-sm"
+					ng-model="vm.relatedContact[$index].companyContact.fullName"
+					readonly>
 			</div>
 
 		</div>

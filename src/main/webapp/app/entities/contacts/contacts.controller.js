@@ -23,12 +23,14 @@
 		vm.searchQuery = pagingParams.search;
 		vm.currentSearch = pagingParams.search;
 		vm.loadAll();
-
+		console.log("No of items per page : "
+				+ paginationConstants.itemsPerPage);
 		function loadAll() {
 			if (pagingParams.search) {
 				console.log("contacts SEARCH called with query"
 						+ pagingParams.search);
 				console.log("pagingParams.page - 1 = " + pagingParams.page - 1)
+				
 				ContactsSearch.query({
 					query : pagingParams.search,
 					page : pagingParams.page - 1,
@@ -105,8 +107,8 @@
 		}
 
 		/*
-		 * var options = [];
-		 *  $( '.dropdown-menu a' ).on( 'click', function( event ) {
+		 * var options = []; $( '.dropdown-menu a' ).on( 'click', function(
+		 * event ) {
 		 * 
 		 * var $target = $( event.currentTarget ), val = $target.attr(
 		 * 'data-value' ), $inp = $target.find( 'input' ), idx;
@@ -114,27 +116,21 @@
 		 * if ( ( idx = options.indexOf( val ) ) > -1 ) { options.splice( idx, 1 );
 		 * setTimeout( function() { $inp.prop( 'checked', false ) }, 0); } else {
 		 * options.push( val ); setTimeout( function() { $inp.prop( 'checked',
-		 * true ) }, 0); }
-		 *  $( event.target ).blur();
+		 * true ) }, 0); } $( event.target ).blur();
 		 * 
 		 * console.log( options ); return false; });
 		 */
 
-		/*if (!('Notification' in window)) {
-			console.log('Web Notification not supported');
-			return;
-		}
-
-		Notification.requestPermission(function(permission) {
-			var notification = new Notification("Title", {
-				body : 'HTML5 Web Notification API',
-				icon : 'http://filmsolutions.com/wp-content/uploads/1Logo.png',
-				dir : 'auto'
-			});
-			setTimeout(function() {
-				notification.close();
-			}, 30000);
-		});*/
+		/*
+		 * if (!('Notification' in window)) { console.log('Web Notification not
+		 * supported'); return; }
+		 * 
+		 * Notification.requestPermission(function(permission) { var
+		 * notification = new Notification("Title", { body : 'HTML5 Web
+		 * Notification API', icon :
+		 * 'http://filmsolutions.com/wp-content/uploads/1Logo.png', dir : 'auto'
+		 * }); setTimeout(function() { notification.close(); }, 30000); });
+		 */
 
 	}
 })();

@@ -42,22 +42,22 @@
         <table class="jh-table table table-striped">
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                <th jh-sort-by="id"><span translate="global.field.id" class="small">ID</span> <span
+                <th jh-sort-by="id"><span translate="global.field.id" class="extra-small">ID</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
 
-                <th jh-sort-by="fullName"><span translate="smartLpcApp.contacts.fullName" class="small">FullName</span> <span
+                <th jh-sort-by="fullName"><span translate="smartLpcApp.contacts.fullName" class="extra-small">FullName</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="title"><span translate="smartLpcApp.contacts.title" class="small">Title</span> <span
+                <th jh-sort-by="title"><span translate="smartLpcApp.contacts.title" class="extra-small">Title</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="email"><span translate="smartLpcApp.contacts.email" class="small">Email</span> <span
+                <th jh-sort-by="email"><span translate="smartLpcApp.contacts.email" class="extra-small">Email</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
 
-                <th jh-sort-by="phoneOffice"><span translate="smartLpcApp.contacts.phoneOffice" class="small">PhoneOffice</span> <span
+                <th jh-sort-by="phoneOffice"><span translate="smartLpcApp.contacts.phoneOffice" class="extra-small">PhoneOffice</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="phoneMobile"><span translate="smartLpcApp.contacts.phoneMobile" class="small">PhoneMobile</span> <span
+                <th jh-sort-by="phoneMobile"><span translate="smartLpcApp.contacts.phoneMobile" class="extra-small">PhoneMobile</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="type.textValue"><span translate="smartLpcApp.contacts.type"
-                                                      class="small">type</span> <span
+                                                      class="extra-small">type</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="companyContact.fullName"><span translate="smartLpcApp.contacts.companyContact"
                                                                class="small">companyContact</span>
@@ -67,24 +67,24 @@
             </thead>
             <tbody>
             <tr ng-repeat="contacts in vm.contacts track by contacts.id">
-                <td class="small"><a ui-sref="contacts-detail({id:contacts.id})">{{contacts.id}}</a></td>
+                <td class="extra-small"><a ui-sref="contacts-detail({id:contacts.id})">{{contacts.id}}</a></td>
 
-                <td class="small">{{contacts.fullName}}</td>
-                <td class="small">{{contacts.title}}</td>
-                <td class="small">{{contacts.email}}</td>
+                <td class="extra-small">{{contacts.fullName}}</td>
+                <td class="extra-small">{{contacts.title}}</td>
+                <td class="extra-small">{{contacts.email}}</td>
 
-                <td class="small">{{contacts.phoneOffice}}</td>
+                <td class="extra-small">{{contacts.phoneOffice}}</td>
 
-                <td class="small">{{contacts.phoneMobile}}</td>
+                <td class="extra-small">{{contacts.phoneMobile}}</td>
 
-                <td class="small">
+                <td class="extra-small">
                     <a ui-sref="lookups-detail({id:contacts.type.id})">{{contacts.type.textValue}}</a>
                 </td>
 
-                <td class="small">
+                <td class="extra-small">
                     <a ui-sref="contacts-detail({id:contacts.companyContact.id})">{{contacts.companyContact.fullName}}</a>
                 </td>
-                <td class="text-right small">
+                <td class="text-right extra-small">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 ui-sref="contacts-detail({id:contacts.id})" ui-sref-opts="{reload: true, notify: true}"

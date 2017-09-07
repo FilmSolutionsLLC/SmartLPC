@@ -223,6 +223,35 @@
                     }]
                 }
             })
+            .state('projects.template-add', {
+                parent: 'projects',
+                url: '/{id}/template?page',
+                params: {
+                    page: {
+                        value: '1'
+                    }
+                },
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'smartLpcApp.projects.detail.title'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'app/entities/projects/projects-template-add.html',
+                        controller: 'ProjectsTemplateAddController',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('projects');
+                        return $translate.refresh();
+                    }],
+                    entity: ['$stateParams', 'Projects', function ($stateParams, Projects) {
+                        return Projects.get({id: $stateParams.id});
+                    }]
+                }
+            })
             .state('projects.delete', {
                 parent: 'projects',
                 url: '/{id}/delete',

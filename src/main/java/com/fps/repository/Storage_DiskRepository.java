@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface Storage_DiskRepository extends JpaRepository<Storage_Disk,Long> {
 
+	Storage_Disk findByName(String name);
 }

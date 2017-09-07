@@ -34,52 +34,11 @@
 	</div>
 	<br />
 	<div class="table-responsive">
-		<table class="jh-table table table-striped">
+		<table class="jh-table table table-hover">
 			<thead>
 				<tr jh-sort="vm.predicate" ascending="vm.reverse"
 					callback="vm.transition()">
-					<!-- 
-					<th jh-sort-by="id" class="small"><span
-						translate="global.field.id">ID</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="requestDate" class="small"><span
-						translate="smartLpcApp.workOrder.requestDate">RequestDate</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="requestDescription" class="small"><span
-						translate="smartLpcApp.workOrder.requestDescription">RequestDescription</span>
-						<span class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="poRecord" class="small"><span
-						translate="smartLpcApp.workOrder.poRecord">PoRecord</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="invoiced" class="small"><span
-						translate="smartLpcApp.workOrder.invoiced">Invoiced</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-
-					<th jh-sort-by="durationOfService" class="small"><span
-						translate="smartLpcApp.workOrder.durationOfService">DurationOfService</span>
-						<span class="glyphicon glyphicon-sort"></span></th>
-
-					<th jh-sort-by="type.textValue" class="small"><span
-						translate="smartLpcApp.workOrder.type">type</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-
-					<th jh-sort-by="status.textValue" class="small"><span
-						translate="smartLpcApp.workOrder.status">status</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-
-					<th jh-sort-by="project.name" class="small"><span
-						translate="smartLpcApp.workOrder.project">project</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-
-					<th jh-sort-by="assignedToUser.firstName" class="small"><span
-						translate="smartLpcApp.workOrder.assignedToUser">assignedToUser</span>
-						<span class="glyphicon glyphicon-sort"></span></th>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
-					 -->
-
+				
 
 
 					<th jh-sort-by="id" class="extra-small"><span
@@ -90,7 +49,8 @@
 						class="glyphicon glyphicon-sort"></span></th>
 					<th class="extra-small">Date Recieved<span
 						class="glyphicon glyphicon-sort"></span></th>
-					<th class="extra-small">HDD ID<span class="glyphicon glyphicon-sort"></span></th>
+					<th class="extra-small">HDD ID<span
+						class="glyphicon glyphicon-sort"></span></th>
 					<th class="extra-small">Proofs Shipped<span
 						class="glyphicon glyphicon-sort"></span></th>
 					<th class="extra-small">Drive Shipped<span
@@ -103,11 +63,14 @@
 						class="glyphicon glyphicon-sort"></span></th>
 					<th class="extra-small">Pages 2<span
 						class="glyphicon glyphicon-sort"></span></th>
-					<th class="extra-small">Notes<span class="glyphicon glyphicon-sort"></span></th>
+					<th class="extra-small">Notes<span
+						class="glyphicon glyphicon-sort"></span></th>
 					<th class="extra-small">Location<span
 						class="glyphicon glyphicon-sort"></span></th>
-					<th class="extra-small">PKO<span class="glyphicon glyphicon-sort"></span></th>
-					<th class="extra-small">Status<span class="glyphicon glyphicon-sort"></span></th>
+					<th class="extra-small">PKO<span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th class="extra-small">Status<span
+						class="glyphicon glyphicon-sort"></span></th>
 					<th class="extra-small">Audited<span
 						class="glyphicon glyphicon-sort"></span></th>
 					<th class="extra-small">Assigned To<span
@@ -122,65 +85,105 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="workOrder in vm.workOrders track by workOrder.id">
-					<td class="extra-small"><a ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a></td>
+				<tr 
+					ng-repeat="workOrder in vm.workOrders track by workOrder.id"  
+					ng-class="{
+                				verify: workOrder.status.textValue == 'Verify',
+               					notstarted: workOrder.status.textValue  == 'Not Started',
+                				rush: workOrder.status.textValue  == 'Rush',
+                				kickback: workOrder.status.textValue  == 'KickBack'
+                			  }">
+					<td class="extra-small"><a
+						ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a></td>
 					<td class="extra-small"><a
 						ui-sref="projects-detail({id:workOrder.project.id})">{{workOrder.project.name}}</a>
 					</td>
-					
+
 					<td class="extra-small">{{workOrder.processingDateRecieved |
 						date:'mediumDate'}}</td>
-					
+
 					<td class="extra-small">{{workOrder.processingHDDid}}</td>
-					
+
 					<td class="extra-small">{{workOrder.processingProofShipped}}</td>
-					
+
 					<td class="extra-small">{{workOrder.processingDriveShipped}}</td>
-					
-				
+
+
 					<td class="extra-small">{{workOrder.processingImageRange}}</td>
-					
+
 					<td class="extra-small">{{workOrder.processingImageQty}}</td>
-					
-					
+
+
 					<td class="extra-small">{{workOrder.printPagesFrom}}</td>
-					
-					
+
+
 					<td class="extra-small">{{workOrder.printPagesTo}}</td>
-					
-					
+
+
 					<td class="extra-small">{{workOrder.processingNotes}}</td>
-					
+
 					<td class="extra-small">{{workOrder.processingLocation}}</td>
-					
+
 					<td class="extra-small">{{workOrder.processing_pko_flag.textValue}}</td>
-					
-					
+
+
 					<td class="extra-small"><a
 						ui-sref="lookups-detail({id:workOrder.status.id})">{{workOrder.status.textValue}}</a>
 					</td>
-					
-					
+
+
 					<td class="extra-small">{{workOrder.auditedFlag}}</td>
-					
-				
-					
+
+
+
 					<td class="extra-small">{{workOrder.assignedToUser.fullName}}</td>
-					
-					
-					<td class="extra-small">processed by..</td>
+
+					<td class="extra-small"></td>
+					<td class="extra-small"></td>
+					<!-- <div ng-repeat="pro in workOrder.workOrdersAdminRelations">
+						<div ng-if="pro.relation_type.relation == 'lab_processed'">
+							<td class="extra-small"><input type="hidden" ng-model="vm.processed" ng-value="true">{{workOrder.workOrdersAdminRelations.admin_user.fullName}}</td>
+						</div>
+					</div> -->
+					<!-- <td class="extra-small"
+						ng-repeat="pro in workOrder.workOrdersAdminRelations | filter: { relation_type : { relation : 'lab_processed'} }"><input
+						type="hidden" name="vm.processed" ng-init="vm.processed=true">{{pro.admin_user.fullName}}</td>
+
+					<td class="extra-small"
+						ng-repeat="pro in workOrder.workOrdersAdminRelations | filter: { relation_type : { relation : 'lab_ingestby'} }"><input
+						type="hidden" ng-model="vm.ingest" ng-init="vm.ingest=true">{{pro.admin_user.fullName}}</td>
+
+					<div ng-if="vm.processed == false">
+						<td class="extra-small">processed by..</td>
+					</div>
+					<div ng-if="!vm.ingest">
+						<td class="extra-small">ingested by..</td>
+					</div> -->
+
+					<!-- <div ng-repeat="ing in workOrder.workOrdersAdminRelations">
+						<div ng-if="ing.relation_type.relation == 'lab_ingestby'">
+							<td class="extra-small"><input type="hidden" ng-model="vm.ingest" ng-value="true">{{ing.admin_user.fullName}}</td>
+						</div>
+					</div>
+					<div ng-if="vm.processed == false">
+						<td class="extra-small">processed by..</td>
+					</div>
+					<div ng-if="vm.ingest == false">
+						<td class="extra-small">ingested by..</td>
+					</div> -->
+					<!-- <td class="extra-small">processed by..</td>
 					<td class="extra-small">ingested by...</td>
-					
-					
+			 -->
+
 					<td class="extra-small">{{workOrder.completionDate |
 						date:'mediumDate'}}</td>
-					
-					
-					
-					
-					
-					
-				<!-- 	<td class="small">{{workOrder.requestDate |
+
+
+
+
+
+
+					<!-- 	<td class="small">{{workOrder.requestDate |
 						date:'mediumDate'}}</td>
 					<td class="small">{{workOrder.requestDescription}}</td>
 
@@ -204,7 +207,7 @@
 							<button type="submit"
 								ui-sref="work-order-detail({id:workOrder.id})"
 								class="btn btn-info btn-sm">
-								<span class="glyphicon glyphicon-eye-open"></span> 
+								<span class="glyphicon glyphicon-eye-open"></span>
 							</button>
 							<button type="submit"
 								ui-sref="work-order.edit({id:workOrder.id})"

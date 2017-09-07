@@ -16,14 +16,15 @@
 
 		var vm = this;
 		vm.talent = talents;
-
+	
 		console.log("Mail Controller called..Total Talents or Execs : "
 				+ vm.talent.length);
 		console.log("Total Keys in JSON object 1:   "
 				+ Object.keys(vm.talent[0]).length);
 	
 		vm.individual = false;
-	
+		vm.mailerList = [];
+
 		vm.keyCount = Object.keys(vm.talent[0]).length;
 		// console.log(JSON.stringify(vm.talent))
 		// + JSON.stringify($scope.roles));
@@ -96,6 +97,11 @@
 				console.log("in for each");
 				obj.selected = true;
 			})
+			
+			for(var i=0;i<vm.talent.length;i++){
+				console.log("Adding name : ",vm.talent[i].contact.fullName);
+				vm.mailerList.push(vm.talent[i]);
+			}
 		};
 
 		vm.clearAll = function() {
@@ -103,7 +109,9 @@
 			angular.forEach(vm.checkBOX, function(obj) {
 				console.log("in for each");
 				obj.selected = false;
+				
 			})
+			vm.mailerList = [];
 		};
 		vm.close = function() {
 
@@ -124,8 +132,7 @@
 
 			console.log("vm.to : " + vm.to);
 		};
-		vm.mailerList = [];
-
+		
 		vm.temp = [];
 		vm.save = function() {
 			

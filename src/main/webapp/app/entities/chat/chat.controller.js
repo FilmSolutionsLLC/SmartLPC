@@ -9,6 +9,31 @@
 	function ChatController($http, Principal, $stateParams, $rootScope, $scope,
 			$state, translatePartialLoader) {
 		var vm = this;
+		
+		
+		vm.arrToSplit = "2014-06-02 06:29:51 Elliot O. Rodger’s Killings in California Followed Years of Withdrawal http://t.co/quDK3UqX2Z                                                           nytimes";
+		
+		console.log("arrToSplit : ",vm.arrToSplit);
+		//vm.breakIT = [];
+		vm.breakIT = vm.arrToSplit.split(/\s+/);
+		
+		vm.arr1  = vm.breakIT[0].trim().concat(" ").concat(vm.breakIT[1]);
+		vm.arr2 = "";
+		
+		for(var i = 2;i<vm.breakIT.length - 2;i++){
+			console.log("Index : "+i + " : "+vm.breakIT[i]);
+			vm.arr2 = vm.arr2.concat(vm.breakIT[i]).concat(" ");
+		}
+		vm.arr3 = vm.breakIT[vm.breakIT.length-2];
+		vm.arr4 = vm.breakIT[vm.breakIT.length-1];
+		
+		
+		console.log("arr1 : ",vm.arr1);
+		console.log("arr2 : ",vm.arr2);
+		console.log("arr3 : ",vm.arr3);
+		console.log("arr4 : ",vm.arr4);
+		
+		
 		vm.hello = [];
 		console.log("Chat Controller - Smart LPC");
 		vm.currentAccount = null;
@@ -34,7 +59,7 @@
 							if (angular.equals(message, "")) {
 							} else {
 								vm.hello = message.split(":")
-								//vm.chats.push(message);
+								// vm.chats.push(message);
 								
 								if (vm.hello[0].trim() === vm.currentAccount.fullName.trim()) {
 									vm.chatOwner = true;
@@ -56,17 +81,13 @@
 									+ "</li>");
 						
 								}
-							/*	vm.chats.push({
-									date: new Date(),
-									owner: vm.hello[0],
-									message: vm.hello[1]
-								})
-								if (angular.equals(vm.hello[0],
-										vm.currentAccount.fullName)) {
-									vm.chatOwner = true;
-								} else {
-									vm.chatOwner = false;
-								}*/
+							/*
+							 * vm.chats.push({ date: new Date(), owner:
+							 * vm.hello[0], message: vm.hello[1] }) if
+							 * (angular.equals(vm.hello[0],
+							 * vm.currentAccount.fullName)) { vm.chatOwner =
+							 * true; } else { vm.chatOwner = false; }
+							 */
 							}
 						});
 					});

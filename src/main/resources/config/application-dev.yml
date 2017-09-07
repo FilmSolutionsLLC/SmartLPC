@@ -52,6 +52,13 @@ spring:
                 path:
                   logs: target/elasticsearch/log
                   data: target/elasticsearch/data
+                cluster:
+                  routing:
+                    allocation:
+                      disk:
+                        threshold_enabled: false
+ 
+   
     mail:
         host: 10.0.1.11
         port: 25
@@ -99,7 +106,7 @@ jhipster:
             host: localhost
             port: 5000
             queueSize: 512
-
+            
 
 
 ingest:
@@ -114,3 +121,7 @@ project:
         path: /opt/rename/
     logo:
         path: /opt/logos/
+
+largest:
+  brick: /mnt/opt/scripts/LargestBrick
+     

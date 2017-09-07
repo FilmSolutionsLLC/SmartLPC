@@ -19,6 +19,8 @@
         vm.search = search;
         vm.searchQuery = pagingParams.search;
         vm.currentSearch = pagingParams.search;
+        vm.processed = false;
+        vm.ingest = false;
         vm.loadAll();
 
         function loadAll() {
@@ -49,6 +51,7 @@
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
                 vm.workOrders = data;
+                console.log("1st entry ",vm.workOrders[0]);
                 vm.page = pagingParams.page;
                 
             }
@@ -92,5 +95,9 @@
             vm.transition();
         }
 
+        $scope.myFilter = function (item) { 
+            return item.relation_type.relation === 'lab_processed'; 
+        };
     }
+    
 })();

@@ -67,7 +67,7 @@
                 vm.id = vm.selected.id;
                 $rootScope.isTemplate = true;
                 $timeout(function () {
-                    $state.go('projects.edit', {id: vm.id}, {reload: true});
+                    $state.go('projects.template-add', {id: vm.id}, {reload: true});
                 }, 0);
 
                 //$state.go('projects.edit', {id: vm.selected.id}, {reload: true});

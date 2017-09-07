@@ -36,28 +36,28 @@
         <table class="jh-table table table-striped">
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                <th jh-sort-by="id" class="small"><span translate="global.field.id">ID</span> <span
+                <th jh-sort-by="id" class="extra-small"><span translate="global.field.id">ID</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="name" class="small"><span translate="smartLpcApp.projects.name">Name</span> <span
+                <th jh-sort-by="name" class="extra-small"><span translate="smartLpcApp.projects.name">Name</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
 
-                <th jh-sort-by="status.textValue" class="small"><span
+                <th jh-sort-by="status.textValue" class="extra-small"><span
                     translate="smartLpcApp.projects.status">status</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
 
-                <th jh-sort-by="name" class="small">Main Contact<span
+                <th jh-sort-by="name" class="extra-small">Main Contact<span
                     class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="name" class="small">Office<span
+                <th jh-sort-by="name" class="extra-small">Office<span
                     class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="name" class="small">Email<span
+                <th jh-sort-by="name" class="extra-small">Email<span
                     class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="name" class="small">Unit Publicist<span
+                <th jh-sort-by="name" class="extra-small">Unit Publicist<span
                     class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="name" class="small">Unit Publicist Mobile<span
+                <th jh-sort-by="name" class="extra-small">Unit Publicist Mobile<span
                     class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="name" class="small">Unit Publicist Office<span
+                <th jh-sort-by="name" class="extra-small">Unit Publicist Office<span
                     class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="name" class="small">Unit Publicist Email<span
+                <th jh-sort-by="name" class="extra-small">Unit Publicist Email<span
                     class="glyphicon glyphicon-sort"></span></th>
 
                 <th></th>
@@ -65,29 +65,29 @@
             </thead>
             <tbody>
             <tr ng-repeat="projects in vm.projectsDTO track by projects.projects.id">
-                <td><a ui-sref="projects-detail({id:projects.projects.id})" class="small">{{projects.projects.id}}</a>
+                <td class="extra-small"><a ui-sref="projects-detail({id:projects.projects.id})" class="small">{{projects.projects.id}}</a>
                 </td>
-                <td class="small">{{projects.projects.name}}</td>
+                <td class="extra-small">{{projects.projects.name}}</td>
 
-                <td class="small">
+                <td class="extra-small">
                     <a ui-sref="lookups-detail({id:projects.projects.status.id})">{{projects.projects.status.textValue}}</a>
                 </td>
 
-                <td class="small">
+                <td class="extra-small">
                     <a ui-sref="contacts-detail({id:projects.projectRoles[0].contact.id})">{{projects.projectRoles[0].contact.fullName}}</a>
                 </td>
-                <td class="small">{{projects.projectRoles[0].contact.phoneOffice}}</td>
-                <td class="small">{{projects.projectRoles[0].contact.email}}</td>
+                <td class="extra-small">{{projects.projectRoles[0].contact.phoneOffice}}</td>
+                <td class="extra-small">{{projects.projectRoles[0].contact.email}}</td>
 
-                <td class="small">
+                <td class="extra-small">
                     <a ui-sref="contacts-detail({id:projects.projectRoles[1].contact.id})">{{projects.projectRoles[1].contact.fullName}}</a>
                 </td>
-                <td class="small">{{projects.projectRoles[1].contact.phoneMobile}}
+                <td class="extra-small">{{projects.projectRoles[1].contact.phoneMobile}}
                 </td>
-                <td class="small">{{projects.projectRoles[1].contact.phoneOffice}}</td>
-                <td class="small">{{projects.projectRoles[1].contact.email}}</td>
+                <td class="extra-small">{{projects.projectRoles[1].contact.phoneOffice}}</td>
+                <td class="extra-small">{{projects.projectRoles[1].contact.email}}</td>
 
-                <td class="text-right small">
+                <td class="text-right extra-small">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 ui-sref="projects-detail({id:projects.projects.id})"

@@ -245,9 +245,17 @@ public class ProjectsServiceImpl implements ProjectsService {
         // change project name in database
         currentTenantIdentifierResolver.setTenant(Constants.MASTER_DATABASE);
         Projects result = projectsRepository.save(projects);
-        projectsSearchRepository.save(result);
-
-
+        System.out.println("--------------------------------------------------------");
+        
+        log.info("Saving into project elasticsearch repository : " +result.getId());
+        
+        Projects existingElastic = projectsSearchRepository.findOne(result.getId());
+        log.info("Getting existing contact from elastic search: "+existingElastic.getId());
+        
+        Projects saveResult = projectsSearchRepository.save(projects);
+        log.info("Saved or updated elasticsearch Repo : " +saveResult.getId());
+        
+        System.out.println("--------------------------------------------------------");
         Set<ProjectRoles> projectRoleses = new HashSet<>();
         Set<ProjectPurchaseOrders> projectPurchaseOrderses = new HashSet<>();
         Set<ProjectLabTasks> projectLabTaskses = new HashSet<>();

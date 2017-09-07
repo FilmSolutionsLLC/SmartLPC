@@ -33,23 +33,23 @@
     </div>
     <br/>
     <div class="table-responsive">
-        <table class="jh-table table table-condensed">
+        <table class="jh-table table table-hover">
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
 
-                <th jh-sort-by="id" class="small">ID <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="requestDate" class="small">Project Name<span class="glyphicon glyphicon-sort"></span>
+                <th jh-sort-by="id" class="extra-small">ID <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="requestDate" class="extra-small">Project Name<span class="glyphicon glyphicon-sort"></span>
                 </th>
-                <th jh-sort-by="requestDescription" class="small">PO#<span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="poRecord" class="small">Date <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="invoiced" class="small">Type <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="durationOfService" class="small">Work Description<span
+                <th jh-sort-by="requestDescription" class="extra-small">PO#<span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="poRecord" class="extra-small">Date <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="invoiced" class="extra-small">Type <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="durationOfService" class="extra-small">Work Description<span
                     class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="type.textValue" class="small">Status<span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="status.textValue" class="small">Time(Hours)<span
+                <th jh-sort-by="type.textValue" class="extra-small">Status<span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="status.textValue" class="extra-small">Time(Hours)<span
                     class="glyphicon glyphicon-sort"></span></th>
 
-                <th jh-sort-by="project.name" class="small">Assigned To <span
+                <th jh-sort-by="project.name" class="extra-small">Assigned To <span
                     class="glyphicon glyphicon-sort"></span></th>
 
                 <th></th>
@@ -66,12 +66,12 @@
                 }">
 
 
-                <td class="col-xs-1 small">
+                <td class="col-xs-1 extra-small">
                     <div ng-if="workOrder.id != HIDE">
                         <a ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a>
                     </div>
                 </td>
-                <td class="col-xs-2 small">
+                <td class="col-xs-2 extra-small">
                     <div ng-if="workOrder.id == HIDE">
                         <strong>{{workOrder.project_name}}</strong>
                     </div>
@@ -79,20 +79,20 @@
                         {{workOrder.project_name}}
                     </div>
                 </td>
-                <td class="col-xs-1 small">
+                <td class="col-xs-1 extra-small">
                     <div ng-if="workOrder.id != HIDE">
                         {{workOrder.po}}
                     </div>
                 </td>
-                <td class="col-xs-1 small">{{workOrder.date}}</td>
-                <td class="small">{{workOrder.type}}</td>
-                <td class="small">{{workOrder.workDesc}}</td>
-                <td class="col-xs-1 small">{{workOrder.status}}</td>
-                <td class="small">{{workOrder.time}}</td>
-                <td class="small">{{workOrder.assignedTo}}</td>
+                <td class="col-xs-1 extra-small">{{workOrder.date}}</td>
+                <td class="extra-small">{{workOrder.type}}</td>
+                <td class="extra-small">{{workOrder.workDesc}}</td>
+                <td class="col-xs-1 extra-small">{{workOrder.status}}</td>
+                <td class="extra-small">{{workOrder.time}}</td>
+                <td class="extra-small">{{workOrder.assignedTo}}</td>
 
 
-                <td class="text-right small">
+                <td class="text-right extra-small">
                     <div ng-if="workOrder.id != HIDE">
 
 

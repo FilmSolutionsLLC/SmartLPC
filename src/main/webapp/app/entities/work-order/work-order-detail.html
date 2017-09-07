@@ -230,7 +230,7 @@
 
 			<div class="col-sm-2">
 				<div
-					ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder1'}}">
+					ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder1'}}">
 
 					<input id="field_vm.workOrder.reminderMsg1.admin_user"
 						name="textinput" type="text" class="form-control input-sm"
@@ -253,7 +253,7 @@
 			<div class="col-sm-2">
 
 				<div
-					ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder2'}}">
+					ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder2'}}">
 
 					<input id="field_vm.workOrder.reminderMsg2.admin_user"
 						name="textinput" type="text" class="form-control input-sm"
@@ -276,7 +276,7 @@
 			</div>
 			<div class="col-sm-2">
 				<div
-					ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder3'}}">
+					ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder3'}}">
 
 					<input id="field_vm.workOrder.reminderMsg3.admin_user"
 						name="textinput" type="text" class="form-control input-sm"
@@ -288,6 +288,12 @@
 	<hr>
 	<h4>Completed Task</h4>
 
+
+
+
+
+		<!-- WORKING CODE -->
+<!-- 
 	<div class="row">
 
 		<label class="col-md-1 control-label small">Verified</label>
@@ -359,8 +365,102 @@
 					ng-model="wo.admin_user.fullName" readonly>
 			</div>
 		</div>
+	</div> -->
+		
+		
+		<div class="row">
+
+		<label class="col-md-1 control-label small">Verified</label>
+		<div class="col-sm-2">
+			<div
+				ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_verified'}}">
+
+				<input id="field_vm.workOrder.verified" name="textinput" type="text"
+					class="form-control input-sm" ng-model="wo.admin_user.fullName"
+					readonly>
+			</div>
+		</div>
+
+		<label class="col-md-1 control-label small" for="textinput">Processed</label>
+		<div class="col-sm-2">
+			<div
+				ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_processed'}}">
+
+				<input id="field_vm.workOrder.processed" name="textinput"
+					type="text" class="form-control input-sm"
+					ng-model="wo.admin_user.fullName" readonly>
+			</div>
+		</div>
+
+		<label class="col-md-1 control-label small" for="textinput">Ingest
+			By</label>
+		<div class="col-sm-2">
+			<div
+				ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_ingestby'}}">
+
+				<input id="field_vm.workOrder.ingestBy" name="textinput" type="text"
+					class="form-control input-sm" ng-model="wo.admin_user.fullName"
+					readonly>
+			</div>
+		</div>
 	</div>
+	<br>
+	<div class="row">
+		<label class="col-md-1 control-label small" for="textinput">Print</label>
+		<div class="col-sm-2">
+			<div
+				ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_print'}}">
+
+				<input id="field_vm.workOrder.print" name="textinput" type="text"
+					class="form-control input-sm" ng-model="wo.admin_user.fullName"
+					readonly>
+			</div>
+		</div>
+
+
+		<label class="col-md-1 control-label small" for="textinput">Upload/HDD
+			Transfer</label>
+		<div class="col-sm-2">
+			<div
+				ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_upload'}}">
+
+				<input id="field_vm.workOrder.hddTr" name="textinput" type="text"
+					class="form-control input-sm" ng-model="wo.admin_user.fullName"
+					readonly>
+			</div>
+		</div>
+
+		<label class="col-md-1 control-label small" for="textinput">Archived</label>
+		<div class="col-sm-2">
+			<div
+				ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_archived'}}">
+
+				<input id="field_vm.workOrder.archviewd" name="textinput"
+					type="text" class="form-control input-sm"
+					ng-model="wo.admin_user.fullName" readonly>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
 	<hr>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	<h4>Work</h4>

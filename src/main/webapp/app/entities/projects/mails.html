@@ -14,10 +14,15 @@
 
 
 			<div class="col-xs-12 no-padding-right">
+		
 				<h4>
 					<strong>Mail Box</strong>
 				</h4>
-
+				<div ng-show="!vm.individual">
+				
+					<button type="button" ng-click="vm.clearAll()" class="btn btn-danger btn-xs pull-right">Clear All <span class="glyphicon glyphicon-remove"></span></button><button type="button" ng-click="vm.checkAll()" class="btn btn-success btn-xs pull-right">Select All <span class="glyphicon glyphicon-ok"></span></button>
+				</div>
+			<br>
 				<table class="jhi-table table table-striped">
 					<tr>
 						<td class="small">TO</td>
@@ -34,18 +39,20 @@
 							<div ng-show="!vm.individual">
 
 								<div ng-show="vm.keyCount < 50">
-									<ui-select multiple ng-model="vm.mailerList" theme="bootstrap"
-										ng-disabled="ctrl.disabled" close-on-select="false"
-										style="width: 750px;" title="Choose a color"> <ui-select-match
+									<ui-select multiple ng-model="vm.mailerList" allow-clear="true"
+										theme="bootstrap" ng-disabled="ctrl.disabled"
+										close-on-select="false" style="width: 750px;"
+										title="Choose a contact"> <ui-select-match
 										placeholder="Select talents...">{{$item.contact.fullName}}</ui-select-match>
 									<ui-select-choices
 										repeat="tags in vm.talent |  filter: { relationship_type: 'PKO_Tag'} | filter:$select.search">{{tags.contact.fullName}}</ui-select-choices>
 									</ui-select>
 								</div>
 								<div ng-show="vm.keyCount > 50">
-									<ui-select multiple ng-model="vm.mailerList" theme="bootstrap"
-										ng-disabled="ctrl.disabled" close-on-select="false"
-										style="width: 750px;" title="Choose a color"> <ui-select-match
+									<ui-select multiple ng-model="vm.mailerList" allow-clear="true"
+										theme="bootstrap" ng-disabled="ctrl.disabled"
+										close-on-select="false" style="width: 750px;"
+										title="Choose a contact"> <ui-select-match
 										placeholder="Select execs...">{{$item.contact.fullName}}</ui-select-match>
 									<ui-select-choices
 										repeat="tags in vm.talent | filter:$select.search">{{tags.contact.fullName}}</ui-select-choices>

@@ -12,6 +12,8 @@
 			$stateParams, entity, Projects, Lookups, Contacts, User,
 			Departments, Storage_Disk, $http) {
 
+		
+		console.log("Project Add Controller");
 		$scope.addImages = function() {
 			var f = document.getElementById('file').files[0], r = new FileReader();
 			$scope.logos = f;
@@ -50,6 +52,18 @@
 				vm.projects = result;
 			});
 		};
+		vm.largestBrick = {};
+		console.log("Getting largest brick");
+		$http({
+			method : 'GET',
+			url : 'api/largest/storage-disks'
+		}).then(function successCallback(response) {
+			vm.largestBrick = response.data;
+			console.log("Largest Brick ", vm.largestBrick);
+			vm.projects.imageLocation = vm.largestBrick;
+		}, function errorCallback(response) {
+			
+		});
 
 		vm.status = {};
 		$http({
@@ -91,6 +105,7 @@
 
 		});
 
+		
 		var onSaveSuccess = function(result) {
 			console.log('saving project...');
 			$scope.$emit('smartLpcApp:projectsUpdate', result);
@@ -117,7 +132,7 @@
 		vm.projects.fullName = '';
 		vm.projects.alfrescoTitle1 = '';
 		vm.projects.alfrescoTitle2 = '';
-
+		
 		String.prototype.toCamelCase = function() {
 			return this.replace(/^([A-Z])|\s(\w)/g, function(match, p1, p2,
 					offset) {
@@ -256,9 +271,12 @@
 		};
 
 		vm.removeTalent = function(index) {
+			console.log("removing talent : " + index);
 			vm.talents.splice(index, 1);
 			$scope.talents.splice(index, 1)
 		};
+		
+		
 		$scope.execs = [];
 		vm.addExec = function() {
 			var exec = $scope.execs.length + 1;
@@ -272,7 +290,9 @@
 		}
 
 		vm.talents = [];
+		
 		vm.execss = [];
+	
 		vm.relatedContact = [];
 
 		$rootScope
@@ -381,7 +401,8 @@
 
 					});
 
-					console.log("Related Contact Length : ",vm.relatedContact.length );
+					console.log("Related Contact Length : ",
+							vm.relatedContact.length);
 				} else if (angular.equals(vm.currrentOBJ.elementID,
 						'field_vm.projects.execs')) {
 					vm.execss.push({

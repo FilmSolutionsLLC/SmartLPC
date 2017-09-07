@@ -416,5 +416,19 @@ public class WorkOrderResource {
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/processing/work-orders");
 		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
 	}
+	
+	
+	
+	// test work order 
+	
+	@RequestMapping(value = "/hhhh/www", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public WorkOrder hello() throws URISyntaxException {
+		currentTenantIdentifierResolver.setTenant(SLAVE);
+
+		
+		WorkOrder wo = workOrderRepository.findOne((long) 9);
+		return wo;
+	}
 
 }

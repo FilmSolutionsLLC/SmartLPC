@@ -4,11 +4,11 @@
 	angular.module('smartLpcApp').controller('ProjectsDetailController',
 			ProjectsDetailController);
 
-	ProjectsDetailController.$inject = ['$uibModal', '$scope', '$rootScope',
+	ProjectsDetailController.$inject = ['$state','$uibModal', '$scope', '$rootScope',
 			'$stateParams', 'entity', 'Projects', 'Lookups', 'Contacts',
 			'User', 'Departments', 'Storage_Disk' ];
 
-	function ProjectsDetailController($uibModal,$scope, $rootScope, $stateParams, entity,
+	function ProjectsDetailController($state,$uibModal,$scope, $rootScope, $stateParams, entity,
 			Projects, Lookups, Contacts, User, Departments, Storage_Disk) {
 		var vm = this;
 		vm.projectsDTO = entity;
@@ -129,6 +129,11 @@
                 }
             })
 		};
+		
+		vm.addSimilar  = function(id) {
+			console.log("similar to add id :",id);
+			$state.go('projects.template-add', {id: id}, {reload: true});
+		}
 		
 	}
 })();

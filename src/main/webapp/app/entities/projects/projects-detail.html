@@ -12,10 +12,16 @@
 				ui-sref="projects.edit({id:vm.projectsDTO.projects.id})"
 				ui-sref-opts="{reload: true, notify: true}"
 				class="btn btn-xs btn btn-primary">Edit</button>
-			<button type="submit"
+				
+			<!-- <button type="submit"
 				ui-sref="projects.edit({id:vm.projectsDTO.projects.id})"
 				ui-sref-opts="{reload: true, notify: true}"
 				class="btn btn-xs btn btn-primary">Add Similar</button>
+				 -->
+				<button type="button"
+				ng-click="vm.addSimilar(vm.projectsDTO.projects.id)"
+				class="btn btn-xs btn btn-primary">Add Similar</button>
+				
 			<button type="button" onclick="window.history.back()"
 				class="btn btn-xs btn btn-danger">Cancel</button>
 		</div>

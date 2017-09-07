@@ -104,14 +104,14 @@ public class WorkOrderServiceImpl implements WorkOrderService {
         log.debug("Request to get WorkOrder : {}", id);
         currentTenantIdentifierResolver.setTenant(SLAVE);
         WorkOrder workOrder = workOrderRepository.findOne(id);
-        final List<WorkOrdersAdminRelation> workOrdersAdminRelations = workOrdersAdminRelationRepository.findByWorkOrder(workOrder);
+        //final List<WorkOrdersAdminRelation> workOrdersAdminRelations = workOrdersAdminRelationRepository.findByWorkOrder(workOrder);
         final List<WorkOrderAbcFile> workOrderAbcFiles = workOrderAbcFileRepository.findByWorkOrder(workOrder);
         final List<WorkOrderAbcHdd> workOrderAbcHdds = workOrderAbcHddRepository.findByWorkOrder(workOrder);
 
-        final Set<WorkOrdersAdminRelation> workOrdersAdminRelationSet = new HashSet<>(workOrdersAdminRelations);
+        //final Set<WorkOrdersAdminRelation> workOrdersAdminRelationSet = new HashSet<>(workOrdersAdminRelations);
         final Set<WorkOrderAbcFile> workOrderAbcFileSet = new HashSet<>(workOrderAbcFiles);
         final Set<WorkOrderAbcHdd> workOrderAbcHddSet = new HashSet<>(workOrderAbcHdds);
-        final WorkOrderDTO workOrderDTO = new WorkOrderDTO(workOrder, workOrderAbcFileSet, workOrderAbcHddSet, workOrdersAdminRelationSet);
+        final WorkOrderDTO workOrderDTO = new WorkOrderDTO(workOrder, workOrderAbcFileSet, workOrderAbcHddSet, null);
 
         return workOrderDTO;
     }

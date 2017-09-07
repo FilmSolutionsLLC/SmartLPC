@@ -55,6 +55,7 @@ public interface WorkOrderRepository extends JpaRepository<WorkOrder, Long> {
 
 
     //PRCESSING LOG
+    //@EntityGraph(attributePaths="workOrdersAdminRelations")
     @Query("select workOrder from WorkOrder workOrder where workOrder.processing_pko_flag.id = 219 ORDER BY workOrder.id DESC")
     Page<WorkOrder> findByProcessing_pko_flag(Pageable pageable);
 

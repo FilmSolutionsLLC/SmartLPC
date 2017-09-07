@@ -219,7 +219,10 @@ public class WorkOrder implements Serializable {
     @JoinColumn(name = "audited_by")
     private User auditedBy;
 
-
+  
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="workOrder",fetch = FetchType.EAGER) 
+    Set<WorkOrdersAdminRelation> workOrdersAdminRelations;
+    
     public Long getId() {
         return id;
     }
@@ -707,7 +710,14 @@ public class WorkOrder implements Serializable {
     public void setAuditedBy(User user) {
         this.auditedBy = user;
     }
- 
+
+    public Set<WorkOrdersAdminRelation> getWorkOrdersAdminRelations() {
+		return workOrdersAdminRelations;
+	}
+
+	public void setWorkOrdersAdminRelations(Set<WorkOrdersAdminRelation> workOrdersAdminRelations) {
+		this.workOrdersAdminRelations = workOrdersAdminRelations;
+	}
 
 	@Override
     public boolean equals(Object o) {

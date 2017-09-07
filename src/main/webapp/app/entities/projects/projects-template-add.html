@@ -29,9 +29,11 @@
         <label class="col-xs-1 control-label small" for="field_name">Project Name
         </label>
 
-        <div class="col-xs-2">
-            <input id="field_name" name="textinput" type="text" placeholder="" class="form-control input-sm" ng-model="vm.projectsDTO.projects.name" readonly>
-        </div>
+       <div class="col-xs-2">
+			<input id="field_name" name="textinput" type="text" placeholder=""
+				class="form-control input-sm text-uppercase"
+				ng-model="vm.projects.name" ng-change="vm.setProjectName()">
+		</div>
 
         <div class="col-md-8">
             <label class="small">
@@ -56,7 +58,7 @@
         <label class="col-md-1 control-label small" for="field_fullName">FullName/New Name
         </label>
         <div class="col-sm-2">
-            <input id="field_fullName" type="text" placeholder="" ng-model="vm.projectsDTO.projects.fullName" class="form-control input-sm" readonly>
+            <input id="field_fullName" type="text" placeholder="" ng-model="vm.projects.fullName" class="form-control input-sm" >
         </div>
 
         <label class="col-md-1 control-label small" for="field_vm.projects.owner">Owner</label>
@@ -78,24 +80,30 @@
 
     </div>
 
-    <div class="row">
-        <label class="col-md-1 control-label small" for="field_alfrescoTitle1">Alfresco Title 1</label>
-        <div class="col-sm-2">
-            <input id="field_alfrescoTitle1" name="textinput" type="text" ng-model="vm.projectsDTO.projects.alfrescoTitle1" class="form-control input-sm" readonly>
-        </div>
+   
+	<div class="row">
+		<label class="col-md-1 control-label small" for="field_alfrescoTitle1">Alfresco
+			Title 1</label>
+		<div class="col-sm-2">
+			<input id="field_alfrescoTitle1" name="textinput" type="text"
+				ng-model="vm.projects.alfrescoTitle1" class="form-control input-sm">
+		</div>
 
-        <label class="col-md-1 control-label small" for="field_alfrescoTitle2">Alfresco Title 2</label>
-        <div class="col-sm-2">
-            <input id="field_alfrescoTitle2" name="textinput" type="text" ng-model="vm.projectsDTO.projects.alfrescoTitle2" class="form-control input-sm" readonly>
-        </div>
+		<label class="col-md-1 control-label small" for="field_alfrescoTitle2">Alfresco
+			Title 2</label>
+		<div class="col-sm-2">
+			<input id="field_alfrescoTitle2" name="textinput" type="text"
+				ng-model="vm.projects.alfrescoTitle2"
+				class="form-control input-sm text-capitalize">
+		</div>
 
-    </div>
+	</div>
 
     <div class="row">
         <label class="col-md-1 control-label small" for="field_imageLocation">Image Location
         </label>
         <div class="col-sm-2">
-            <div class="input-group">
+            <!-- <div class="input-group">
 
                 <span class="input-group-btn">
 					<button href="#addDepartment" id="openBtn" data-toggle="modal"
@@ -106,7 +114,10 @@
                 <select class="form-control input-sm" id="field_imageLocation" name="imageLocation" ng-model="vm.projectsDTO.projects.imageLocation" ng-options="storage_Disk as storage_Disk.name for storage_Disk in vm.storage_disks track by storage_Disk.id">
                     <option value=""></option>
                 </select>
-            </div>
+            </div> -->
+            <input id="field_imageLocation" name="textinput" type="text"
+					ng-model="vm.projects.imageLocation.name"
+					class="form-control input-sm" readonly>
 
         </div>
 
@@ -931,7 +942,7 @@
 					class=" glyphicon glyphicon-info-sign small text-primary"></span></a> |
                 <a href="" ng-click="vm.sendIndividualMail(tags)"><span
 					class=" glyphicon glyphicon-envelope small text-success"></span></a> |
-                <a href="" ng-click="vm.removeTalent(tags.id)"><span
+                <a href="" ng-click="vm.removeTalent($index)"><span
 					class=" glyphicon glyphicon-trash small text-danger"></span></a></td>
         </tr>
     </table>
@@ -954,9 +965,7 @@
     <table class="table table-hover">
         <tr>
             <th>#</th>
-            <th class="small"><a href
-				ng-click="vm.openMultipleExecs('multipleExecs')">Add Multiple
-					Execs</a></th>
+            <th></th>
             <th class="small">Username</th>
             <th class="small">Password</th>
             <th class="small">Download</th>
