@@ -60,7 +60,7 @@
                                                       class="extra-small">type</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="companyContact.fullName"><span translate="smartLpcApp.contacts.companyContact"
-                                                               class="small">companyContact</span>
+                                                               class="extra-small">companyContact</span>
                     <span class="glyphicon glyphicon-sort"></span></th>
                 <th></th>
             </tr>
@@ -86,6 +86,13 @@
                 </td>
                 <td class="text-right extra-small">
                     <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                ui-sref="contacts.project-permission({id:contacts.id})" ui-sref-opts="{reload: true, notify: true}"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-film"></span>
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
+                        </button>
+
                         <button type="submit"
                                 ui-sref="contacts-detail({id:contacts.id})" ui-sref-opts="{reload: true, notify: true}"
                                 class="btn btn-info btn-sm">

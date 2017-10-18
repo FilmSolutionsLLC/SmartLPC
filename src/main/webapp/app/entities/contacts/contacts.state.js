@@ -98,7 +98,7 @@
 
 											return Contacts.get({
 												id : $stateParams.id
-											});
+											}).$promise;
 										} ]
 							}
 						})
@@ -200,7 +200,7 @@
 													.addPart('contacts');
 											return $translate.refresh();
 										} ],
-								
+
 
 								entity : [ '$stateParams', 'Contacts',
 										function($stateParams, Contacts) {
@@ -277,17 +277,17 @@
 												// relatedContacts: null,
 												username : null,
 												password : null,
-												full_name : null,
+												fullName : null,
 												title : null,
 												email : null,
-												email_2 : null,
-												phone_office : null,
-												phone_alternate : null,
-												phone_mobile : null,
-												phone_fax : null,
-												street_address : null,
-												street_address_2 : null,
-												street_address_3 : null,
+												email2 : null,
+												phoneOffice : null,
+												phoneAlternate : null,
+												phoneMobile : null,
+												phoneFax : null,
+                                                streetAddress : null,
+                                                streetAddress2 : null,
+                                                streetAddress3 : null,
 												city : null,
 												state : null,
 												zipcode : null,
@@ -295,26 +295,26 @@
 												website : null,
 												notes : null,
 												source_id : null,
-												created_date : null,
-												updated_date : null,
+                                                createdDate : null,
+												updatedDate : null,
 												dashboard : null,
-												internal_only_access : null,
-												adhoc_expires_in : null,
-												adhoc_limit_views : null,
-												adhoc_download : null,
-												adhoc_watermark_text : null,
-												login_ip : null,
-												login_attempt : null,
-												attempt_based_login : null,
-												ip_based_login : null,
+                                                internalAccessOnly : null,
+                                                adhocExpiresIn : null,
+                                                adhocLimitViews : null,
+                                                adhocDownload : null,
+                                                adhocWatermarkText : null,
+                                                loginIp : null,
+                                                loginAttempt : null,
+                                                attemptBasedLogin : null,
+                                                ipBasedLogin : null,
 												resetpassword : null,
-												company_contact_id : null,
-												created_by_admin_user_id : null,
-												updated_by_admin_user_id : null,
-												global_restart_columns : null,
-												global_restart_images_per_page : null,
-												global_restart_image_size : null,
-												global_restart_time : null,
+                                                companyContact : null,
+                                                createdByAdmin : null,
+                                                updatedByAdmin : null,
+                                                globalRestartColumns : null,
+                                                globalRestartImagesPerPage : null,
+                                                globalRestartImageSize : null,
+                                                globalRestartTime : null,
 												id : null
 											};
 										}
@@ -479,11 +479,11 @@
 											// 'Contacts', function
 											// ($stateParams, Contacts) {
 											console
-													.log("Project Permission State Called");
+													.log("Project Permission State Called for ID : "+ $stateParams.id);
 
 											return Contacts.get({
 												id : $stateParams.id
-											});
+											}).$promise;
 										} ]
 							}
 						})
@@ -511,7 +511,7 @@
 												}).result.then(function() {
 											$state.go('contacts.add', null, {
 												reload : true
-											});
+											});xz
 										}, function() {
 											$state.go('^');
 										});

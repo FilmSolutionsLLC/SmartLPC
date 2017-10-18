@@ -23,6 +23,7 @@
 		vm.searchQuery = pagingParams.search;
 		vm.currentSearch = pagingParams.search;
 		vm.loadAll();
+		
 		console.log("No of items per page : "
 				+ paginationConstants.itemsPerPage);
 		function loadAll() {
@@ -62,6 +63,7 @@
 				vm.queryCount = vm.totalItems;
 				vm.contacts = data;
 				vm.page = pagingParams.page;
+				console.log("Contacts ",vm.contacts);
 			}
 
 			function onError(error) {
@@ -131,6 +133,6 @@
 		 * 'http://filmsolutions.com/wp-content/uploads/1Logo.png', dir : 'auto'
 		 * }); setTimeout(function() { notification.close(); }, 30000); });
 		 */
-
+		
 	}
 })();

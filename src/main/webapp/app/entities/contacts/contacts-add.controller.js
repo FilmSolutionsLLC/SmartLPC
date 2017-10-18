@@ -56,17 +56,15 @@
 				console.log("null rootscope");
 
 			} else {
-				console.log("not null");
 
 				vm.currrentOBJ = $rootScope.relationships;
-				console.log("========> " + JSON.stringify(vm.currentOBJ));
+				//console.log("========> " + JSON.stringify(vm.currentOBJ));
 				if (angular.equals(vm.currrentOBJ.elementID,
 						'field_vm.contacts.contactCompany')) {
-					console.log("found equal");
+					//console.log("found equal");
 
 					vm.contacts.companyContact = vm.currrentOBJ.data;
-					console.log(JSON.stringify(vm.contacts.companyContact));
-					console.log(vm.contacts.companyContact.fullName);
+
 				} else if (angular.equals(vm.currrentOBJ.elementID,
 						'relatedContact')) {
 					console.log("count : " + vm.count);
@@ -78,9 +76,6 @@
 						"contact_b" : vm.currrentOBJ.data
 					});
 					vm.count++;
-
-					console.log("related Contacts size "
-							+ vm.relatedContacts.length);
 				} else {
 					console.log("not equal..");
 				}
@@ -89,7 +84,7 @@
 
 		vm.departmentss = Departments.query();
 		vm.users = User.query();
-		vm.contactss = Contacts.query();
+		//vm.contactss = Contacts.query();
 		vm.states = [ 'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
 				'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia',
 				'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas',
@@ -110,37 +105,45 @@
 			});
 		};
 
-		vm.contactsDTO = {
-			"contacts" : vm.contacts,
-			"contactRelationships" : vm.relatedContacts
-		}
+        vm.contactsDTO = {
+
+            "contacts" : vm.contacts,
+
+            "contactRelationships" : vm.relatedContacts
+        }
 
 		vm.save = function() {
-			console.log("calling SAVE function....");
+		   // vm.contacts.contact_a = vm.relatedContacts;
+
+
+			//console.log("calling SAVE function....");
 			vm.isSaving = true;
-			if (vm.contacts.id !== null) {
 
-				console.log(("updating contacts from admin /api "))
-				console.log(JSON.stringify(vm.contacts));
-				Contacts.update(vm.contacts, onSaveSuccess, onSaveError);
 
-			} else {
+            if (vm.contacts.id === null) {
 
-				console.log("SAVING : ");
-				console.log("--> 1");
-				console.log("====== CONTACTS ====");
-				console.log(JSON.stringify(vm.contacts));
-				console.log("====== RELATED ====");
-				console.log(JSON.stringify(vm.relatedContactss));
+                // console.log("SAVING : ");
+                // console.log("--> 1");
+                // console.log("====== CONTACTS ====");
+                //
+                // console.log(JSON.stringify(vm.contacts));
+                // console.log("====== RELATED ====");
+                // console.log(JSON.stringify(vm.relatedContacts));
+                //
+                // console.log("====================================")
+                // console.log("==============TOTAL===============");
+                // console.log(JSON.stringify(vm.contactsDTO));
+                Contacts.save(vm.contactsDTO, onSaveSuccess, onSaveError);
+                // console.log(JSON.stringify(vm.contactsDTO));
 
-				console.log("====================================")
-				console.log("==============TOTAL===============");
-				// console.log(JSON.stringify(vm.contactsDTO));
-				Contacts.save(vm.contactsDTO, onSaveSuccess, onSaveError);
-				console.log(JSON.stringify(vm.contactsDTO));
 
-				alert("Contact : " + vm.contacts.fullName + " has been saved");
-			}
+            } else {
+
+                // console.log(("updating contacts from admin /api "))
+                // console.log(JSON.stringify(vm.contacts));
+                Contacts.update(vm.contacts, onSaveSuccess, onSaveError);
+
+            }
 
 		};
 		var onSaveSuccess = function(result) {
@@ -151,20 +154,24 @@
 			// ...
 			console.log("data saved : " + JSON.stringify(result.data));
 			$rootScope.savedContact.push(result);
-
+            alert("Contact : " + vm.contacts.fullName + " has been saved");
 		};
+
 		vm.saveAndAdd = function() {
 			console.log("calling SAVE and ADD function....");
 			vm.isSaving = true;
 			Contacts.save(vm.contactsDTO, onSaveAddSuccess, onSaveError);
 		};
+
+
 		var onSaveAddSuccess = function(result) {
 			vm.isSaving = false;
 			// $scope.$emit('smartLpcApp:contactsUpdate', result);
 			// $uibModalInstance.close(result);
-			$state.go('contacts', {}, {
-				reload : true
-			});// use for redirecting ...
+			//$state.go('contacts', {}, { reload : true });// use for redirecting ...
+			//$window.history.back();
+			alert("Contact : " + vm.contacts.fullName + " has been saved");
+			vm.goBack();
 			console.log("data saved : " + JSON.stringify(result.data));
 			// $rootScope.savedContact = result;
 

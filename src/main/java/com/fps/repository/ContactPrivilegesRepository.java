@@ -20,13 +20,17 @@ public interface ContactPrivilegesRepository extends JpaRepository<ContactPrivil
     @Query("select contactPrivileges from ContactPrivileges contactPrivileges where contactPrivileges.updatedByAdminUser.login = ?#{principal.username}")
     List<ContactPrivileges> findByUpdatedByAdminUserIsCurrentUser();
 
-    List<ContactPrivileges> findByProject(Projects projects);
-
     List<ContactPrivileges> findByProjectAndInternal(Projects projects, Boolean internal);
 
+    List<ContactPrivileges> findByProject(Projects projects);
+
+ 
     @Transactional
     void deleteByProject(Projects projects);
-    
+
     List<ContactPrivileges> findByContact(Contacts contact);
-    
+
+    @Transactional
+    List<ContactPrivileges> removeByContact(Contacts contact);
+
 }

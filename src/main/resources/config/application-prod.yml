@@ -18,10 +18,14 @@ spring:
         livereload:
             enabled: false
     datasource:
-        url: jdbc:mysql://localhost:3306/SmartLPC?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://10.0.1.92:3306/smartlpc_demo?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url2: jdbc:mysql://10.0.1.92:3306/smartlpc_demo?useUnicode=true&characterEncoding=utf8&useSSL=false
+
         name:
-        username: root
-        password: root
+        username: alfresco
+        password: alfresco
+        username2: alfresco
+        password2: alfresco
         hikari:
             data-source-properties:
                 cachePrepStmts: true
@@ -100,3 +104,12 @@ ingest:
     new: /mnt/ingest/new
     queue: /mnt/ingest/queue
     lightroomExport: 700,1600,MASTER,RAW
+
+project:
+    rename:
+        path: /opt/rename/
+    logo:
+        path: /opt/logos/
+
+largest:
+  brick: /opt/scripts/LargestBrick

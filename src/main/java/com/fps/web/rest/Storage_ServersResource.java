@@ -153,6 +153,7 @@ public class Storage_ServersResource {
     public ResponseEntity<Void> deleteStorage_Servers(@PathVariable Long id) {
         log.debug("REST request to delete Storage_Servers : {}", id);
         currentTenantIdentifierResolver.setTenant(MASTER);
+
         storage_ServersRepository.delete(id);
         storage_ServersSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("storage_Servers", id.toString())).build();

@@ -31,10 +31,11 @@
             })
             .state('search.display', {
                 parent: 'app',
-                url: '/searchResults?search&type',
+                url: '/searchResults?search&type&filter',
                 params: {
                     search: null,
-                    type: null
+                    type: null,
+                    filter: null
                 },
                 data: {
                     authorities: ['ROLE_USER']

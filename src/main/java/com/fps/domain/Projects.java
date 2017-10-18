@@ -4,6 +4,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -110,9 +112,11 @@ public class Projects implements Serializable {
     private String projectInfoNotes;
 
     @Column(name = "created_date")
+    @JsonIgnore
     private LocalDate createdDate;
 
     @Column(name = "updated_date")
+    @JsonIgnore
     private LocalDate updatedDate;
 
     @Column(name = "legacy_director")
@@ -240,9 +244,11 @@ public class Projects implements Serializable {
     private Lookups processingOriginalFileType;
 
     @ManyToOne
+    @JsonIgnore
     private User createdByAdminUser;
 
     @ManyToOne
+    @JsonIgnore
     private User updatedByAdminUser;
 
     @ManyToOne

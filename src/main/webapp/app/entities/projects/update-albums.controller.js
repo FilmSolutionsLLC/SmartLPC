@@ -89,7 +89,7 @@
                     url: 'api/update/album',
                     data: tags
                 }).then(function successCallback(response) {
-
+                	alert("Album name changed to : "+tags.value);
                 }, function errorCallback(response) {
 
                 });

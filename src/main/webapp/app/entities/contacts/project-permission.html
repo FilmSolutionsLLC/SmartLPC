@@ -1,224 +1,202 @@
 <div class="container-full">
-	<h4 class="" align="center">Project Permission</h4>
-	<div class="row">
-		<div class="col-sm-8">
-			<button class="btn btn-xs btn-primary"
-				ng-click="vm.openModalProject()">Add New Projects</button>
-			<button class="btn btn-xs btn-success" ng-click="vm.save()">Save
-				All</button>
-			<button class="btn btn-xs btn-danger" onclick="window.history.back()">Close</button>
-		</div>
-	</div>
-	<br>
+    <h4 class="" align="center">Project Permission</h4>
+    <div class="row">
+        <div class="col-sm-4"><h5><strong>{{vm.contactDTO.contacts.fullName}}</strong></h5></div>
+        <div class="col-sm-3 pull-right">
+            <button class="btn btn-xs btn-primary"
+                    ng-click="vm.openModalProject()">Add New Projects
+            </button>
+            <button class="btn btn-xs btn-success" ng-click="vm.save()">Save
+                All
+            </button>
+            <button class="btn btn-xs btn-danger" onclick="window.history.back()">Close</button>
+        </div>
+    </div>
+    <br>
 
-	<table class="table table-striped">
-		<tr>
-			<td><span class="i1"></span></td>
-			<td></td>
+    <table class="table table-striped">
+        <tr>
+            <td><span class="i1"></span></td>
+            <td></td>
 
-			<td><span class="i2"></span></td>
-			<td><span class="i3"></span></td>
-			<td><span class="i4"></span></td>
-			<td><span class="i5"></span></td>
-			<td><span class="i6"></span></td>
-			<td><span class="i7"></span></td>
-			<td><span class="i8"></span></td>
-			<td><span class="i9"></span></td>
-			<td><span class="i10"></span></td>
-			<td><span class="i11"></span></td>
-			<td><span class="i12"></span></td>
-			<td><span class="i13"></span></td>
-			<td><span class="i14"></span></td>
-			<td><span class="i15"></span></td>
-			<td><span class="i16"></span></td>
-			<td><span class="i17"></span></td>
-			<td><span class="i18"></span></td>
-			<td><span class="i19"></span></td>
-			<td><span class="i20"></span></td>
-			<td><span class="i21"></span></td>
-			<td><span class="i22"></span></td>
-			<td><span class="i23"></span></td>
-			<td><span class="i24"></span></td>
-			<td><span class="i25"></span></td>
-			<td><span class="i26"></span></td>
-			<td><span class="i27"></span></td>
-			<td><span class="i28"></span></td>
-			<td><span class="i29"></span></td>
-			<td><span class="i30"></span></td>
-			<td><span class="i31"></span></td>
-			<td></td>
+            <td><span class="i2"></span></td>
+            <td><span class="i3"></span></td>
+            <td><span class="i4"></span></td>
+            <td><span class="i5"></span></td>
+            <td><span class="i6"></span></td>
+            <td><span class="i7"></span></td>
+            <td><span class="i8"></span></td>
+            <td><span class="i9"></span></td>
+            <td><span class="i10"></span></td>
+            <td><span class="i11"></span></td>
+            <td><span class="i12"></span></td>
+            <td><span class="i13"></span></td>
+            <td><span class="i14"></span></td>
+            <td><span class="i15"></span></td>
+            <td><span class="i16"></span></td>
+            <td><span class="i17"></span></td>
+            <td><span class="i18"></span></td>
+            <td><span class="i19"></span></td>
+            <td><span class="i20"></span></td>
+            <td><span class="i21"></span></td>
+            <td><span class="i22"></span></td>
+            <td><span class="i23"></span></td>
+            <td><span class="i24"></span></td>
+            <td><span class="i25"></span></td>
+            <td><span class="i26"></span></td>
+            <td><span class="i27"></span></td>
+            <td><span class="i28"></span></td>
+            <td><span class="i29"></span></td>
+            <td><span class="i30"></span></td>
+            <td><span class="i31"></span></td>
+            <td></td>
 
-		</tr>
-		<tr class="verify">
-			<td><input type="checkbox" class="small"
-				ng-model="checkAllInternalUsers"></td>
+        </tr>
+        <tr class="verify">
+            <td><input type="checkbox" class="small"
+                       ng-model="checkAllInternalUsers" ng-change="vm.clickedThis('checkAllInternalUsers',checkAllInternalUsers)"></td>
 
-			<td class="extra-small"><strong>APPLY ALL</strong></td>
+            <td class="extra-small"><strong>APPLY ALL</strong></td>
 
-			<td class="small"><input type="checkbox" ng-model="checkAllExec"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllVendor"></td>
-
-
-			<td class="small"><select ng-model="selectDlPrivilage"
-				ng-init="selectDlPrivilage = 0">
-					<option value="0" class="extra-small">NONE</option>
-					<option value="1" class="extra-small">ALL</option>
-					<option value="2" class="extra-small">LOCKAPPROVED</option>
-			</select></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllPrint"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllCaptioning"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllEmail"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllPriorityPix"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllReleaseAll"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllSeeLock"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllWatermark"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllExec" ng-change="vm.clickedThis('checkAllExec',checkAllExec)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllVendor" ng-change="vm.clickedThis('checkAllVendor',checkAllVendor)"></td>
 
 
-			<td class="small"><input type="text" style="width: 80%"
-				ng-model="outerWatermark"></td>
-			<td class="small"><input type="text" style="width: 80%"
-				ng-model="innerWatermark"></td>
+            <td class="small">
+                <select  ng-model="downloadType" ng-options="download.value for download in vm.downloadType" ng-change="vm.clickedThis('downloadType',downloadType.id)">
 
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllSensitive"></td>
+                </select>
+            </td>
 
-			<td class="small"><select>
-					<option value="0" class="extra-small">NONE</option>
-					<option value="1" class="extra-small">BASIC</option>
-					<option value="2" class="extra-small">MASTER</option>
-			</select></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllHidden"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllVideo"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllFinalized"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllReadonly"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllPrint" ng-change="vm.clickedThis('checkAllPrint',checkAllPrint)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllCaptioning" ng-change="vm.clickedThis('checkAllCaptioning',checkAllCaptioning)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllEmail" ng-change="vm.clickedThis('checkAllEmail',checkAllEmail)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllPriorityPix" ng-change="vm.clickedThis('checkAllPriorityPix',checkAllPriorityPix)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllReleaseAll" ng-change="vm.clickedThis('checkAllReleaseAll',checkAllReleaseAll)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllSeeLock" ng-change="vm.clickedThis('checkAllSeeLock',checkAllSeeLock)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllWatermark" ng-change="vm.clickedThis('checkAllWatermark',checkAllWatermark)"></td>
+            <td class="small"><input type="text" style="width: 80%" ng-model="outerWatermark" ng-change="vm.clickedThis('outerWatermark',outerWatermark)"></td>
+            <td class="small"><input type="text" style="width: 80%" ng-model="innerWatermark" ng-change="vm.clickedThis('innerWatermark',innerWatermark)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllSensitive" ng-change="vm.clickedThis('checkAllSensitive',checkAllSensitive)"></td>
 
-			<td class="small"><input type="date" ng-model="expireDate"
-				class="input-xs" style="width: 90%"></td>
+            <!--<td class="small" ng-options="download in vm.downloadType" ng-mode="downloadType" ng-change="vm.clickedThis('downloadType',downloadType)"><select>
+                <option value="0" class="extra-small">NONE</option>
+                <option value="1" class="extra-small">BASIC</option>
+                <option value="2" class="extra-small">MASTER</option>
+            </select></td>-->
 
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllViewOnly"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllWelcomeMessage"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllTalentMgmt"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllSOMgmt"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllGlobalAlbum"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllUpload"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllAdhoc"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllRetouch"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllCritique"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllDeleteAssets"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="checkAllDisabled"></td>
-			<td></td>
+            <td class="small">
+                <select  ng-model="exclusives" ng-options="exclusives.value for exclusives in vm.exclusives" ng-change="vm.clickedThis('exclusives',exclusives.id)">
 
-		</tr>
+                </select>
+            </td>
+
+            <td class="small"><input type="checkbox" ng-model="checkAllHidden" ng-change="vm.clickedThis('checkAllHidden',checkAllHidden)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllVideo" ng-change="vm.clickedThis('checkAllVideo',checkAllVideo)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllFinalized" ng-change="vm.clickedThis('checkAllFinalized',checkAllFinalized)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllReadonly" ng-change="vm.clickedThis('checkAllReadonly',checkAllReadonly)"></td>
+            <td class="small"><input type="date" ng-model="expireDate" class="input-xs" style="width: 90%" ng-change="vm.clickedThis('expireDate',expireDate)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllViewOnly" ng-change="vm.clickedThis('checkAllViewOnly',checkAllViewOnly)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllWelcomeMessage" ng-change="vm.clickedThis('checkAllWelcomeMessage',checkAllWelcomeMessage)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllTalentMgmt" ng-change="vm.clickedThis('checkAllTalentMgmt',checkAllTalentMgmt)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllSOMgmt" ng-change="vm.clickedThis('checkAllSOMgmt',checkAllSOMgmt)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllGlobalAlbum" ng-change="vm.clickedThis('checkAllGlobalAlbum',checkAllGlobalAlbum)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllUpload" ng-change="vm.clickedThis('checkAllUpload',checkAllUpload)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllAdhoc" ng-change="vm.clickedThis('checkAllAdhoc',checkAllAdhoc)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllRetouch" ng-change="vm.clickedThis('checkAllRetouch',checkAllRetouch)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllCritique" ng-change="vm.clickedThis('checkAllCritique',checkAllCritique)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllDeleteAssets" ng-change="vm.clickedThis('checkAllDeleteAssets',checkAllDeleteAssets)"></td>
+            <td class="small"><input type="checkbox" ng-model="checkAllDisabled" ng-change="vm.clickedThis('checkAllDisabled',checkAllDisabled)"></td>
+            <td></td>
+
+        </tr>
 
 
-		<tr ng-repeat="project in vm.selectedProjects">
-			<td><input type="checkbox" class="small"
-				ng-model="project.internal"></td>
+        <tr ng-repeat="project in vm.selectedProjects">
+            <td><input type="checkbox" class="small"
+                       ng-model="project.internal"></td>
 
-			<td class="extra-small"><strong>{{project.project.name}}</strong></td>
+            <td class="extra-small"><strong>{{project.project.name}}</strong></td>
 
-			<td class="small"><input type="checkbox" ng-model="project.exec"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.vendor"></td>
-
-
-			<td class="small"><select ng-model="project.downloadType"
-				ng-options="excl.id as excl.value for excl in vm.downloadType">
-					<option>{{excl.value}}</option>
-			</select></td>
+            <td class="small"><input type="checkbox" ng-model="project.exec"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.vendor"></td>
 
 
-			<td class="small"><input type="checkbox"
-				ng-model="project.print"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.captioning"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.email"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.priorityPix"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.releaseExclude"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.lockApproveRestriction"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.watermark"></td>
+            <td class="small"><select ng-model="project.downloadType"
+                                      ng-options="excl.id as excl.value for excl in vm.downloadType">
+                <option>{{excl.value}}</option>
+            </select></td>
 
 
-			<td class="small"><input type="text" style="width: 80%"
-				ng-model="project.watermarkOuterTransparency"></td>
-			<td class="small"><input type="text" style="width: 80%"
-				ng-model="project.watermarkInnerTransparency"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.print"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.captioning"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.email"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.priorityPix"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.releaseExclude"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.lockApproveRestriction"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.watermark"></td>
 
-			<td class="small"><input type="checkbox"
-				ng-model="project.viewSensitive"></td>
 
-			<td class="small"><select ng-model="project.exclusives"
-								ng-options="excl.id as excl.value for excl in vm.exclusives">
-									<option>{{excl.value}}</option>
-							</select></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.hidden"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.hasVideo"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.showFinalizations"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.readOnly"></td>
+            <td class="small"><input type="text" style="width: 80%"
+                                     ng-model="project.watermarkOuterTransparency"></td>
+            <td class="small"><input type="text" style="width: 80%"
+                                     ng-model="project.watermarkInnerTransparency"></td>
 
-			<td class="small"><input type="date" class="input-xs"
-				style="width: 90%" ng-model="project.expireDate"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.viewSensitive"></td>
 
-			<td class="small"><input type="checkbox"
-				ng-model="project.isABCViewer"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.welcomeMessage"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.talentManagement"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.signoffManagement"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.globalAlbum"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.fileUpload"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.adhocLink"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.retouch"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.critique"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.deleteAssets"></td>
-			<td class="small"><input type="checkbox"
-				ng-model="project.disabled"></td>
-			<td><a href="" ng-click="vm.removeSelected($index)"><span
-					class="glyphicon glyphicon-trash text-danger extra-small"></span></a></td>
+            <td class="small"><select ng-model="project.exclusives"
+                                      ng-options="excl.id as excl.value for excl in vm.exclusives">
+                <option>{{excl.value}}</option>
+            </select></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.hidden"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.hasVideo"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.showFinalizations"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.readOnly"></td>
 
-		</tr>
+            <td class="small"><input type="date" class="input-xs"
+                                     style="width: 90%" ng-model="project.expireDate"></td>
 
-	</table>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.isABCViewer"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.welcomeMessage"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.talentManagement"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.signoffManagement"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.globalAlbum"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.fileUpload"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.adhocLink"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.retouch"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.critiqueIt"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.deleteAssets"></td>
+            <td class="small"><input type="checkbox"
+                                     ng-model="project.disabled"></td>
+            <td><a href="" ng-click="vm.removeSelected($index)"><span
+                class="glyphicon glyphicon-trash text-danger extra-small"></span></a></td>
+
+        </tr>
+
+    </table>
 
 
 </div>

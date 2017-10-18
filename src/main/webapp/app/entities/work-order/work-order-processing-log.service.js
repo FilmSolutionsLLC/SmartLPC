@@ -2,12 +2,12 @@
     'use strict';
     angular
         .module('smartLpcApp')
-        .factory('WorkOrder', WorkOrder);
+        .factory('WorkOrderPorcessing', WorkOrderPorcessing);
 
-    WorkOrder.$inject = ['$resource', 'DateUtils'];
+    WorkOrderPorcessing.$inject = ['$resource', 'DateUtils'];
 
-    function WorkOrder($resource, DateUtils) {
-        var resourceUrl = 'api/work-orders/:id';
+    function WorkOrderPorcessing($resource, DateUtils) {
+        var resourceUrl = 'api/processing/work-orders/:id';
 
         return $resource(resourceUrl, {}, {
             'query': {method: 'GET', isArray: true},
@@ -29,41 +29,6 @@
                     data.workOrder.completionDate = DateUtils.convertLocalDateFromServer(data.workOrder.completionDate);
                     data.workOrder.processingProofShipped = DateUtils.convertLocalDateFromServer(data.workOrder.processingProofShipped);
                     return data;
-                }
-            },
-            'update': {
-                method: 'PUT',
-                transformRequest: function (data) {
-                    data.requestDate = DateUtils.convertLocalDateToServer(data.requestDate);
-                    data.reminderDate1 = DateUtils.convertLocalDateToServer(data.reminderDate1);
-                    data.reminderDate2 = DateUtils.convertLocalDateToServer(data.reminderDate2);
-                    data.reminderDate3 = DateUtils.convertLocalDateToServer(data.reminderDate3);
-                    data.processingDateRecieved = DateUtils.convertLocalDateToServer(data.processingDateRecieved);
-                    data.processingDateShipped = DateUtils.convertLocalDateToServer(data.processingDateShipped);
-                    data.dueToClientReminder = DateUtils.convertLocalDateToServer(data.dueToClientReminder);
-                    data.dueToMounterReminder = DateUtils.convertLocalDateToServer(data.dueToMounterReminder);
-                    data.recievedFromMounterReminder = DateUtils.convertLocalDateToServer(data.recievedFromMounterReminder);
-                    data.completionDate = DateUtils.convertLocalDateToServer(data.completionDate);
-                    data.processingProofShipped = DateUtils.convertLocalDateToServer(data.processingProofShipped);
-
-                    return angular.toJson(data);
-                }
-            },
-            'save': {
-                method: 'POST',
-                transformRequest: function (data) {
-                    data.requestDate = DateUtils.convertLocalDateToServer(data.requestDate);
-                    data.reminderDate1 = DateUtils.convertLocalDateToServer(data.reminderDate1);
-                    data.reminderDate2 = DateUtils.convertLocalDateToServer(data.reminderDate2);
-                    data.reminderDate3 = DateUtils.convertLocalDateToServer(data.reminderDate3);
-                    data.processingDateRecieved = DateUtils.convertLocalDateToServer(data.processingDateRecieved);
-                    data.processingDateShipped = DateUtils.convertLocalDateToServer(data.processingDateShipped);
-                    data.dueToClientReminder = DateUtils.convertLocalDateToServer(data.dueToClientReminder);
-                    data.dueToMounterReminder = DateUtils.convertLocalDateToServer(data.dueToMounterReminder);
-                    data.recievedFromMounterReminder = DateUtils.convertLocalDateToServer(data.recievedFromMounterReminder);
-                    data.completionDate = DateUtils.convertLocalDateToServer(data.completionDate);
-                    data.processingProofShipped = DateUtils.convertLocalDateToServer(data.processingProofShipped);
-                    return angular.toJson(data);
                 }
             }
         });

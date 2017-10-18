@@ -18,8 +18,8 @@ spring:
         livereload:
             enabled: false # we use gulp + BrowserSync for livereload
     datasource:
-        url: jdbc:mysql://127.0.0.1:3306/TrySmartLPC?useUnicode=true&characterEncoding=utf8&useSSL=false
-        url2: jdbc:mysql://127.0.0.1:3306/TrySmartLPC?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://127.0.0.1:3306/smartlpc_demo?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url2: jdbc:mysql://127.0.0.1:3306/smartlpc_demo?useUnicode=true&characterEncoding=utf8&useSSL=false
 
         name:
         username: root
@@ -38,7 +38,7 @@ spring:
             #ddl-auto: update
         database-platform: org.hibernate.dialect.MySQLInnoDBDialect
         database: MYSQL
-        show_sql: true
+        show_sql: false
         properties:
             hibernate.cache.use_second_level_cache: true
             hibernate.cache.use_query_cache: false
@@ -57,8 +57,8 @@ spring:
                     allocation:
                       disk:
                         threshold_enabled: false
- 
-   
+
+
     mail:
         host: 10.0.1.11
         port: 25
@@ -106,7 +106,7 @@ jhipster:
             host: localhost
             port: 5000
             queueSize: 512
-            
+
 
 
 ingest:
@@ -123,5 +123,4 @@ project:
         path: /opt/logos/
 
 largest:
-  brick: /mnt/opt/scripts/LargestBrick
-     
+  brick: /opt/scripts/LargestBrick

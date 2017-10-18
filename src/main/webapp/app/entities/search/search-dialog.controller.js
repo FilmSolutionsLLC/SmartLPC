@@ -20,21 +20,30 @@
         vm.contacts = [];
         vm.projects = [];
 
-       
+        vm.workOrderFilter = [
+                {id: 'project',name: 'Project Name'},
+                {id: 'id',name: 'Work Order ID'},
+                {id: 'po',name: 'PO Record'},
+                //{id: 'requestor',name: 'Requestor Name'},
+                {id: 'desc',name: 'Work Description'},
+                {id: 'invoice',name: 'Invoice'},
+        ];
+
+
         vm.searchContacts = function (query) {
 
             console.log("query  : " + query);
 
             $uibModalInstance.dismiss('cancel');
 
-            $state.transitionTo('search.display', {search: query, type: 'contacts'})
+            $state.transitionTo('search.display', {search: query, type: 'contacts' , filter: null})
 
         };
 
         vm.searchProjects = function (query) {
             console.log("searching projects" + query);
             $uibModalInstance.dismiss('cancel');
-            $state.go('search.display', {search: query, type: 'projects'})
+            $state.go('search.display', {search: query, type: 'projects' , filter: null})
         };
 
         vm.searchBoth = function (query) {
@@ -50,7 +59,11 @@
 
             $uibModalInstance.dismiss('cancel');
 
-            $state.go('search.display', {search: query, type: 'workOrder'})
+            console.log("Searching workorder");
+            console.log("Type : "+JSON.stringify(vm.type));
+            console.log("Query : ",vm.search);
+
+            $state.go('search.display', {search: query, type: 'workOrder', filter: vm.type.id})
         };
 
         var onSaveSuccess = function (result) {

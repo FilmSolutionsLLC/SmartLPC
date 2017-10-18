@@ -8,8 +8,9 @@
 
     function Contacts($resource, DateUtils) {
 
+        console.log("Starting to get data");
         var resourceUrl = 'api/contacts/:id';
-        
+
         return $resource(resourceUrl, {}, {
 
             'query': {

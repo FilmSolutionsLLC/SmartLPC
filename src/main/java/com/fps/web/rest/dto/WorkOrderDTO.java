@@ -2,15 +2,21 @@ package com.fps.web.rest.dto;
 
 import com.fps.domain.*;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by macbookpro on 1/6/17.
  */
-public class WorkOrderDTO {
+public class WorkOrderDTO implements Serializable{
 
-    private WorkOrder workOrder;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private WorkOrder workOrder;
     private Set<WorkOrderAbcFile> workOrderAbcFiles = new HashSet<>();
     private Set<WorkOrderAbcHdd> workOrderAbcHdds = new HashSet<>();
     private Set<WorkOrdersAdminRelation> workOrdersAdminRelations = new HashSet<>();

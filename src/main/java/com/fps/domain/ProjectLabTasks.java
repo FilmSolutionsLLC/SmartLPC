@@ -4,6 +4,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -25,24 +27,29 @@ public class ProjectLabTasks implements Serializable {
     private Long id;
 
     @Column(name = "created_date")
+    @JsonIgnore
     private ZonedDateTime createdDate;
 
     @Column(name = "updated_date")
+    @JsonIgnore
     private ZonedDateTime updatedDate;
 
     @Column(name = "qb_rid")
     private Integer qb_rid;
 
     @ManyToOne
+    @JsonIgnore
     private Projects project;
 
     @ManyToOne
     private Lookups task_name;
 
     @ManyToOne
+    @JsonIgnore
     private User created_by_admin_user;
 
     @ManyToOne
+    @JsonIgnore
     private User updated_by_admin_user;
 
     public Long getId() {

@@ -1,892 +1,893 @@
 <div print-section>
-	<div class="row">
-		<button type="submit" class="btn btn-xs btn btn-primary"
-			ui-sref="work-order.edit({id:workOrderDTO.workOrder.id})">
-			Edit</button>
+    <div print-remove>
+        <div class="row">
+            <button type="submit" class="btn btn-xs btn btn-primary"
+                    ui-sref="work-order.edit({id:workOrderDTO.workOrder.id})">
+                Edit
+            </button>
 
-		<button print-btn class="btn btn-xs btn btn-primary">Print</button>
-		<button type="button" class="btn btn-xs btn btn-primary"  onclick="window.print()">Print Window</button>
-		<button type="button" onclick="window.history.back()"
-			class="btn btn-xs btn btn-danger">Cancel</button>
+            <button print-btn class="btn btn-xs btn btn-primary">Print</button>
+            <button type="button" class="btn btn-xs btn btn-primary" onclick="window.print()">Print Window</button>
+            <button type="button" onclick="window.history.back()"
+                    class="btn btn-xs btn btn-danger">Cancel
+            </button>
 
-	</div>
-	<br>
+        </div>
+        <br>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <h3>
+                Work Order <strong>#{{vm.workOrderDTO.workOrder.id}}</strong>
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-8">
+            <label class="small"><input type="checkbox" id="isPrint"
+                                        ng-model="vm.workOrderDTO.workOrder.isPrint" disabled>
+                &nbspPrint &nbsp </label> <label class="small"><input
+            type="checkbox" id="isProof"
+            ng-model="vm.workOrderDTO.workOrder.isProof" disabled>
+            &nbspProof &nbsp</label> <label class="small"><input type="checkbox"
+                                                                 ng-model="vm.workOrderDTO.workOrder.isAbc" disabled>
+            &nbspABC &nbsp</label> <label class="small"><input type="checkbox"
+                                                               ng-model="vm.workOrderDTO.workOrder.isTracking" disabled>
+            &nbspTracking &nbsp</label>
+        </div>
+    </div>
+    <h4>Work Order</h4>
+    <div class="row">
+        <label class="col-xs-2 control-label small">Project Name</label> <label
+        class="col-xs-2 control-label small">Type</label> <label
+        class="col-xs-2 control-label small">Assigned To</label> <label
+        class="col-xs-2 control-label small">Priority</label>
+    </div>
 
-	<div class="row">
-		<div class="col-xs-4">
-			<h3>
-				Work Order <strong>#{{vm.workOrderDTO.workOrder.id}}</strong>
-			</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-4 col-xs-offset-8">
-			<label class="small"><input type="checkbox" id="isPrint"
-				ng-model="vm.workOrderDTO.workOrder.isPrint" disabled>
-				&nbspPrint &nbsp </label> <label class="small"><input
-				type="checkbox" id="isProof"
-				ng-model="vm.workOrderDTO.workOrder.isProof" disabled>
-				&nbspProof &nbsp</label> <label class="small"><input type="checkbox"
-				ng-model="vm.workOrderDTO.workOrder.isAbc" disabled>
-				&nbspABC &nbsp</label> <label class="small"><input type="checkbox"
-				ng-model="vm.workOrderDTO.workOrder.isTracking" disabled>
-				&nbspTracking &nbsp</label>
-		</div>
-	</div>
-	<h4>Work Order</h4>
-	<div class="row">
-		<label class="col-xs-2 control-label small">Project Name</label> <label
-			class="col-xs-2 control-label small">Type</label> <label
-			class="col-xs-2 control-label small">Assigned To</label> <label
-			class="col-xs-2 control-label small">Priority</label>
-	</div>
+    <div class="row">
+        <div class="col-xs-2">
+            <input id="field_project" type="text" class="form-control input-sm"
+                   ng-model="vm.workOrderDTO.workOrder.project.name" readonly>
+        </div>
+        <div class="col-xs-2">
+            <input id="field_vm.workOrder.type" type="text"
+                   class="form-control input-sm"
+                   ng-model="vm.workOrderDTO.workOrder.type.textValue" readonly>
+        </div>
+        <div class="col-xs-2">
+            <input id="field_assignedToUser" type="text"
+                   class="form-control input-sm"
+                   ng-model="vm.workOrderDTO.workOrder.assignedToUser.fullName"
+                   readonly>
+        </div>
+        <div class="col-xs-2">
+            <input id="field_vm.workOrder.priority" type="text"
+                   class="form-control input-sm"
+                   ng-model="vm.workOrderDTO.workOrder.priority.textValue" readonly>
 
-	<div class="row">
-		<div class="col-xs-2">
-			<input id="field_project" type="text" class="form-control input-sm"
-				ng-model="vm.workOrderDTO.workOrder.project.name" readonly>
-		</div>
-		<div class="col-xs-2">
-			<input id="field_vm.workOrder.type" type="text"
-				class="form-control input-sm"
-				ng-model="vm.workOrderDTO.workOrder.type.textValue" readonly>
-		</div>
-		<div class="col-xs-2">
-			<input id="field_assignedToUser" type="text"
-				class="form-control input-sm"
-				ng-model="vm.workOrderDTO.workOrder.assignedToUser.fullName"
-				readonly>
-		</div>
-		<div class="col-xs-2">
-			<input id="field_vm.workOrder.priority" type="text"
-				class="form-control input-sm"
-				ng-model="vm.workOrderDTO.workOrder.priority.textValue" readonly>
+        </div>
 
-		</div>
-	</div>
+    </div>
+    <div print-remove>
+        <hr>
+    </div>
 
-	<hr>
-
-
-	<h4>Requestor</h4>
-	<div class="row">
-		<label class="col-md-1 control-label small" for="textinput">Name</label>
-		<div class="col-md-2">
-			<div class="input-group">
+    <h4>Requestor</h4>
+    <div printTable>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Name</label>
+            <div class="col-md-2">
+                <div class="input-group">
 
 				<span class="input-group-btn">
 
 					<button type="button" id="openBtn"
-						ng-click="vm.openModal('field_vm.workOrder.requestor')"
-						class="btn btn-primary btn-sm disabled">
+                            ng-click="vm.openModal('field_vm.workOrder.requestor')"
+                            class="btn btn-primary btn-sm disabled">
 						<span class="glyphicon glyphicon-list-alt"></span>
 					</button>
 				</span> <input id="field_vm.workOrder.requestor" type="text"
-					class="form-control input-sm"
-					ng-model="vm.workOrderDTO.workOrder.requestor.fullName" readonly>
-			</div>
+                               class="form-control input-sm"
+                               ng-model="vm.workOrderDTO.workOrder.requestor.fullName" readonly>
+                </div>
 
-		</div>
-		<label class="col-md-1 control-label small" for="textinput">Company</label>
-		<div class="col-sm-2">
-			<input id="company.name" name="textinput" type="text"
-				class="form-control input-sm"
-				ng-model="vm.workOrderDTO.workOrder.requestor.companyContact.fullName"
-				readonly>
-		</div>
-	</div>
-	<div class="row">
-		<label class="col-md-1 control-label small" for="textinput">Office
-			Phone</label>
-		<div class="col-sm-2">
-			<input id="company.phone" name="textinput" type="text"
-				ng-model="vm.workOrderDTO.workOrder.requestor.phoneOffice"
-				class="form-control input-sm" readonly>
-		</div>
-		<label class="col-md-1 control-label small" for="textinput">Email</label>
-		<div class="col-sm-2">
-			<input id="company.email" name="textinput" type="text"
-				ng-model="vm.workOrderDTO.workOrder.requestor.email"
-				class="form-control input-sm" readonly>
-		</div>
-	</div>
-	<hr>
-	<div ng-if="vm.workOrderDTO.workOrder.type.textValue == 'PKO'">
+            </div>
+            <label class="col-md-1 control-label small" for="textinput">Company</label>
+            <div class="col-sm-2">
+                <input id="company.name" name="textinput" type="text"
+                       class="form-control input-sm"
+                       ng-model="vm.workOrderDTO.workOrder.requestor.companyContact.fullName"
+                       readonly>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Office
+                Phone</label>
+            <div class="col-sm-2">
+                <input id="company.phone" name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrder.requestor.phoneOffice"
+                       class="form-control input-sm" readonly>
+            </div>
+            <label class="col-md-1 control-label small" for="textinput">Email</label>
+            <div class="col-sm-2">
+                <input id="company.email" name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrder.requestor.email"
+                       class="form-control input-sm" readonly>
+            </div>
+        </div>
+    </div>
+    <div print-remove>
+        <hr>
+    </div>
+    <div ng-if="vm.workOrderDTO.workOrder.type.textValue == 'PKO'">
 
-		<div id="processing">
-			<h4>Processing</h4>
-			<div class="row">
-				<label class="col-md-1 control-label small" for="textinput">Date
-					Recieved</label>
-				<div class="col-sm-2">
-					<input type="date" class="form-control input-sm"
-						ng-model="vm.workOrderDTO.workOrder.processingDateRecieved"
-						readonly>
-				</div>
-				<label class="col-md-1 control-label small" for="textinput">HDD
-					ID</label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control input-sm"
-						ng-model="vm.workOrderDTO.workOrder.processingHDDid" readonly>
-				</div>
-			</div>
-			<div class="row">
-				<label class="col-md-1 control-label small" for="textinput">Date
-					Shipped</label>
-				<div class="col-sm-2">
-					<input type="date" class="form-control input-sm"
-						ng-model="vm.workOrderDTO.workOrder.processingDateShipped"
-						readonly>
-				</div>
-				<label class="col-md-1 control-label small" for="textinput">Proof
-					Shipped</label>
-				<div class="col-sm-2">
-					<input type="date" class="form-control input-sm"
-						ng-model="vm.workOrderDTO.workOrder.processingProofShipped"
-						readonly>
-				</div>
-			</div>
-			<div class="row">
-				<label class="col-md-1 control-label small" for="textinput">Notes</label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control input-sm"
-						ng-model="vm.workOrderDTO.workOrder.processingNotes" readonly>
-				</div>
-				<label class="col-md-1 control-label small" for="textinput">Location</label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control input-sm"
-						ng-model="vm.workOrderDTO.workOrder.processingLocation" readonly>
-				</div>
-			</div>
-			<div class="row">
-				<label class="col-md-1 control-label small" for="textinput">Image
-					Range</label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control input-sm"
-						ng-model="vm.workOrderDTO.workOrder.processingImageRange" readonly>
-				</div>
-				<label class="col-md-1 control-label small" for="textinput">Image
-					Qty</label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control input-sm"
-						ng-model="vm.workOrderDTO.workOrder.processingImageQty" readonly>
-				</div>
-			</div>
-			<hr>
+        <div id="processing">
+            <h4>Processing</h4>
+            <div class="row">
+                <label class="col-md-1 control-label small" for="textinput">Date
+                    Recieved</label>
+                <div class="col-sm-2">
+                    <input type="date" class="form-control input-sm"
+                           ng-model="vm.workOrderDTO.workOrder.processingDateRecieved"
+                           readonly>
+                </div>
+                <label class="col-md-1 control-label small" for="textinput">HDD
+                    ID</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.workOrderDTO.workOrder.processingHDDid" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-1 control-label small" for="textinput">Date
+                    Shipped</label>
+                <div class="col-sm-2">
+                    <input type="date" class="form-control input-sm"
+                           ng-model="vm.workOrderDTO.workOrder.processingDateShipped"
+                           readonly>
+                </div>
+                <label class="col-md-1 control-label small" for="textinput">Proof
+                    Shipped</label>
+                <div class="col-sm-2">
+                    <input type="date" class="form-control input-sm"
+                           ng-model="vm.workOrderDTO.workOrder.processingProofShipped"
+                           readonly>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-1 control-label small" for="textinput">Notes</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.workOrderDTO.workOrder.processingNotes" readonly>
+                </div>
+                <label class="col-md-1 control-label small" for="textinput">Location</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.workOrderDTO.workOrder.processingLocation" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-1 control-label small" for="textinput">Image
+                    Range</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.workOrderDTO.workOrder.processingImageRange" readonly>
+                </div>
+                <label class="col-md-1 control-label small" for="textinput">Image
+                    Qty</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.workOrderDTO.workOrder.processingImageQty" readonly>
+                </div>
+            </div>
+            <hr>
 
-			<h4>Lab</h4>
-			<div class="row">
-				<label class="col-md-2 control-label small" for="textinput">Tasks</label>
-			</div>
-			<div ng-repeat="labs in vm.labs track by labs.id">
-
-
-				<div class="row">
-					<div class="col-lg-3">
-						<div class="input-group">
-
-							</small><span class="input-group-addon input-sm"><small>{{$index}}</small></span>
-
-							<input type="text" class="form-control input-sm"
-								ng-model="labs.task_name.textValue" readonly>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<br>
-			<div class="row">
-
-				<label class="col-md-2 control-label small" for="textinput">Image
-					Number Schema</label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control input-sm"
-						ng-model="vm.workOrderDTO.projects.labImageNumberSchema" readonly>
-				</div>
-				<label class="col-md-2 control-label small" for="textinput">
-					Folder/Batch Schema</label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control input-sm"
-						ng-model="vm.workOrderDTO.projects.labFolderBatchSchema" readonly>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="tracking" ng-show="vm.workOrderDTO.workOrder.isTracking">
-		<h4>Tracking</h4>
-
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">Reminder1</label>
-			<div class="col-sm-2">
-				<input type="date" class="form-control input-sm"
-					ng-model="vm.workOrderDTO.workOrder.reminderDate1" readonly>
-			</div>
-			<div class="col-sm-2">
-				<input id="field_vm.workOrder.reminderMsg1" name="textinput"
-					type="text" placeholder="reminder message"
-					class="form-control input-sm"
-					ng-model="vm.workOrderDTO.workOrder.reminderMsg1" readonly>
-			</div>
-
-			<div class="col-sm-2">
-				<div
-					ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder1'}}">
-
-					<input id="field_vm.workOrder.reminderMsg1.admin_user"
-						name="textinput" type="text" class="form-control input-sm"
-						ng-model="wo.admin_user.fullName" readonly>
-				</div>
-
-			</div>
-		</div>
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">Reminder2</label>
-			<div class="col-sm-2">
-				<input type="date" class="form-control input-sm"
-					ng-model="vm.workOrderDTO.workOrder.reminderDate2" readonly>
-			</div>
-			<div class="col-sm-2">
-				<input id="textinput" name="textinput" type="text"
-					placeholder="reminder message" class="form-control input-sm"
-					ng-model="vm.workOrderDTO.workOrder.reminderMsg2" readonly>
-			</div>
-			<div class="col-sm-2">
-
-				<div
-					ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder2'}}">
-
-					<input id="field_vm.workOrder.reminderMsg2.admin_user"
-						name="textinput" type="text" class="form-control input-sm"
-						ng-model="wo.admin_user.fullName" readonly>
-				</div>
-
-			</div>
-		</div>
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">Reminder3</label>
-			<div class="col-sm-2">
-				<input type="date" class="form-control input-sm"
-					ng-model="vm.workOrderDTO.workOrder.reminderDate3" readonly>
-			</div>
-			<div class="col-sm-2">
-				<input id="field_vm.workOrder.reminderMsg3" name="textinput"
-					type="text" placeholder="reminder message"
-					ng-model="vm.workOrderDTO.workOrder.reminderMsg3"
-					class="form-control input-sm" readonly>
-			</div>
-			<div class="col-sm-2">
-				<div
-					ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder3'}}">
-
-					<input id="field_vm.workOrder.reminderMsg3.admin_user"
-						name="textinput" type="text" class="form-control input-sm"
-						ng-model="wo.admin_user.fullName" readonly>
-				</div>
-			</div>
-		</div>
-	</div>
-	<hr>
-	<h4>Completed Task</h4>
+            <h4>Lab</h4>
+            <div class="row">
+                <label class="col-md-2 control-label small" for="textinput">Tasks</label>
+            </div>
+            <div ng-repeat="labs in vm.labs track by labs.id">
 
 
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="input-group">
+
+                            </small><span class="input-group-addon input-sm"><small>{{$index}}</small></span>
+
+                            <input type="text" class="form-control input-sm"
+                                   ng-model="labs.task_name.textValue" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <div class="row">
+
+                <label class="col-md-2 control-label small" for="textinput">Image
+                    Number Schema</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.workOrderDTO.projects.labImageNumberSchema" readonly>
+                </div>
+                <label class="col-md-2 control-label small" for="textinput">
+                    Folder/Batch Schema</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.workOrderDTO.projects.labFolderBatchSchema" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tracking" ng-show="vm.workOrderDTO.workOrder.isTracking">
+        <h4>Tracking</h4>
+
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Reminder1</label>
+            <div class="col-sm-2">
+                <input type="date" class="form-control input-sm"
+                       ng-model="vm.workOrderDTO.workOrder.reminderDate1" readonly>
+            </div>
+            <div class="col-sm-2">
+                <input id="field_vm.workOrder.reminderMsg1" name="textinput"
+                       type="text" placeholder="reminder message"
+                       class="form-control input-sm"
+                       ng-model="vm.workOrderDTO.workOrder.reminderMsg1" readonly>
+            </div>
+
+            <div class="col-sm-2">
+                <div
+                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder1'}}">
+
+                    <input id="field_vm.workOrder.reminderMsg1.admin_user"
+                           name="textinput" type="text" class="form-control input-sm"
+                           ng-model="wo.admin_user.fullName" readonly>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Reminder2</label>
+            <div class="col-sm-2">
+                <input type="date" class="form-control input-sm"
+                       ng-model="vm.workOrderDTO.workOrder.reminderDate2" readonly>
+            </div>
+            <div class="col-sm-2">
+                <input id="textinput" name="textinput" type="text"
+                       placeholder="reminder message" class="form-control input-sm"
+                       ng-model="vm.workOrderDTO.workOrder.reminderMsg2" readonly>
+            </div>
+            <div class="col-sm-2">
+
+                <div
+                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder2'}}">
+
+                    <input id="field_vm.workOrder.reminderMsg2.admin_user"
+                           name="textinput" type="text" class="form-control input-sm"
+                           ng-model="wo.admin_user.fullName" readonly>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Reminder3</label>
+            <div class="col-sm-2">
+                <input type="date" class="form-control input-sm"
+                       ng-model="vm.workOrderDTO.workOrder.reminderDate3" readonly>
+            </div>
+            <div class="col-sm-2">
+                <input id="field_vm.workOrder.reminderMsg3" name="textinput"
+                       type="text" placeholder="reminder message"
+                       ng-model="vm.workOrderDTO.workOrder.reminderMsg3"
+                       class="form-control input-sm" readonly>
+            </div>
+            <div class="col-sm-2">
+                <div
+                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder3'}}">
+
+                    <input id="field_vm.workOrder.reminderMsg3.admin_user"
+                           name="textinput" type="text" class="form-control input-sm"
+                           ng-model="wo.admin_user.fullName" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div print-remove>
+        <hr>
+
+        <h4>Completed Task</h4>
 
 
+        <!-- WORKING CODE -->
+        <!--
+            <div class="row">
 
-		<!-- WORKING CODE -->
-<!-- 
-	<div class="row">
+                <label class="col-md-1 control-label small">Verified</label>
+                <div class="col-sm-2">
+                    <div
+                        ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_verified'}}">
 
-		<label class="col-md-1 control-label small">Verified</label>
-		<div class="col-sm-2">
-			<div
-				ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_verified'}}">
+                        <input id="field_vm.workOrder.verified" name="textinput" type="text"
+                            class="form-control input-sm" ng-model="wo.admin_user.fullName"
+                            readonly>
+                    </div>
+                </div>
 
-				<input id="field_vm.workOrder.verified" name="textinput" type="text"
-					class="form-control input-sm" ng-model="wo.admin_user.fullName"
-					readonly>
-			</div>
-		</div>
+                <label class="col-md-1 control-label small" for="textinput">Processed</label>
+                <div class="col-sm-2">
+                    <div
+                        ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_processed'}}">
 
-		<label class="col-md-1 control-label small" for="textinput">Processed</label>
-		<div class="col-sm-2">
-			<div
-				ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_processed'}}">
+                        <input id="field_vm.workOrder.processed" name="textinput"
+                            type="text" class="form-control input-sm"
+                            ng-model="wo.admin_user.fullName" readonly>
+                    </div>
+                </div>
 
-				<input id="field_vm.workOrder.processed" name="textinput"
-					type="text" class="form-control input-sm"
-					ng-model="wo.admin_user.fullName" readonly>
-			</div>
-		</div>
+                <label class="col-md-1 control-label small" for="textinput">Ingest
+                    By</label>
+                <div class="col-sm-2">
+                    <div
+                        ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_ingestby'}}">
 
-		<label class="col-md-1 control-label small" for="textinput">Ingest
-			By</label>
-		<div class="col-sm-2">
-			<div
-				ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_ingestby'}}">
+                        <input id="field_vm.workOrder.ingestBy" name="textinput" type="text"
+                            class="form-control input-sm" ng-model="wo.admin_user.fullName"
+                            readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-1 control-label small" for="textinput">Print</label>
+                <div class="col-sm-2">
+                    <div
+                        ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_print'}}">
 
-				<input id="field_vm.workOrder.ingestBy" name="textinput" type="text"
-					class="form-control input-sm" ng-model="wo.admin_user.fullName"
-					readonly>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<label class="col-md-1 control-label small" for="textinput">Print</label>
-		<div class="col-sm-2">
-			<div
-				ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_print'}}">
-
-				<input id="field_vm.workOrder.print" name="textinput" type="text"
-					class="form-control input-sm" ng-model="wo.admin_user.fullName"
-					readonly>
-			</div>
-		</div>
-
-
-		<label class="col-md-1 control-label small" for="textinput">Upload/HDD
-			Transfer</label>
-		<div class="col-sm-2">
-			<div
-				ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_upload'}}">
-
-				<input id="field_vm.workOrder.hddTr" name="textinput" type="text"
-					class="form-control input-sm" ng-model="wo.admin_user.fullName"
-					readonly>
-			</div>
-		</div>
-
-		<label class="col-md-1 control-label small" for="textinput">Archived</label>
-		<div class="col-sm-2">
-			<div
-				ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_archived'}}">
-
-				<input id="field_vm.workOrder.archviewd" name="textinput"
-					type="text" class="form-control input-sm"
-					ng-model="wo.admin_user.fullName" readonly>
-			</div>
-		</div>
-	</div> -->
-		
-		
-		<div class="row">
-
-		<label class="col-md-1 control-label small">Verified</label>
-		<div class="col-sm-2">
-			<div
-				ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_verified'}}">
-
-				<input id="field_vm.workOrder.verified" name="textinput" type="text"
-					class="form-control input-sm" ng-model="wo.admin_user.fullName"
-					readonly>
-			</div>
-		</div>
-
-		<label class="col-md-1 control-label small" for="textinput">Processed</label>
-		<div class="col-sm-2">
-			<div
-				ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_processed'}}">
-
-				<input id="field_vm.workOrder.processed" name="textinput"
-					type="text" class="form-control input-sm"
-					ng-model="wo.admin_user.fullName" readonly>
-			</div>
-		</div>
-
-		<label class="col-md-1 control-label small" for="textinput">Ingest
-			By</label>
-		<div class="col-sm-2">
-			<div
-				ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_ingestby'}}">
-
-				<input id="field_vm.workOrder.ingestBy" name="textinput" type="text"
-					class="form-control input-sm" ng-model="wo.admin_user.fullName"
-					readonly>
-			</div>
-		</div>
-	</div>
-	<br>
-	<div class="row">
-		<label class="col-md-1 control-label small" for="textinput">Print</label>
-		<div class="col-sm-2">
-			<div
-				ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_print'}}">
-
-				<input id="field_vm.workOrder.print" name="textinput" type="text"
-					class="form-control input-sm" ng-model="wo.admin_user.fullName"
-					readonly>
-			</div>
-		</div>
+                        <input id="field_vm.workOrder.print" name="textinput" type="text"
+                            class="form-control input-sm" ng-model="wo.admin_user.fullName"
+                            readonly>
+                    </div>
+                </div>
 
 
-		<label class="col-md-1 control-label small" for="textinput">Upload/HDD
-			Transfer</label>
-		<div class="col-sm-2">
-			<div
-				ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_upload'}}">
+                <label class="col-md-1 control-label small" for="textinput">Upload/HDD
+                    Transfer</label>
+                <div class="col-sm-2">
+                    <div
+                        ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_upload'}}">
 
-				<input id="field_vm.workOrder.hddTr" name="textinput" type="text"
-					class="form-control input-sm" ng-model="wo.admin_user.fullName"
-					readonly>
-			</div>
-		</div>
+                        <input id="field_vm.workOrder.hddTr" name="textinput" type="text"
+                            class="form-control input-sm" ng-model="wo.admin_user.fullName"
+                            readonly>
+                    </div>
+                </div>
 
-		<label class="col-md-1 control-label small" for="textinput">Archived</label>
-		<div class="col-sm-2">
-			<div
-				ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_archived'}}">
+                <label class="col-md-1 control-label small" for="textinput">Archived</label>
+                <div class="col-sm-2">
+                    <div
+                        ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_archived'}}">
 
-				<input id="field_vm.workOrder.archviewd" name="textinput"
-					type="text" class="form-control input-sm"
-					ng-model="wo.admin_user.fullName" readonly>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<hr>
+                        <input id="field_vm.workOrder.archviewd" name="textinput"
+                            type="text" class="form-control input-sm"
+                            ng-model="wo.admin_user.fullName" readonly>
+                    </div>
+                </div>
+            </div> -->
 
 
+        <div class="row">
+
+            <label class="col-md-1 control-label small">Verified</label>
+            <div class="col-sm-2">
+                <div
+                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_verified'}}">
+
+                    <input id="field_vm.workOrder.verified" name="textinput" type="text"
+                           class="form-control input-sm" ng-model="wo.admin_user.fullName"
+                           readonly>
+                </div>
+            </div>
+
+            <label class="col-md-1 control-label small" for="textinput">Processed</label>
+            <div class="col-sm-2">
+                <div
+                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_processed'}}">
+
+                    <input id="field_vm.workOrder.processed" name="textinput"
+                           type="text" class="form-control input-sm"
+                           ng-model="wo.admin_user.fullName" readonly>
+                </div>
+            </div>
+
+            <label class="col-md-1 control-label small" for="textinput">Ingest
+                By</label>
+            <div class="col-sm-2">
+                <div
+                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_ingestby'}}">
+
+                    <input id="field_vm.workOrder.ingestBy" name="textinput" type="text"
+                           class="form-control input-sm" ng-model="wo.admin_user.fullName"
+                           readonly>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Print</label>
+            <div class="col-sm-2">
+                <div
+                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_print'}}">
+
+                    <input id="field_vm.workOrder.print" name="textinput" type="text"
+                           class="form-control input-sm" ng-model="wo.admin_user.fullName"
+                           readonly>
+                </div>
+            </div>
 
 
+            <label class="col-md-1 control-label small" for="textinput">Upload/HDD
+                Transfer</label>
+            <div class="col-sm-2">
+                <div
+                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_upload'}}">
 
+                    <input id="field_vm.workOrder.hddTr" name="textinput" type="text"
+                           class="form-control input-sm" ng-model="wo.admin_user.fullName"
+                           readonly>
+                </div>
+            </div>
 
+            <label class="col-md-1 control-label small" for="textinput">Archived</label>
+            <div class="col-sm-2">
+                <div
+                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_archived'}}">
 
-
-
-
-
-
-
-
-	<h4>Work</h4>
-	<div class="row">
-		<label class="col-xs-3 control-label small">Request Date</label>
-	</div>
-	<div class="row">
-		<div class="col-sm-2">
-			<input name="startDate" type="date" id="field_requestDate"
-				ng-model="vm.workOrderDTO.workOrder.requestDate"
-				class="form-control input-sm" readonly>
-		</div>
-	</div>
-	<div class="row">
-		<label class="col-xs-3 control-label small">Work Description</label>
-	</div>
-	<div class="row">
-		<div class="col-sm-9">
+                    <input id="field_vm.workOrder.archviewd" name="textinput"
+                           type="text" class="form-control input-sm"
+                           ng-model="wo.admin_user.fullName" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div print-remove>
+        <hr>
+    </div>
+    <h4>Work</h4>
+    <div class="row">
+        <label class="col-xs-3 control-label small">Request Date</label>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <input name="startDate" type="date" id="field_requestDate"
+                   ng-model="vm.workOrderDTO.workOrder.requestDate"
+                   class="form-control input-sm" readonly>
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-xs-3 control-label small">Work Description</label>
+    </div>
+    <div class="row">
+        <div class="col-sm-9">
 			<textarea class="form-control input-sm" rows="5"
-				id="field_vm.workOrder.requestDescription"
-				ng-model="vm.workOrderDTO.workOrder.requestDescription" readonly></textarea>
-		</div>
+                      id="field_vm.workOrder.requestDescription"
+                      ng-model="vm.workOrderDTO.workOrder.requestDescription" readonly></textarea>
+        </div>
 
-	</div>
-	<hr>
+    </div>
+    <div print-remove>
+        <hr>
+    </div>
 
 
-	<div class="row">
-		<label class="col-md-1 control-label small" for="textinput">Status</label>
-		<div class="col-xs-2">
+    <div class="row">
+        <label class="col-md-1 control-label small" for="textinput">Status</label>
+        <div class="col-xs-2">
 
-			<input id="field_vm.workOrder.status" name="textinput" type="text"
-				class="form-control input-sm"
-				ng-model="vm.workOrderDTO.workOrder.status.textValue" readonly>
-		</div>
-		<label class="col-md-1 control-label small" for="textinput">Completed</label>
-		<div class="col-xs-2">
-			<input id="field_vm.workOrder.completionDate" name="textinput"
-				type="date" ng-model="vm.workOrderDTO.workOrder.completionDate"
-				class="form-control input-sm" readonly>
-		</div>
-		<label class="col-xs-1 control-label small" for="textinput">Duration
-			of Service</label>
-		<div class="col-xs-2">
-			<input id="field_vm.workOrder.durationOfService" name="textinput"
-				type="text" ng-model="vm.workOrderDTO.workOrder.durationOfService"
-				class="form-control input-sm" readonly>
-		</div>
-	</div>
-
-	<hr>
-
-	<div ng-show="vm.workOrderDTO.workOrder.isAbc">
-		<h4>ABC</h4>
-		<div class="row">
-			<label class="col-xs-3 control-label small">ABC Instructions</label>
-		</div>
-		<div class="row">
-			<div class="col-sm-9">
+            <input id="field_vm.workOrder.status" name="textinput" type="text"
+                   class="form-control input-sm"
+                   ng-model="vm.workOrderDTO.workOrder.status.textValue" readonly>
+        </div>
+        <label class="col-md-1 control-label small" for="textinput">Completed</label>
+        <div class="col-xs-2">
+            <input id="field_vm.workOrder.completionDate" name="textinput"
+                   type="date" ng-model="vm.workOrderDTO.workOrder.completionDate"
+                   class="form-control input-sm" readonly>
+        </div>
+        <label class="col-xs-1 control-label small" for="textinput">Duration
+            of Service</label>
+        <div class="col-xs-2">
+            <input id="field_vm.workOrder.durationOfService" name="textinput"
+                   type="text" ng-model="vm.workOrderDTO.workOrder.durationOfService"
+                   class="form-control input-sm" readonly>
+        </div>
+    </div>
+    <div print-remove>
+        <hr>
+    </div>
+    <div ng-show="vm.workOrderDTO.workOrder.isAbc">
+        <h4>ABC</h4>
+        <div class="row">
+            <label class="col-xs-3 control-label small">ABC Instructions</label>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
 				<textarea class="form-control input-sm" rows="5"
-					ng-model="vm.workOrderDTO.workOrder.abcInstruction" readonly></textarea>
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			<label class="col-xs-2 control-label small">File Count</label> <label
-				class="col-xs-2 control-label small">File Type</label> <label
-				class="col-xs-2 control-label small">File Size</label> <label
-				class="col-xs-2 control-label small">Total File Count</label>
-		</div>
-		<div class="row">
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderDTO.workOrderAbcFiles[0].file_count"
-					name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcFiles[0].file_count"
-					class="form-control input-sm" readonly>
-			</div>
-			<div class="col-xs-2">
+                          ng-model="vm.workOrderDTO.workOrder.abcInstruction" readonly></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <label class="col-xs-2 control-label small">File Count</label> <label
+            class="col-xs-2 control-label small">File Type</label> <label
+            class="col-xs-2 control-label small">File Size</label> <label
+            class="col-xs-2 control-label small">Total File Count</label>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderDTO.workOrderAbcFiles[0].file_count"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcFiles[0].file_count"
+                       class="form-control input-sm" readonly>
+            </div>
+            <div class="col-xs-2">
 
-				<input name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcFiles[0].file_type.textValue"
-					class="form-control input-sm" readonly>
+                <input name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcFiles[0].file_type.textValue"
+                       class="form-control input-sm" readonly>
 
-			</div>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderDTO.workOrderAbcFiles[0].file_size"
-					name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcFiles[0].file_size"
-					class="form-control input-sm" readonly>
-			</div>
-			<div class="col-xs-2">
-				<label class="col-xs-2 text-danger">{{vm.workOrderDTO.workOrderAbcFiles[0].file_count--vm.workOrderDTO.workOrderAbcFiles[1].file_count--vm.workOrderDTO.workOrderAbcFiles[2].file_count}}</label>
-			</div>
-		</div>
+            </div>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderDTO.workOrderAbcFiles[0].file_size"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcFiles[0].file_size"
+                       class="form-control input-sm" readonly>
+            </div>
+            <div class="col-xs-2">
+                <label class="col-xs-2 text-danger">{{vm.workOrderDTO.workOrderAbcFiles[0].file_count--vm.workOrderDTO.workOrderAbcFiles[1].file_count--vm.workOrderDTO.workOrderAbcFiles[2].file_count}}</label>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderDTO.workOrderAbcFiles[1].file_count"
-					name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcFiles[1].file_count"
-					class="form-control input-sm" readonly>
-			</div>
-			<div class="col-xs-2">
-				<input name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcFiles[1].file_type.textValue"
-					class="form-control input-sm" readonly>
-			</div>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderDTO.workOrderAbcFiles[1].file_size"
-					name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcFiles[1].file_size"
-					class="form-control input-sm" readonly>
-			</div>
-		</div>
+        <div class="row">
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderDTO.workOrderAbcFiles[1].file_count"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcFiles[1].file_count"
+                       class="form-control input-sm" readonly>
+            </div>
+            <div class="col-xs-2">
+                <input name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcFiles[1].file_type.textValue"
+                       class="form-control input-sm" readonly>
+            </div>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderDTO.workOrderAbcFiles[1].file_size"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcFiles[1].file_size"
+                       class="form-control input-sm" readonly>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderDTO.workOrderAbcFiles[2].file_count"
-					name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcFiles[2].file_count"
-					class="form-control input-sm" readonly>
-			</div>
-			<div class="col-xs-2">
-				<input name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcFiles[2].file_type.textValue"
-					class="form-control input-sm" readonly>
-			</div>
-			<div class="col-xs-2">
-				<input id="field_vm.vm.workOrderDTO.workOrderAbcFiles[2].file_size"
-					name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcFiles[2].file_size"
-					class="form-control input-sm" readonly>
-			</div>
-		</div>
-		<br>
-
-
-		<div class="row">
-			<label class="col-xs-2 control-label small">Hard Drive To</label> <label
-				class="col-xs-2 control-label small">Size in GB</label> <label
-				class="col-xs-2 control-label small">Drive #</label> <label
-				class="col-xs-2 control-label small">Hard Drive To</label> <label
-				class="col-xs-2 control-label small">Size in GB</label> <label
-				class="col-xs-2 control-label small">Drive #</label>
-		</div>
-		<div class="row">
-
-			<div class="col-xs-2">
-
-				<input name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcHdds[0].hdd_to.textValue"
-					class="form-control input-sm" readonly>
-			</div>
-
-			<div class="col-xs-2">
-				<input id="field_vm.vm.workOrderDTO.workOrderAbcHdds[0].size"
-					name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcHdds[0].size"
-					class="form-control input-sm" readonly>
-			</div>
-
-			<div class="col-xs-2">
-				<input
-					id="field_vm.vm.workOrderDTO.workOrderAbcHdds[0].drive_number"
-					name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcHdds[0].drive_number"
-					class="form-control input-sm" readonly>
-			</div>
-
-			<div class="col-xs-2">
-				<input name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcHdds[1].hdd_to.textValue"
-					class="form-control input-sm" readonly>
-			</div>
-
-			<div class="col-xs-2">
-				<input id="field_vm.vm.workOrderDTO.workOrderAbcHdds[1].size"
-					name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcHdds[1].size"
-					class="form-control input-sm" readonly>
-			</div>
-
-			<div class="col-xs-2">
-				<input
-					id="field_vm.vm.workOrderDTO.workOrderAbcHdds[1].drive_number"
-					name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcHdds[1].drive_number"
-					class="form-control input-sm" readonly>
-			</div>
-		</div>
+        <div class="row">
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderDTO.workOrderAbcFiles[2].file_count"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcFiles[2].file_count"
+                       class="form-control input-sm" readonly>
+            </div>
+            <div class="col-xs-2">
+                <input name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcFiles[2].file_type.textValue"
+                       class="form-control input-sm" readonly>
+            </div>
+            <div class="col-xs-2">
+                <input id="field_vm.vm.workOrderDTO.workOrderAbcFiles[2].file_size"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcFiles[2].file_size"
+                       class="form-control input-sm" readonly>
+            </div>
+        </div>
+        <br>
 
 
-		<div class="row">
-			<div class="col-xs-2">
-				<input name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcHdds[2].hdd_to.textValue"
-					class="form-control input-sm" readonly>
-			</div>
+        <div class="row">
+            <label class="col-xs-2 control-label small">Hard Drive To</label> <label
+            class="col-xs-2 control-label small">Size in GB</label> <label
+            class="col-xs-2 control-label small">Drive #</label> <label
+            class="col-xs-2 control-label small">Hard Drive To</label> <label
+            class="col-xs-2 control-label small">Size in GB</label> <label
+            class="col-xs-2 control-label small">Drive #</label>
+        </div>
+        <div class="row">
 
-			<div class="col-xs-2">
-				<input id="field_vm.vm.workOrderDTO.workOrderAbcHdds[2].size"
-					name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcHdds[2].size"
-					class="form-control input-sm" readonly>
-			</div>
+            <div class="col-xs-2">
 
-			<div class="col-xs-2">
-				<input
-					id="field_vm.vm.workOrderDTO.workOrderAbcHdds[2].drive_number"
-					name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcHdds[2].drive_number"
-					class="form-control input-sm" readonly>
-			</div>
-			<div class="col-xs-2">
-				<input name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcHdds[3].hdd_to.textValue"
-					class="form-control input-sm" readonly>
-			</div>
+                <input name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcHdds[0].hdd_to.textValue"
+                       class="form-control input-sm" readonly>
+            </div>
 
-			<div class="col-xs-2">
-				<input id="field_vm.vm.workOrderDTO.workOrderAbcHdds[3].size"
-					name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcHdds[3].size"
-					class="form-control input-sm" readonly>
-			</div>
+            <div class="col-xs-2">
+                <input id="field_vm.vm.workOrderDTO.workOrderAbcHdds[0].size"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcHdds[0].size"
+                       class="form-control input-sm" readonly>
+            </div>
 
-			<div class="col-xs-2">
-				<input
-					id="field_vm.vm.workOrderDTO.workOrderAbcHdds[3].drive_number"
-					name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrderAbcHdds[3].drive_number"
-					class="form-control input-sm" readonly>
-			</div>
-		</div>
+            <div class="col-xs-2">
+                <input
+                    id="field_vm.vm.workOrderDTO.workOrderAbcHdds[0].drive_number"
+                    name="textinput" type="text"
+                    ng-model="vm.workOrderDTO.workOrderAbcHdds[0].drive_number"
+                    class="form-control input-sm" readonly>
+            </div>
 
+            <div class="col-xs-2">
+                <input name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcHdds[1].hdd_to.textValue"
+                       class="form-control input-sm" readonly>
+            </div>
 
-		<br>
+            <div class="col-xs-2">
+                <input id="field_vm.vm.workOrderDTO.workOrderAbcHdds[1].size"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcHdds[1].size"
+                       class="form-control input-sm" readonly>
+            </div>
 
-
-		<div class="row">
-			<label class="col-xs-2 control-label small">Raw DVD</label> <label
-				class="col-xs-2 control-label small">Talent Count</label>
-		</div>
-		<div class="row">
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.abcRawDvd" name="textinput"
-					type="text" ng-model="vm.workOrderDTO.workOrder.abcRawDvd"
-					class="form-control input-sm" readonly>
-			</div>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.abcTalentCount" name="textinput"
-					type="text" ng-model="vm.workOrderDTO.workOrder.abcTalentCount"
-					class="form-control input-sm" readonly>
-			</div>
-		</div>
-
-	</div>
+            <div class="col-xs-2">
+                <input
+                    id="field_vm.vm.workOrderDTO.workOrderAbcHdds[1].drive_number"
+                    name="textinput" type="text"
+                    ng-model="vm.workOrderDTO.workOrderAbcHdds[1].drive_number"
+                    class="form-control input-sm" readonly>
+            </div>
+        </div>
 
 
-	<div ng-show="vm.workOrderDTO.workOrder.isPrint">
-		<h4>Printing</h4>
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">Size</label>
-			<div class="col-xs-2">
-				<input name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrder.printSize.textValue"
-					class="form-control input-sm" readonly>
+        <div class="row">
+            <div class="col-xs-2">
+                <input name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcHdds[2].hdd_to.textValue"
+                       class="form-control input-sm" readonly>
+            </div>
 
-			</div>
+            <div class="col-xs-2">
+                <input id="field_vm.vm.workOrderDTO.workOrderAbcHdds[2].size"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcHdds[2].size"
+                       class="form-control input-sm" readonly>
+            </div>
+
+            <div class="col-xs-2">
+                <input
+                    id="field_vm.vm.workOrderDTO.workOrderAbcHdds[2].drive_number"
+                    name="textinput" type="text"
+                    ng-model="vm.workOrderDTO.workOrderAbcHdds[2].drive_number"
+                    class="form-control input-sm" readonly>
+            </div>
+            <div class="col-xs-2">
+                <input name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcHdds[3].hdd_to.textValue"
+                       class="form-control input-sm" readonly>
+            </div>
+
+            <div class="col-xs-2">
+                <input id="field_vm.vm.workOrderDTO.workOrderAbcHdds[3].size"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrderAbcHdds[3].size"
+                       class="form-control input-sm" readonly>
+            </div>
+
+            <div class="col-xs-2">
+                <input
+                    id="field_vm.vm.workOrderDTO.workOrderAbcHdds[3].drive_number"
+                    name="textinput" type="text"
+                    ng-model="vm.workOrderDTO.workOrderAbcHdds[3].drive_number"
+                    class="form-control input-sm" readonly>
+            </div>
+        </div>
 
 
-			<label class="col-md-1 control-label small" for="textinput">Surface</label>
-			<div class="col-xs-2">
-				<input name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrder.printSurface.textValue"
-					class="form-control input-sm" readonly>
-
-			</div>
+        <br>
 
 
-			<label class="col-md-1 control-label small" for="textinput">Bleed</label>
-			<div class="col-xs-2">
-				<input name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrder.printBleed.textValue"
-					class="form-control input-sm" readonly>
+        <div class="row">
+            <label class="col-xs-2 control-label small">Raw DVD</label> <label
+            class="col-xs-2 control-label small">Talent Count</label>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.abcRawDvd" name="textinput"
+                       type="text" ng-model="vm.workOrderDTO.workOrder.abcRawDvd"
+                       class="form-control input-sm" readonly>
+            </div>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.abcTalentCount" name="textinput"
+                       type="text" ng-model="vm.workOrderDTO.workOrder.abcTalentCount"
+                       class="form-control input-sm" readonly>
+            </div>
+        </div>
 
-			</div>
-		</div>
+    </div>
 
 
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">File
-				Name</label>
-			<div class="col-xs-2">
-				<input name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrder.printFilename.textValue"
-					class="form-control input-sm" readonly>
+    <div ng-show="vm.workOrderDTO.workOrder.isPrint">
+        <h4>Printing</h4>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Size</label>
+            <div class="col-xs-2">
+                <input name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrder.printSize.textValue"
+                       class="form-control input-sm" readonly>
 
-			</div>
+            </div>
 
-			<label class="col-md-1 control-label small" for="textinput">Photo
-				Credit</label>
-			<div class="col-xs-2">
-				<input name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrder.printPhotoCredit.textValue"
-					class="form-control input-sm" readonly>
 
-			</div>
+            <label class="col-md-1 control-label small" for="textinput">Surface</label>
+            <div class="col-xs-2">
+                <input name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrder.printSurface.textValue"
+                       class="form-control input-sm" readonly>
 
-		</div>
-		<hr>
-		<h4>Quantity</h4>
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">Sets</label>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.printSet" name="textinput" type="text"
-					ng-model="vm.workOrderDTO.workOrder.printSet"
-					class="form-control input-sm" readonly>
-			</div>
-			<label class="col-md-1 control-label small" for="textinput">Quantity</label>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.printQuantity" name="textinput"
-					type="text" ng-model="vm.workOrderDTO.workOrder.printQuantity"
-					class="form-control input-sm" readonly>
-			</div>
+            </div>
 
-		</div>
-	</div>
-	<hr>
-	<div id="proof" ng-show="vm.workOrderDTO.workOrder.isProof">
-		<h4>Days/Pages</h4>
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">Days</label>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.printDaysFrom" name="textinput"
-					type="text" ng-model="vm.workOrderDTO.workOrder.printDaysFrom"
-					class="form-control input-sm" readonly>
-			</div>
-			<label class="col-md-1 control-label small" for="textinput">To</label>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.printDaysTo" name="textinput"
-					type="text" ng-model="vm.workOrderDTO.workOrder.printDaysTo"
-					class="form-control input-sm" readonly>
-			</div>
-		</div>
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">Pages</label>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.printPagesFrom" name="textinput"
-					type="text" ng-model="vm.workOrderDTO.workOrder.printPagesFrom"
-					class="form-control input-sm" readonly>
-			</div>
-			<label class="col-md-1 control-label small" for="textinput">To</label>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.printPagesTo" name="textinput"
-					type="text" ng-model="vm.workOrderDTO.workOrder.printPagesTo"
-					class="form-control input-sm" readonly>
-			</div>
-		</div>
 
-		<hr>
-		<h4>Purchase Orders</h4>
+            <label class="col-md-1 control-label small" for="textinput">Bleed</label>
+            <div class="col-xs-2">
+                <input name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrder.printBleed.textValue"
+                       class="form-control input-sm" readonly>
 
-		<div
-			ng-repeat="purchaseOrders in vm.purchaseOrders track by purchaseOrders.id">
-			<div class="row">
-				<div class="col-lg-2">
-					<div class="input-group">
+            </div>
+        </div>
 
-						</small><span class="input-group-addon input-sm"><small>PO
+
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">File
+                Name</label>
+            <div class="col-xs-2">
+                <input name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrder.printFilename.textValue"
+                       class="form-control input-sm" readonly>
+
+            </div>
+
+            <label class="col-md-1 control-label small" for="textinput">Photo
+                Credit</label>
+            <div class="col-xs-2">
+                <input name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrder.printPhotoCredit.textValue"
+                       class="form-control input-sm" readonly>
+
+            </div>
+
+        </div>
+        <hr>
+        <h4>Quantity</h4>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Sets</label>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.printSet" name="textinput" type="text"
+                       ng-model="vm.workOrderDTO.workOrder.printSet"
+                       class="form-control input-sm" readonly>
+            </div>
+            <label class="col-md-1 control-label small" for="textinput">Quantity</label>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.printQuantity" name="textinput"
+                       type="text" ng-model="vm.workOrderDTO.workOrder.printQuantity"
+                       class="form-control input-sm" readonly>
+            </div>
+
+        </div>
+
+    </div>
+    <div print-remove>
+        <hr>
+    </div>
+    <div id="proof" ng-show="vm.workOrderDTO.workOrder.isProof">
+        <h4>Days/Pages</h4>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Days</label>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.printDaysFrom" name="textinput"
+                       type="text" ng-model="vm.workOrderDTO.workOrder.printDaysFrom"
+                       class="form-control input-sm" readonly>
+            </div>
+            <label class="col-md-1 control-label small" for="textinput">To</label>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.printDaysTo" name="textinput"
+                       type="text" ng-model="vm.workOrderDTO.workOrder.printDaysTo"
+                       class="form-control input-sm" readonly>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Pages</label>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.printPagesFrom" name="textinput"
+                       type="text" ng-model="vm.workOrderDTO.workOrder.printPagesFrom"
+                       class="form-control input-sm" readonly>
+            </div>
+            <label class="col-md-1 control-label small" for="textinput">To</label>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.printPagesTo" name="textinput"
+                       type="text" ng-model="vm.workOrderDTO.workOrder.printPagesTo"
+                       class="form-control input-sm" readonly>
+            </div>
+        </div>
+
+        <div print-remove>
+            <hr>
+        </div>
+        <h4>Purchase Orders</h4>
+
+        <div
+            ng-repeat="purchaseOrders in vm.purchaseOrders track by purchaseOrders.id">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="input-group">
+
+                        </small><span class="input-group-addon input-sm"><small>PO
 								{{$index}}</small></span> <input type="text" class="form-control input-sm"
-							ng-model="purchaseOrders.po_number" readonly>
-					</div>
-				</div>
-				<div class="col-lg-3">
-					<input type="text" class="form-control input-sm"
-						ng-model="purchaseOrders.po_notes" readonly>
-				</div>
+                                                                 ng-model="purchaseOrders.po_number" readonly>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="purchaseOrders.po_notes" readonly>
+                </div>
 
-			</div>
-		</div>
+            </div>
+        </div>
 
-	</div>
-	<hr>
-	<br>
-
-
-	<div class="row">
-		<label class="col-xs-3 control-label small">PO Record Field</label>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
+    </div>
+    <div print-remove>
+        <hr>
+    </div>
+    <div class="row">
+        <label class="col-xs-3 control-label small">PO Record Field</label>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
 			<textarea class="form-control input-sm" rows="5"
-				id="field_vm.workOrder.poRecord"
-				ng-model="vm.workOrderDTO.workOrder.poRecord" readonly></textarea>
-		</div>
+                      id="field_vm.workOrder.poRecord"
+                      ng-model="vm.workOrderDTO.workOrder.poRecord" readonly></textarea>
+        </div>
 
-	</div>
+    </div>
 
-	<hr>
-	<h4>Accounting</h4>
+    <div print-remove>
+        <hr>
+    </div>
+    <h4>Accounting</h4>
 
-	<div class="row">
-		<label class="col-md-1 control-label small" for="textinput">Invoiced</label>
-		<div class="col-xs-2">
-			<input name="textinput" type="text" id="field_vm.workOrder.invoiced"
-				ng-model="vm.workOrderDTO.workOrder.invoiced"
-				class="form-control input-sm" readonly>
-		</div>
+    <div class="row">
+        <label class="col-md-1 control-label small" for="textinput">Invoiced</label>
+        <div class="col-xs-2">
+            <input name="textinput" type="text" id="field_vm.workOrder.invoiced"
+                   ng-model="vm.workOrderDTO.workOrder.invoiced"
+                   class="form-control input-sm" readonly>
+        </div>
 
-	</div>
-	<div class="row">
-		<label class="col-xs-3 control-label small">PO.</label>
-	</div>
-	<div class="row">
-		<div class="col-sm-9">
+    </div>
+    <div class="row">
+        <label class="col-xs-3 control-label small">PO.</label>
+    </div>
+    <div class="row">
+        <div class="col-sm-9">
 			<textarea class="form-control input-sm" rows="5"
-				id="field_vm.workOrder.invoiceNumber"
-				ng-model="vm.workOrderDTO.workOrder.invoiceNumber" readonly></textarea>
-		</div>
+                      id="field_vm.workOrder.invoiceNumber"
+                      ng-model="vm.workOrderDTO.workOrder.invoiceNumber" readonly></textarea>
+        </div>
 
-	</div>
-	<hr>
-	<button type="submit" onclick="window.history.back()"
-		class="btn btn-info btn-sm">
-		<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
-			translate="entity.action.back"> Back</span>
-	</button>
+    </div>
+    <div print-remove>
+        <hr>
+    </div>
+    <button type="submit" onclick="window.history.back()"
+            class="btn btn-info btn-sm">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+        translate="entity.action.back"> Back</span>
+    </button>
 </div>
+
+

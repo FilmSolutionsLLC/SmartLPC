@@ -37,129 +37,141 @@ import java.util.List;
 @Transactional
 public class ElasticSearchUpdater {
 
-    private final Logger log = LoggerFactory.getLogger(ElasticSearchUpdater.class);
+	private final Logger log = LoggerFactory.getLogger(ElasticSearchUpdater.class);
 
+	@Inject
+	private CurrentTenantIdentifierResolverImpl currentTenantIdentifierResolver;
 
-    @Inject
-    private CurrentTenantIdentifierResolverImpl currentTenantIdentifierResolver;
+	final static private String MASTER = "master";
+	final static private String SLAVE = "slave";
 
-    final static private String MASTER = "master";
-    final static private String SLAVE = "slave";
+	@Inject
+	private ContactsRepository contactsRepository;
 
-    @Inject
-    private ContactsRepository contactsRepository;
+	@Inject
+	private ContactsSearchRepository contactsSearchRepository;
 
-    @Inject
-    private ContactsSearchRepository contactsSearchRepository;
+	@Inject
+	private ProjectsRepository projectsRepository;
 
-    @Inject
-    private ProjectsRepository projectsRepository;
+	@Inject
+	private ProjectsSearchRepository projectsSearchRepository;
 
-    @Inject
-    private ProjectsSearchRepository projectsSearchRepository;
+	@Inject
+	private WorkOrderRepository workOrderRepository;
 
-    @Inject
-    private WorkOrderRepository workOrderRepository;
+	@Inject
+	private WorkOrderSearchRepository workOrderSearchRepository;
 
-    @Inject
-    private WorkOrderSearchRepository workOrderSearchRepository;
+	@Inject
+	private IngestsRepository ingestsRepository;
 
-    @Inject
-    private IngestsRepository ingestsRepository;
+	@Inject
+	private IngestsSearchRepository ingestsSearchRepository;
 
-    @Inject
-    private IngestsSearchRepository ingestsSearchRepository;
+	/**
+	 * GET /updates/contacts : update elasticsearch for contacts from Database.
+	 *
+	 * @return the ResponseEntity with status 200 (OK)
+	 * @throws URISyntaxException
+	 *             if there is an error to generate the pagination HTTP headers
+	 */
+	@RequestMapping(value = "/updates/contacts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<?> updateContacts() throws URISyntaxException {
 
+		currentTenantIdentifierResolver.setTenant(SLAVE);
+		try {
+			final List<Contacts> contactsList = contactsRepository.findAll();
 
-    /**
-     * GET  /updates/contacts : update elasticsearch for contacts from Database.
-     *
-     * @return the ResponseEntity with status 200 (OK)
-     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
-     */
-    @RequestMapping(value = "/updates/contacts",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<?> updateContacts() throws URISyntaxException {
+			log.info("Got all contacts : "+contactsList.size());
+            log.info(contactsList.get(1).toString());
 
-        currentTenantIdentifierResolver.setTenant(SLAVE);
-        final List<Contacts> contactsList = contactsRepository.findAll();
-        try {
-            contactsSearchRepository.save(contactsList);
-            return new ResponseEntity<Authenticator.Success>(HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
-        }
-    }
+			contactsSearchRepository.save(contactsList);
+         /*   for(Contacts c: contactsList){
+            	System.out.println("Saving to ElasticSearch : "+c.getId());
+            	contactsSearchRepository.save(c);
+            }*/
+			return new ResponseEntity<Authenticator.Success>(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
+		}
+	}
 
-    /**
-     * GET  /updates/contacts : update elasticsearch for projects from Database.
-     *
-     * @return the ResponseEntity with status 200 (OK)
-     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
-     */
-    @RequestMapping(value = "/updates/projects",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<?> updateProjects() throws URISyntaxException {
+	/**
+	 * GET /updates/contacts : update elasticsearch for projects from Database.
+	 *
+	 * @return the ResponseEntity with status 200 (OK)
+	 * @throws URISyntaxException
+	 *             if there is an error to generate the pagination HTTP headers
+	 */
+	@RequestMapping(value = "/updates/projects", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<?> updateProjects() throws URISyntaxException {
 
-        currentTenantIdentifierResolver.setTenant(SLAVE);
-        final List<Projects> projectsList = projectsRepository.findAll();
-        try {
-            projectsSearchRepository.save(projectsList);
-            return new ResponseEntity<Authenticator.Success>(HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
-        }
-    }
+		currentTenantIdentifierResolver.setTenant(SLAVE);
+		try {
+			final List<Projects> projectsList = projectsRepository.findAll();
 
-    /**
-     * GET  /updates/contacts : update elasticsearch for workorder from Database.
-     *
-     * @return the ResponseEntity with status 200 (OK)
-     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
-     */
-    @RequestMapping(value = "/updates/workorder",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<?> updateWorkOrders() throws URISyntaxException {
+			projectsSearchRepository.save(projectsList);
+			/*for(Projects p: projectsList){
+            	System.out.println("Saving to ElasticSearch : "+p.getId());
+            	projectsSearchRepository.save(p);
+            }*/
+			return new ResponseEntity<Authenticator.Success>(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
+		}
+	}
 
-        currentTenantIdentifierResolver.setTenant(SLAVE);
-        final List<WorkOrder> workOrderList = workOrderRepository.findAll();
-        try {
-            workOrderSearchRepository.save(workOrderList);
-            return new ResponseEntity<Authenticator.Success>(HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
-        }
-    }
+	/**
+	 * GET /updates/contacts : update elasticsearch for workorder from Database.
+	 *
+	 * @return the ResponseEntity with status 200 (OK)
+	 * @throws URISyntaxException
+	 *             if there is an error to generate the pagination HTTP headers
+	 */
+	@RequestMapping(value = "/updates/workorder", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<?> updateWorkOrders() throws URISyntaxException {
 
-    /**
-     * GET  /updates/ingest : update elasticsearch for ingests from Database.
-     *
-     * @return the ResponseEntity with status 200 (OK)
-     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
-     */
-    @RequestMapping(value = "/updates/ingests",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<?> updateIngests() throws URISyntaxException {
+		currentTenantIdentifierResolver.setTenant(SLAVE);
+		try {
+			final List<WorkOrder> workOrderList = workOrderRepository.findAll();
 
-        currentTenantIdentifierResolver.setTenant(SLAVE);
-        final List<Ingests> ingestsList = ingestsRepository.findAll();
-        try {
-            ingestsSearchRepository.save(ingestsList);
-            return new ResponseEntity<Authenticator.Success>(HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
-        }
-    }
+			//workOrderSearchRepository.save(workOrderList);
+			for(WorkOrder wo: workOrderList){
+            	System.out.println("Saving to ElasticSearch : "+wo.getId());
+            	workOrderSearchRepository.save(wo);
+			}
+			return new ResponseEntity<Authenticator.Success>(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/**
+	 * GET /updates/ingest : update elasticsearch for ingests from Database.
+	 *
+	 * @return the ResponseEntity with status 200 (OK)
+	 * @throws URISyntaxException
+	 *             if there is an error to generate the pagination HTTP headers
+	 */
+	@RequestMapping(value = "/updates/ingests", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<?> updateIngests() throws URISyntaxException {
+
+		currentTenantIdentifierResolver.setTenant(SLAVE);
+		final List<Ingests> ingestsList = ingestsRepository.findAll();
+		try {
+			ingestsSearchRepository.save(ingestsList);
+			return new ResponseEntity<Authenticator.Success>(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
+		}
+	}
 }

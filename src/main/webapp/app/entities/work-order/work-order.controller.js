@@ -49,7 +49,7 @@
                 vm.queryCount = vm.totalItems;
                 vm.workOrders = data;
                 vm.page = pagingParams.page;
-                
+
             }
 
             function onError(error) {

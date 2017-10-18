@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface WorkOrderSearchRepository extends ElasticsearchRepository<WorkOrder, Long> {
 
-    List<WorkOrder> findByProject(Projects project);
+    List<WorkOrder> findByProject(String project);
 
     List<WorkOrder> findByPoRecord(String poRecord);
 

@@ -12,16 +12,16 @@
 				ui-sref="projects.edit({id:vm.projectsDTO.projects.id})"
 				ui-sref-opts="{reload: true, notify: true}"
 				class="btn btn-xs btn btn-primary">Edit</button>
-				
+
 			<!-- <button type="submit"
-				ui-sref="projects.edit({id:vm.projectsDTO.projects.id})"
-				ui-sref-opts="{reload: true, notify: true}"
-				class="btn btn-xs btn btn-primary">Add Similar</button>
-				 -->
-				<button type="button"
+                ui-sref="projects.edit({id:vm.projectsDTO.projects.id})"
+                ui-sref-opts="{reload: true, notify: true}"
+                class="btn btn-xs btn btn-primary">Add Similar</button>
+                 -->
+			<button type="button"
 				ng-click="vm.addSimilar(vm.projectsDTO.projects.id)"
 				class="btn btn-xs btn btn-primary">Add Similar</button>
-				
+
 			<button type="button" onclick="window.history.back()"
 				class="btn btn-xs btn btn-danger">Cancel</button>
 		</div>
@@ -629,10 +629,11 @@
 		</div>
 	</div>
 	<hr>
+
 	<div class="row">
 		<div class="col-sm-3">
 			<h4>
-				<strong>NAME/ID/PASSWORD</strong>
+				<strong>TALENTS</strong>
 			</h4>
 		</div>
 	</div>
@@ -690,7 +691,9 @@
 					</h5>
 				</td>
 				<td>
-					<h5 class="small">{{tags.contact.fullName}}</h5>
+					<h5 class="small">
+						<a ui-sref="contacts-detail({id:tags.contact.id})">{{tags.contact.fullName}}</a>
+					</h5>
 				</td>
 				<td>
 					<h5 class="small">{{tags.contact.username}}</h5>
@@ -714,12 +717,24 @@
 			</tr>
 		</table>
 	</div>
-	<div ng-repeat="x in vm.tag">
-		<p>{{x}}</p>
+	<div class="row">
+		<div class="col-sm-12">
+			<h5>
+				<strong>Additional : </strong> <span>{{vm.projectsDTO.projects.legacyAdditionalTalent}}</span>
+			</h5>
+		</div>
 	</div>
-	<br>
+	<hr>
+	<div class="row">
+		<div class="col-sm-3">
+			<h4>
+				<strong>EXECS</strong>
+			</h4>
+		</div>
+	</div>
 	<div class="table-responsive">
-		<table class="jh-table table table-condensed table-striped header-fixed">
+		<table
+			class="jh-table table table-condensed table-striped header-fixed">
 			<thead>
 				<tr>
 					<th><h5>
@@ -810,7 +825,9 @@
 						</h5>
 					</td>
 					<td>
-						<h5 class="small">{{execs.contact.fullName}}</h5>
+						<h5 class="small">
+							<a ui-sref="contacts-detail({id:execs.contact.id})">{{execs.contact.fullName}}</a>
+						</h5>
 					</td>
 					<td>
 						<h5 class="small">{{execs.contact.username}}</h5>
@@ -899,7 +916,15 @@
 			</tbody>
 		</table>
 	</div>
-	<hr>
+	<div class="row">
+		<div class="col-sm-12">
+			<h5>
+				<strong>Additional : </strong> <span>{{vm.projectsDTO.projects.legacyNameNotes}}</span>
+			</h5>
+		</div>
+	</div>
+
+	<!-- 
 	<div class="row">
 		<div class="col-sm-3">
 			<h4>
@@ -907,72 +932,141 @@
 			</h4>
 		</div>
 	</div>
-	<div
-		ng-repeat="tags in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'PKO_Tag'} | filter: isGeneric">
-		<div class="row">
-			<div class="col-sm-2">
-				<h5>
-					<strong>Talent {{$index+1}}: </strong> {{tags.contact.fullName}}
-				</h5>
-			</div>
-			<div class="col-sm-2">
-				<h5>
-					<strong>Character: </strong> {{tags.characterName}}
-				</h5>
-			</div>
-			<div class="col-sm-2">
-				<h5>
-					<strong>Start Date Days: </strong> {{tags.startDate}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-2">
-				<h5>
-					<strong>Contact: </strong> {{tags.contact.fullName}}
-				</h5>
-			</div>
-			<div class="col-sm-2">
-				<h5>
-					<strong>Type: </strong> {{tags.contact.type.textValue}}
-				</h5>
-			</div>
-			<div class="col-sm-2">
-				<h5>
-					<strong>Company: </strong> {{tags.contact.companyContact.fullName}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-2">
-				<h5>
-					<strong>Phone: </strong> {{tags.contact.contact.phoneOffice}}
-				</h5>
-			</div>
-			<div class="col-sm-2">
-				<h5>
-					<strong>Email: </strong> {{tags.contact.email}}
-				</h5>
-			</div>
-			<div class="col-sm-2">
-				<h5>
-					<strong>Mobile: </strong> {{tags.contact.phoneMobile}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-2">
-				<h5>
-					<strong>Asst Notes/Notes: </strong> {{tags.contact.notes}}
-				</h5>
-			</div>
-			<div class="col-sm-2">
-				<h5>
-					<strong>Notes: </strong> {{tags.notes}}
-				</h5>
-			</div>
-		</div>
-	</div>
+
+  <div
+      ng-repeat="tags in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'PKO_Tag'} | filter: isGeneric">
+      <div class="row">
+          <div class="col-sm-3">
+              <h5>
+                  <strong>Talent {{$index+1}}: </strong> {{tags.contact.fullName}}
+              </h5>
+          </div>
+          <div class="col-sm-3">
+              <h5>
+                  <strong>Character: </strong> {{tags.characterName}}
+              </h5>
+          </div>
+          <div class="col-sm-3">
+              <h5>
+                  <strong>Start Date: </strong> {{tags.startDate}}
+              </h5>
+          </div>
+          <div class="col-sm-3">
+              <h5>
+                  <strong>Days: </strong> {{tags.daysWorking}}
+              </h5>
+          </div>
+      </div> -->
+
+
+
+
+	<!--  <div ng-if="tags.contact.contact_a.length == 0">
+                  <div class="row">
+                      <div class="col-sm-3">
+                          <h5>
+                              <strong>Contact: </strong> {{tags.contact.fullName}}
+                          </h5>
+                      </div>
+                      <div class="col-sm-3">
+                          <h5>
+                              <strong>Type: </strong> {{tags.contact.type.textValue}}
+                          </h5>
+                      </div>
+                      <div class="col-sm-3">
+                          <h5>
+                              <strong>Company: </strong> {{tags.contact.companyContact.fullName}}
+                          </h5>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-sm-3">
+                          <h5>
+                              <strong>Phone: </strong> {{tags.contact.contact.phoneOffice}}
+                          </h5>
+                      </div>
+                      <div class="col-sm-3">
+                          <h5>
+                              <strong>Email: </strong> {{tags.contact.email}}
+                          </h5>
+                      </div>
+                      <div class="col-sm-3">
+                          <h5>
+                              <strong>Mobile: </strong> {{tags.contact.phoneMobile}}
+                          </h5>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-sm-3">
+                          <h5>
+                              <strong>Asst Notes/Notes: </strong> {{tags.contact.notes}}
+                          </h5>
+                      </div>
+                      <div class="col-sm-3">
+                          <h5>
+                              <strong>Notes: </strong> {{tags.notes}}
+                          </h5>
+                      </div>
+                  </div>
+              </div> -->
+
+
+	<!-- <div ng-if="tags.contact.contact_a.length > 0">
+                         <div ng-repeat="related in tags.contact.contact_a">
+                             <div ng-if="related.isPrimaryContact == true">
+                                 <div class="row">
+                                     <div class="col-sm-3">
+                                         <h5>
+                                             <strong>Contact: </strong> {{related.contact_b.fullName}}
+                                         </h5>
+                                     </div>
+                                     <div class="col-sm-3">
+                                         <h5>
+                                             <strong>Type: </strong> {{related.contact_b.type.textValue}}
+                                         </h5>
+                                     </div>
+                                     <div class="col-sm-3">
+                                         <h5>
+                                             <strong>Company: </strong> {{related.contact_b.companyContact.fullName}}
+                                         </h5>
+                                     </div>
+                                 </div>
+                                 <div class="row">
+                                     <div class="col-sm-3">
+                                         <h5>
+                                             <strong>Phone: </strong> {{related.contact_b.phoneOffice}}
+                                         </h5>
+                                     </div>
+                                     <div class="col-sm-3">
+                                         <h5>
+                                             <strong>Email: </strong> {{related.contact_b.email}}
+                                         </h5>
+                                     </div>
+                                     <div class="col-sm-3">
+                                         <h5>
+                                             <strong>Mobile: </strong> {{related.contact_b.phoneMobile}}
+                                         </h5>
+                                     </div>
+                                 </div>
+                                 <div class="row">
+                                     <div class="col-sm-3">
+                                         <h5>
+                                             <strong>Asst Notes/Notes: </strong> {{related.contact_b.notes}}
+                                         </h5>
+                                     </div>
+                                     <div class="col-sm-3">
+                                         <h5>
+                                             <strong>Notes: </strong> {{tags.notes}}
+                                         </h5>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+ -->
+
+
+
 	<hr>
 	<div class="row">
 		<div class="col-sm-3">
@@ -985,13 +1079,14 @@
 		<div class="col-sm-3">
 			<h5>
 				<strong>Name : </strong>
-				{{vm.projectsDTO.projects.parentCompanyContact.fullName}}
+				<a ui-sref="contacts-detail({id:vm.projectsDTO.projects.parentCompanyContact.id})">{{vm.projectsDTO.projects.parentCompanyContact.fullName}}</a>
 			</h5>
 		</div>
 	</div>
 	<button type="submit" onclick="window.history.back()"
-		class="btn btn-info">
+		class="btn btn-info btn-sm">
 		<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
 			translate="entity.action.back"> Back</span>
 	</button>
 </div>
+

@@ -4,6 +4,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -70,24 +72,29 @@ public class ProjectRoles implements Serializable {
     private Float tertiaryKillPct;
 
     @Column(name = "created_date")
+    @JsonIgnore
     private LocalDate createdDate;
 
     @Column(name = "updated_date")
+    @JsonIgnore
     private LocalDate updatedDate;
 
     @Column(name = "welcome_message")
     String welcomeMessage;
 
     @ManyToOne
+    @JsonIgnore
     private Projects project;
 
     @ManyToOne
     private Contacts contact;
     
     @ManyToOne
+    @JsonIgnore
     private User createdByAdminUser;
 
     @ManyToOne
+    @JsonIgnore
     private User updatedByAdminUser;
 
     public Long getId() {

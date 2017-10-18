@@ -45,7 +45,9 @@
 						console.log("in http get of talent");
 						vm.mailer = response.data;
 						var responseBody = vm.mailer.body;
+
 						vm.tempTO = vm.talent.contact.fullName;
+
 						vm.mailer.body = vm.mailer.body.replace(/XYZ/i,
 								vm.currentAccount.fullName);
 						vm.mailer.body = vm.mailer.body.replace(/XXXemail/i,
@@ -90,7 +92,7 @@
 		};
 
 		// send mail
-		vm.mailerList = [];
+		//vm.mailerList = [];
 
 		vm.temp = [];
 		vm.save = function() {

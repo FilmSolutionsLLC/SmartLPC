@@ -16,6 +16,7 @@
                 transformResponse: function (data) {
                     data = angular.fromJson(data);
                     data.captionDttm = DateUtils.convertDateTimeFromServer(data.captionDttm);
+                    console.log("Getting data from server");
                     return data;
                 }
             },

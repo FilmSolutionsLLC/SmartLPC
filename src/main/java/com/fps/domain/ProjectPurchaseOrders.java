@@ -4,6 +4,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -34,18 +36,23 @@ public class ProjectPurchaseOrders implements Serializable {
     private Integer qb_rid;
 
     @Column(name = "created_date")
+    @JsonIgnore
     private ZonedDateTime created_date;
 
     @Column(name = "updated_date")
+    @JsonIgnore
     private ZonedDateTime updated_date;
 
     @ManyToOne
+    @JsonIgnore
     private Projects project;
 
     @ManyToOne
+    @JsonIgnore
     private User created_by_admin_user;
 
     @ManyToOne
+    @JsonIgnore
     private User updated_by_admin_user;
 
     public Long getId() {

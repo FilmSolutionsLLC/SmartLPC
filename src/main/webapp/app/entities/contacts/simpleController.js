@@ -13,7 +13,6 @@
 
 
         $rootScope.owner = null;
-//ths
 
         var vm = this;
         vm.loadAll = loadAll;
@@ -71,6 +70,31 @@
                     console.log("error in getting data.");
                 });
             }
+            
+            function sort() {
+
+				var result = [ vm.predicate + ','
+						+ (vm.reverse ? 'asc' : 'desc') ];
+				if (vm.predicate !== 'id') {
+					result.push('id');
+				}
+				return result;
+			}
+
+			function onSuccess(data, headers) {
+
+				vm.links = ParseLinks.parse(headers('link'));
+
+				vm.totalItems = headers('X-Total-Count');
+				vm.queryCount = vm.totalItems;
+				vm.contacts = data;
+				vm.page = pagingParams.page;
+				console.log("Contacts ",vm.contacts);
+			}
+
+			function onError(error) {
+				AlertService.error(error.data.message);
+			}
         }
 
 

@@ -71,7 +71,7 @@
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Captions', function($stateParams, Captions) {
-                    return Captions.get({id : $stateParams.id});
+                    return Captions.get({id : $stateParams.id}).$promise;
                 }]
             }
         })

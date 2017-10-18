@@ -71,7 +71,7 @@
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Storage_Servers', function($stateParams, Storage_Servers) {
-                    return Storage_Servers.get({id : $stateParams.id});
+                    return Storage_Servers.get({id : $stateParams.id}).$promise;
                 }]
             }
         })

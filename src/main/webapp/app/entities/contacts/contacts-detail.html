@@ -1,283 +1,287 @@
-
 <div print-section>
-	<div class="row">
-		<div class="col-sm-3">
-			<h3>{{vm.contactDTO.contacts.fullName}}</h3>
-		</div>
-		<div print-hide>
-			<div class="col-sm-3 pull-right">
-				<button print-btn class="btn btn-xs btn btn-primary">Print</button>
-				<button type="submit" class="btn btn-xs btn btn-primary"
-					ui-sref="contacts.edit({id:vm.contactDTO.contacts.id})">Edit
-				</button>
-				<button type="submit"
-					ui-sref="contacts.edit({id:vm.contactDTO.contacts.id})"
-					class="btn btn-xs btn btn-primary">Add Similar</button>
-				<button type="button" type="submit" onclick="window.history.back()"
-					class="btn btn-xs btn btn-danger">Cancel</button>
-			</div>
-		</div>
-	</div>
-	<hr>
-	<div id="printContents">
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong><span translate="smartLpcApp.contacts.type">type</span>
-						: </strong><a ui-sref="lookups-detail({id:vm.contactDTO.contacts.type.id})">{{vm.contactDTO.contacts.type.textValue}}</a>
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span translate="smartLpcApp.contacts.fullName">FullName</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.fullName}}</span>
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span translate="smartLpcApp.contacts.title">Title</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.title}}</span>
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-5">
-				<h5>
-					<strong> <span
-						translate="smartLpcApp.contacts.companyContact">companyContact</span>
-						:
-					</strong> <a
-						ui-sref="contacts-detail({id:vm.contactDTO.contacts.companyContact.id})">{{vm.contactDTO.contacts.companyContact.fullName}}</a>
-				</h5>
-			</div>
-		</div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h3>{{vm.contactDTO.contacts.fullName}}</h3>
+        </div>
+        <div print-hide>
+            <div class="col-sm-3 pull-right">
+                <button print-btn class="btn btn-xs btn btn-primary">Print</button>
+                <button type="submit" class="btn btn-xs btn btn-primary"
+                        ui-sref="contacts.edit({id:vm.contactDTO.contacts.id})">Edit
+                </button>
+                <button type="submit"
+                        ui-sref="contacts.edit({id:vm.contactDTO.contacts.id})"
+                        class="btn btn-xs btn btn-primary">Add Similar
+                </button>
+                <button type="button" onclick="window.history.back()"
+                        class="btn btn-xs btn btn-danger">Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div id="printContents">
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong><span translate="smartLpcApp.contacts.type">type</span>
+                        : </strong><a ui-sref="lookups-detail({id:vm.contactDTO.contacts.type.id})">{{vm.contactDTO.contacts.type.textValue}}</a>
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span translate="smartLpcApp.contacts.fullName">FullName</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.fullName}}</span>
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span translate="smartLpcApp.contacts.title">Title</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.title}}</span>
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <h5>
+                    <strong> <span
+                        translate="smartLpcApp.contacts.companyContact">companyContact</span>
+                        :
+                    </strong> <a
+                    ui-sref="contacts-detail({id:vm.contactDTO.contacts.companyContact.id})">{{vm.contactDTO.contacts.companyContact.fullName}}</a>
+                </h5>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span
-						translate="smartLpcApp.contacts.phoneOffice">phoneOffice</span> :
-					</strong> <span>{{vm.contactDTO.contacts.phoneOffice}}</span>
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span
-						translate="smartLpcApp.contacts.phoneMobile">phoneMobile</span> :
-					</strong> <span>{{vm.contactDTO.contacts.phoneMobile}}</span>
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span
-						translate="smartLpcApp.contacts.phoneAlternate">phoneAlternate</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.phoneAlternate}}</span>
-				</h5>
-			</div>
-		</div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span
+                        translate="smartLpcApp.contacts.phoneOffice">phoneOffice</span> :
+                    </strong> <span>{{vm.contactDTO.contacts.phoneOffice}}</span>
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span
+                        translate="smartLpcApp.contacts.phoneMobile">phoneMobile</span> :
+                    </strong> <span>{{vm.contactDTO.contacts.phoneMobile}}</span>
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span
+                        translate="smartLpcApp.contacts.phoneAlternate">phoneAlternate</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.phoneAlternate}}</span>
+                </h5>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span translate="smartLpcApp.contacts.email">email</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.email}}</span>
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span translate="smartLpcApp.contacts.email2">email2</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.email2}}</span>
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span
-						translate="smartLpcApp.contacts.streetAddress">streetAddress</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.streetAddress}}</span>
-				</h5>
-			</div>
-			<div class="col-sm-2">
-				<h5>
-					<strong> <span translate="smartLpcApp.contacts.city">city</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.city}}</span>
-				</h5>
-			</div>
-			<div class="col-sm-1">
-				<h5>
-					<strong> <span translate="smartLpcApp.contacts.state">state</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.state}}</span>
-				</h5>
-			</div>
-			<div class="col-sm-2">
-				<h5>
-					<strong> <span translate="smartLpcApp.contacts.zipcode">zipcode</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.zipcode}}</span>
-				</h5>
-			</div>
-			<div class="col-sm-1">
-				<h5>
-					<strong> <span translate="smartLpcApp.contacts.country">country</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.country}}</span>
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span translate="smartLpcApp.contacts.username">username</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.username}}</span>
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span translate="smartLpcApp.contacts.password">password</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.password}}</span>
-				</h5>
-			</div>
-		</div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span translate="smartLpcApp.contacts.email">email</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.email}}</span>
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span translate="smartLpcApp.contacts.email2">email2</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.email2}}</span>
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span
+                        translate="smartLpcApp.contacts.streetAddress">streetAddress</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.streetAddress}}</span>
+                </h5>
+            </div>
+            <div class="col-sm-2">
+                <h5>
+                    <strong> <span translate="smartLpcApp.contacts.city">city</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.city}}</span>
+                </h5>
+            </div>
+            <div class="col-sm-1">
+                <h5>
+                    <strong> <span translate="smartLpcApp.contacts.state">state</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.state}}</span>
+                </h5>
+            </div>
+            <div class="col-sm-2">
+                <h5>
+                    <strong> <span translate="smartLpcApp.contacts.zipcode">zipcode</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.zipcode}}</span>
+                </h5>
+            </div>
+            <div class="col-sm-1">
+                <h5>
+                    <strong> <span translate="smartLpcApp.contacts.country">country</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.country}}</span>
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span translate="smartLpcApp.contacts.username">username</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.username}}</span>
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span translate="smartLpcApp.contacts.password">password</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.password}}</span>
+                </h5>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span translate="smartLpcApp.contacts.website">website</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.website}}</span>
-				</h5>
-			</div>
-		</div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span translate="smartLpcApp.contacts.website">website</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.website}}</span>
+                </h5>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span translate="smartLpcApp.contacts.notes">notes</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.notes}}</span>
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span
-						translate="smartLpcApp.contacts.globalRestartColumns">globalRestartColumns</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.globalRestartColumns}}</span>
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span translate="smartLpcApp.contacts.dashboard">dashboard</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.dashboard}}</span>
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span
-						translate="smartLpcApp.contacts.globalRestartImageSize">globalRestartImageSize</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.globalRestartImageSize}}</span>
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span
-						translate="smartLpcApp.contacts.internalAccessOnly">internalAccessOnly</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.internalAccessOnly}}</span>
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong> <span
-						translate="smartLpcApp.contacts.globalRestartImagesPerPage">globalRestartImagesPerPage</span>
-						:
-					</strong> <span>{{vm.contactDTO.contacts.globalRestartImagesPerPage}}</span>
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong> Blocked : </strong> <span>{{vm.contactDTO.contacts.dashboard}}</span>
-				</h5>
-			</div>
-		</div>
-		<hr>
-		<h4>Related Contacts</h4>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span translate="smartLpcApp.contacts.notes">notes</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.notes}}</span>
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span
+                        translate="smartLpcApp.contacts.globalRestartColumns">globalRestartColumns</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.globalRestartColumns}}</span>
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span translate="smartLpcApp.contacts.dashboard">dashboard</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.dashboard}}</span>
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span
+                        translate="smartLpcApp.contacts.globalRestartImageSize">globalRestartImageSize</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.globalRestartImageSize}}</span>
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span
+                        translate="smartLpcApp.contacts.internalAccessOnly">internalAccessOnly</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.internalAccessOnly}}</span>
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong> <span
+                        translate="smartLpcApp.contacts.globalRestartImagesPerPage">globalRestartImagesPerPage</span>
+                        :
+                    </strong> <span>{{vm.contactDTO.contacts.globalRestartImagesPerPage}}</span>
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong> Blocked : </strong> <span>{{vm.contactDTO.contacts.dashboard}}</span>
+                </h5>
+            </div>
+        </div>
+        <hr>
+        <h4>Related Contacts</h4>
+    <hr>
+        <div
+            ng-repeat="contacts in vm.contactDTO.contactRelationships">
 
-		<div
-			ng-repeat="contacts in vm.contactDTO.contactRelationships track by contacts.id">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Name : </strong><a ui-sref="contacts-detail({id:contacts.contact_b.id})"> {{contacts.contact_b.fullName}}</a></a>
+                    </h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Type : </strong> {{contacts.contact_b.type.textValue}}
+                    </h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Company : </strong>
+                        {{contacts.contact_b.companyContact.fullName}}
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Main : </strong> {{contacts.contact_b.phoneOffice}}
+                    </h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Email : </strong> {{contacts.contact_b.email}}
+                    </h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Mobile : </strong> {{contacts.contact_b.phoneMobile}}
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Asst/Notes : </strong> {{contacts.contact_b.notes}}
+                    </h5>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
 
-			<div class="row">
-				<div class="col-sm-3">
-					<h5>
-						<strong>Name : </strong> {{contacts.contact_b.fullName}}
-					</h5>
-				</div>
-				<div class="col-sm-3">
-					<h5>
-						<strong>Type : </strong> {{contacts.contact_b.type.text_value}}
-					</h5>
-				</div>
-				<div class="col-sm-3">
-					<h5>
-						<strong>Company : </strong>
-						{{contacts.contact_b.companyContact.fullName}}
-					</h5>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-3">
-					<h5>
-						<strong>Main : </strong> {{contacts.contact_b.officePhone}}
-					</h5>
-				</div>
-				<div class="col-sm-3">
-					<h5>
-						<strong>Email : </strong> {{contacts.contact_b.email}}
-					</h5>
-				</div>
-				<div class="col-sm-3">
-					<h5>
-						<strong>Mobile : </strong> {{contacts.contact_b.officeMobile}}
-					</h5>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-3">
-					<h5>
-						<strong>Asst/Notes : </strong> {{contacts.contact_b.notes}}
-					</h5>
-				</div>
-			</div>
-			<hr>
-		</div>
-	</div>
+    <button type="submit" onclick="window.history.back()"
+            class="btn btn-info btn-sm">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+        translate="entity.action.back"> Back</span>
+    </button>
 
-	<button type="submit" onclick="window.history.back()"
-		class="btn btn-info btn-sm">
-		<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
-			translate="entity.action.back"> Back</span>
-	</button>
-	
-	
+
 </div>
+
+
+<button ng-click="vm.errorDialog()" class="btn btn-primary">Error/Red dialog</button>

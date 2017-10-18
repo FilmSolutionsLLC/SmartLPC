@@ -10,6 +10,7 @@
     function Storage_ServersDetailController($scope, $rootScope, $stateParams, entity, Storage_Servers) {
         var vm = this;
         vm.storage_Servers = entity;
+        console.log("entity : "+JSON.stringify(vm.storage_Servers));
         vm.load = function (id) {
             Storage_Servers.get({id: id}, function(result) {
                 vm.storage_Servers = result;

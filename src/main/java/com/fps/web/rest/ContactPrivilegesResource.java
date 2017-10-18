@@ -77,9 +77,9 @@ public class ContactPrivilegesResource {
 		contactPrivileges.setCreatedDate(ZonedDateTime.now());
 		contactPrivileges.setCreatedByAdminUser(user);
 		ContactPrivileges result = contactPrivilegesRepository.save(contactPrivileges);
-		
+
 		contactPrivilegesSearchRepository.save(result);
-		
+
 		return ResponseEntity.created(new URI("/api/contact-privileges/" + result.getId()))
 				.headers(HeaderUtil.createEntityCreationAlert("contactPrivileges", result.getId().toString()))
 				.body(result);
@@ -102,13 +102,14 @@ public class ContactPrivilegesResource {
 	public ResponseEntity<ContactPrivileges> updateContactPrivileges(@RequestBody ContactPrivileges contactPrivileges)
 			throws URISyntaxException {
 		log.debug("REST request to update ContactPrivileges : {}", contactPrivileges);
-		
+        final User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
 		if (contactPrivileges.getId() == null) {
 			return createContactPrivileges(contactPrivileges);
 		}
-		contactPrivileges.setCreatedDate(ZonedDateTime.now());
-		
+		contactPrivileges.setUpdatedDate(ZonedDateTime.now());
+		contactPrivileges.setUpdatedByAdminUser(user);
 		ContactPrivileges result = contactPrivilegesRepository.save(contactPrivileges);
+
 		contactPrivilegesSearchRepository.save(result);
 		return ResponseEntity.ok()
 				.headers(HeaderUtil.createEntityUpdateAlert("contactPrivileges", contactPrivileges.getId().toString()))
@@ -163,8 +164,10 @@ public class ContactPrivilegesResource {
 	@Timed
 	public ResponseEntity<Void> deleteContactPrivileges(@PathVariable Long id) {
 		log.debug("REST request to delete ContactPrivileges : {}", id);
-		contactPrivilegesRepository.delete(id);
-		contactPrivilegesSearchRepository.delete(id);
+		if(id == null) {
+            contactPrivilegesRepository.delete(id);
+            contactPrivilegesSearchRepository.delete(id);
+        }
 		return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("contactPrivileges", id.toString()))
 				.build();
 	}

@@ -4,14 +4,16 @@
 	angular.module('smartLpcApp').controller('ProjectsDetailController',
 			ProjectsDetailController);
 
-	ProjectsDetailController.$inject = ['$state','$uibModal', '$scope', '$rootScope',
-			'$stateParams', 'entity', 'Projects', 'Lookups', 'Contacts',
-			'User', 'Departments', 'Storage_Disk' ];
+	ProjectsDetailController.$inject = [ '$http', '$state', '$uibModal',
+			'$scope', '$rootScope', '$stateParams', 'entity', 'Projects',
+			'Lookups', 'Contacts', 'User', 'Departments', 'Storage_Disk' ];
 
-	function ProjectsDetailController($state,$uibModal,$scope, $rootScope, $stateParams, entity,
-			Projects, Lookups, Contacts, User, Departments, Storage_Disk) {
+	function ProjectsDetailController($http, $state, $uibModal, $scope,
+			$rootScope, $stateParams, entity, Projects, Lookups, Contacts,
+			User, Departments, Storage_Disk) {
 		var vm = this;
 		vm.projectsDTO = entity;
+	//	console.log("projectsDTO " + JSON.stringify(vm.projectsDTO));
 
 		$scope.isGeneric = function(tags) {
 			return tags.contact.fullName !== 'generic pkotag';
@@ -68,6 +70,41 @@
 		 * 
 		 * }); };
 		 */
+		/*vm.relatedContact = [];
+		vm.expandedInfo ={"talent": null,"related": null};
+		for (var i = 0; i < vm.projectsDTO.projectRoles.length; i++) {
+			var talent = null;
+			// for (var taggs in vm.projectsDTO.projectRoles) {
+			console.log("inside for");
+			if (angular
+					.equals(vm.projectsDTO.projectRoles[i].relationship_type,
+							'PKO_Tag')) {
+				// get related too.
+				console.log(" get releated  : "
+						+ vm.projectsDTO.projectRoles[i].contact.id);
+				talent = vm.projectsDTO.projectRoles[i].contact;
+				console.log("Talent : "+JSON.stringify(talent));
+				$http({method : 'GET',url : 'api/contacts/related/'+ vm.projectsDTO.projectRoles[i].contact.id})
+					.then(function successCallback(response) {
+					var related = response.data
+					console.log("Related : "+JSON.stringify(related));
+					vm.expandedInfo = {
+							"talent": talent,
+							"related": related
+						};
+					vm.relatedContact.concat(vm.expandedInfo);
+				
+				}, function errorCallback(response) {
+
+				});
+			}
+
+			if(i == vm.projectsDTO.projectRoles.length-1){
+				console.log("LAst object");
+				console.log("Final Data: "+JSON.stringify(vm.relatedContact));
+			}
+		}*/
+
 		var unsubscribe = $rootScope.$on('smartLpcApp:projectsUpdate',
 				function(event, result) {
 					vm.projectsDTO = result;
@@ -101,39 +138,46 @@
 				}
 			})
 		};
-		
-		  // send multiple email
-        vm.sendMail = function(talents) {
-        	
-            var modalInstance = $uibModal.open({
 
-                templateUrl: 'app/entities/projects/mails.html',
-                controller: 'MailsController',
-                size: 'lg',
-                scope: $scope,
-                controllerAs: 'vm',
-                backdrop: 'static',
-                resolve: {
-                	
-                	
-                	talents: function () {
-                		
-                        return talents;
-                    },
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('contacts');
-                        $translatePartialLoader.addPart('projects');
-                        $translatePartialLoader.addPart('global');
-                        return $translate.refresh();
-                    }]
-                }
-            })
+		// send multiple email
+		vm.sendMail = function(talents) {
+
+			var modalInstance = $uibModal.open({
+
+				templateUrl : 'app/entities/projects/mails.html',
+				controller : 'MailsController',
+				size : 'lg',
+				scope : $scope,
+				controllerAs : 'vm',
+				backdrop : 'static',
+				resolve : {
+
+					talents : function() {
+
+						return talents;
+					},
+					translatePartialLoader : [ '$translate',
+							'$translatePartialLoader',
+							function($translate, $translatePartialLoader) {
+								$translatePartialLoader.addPart('contacts');
+								$translatePartialLoader.addPart('projects');
+								$translatePartialLoader.addPart('global');
+								return $translate.refresh();
+							} ]
+				}
+			})
+
 		};
-		
-		vm.addSimilar  = function(id) {
-			console.log("similar to add id :",id);
-			$state.go('projects.template-add', {id: id}, {reload: true});
+
+		vm.addSimilar = function(id) {
+			console.log("similar to add id :", id);
+			$state.go('projects.template-add', {
+				id : id
+			}, {
+				reload : true
+			});
 		}
-		
+
+
 	}
 })();

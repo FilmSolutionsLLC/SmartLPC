@@ -4,6 +4,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -30,6 +32,7 @@ public class WorkOrderAbcHdd implements Serializable {
     private String drive_number;
 
     @ManyToOne
+    @JsonIgnore
     private WorkOrder workOrder;
 
     @ManyToOne

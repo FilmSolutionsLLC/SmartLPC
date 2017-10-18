@@ -20,9 +20,10 @@
             'angularjs-dropdown-multiselect',
             'btorfs.multiselect',
             'flow',
-            'ui.select', 
+            'ui.select',
             'ngSanitize',
-            'AngularPrint'
+            'AngularPrint',
+            'cp.ngConfirm'
         ])
         .run(run);
 

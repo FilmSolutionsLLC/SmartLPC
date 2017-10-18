@@ -1,5 +1,6 @@
 package com.fps.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -28,27 +29,34 @@ public class ContactRelationships implements Serializable {
     private Boolean isPrimaryContact;
 
     @Column(name = "created_date")
+    @JsonIgnore
     private LocalDate createdDate;
 
     @Column(name = "updated_date")
+    @JsonIgnore
     private LocalDate updatedDate;
 
     @ManyToOne
+    @JsonIgnore
     private User createdByAdminUser;
 
     @ManyToOne
+    @JsonIgnore
     private User updatedByAdminUser;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.MERGE)
+    @JsonIgnore
     private Contacts contact_a;
 
     @ManyToOne
     private Contacts contact_b;
 
     @ManyToOne
+    @JsonIgnore
     private Contacts contact_a_qb_rid;
 
     @ManyToOne
+    @JsonIgnore
     private Contacts contact_b_qb_rid;
 
     public Long getId() {

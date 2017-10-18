@@ -4,8 +4,10 @@ import com.fps.config.Constants;
 import com.fps.config.util.CurrentTenantIdentifierResolverImpl;
 import com.fps.domain.Contacts;
 import com.fps.elastics.search.ContactsSearchRepository;
+import com.fps.repository.ContactPrivilegesRepository;
 import com.fps.repository.ContactRelationshipsRepository;
 import com.fps.repository.ContactsRepository;
+import com.fps.repository.ProjectRolesRepository;
 import com.fps.service.ContactsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,12 +20,14 @@ import javax.inject.Inject;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
+
 /**
  * Service Implementation for managing Contacts.
  */
 @Service
 @Transactional
 public class ContactsServiceImpl implements ContactsService {
+
 
     private final Logger log = LoggerFactory.getLogger(ContactsServiceImpl.class);
 
@@ -38,6 +42,13 @@ public class ContactsServiceImpl implements ContactsService {
 
     @Inject
     private ContactRelationshipsRepository contactRelationshipsRepository;
+
+    @Inject
+    private ContactPrivilegesRepository contactPrivilegesRepository;
+
+    @Inject
+    private ProjectRolesRepository projectRolesRepository;
+
 
     /**
      * Save a contacts.
@@ -81,6 +92,7 @@ public class ContactsServiceImpl implements ContactsService {
 
 
         Contacts contacts = contactsRepository.findOne(id);
+
         return contacts;
     }
 
@@ -94,6 +106,10 @@ public class ContactsServiceImpl implements ContactsService {
 
         currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
         Contacts contacts = contactsRepository.findOne(id);
+        //TODO: delete from all tables such as ContactPrivileges,ProjectRoles
+       contactPrivilegesRepository.removeByContact(contacts);
+       projectRolesRepository.removeByContact(contacts);
+
         if (contactRelationshipsRepository.findByContact_A(contacts).size() > 0) {
             currentTenantIdentifierResolver.setTenant(Constants.MASTER_DATABASE);
             contactRelationshipsRepository.deleteByContacts(contacts);
@@ -101,6 +117,8 @@ public class ContactsServiceImpl implements ContactsService {
         currentTenantIdentifierResolver.setTenant(Constants.MASTER_DATABASE);
         contactsRepository.delete(id);
         contactsSearchRepository.delete(id);
+
+
     }
 
     /**
@@ -127,4 +145,7 @@ public class ContactsServiceImpl implements ContactsService {
         log.debug("Request to search for a page of Contacts for query {}", query);
         return contactsSearchRepository.search(queryStringQuery(query));
     }
+
+
+
 }

@@ -72,7 +72,7 @@
                     }],
                     entity: ['$stateParams', 'Projects', function ($stateParams, Projects) {
                         console.log("sending entity via params..");
-                        return Projects.get({id: $stateParams.id});
+                        return Projects.get({id: $stateParams.id}).$promise;
                     }]
                 }
             })

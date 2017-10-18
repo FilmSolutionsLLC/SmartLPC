@@ -78,6 +78,7 @@ public class ContactsResource {
 
 		log.debug("REST request to save Contacts : {}", contactsDTO);
 
+		System.out.println("Inside saving of contacts");
 		Contacts contacts = contactsDTO.getContacts();
 		if (contacts.getId() != null) {
 			return ResponseEntity.badRequest().headers(
@@ -90,10 +91,13 @@ public class ContactsResource {
 
 		contacts.setCreatedByAdmin(user);
 		contacts.setCreatedDate(LocalDate.now());
+
+
 		Contacts result = contactsService.save(contacts);
 
+		
 		if (contactsDTO.getContactRelationships().size() > 0) {
-
+            
 			Set<ContactRelationships> contactRelationshipses = new HashSet<>();
 			for (ContactRelationships contactRelationships : contactsDTO.getContactRelationships()) {
 				log.debug("REST request to save ContactsRelationships : {}", contactRelationships);
@@ -172,7 +176,6 @@ public class ContactsResource {
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/contacts");
 		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
 	}
-
 	/**
 	 * GET /contacts/:id : get the "id" contacts.
 	 *
@@ -298,6 +301,7 @@ public class ContactsResource {
 			Long primaryContactId = jdbcTemplate.queryForObject(getPrimary, new Object[] {}, Long.class);
 
 			final Contacts contact = contactsRepository.findOne(primaryContactId);
+			System.out.println("Returning Related Contact : "+contact.getId());
 			return contact;
 
 		} catch (EmptyResultDataAccessException e) {

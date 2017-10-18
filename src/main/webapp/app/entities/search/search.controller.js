@@ -12,9 +12,10 @@
 
         vm.search = $stateParams.search;
         vm.searchType = $stateParams.type;
-
+        vm.filter = $stateParams.filter;
         console.log("state param query : " + vm.search);
         console.log("search type       : " + vm.searchType);
+        console.log("search filter       : " + (vm.filter));
         vm.contacts = [];
         vm.projects = [];
         vm.workOrders = [];
@@ -94,12 +95,32 @@
 
         if (vm.searchType == 'workOrder') {
             console.log("search work orders");
-            WorkOrderSearch.query({
-                query: vm.search,
-                size: 100000
-            }, onSuccess, onError);
+            /*     WorkOrderSearch.query({
+                     query: vm.search,
+                     size: 100000
+                 }, onSuccess, onError);
+     */
 
+
+            $http({
+                url: "api/search/work-orders/various",
+                method: "GET",
+                params: {
+                    type: vm.filter,
+                    query: vm.search
+                }
+            }).then(function successCallback(response) {
+                for (var i = 0; i < response.data.length; i++) {
+                    vm.workOrders.push(response.data[i]);
+                    console.log("added" + i);
+                }
+                $scope.totalItemsWO = vm.workOrders.length;
+
+                console.log(" ==> "+JSON.stringify(vm.workOrders));
+            }, function errorCallback(response) {
+            });
         }
+
         function onSuccess(data, headers) {
 
             for (var i = 0; i < data.length; i++) {
@@ -108,6 +129,7 @@
             }
             $scope.totalItemsWO = vm.workOrders.length;
         };
+
         function onError(error) {
             // AlertService.error(error.data.message);
         }

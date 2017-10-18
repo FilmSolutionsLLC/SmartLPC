@@ -32,29 +32,31 @@
 
             </div>
         </div>
-        <br>
-        <div class="row">
+
+       <!-- <div class="row">
             <div class="col-xs-5">
 
                 <input id="textinput" name="textinput" type="text" placeholder="Additional Filter"
                        class="form-control input-sm" ng-model="vm.search.filter">
 
             </div>
-        </div>
+        </div>-->
         <hr>
 
         <h4>Search <strong>Work Order Report</strong></h4>
 
         <div class="row">
             <div class="col-xs-4">
-                <select class="form-control input-sm" id="sel1">
+                <select class="form-control input-sm" ng-model="vm.type" ng-options="filter.name for filter in vm.workOrderFilter"></select>
+               <!-- <select class="form-control input-sm" id="sel1">
                     <option>Project Name</option>
                     <option>Work Order ID</option>
                     <option>PO Record</option>
                     <option>Requestor Name</option>
                     <option>Work Description</option>
                     <option>Invoice</option>
-                </select>
+                </select>-->
+
 
             </div>
             <div class="col-xs-5">

@@ -8,9 +8,9 @@
         .module('smartLpcApp')
         .controller('WorkOrderUpdateController', WorkOrderUpdateController);
 
-    WorkOrderUpdateController.$inject = ['$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'WorkOrder', 'Lookups', 'Projects', 'User', 'Contacts'];
+    WorkOrderUpdateController.$inject = ['$state','$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'WorkOrder', 'Lookups', 'Projects', 'User', 'Contacts'];
 
-    function WorkOrderUpdateController($uibModal, $http, $scope, $rootScope, $stateParams, entity, WorkOrder, Lookups, Projects, User, Contacts) {
+    function WorkOrderUpdateController($state,$uibModal, $http, $scope, $rootScope, $stateParams, entity, WorkOrder, Lookups, Projects, User, Contacts) {
         var vm = this;
         vm.workOrderDTO = entity;
         console.log(JSON.stringify(vm.workOrderDTO));
@@ -250,7 +250,7 @@
         vm.save = function () {
             vm.isSaving = true;
             if (vm.workOrderDTO.workOrder.id !== null) {
-                //WorkOrder.update(vm.workOrder, onSaveSuccess, onSaveError);
+                WorkOrder.update(vm.workOrderDTO, onSaveSuccess, onSaveError);
                 console.log("updating work order");
                 console.log(JSON.stringify(vm.workOrderDTO));
             } else {
@@ -260,6 +260,19 @@
                 WorkOrder.save(vm.workOrderDTO, onSaveSuccess, onSaveError);
             }
         };
+        
+        var onSaveSuccess = function(result) {
+			$scope.$emit('smartLpcApp:workOrderUpdate', result);
+			vm.isSaving = false;
+			$state.go('work-order', {}, {
+				reload : true
+			});// use for redirecting ...
+		};
+
+		var onSaveError = function() {
+			vm.isSaving = false;
+		};
+
 
     }
 })();

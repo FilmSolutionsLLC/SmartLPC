@@ -4,6 +4,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -112,9 +114,11 @@ public class ContactPrivileges implements Serializable {
     private Boolean datgeditManagement;
 
     @Column(name = "created_date")
+    @JsonIgnore
     private ZonedDateTime createdDate;
 
     @Column(name = "updated_date")
+    @JsonIgnore
     private ZonedDateTime updatedDate;
 
     @Column(name = "expire_date")
@@ -181,9 +185,11 @@ public class ContactPrivileges implements Serializable {
     private Contacts contact;
 
     @ManyToOne
+    @JsonIgnore
     private User createdByAdminUser;
 
     @ManyToOne
+    @JsonIgnore
     private User updatedByAdminUser;
 
     public Long getId() {

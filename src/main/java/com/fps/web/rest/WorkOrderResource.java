@@ -76,7 +76,7 @@ public class WorkOrderResource {
 
 	@Inject
 	private LookupsRepository lookupsRepository;
-	
+
 	/**
 	 * POST /work-orders : Create a new workOrder.
 	 *
@@ -168,18 +168,70 @@ public class WorkOrderResource {
 	@RequestMapping(value = "/work-orders", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<WorkOrder> updateWorkOrder(@RequestBody WorkOrderDTO workOrderDTO) throws URISyntaxException {
+		/*
+		 * log.debug("REST request to update WorkOrder : {}", workOrderDTO);
+		 * WorkOrder workOrder = workOrderDTO.getWorkOrder(); if
+		 * (workOrder.getId() == null) { return createWorkOrder(workOrderDTO); }
+		 * currentTenantIdentifierResolver.setTenant(SLAVE); User user =
+		 * userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).
+		 * get();
+		 *
+		 * workOrder.setUpdatedBy(user);
+		 * workOrder.setUpdatedDate(ZonedDateTime.now());
+		 *
+		 * WorkOrder result = workOrderService.save(workOrder);
+		 */
 		log.debug("REST request to update WorkOrder : {}", workOrderDTO);
 		WorkOrder workOrder = workOrderDTO.getWorkOrder();
-		if (workOrder.getId() == null) {
-			return createWorkOrder(workOrderDTO);
-		}
+
 		currentTenantIdentifierResolver.setTenant(SLAVE);
 		User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
 
 		workOrder.setUpdatedBy(user);
 		workOrder.setUpdatedDate(ZonedDateTime.now());
 
+		currentTenantIdentifierResolver.setTenant(MASTER);
 		WorkOrder result = workOrderService.save(workOrder);
+
+		if (workOrder.isIsAbc()) {
+			Set<WorkOrderAbcFile> workOrderAbcFiles = new HashSet<>();
+			Set<WorkOrderAbcHdd> workOrderAbcHdds = new HashSet<>();
+
+			log.info("Saving WorkOrderAbcFile ");
+			for (WorkOrderAbcFile workOrderAbcFile : workOrderDTO.getWorkOrderAbcFiles()) {
+				workOrderAbcFile.setWorkOrder(workOrder);
+				workOrderAbcFiles.add(workOrderAbcFile);
+				log.info(workOrderAbcFile.toString());
+			}
+			if (workOrderAbcFiles.size() > 0) {
+				workOrderAbcFileRepository.save(workOrderAbcFiles);
+			}
+
+			log.info("Saving WorkOrderAbcHdd ");
+			for (WorkOrderAbcHdd workOrderAbcHdd : workOrderDTO.getWorkOrderAbcHdds()) {
+				workOrderAbcHdd.setWorkOrder(workOrder);
+				log.info(workOrderAbcHdd.toString());
+				workOrderAbcHdds.add(workOrderAbcHdd);
+			}
+			if (workOrderAbcHdds.size() > 0) {
+				workOrderAbcHddRepository.save(workOrderAbcHdds);
+			}
+		}
+
+		Set<WorkOrdersAdminRelation> workOrdersAdminRelations = new HashSet<>();
+		log.info("Saving WorkOrdersAdminRelation ");
+		if (workOrderDTO.getWorkOrdersAdminRelations() != null) {
+			for (WorkOrdersAdminRelation workOrdersAdminRelation : workOrderDTO.getWorkOrdersAdminRelations()) {
+
+				if (workOrdersAdminRelation.getAdmin_user() != null) {
+
+					workOrdersAdminRelation.setWorkOrder(workOrder);
+					workOrdersAdminRelations.add(workOrdersAdminRelation);
+					log.info(workOrdersAdminRelation.toString());
+				}
+			}
+			workOrdersAdminRelationRepository.save(workOrdersAdminRelations);
+		}
 		return ResponseEntity.ok()
 				.headers(HeaderUtil.createEntityUpdateAlert("workOrder", workOrder.getId().toString())).body(result);
 	}
@@ -271,7 +323,7 @@ public class WorkOrderResource {
 		log.debug("REST request to search for a page of WorkOrders for query {}", query + " and filer :" + filter);
 		List<WorkOrder> workOrders = new ArrayList<>();
 		if (filter.equals("project")) {
-
+			workOrders = (List<WorkOrder>) workOrderSearchRepository.findByProject(query);
 		} else if (filter.equals("id")) {
 			workOrders = (List<WorkOrder>) workOrderSearchRepository.findOne(Long.valueOf(query));
 		} else if (filter.equals("name")) {
@@ -406,8 +458,7 @@ public class WorkOrderResource {
 				new BeanPropertyRowMapper(ProjectInfoReportsDTO.class));
 		return reportsDTOs;
 	}
-	
-	
+
 	@RequestMapping(value = "/processing/work-orders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<List<WorkOrder>> processingWorkOrders(Pageable pageable) throws URISyntaxException {
@@ -416,19 +467,34 @@ public class WorkOrderResource {
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/processing/work-orders");
 		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
 	}
-	
-	
-	
-	// test work order 
-	
+
+	// test work order
+
 	@RequestMapping(value = "/hhhh/www", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public WorkOrder hello() throws URISyntaxException {
 		currentTenantIdentifierResolver.setTenant(SLAVE);
 
-		
 		WorkOrder wo = workOrderRepository.findOne((long) 9);
 		return wo;
 	}
+
+    /**
+     *
+     * @param type
+     * @param query
+     * @return workorder list
+     * @throws URISyntaxException
+     */
+    @RequestMapping(value = "/search/work-orders/various", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<WorkOrderListDTO> searchByVarious(@RequestParam String type,@RequestParam String query) throws URISyntaxException {
+
+	    log.info("Search WorkOrder By : "+type );
+	    log.info("Search KeyWord : "+query);
+	    final List<WorkOrderListDTO> workOrderDTOS =  workOrderService.searchByVarious(type,query);
+	    return workOrderDTOS;
+
+    }
 
 }

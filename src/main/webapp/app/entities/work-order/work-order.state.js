@@ -211,7 +211,8 @@
                                     processedBy: null,
                                     ingestBy: null,
                                     printBy: null,
-                                    uploadBy: null
+                                    uploadBy: null,
+                                    project: null
 
                                 };
                             }

@@ -63,6 +63,9 @@ public interface WorkOrderService {
     List<WorkOrderListDTO> findWorkOrdersByReport(String reportType);
 
     List<WorkOrder> findMyOpenWorkOrders(User user);
+
+    List<WorkOrderListDTO> searchByVarious(String type,String query);
+
 }
 
 

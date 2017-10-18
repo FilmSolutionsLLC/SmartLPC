@@ -5,9 +5,9 @@
         .module('smartLpcApp')
         .controller('ProjectsController', ProjectsController);
 
-    ProjectsController.$inject = ['$scope', '$state', 'Projects', 'ProjectsSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants'];
+    ProjectsController.$inject = ['$http', '$scope', '$state', 'Projects', 'ProjectsSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants'];
 
-    function ProjectsController($scope, $state, Projects, ProjectsSearch, ParseLinks, AlertService, pagingParams, paginationConstants) {
+    function ProjectsController($http, $scope, $state, Projects, ProjectsSearch, ParseLinks, AlertService, pagingParams, paginationConstants) {
         var vm = this;
         vm.loadAll = loadAll;
         vm.loadPage = loadPage;
@@ -22,6 +22,7 @@
         vm.projects = [];
         vm.mainContactFlag = false;
         vm.mainUnitPublicistFlag = false;
+
         function loadAll() {
             if (pagingParams.search) {
                 ProjectsSearch.query({
@@ -37,6 +38,7 @@
                     sort: sort()
                 }, onSuccess, onError);
             }
+
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
                 console.log("sort by : " + result);
@@ -47,11 +49,13 @@
             }
 
             vm.z = [];
+
             function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
                 vm.projectsDTO = data;
+                console.log("ProjectsDTO : ", vm.projectsDTO);
                 vm.page = pagingParams.page;
             }
 
@@ -94,5 +98,35 @@
             vm.transition();
         }
 
+
+        vm.delete = function (id) {
+            var password = prompt("Enter password: ", "");
+
+            if (password == null || password == "") {
+
+            } else {
+                $http({
+                    method: 'POST',
+                    url: 'api/project/delete',
+                    data: password
+                }).then(function successCallback(response) {
+
+                    vm.success = response.data;
+                    if (angular.equals(vm.success, 1)) {
+                        alert("Project Delete Started : " + vm.projectsDTO.projects.id);
+                    } else {
+                        alert("Incorrect Password...");
+                    }
+
+                }, function errorCallback(response) {
+
+                });
+            }
+
+            /*
+			 * if(angular.equals(retVal,"abcd")){ alert("Password Correct :
+			 * "+retVal); }else{ alert("Password Incorrect : "+retVal); }
+			 */
+        };
     }
 })();
