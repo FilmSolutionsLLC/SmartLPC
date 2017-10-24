@@ -145,9 +145,9 @@
 			 * vm.currrentOBJ.data.id }).then(function successCallback(response) {
 			 * vm.relatedContact.push(response.data); }, function
 			 * errorCallback(response) {
-			 * 
+			 *
 			 * });
-			 * 
+			 *
 			 * console.log("Related Contact Length : ",vm.relatedContact.length );
 			 */
 
@@ -155,12 +155,12 @@
 
         vm.removeTalent = function (index) {
             console.log("removing talent : " + index);
-          
+
             for (var i = 0; i < vm.projectsDTO.projectRoles.length; i++) {
-            	       
+
                 if ( vm.projectsDTO.projectRoles[i].id == index) {
                          // remove it
-                   if (confirm('Are you sure you want to remove Talent : '+vm.projectsDTO.projectRoles[i].contact.fullName)) 
+                   if (confirm('Are you sure you want to remove Talent : '+vm.projectsDTO.projectRoles[i].contact.fullName))
                    	{
                      	console.log("Removing project role:"+vm.projectsDTO.projectRoles[i].id);
                          vm.projectsDTO.projectRoles.splice(i, 1);
@@ -171,10 +171,10 @@
                  }
                }
             };
-    
+
             // vm.projectsDTO.projectRoles.splice(index, 1);
 
-        
+
 
         vm.notify = function (talent) {
             alert("Notification Email sent to : " + talent.contact.fullName);
@@ -209,19 +209,19 @@
                 "watermark": false,
                 "internal": false
             })
-            
+
             $location.hash('bottom');
             // call $anchorScroll()
             $anchorScroll();
         };
         vm.removeExec = function (index) {
         	console.log("removing contact privilege :"+index );
-        	
+
         	for (var i = 0; i < vm.projectsDTO.contactPrivileges.length; i++) {
         		console.log("cp :"+vm.projectsDTO.contactPrivileges[i].id);
         		  if ( vm.projectsDTO.contactPrivileges[i].id == index) {
         			  console.log("found");
-        			  if (confirm('Are you sure you want to remove Exec : '+vm.projectsDTO.contactPrivileges[i].contact.fullName)) 
+        			  if (confirm('Are you sure you want to remove Exec : '+vm.projectsDTO.contactPrivileges[i].contact.fullName))
                      	{
                        	console.log("Removing project role:"+vm.projectsDTO.projectRoles[i].id);
                        	vm.projectsDTO.contactPrivileges.splice(i, 1);
@@ -229,7 +229,7 @@
                       }else {
                                // Do nothing!
                           }
-        			  
+
         		  }
         	}
         }
@@ -471,55 +471,55 @@
 		 * []; vm.projectRoles = []; vm.contactPrivileges = [];
 		 * vm.projectPurchaseOrders = []; vm.projectLabTaskses = []; vm.tags =
 		 * [];
-		 * 
+		 *
 		 * vm.projects = vm.projectsDTO.projects; vm.projectRolesTemp =
 		 * vm.projectsDTO.projectRoles; vm.contactPrivileges =
 		 * vm.projectsDTO.contactPrivileges; vm.projectPurchaseOrders =
 		 * vm.projectsDTO.projectPurchaseOrderses; vm.projectLabTaskses =
 		 * vm.projectsDTO.projectLabTaskses;
-		 * 
+		 *
 		 * vm.users = User.query(); vm.departmentss = Departments.query();
 		 * vm.storage_disks = Storage_Disk.query();
-		 * 
-		 * 
+		 *
+		 *
 		 * vm.downloadType = [{0: "NONE"}, {1: "ALL"}, {2: "Locked Approved"}];
 		 * vm.exclusives = [{0: "NONE"}, {1: "BASIC"}, {2: "MASTER"}];
-		 * 
-		 * 
+		 *
+		 *
 		 * vm.talents = []; vm.status = {};
-		 * 
+		 *
 		 * $http({ method: 'GET', url: 'api/lookups/projects/status'
 		 * }).then(function successCallback(response) { vm.status =
 		 * response.data; }, function errorCallback(response) {
-		 * 
+		 *
 		 * });
-		 * 
+		 *
 		 * vm.projectType = {}; $http({ method: 'GET', url:
 		 * 'api/lookups/projects/type' }).then(function
 		 * successCallback(response) { vm.projectType = response.data; },
 		 * function errorCallback(response) {
-		 * 
+		 *
 		 * });
-		 * 
-		 * 
+		 *
+		 *
 		 * vm.fileType = {}; $http({ method: 'GET', url:
 		 * 'api/lookups/projects/filetype' }).then(function
 		 * successCallback(response) { vm.fileType = response.data; }, function
 		 * errorCallback(response) {
-		 * 
+		 *
 		 * });
-		 * 
+		 *
 		 * vm.labTask = {}; $http({ method: 'GET', url:
 		 * 'api/lookups/get/project_lab_tasks/task_name_id' }).then(function
 		 * successCallback(response) { vm.labTask = response.data; }, function
 		 * errorCallback(response) {
-		 * 
+		 *
 		 * });
-		 * 
+		 *
 		 * vm.tags = []; $scope.talents = []; if
 		 * (!(angular.equals(vm.projectRolesTemp, []))) { for (var i = 0; i <
 		 * vm.projectRolesTemp.length; i++) {
-		 * 
+		 *
 		 * if (angular.equals(vm.projectRolesTemp[i].relationship_type, "Main
 		 * Contact")) { console.log("main contact added"); //vm.mainC =
 		 * vm.projectRoles[i]; vm.projectRoles[0] = vm.projectRolesTemp[i]; }
@@ -543,36 +543,36 @@
 		 * vm.projectLabTaskses.length); console.log("Execs total : " +
 		 * vm.contactPrivileges.length); console.log("Project Roles total : " +
 		 * vm.projectRoles.length);
-		 * 
+		 *
 		 * $scope.runShow = []; for (var i = 0; i <
 		 * vm.projectPurchaseOrders.length; i++) { console.log("==== > Run of
 		 * Show added : " + i); $scope.runShow.push({'id': 'runShow' + i}); }
 		 * vm.runShowAdd = function () { console.log(" Run of Show added ..");
 		 * var newItemNo = $scope.runShow.length + 1; $scope.runShow.push({'id':
 		 * 'runShow' + newItemNo}); };
-		 * 
+		 *
 		 * vm.runShowRemove = function (index) { console.log(" Run of Show
 		 * removed : " + index); $scope.runShow.splice(index, 1); };
-		 * 
+		 *
 		 * $scope.related = []; for (var i = 0; i < vm.projectLabTaskses.length;
 		 * i++) { console.log("lab tasks present : " + i);
 		 * $scope.related.push({'id': 'related' + i}); } vm.addlab = function () {
 		 * console.log("lab tasks added"); var newItemNo = $scope.related.length +
 		 * 1; $scope.related.push({'id': 'related' + newItemNo}); };
-		 * 
+		 *
 		 * vm.removelab = function (index) { console.log("lab tasks index : " +
 		 * index); vm.projectLabTaskses.splice(index, 1);
 		 * $scope.related.splice(index, 1); };
-		 * 
+		 *
 		 * vm.alert = function () { console.log("esdadasdas");
 		 * window.alert("Wake up !!!!"); };
-		 * 
-		 * 
+		 *
+		 *
 		 * for (var i = 0; i < vm.tags; i++) { $scope.talents.push({'id': i}); }
 		 * vm.addTalent = function () { var talent = $scope.talents.length + 1;
 		 * $scope.talents.push({'id': talent}); console.log("-------");
 		 * console.log(JSON.stringify($scope.talents)); };
-		 * 
+		 *
 		 * vm.removeTalent = function (index) { vm.talents.splice(index, 1);
 		 * $scope.talents.splice(index, 1) }; $scope.execs = []; for (var i = 0;
 		 * i < vm.contactPrivileges.length; i++) { console.log("lab tasks
@@ -581,23 +581,23 @@
 		 * $scope.execs.push({'id': 'execs' + exec}); }; vm.removeExec =
 		 * function (index) { vm.contactPrivileges.splice(index, 1);
 		 * $scope.execs.splice(index, 1); }
-		 * 
-		 * 
+		 *
+		 *
 		 * vm.count = 0; $rootScope.$watch(function () { return
 		 * $rootScope.relationships; }, function () { if
 		 * ($rootScope.relationships == null) { console.log("null rootscope"); }
 		 * else { console.log("not null");
-		 * 
+		 *
 		 * vm.currrentOBJ = $rootScope.relationships; console.log("========> " +
 		 * JSON.stringify(vm.currentOBJ)); if
 		 * (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.owner')) {
 		 * console.log("found equal");
-		 * 
+		 *
 		 * vm.projects.owner = vm.currrentOBJ.data;
-		 * 
+		 *
 		 * console.log(vm.projects.owner.fullName); }
-		 * 
-		 * 
+		 *
+		 *
 		 * else if (angular.equals(vm.currrentOBJ.elementID,
 		 * 'field_vm.projects.mainContact')) { vm.projectRoles[0] = {"contact":
 		 * vm.currrentOBJ.data, "relationship_type": "Main Contact"}; } else if
@@ -631,25 +631,25 @@
 		 * "readOnly": false, "restartColumns": 2, "restartImageSize": 'Large',
 		 * "restartImagesPerPage": 20, "showFinalizations": false, "watermark":
 		 * false, "internal": false
-		 * 
+		 *
 		 * }); } else if (angular.equals(vm.currrentOBJ.elementID,
 		 * 'relatedContact')) { console.log("count : " + vm.count);
 		 * //vm.relatedContacts.push(vm.currrentOBJ.data); //
 		 * vm.relatedContacts[vm.count].contactB = vm.currrentOBJ.data;
 		 * vm.relatedContacts.push({"isPrimaryContact": false, "contact_b":
 		 * vm.currrentOBJ.data}); vm.count++;
-		 * 
+		 *
 		 * console.log("related Contacts size " + vm.relatedContacts.length); }
 		 * else { console.log("not equal.."); } } });
-		 * 
-		 * 
+		 *
+		 *
 		 * vm.openModal = function (elementID) {
-		 * 
+		 *
 		 * console.log("id of textbox : " + elementID); //var ctrl =
 		 * angular.element(id).data('$ngModelController');
-		 * 
+		 *
 		 * var modalInstance = $uibModal.open({
-		 * 
+		 *
 		 * templateUrl: 'app/entities/contacts/simpleModal.html', controller:
 		 * 'SimpleController', size: 'lg', scope: $scope, controllerAs: 'vm',
 		 * backdrop: 'static', resolve: { sendID: function () { return
@@ -667,11 +667,11 @@
 		 * vm.projectsDTO.contactPrivileges; vm.projectPurchaseOrders =
 		 * vm.projectsDTO.projectPurchaseOrders; vm.projectLabTaskses =
 		 * vm.projectsDTO.projectLabTaskses;
-		 * 
+		 *
 		 * }); }; var unsubscribe = $rootScope.$on('smartLpcApp:projectsUpdate',
 		 * function (event, result) { vm.projects = result; });
 		 * $scope.$on('$destroy', unsubscribe);
-		 * 
+		 *
 		 * vm.save = function () { /!* console.log(" projectRoles : " +
 		 * JSON.stringify(vm.projectRoles)); console.log(" talents : " +
 		 * JSON.stringify(vm.talents)); console.log(" contactPrivileges : " +
@@ -686,13 +686,13 @@
 		 * console.log("ProjectsDTO");
 		 * //console.log(JSsON.stringify(vm.projectsDTO));
 		 * console.log("Projects: " + JSON.stringify(vm.projects));
-		 * 
+		 *
 		 * vm.isSaving = true;
-		 * 
+		 *
 		 * if (vm.projects.id !== null) { console.log("UPDATING entity
 		 * projectsDTO"); Projects.update(vm.projectsDTO, onSaveSuccess,
 		 * onSaveError); } else {
-		 * 
+		 *
 		 * console.log("==========================================");
 		 * console.log("==========================================");
 		 * console.log(JSON.stringify(vm.projectsDTO));
@@ -701,9 +701,9 @@
 		 * $scope.$emit('smartLpcApp:projectsUpdate', result); //
 		 * $uibModalInstance.close(result); vm.isSaving = false;
 		 * $state.go('projects', {}, {reload: true});// use for redirecting ... };
-		 * 
+		 *
 		 * var onSaveError = function () { vm.isSaving = false; };
-		 * 
+		 *
 		 */
         vm.getCount = function (projects) {
             // console.log("Drive ID : " + JSON.stringify(diskID));
@@ -738,6 +738,9 @@
                 resolve: {
                     id: function () {
                         return id;
+                    },
+                    projectID: function () {
+                      return vm.projectsDTO.projects.id;
                     },
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('contacts');
@@ -905,6 +908,10 @@
                 }
             })
         };
+
+
+
+
 
 
         $rootScope.$watch(

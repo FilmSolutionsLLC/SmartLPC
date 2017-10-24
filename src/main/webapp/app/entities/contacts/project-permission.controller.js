@@ -4,9 +4,9 @@
     angular.module('smartLpcApp').controller('ProjectPermission',
         ProjectPermission);
 
-    ProjectPermission.$inject = ['DateUtils', '$http', 'entity', 'ContactPrivileges', '$rootScope', '$uibModal', '$scope', '$state', 'Contacts', 'ContactsSearch', 'AlertService'];
+    ProjectPermission.$inject = ['$ngConfirm','DateUtils', '$http', 'entity', 'ContactPrivileges', '$rootScope', '$uibModal', '$scope', '$state', 'Contacts', 'ContactsSearch', 'AlertService'];
 
-    function ProjectPermission(DateUtils, $http, entity, ContactPrivileges, $rootScope, $uibModal, $scope, $state, Contacts, ContactsSearch, AlertService) {
+    function ProjectPermission($ngConfirm,DateUtils, $http, entity, ContactPrivileges, $rootScope, $uibModal, $scope, $state, Contacts, ContactsSearch, AlertService) {
         console.log("Project Permission Controller");
         //  console.log(JSON.stringify(entity));
 
@@ -90,8 +90,22 @@
                 console.log("SAVED : " + JSON.stringify(vm.selectedProjects[i]));
                 ContactPrivileges.update(vm.selectedProjects[i], onSaveSuccess, onSaveError);
                 if (i == vm.selectedProjects.length - 1) {
-                    alert("Projects and its Privileges have been added/updated to the Contact : " + vm.contacts.fullName);
-
+                    //alert("Projects and its Privileges have been added/updated to the Contact : " + vm.contacts.fullName);
+                    $ngConfirm({
+                        title: 'Success!',
+                        content: "<small>Projects and its Privileges have been added/updated to the Contact </small>: <strong>"+vm.contacts.fullName+"</strong>",
+                        type: 'red',
+                        typeAnimated: true,
+                        theme: 'dark',
+                        buttons: {
+                            confirm: {
+                                text: 'Okay',
+                                btnClass: 'btn-red',
+                                action: function () {
+                                }
+                            }
+                        }
+                    });
                 }
             }
         };

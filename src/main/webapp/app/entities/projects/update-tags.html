@@ -4,7 +4,7 @@
 
     <div class="btn-toolbar btn-toolbar-xs" role="toolbar">
 
-        <button type="button" class="btn btn-success btn-xs">
+        <button type="button" ng-click="vm.addTags()" class="btn btn-success btn-xs">
             Add Record
         </button>
     </div>
@@ -19,7 +19,8 @@
 
         <tr ng-repeat="tags in vm.tagss.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy : 'type'">
             <td class="small">
-                <button type="button" class="btn btn-primary btn-xs">Select</button>
+                <button class="btn btn-primary btn-xs" type="button"
+                        ng-click="vm.editTags(tags.id)">Select</button>
             </td>
             <td class="small">{{tags.type}}</td>
             <td class="small">{{tags.value}}</td>

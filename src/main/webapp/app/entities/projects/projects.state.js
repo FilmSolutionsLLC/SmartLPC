@@ -219,7 +219,7 @@
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'Projects', function ($stateParams, Projects) {
-                        return Projects.get({id: $stateParams.id});
+                        return Projects.get({id: $stateParams.id}).$promise;
                     }]
                 }
             })
@@ -473,6 +473,75 @@
                         return $translate.refresh();
                     }]
                 }
+            })
+            .state('projectroles.edit', {
+                parent: 'entity',
+                url: '/edit/pr/{id}',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/project-roles/project-roles-dialog.html',
+                        controller: 'ProjectRolesDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: ['ProjectRoles', function(ProjectRoles) {
+                                return ProjectRoles.get({id : $stateParams.id});
+                            }]
+                        }
+                    }).result.then(function() {
+                        //$state.go('project-roles', null, { reload: true });
+                        //window.history.back();
+                    }, function() {
+                        //$state.go('^');
+                    });
+                }]
+            })
+            .state('projectroles.new', {
+                parent: 'project-roles',
+                url: '/new/edit/pr',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/project-roles/project-roles-dialog.html',
+                        controller: 'ProjectRolesDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: function () {
+                                return {
+                                    soloKillPct: null,
+                                    groupKillPct: null,
+                                    miniFullDt: null,
+                                    fullFinalDt: null,
+                                    disabled: null,
+                                    characterName: null,
+                                    startDate: null,
+                                    daysWorking: null,
+                                    excSologroup: null,
+                                    notes: null,
+                                    tagName: null,
+                                    hotkeyValue: null,
+                                    expireDate: null,
+                                    tertiaryKillPct: null,
+                                    createdDate: null,
+                                    updatedDate: null,
+                                    id: null
+                                };
+                            }
+                        }
+                    }).result.then(function() {
+                        $state.go('project-roles', null, { reload: true });
+                    }, function() {
+                        $state.go('project-roles');
+                    });
+                }]
             });
     }
 

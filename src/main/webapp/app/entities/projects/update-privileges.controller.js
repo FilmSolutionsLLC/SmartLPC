@@ -10,7 +10,7 @@
     UpdatePrivilegesController.$inject = ['id', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModal', '$scope', '$state', 'Projects','$uibModalInstance'];
 
     function UpdatePrivilegesController(id, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModal, $scope, $state, Projects,$uibModalInstance) {
-    	
+
         var vm = this;
 
         $http({
@@ -60,12 +60,12 @@
 
         vm.editPrivilege = function (id) {
             console.log("id of textbox : " + id);
-            //var ctrl = angular.element(id).data('$ngModelController');
+            // var ctrl = angular.element(id).data('$ngModelController');
 
             var modalInstance = $uibModal.open({
 
-            	templateUrl: 'app/entities/contacts/project-permission.html',
-                controller: 'ProjectPermission',
+                templateUrl: 'app/entities/projects/individual-privilege.html',
+                controller: 'IndividualPrivilegesController',
                 size: 'md',
                 scope: $scope,
                 controllerAs: 'vm',
@@ -73,7 +73,7 @@
                     id: function () {
                         return id;
                     },
-                 
+
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('contacts');
                         $translatePartialLoader.addPart('projects');
@@ -83,5 +83,6 @@
                 }
             });
         };
+
     }
 })();

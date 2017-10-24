@@ -6,19 +6,21 @@
 
     angular
         .module('smartLpcApp')
-        .controller('UpdateAlbumsController', UpdateAlbumsController);
-    UpdateAlbumsController.$inject = ['id', 'projectID', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModalInstance', '$scope', '$state', 'Projects'];
+        .controller('SelectAlbumController', SelectAlbumController);
+    SelectAlbumController.$inject = ['id', 'projectID', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModalInstance', '$scope', '$state', 'Projects'];
 
-    function UpdateAlbumsController(id, projectID, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModalInstance, $scope, $state, Projects) {
+    function SelectAlbumController(id, projectID, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModalInstance, $scope, $state, Projects) {
 
 
         var vm = this;
-
+        vm.type = id;
+        console.log("ID : " + id);
+        console.log("projectID : " + projectID);
         $http({
             method: 'GET',
             url: 'api/talents',
             params: {
-                id: id,
+                id: projectID,
                 type: 'albums'
 
             }
@@ -89,7 +91,7 @@
                     url: 'api/update/album',
                     data: tags
                 }).then(function successCallback(response) {
-                	alert("Album name changed to : "+tags.value);
+                    alert("Album name changed to : " + tags.value);
                 }, function errorCallback(response) {
 
                 });
@@ -120,6 +122,20 @@
             } else {
                 console.log("u pressed cancel");
             }
+        };
+
+        $rootScope.selected = {};
+        vm.selectAlbum = function (id) {
+            console.log("Selecting Album at " + id);
+            $scope.currentOBJ = {
+                "elementID": vm.type,
+                "data": vm.albums[id]
+            };
+
+            $rootScope.selected = $scope.currentOBJ;
+            console.log("Selected albums : " + JSON.stringify($rootScope.selected));
+            $uibModalInstance.dismiss('cancel');
+
         };
 
 

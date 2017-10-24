@@ -6,27 +6,29 @@
 
     angular
         .module('smartLpcApp')
-        .controller('UpdateAlbumsController', UpdateAlbumsController);
-    UpdateAlbumsController.$inject = ['id', 'projectID', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModalInstance', '$scope', '$state', 'Projects'];
+        .controller('SelectActorController', SelectActorController);
+    SelectActorController.$inject = ['id', 'projectID', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModalInstance', '$scope', '$state', 'Projects'];
 
-    function UpdateAlbumsController(id, projectID, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModalInstance, $scope, $state, Projects) {
+    function SelectActorController(id, projectID, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModalInstance, $scope, $state, Projects) {
 
 
         var vm = this;
-
+        vm.type = id;
+        console.log("ID : " + id);
+        console.log("projectID : " + projectID);
         $http({
             method: 'GET',
             url: 'api/talents',
             params: {
-                id: id,
-                type: 'albums'
+                id: projectID,
+                type: 'tags'
 
             }
         }).then(function successCallback(response) {
-            vm.albums = response.data;
+            vm.tagss = response.data;
 
-            console.log(JSON.stringify(vm.albums));
-            $scope.totalItems = vm.albums.length;
+            console.log(JSON.stringify(vm.tagss));
+            $scope.totalItems = vm.tagss.length;
             console.log("Albums Length : " + $scope.totalItems);
         }, function errorCallback(response) {
 
@@ -89,7 +91,7 @@
                     url: 'api/update/album',
                     data: tags
                 }).then(function successCallback(response) {
-                	alert("Album name changed to : "+tags.value);
+                    alert("Album name changed to : " + tags.value);
                 }, function errorCallback(response) {
 
                 });
@@ -120,6 +122,16 @@
             } else {
                 console.log("u pressed cancel");
             }
+        };
+
+        $rootScope.selectedTalent = {};
+        vm.selectTalent = function (id) {
+            console.log("Selecting Talent at " + id);
+
+            $rootScope.selectedTalent = vm.tagss[id];
+            console.log("Selected Talent : " + JSON.stringify($rootScope.selectedTalent));
+            $uibModalInstance.dismiss('cancel');
+
         };
 
 

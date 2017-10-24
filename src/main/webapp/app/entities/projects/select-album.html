@@ -1,0 +1,45 @@
+<div class="modal-header">
+    <button type="button" class="close danger" data-dismiss="modal" aria-hidden="true" ng-click="vm.close()">&times;
+    </button>
+
+    <div ng-if="vm.type == 'defaultAlbum'">
+        <h4><strong>Default Album</strong></h4>
+    </div>
+    <div ng-if="vm.type == 'namedAlbum'">
+        <h4><strong>Named Album</strong></h4>
+    </div>
+
+
+</div>
+<div class="modal-body">
+    <table class="jh-table table table-striped">
+        <tr>
+
+            <th class="small">Album Name</th>
+            <th class="small">Album Description</th>
+            <th class="small"></th>
+        </tr>
+
+        <tr ng-repeat="tags in vm.albums.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy : 'type'">
+
+            <!--<td class="small"><input type="text" value="{{tags.type}}" ng-model="tags.type" class="input-xs"></td>
+            <td class="small"><input type="text" value="{{tags.value}}" ng-model="tags.value" class="input-xs"></td>-->
+            <td class="small"><h5>{{tags.type}}</h5></td>
+            <td class="small"><h5>{{tags.value}}</h5></td>
+            <td class="text-right small">
+                <div class="btn-group flex-btn-group-container">
+
+                    <button type="button" class="btn btn-primary btn-xs" ng-click="vm.selectAlbum($index)">
+                        <span class="glyphicon glyphicon-check"></span> &nbsp; Select
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="text-center">
+        <h5>Page: {{currentPage}} / {{numPages}} of Albums</h5>
+        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="currentPage" max-size="maxSize"
+                        boundary-links="true" rotate="false" num-pages="numPages"
+                        items-per-page="itemsPerPage"></uib-pagination>
+    </div>
+</div>

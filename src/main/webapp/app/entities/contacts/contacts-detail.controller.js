@@ -49,7 +49,7 @@
         // socket impl
 
 
-        vm.errorDialog = function () {
+       /* vm.errorDialog = function () {
 
 
             $ngConfirm({
@@ -69,6 +69,6 @@
                 }
             });
 
-        }
+        }*/
     }
 })();

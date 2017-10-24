@@ -7,11 +7,11 @@
 	angular.module('smartLpcApp').controller('ContactsAddController',
 			ContactsAddController);
 
-	ContactsAddController.$inject = [ 'pagingParams', '$rootScope', '$state',
+	ContactsAddController.$inject = [ '$ngConfirm','pagingParams', '$rootScope', '$state',
 			'$uibModal', '$scope', '$stateParams', 'entity', 'Contacts',
 			'Lookups', 'Departments', 'User', '$http', 'ContactRelationships' ];
 
-	function ContactsAddController(pagingParams, $rootScope, $state, $uibModal,
+	function ContactsAddController($ngConfirm,pagingParams, $rootScope, $state, $uibModal,
 			$scope, $stateParams, entity, Contacts, Lookups, Departments, User,
 			$http, $mdDialog, ContactRelationships) {
 
@@ -154,7 +154,22 @@
 			// ...
 			console.log("data saved : " + JSON.stringify(result.data));
 			$rootScope.savedContact.push(result);
-            alert("Contact : " + vm.contacts.fullName + " has been saved");
+            //alert("Contact : " + vm.contacts.fullName + " has been saved");
+            $ngConfirm({
+                title: 'Success!',
+                content: "Contact : <strong>"+vm.contacts.fullName+"</strong> has been created",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+                        }
+                    }
+                }
+            });
 		};
 
 		vm.saveAndAdd = function() {
@@ -170,7 +185,22 @@
 			// $uibModalInstance.close(result);
 			//$state.go('contacts', {}, { reload : true });// use for redirecting ...
 			//$window.history.back();
-			alert("Contact : " + vm.contacts.fullName + " has been saved");
+			//alert("Contact : " + vm.contacts.fullName + " has been saved");
+            $ngConfirm({
+                title: 'Success!',
+                content: "Contact : <strong>"+vm.contacts.fullName+"</strong> has been created",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+                        }
+                    }
+                }
+            });
 			vm.goBack();
 			console.log("data saved : " + JSON.stringify(result.data));
 			// $rootScope.savedContact = result;

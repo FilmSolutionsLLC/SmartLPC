@@ -2,9 +2,14 @@ package com.fps.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.fps.config.util.CurrentTenantIdentifierResolverImpl;
+import com.fps.domain.Contacts;
 import com.fps.domain.ProjectRoles;
-import com.fps.repository.ProjectRolesRepository;
+import com.fps.domain.User;
 import com.fps.elastics.search.ProjectRolesSearchRepository;
+import com.fps.repository.ContactsRepository;
+import com.fps.repository.ProjectRolesRepository;
+import com.fps.repository.UserRepository;
+import com.fps.security.SecurityUtils;
 import com.fps.web.rest.util.HeaderUtil;
 import com.fps.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -15,16 +20,19 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * REST controller for managing ProjectRoles.
@@ -45,8 +53,18 @@ public class ProjectRolesResource {
     @Inject
     private CurrentTenantIdentifierResolverImpl currentTenantIdentifierResolver;
 
-    final static private String MASTER ="master";
-    final static private String SLAVE ="slave";
+    @Inject
+    private ContactsRepository contactsRepository;
+
+
+    @Inject
+    private JdbcTemplate jdbcTemplate;
+
+    @Inject
+    private UserRepository userRepository;
+
+    final static private String MASTER = "master";
+    final static private String SLAVE = "slave";
 
     /**
      * POST  /project-roles : Create a new projectRoles.
@@ -65,6 +83,17 @@ public class ProjectRolesResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("projectRoles", "idexists", "A new projectRoles cannot already have an ID")).body(null);
         }
         currentTenantIdentifierResolver.setTenant(MASTER);
+        if (projectRoles.getContact() == null) {
+            Contacts contacts = contactsRepository.findOne((long) 5181);
+            projectRoles.setContact(contacts);
+            projectRoles.setRelationship_type("PKO_Tag");
+        }
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+
+        projectRoles.setCreatedByAdminUser(user);
+        projectRoles.setCreatedDate(LocalDate.now());
+
+        log.info("Saving This Project Roles : " + projectRoles.toString());
         ProjectRoles result = projectRolesRepository.save(projectRoles);
         projectRolesSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/project-roles/" + result.getId()))
@@ -90,6 +119,11 @@ public class ProjectRolesResource {
         if (projectRoles.getId() == null) {
             return createProjectRoles(projectRoles);
         }
+        final User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+
+        projectRoles.setUpdatedByAdminUser(user);
+        projectRoles.setUpdatedDate(LocalDate.now());
+
         currentTenantIdentifierResolver.setTenant(MASTER);
         ProjectRoles result = projectRolesRepository.save(projectRoles);
         projectRolesSearchRepository.save(result);
@@ -145,6 +179,7 @@ public class ProjectRolesResource {
      * @param id the id of the projectRoles to delete
      * @return the ResponseEntity with status 200 (OK)
      */
+    // TODO: Delete from user_image table where project_roles id = xxx
     @RequestMapping(value = "/project-roles/{id}",
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -175,5 +210,22 @@ public class ProjectRolesResource {
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/project-roles");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+
+    @RequestMapping(value = "/hotkeys/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Map> getHotKeys(@PathVariable Long id) throws URISyntaxException {
+    	System.out.println("GET HOTKEYS");
+
+        final String sql = "select hotkey_value from project_roles  where relationship_type='PKO_Tag' and project_id=" + id;
+
+        System.out.println(sql);
+        final List<Map> hotkeys = (List) jdbcTemplate.queryForList(sql);
+
+        return hotkeys;
+    }
+
 
 }

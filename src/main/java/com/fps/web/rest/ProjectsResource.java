@@ -59,6 +59,12 @@ public class ProjectsResource {
 	@Inject
 	private CurrentTenantIdentifierResolverImpl currentTenantIdentifierResolver;
 
+	@Inject
+    private ProjectsRepository projectsRepository;
+
+	@Inject
+    private AlbumPermissionsRepository albumPermissionsRepository;
+
 	final static private String MASTER = "master";
 	final static private String SLAVE = "slave";
 
@@ -240,10 +246,10 @@ public class ProjectsResource {
 	}
 
 	/*
-	 * 
+	 *
 	 * @RequestMapping(value = "/_search/projects/filter", method =
 	 * RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	 * 
+	 *
 	 * @Timed public ResponseEntity<List<Projects>>
 	 * searchProjectsbyFilter(@RequestParam String query) throws
 	 * URISyntaxException {
@@ -383,5 +389,31 @@ public class ProjectsResource {
 		projectsService.rename(id, alfrescoTitle1, alfrescoTitle2);
 
 	}
+
+
+
+    @RequestMapping(value = "/justproject/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Projects>  justProject(@PathVariable Long id) {
+
+        log.info("Get Just Project with ID : " + id);
+        Projects projects = projectsRepository.findOne(id);
+
+        return Optional.ofNullable(projects).map(result -> new ResponseEntity<>(result, HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+
+    @RequestMapping(value = "/album/permissions", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public String albumPermissions(@RequestBody List<AlbumPermissions> albumPermissionsList) {
+
+        albumPermissionsRepository.save(albumPermissionsList);
+        log.info("Saved album permissions");
+	    return "saved";
+    }
+
+
+
 
 }

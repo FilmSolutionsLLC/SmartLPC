@@ -1,5 +1,6 @@
 package com.fps.domain;
 
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -83,7 +84,7 @@ public class ProjectRoles implements Serializable {
     String welcomeMessage;
 
     @ManyToOne
-    @JsonIgnore
+    @JsonManagedReference
     private Projects project;
 
     @ManyToOne
