@@ -5,21 +5,22 @@
         .module('smartLpcApp')
         .controller('ProjectsUpdateController', ProjectsUpdateController);
 
-    ProjectsUpdateController.$inject = ['$anchorScroll','$location', '$state', '$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'Projects', 'Lookups', 'Contacts', 'User', 'Departments', 'Storage_Disk'];
+    ProjectsUpdateController.$inject = ['$ngConfirm', '$anchorScroll', '$location', '$state', '$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'Projects', 'Lookups', 'Contacts', 'User', 'Departments', 'Storage_Disk'];
 
-    function ProjectsUpdateController($anchorScroll,$location, $state, $uibModal, $http, $scope, $rootScope, $stateParams, entity, Projects, Lookups, Contacts, User, Departments, Storage_Disk) {
+    function ProjectsUpdateController($ngConfirm, $anchorScroll, $location, $state, $uibModal, $http, $scope, $rootScope, $stateParams, entity, Projects, Lookups, Contacts, User, Departments, Storage_Disk) {
 
 
         var vm = this;
         console.log("PROJECT UPDATE CONTROLLER");
 
         vm.projectsDTO = entity;
-        console.log("ProjectsDTO : " + JSON.stringify(vm.projectsDTO));
+        //console.log("ProjectsDTO : " + JSON.stringify(vm.projectsDTO));
 
-        // GET ALL Related Entities
+
         vm.users = User.query();
         vm.departmentss = Departments.query();
-        vm.storage_disks = Storage_Disk.query();
+
+        vm.relatedContact = [];
 
         vm.downloadType = [{
             'id': 0,
@@ -44,8 +45,8 @@
 
 
         vm.talents = [];
-        vm.status = {};
 
+        vm.status = {};
         $http({
             method: 'GET',
             url: 'api/lookups/projects/status'
@@ -136,44 +137,57 @@
                 "soloKillPct": 50,
                 "groupKillPct": 25,
                 "characterName": "",
-                "disabled": false
+                "disabled": false,
+                "excSologroup": false
             });
             // get related too.
-            /*
-			 * console.log(" get releated : ", vm.currrentOBJ.data.id); $http({
-			 * method : 'GET', url : 'api/contacts/related/' +
-			 * vm.currrentOBJ.data.id }).then(function successCallback(response) {
-			 * vm.relatedContact.push(response.data); }, function
-			 * errorCallback(response) {
-			 *
-			 * });
-			 *
-			 * console.log("Related Contact Length : ",vm.relatedContact.length );
-			 */
+            /*console.log(" get releated : ", vm.currrentOBJ.data.id);
+            $http({
+                method: 'GET', url: 'api/contacts/related/' +
+                vm.currrentOBJ.data.id
+            }).then(function successCallback(response) {
+                vm.relatedContact.push(response.data);
+            }, function
+                errorCallback(response) {
+
+            });
+
+            console.log("Related Contact Length : ", vm.relatedContact.length);*/
 
         };
+
+        //GET RELATED CONTACTS
+        $http({
+            method: 'GET', url: 'api/contacts/related/' + vm.projectsDTO.projects.id
+        }).then(function successCallback(response) {
+            vm.relatedContact = response.data;
+            console.log("Total Related Contact found  : "+vm.relatedContact.length);
+        }, function
+            errorCallback(response) {
+
+        });
+
+
 
         vm.removeTalent = function (index) {
             console.log("removing talent : " + index);
 
             for (var i = 0; i < vm.projectsDTO.projectRoles.length; i++) {
 
-                if ( vm.projectsDTO.projectRoles[i].id == index) {
-                         // remove it
-                   if (confirm('Are you sure you want to remove Talent : '+vm.projectsDTO.projectRoles[i].contact.fullName))
-                   	{
-                     	console.log("Removing project role:"+vm.projectsDTO.projectRoles[i].id);
-                         vm.projectsDTO.projectRoles.splice(i, 1);
+                if (vm.projectsDTO.projectRoles[i].id == index) {
+                    // remove it
+                    if (confirm('Are you sure you want to remove Talent : ' + vm.projectsDTO.projectRoles[i].contact.fullName)) {
+                        console.log("Removing project role:" + vm.projectsDTO.projectRoles[i].id);
+                        vm.projectsDTO.projectRoles.splice(i, 1);
 
-                    }else {
-                             // Do nothing!
-                        }
-                 }
-               }
-            };
+                    } else {
+                        // Do nothing!
+                    }
+                }
+            }
+        };
 
-            // vm.projectsDTO.projectRoles.splice(index, 1);
-
+        // vm.projectsDTO.projectRoles.splice(index, 1);
 
 
         vm.notify = function (talent) {
@@ -215,27 +229,25 @@
             $anchorScroll();
         };
         vm.removeExec = function (index) {
-        	console.log("removing contact privilege :"+index );
+            console.log("removing contact privilege :" + index);
 
-        	for (var i = 0; i < vm.projectsDTO.contactPrivileges.length; i++) {
-        		console.log("cp :"+vm.projectsDTO.contactPrivileges[i].id);
-        		  if ( vm.projectsDTO.contactPrivileges[i].id == index) {
-        			  console.log("found");
-        			  if (confirm('Are you sure you want to remove Exec : '+vm.projectsDTO.contactPrivileges[i].contact.fullName))
-                     	{
-                       	console.log("Removing project role:"+vm.projectsDTO.projectRoles[i].id);
-                       	vm.projectsDTO.contactPrivileges.splice(i, 1);
+            for (var i = 0; i < vm.projectsDTO.contactPrivileges.length; i++) {
+                console.log("cp :" + vm.projectsDTO.contactPrivileges[i].id);
+                if (vm.projectsDTO.contactPrivileges[i].id == index) {
+                    console.log("found");
+                    if (confirm('Are you sure you want to remove Exec : ' + vm.projectsDTO.contactPrivileges[i].contact.fullName)) {
+                        console.log("Removing project role:" + vm.projectsDTO.projectRoles[i].id);
+                        vm.projectsDTO.contactPrivileges.splice(i, 1);
 
-                      }else {
-                               // Do nothing!
-                          }
+                    } else {
+                        // Do nothing!
+                    }
 
-        		  }
-        	}
+                }
+            }
         }
 
 
-        vm.relatedContact = [];
         vm.count = 0;
         $rootScope.$watch(function () {
             return $rootScope.relationships;
@@ -257,26 +269,34 @@
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.mainContact')) {
                     vm.projectRoles[0] = {
                         "contact": vm.currrentOBJ.data,
-                        "relationship_type": "Main Contact"
+                        "relationship_type": "Main Contact",
+                        "excSologroup": false,
+                        "disabled": false
                     };
 
 
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.unitPublicist')) {
                     vm.projectRoles[1] = {
                         "contact": vm.currrentOBJ.data,
-                        "relationship_type": "Unit Publicist"
+                        "relationship_type": "Unit Publicist",
+                        "excSologroup": false,
+                        "disabled": false
                     };
 
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.unitPhotographer')) {
                     vm.projectRoles[2] = {
                         "contact": vm.currrentOBJ.data,
-                        "relationship_type": "Unit Photographer"
+                        "relationship_type": "Unit Photographer",
+                        "excSologroup": false,
+                        "disabled": false
                     };
 
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.labInfo')) {
                     vm.projectRoles[3] = {
                         "contact": vm.currrentOBJ.data,
-                        "relationship_type": "Lab"
+                        "relationship_type": "Lab",
+                        "excSologroup": false,
+                        "disabled": false
                     };
 
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.productCompany')) {
@@ -294,9 +314,10 @@
                         "soloKillPct": 50,
                         "groupKillPct": 25,
                         "characterName": "",
+                        "excSologroup": false,
                         "disabled": false
                     });
-                    // get related too.
+                    /*// get related too.
                     console.log(" get releated  : ", vm.currrentOBJ.data.id);
                     $http({
                         method: 'GET',
@@ -306,9 +327,9 @@
                         console.log("Related Contact added..");
                     }, function errorCallback(response) {
 
-                    });
+                    });*/
 
-                    console.log("Related Contact Length :", vm.relatedContact.length);
+                    //console.log("Related Contact Length :", vm.relatedContact.length);
 
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.execs')) {
                     vm.projectsDTO.contactPrivileges.pop();
@@ -389,7 +410,7 @@
         vm.save = function () {
 
             console.log("ProjectsDTO");
-            console.log(JSON.stringify(vm.projectsDTO));
+            //console.log(JSON.stringify(vm.projectsDTO));
 
             vm.isSaving = true;
 
@@ -716,7 +737,24 @@
                 vm.count = response.data;
                 console.log(vm.res);
 
-                alert(vm.count);
+                $ngConfirm({
+                    title: 'Size of Project in GB',
+                    //content: "<strong>"+vm.count+" Gb</strong> ",
+                    content: "<strong>100 Gb</strong> ",
+                    type: 'red',
+                    typeAnimated: true,
+                    theme: 'dark',
+                    buttons: {
+                        confirm: {
+                            text: 'Okay',
+                            btnClass: 'btn-green',
+                            action: function () {
+
+                            }
+                        }
+                    }
+                });
+
             }, function errorCallback(response) {
 
             });
@@ -740,7 +778,7 @@
                         return id;
                     },
                     projectID: function () {
-                      return vm.projectsDTO.projects.id;
+                        return vm.projectsDTO.projects.id;
                     },
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('contacts');
@@ -910,10 +948,6 @@
         };
 
 
-
-
-
-
         $rootScope.$watch(
             function () {
                 return $rootScope.execsContactMultiple;
@@ -940,27 +974,85 @@
             });
 
 
-        console.log("ProjectsDTO ", vm.projectsDTO);
 
-        vm.tggg = [];
-        vm.tggg.concat(vm.projectsDTO.projectRoles);
-        console.log("Project Roles ", vm.projectsDTO.projectRoles);
-        console.log("vm.tgg length ", vm.tggg.length);
-        for (var i = 0; i < vm.tggg.length; i++) {
-            console.log("vm.projectsDTO.projectRoles[i].relationship_type : " + vm.projectsDTO.projectRoles[i].relationship_type);
-            if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, 'PKO_Tag')) {
-                console.log(" get releated for existing contacts  : ", vm.currrentOBJ.data.id);
-                $http({
-                    method: 'GET',
-                    url: 'api/contacts/related/' + vm.projectsDTO.projectRoles[i].contact.id
-                }).then(function successCallback(response) {
-                    vm.relatedContact.push(response.data);
-                }, function errorCallback(response) {
+        vm.enableDisableProject = function (action) {
+            $ngConfirm({
+                title: 'Warning!',
+                content: "<small>Are You Sure You Want to <strong>" + action + "</strong> the Project </small>: <strong>" + vm.projectsDTO.projects.fullName + "</strong>",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-green',
+                        action: function () {
+                            console.log("YOU DISABLED PROJECT");
+                            $http({
+                                method: 'GET',
+                                //url: 'api/disableproject/' + vm.projectsDTO.projects.id,
+                                url: 'api/disableproject',
+                                params: {
+                                    id: vm.projectsDTO.projects.id,
+                                    action: action
+                                }
+                            }).then(function successCallback(response) {
+                                //vm.relatedContact.push(response.data);
+                            }, function errorCallback(response) {
 
-                });
-            }
+                            });
+                        }
+                    },
+                    close: {
+                        text: 'Cancel',
+                        btnClass: 'btn-red',
+                        action: function () {
+                            // closes the modal
+                            console.log("YOU PRESSED CANCEL");
+                        }
+                    }
+                }
+            });
+        };
+
+        $scope.isGeneric = function(tags) {
+            return tags.contact.fullName !== 'generic pkotag';
         }
 
+        vm.editTags = function (id) {
+            console.log("id of project role : " + id);
+            // var ctrl = angular.element(id).data('$ngModelController');
 
+            var modalInstance = $uibModal.open({
+
+                templateUrl: 'app/entities/project-roles/project-roles-dialog.html',
+                controller: 'ProjectRolesDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'md',
+                resolve: {
+                    id: function () {
+                        return id;
+                    },
+                    entity: function () {
+                        return null;
+                    },
+                    projectID: function () {
+                        return vm.projectsDTO.projects.id;
+                    },
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('contacts');
+                        $translatePartialLoader.addPart('projects');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }
+                /*resolve: {
+                    entity: ['ProjectRoles', function(ProjectRoles) {
+                        return ProjectRoles.get({id : $stateParams.id}).$promise;
+                    }]
+                }*/
+            });
+        };
     }
 })();

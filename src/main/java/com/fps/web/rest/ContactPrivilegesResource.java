@@ -1,14 +1,14 @@
 package com.fps.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.fps.domain.Contact;
 import com.fps.domain.ContactPrivileges;
-import com.fps.domain.Contacts;
 import com.fps.domain.User;
+import com.fps.elastics.search.ContactPrivilegesSearchRepository;
 import com.fps.repository.ContactPrivilegesRepository;
-import com.fps.repository.ContactsRepository;
+import com.fps.repository.ContactRepository;
 import com.fps.repository.UserRepository;
 import com.fps.security.SecurityUtils;
-import com.fps.elastics.search.ContactPrivilegesSearchRepository;
 import com.fps.web.rest.util.HeaderUtil;
 import com.fps.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -29,7 +29,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * REST controller for managing ContactPrivileges.
@@ -48,7 +48,7 @@ public class ContactPrivilegesResource {
 	private ContactPrivilegesSearchRepository contactPrivilegesSearchRepository;
 
 	@Inject
-	private ContactsRepository contactRepository;
+	private ContactRepository contactRepository;
 	@Inject
 	private UserRepository userRepository;
 
@@ -194,7 +194,7 @@ public class ContactPrivilegesResource {
 	@RequestMapping(value = "/contact/project/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public List<ContactPrivileges> contactProjects(@PathVariable Long id) throws URISyntaxException {
-		final Contacts contact = contactRepository.findOne(id);
+		final Contact contact = contactRepository.findOne(id);
 		final List<ContactPrivileges> projects = contactPrivilegesRepository.findByContact(contact);
 		log.info("Total Contact Privileges : " + projects.size());
 

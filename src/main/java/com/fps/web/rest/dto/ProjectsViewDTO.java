@@ -7,9 +7,13 @@ public class ProjectsViewDTO {
     private Long id;
     private String projectName;
     private String projectStatus;
+    private Long mainContactID;
+
+
     private String mainContactName;
     private String mainContactOffice;
     private String mainContactEmail;
+    private Long unitPublicistID;
     private String unitPublicistName;
     private String unitPublicistMobile;
     private String unitPublicistOffice;
@@ -95,6 +99,22 @@ public class ProjectsViewDTO {
         this.unitPublicistEmail = unitPublicistEmail;
     }
 
+    public Long getMainContactID() {
+        return mainContactID;
+    }
+
+    public void setMainContactID(Long mainContactID) {
+        this.mainContactID = mainContactID;
+    }
+
+    public Long getUnitPublicistID() {
+        return unitPublicistID;
+    }
+
+    public void setUnitPublicistID(Long unitPublicistID) {
+        this.unitPublicistID = unitPublicistID;
+    }
+
     @Override
     public String toString() {
         return "ProjectsViewDTO{" +
@@ -109,5 +129,23 @@ public class ProjectsViewDTO {
             ", unitPublicistOffice='" + unitPublicistOffice + '\'' +
             ", unitPublicistEmail='" + unitPublicistEmail + '\'' +
             '}';
+    }
+
+    public ProjectsViewDTO() {
+    }
+
+    public ProjectsViewDTO(Long id, String projectName, String projectStatus, Long mainContactID, String mainContactName, String mainContactOffice, String mainContactEmail, Long unitPublicistID, String unitPublicistName, String unitPublicistMobile, String unitPublicistOffice, String unitPublicistEmail) {
+        this.id = id;
+        this.projectName = projectName;
+        this.projectStatus = projectStatus;
+        this.mainContactID = mainContactID;
+        this.mainContactName = mainContactName;
+        this.mainContactOffice = mainContactOffice;
+        this.mainContactEmail = mainContactEmail;
+        this.unitPublicistID = unitPublicistID;
+        this.unitPublicistName = unitPublicistName;
+        this.unitPublicistMobile = unitPublicistMobile;
+        this.unitPublicistOffice = unitPublicistOffice;
+        this.unitPublicistEmail = unitPublicistEmail;
     }
 }

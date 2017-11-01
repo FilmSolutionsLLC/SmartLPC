@@ -23,6 +23,21 @@
             $scope.totalItems = vm.workOrders.length;
         });
 
+       /* $http({
+            method : 'GET',
+            url : 'api/reports/work-orders',
+            params : {
+                reportType : 'open_work_orders_grouped'
+            }
+        }).then(function(response) {
+            vm.workOrders = response.data;
+            console.log("total open workOrders : " + vm.workOrders.length);
+            console.log(JSON.stringify(vm.workOrders));
+            $scope.totalItems = vm.workOrders.length;
+
+        });*/
+
+
         $scope.viewby = 20;
 
         $scope.currentPage = 1;

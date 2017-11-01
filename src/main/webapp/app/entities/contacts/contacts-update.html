@@ -12,7 +12,7 @@
             <button type="button" class="btn btn-xs btn btn-primary" ng-click="vm.testFunction()">Save
                 and Add
             </button>
-		
+
             <button type="button" ui-sref="contacts.project-permission({id:vm.contactDTO.contacts.id})" ui-sref-opts="{reload: true}"  class="btn btn-xs btn btn-primary">Project
                 Permissions
             </button>
@@ -332,6 +332,7 @@
         <!--<fieldset data-ng-repeat="item in related">-->
         <div
             ng-repeat="rcontacts in vm.contactDTO.contactRelationships">
+
             <div class="row">
                 <div class="col-xs-2">
                     <label class="small"> <input type="checkbox"
@@ -372,7 +373,7 @@
                 <div class="col-xs-2">
 
                     <input type="text" class="form-control input-sm"
-                           ng-model="rcontacts.contact_b.type.textValue" readonly>
+                           ng-model="rcontacts.contact_b.typeValue" readonly>
 
                 </div>
 

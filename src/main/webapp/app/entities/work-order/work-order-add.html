@@ -125,7 +125,7 @@
 				&nbspABC &nbsp
 			</label> <label class="small"> <input type="checkbox"
 				ng-model="vm.workOrder.isTracking"
-				ng-init="vm.workOrder.isTracking=false"> &nbspTracking &nbsp
+				ng-init="vm.workOrder.isTracking=false" ng-click='vm.trackingCheck()'> &nbspTracking &nbsp
 			</label>
 		</div>
 	</div>
@@ -388,9 +388,9 @@
 					theme="bootstrap" ng-disabled="ctrl.disabled"
 					close-on-select="false" style="width: 200px;"
 					title="Choose a color"> <ui-select-match
-					placeholder="Select reminder to...">{{$item.firstName}}</ui-select-match>
+					placeholder="Select reminder to...">{{$item.admin_user.fullName}}</ui-select-match>
 				<ui-select-choices
-					repeat="admin in vm.dueMountReminder | filter:$select.search">{{admin.fullName}}</ui-select-choices>
+					repeat="admin in vm.dueMountReminder | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
 				</ui-select>
 
 			</div>
@@ -418,9 +418,9 @@
 					theme="bootstrap" ng-disabled="ctrl.disabled"
 					close-on-select="false" style="width: 200px;"
 					title="Choose a color"> <ui-select-match
-					placeholder="Select reminder to...">{{$item.firstName}}</ui-select-match>
+					placeholder="Select reminder to...">{{$item.admin_user.fullName}}</ui-select-match>
 				<ui-select-choices
-					repeat="admin in vm.clientReminder | filter:$select.search">{{admin.fullName}}</ui-select-choices>
+					repeat="admin in vm.clientReminder | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
 				</ui-select>
 			</div>
 			<h5>(WO_TO_CLIENT_REMINDER)</h5>
@@ -447,9 +447,9 @@
 					theme="bootstrap" ng-disabled="ctrl.disabled"
 					close-on-select="false" style="width: 200px;"
 					title="Choose a color"> <ui-select-match
-					placeholder="Select reminder to...">{{$item.firstName}}</ui-select-match>
+					placeholder="Select reminder to...">{{$item.admin_user.fullName}}</ui-select-match>
 				<ui-select-choices
-					repeat="admin in vm.toMountReminder | filter:$select.search">{{admin.fullName}}</ui-select-choices>
+					repeat="admin in vm.toMountReminder | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
 				</ui-select>
 			</div>
 			<h5>(WO_TO_MOUNT_REMINDER)</h5>
@@ -481,14 +481,14 @@
 
 		<div class="col-sm-2">
 
-			<!-- 
+			<!--
 			<select class="form-control input-sm"
 				id="field_vm.adminRelationDTOs[3].admin_user" name="assignedToUser"
 				ng-model="vm.workOrdersAdminRelations[0].admin_user"
 				ng-options="user as user.fullName for user in vm.verifiedBy track by user.id">
 				<option value=""></option>
 			</select> -->
-			<!-- 
+			<!--
             <div class="dropdown" uib-dropdown auto-close="outsideClick" on-toggle="toggled(open)">
                 <a class="btn btn-primary btn-sm" uib-dropdown-toggle>Verified</a>
                 <ul class="dropdown-menu status-select" class="status-select" ng-if="$index == selectedFilterIndex" uib-dropdown-menu>
@@ -506,7 +506,7 @@
 			<ui-select multiple ng-model="vm.selectedverifiedBy"
 				theme="bootstrap" ng-disabled="ctrl.disabled"
 				close-on-select="false" style="width: 200px;" title="Choose a color">
-			<ui-select-match placeholder="Select verified by...">{{$item.admin_user.firstName}}</ui-select-match>
+			<ui-select-match placeholder="Select verified by...">{{$item.admin_user.fullName}}</ui-select-match>
 			<ui-select-choices
 				repeat="admin in vm.verifiedBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
 			</ui-select>
@@ -522,7 +522,7 @@
 			<ui-select multiple ng-model="vm.selectedprocessedBy"
 				theme="bootstrap" ng-disabled="ctrl.disabled"
 				close-on-select="false" style="width: 200px;" title="Choose a color">
-			<ui-select-match placeholder="Select processed by...">{{$item.admin_user.firstName}}</ui-select-match>
+			<ui-select-match placeholder="Select processed by...">{{$item.admin_user.fullName}}</ui-select-match>
 			<ui-select-choices
 				repeat="admin in vm.processedBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
 			</ui-select>
@@ -538,7 +538,7 @@
 			<ui-select multiple ng-model="vm.selectedingestBy" theme="bootstrap"
 				ng-disabled="ctrl.disabled" close-on-select="false"
 				style="width: 200px;" title="Choose a color"> <ui-select-match
-				placeholder="Select ingest by...">{{$item.admin_user.firstName}}</ui-select-match>
+				placeholder="Select ingest by...">{{$item.admin_user.fullName}}</ui-select-match>
 			<ui-select-choices
 				repeat="admin in vm.ingestBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
 			</ui-select>
@@ -554,7 +554,7 @@
 			<ui-select multiple ng-model="vm.selectedprintBy" theme="bootstrap"
 				ng-disabled="ctrl.disabled" close-on-select="false"
 				style="width: 200px;" title="Choose a color"> <ui-select-match
-				placeholder="Select print by...">{{$item.admin_user.firstName}}</ui-select-match>
+				placeholder="Select print by...">{{$item.admin_user.fullName}}</ui-select-match>
 			<ui-select-choices
 				repeat="admin in vm.printBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
 			</ui-select>
@@ -570,7 +570,7 @@
 			<ui-select multiple ng-model="vm.selecteduploadBy" theme="bootstrap"
 				ng-disabled="ctrl.disabled" close-on-select="false"
 				style="width: 200px;" title="Choose a color"> <ui-select-match
-				placeholder="Select upload by...">{{$item.admin_user.firstName}}</ui-select-match>
+				placeholder="Select upload by...">{{$item.admin_user.fullName}}</ui-select-match>
 			<ui-select-choices
 				repeat="admin in vm.uploadBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
 			</ui-select>
@@ -585,12 +585,16 @@
 			<ui-select multiple ng-model="vm.selectedarchivedBy"
 				theme="bootstrap" ng-disabled="ctrl.disabled"
 				close-on-select="false" style="width: 200px;" title="Choose a color">
-			<ui-select-match placeholder="Select archived by...">{{$item.admin_user.firstName}}</ui-select-match>
+			<ui-select-match placeholder="Select archived by...">{{$item.admin_user.fullName}}</ui-select-match>
 			<ui-select-choices
 				repeat="admin in vm.archivedBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
 			</ui-select>
 		</div>
 	</div>
+
+
+
+
 	<hr>
 
 	<h4 class="text-primary">
@@ -1015,19 +1019,17 @@
 
 		<div ng-repeat="purchaseOrders in vm.purchaseOrders">
 			<div class="row">
-				<div class="col-lg-2">
-					<div class="input-group">
+                <div class="row">
 
-						</small><span class="input-group-addon input-sm"><small>PO
-								{{$index}}</small></span> <input type="text" class="form-control input-sm"
-							ng-model="purchaseOrders[0]" readonly>
-					</div>
-				</div>
-				<div class="col-lg-3">
-					<input type="text" class="form-control input-sm"
-						ng-model="purchaseOrders[1]" readonly>
-				</div>
-
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control input-sm"
+                               ng-model="purchaseOrders.po_number" readonly>
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control input-sm"
+                               ng-model="purchaseOrders.po_notes" readonly>
+                    </div>
+                </div>
 			</div>
 		</div>
 
@@ -1054,8 +1056,13 @@
 	<div class="row">
 		<label class="col-md-1 control-label small" for="textinput">Invoiced</label>
 		<div class="col-xs-2">
-			<input name="textinput" type="text" id="field_vm.workOrder.invoiced"
-				ng-model="vm.workOrder.invoiced" class="form-control input-sm">
+
+            <select class="form-control input-sm"
+
+                    ng-model="vm.workOrder.invoiced"
+                    ng-options="invoice.id as invoice.name for invoice in vm.invoiced track by invoice.id">
+                <option value=""></option>
+            </select>
 		</div>
 
 	</div>

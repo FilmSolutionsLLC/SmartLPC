@@ -2,6 +2,7 @@ package com.fps.service.impl;
 
 import com.fps.config.Constants;
 import com.fps.config.util.CurrentTenantIdentifierResolverImpl;
+import com.fps.domain.Contact;
 import com.fps.domain.Contacts;
 import com.fps.elastics.search.ContactsSearchRepository;
 import com.fps.repository.ContactPrivilegesRepository;
@@ -11,6 +12,7 @@ import com.fps.repository.ProjectRolesRepository;
 import com.fps.service.ContactsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -49,6 +51,11 @@ public class ContactsServiceImpl implements ContactsService {
     @Inject
     private ProjectRolesRepository projectRolesRepository;
 
+    @Value("${javalocation.path}")
+    String javaLocation;
+
+    @Value("${javalocation.jarFile}")
+    String encryptorJar;
 
     /**
      * Save a contacts.
@@ -61,6 +68,22 @@ public class ContactsServiceImpl implements ContactsService {
         currentTenantIdentifierResolver.setTenant(Constants.MASTER_DATABASE);
         Contacts result = contactsRepository.save(contacts);
         contactsSearchRepository.save(result);
+        try {
+            String command = javaLocation + " -jar " + encryptorJar + " '" + result.getId() + "' '" + result.getPassword() + "'";
+            log.info("Password Encrypt : " + command);
+
+
+            ProcessBuilder pb = new ProcessBuilder(command);
+            Process p = pb.start();
+            if(p.waitFor()==0){
+                log.info("Password Encryption Complete");
+            }else{
+                log.info("Password Encryption Error");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return result;
     }
 
@@ -72,7 +95,7 @@ public class ContactsServiceImpl implements ContactsService {
      */
     @Transactional(readOnly = true)
     public Page<Contacts> findAll(Pageable pageable) {
-        log.debug("Request to get all Contacts");
+        log.info("Request to get all Contacts");
         currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
         Page<Contacts> result = contactsRepository.findAll(pageable);
 
@@ -93,6 +116,8 @@ public class ContactsServiceImpl implements ContactsService {
 
         Contacts contacts = contactsRepository.findOne(id);
 
+
+        log.info(contacts.toString());
         return contacts;
     }
 
@@ -107,10 +132,14 @@ public class ContactsServiceImpl implements ContactsService {
         currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
         Contacts contacts = contactsRepository.findOne(id);
         //TODO: delete from all tables such as ContactPrivileges,ProjectRoles
-       contactPrivilegesRepository.removeByContact(contacts);
-       projectRolesRepository.removeByContact(contacts);
+        Contact contact = new Contact();
+        contact.setId(contacts.getId());
 
-        if (contactRelationshipsRepository.findByContact_A(contacts).size() > 0) {
+        contactPrivilegesRepository.removeByContact(contact);
+        projectRolesRepository.removeByContact(contact);
+
+
+        if (contactRelationshipsRepository.findByContact_A(contact).size() > 0) {
             currentTenantIdentifierResolver.setTenant(Constants.MASTER_DATABASE);
             contactRelationshipsRepository.deleteByContacts(contacts);
         }
@@ -145,7 +174,6 @@ public class ContactsServiceImpl implements ContactsService {
         log.debug("Request to search for a page of Contacts for query {}", query);
         return contactsSearchRepository.search(queryStringQuery(query));
     }
-
 
 
 }

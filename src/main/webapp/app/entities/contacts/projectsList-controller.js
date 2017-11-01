@@ -190,7 +190,7 @@
                     vm.isSaving = true;
 
                     vm.tempExecs.push(vm.execs);
-                   // ContactPrivileges.save(vm.execs, onSaveSuccess, onSaveError);
+                    ContactPrivileges.save(vm.execs, onSaveSuccess, onSaveError);
 
                     console.log("vm.tempExecs length : "+vm.tempExecs.length);
 
@@ -222,7 +222,7 @@
         };
 
 
-        vm.downloadType = [{
+        vm.downloadTypeList = [{
             'id': 0,
             'value': "NONE"
         }, {
@@ -232,7 +232,7 @@
             'id': 2,
             'value': "Lock Approved"
         }];
-        vm.exclusives = [{
+        vm.exclusivesList = [{
             'id': 0,
             'value': "NONE"
         }, {

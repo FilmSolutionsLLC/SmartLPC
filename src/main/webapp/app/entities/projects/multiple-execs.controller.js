@@ -266,7 +266,7 @@
                     "vendor": vm.vendor,
                     "lockApproveRestriction": vm.lockApproveRestriction,
                     "viewSensitive": vm.viewSensitive,
-                    "exclusives": false,
+                    "exclusives": vm.exclusives,
                     "seesUntagged": false,
                     "hasVideo": vm.hasVideo,
                     "disabled": vm.disabled,
@@ -283,5 +283,9 @@
             }
             $uibModalInstance.dismiss('cancel');
         };
+
+       vm.save = function () {
+
+       };
     }
 })();

@@ -5,12 +5,28 @@
         .module('smartLpcApp')
         .controller('WorkOrderDetailController', WorkOrderDetailController);
 
-    WorkOrderDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'WorkOrder', 'Lookups', 'Projects', 'User', 'Contacts'];
+    WorkOrderDetailController.$inject = ['$http','$scope', '$rootScope', '$stateParams', 'entity', 'WorkOrder', 'Lookups', 'Projects', 'User', 'Contacts'];
 
-    function WorkOrderDetailController($scope, $rootScope, $stateParams, entity, WorkOrder, Lookups, Projects, User, Contacts) {
+    function WorkOrderDetailController( $http,$scope, $rootScope, $stateParams, entity, WorkOrder, Lookups, Projects, User, Contacts) {
         var vm = this;
         vm.workOrderDTO = entity;
         console.log(JSON.stringify(vm.workOrderDTO));
+        vm.purchaseOrders = [];
+        $http({
+            method: 'GET',
+            url: 'api/project-purchase-orders/projects/' + vm.workOrderDTO.workOrder.project.id
+        }).then(function (response) {
+            vm.purchaseOrders = response.data;
+            console.log("project purchaseOrders : " + JSON.stringify(vm.purchaseOrders));
+        });
+
+        $http({
+            method: 'GET',
+            url: 'api/project-lab-tasks/projects/' + vm.workOrderDTO.workOrder.project.id
+        }).then(function (response) {
+            vm.labs = response.data;
+            console.log("project LAB Tasks : " + JSON.stringify(vm.labs));
+        });
 
         /*console.log(JSON.stringify(vm.workOrderDTO));
         vm.workOrder = vm.workOrderDTO.workOrder;

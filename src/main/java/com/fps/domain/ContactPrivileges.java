@@ -98,7 +98,7 @@ public class ContactPrivileges implements Serializable {
     @Column(name = "disabled")
     private Boolean disabled;
 
-    @Column(name = "welcome_message")
+    @Column(name = "welcomeMessage")
     private Boolean welcomeMessage;
 
     @Column(name = "isABCViewer")
@@ -182,7 +182,7 @@ public class ContactPrivileges implements Serializable {
     private Projects project;
 
     @ManyToOne
-    private Contacts contact;
+    private Contact contact;
 
     @ManyToOne
     @JsonIgnore
@@ -608,11 +608,11 @@ public class ContactPrivileges implements Serializable {
         this.project = projects;
     }
 
-    public Contacts getContact() {
+    public Contact getContact() {
         return contact;
     }
 
-    public void setContact(Contacts contacts) {
+    public void setContact(Contact contacts) {
         this.contact = contacts;
     }
 

@@ -28,6 +28,9 @@ public class ContactRelationships implements Serializable {
     @Column(name = "is_primary_contact")
     private Boolean isPrimaryContact;
 
+    @Column(name = "relationship_type")
+    private String relationshipType;
+
     @Column(name = "created_date")
     @JsonIgnore
     private LocalDate createdDate;
@@ -46,18 +49,18 @@ public class ContactRelationships implements Serializable {
 
     @ManyToOne(cascade=CascadeType.MERGE)
     @JsonIgnore
-    private Contacts contact_a;
+    private Contact contact_a;
 
     @ManyToOne
-    private Contacts contact_b;
-
-    @ManyToOne
-    @JsonIgnore
-    private Contacts contact_a_qb_rid;
+    private Contact contact_b;
 
     @ManyToOne
     @JsonIgnore
-    private Contacts contact_b_qb_rid;
+    private Contact contact_a_qb_rid;
+
+    @ManyToOne
+    @JsonIgnore
+    private Contact contact_b_qb_rid;
 
     public Long getId() {
         return id;
@@ -107,36 +110,44 @@ public class ContactRelationships implements Serializable {
         this.updatedByAdminUser = user;
     }
 
-    public Contacts getContact_a() {
+    public Contact getContact_a() {
         return contact_a;
     }
 
-    public void setContact_a(Contacts contacts) {
+    public void setContact_a(Contact contacts) {
         this.contact_a = contacts;
     }
 
-    public Contacts getContact_b() {
+    public Contact getContact_b() {
         return contact_b;
     }
 
-    public void setContact_b(Contacts contacts) {
+    public void setContact_b(Contact contacts) {
         this.contact_b = contacts;
     }
 
-    public Contacts getContact_a_qb_rid() {
+    public Contact getContact_a_qb_rid() {
         return contact_a_qb_rid;
     }
 
-    public void setContact_a_qb_rid(Contacts contacts) {
+    public void setContact_a_qb_rid(Contact contacts) {
         this.contact_a_qb_rid = contacts;
     }
 
-    public Contacts getContact_b_qb_rid() {
+    public Contact getContact_b_qb_rid() {
         return contact_b_qb_rid;
     }
 
-    public void setContact_b_qb_rid(Contacts contacts) {
+    public void setContact_b_qb_rid(Contact contacts) {
         this.contact_b_qb_rid = contacts;
+    }
+
+    public String getRelationshipType() {
+        return relationshipType;
+    }
+
+    public void setRelationshipType(String relationshipType) {
+        this.relationshipType = relationshipType;
     }
 
     @Override

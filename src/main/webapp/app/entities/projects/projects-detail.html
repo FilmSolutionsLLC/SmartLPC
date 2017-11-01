@@ -1,1017 +1,1019 @@
 <div print-section>
-	<div class="row">
-		<div class="col-sm-3">
-			<h4>
-				<span translate="smartLpcApp.projects.detail.title">Project</span> <strong>#{{vm.projectsDTO.projects.id}}
-					- {{vm.projectsDTO.projects.name}}</strong>
-			</h4>
-		</div>
-		<div class="col-sm-3 pull-right">
-			<button print-btn class="btn btn-xs btn btn-primary">Print</button>
-			<button type="submit"
-				ui-sref="projects.edit({id:vm.projectsDTO.projects.id})"
-				ui-sref-opts="{reload: true, notify: true}"
-				class="btn btn-xs btn btn-primary">Edit</button>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>
+                <span translate="smartLpcApp.projects.detail.title">Project</span> <strong>#{{vm.projectsDTO.projects.id}}
+                - {{vm.projectsDTO.projects.name}}</strong>
+            </h4>
+        </div>
+        <div class="col-sm-3 pull-right">
+            <button print-btn class="btn btn-xs btn btn-primary">Print</button>
+            <button type="submit"
+                    ui-sref="projects.edit({id:vm.projectsDTO.projects.id})"
+                    ui-sref-opts="{reload: true, notify: true}"
+                    class="btn btn-xs btn btn-primary">Edit
+            </button>
 
-			<!-- <button type="submit"
+            <!-- <button type="submit"
                 ui-sref="projects.edit({id:vm.projectsDTO.projects.id})"
                 ui-sref-opts="{reload: true, notify: true}"
                 class="btn btn-xs btn btn-primary">Add Similar</button>
                  -->
-			<button type="button"
-				ng-click="vm.addSimilar(vm.projectsDTO.projects.id)"
-				class="btn btn-xs btn btn-primary">Add Similar</button>
+            <button type="button"
+                    ng-click="vm.addSimilar(vm.projectsDTO.projects.id)"
+                    class="btn btn-xs btn btn-primary">Add Similar
+            </button>
 
-			<button type="button" onclick="window.history.back()"
-				class="btn btn-xs btn btn-danger">Cancel</button>
-		</div>
-	</div>
-	<hr>
-	<div class="row">
-		<div class="col-sm-3">
-			<h4>
-				<strong>PROJECT</strong>
-			</h4>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong><span translate="smartLpcApp.projects.name">Name</span></strong>
-				<span>{{vm.projectsDTO.projects.name}}</span>
-			</h5>
-		</div>
-		<div class="col-sm-3">
-			<h5>
-				<strong><span
-					translate="smartLpcApp.projects.runOfShowFlag">
+            <button type="button" onclick="window.history.back()"
+                    class="btn btn-xs btn btn-danger">Cancel
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>
+                <strong>PROJECT</strong>
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong><span translate="smartLpcApp.projects.name">Name</span></strong>
+                <span>{{vm.projectsDTO.projects.name}}</span>
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.runOfShowFlag">
 						RunOfShowFlag</span></strong> <span>{{vm.projectsDTO.projects.runOfShowFlag}}</span>
-			</h5>
-		</div>
-		<div class="col-sm-3">
-			<h5>
-				<strong><span translate="smartLpcApp.projects.labFlag">LabFlag</span></strong>
-				<span> {{vm.projectsDTO.projects.labFlag}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong><span translate="smartLpcApp.projects.fullName">FullName</span></strong>
-				<span>{{vm.projectsDTO.projects.fullName}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong><span
-					translate="smartLpcApp.projects.alfrescoTitle1">AlfrescoTitle1</span></strong>
-				<span>{{vm.projectsDTO.projects.alfrescoTitle1}}</span>
-			</h5>
-		</div>
-		<div class="col-sm-3">
-			<h5>
-				<strong><span
-					translate="smartLpcApp.projects.alfrescoTitle2">AlfrescoTitle2</span></strong>
-				<span>{{vm.projectsDTO.projects.alfrescoTitle2}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong><span translate="smartLpcApp.projects.status">Status</span></strong>
-				<span>{{vm.projectsDTO.projects.status.textValue}}</span>
-			</h5>
-		</div>
-		<div class="col-sm-3">
-			<h5>
-				<strong><span translate="smartLpcApp.projects.type">Type</span></strong>
-				<span>{{vm.projectsDTO.projects.type.textValue}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong><span
-					translate="smartLpcApp.projects.actorsWithRights">ActorsWithRights</span></strong>
-				<span>{{vm.projectsDTO.projects.actorsWithRights}}</span>
-			</h5>
-		</div>
-		<div class="col-sm-3">
-			<h5>
-				<strong><span translate="smartLpcApp.projects.daysShooting">DaysShooting</span></strong>
-				<span>{{vm.projectsDTO.projects.daysShooting}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong><span
-					translate="smartLpcApp.projects.weeksShooting">WeeksShooting</span></strong>
-				<span>{{vm.projectsDTO.projects.weeksShooting}}</span>
-			</h5>
-		</div>
-		<div class="col-sm-2">
-			<h5>
-				<strong><span translate="smartLpcApp.projects.startDate">StartDate</span></strong>
-				<span>{{vm.projectsDTO.projects.startDate |
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong><span translate="smartLpcApp.projects.labFlag">LabFlag</span></strong>
+                <span> {{vm.projectsDTO.projects.labFlag}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong><span translate="smartLpcApp.projects.fullName">FullName</span></strong>
+                <span>{{vm.projectsDTO.projects.fullName}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.alfrescoTitle1">AlfrescoTitle1</span></strong>
+                <span>{{vm.projectsDTO.projects.alfrescoTitle1}}</span>
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.alfrescoTitle2">AlfrescoTitle2</span></strong>
+                <span>{{vm.projectsDTO.projects.alfrescoTitle2}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong><span translate="smartLpcApp.projects.status">Status</span></strong>
+                <span>{{vm.projectsDTO.projects.status.textValue}}</span>
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong><span translate="smartLpcApp.projects.type">Type</span></strong>
+                <span>{{vm.projectsDTO.projects.type.textValue}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.actorsWithRights">ActorsWithRights</span></strong>
+                <span>{{vm.projectsDTO.projects.actorsWithRights}}</span>
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong><span translate="smartLpcApp.projects.daysShooting">DaysShooting</span></strong>
+                <span>{{vm.projectsDTO.projects.daysShooting}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.weeksShooting">WeeksShooting</span></strong>
+                <span>{{vm.projectsDTO.projects.weeksShooting}}</span>
+            </h5>
+        </div>
+        <div class="col-sm-2">
+            <h5>
+                <strong><span translate="smartLpcApp.projects.startDate">StartDate</span></strong>
+                <span>{{vm.projectsDTO.projects.startDate |
 					date:'mediumDate'}}</span>
-			</h5>
-		</div>
-		<div class="col-sm-2">
-			<h5>
-				<strong><span translate="smartLpcApp.projects.endDate">EndDate</span></strong>
-				<span>{{vm.projectsDTO.projects.endDate | date:'mediumDate'}}</span>
-			</h5>
-		</div>
-		<div class="col-sm-2">
-			<h5>
-				<strong><span translate="smartLpcApp.projects.reminderDate">ReminderDate</span></strong>
-				<span>{{vm.projectsDTO.projects.reminderDate |
+            </h5>
+        </div>
+        <div class="col-sm-2">
+            <h5>
+                <strong><span translate="smartLpcApp.projects.endDate">EndDate</span></strong>
+                <span>{{vm.projectsDTO.projects.endDate | date:'mediumDate'}}</span>
+            </h5>
+        </div>
+        <div class="col-sm-2">
+            <h5>
+                <strong><span translate="smartLpcApp.projects.reminderDate">ReminderDate</span></strong>
+                <span>{{vm.projectsDTO.projects.reminderDate |
 					date:'mediumDate'}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12">
-			<h5>
-				<strong>Project History</strong> <span>{{vm.projectsDTO.projects.notes}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong><span translate="smartLpcApp.projects.photoCredit">PhotoCredit</span></strong>
-				<span>{{vm.projectsDTO.projects.photoCredit}}</span>
-			</h5>
-		</div>
-		<div class="col-sm-3">
-			<h5>
-				<strong><span
-					translate="smartLpcApp.projects.unitPhotographerOverride">UnitPhotographerOverride</span></strong>
-				<span>{{vm.projectsDTO.projects.unitPhotographerOverride}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong><span translate="smartLpcApp.projects.shootDate">ShootDate</span></strong>
-				<span>{{vm.projectsDTO.projects.shootDate |
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h5>
+                <strong>Project History</strong> <span>{{vm.projectsDTO.projects.notes}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong><span translate="smartLpcApp.projects.photoCredit">PhotoCredit</span></strong>
+                <span>{{vm.projectsDTO.projects.photoCredit}}</span>
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.unitPhotographerOverride">UnitPhotographerOverride</span></strong>
+                <span>{{vm.projectsDTO.projects.unitPhotographerOverride}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong><span translate="smartLpcApp.projects.shootDate">ShootDate</span></strong>
+                <span>{{vm.projectsDTO.projects.shootDate |
 					date:'mediumDate'}}</span>
-			</h5>
-		</div>
-	</div>
-	<hr>
-	<div class="row">
-		<div class="col-sm-3">
-			<h4>
-				<strong>RUN OF SHOW PURCHASE ORDERS</strong>
-			</h4>
-		</div>
-	</div>
-	<div
-		ng-repeat="po in vm.projectsDTO.projectPurchaseOrderses track by po.id">
-		<div class="row">
-			<div class="col-sm-8">
-				<h5>
-					<strong>PO{{$index + 1}} : </strong>{{po.po_number}} <strong>
-						| </strong> {{ po.po_notes}}
-				</h5>
-			</div>
-		</div>
-	</div>
-	<hr>
-	<div class="row">
-		<div class="col-sm-3">
-			<h4>
-				<strong>PROJECT PROCESSING PROFILE</strong>
-			</h4>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-8">
-			<h5>
-				<strong><span
-					translate="smartLpcApp.projects.processingDeliveries">ProcessingDeliveries</span></strong>
-				<span>{{vm.projectsDTO.projects.processingDeliveries}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-8">
-			<h5>
-				<strong><span
-					translate="smartLpcApp.projects.processingSpecialInstructions">ProcessingSpecialInstructions</span></strong>
-				<span>{{vm.projectsDTO.projects.processingSpecialInstructions}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-8">
-			<h5>
-				<strong><span
-					translate="smartLpcApp.projects.processingWatermark">ProcessingWatermark</span></strong>
-				<span>{{vm.projectsDTO.projects.processingWatermark}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-8">
-			<h5>
-				<strong><span
-					translate="smartLpcApp.projects.processingCopyright">ProcessingCopyright</span></strong>
-				<span>{{vm.projectsDTO.projects.processingCopyright}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-8">
-			<h5>
-				<strong><span
-					translate="smartLpcApp.projects.processingOriginalFileType">ProcessingOriginalFileType</span></strong>
-				<a
-					ui-sref="lookups-detail({id:vm.projects.processingOriginalFileType.id})">{{vm.projectsDTO.projects.processingOriginalFileType.textValue}}</a>
-			</h5>
-		</div>
-	</div>
-	<hr>
-	<div class="row">
-		<div class="col-sm-3">
-			<h4>
-				<strong>LAB TASKS</strong>
-			</h4>
-		</div>
-	</div>
-	<div
-		ng-repeat="labs in vm.projectsDTO.projectLabTaskses track by labs.id">
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>{{$index}} : </strong>{{labs.task_name.textValue}}
-				</h5>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong><span
-					translate="smartLpcApp.projects.labProofNotes">LabProofNotes</span></strong>
-				<span>{{vm.projectsDTO.projects.labProofNotes}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong><span
-					translate="smartLpcApp.projects.labLastProofImageNumber">LabLastProofImageNumber</span></strong>
-				<span>{{vm.projectsDTO.projects.labLastProofImageNumber}}</span>
-			</h5>
-		</div>
-		<div class="col-sm-3">
-			<h5>
-				<strong><span
-					translate="smartLpcApp.projects.labLastProofPageNumber">LabLastProofPageNumber</span></strong>
-				<span>{{vm.projectsDTO.projects.labLastProofPageNumber}}</span>
-			</h5>
-		</div>
-	</div>
-	<hr>
-	<div class="row">
-		<div class="col-sm-3">
-			<h4>
-				<strong>PROJECT INFORMATION</strong>
-			</h4>
-		</div>
-	</div>
-	<div
-		ng-repeat="mainC in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Main Contact'}">
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Main Contact : </strong> {{mainC.contact.fullName}}
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong>Title : </strong> {{mainC.contact.title}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Office Phone : </strong> {{mainC.contact.phoneOffice}}
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong>Mobile : </strong> {{mainC.contact.phoneMobile}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Email : </strong> {{mainC.contact.email}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-8">
-				<h5>
-					<strong>Notes : </strong> {{mainC.contact.notes}}
-				</h5>
-			</div>
-		</div>
-	</div>
-	<br>
-	<div
-		ng-repeat="uPub in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Unit Publicist'}">
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Unit Publicist : </strong> {{uPub.contact.fullName}}
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong>Title : </strong> {{uPub.contact.title}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Office Phone : </strong> {{uPub.contact.phoneOffice}}
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong>Mobile : </strong> {{mainC.uPub.phoneMobile}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Email : </strong> {{uPub.contact.email}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Notes : </strong> {{uPub.contact.notes}}
-				</h5>
-			</div>
-		</div>
-	</div>
-	<br>
-	<div
-		ng-repeat="uPhoto in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Unit Photographer'}">
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Unit Photographer : </strong> {{uPhoto.contact.fullName}}
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong>Title : </strong> {{uPhoto.contact.title}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Office Phone : </strong> {{uPhoto.contact.phoneOffice}}
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong>Mobile : </strong> {{uPhoto.contact.phoneMobile}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Email : </strong> {{uPhoto.contact.email}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Notes : </strong> {{uPhoto.contact.notes}}
-				</h5>
-			</div>
-		</div>
-	</div>
-	<br>
-	<div
-		ng-repeat="lab in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Lab'}">
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Lab Information : </strong> {{lab.contact.fullName}}
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong>Title : </strong> {{lab.contact.title}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Office Phone : </strong> {{lab.contact.phoneOffice}}
-				</h5>
-			</div>
-			<div class="col-sm-3">
-				<h5>
-					<strong>Email : </strong> {{lab.contact.email}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Address : </strong> {{lab.contact.streetAdress}}
-				</h5>
-			</div>
-			<div class="col-sm-2">
-				<h5>
-					<strong>City : </strong> {{lab.contact.city}}
-				</h5>
-			</div>
-			<div class="col-sm-1">
-				<h5>
-					<strong>State : </strong> {{lab.contact.state}}
-				</h5>
-			</div>
-			<div class="col-sm-2">
-				<h5>
-					<strong>Zip : </strong> {{lab.contact.zipcode}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Contact/Notes : </strong> {{lab.contact.notes}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Photo Lab Info : </strong> {{lab.notes}}
-				</h5>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<h5>
-					<strong>Notes : </strong> {{lab.notes}}
-				</h5>
-			</div>
-		</div>
-	</div>
-	<br>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong>Director : </strong> <span>{{vm.projectsDTO.projects.legacyDirector}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong>Executive Producer : </strong> <span>{{vm.projectsDTO.projects.legacyExecutiveProducer}}</span>
-			</h5>
-		</div>
-		<div class="col-sm-3">
-			<h5>
-				<strong>Executive Producer : </strong> <span>{{vm.projectsDTO.projects.legacyExecutiveProducer2}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong>Executive Producer : </strong> <span>{{vm.projectsDTO.projects.legacyExecutiveProducer3}}</span>
-			</h5>
-		</div>
-		<div class="col-sm-3">
-			<h5>
-				<strong>Executive Producer : </strong> <span>{{vm.projectsDTO.projects.legacyExecutiveProducer4}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong>Producer : </strong> <span>{{vm.projectsDTO.projects.legacyProducer}}</span>
-			</h5>
-		</div>
-		<div class="col-sm-3">
-			<h5>
-				<strong>Producer : </strong> <span>{{vm.projectsDTO.projects.legacyProducer2}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong>Producer : </strong> <span>{{vm.projectsDTO.projects.legacyProducer3}}</span>
-			</h5>
-		</div>
-		<div class="col-sm-3">
-			<h5>
-				<strong>Producer : </strong> <span>{{vm.projectsDTO.projects.legacyProducer4}}</span>
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong>Notes : </strong> <span>{{vm.projectsDTO.projects.legacyNameNotes}}</span>
-			</h5>
-		</div>
-	</div>
-	<hr>
-	<div class="row">
-		<div class="col-sm-3">
-			<h4>
-				<strong>PRODUCTION COMPANY INFO</strong>
-			</h4>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong>Name : </strong>
-				{{vm.projectsDTO.projects.productionCompanyContact.fullName}}
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong>Office Phone : </strong>
-				{{vm.projectsDTO.projects.productionCompanyContact.phoneOffice}}
-			</h5>
-		</div>
-		<div class="col-sm-3">
-			<h5>
-				<strong>Alt : </strong>
-				{{vm.projectsDTO.projects.productionCompanyContact.phoneAlternate}}
-			</h5>
-		</div>
-		<div class="col-sm-3">
-			<h5>
-				<strong>Fax : </strong>
-				{{vm.projectsDTO.projects.productionCompanyContact.phoneFax}}
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong>Address : </strong>
-				{{vm.projectsDTO.projects.productionCompanyContact.streetAdress}}
-			</h5>
-		</div>
-		<div class="col-sm-2">
-			<h5>
-				<strong>City : </strong>
-				{{vm.projectsDTO.projects.productionCompanyContact.city}}
-			</h5>
-		</div>
-		<div class="col-sm-1">
-			<h5>
-				<strong>State : </strong>
-				{{vm.projectsDTO.projects.productionCompanyContact.state}}
-			</h5>
-		</div>
-		<div class="col-sm-2">
-			<h5>
-				<strong>Zip : </strong>
-				{{vm.projectsDTO.projects.productionCompanyContact.zipcode}}
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong>Contact/Notes : </strong>
-				{{vm.projectsDTO.projects.productionCompanyContact.notes}}
-			</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong>FEDEX : </strong> {{vm.projectsDTO.projects.fedex}}
-			</h5>
-		</div>
-	</div>
-	<hr>
+            </h5>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>
+                <strong>RUN OF SHOW PURCHASE ORDERS</strong>
+            </h4>
+        </div>
+    </div>
+    <div
+        ng-repeat="po in vm.projectsDTO.projectPurchaseOrderses track by po.id">
+        <div class="row">
+            <div class="col-sm-8">
+                <h5>
+                    <strong>PO{{$index + 1}} : </strong>{{po.po_number}} <strong>
+                    | </strong> {{ po.po_notes}}
+                </h5>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>
+                <strong>PROJECT PROCESSING PROFILE</strong>
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.processingDeliveries">ProcessingDeliveries</span></strong>
+                <span>{{vm.projectsDTO.projects.processingDeliveries}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.processingSpecialInstructions">ProcessingSpecialInstructions</span></strong>
+                <span>{{vm.projectsDTO.projects.processingSpecialInstructions}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.processingWatermark">ProcessingWatermark</span></strong>
+                <span>{{vm.projectsDTO.projects.processingWatermark}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.processingCopyright">ProcessingCopyright</span></strong>
+                <span>{{vm.projectsDTO.projects.processingCopyright}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.processingOriginalFileType">ProcessingOriginalFileType</span></strong>
+                <a
+                    ui-sref="lookups-detail({id:vm.projects.processingOriginalFileType.id})">{{vm.projectsDTO.projects.processingOriginalFileType.textValue}}</a>
+            </h5>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>
+                <strong>LAB TASKS</strong>
+            </h4>
+        </div>
+    </div>
+    <div
+        ng-repeat="labs in vm.projectsDTO.projectLabTaskses track by labs.id">
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>{{$index}} : </strong>{{labs.task_name.textValue}}
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.labProofNotes">LabProofNotes</span></strong>
+                <span>{{vm.projectsDTO.projects.labProofNotes}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.labLastProofImageNumber">LabLastProofImageNumber</span></strong>
+                <span>{{vm.projectsDTO.projects.labLastProofImageNumber}}</span>
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.labLastProofPageNumber">LabLastProofPageNumber</span></strong>
+                <span>{{vm.projectsDTO.projects.labLastProofPageNumber}}</span>
+            </h5>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>
+                <strong>PROJECT INFORMATION</strong>
+            </h4>
+        </div>
+    </div>
+    <div
+        ng-repeat="mainC in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Main Contact'}">
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Main Contact : </strong> {{mainC.contact.fullName}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Title : </strong> {{mainC.contact.title}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Office Phone : </strong> {{mainC.contact.phoneOffice}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Mobile : </strong> {{mainC.contact.phoneMobile}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Email : </strong> {{mainC.contact.email}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <h5>
+                    <strong>Notes : </strong> {{mainC.contact.notes}}
+                </h5>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div
+        ng-repeat="uPub in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Unit Publicist'}">
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Unit Publicist : </strong> {{uPub.contact.fullName}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Title : </strong> {{uPub.contact.title}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Office Phone : </strong> {{uPub.contact.phoneOffice}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Mobile : </strong> {{mainC.uPub.phoneMobile}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Email : </strong> {{uPub.contact.email}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Notes : </strong> {{uPub.contact.notes}}
+                </h5>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div
+        ng-repeat="uPhoto in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Unit Photographer'}">
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Unit Photographer : </strong> {{uPhoto.contact.fullName}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Title : </strong> {{uPhoto.contact.title}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Office Phone : </strong> {{uPhoto.contact.phoneOffice}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Mobile : </strong> {{uPhoto.contact.phoneMobile}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Email : </strong> {{uPhoto.contact.email}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Notes : </strong> {{uPhoto.contact.notes}}
+                </h5>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div
+        ng-repeat="lab in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Lab'}">
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Lab Information : </strong> {{lab.contact.fullName}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Title : </strong> {{lab.contact.title}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Office Phone : </strong> {{lab.contact.phoneOffice}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Email : </strong> {{lab.contact.email}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Address : </strong> {{lab.contact.streetAdress}}
+                </h5>
+            </div>
+            <div class="col-sm-2">
+                <h5>
+                    <strong>City : </strong> {{lab.contact.city}}
+                </h5>
+            </div>
+            <div class="col-sm-1">
+                <h5>
+                    <strong>State : </strong> {{lab.contact.state}}
+                </h5>
+            </div>
+            <div class="col-sm-2">
+                <h5>
+                    <strong>Zip : </strong> {{lab.contact.zipcode}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Contact/Notes : </strong> {{lab.contact.notes}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Photo Lab Info : </strong> {{lab.notes}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Notes : </strong> {{lab.notes}}
+                </h5>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Director : </strong> <span>{{vm.projectsDTO.projects.legacyDirector}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Executive Producer : </strong> <span>{{vm.projectsDTO.projects.legacyExecutiveProducer}}</span>
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong>Executive Producer : </strong> <span>{{vm.projectsDTO.projects.legacyExecutiveProducer2}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Executive Producer : </strong> <span>{{vm.projectsDTO.projects.legacyExecutiveProducer3}}</span>
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong>Executive Producer : </strong> <span>{{vm.projectsDTO.projects.legacyExecutiveProducer4}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Producer : </strong> <span>{{vm.projectsDTO.projects.legacyProducer}}</span>
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong>Producer : </strong> <span>{{vm.projectsDTO.projects.legacyProducer2}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Producer : </strong> <span>{{vm.projectsDTO.projects.legacyProducer3}}</span>
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong>Producer : </strong> <span>{{vm.projectsDTO.projects.legacyProducer4}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Notes : </strong> <span>{{vm.projectsDTO.projects.legacyNameNotes}}</span>
+            </h5>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>
+                <strong>PRODUCTION COMPANY INFO</strong>
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Name : </strong>
+                {{vm.projectsDTO.projects.productionCompanyContact.fullName}}
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Office Phone : </strong>
+                {{vm.projectsDTO.projects.productionCompanyContact.phoneOffice}}
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong>Alt : </strong>
+                {{vm.projectsDTO.projects.productionCompanyContact.phoneAlternate}}
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong>Fax : </strong>
+                {{vm.projectsDTO.projects.productionCompanyContact.phoneFax}}
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Address : </strong>
+                {{vm.projectsDTO.projects.productionCompanyContact.streetAddress}}
+            </h5>
+        </div>
+        <div class="col-sm-2">
+            <h5>
+                <strong>City : </strong>
+                {{vm.projectsDTO.projects.productionCompanyContact.city}}
+            </h5>
+        </div>
+        <div class="col-sm-1">
+            <h5>
+                <strong>State : </strong>
+                {{vm.projectsDTO.projects.productionCompanyContact.state}}
+            </h5>
+        </div>
+        <div class="col-sm-2">
+            <h5>
+                <strong>Zip : </strong>
+                {{vm.projectsDTO.projects.productionCompanyContact.zipcode}}
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Contact/Notes : </strong>
+                {{vm.projectsDTO.projects.productionCompanyContact.notes}}
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>FEDEX : </strong> {{vm.projectsDTO.projects.fedex}}
+            </h5>
+        </div>
+    </div>
+    <hr>
 
-	<div class="row">
-		<div class="col-sm-3">
-			<h4>
-				<strong>TALENTS</strong>
-			</h4>
-		</div>
-	</div>
-	<div class="table-responsive">
-		<table class="jh-table table table-condensed table-striped">
-			<tr>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>
+                <strong>TALENTS</strong>
+            </h4>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="jh-table table table-condensed table-striped">
+            <tr>
 
-				<th>
-					<h5>
-						<a href ng-click="vm.sendMail(vm.projectsDTO.projectRoles)"> <strong>Mail
-								All</strong>
-						</a>
-					</h5>
-				</th>
-				<th>
-					<h5>
-						<strong>Talent Name</strong>
-					</h5>
-				</th>
-				<th>
-					<h5>
-						<strong>Username</strong>
-					</h5>
-				</th>
-				<th>
-					<h5>
-						<strong>Password</strong>
-					</h5>
-				</th>
-				<th>
-					<h5>
-						<strong>Solo</strong>
-					</h5>
-				</th>
-				<th>
-					<h5>
-						<strong>Group</strong>
-					</h5>
-				</th>
-				<th>
-					<h5>
-						<strong>Disabled</strong>
-					</h5>
-				</th>
-			</tr>
-			<!--  <tr ng-repeat="tags in vm.tags track by $index">-->
-			<tr
-				ng-repeat="tags in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'PKO_Tag'} | filter: isGeneric">
+                <th>
+                    <h5>
+                        <a href ng-click="vm.sendMail(vm.projectsDTO.projectRoles)"> <strong>Mail
+                            All</strong>
+                        </a>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Talent Name</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Username</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Password</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Solo</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Group</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Disabled</strong>
+                    </h5>
+                </th>
+            </tr>
+            <!--  <tr ng-repeat="tags in vm.tags track by $index">-->
+            <tr
+                ng-repeat="tags in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'PKO_Tag'} | filter: isGeneric">
 
-				<td>
-					<h5 class="small">
-						<a href="" ng-click="vm.sendIndividualMail(tags)"><span
-							class=" glyphicon glyphicon-envelope small text-success"></span></a>
-						Talent {{$index+1}}
-					</h5>
-				</td>
-				<td>
-					<h5 class="small">
-						<a ui-sref="contacts-detail({id:tags.contact.id})">{{tags.contact.fullName}}</a>
-					</h5>
-				</td>
-				<td>
-					<h5 class="small">{{tags.contact.username}}</h5>
-				</td>
-				<td>
-					<h5 class="small">{{tags.contact.password}}</h5>
-				</td>
-				<td>
-					<h5 class="small">{{tags.soloKillPct}}</h5>
-				</td>
-				<td>
-					<h5 class="small">{{tags.groupKillPct}}</h5>
-				</td>
-				<td>
-					<div ng-if="tags.disabled == true">
-						<h5 class="small">
-							<strong>X</strong>
-						</h5>
-					</div>
-				</td>
-			</tr>
-		</table>
-	</div>
-	<div class="row">
-		<div class="col-sm-12">
-			<h5>
-				<strong>Additional : </strong> <span>{{vm.projectsDTO.projects.legacyAdditionalTalent}}</span>
-			</h5>
-		</div>
-	</div>
-	<hr>
-	<div class="row">
-		<div class="col-sm-3">
-			<h4>
-				<strong>EXECS</strong>
-			</h4>
-		</div>
-	</div>
-	<div class="table-responsive">
-		<table
-			class="jh-table table table-condensed table-striped header-fixed">
-			<thead>
-				<tr>
-					<th><h5>
-							<a href ng-click="vm.sendMail(vm.projectsDTO.contactPrivileges)">
-								<strong>Mail All</strong>
-							</a>
-						</h5></th>
-					<th>
-						<h5>
-							<strong>Exec Name</strong>
-						</h5>
-					</th>
-					<th>
-						<h5>
-							<strong>Username</strong>
-						</h5>
-					</th>
-					<th>
-						<h5>
-							<strong>Password</strong>
-						</h5>
-					</th>
-					<th>
-						<h5>
-							<strong>Print</strong>
-						</h5>
-					</th>
-					<th>
-						<h5>
-							<strong>Caption</strong>
-						</h5>
-					</th>
-					<th>
-						<h5>
-							<strong>Email</strong>
-						</h5>
-					</th>
-					<th>
-						<h5>
-							<strong>Talent MGMT</strong>
-						</h5>
-					</th>
-					<th>
-						<h5>
-							<strong>SO MGMT</strong>
-						</h5>
-					</th>
-					<th>
-						<h5>
-							<strong>PriorityPix</strong>
-						</h5>
-					</th>
-					<th>
-						<h5>
-							<strong>Rel/Ex</strong>
-						</h5>
-					</th>
-					<th>
-						<h5>
-							<strong>Ven</strong>
-						</h5>
-					</th>
-					<th>
-						<h5>
-							<strong>L/A</strong>
-						</h5>
-					</th>
-					<th>
-						<h5>
-							<strong>Sens</strong>
-						</h5>
-					</th>
-					<th>
-						<h5>
-							<strong>Disabled</strong>
-						</h5>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr
-					ng-repeat="execs in vm.projectsDTO.contactPrivileges track by execs.id">
-					<td>
-						<h5 class="small">
-							<a href="" ng-click="vm.sendIndividualMail(execs)"><span
-								class=" glyphicon glyphicon-envelope small text-success"></span></a>
-							Exec {{$index+1}}
-						</h5>
-					</td>
-					<td>
-						<h5 class="small">
-							<a ui-sref="contacts-detail({id:execs.contact.id})">{{execs.contact.fullName}}</a>
-						</h5>
-					</td>
-					<td>
-						<h5 class="small">{{execs.contact.username}}</h5>
-					</td>
-					<td>
-						<h5 class="small">{{execs.contact.password}}</h5>
-					</td>
-					<td>
-						<h5 class="small">
-							<div ng-if="execs.print == true">
-								<strong>X</strong>
-							</div>
-						</h5>
-					</td>
-					<td>
-						<h5 class="small">
-							<div ng-if="execs.captioning == true">
-								<strong>X</strong>
-							</div>
-						</h5>
-					</td>
-					<td>
-						<h5 class="small">
-							<div ng-if="execs.email == true">
-								<strong>X</strong>
-							</div>
-						</h5>
-					</td>
-					<td align="center">
-						<h5 class="small">
-							<div ng-if="execs.talentManagement == true">
-								<strong>X</strong>
-							</div>
-						</h5>
-					</td>
-					<td>
-						<h5 class="small">
-							<div ng-if="execs.signoffManagement == true">
-								<strong>X</strong>
-							</div>
-						</h5>
-					</td>
-					<td>
-						<h5 class="small">
-							<div ng-if="execs.priorityPix == true">
-								<strong>X</strong>
-							</div>
-						</h5>
-					</td>
-					<td align="center">
-						<h5 class="small">
-							<div ng-if="execs.releaseExclude == true">
-								<strong>X</strong>
-							</div>
-						</h5>
-					</td>
-					<td>
-						<h5 class="small">
-							<div ng-if="execs.vendor == true">
-								<strong>X</strong>
-							</div>
-						</h5>
-					</td>
-					<td>
-						<h5 class="small">
-							<div ng-if="execs.lockApproveRestriction == true">
-								<strong>X</strong>
-							</div>
-						</h5>
-					</td>
-					<td>
-						<h5 class="small">
-							<div ng-if="execs.viewSensitive == true">
-								<strong>X</strong>
-							</div>
-						</h5>
-					</td>
-					<td>
-						<h5 class="small">
-							<div ng-if="execs.disabled == true">
-								<strong>X</strong>
-							</div>
-						</h5>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div class="row">
-		<div class="col-sm-12">
-			<h5>
-				<strong>Additional : </strong> <span>{{vm.projectsDTO.projects.legacyNameNotes}}</span>
-			</h5>
-		</div>
-	</div>
-
-	<!-- 
-	<div class="row">
-		<div class="col-sm-3">
-			<h4>
-				<strong>EXPANDED TALENT INFORMATION</strong>
-			</h4>
-		</div>
-	</div>
-
-  <div
-      ng-repeat="tags in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'PKO_Tag'} | filter: isGeneric">
-      <div class="row">
-          <div class="col-sm-3">
-              <h5>
-                  <strong>Talent {{$index+1}}: </strong> {{tags.contact.fullName}}
-              </h5>
-          </div>
-          <div class="col-sm-3">
-              <h5>
-                  <strong>Character: </strong> {{tags.characterName}}
-              </h5>
-          </div>
-          <div class="col-sm-3">
-              <h5>
-                  <strong>Start Date: </strong> {{tags.startDate}}
-              </h5>
-          </div>
-          <div class="col-sm-3">
-              <h5>
-                  <strong>Days: </strong> {{tags.daysWorking}}
-              </h5>
-          </div>
-      </div> -->
-
+                <td>
+                    <h5 class="small">
+                        <a href="" ng-click="vm.sendIndividualMail(tags)"><span
+                            class=" glyphicon glyphicon-envelope small text-success"></span></a>
+                        Talent {{$index+1}}
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="small">
+                        <a ui-sref="contacts-detail({id:tags.contact.id})">{{tags.contact.fullName}}</a>
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="small">{{tags.contact.username}}</h5>
+                </td>
+                <td>
+                    <h5 class="small">{{tags.contact.password}}</h5>
+                </td>
+                <td>
+                    <h5 class="small">{{tags.soloKillPct}}</h5>
+                </td>
+                <td>
+                    <h5 class="small">{{tags.groupKillPct}}</h5>
+                </td>
+                <td>
+                    <div ng-if="tags.disabled == true">
+                        <h5 class="small">
+                            <strong>X</strong>
+                        </h5>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h5>
+                <strong>Additional : </strong> <span>{{vm.projectsDTO.projects.legacyAdditionalTalent}}</span>
+            </h5>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>
+                <strong>EXECS</strong>
+            </h4>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table
+            class="jh-table table table-condensed table-striped header-fixed">
+            <thead>
+            <tr>
+                <th><h5>
+                    <a href ng-click="vm.sendMail(vm.projectsDTO.contactPrivileges)">
+                        <strong>Mail All</strong>
+                    </a>
+                </h5></th>
+                <th>
+                    <h5>
+                        <strong>Exec Name</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Username</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Password</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Print</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Caption</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Email</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Talent MGMT</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>SO MGMT</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>PriorityPix</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Rel/Ex</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Ven</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>L/A</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Sens</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        <strong>Disabled</strong>
+                    </h5>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+                ng-repeat="execs in vm.projectsDTO.contactPrivileges track by execs.id">
+                <td>
+                    <h5 class="small">
+                        <a href="" ng-click="vm.sendIndividualMail(execs)"><span
+                            class=" glyphicon glyphicon-envelope small text-success"></span></a>
+                        Exec {{$index+1}}
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="small">
+                        <a ui-sref="contacts-detail({id:execs.contact.id})">{{execs.contact.fullName}}</a>
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="small">{{execs.contact.username}}</h5>
+                </td>
+                <td>
+                    <h5 class="small">{{execs.contact.password}}</h5>
+                </td>
+                <td>
+                    <h5 class="small">
+                        <div ng-if="execs.print == true">
+                            <strong>X</strong>
+                        </div>
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="small">
+                        <div ng-if="execs.captioning == true">
+                            <strong>X</strong>
+                        </div>
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="small">
+                        <div ng-if="execs.email == true">
+                            <strong>X</strong>
+                        </div>
+                    </h5>
+                </td>
+                <td align="center">
+                    <h5 class="small">
+                        <div ng-if="execs.talentManagement == true">
+                            <strong>X</strong>
+                        </div>
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="small">
+                        <div ng-if="execs.signoffManagement == true">
+                            <strong>X</strong>
+                        </div>
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="small">
+                        <div ng-if="execs.priorityPix == true">
+                            <strong>X</strong>
+                        </div>
+                    </h5>
+                </td>
+                <td align="center">
+                    <h5 class="small">
+                        <div ng-if="execs.releaseExclude == true">
+                            <strong>X</strong>
+                        </div>
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="small">
+                        <div ng-if="execs.vendor == true">
+                            <strong>X</strong>
+                        </div>
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="small">
+                        <div ng-if="execs.lockApproveRestriction == true">
+                            <strong>X</strong>
+                        </div>
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="small">
+                        <div ng-if="execs.viewSensitive == true">
+                            <strong>X</strong>
+                        </div>
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="small">
+                        <div ng-if="execs.disabled == true">
+                            <strong>X</strong>
+                        </div>
+                    </h5>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h5>
+                <strong>Additional : </strong> <span>{{vm.projectsDTO.projects.legacyNameNotes}}</span>
+            </h5>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>
+                <strong>EXPANDED TALENT INFORMATION</strong>
+            </h4>
+        </div>
+    </div>
+    <br>
+    <div
+        ng-repeat="tags in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'PKO_Tag'} | filter: isGeneric">
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Talent {{$index+1}}: </strong> {{tags.contact.fullName}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Character: </strong> {{tags.characterName}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Start Date: </strong> {{tags.startDate}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Days: </strong> {{tags.daysWorking}}
+                </h5>
+            </div>
+        </div>
 
 
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Contact: </strong> {{vm.relatedContacts[$index].fullName}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Type: </strong> {{vm.relatedContacts[$index].type.textValue}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Company: </strong> {{vm.relatedContacts[$index].companyContact.fullName}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Phone: </strong> {{vm.relatedContacts[$index].phoneOffice}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Email: </strong> {{vm.relatedContacts[$index].email}}
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong>Mobile: </strong> {{vm.relatedContacts[$index].phoneMobile}}
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h5>
+                    <strong>Asst Notes/Notes: </strong> {{vm.relatedContacts[$index].notes}}
+                </h5>
+            </div>
 
-	<!--  <div ng-if="tags.contact.contact_a.length == 0">
-                  <div class="row">
-                      <div class="col-sm-3">
-                          <h5>
-                              <strong>Contact: </strong> {{tags.contact.fullName}}
-                          </h5>
-                      </div>
-                      <div class="col-sm-3">
-                          <h5>
-                              <strong>Type: </strong> {{tags.contact.type.textValue}}
-                          </h5>
-                      </div>
-                      <div class="col-sm-3">
-                          <h5>
-                              <strong>Company: </strong> {{tags.contact.companyContact.fullName}}
-                          </h5>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-sm-3">
-                          <h5>
-                              <strong>Phone: </strong> {{tags.contact.contact.phoneOffice}}
-                          </h5>
-                      </div>
-                      <div class="col-sm-3">
-                          <h5>
-                              <strong>Email: </strong> {{tags.contact.email}}
-                          </h5>
-                      </div>
-                      <div class="col-sm-3">
-                          <h5>
-                              <strong>Mobile: </strong> {{tags.contact.phoneMobile}}
-                          </h5>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-sm-3">
-                          <h5>
-                              <strong>Asst Notes/Notes: </strong> {{tags.contact.notes}}
-                          </h5>
-                      </div>
-                      <div class="col-sm-3">
-                          <h5>
-                              <strong>Notes: </strong> {{tags.notes}}
-                          </h5>
-                      </div>
-                  </div>
-              </div> -->
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h5>
+                    <strong>Notes: </strong> {{tags.notes}}
+                </h5>
+            </div>
+        </div>
+        <hr>
+    </div>
 
-
-	<!-- <div ng-if="tags.contact.contact_a.length > 0">
+    <!-- <div ng-if="tags.contact.contact_a.length > 0">
                          <div ng-repeat="related in tags.contact.contact_a">
                              <div ng-if="related.isPrimaryContact == true">
                                  <div class="row">
@@ -1066,27 +1068,26 @@
  -->
 
 
-
-	<hr>
-	<div class="row">
-		<div class="col-sm-3">
-			<h4>
-				<strong>PARENT COMPANY INFO</strong>
-			</h4>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<h5>
-				<strong>Name : </strong>
-				<a ui-sref="contacts-detail({id:vm.projectsDTO.projects.parentCompanyContact.id})">{{vm.projectsDTO.projects.parentCompanyContact.fullName}}</a>
-			</h5>
-		</div>
-	</div>
-	<button type="submit" onclick="window.history.back()"
-		class="btn btn-info btn-sm">
-		<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
-			translate="entity.action.back"> Back</span>
-	</button>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>
+                <strong>PARENT COMPANY INFO</strong>
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Name : </strong>
+                <a ui-sref="contacts-detail({id:vm.projectsDTO.projects.parentCompanyContact.id})">{{vm.projectsDTO.projects.parentCompanyContact.fullName}}</a>
+            </h5>
+        </div>
+    </div>
+    <button type="submit" onclick="window.history.back()"
+            class="btn btn-info btn-sm">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+        translate="entity.action.back"> Back</span>
+    </button>
 </div>
 

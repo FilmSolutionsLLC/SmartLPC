@@ -4,6 +4,7 @@ import com.fps.domain.User;
 import com.fps.domain.WorkOrder;
 import com.fps.web.rest.dto.WorkOrderDTO;
 import com.fps.web.rest.dto.WorkOrderListDTO;
+import com.fps.web.rest.dto.WorkOrderProcessingDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,10 +18,10 @@ public interface WorkOrderService {
     /**
      * Save a workOrder.
      *
-     * @param workOrder the entity to save
-     * @return the persisted entity
+     * @param workOrderDTO the entity to save
+     * @return the persisted entitys
      */
-    WorkOrder save(WorkOrder workOrder);
+    WorkOrder save(WorkOrderDTO workOrderDTO);
 
     /**
      * Get all the workOrders.
@@ -56,7 +57,7 @@ public interface WorkOrderService {
 
     List<WorkOrderListDTO> findOpenWorkOrders();
 
-    List<WorkOrderListDTO> findOpenWorkOrdersGrouped();
+    List<WorkOrderListDTO> findOpenWorkOrdersGrouped(String reportType);
 
     List<WorkOrderListDTO> findToAudit();
 
@@ -66,6 +67,7 @@ public interface WorkOrderService {
 
     List<WorkOrderListDTO> searchByVarious(String type,String query);
 
+    List<WorkOrderProcessingDTO> findWorkOrderProcessingDtos();
 }
 
 

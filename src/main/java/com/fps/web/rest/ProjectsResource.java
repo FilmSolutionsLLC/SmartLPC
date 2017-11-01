@@ -10,8 +10,6 @@ import com.fps.web.rest.dto.ProjectsViewDTO;
 import com.fps.web.rest.dto.TalentInfoDTO;
 import com.fps.web.rest.util.HeaderUtil;
 import com.fps.web.rest.util.PaginationUtil;
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -20,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,10 +59,16 @@ public class ProjectsResource {
 	private CurrentTenantIdentifierResolverImpl currentTenantIdentifierResolver;
 
 	@Inject
+    private ContactsRepository contactsRepository;
+
+	@Inject
     private ProjectsRepository projectsRepository;
 
 	@Inject
     private AlbumPermissionsRepository albumPermissionsRepository;
+
+	@Inject
+    private JdbcTemplate jdbcTemplate;
 
 	final static private String MASTER = "master";
 	final static private String SLAVE = "slave";
@@ -131,7 +136,7 @@ public class ProjectsResource {
 	@RequestMapping(value = "/projects", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<List<ProjectsDTO>> getAllProjects(Pageable pageable) throws URISyntaxException {
-		log.debug("REST request to get a page of Projects");
+		log.info("REST request to get a page of Projects");
 		Page<Projects> page = projectsService.findAll(pageable);
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/projects");
 		currentTenantIdentifierResolver.setTenant(SLAVE);
@@ -167,7 +172,7 @@ public class ProjectsResource {
 	@RequestMapping(value = "/projects/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<ProjectsDTO> getProjects(@PathVariable Long id) {
-		log.debug("REST request to get Projects : {}", id);
+		log.info("REST request to get Projects : {}", id);
 
 		final Projects projects = projectsService.findOne(id);
 
@@ -186,9 +191,9 @@ public class ProjectsResource {
 		final Set<ProjectLabTasks> projectLabTasksSet = new HashSet<>(projectLabTaskses);
 		final Set<ContactPrivileges> contactPrivilegesSet = new HashSet<>(contactPrivilegeses);
 
-		Contacts contacts = new Contacts();
-		contacts.setId(Long.valueOf(5181));
-		Set<ProjectRoles> projectRolesSet = projectRolesRepository.findByProjectAndContact(projects, contacts);
+		Contact contact = new Contact();
+		contact.setId(Long.valueOf(5181));
+		Set<ProjectRoles> projectRolesSet = projectRolesRepository.findByProjectAndContact(projects, contact);
 
 		final ProjectsDTO projectsDTO = new ProjectsDTO(projects, projectLabTasksSet, projectPurchaseOrdersSet,
 				projectRolesSet, contactPrivilegesSet);
@@ -259,20 +264,32 @@ public class ProjectsResource {
 	 * "/api/_search/projects"); return new ResponseEntity<>(page.getContent(),
 	 * headers, HttpStatus.OK); }
 	 */
+
+    /**
+     * Get All Projects in id,name form for Select Dropdown
+     * @return
+     * @throws URISyntaxException
+     */
 	@RequestMapping(value = "/idname/projects", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public List<Objects[]> getAllProjectsIDName() throws URISyntaxException {
-		log.debug("REST request to get all projects");
+		log.info("REST request to get all projects");
 		List<Objects[]> projects = projectsService.findProjects();
 		return projects;
 	}
 
+    /**
+     * DATA in project view table form with pagination
+     * @param pageable
+     * @return
+     * @throws URISyntaxException
+     */
 	@RequestMapping(value = "/pro", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<List<ProjectsViewDTO>> getAllProjectsNew(Pageable pageable) throws URISyntaxException {
-		log.debug("REST request to get all projects");
+		log.info("REST request to get all projects");
 		Page<Objects[]> page = projectsService.getAllProjects(pageable);
-		// List<ProjectsViewDTO> projectsViewDTOs = page.getContent();
+
 		// columns names same as pojo class
 		List<ProjectsViewDTO> projectsViewDTOs = new ArrayList<>();
 		for (Object[] objects : page.getContent()) {
@@ -289,15 +306,21 @@ public class ProjectsResource {
 			projectsViewDTO.setUnitPublicistOffice(String.valueOf(objects[8]));
 			projectsViewDTO.setUnitPublicistEmail(String.valueOf(objects[9]));
 
-			log.info("===================================================");
 			projectsViewDTOs.add(projectsViewDTO);
-			log.info(projectsViewDTO.toString());
+
 		}
 
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/pro");
 		return new ResponseEntity<>(projectsViewDTOs, headers, HttpStatus.OK);
 	}
 
+    /**
+     * Upload Logo to server
+     * @param logo
+     * @return
+     * @throws URISyntaxException
+     * @throws IOException
+     */
 	@RequestMapping(value = "/logos", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<?> addLogos(@RequestBody byte[] logo) throws URISyntaxException, IOException {
@@ -310,21 +333,27 @@ public class ProjectsResource {
 		}
 	}
 
+    /**
+     * GB count of project on server /alfrescoTitle1/alfrescoTitle2
+     * @param projects
+     * @return
+     * @throws URISyntaxException
+     * @throws IOException
+     */
 	@RequestMapping(value = "/count", method = RequestMethod.POST, produces = "text/plain")
 	@Timed
 	public String getGBCount(@RequestBody Projects projects) throws URISyntaxException, IOException {
 
 		final String gbCount = projectsService.getGbCount(projects);
-
-		/*
-		 * return Optional.ofNullable(gbCount) .map(result -> new
-		 * ResponseEntity<>( result, HttpStatus.OK)) .orElse(new
-		 * ResponseEntity<>(HttpStatus.NOT_FOUND));
-		 */
-
 		return gbCount;
 	}
 
+    /**
+     * Get All Talents related to Project
+     * @param id
+     * @param type
+     * @return
+     */
 	@RequestMapping(value = "/talents", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<List<TalentInfoDTO>> talentInfoss(@RequestParam Long id, @RequestParam String type) {
@@ -339,6 +368,11 @@ public class ProjectsResource {
 
 	}
 
+    /**
+     * Remove Talent
+     * @param id
+     * @param type
+     */
 	@RequestMapping(value = "/remove", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public void removeTalentInfo(@RequestParam Long id, @RequestParam String type) {
@@ -349,6 +383,10 @@ public class ProjectsResource {
 
 	}
 
+    /**
+     * Update album
+     * @param album
+     */
 	@RequestMapping(value = "/update/album", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public void updateAlbum(@RequestBody TalentInfoDTO album) {
@@ -359,6 +397,10 @@ public class ProjectsResource {
 
 	}
 
+    /**
+     * Insert new album
+     * @param album
+     */
 	@RequestMapping(value = "/insert/album", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public void insertAlbum(@RequestBody TalentInfoDTO album) {
@@ -369,6 +411,12 @@ public class ProjectsResource {
 
 	}
 
+    /**
+     * TODO: Create touch file or call delete script
+     * Delete Project
+     * @param password
+     * @return
+     */
 	@RequestMapping(value = "/project/delete", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public Integer deleteProjectPassword(@RequestBody String password) {
@@ -379,6 +427,13 @@ public class ProjectsResource {
 		}
 	}
 
+    /**
+     * TODO: Create touch file or call delete script
+     * Rename project
+     * @param id
+     * @param alfrescoTitle1
+     * @param alfrescoTitle2
+     */
 	@RequestMapping(value = "/rename", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public void renameProject(@RequestParam Long id, @RequestParam String alfrescoTitle1,
@@ -391,7 +446,11 @@ public class ProjectsResource {
 	}
 
 
-
+    /**
+     * Get just the Project and not the ProjectDTO
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/justproject/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<Projects>  justProject(@PathVariable Long id) {
@@ -404,6 +463,11 @@ public class ProjectsResource {
     }
 
 
+    /**
+     * Save Album Permissions for Exec
+     * @param albumPermissionsList
+     * @return
+     */
     @RequestMapping(value = "/album/permissions", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public String albumPermissions(@RequestBody List<AlbumPermissions> albumPermissionsList) {
@@ -413,6 +477,26 @@ public class ProjectsResource {
 	    return "saved";
     }
 
+    /**
+     * Disable Projects by setting disable flag to true
+     * @param id
+     * @param action
+     */
+    @RequestMapping(value = "/disableproject", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public void  disableProject(@RequestParam("id") Long id,@RequestParam("action") String action) {
+        if(action.equalsIgnoreCase("disable")) {
+            log.info("Disable Project with ID : " + id);
+            String sql = "Update projects set disabled = 1 where id = " + id;
+            jdbcTemplate.update(sql);
+            log.info("Disable success");
+        }else{
+            log.info("Enable Project with ID : " + id);
+            String sql = "Update projects set disabled = 0 where id = " + id;
+            jdbcTemplate.update(sql);
+            log.info("Enable success");
+        }
+    }
 
 
 

@@ -113,3 +113,7 @@ project:
 
 largest:
   brick: /opt/scripts/LargestBrick
+
+javalocation:
+  path: /usr/java/jdk1.8.0_45/bin/java
+  jarFile: /opt/scripts/LPCPasswordEncryptor-0.0.1.jar

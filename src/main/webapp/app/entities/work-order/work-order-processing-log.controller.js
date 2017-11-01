@@ -5,11 +5,11 @@
         .module('smartLpcApp')
         .controller('WorkOrderProcessingController', WorkOrderProcessingController);
 
-    WorkOrderProcessingController.$inject = ['$scope', '$state', 'WorkOrderPorcessing', 'WorkOrderSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants'];
+    WorkOrderProcessingController.$inject = ['$http','$scope', '$state', 'WorkOrderPorcessing', 'WorkOrderSearch', 'AlertService'];
 
-    function WorkOrderProcessingController($scope, $state, WorkOrderPorcessing, WorkOrderSearch, ParseLinks, AlertService, pagingParams, paginationConstants) {
+    function WorkOrderProcessingController($http,$scope, $state, WorkOrderPorcessing, WorkOrderSearch, AlertService) {
     	console.log("WorkOrderProcessingController");
-    	var vm = this;
+    	/*var vm = this;
         vm.loadAll = loadAll;
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
@@ -51,9 +51,9 @@
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
                 vm.workOrders = data;
-                console.log("1st entry ",vm.workOrders[0]);
+                console.log("1st entry "+JSON.stringify(vm.workOrders));
                 vm.page = pagingParams.page;
-                
+
             }
 
             function onError(error) {
@@ -95,9 +95,42 @@
             vm.transition();
         }
 
-        $scope.myFilter = function (item) { 
-            return item.relation_type.relation === 'lab_processed'; 
+        $scope.myFilter = function (item) {
+            return item.relation_type.relation === 'lab_processed';
+        };*/
+
+    	var vm = this;
+        vm.workOrders = [];
+        $http({
+            method : 'GET',
+            url : 'api/processing/work-orders'
+        }).then(function(response) {
+            vm.workOrders = response.data;
+            console.log("total processing workOrders : " + vm.workOrders.length);
+            console.log(JSON.stringify(vm.workOrders[0]));
+            $scope.totalItems = vm.workOrders.length;
+
+        });
+
+        $scope.viewby = 15;
+
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = $scope.viewby;
+        $scope.maxSize = 5; // Number of pager buttons to show
+
+        console.log("total items : " + $scope.totalItems);
+        $scope.setPage = function(pageNo) {
+            $scope.currentPage = pageNo;
+        };
+
+        $scope.pageChanged = function() {
+            console.log('Page changed to: ' + $scope.currentPage);
+        };
+
+        $scope.setItemsPerPage = function(num) {
+            $scope.itemsPerPage = num;
+            $scope.currentPage = 1; // reset to first paghe
         };
     }
-    
+
 })();

@@ -11,7 +11,7 @@
 						new WorkOrder </span>
 				</button>
 			</div>
-			<div class="col-xs-8 no-padding-right">
+			<!--<div class="col-xs-8 no-padding-right">
 				<form name="searchForm" class="form-inline">
 					<div class="input-group pull-right">
 						<input type="text" class="form-control input-sm"
@@ -29,7 +29,7 @@
 						</span>
 					</div>
 				</form>
-			</div>
+			</div>-->
 		</div>
 	</div>
 	<br />
@@ -38,7 +38,7 @@
 			<thead>
 				<tr jh-sort="vm.predicate" ascending="vm.reverse"
 					callback="vm.transition()">
-				
+
 
 
 					<th jh-sort-by="id" class="extra-small"><span
@@ -85,123 +85,60 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr 
-					ng-repeat="workOrder in vm.workOrders track by workOrder.id"  
-					ng-class="{
-                				verify: workOrder.status.textValue == 'Verify',
-               					notstarted: workOrder.status.textValue  == 'Not Started',
-                				rush: workOrder.status.textValue  == 'Rush',
-                				kickback: workOrder.status.textValue  == 'KickBack'
-                			  }">
+            <tr
+                ng-repeat="workOrder in vm.workOrders.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"
+                ng-class="{
+                verify: workOrder.color == 'Orange',
+                notstarted: workOrder.color == 'Yellow',
+                rush: workOrder.color == 'Red',
+                kickback: workOrder.color == 'Blue'
+                }">
 					<td class="extra-small"><a
 						ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a></td>
 					<td class="extra-small"><a
-						ui-sref="projects-detail({id:workOrder.project.id})">{{workOrder.project.name}}</a>
+						ui-sref="projects-detail({id:workOrder.project.id})">{{workOrder.projectName}}</a>
 					</td>
 
-					<td class="extra-small">{{workOrder.processingDateRecieved |
+					<td class="extra-small">{{workOrder.dateRecieved |
 						date:'mediumDate'}}</td>
 
-					<td class="extra-small">{{workOrder.processingHDDid}}</td>
+					<td class="extra-small">{{workOrder.hddID}}</td>
 
-					<td class="extra-small">{{workOrder.processingProofShipped}}</td>
+					<td class="extra-small">{{workOrder.proofShipped}}</td>
 
-					<td class="extra-small">{{workOrder.processingDriveShipped}}</td>
-
-
-					<td class="extra-small">{{workOrder.processingImageRange}}</td>
-
-					<td class="extra-small">{{workOrder.processingImageQty}}</td>
+					<td class="extra-small">{{workOrder.driveShipped}}</td>
 
 
-					<td class="extra-small">{{workOrder.printPagesFrom}}</td>
+					<td class="extra-small">{{workOrder.imageRange}}</td>
+
+					<td class="extra-small">{{workOrder.imageQty}}</td>
 
 
-					<td class="extra-small">{{workOrder.printPagesTo}}</td>
+					<td class="extra-small">{{workOrder.page1}}</td>
 
 
-					<td class="extra-small">{{workOrder.processingNotes}}</td>
-
-					<td class="extra-small">{{workOrder.processingLocation}}</td>
-
-					<td class="extra-small">{{workOrder.processing_pko_flag.textValue}}</td>
+					<td class="extra-small">{{workOrder.page2}}</td>
 
 
-					<td class="extra-small"><a
-						ui-sref="lookups-detail({id:workOrder.status.id})">{{workOrder.status.textValue}}</a>
-					</td>
+					<td class="extra-small">{{workOrder.notes}}</td>
+
+					<td class="extra-small">{{workOrder.location}}</td>
+
+					<td class="extra-small">{{workOrder.isPko}}</td>
 
 
-					<td class="extra-small">{{workOrder.auditedFlag}}</td>
+					<td class="extra-small">{{workOrder.status}}</td>
 
 
+					<td class="extra-small">{{workOrder.audited}}</td>
 
-					<td class="extra-small">{{workOrder.assignedToUser.fullName}}</td>
+					<td class="extra-small">{{workOrder.assignedTo}}</td>
 
-					<td class="extra-small"></td>
-					<td class="extra-small"></td>
-					<!-- <div ng-repeat="pro in workOrder.workOrdersAdminRelations">
-						<div ng-if="pro.relation_type.relation == 'lab_processed'">
-							<td class="extra-small"><input type="hidden" ng-model="vm.processed" ng-value="true">{{workOrder.workOrdersAdminRelations.admin_user.fullName}}</td>
-						</div>
-					</div> -->
-					<!-- <td class="extra-small"
-						ng-repeat="pro in workOrder.workOrdersAdminRelations | filter: { relation_type : { relation : 'lab_processed'} }"><input
-						type="hidden" name="vm.processed" ng-init="vm.processed=true">{{pro.admin_user.fullName}}</td>
+					<td class="extra-small">{{workOrder.processedBy}}</td>
+					<td class="extra-small">{{workOrder.ingestedBy}}</td>
 
-					<td class="extra-small"
-						ng-repeat="pro in workOrder.workOrdersAdminRelations | filter: { relation_type : { relation : 'lab_ingestby'} }"><input
-						type="hidden" ng-model="vm.ingest" ng-init="vm.ingest=true">{{pro.admin_user.fullName}}</td>
+					<td class="extra-small">{{workOrder.completion | date:'mediumDate'}}</td>
 
-					<div ng-if="vm.processed == false">
-						<td class="extra-small">processed by..</td>
-					</div>
-					<div ng-if="!vm.ingest">
-						<td class="extra-small">ingested by..</td>
-					</div> -->
-
-					<!-- <div ng-repeat="ing in workOrder.workOrdersAdminRelations">
-						<div ng-if="ing.relation_type.relation == 'lab_ingestby'">
-							<td class="extra-small"><input type="hidden" ng-model="vm.ingest" ng-value="true">{{ing.admin_user.fullName}}</td>
-						</div>
-					</div>
-					<div ng-if="vm.processed == false">
-						<td class="extra-small">processed by..</td>
-					</div>
-					<div ng-if="vm.ingest == false">
-						<td class="extra-small">ingested by..</td>
-					</div> -->
-					<!-- <td class="extra-small">processed by..</td>
-					<td class="extra-small">ingested by...</td>
-			 -->
-
-					<td class="extra-small">{{workOrder.completionDate |
-						date:'mediumDate'}}</td>
-
-
-
-
-
-
-					<!-- 	<td class="small">{{workOrder.requestDate |
-						date:'mediumDate'}}</td>
-					<td class="small">{{workOrder.requestDescription}}</td>
-
-					<td class="small">{{workOrder.poRecord}}</td>
-					<td class="small">{{workOrder.invoiced}}</td>
-					<td class="small">{{workOrder.durationOfService}}</td>
-
-
-					<td class="small"><a
-						ui-sref="lookups-detail({id:workOrder.type.id})">{{workOrder.type.textValue}}</a>
-					</td>
-					<td class="small"><a
-						ui-sref="lookups-detail({id:workOrder.status.id})">{{workOrder.status.textValue}}</a>
-					</td>
-
-					
-					<td class="small">{{workOrder.assignedToUser.firstName}}</td>
- -->
 					<td class="text-right extra-small">
 						<div class="btn-group flex-btn-group-container">
 							<button type="submit"
@@ -225,9 +162,11 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="text-center">
-		<jhi-item-count page="vm.page" total="vm.queryCount"></jhi-item-count>
-		<uib-pagination class="pagination-sm" total-items="vm.totalItems"
-			ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
-	</div>
+    <div class="text-center">
+
+        <uib-pagination class="pagination-sm" total-items="totalItems"
+                        ng-model="currentPage" max-size="maxSize" boundary-links="true"
+                        rotate="false" num-pages="numPages" items-per-page="itemsPerPage"></uib-pagination>
+        <pre>Page: {{currentPage}} / {{numPages}}</pre>
+    </div>
 </div>

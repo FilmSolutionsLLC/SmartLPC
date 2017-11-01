@@ -311,7 +311,7 @@
 								translate="global.menu.entities.work.opengrp">Open Work
 									Orders(GROUPED)</span></a></li>
 						<li ui-sref-active="active"><a
-							ui-sref="work-order-processing" data-toggle="collapse"
+							ui-sref="work-order-processing-log" data-toggle="collapse"
 							data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-eye-open"></span> &#xA0;<span
 								translate="global.menu.entities.work.log">Processing Log</span></a>
@@ -372,20 +372,20 @@
 							data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-lock"></span> &#xA0;<span
 								translate="global.menu.account.password">Password</span></a></li>
-								
+
 						<li ui-sref-active="active" ng-switch-when="true"><a href=""
 							ng-click="vm.logout()" id="logout" data-toggle="collapse"
 							data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-log-out"></span> &#xA0;<span
 								translate="global.menu.account.logout">Sign out</span></a></li>
-								
+
 						<li ui-sref-active="active" ng-switch-when="false"><a href=""
 							ng-click="vm.login()" id="login" data-toggle="collapse"
 							data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-log-in"></span> &#xA0;<span
 								translate="global.menu.account.login">Sign in</span></a></li>
-								
-								
+
+
 						<li ui-sref-active="active" ng-switch-when="false"><a
 							ui-sref="register" data-toggle="collapse"
 							data-target=".navbar-collapse.in"><span
@@ -460,7 +460,7 @@
 					ui-sref="chat" ng-click="vm.navCollapsed = true"> <span
 						class="glyphicon glyphicon-envelope text-success"></span>
 				</a></li>
-				
+
 			</ul>
 		</div>
 	</div>

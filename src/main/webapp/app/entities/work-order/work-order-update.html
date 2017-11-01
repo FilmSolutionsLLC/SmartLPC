@@ -1,4 +1,4 @@
-
+<h2 align="center">Work-Order</h2>
 
 
 <div class="row">
@@ -27,7 +27,7 @@
             &nbspProof &nbsp</label>
         <label class="small"><input type="checkbox" ng-model="vm.workOrderDTO.workOrder.isAbc">
             &nbspABC &nbsp</label>
-        <label class="small"><input type="checkbox" ng-model="vm.workOrderDTO.workOrder.isTracking">
+        <label class="small"><input type="checkbox" ng-click="vm.trackingCheck()" ng-model="vm.workOrderDTO.workOrder.isTracking">
             &nbspTracking &nbsp</label>
     </div>
 </div>
@@ -223,13 +223,20 @@
 
         <div class="col-sm-2">
 
-            <select class="form-control input-sm" id="field_vm.adminRelationDTOs[0].admin_user"
+           <!-- <select class="form-control input-sm" id="field_vm.adminRelationDTOs[0].admin_user"
                     name="assignedToUser"
                     ng-model="vm.workOrderDTO.workOrdersAdminRelations[5].admin_user"
                     ng-options="user as user.fullName for user in vm.users track by user.id">
                 <option value=""></option>
             </select>
-
+-->     <ui-select multiple ng-model="vm.selecteddueMountReminder"
+              theme="bootstrap" ng-disabled="ctrl.disabled"
+              close-on-select="false" style="width: 200px;"
+              title="Choose a color"> <ui-select-match
+            placeholder="Select reminder to...">{{$item.admin_user.fullName}}</ui-select-match>
+            <ui-select-choices
+                repeat="admin in vm.dueMountReminder | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
+        </ui-select>
 
         </div>
     </div>
@@ -244,12 +251,20 @@
                    class="form-control input-sm" ng-model="vm.workOrderDTO.workOrder.reminderMsg2">
         </div>
         <div class="col-sm-2">
-            <select class="form-control input-sm" id="field_vm.adminRelationDTOs[1].admin_user"
+           <!-- <select class="form-control input-sm" id="field_vm.adminRelationDTOs[1].admin_user"
                     name="assignedToUser"
                     ng-model="vm.workOrderDTO.workOrdersAdminRelations[6].admin_user"
                     ng-options="user as user.fullName for user in vm.users track by user.id">
                 <option value=""></option>
-            </select>
+            </select>-->
+            <ui-select multiple ng-model="vm.selectedclientReminder"
+                       theme="bootstrap" ng-disabled="ctrl.disabled"
+                       close-on-select="false" style="width: 200px;"
+                       title="Choose a color"> <ui-select-match
+                placeholder="Select reminder to...">{{$item.admin_user.fullName}}</ui-select-match>
+                <ui-select-choices
+                    repeat="admin in vm.clientReminder | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
+            </ui-select>
         </div>
     </div>
     <div class="row">
@@ -264,83 +279,105 @@
                    class="form-control input-sm">
         </div>
         <div class="col-sm-2">
-            <select class="form-control input-sm" id="field_vm.adminRelationDTOs[2].admin_user"
+            <!--<select class="form-control input-sm" id="field_vm.adminRelationDTOs[2].admin_user"
                     name="assignedToUser"
                     ng-model="vm.workOrderDTO.workOrdersAdminRelations[7].admin_user"
                     ng-options="user as user.fullName for user in vm.users track by user.id">
                 <option value=""></option>
-            </select>
+            </select>-->
+            <ui-select multiple ng-model="vm.selectedtoMountReminder"
+                       theme="bootstrap" ng-disabled="ctrl.disabled"
+                       close-on-select="false" style="width: 200px;"
+                       title="Choose a color"> <ui-select-match
+                placeholder="Select reminder to...">{{$item.admin_user.fullName}}</ui-select-match>
+                <ui-select-choices
+                    repeat="admin in vm.toMountReminder | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
+            </ui-select>
         </div>
     </div>
 </div>
 <hr>
 <h4>Completed Task</h4>
 
+
 <div class="row">
 
-    <label class="col-md-1 control-label small">Verified</label>
+    <label class="col-md-1 control-label small" for="field_verifiedBy">Verified</label>
     <div class="col-sm-2">
-        <select class="form-control input-sm" id="field_vm.adminRelationDTOs[3].admin_user"
-                name="assignedToUser"
-                ng-model="vm.workOrderDTO.workOrdersAdminRelations[0].admin_user"
-                ng-options="user as user.fullName for user in vm.users track by user.id">
-            <option value=""></option>
-        </select>
+        <ui-select multiple ng-model="vm.selectedverifiedBy"
+                   theme="bootstrap" ng-disabled="ctrl.disabled"
+                   close-on-select="false" style="width: 200px;" title="Choose a color">
+            <ui-select-match placeholder="Select verified by...">{{$item.admin_user.fullName}}</ui-select-match>
+            <ui-select-choices
+                repeat="admin in vm.verifiedBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
+        </ui-select>
+
     </div>
 
     <label class="col-md-1 control-label small" for="textinput">Processed</label>
     <div class="col-sm-2">
-        <select class="form-control input-sm" id="field_vm.adminRelationDTOs[4].admin_user"
-                name="assignedToUser"
-                ng-model="vm.workOrderDTO.workOrdersAdminRelations[1].admin_user"
-                ng-options="user as user.fullName for user in vm.users track by user.id">
-            <option value=""></option>
-        </select>
+
+        <ui-select multiple ng-model="vm.selectedprocessedBy"
+                   theme="bootstrap" ng-disabled="ctrl.disabled"
+                   close-on-select="false" style="width: 200px;" title="Choose a color">
+            <ui-select-match placeholder="Select processed by...">{{$item.admin_user.fullName}}</ui-select-match>
+            <ui-select-choices
+                repeat="admin in vm.processedBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
+        </ui-select>
     </div>
 
-    <label class="col-md-1 control-label small" for="textinput">Ingest By</label>
+    <label class="col-md-1 control-label small" for="textinput">Ingest
+        By </label>
     <div class="col-sm-2">
-        <select class="form-control input-sm" id="field_vm.adminRelationDTOs[5].admin_user"
-                name="assignedToUser"
-                ng-model="vm.workOrderDTO.workOrdersAdminRelations[2].admin_user"
-                ng-options="user as user.fullName for user in vm.users track by user.id">
-            <option value=""></option>
-        </select>
+
+        <ui-select multiple ng-model="vm.selectedingestBy" theme="bootstrap"
+                   ng-disabled="ctrl.disabled" close-on-select="false"
+                   style="width: 200px;" title="Choose a color"> <ui-select-match
+            placeholder="Select ingest by...">{{$item.admin_user.fullName}}</ui-select-match>
+            <ui-select-choices
+                repeat="admin in vm.ingestBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
+        </ui-select>
     </div>
 </div>
+<br>
 <div class="row">
     <label class="col-md-1 control-label small" for="textinput">Print</label>
     <div class="col-sm-2">
-        <select class="form-control input-sm" id="field_vm.adminRelationDTOs[6].admin_user"
-                name="assignedToUser"
-                ng-model="vm.workOrderDTO.workOrdersAdminRelations[3].admin_user"
-                ng-options="user as user.fullName for user in vm.users track by user.id">
-            <option value=""></option>
-        </select>
+
+        <ui-select multiple ng-model="vm.selectedprintBy" theme="bootstrap"
+                   ng-disabled="ctrl.disabled" close-on-select="false"
+                   style="width: 200px;" title="Choose a color"> <ui-select-match
+            placeholder="Select print by...">{{$item.admin_user.fullName}}</ui-select-match>
+            <ui-select-choices
+                repeat="admin in vm.printBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
+        </ui-select>
     </div>
 
-
-    <label class="col-md-1 control-label small" for="textinput">Upload/HDD Transfer</label>
+    <label class="col-md-1 control-label small" for="textinput">Upload/HDD
+        Transfer </label>
     <div class="col-sm-2">
-        <select class="form-control input-sm" id="field_vm.adminRelationDTOs[7].admin_user"
-                name="assignedToUser"
-                ng-model="vm.workOrderDTO.workOrdersAdminRelations[4].admin_user"
-                ng-options="user as user.fullName for user in vm.users track by user.id">
-            <option value=""></option>
-
-        </select>
+        <ui-select multiple ng-model="vm.selecteduploadBy" theme="bootstrap"
+                   ng-disabled="ctrl.disabled" close-on-select="false"
+                   style="width: 200px;" title="Choose a color"> <ui-select-match
+            placeholder="Select upload by...">{{$item.admin_user.fullName}}</ui-select-match>
+            <ui-select-choices
+                repeat="admin in vm.uploadBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
+        </ui-select>
     </div>
 
     <label class="col-md-1 control-label small" for="textinput">Archived</label>
     <div class="col-sm-2">
-        <select class="form-control input-sm" id="field_vm.adminRelationDTOs[8].admin_user"
-                name="assignedToUser"
-                ng-model="vm.workOrderDTO.workOrdersAdminRelations[8].admin_user"
-                ng-options="user as user.fullName for user in vm.users track by user.id">
-            <option value=""></option>
-        </select>
+
+        <ui-select multiple ng-model="vm.selectedarchivedBy"
+                   theme="bootstrap" ng-disabled="ctrl.disabled"
+                   close-on-select="false" style="width: 200px;" title="Choose a color">
+            <ui-select-match placeholder="Select archived by...">{{$item.admin_user.fullName}}</ui-select-match>
+            <ui-select-choices
+                repeat="admin in vm.archivedBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
+        </ui-select>
     </div>
 </div>
+
 <hr>
 
 

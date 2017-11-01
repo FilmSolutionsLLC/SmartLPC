@@ -1,6 +1,6 @@
 package com.fps.repository;
 
-import com.fps.domain.Contacts;
+import com.fps.domain.Contact;
 import com.fps.domain.ProjectRoles;
 import com.fps.domain.Projects;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,9 +31,9 @@ public interface ProjectRolesRepository extends JpaRepository<ProjectRoles, Long
     Set<ProjectRoles> findByProjectAndRelationshipType(Projects projects, String MainC, String UPub);
 
     @Query("select  p from ProjectRoles p where p.project = ?1 and p.contact <> ?2")
-    Set<ProjectRoles> findByProjectAndContact(Projects projects, Contacts contacts);
+    Set<ProjectRoles> findByProjectAndContact(Projects projects, Contact contact);
 
     @Transactional
-    List<ProjectRoles> removeByContact(Contacts contact);
+    List<ProjectRoles> removeByContact(Contact contact);
 
 }

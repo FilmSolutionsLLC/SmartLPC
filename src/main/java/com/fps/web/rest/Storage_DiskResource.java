@@ -187,15 +187,15 @@ public class Storage_DiskResource {
 	}
 
 	@SuppressWarnings("resource")
-	@RequestMapping(value = "/largest/storage-disks", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/largest/storage-disks", method = RequestMethod.GET,  produces = "text/plain")
 	@Timed
-	public Storage_Disk largestDisk() throws URISyntaxException {
+	public String largestDisk() throws URISyntaxException {
 		log.debug("REST request to get a page of Storage_Disks");
 		currentTenantIdentifierResolver.setTenant(SLAVE);
-
+		String everything = null;
 		try {
 
-		
+
 			final BufferedReader br = new BufferedReader(new FileReader(largestBrick));
 			StringBuilder sb = new StringBuilder();
 			String line = br.readLine();
@@ -204,21 +204,20 @@ public class Storage_DiskResource {
 				sb.append(line);
 				sb.append(System.lineSeparator());
 				line = br.readLine();
-				
 			}
-			String everything = sb.toString().trim();
+			everything = sb.toString().trim();
 			log.info("Largest Drive : "+everything);
-			final Storage_Disk storage_Disk = storage_DiskRepository.findByName(everything);
-			return storage_Disk;
+			//final Storage_Disk storage_Disk = storage_DiskRepository.findByName(everything);
+			return everything;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return null;
-
 	}
 
 }

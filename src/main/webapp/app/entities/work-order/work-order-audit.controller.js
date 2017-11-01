@@ -13,7 +13,7 @@
 	function WorkOrderAuditController( $http, $scope, $state) {
 
 		var vm = this;
-		
+
 
 		vm.workOrders = [];
 		$http({
@@ -50,16 +50,16 @@
 			$scope.currentPage = 1; // reset to first paghe
 		};
 
-		$http({
+		/*$http({
 			method : 'GET',
 			url : 'api/grouped/work-orders'
 		}).then(function(response) {
 			vm.groupedWorkOrders = response.data;
 			// console.log("GroupWorkOrders : " +
 			// JSON.stringify(vm.groupedWorkOrders));
-		});
+		});*/
 
-		$http({
+		/*$http({
 			url : "api/_search/filters/work-orders",
 			method : "GET",
 			params : {
@@ -69,7 +69,7 @@
 		}).then(function(response) {
 			vm.wo = response.data;
 			// console.log("WorkOrders : " + JSON.stringify(vm.wo));
-		});
+		});*/
 
 	}
 })();

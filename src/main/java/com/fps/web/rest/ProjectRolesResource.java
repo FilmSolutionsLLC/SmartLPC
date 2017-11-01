@@ -2,7 +2,6 @@ package com.fps.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.fps.config.util.CurrentTenantIdentifierResolverImpl;
-import com.fps.domain.Contacts;
 import com.fps.domain.ProjectRoles;
 import com.fps.domain.User;
 import com.fps.elastics.search.ProjectRolesSearchRepository;
@@ -27,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -83,15 +82,15 @@ public class ProjectRolesResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("projectRoles", "idexists", "A new projectRoles cannot already have an ID")).body(null);
         }
         currentTenantIdentifierResolver.setTenant(MASTER);
-        if (projectRoles.getContact() == null) {
+       /* if (projectRoles.getContact() == null) {
             Contacts contacts = contactsRepository.findOne((long) 5181);
             projectRoles.setContact(contacts);
             projectRoles.setRelationship_type("PKO_Tag");
-        }
+        }*/
         User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
 
         projectRoles.setCreatedByAdminUser(user);
-        projectRoles.setCreatedDate(LocalDate.now());
+        projectRoles.setCreatedDate(ZonedDateTime.now());
 
         log.info("Saving This Project Roles : " + projectRoles.toString());
         ProjectRoles result = projectRolesRepository.save(projectRoles);
@@ -122,7 +121,7 @@ public class ProjectRolesResource {
         final User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
 
         projectRoles.setUpdatedByAdminUser(user);
-        projectRoles.setUpdatedDate(LocalDate.now());
+        projectRoles.setUpdatedDate(ZonedDateTime.now());
 
         currentTenantIdentifierResolver.setTenant(MASTER);
         ProjectRoles result = projectRolesRepository.save(projectRoles);

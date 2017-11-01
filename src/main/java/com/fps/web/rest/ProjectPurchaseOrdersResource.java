@@ -6,6 +6,7 @@ import com.fps.domain.ProjectPurchaseOrders;
 import com.fps.domain.Projects;
 import com.fps.elastics.search.ProjectPurchaseOrdersSearchRepository;
 import com.fps.repository.ProjectPurchaseOrdersRepository;
+import com.fps.web.rest.dto.PurchaseOrderDTO;
 import com.fps.web.rest.util.HeaderUtil;
 import com.fps.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -16,15 +17,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
@@ -44,6 +45,8 @@ public class ProjectPurchaseOrdersResource {
     @Inject
     private ProjectPurchaseOrdersSearchRepository projectPurchaseOrdersSearchRepository;
 
+    @Inject
+    private JdbcTemplate jdbcTemplate;
 
     @Inject
     private CurrentTenantIdentifierResolverImpl currentTenantIdentifierResolver;
@@ -189,14 +192,29 @@ public class ProjectPurchaseOrdersResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public Set<ProjectPurchaseOrders> getProjectPurchaseOrdersByProject(@PathVariable Long id) {
+    public List<PurchaseOrderDTO> getProjectPurchaseOrdersByProject(@PathVariable Long id) {
         log.debug("REST request to get ProjectPurchaseOrders : {}", id);
         currentTenantIdentifierResolver.setTenant(SLAVE);
         Projects project = new Projects();
         project.setId(id);
         Set<ProjectPurchaseOrders> projectPurchaseOrders = projectPurchaseOrdersRepository.findByProjectID(project);
-        return projectPurchaseOrders;
+
+        String sql = "select po_number,po_notes from project_purchase_orders where project_id = "+id;
+
+        /*String query = jdbcTemplate.queryForObject(sql, new Object[] {}, String.class);
+        List<Map<String, Object>> pos = jdbcTemplate.queryForList(query);
+        List<PurchaseOrderTemp> purchaseOrderTemps = new ArrayList<>();
+        for (Map po : pos) {
+            PurchaseOrderTemp purchaseOrderTemp = new PurchaseOrderTemp();
+            purchaseOrderTemp.setPo_number((String) po.get("po_number"));
+            purchaseOrderTemp.setPo_notes((String) po.get("po_notes"));
+            purchaseOrderTemps.add(purchaseOrderTemp);
+        }*/
+        List<PurchaseOrderDTO> purchaseOrderTemps = jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(PurchaseOrderDTO.class));
+        return purchaseOrderTemps;
     }
+
+
 
 
 }

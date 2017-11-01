@@ -8,7 +8,7 @@
     stateConfig.$inject = ['$stateProvider'];
 
     function stateConfig($stateProvider) {
-    	
+
 
         $stateProvider
             .state('work-order', {
@@ -73,7 +73,8 @@
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'WorkOrder', function ($stateParams, WorkOrder) {
-                        return WorkOrder.get({id: $stateParams.id});
+                        return WorkOrder.get({id: $stateParams.id}).$promise;
+                        ;
                     }]
                 }
             })
@@ -212,7 +213,8 @@
                                     ingestBy: null,
                                     printBy: null,
                                     uploadBy: null,
-                                    project: null
+                                    project: null,
+                                    type: null
 
                                 };
                             }
@@ -252,7 +254,7 @@
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'WorkOrder', function ($stateParams, WorkOrder) {
-                        return WorkOrder.get({id: $stateParams.id});
+                        return WorkOrder.get({id: $stateParams.id}).$promise;
                     }]
                 }
             })
@@ -287,22 +289,22 @@
                     authorities: ['ROLE_USER'],
                     pageTitle: 'smartLpcApp.projectinfo.home.title'
                 },
-               /* views: {
-                    'content@': {
-                        templateUrl: 'app/entities/work-order/work-order-audit.html',
-                        controller: 'WorkOrderAuditController',
-                        controllerAs: 'vm'
-                    }
-                },
-                resolve: {
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('workOrder');
-                        $translatePartialLoader.addPart('global');
-                        return $translate.refresh();
-                    }]
-                }*/
+                /* views: {
+                     'content@': {
+                         templateUrl: 'app/entities/work-order/work-order-audit.html',
+                         controller: 'WorkOrderAuditController',
+                         controllerAs: 'vm'
+                     }
+                 },
+                 resolve: {
+                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                         $translatePartialLoader.addPart('workOrder');
+                         $translatePartialLoader.addPart('global');
+                         return $translate.refresh();
+                     }]
+                 }*/
                 views: {
-                    'content@': {       
+                    'content@': {
                         controller: 'ProjectInfoRouter',
                         controllerAs: 'vm'
                     }
@@ -314,7 +316,7 @@
                         return $translate.refresh();
                     }]
                 }
-                
+
             })
             .state('work-order-audit', {
                 parent: 'entity',
@@ -382,41 +384,21 @@
                     }]
                 }
             })
-            .state('work-order-processing-log', {
+            .state('work-order-included-comp', {
                 parent: 'entity',
-                url: '/work-order-processing-log?page&sort&search',
+                url: '/work-order-included-comp',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'smartLpcApp.projectinfo.home.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'app/entities/work-order/work-order-processing-log.html',
-                        controller: 'WorkOrderController',
+                        templateUrl: 'app/entities/work-order/work-order-included-comp.html',
+                        controller: 'WorkOrderIncludedCompController',
                         controllerAs: 'vm'
                     }
                 },
-                params: {
-                    page: {
-                        value: '1',
-                        squash: true
-                    },
-                    sort: {
-                        value: 'id,asc',
-                        squash: true
-                    },
-                    search: null
-                },
                 resolve: {
-                    pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
-                        return {
-                            page: PaginationUtil.parsePage($stateParams.page),
-                            sort: $stateParams.sort,
-                            predicate: PaginationUtil.parsePredicate($stateParams.sort),
-                            ascending: PaginationUtil.parseAscending($stateParams.sort),
-                            search: $stateParams.search
-                        };
-                    }],
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('workOrder');
                         $translatePartialLoader.addPart('global');
@@ -426,10 +408,10 @@
             })
             .state('work-order-invoice', {
                 parent: 'entity',
-                url: '/work-order-invoice?page&sort&search',
+                url: '/work-order-invoice',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'smartLpcApp.work-order.home.title'
+                    pageTitle: 'smartLpcApp.projectinfo.home.title'
                 },
                 views: {
                     'content@': {
@@ -438,69 +420,7 @@
                         controllerAs: 'vm'
                     }
                 },
-                params: {
-                    page: {
-                        value: '1',
-                        squash: true
-                    },
-                    sort: {
-                        value: 'id,asc',
-                        squash: true
-                    },
-                    search: null
-                },
                 resolve: {
-                    pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
-                        return {
-                            page: PaginationUtil.parsePage($stateParams.page),
-                            sort: $stateParams.sort,
-                            predicate: PaginationUtil.parsePredicate($stateParams.sort),
-                            ascending: PaginationUtil.parseAscending($stateParams.sort),
-                            search: $stateParams.search
-                        };
-                    }],
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('workOrder');
-                        $translatePartialLoader.addPart('global');
-                        return $translate.refresh();
-                    }]
-                }
-            })
-            .state('work-order-included-comp', {
-                parent: 'entity',
-                url: '/work-order-included-comp-log?page&sort&search',
-                data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'smartLpcApp.work-order.home.title'
-                },
-                views: {
-                    'content@': {
-                        templateUrl: 'app/entities/work-order/work-order-included-comp.html',
-                        controller: 'WorkOrderController',
-                        controllerAs: 'vm'
-                    }
-                },
-                params: {
-                    page: {
-                        value: '1',
-                        squash: true
-                    },
-                    sort: {
-                        value: 'id,asc',
-                        squash: true
-                    },
-                    search: null
-                },
-                resolve: {
-                    pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
-                        return {
-                            page: PaginationUtil.parsePage($stateParams.page),
-                            sort: $stateParams.sort,
-                            predicate: PaginationUtil.parsePredicate($stateParams.sort),
-                            ascending: PaginationUtil.parseAscending($stateParams.sort),
-                            search: $stateParams.search
-                        };
-                    }],
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('workOrder');
                         $translatePartialLoader.addPart('global');
@@ -510,15 +430,105 @@
             })
             .state('work-order-my-open', {
                 parent: 'entity',
-                url: '/work-order-my-open?page&sort&search',
+                url: '/work-order-my-open',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'smartLpcApp.projectinfo.home.title'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'app/entities/work-order/work-order-my-open.html',
+                        controller: 'WorkOrderMyOpenController',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('workOrder');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }
+            })
+
+
+            .state('work-order-processing-log', {
+                parent: 'entity',
+                url: '/work-order-processing-log',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'smartLpcApp.projectinfo.home.title'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'app/entities/work-order/work-order-processing-log.html',
+                        controller: 'WorkOrderProcessingController',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('workOrder');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }
+            })
+
+
+        /*.state('work-order-invoice', {
+            parent: 'entity',
+            url: '/work-order-invoice?page&sort&search',
+            data: {
+                authorities: ['ROLE_USER'],
+                pageTitle: 'smartLpcApp.work-order.home.title'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/entities/work-order/work-order-invoice.html',
+                    controller: 'WorkOrderInvoiceController',
+                    controllerAs: 'vm'
+                }
+            },
+            params: {
+                page: {
+                    value: '1',
+                    squash: true
+                },
+                sort: {
+                    value: 'id,asc',
+                    squash: true
+                },
+                search: null
+            },
+            resolve: {
+                pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                    return {
+                        page: PaginationUtil.parsePage($stateParams.page),
+                        sort: $stateParams.sort,
+                        predicate: PaginationUtil.parsePredicate($stateParams.sort),
+                        ascending: PaginationUtil.parseAscending($stateParams.sort),
+                        search: $stateParams.search
+                    };
+                }],
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('workOrder');
+                    $translatePartialLoader.addPart('global');
+                    return $translate.refresh();
+                }]
+            }
+        })*/
+        /*    .state('work-order-included-comp', {
+                parent: 'entity',
+                url: '/work-order-included-comp-log?page&sort&search',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'smartLpcApp.work-order.home.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'app/entities/work-order/work-order-my-open.html',
-                        controller: 'WorkOrderMyOpenController',
+                        templateUrl: 'app/entities/work-order/work-order-included-comp.html',
+                        controller: 'WorkOrderInvoicedCompController',
                         controllerAs: 'vm'
                     }
                 },
@@ -550,48 +560,94 @@
                     }]
                 }
             })
-            .state('work-order-processing', {
-                parent: 'entity',
-                url: '/processing/work-order?page&sort&search',
-                data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'smartLpcApp.workOrder.home.title'
-                },
-                views: {
-                    'content@': {
-                        templateUrl: 'app/entities/work-order/work-order-processing-log.html',
-                        controller: 'WorkOrderProcessingController',
-                        controllerAs: 'vm'
-                    }
-                },
-                params: {
-                    page: {
-                        value: '1',
-                        squash: true
-                    },
-                    sort: {
-                        value: 'id,asc',
-                        squash: true
-                    },
-                    search: null
-                },
-                resolve: {
-                    pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
-                        return {
-                            page: PaginationUtil.parsePage($stateParams.page),
-                            sort: $stateParams.sort,
-                            predicate: PaginationUtil.parsePredicate($stateParams.sort),
-                            ascending: PaginationUtil.parseAscending($stateParams.sort),
-                            search: $stateParams.search
-                        };
-                    }],
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('workOrder');
-                        $translatePartialLoader.addPart('global');
-                        return $translate.refresh();
-                    }]
+            */
+
+
+        /* .state('work-order-my-open', {
+             parent: 'entity',
+             url: '/work-order-my-open?page&sort&search',
+             data: {
+                 authorities: ['ROLE_USER'],
+                 pageTitle: 'smartLpcApp.work-order.home.title'
+             },
+             views: {
+                 'content@': {
+                     templateUrl: 'app/entities/work-order/work-order-my-open.html',
+                     controller: 'WorkOrderMyOpenController',
+                     controllerAs: 'vm'
+                 }
+             },
+             params: {
+                 page: {
+                     value: '1',
+                     squash: true
+                 },
+                 sort: {
+                     value: 'id,asc',
+                     squash: true
+                 },
+                 search: null
+             },
+             resolve: {
+                 pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                     return {
+                         page: PaginationUtil.parsePage($stateParams.page),
+                         sort: $stateParams.sort,
+                         predicate: PaginationUtil.parsePredicate($stateParams.sort),
+                         ascending: PaginationUtil.parseAscending($stateParams.sort),
+                         search: $stateParams.search
+                     };
+                 }],
+                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                     $translatePartialLoader.addPart('workOrder');
+                     $translatePartialLoader.addPart('global');
+                     return $translate.refresh();
+                 }]
+             }
+         })*/
+        /*.state('work-order-processing', {
+            parent: 'entity',
+            url: '/processing/work-order?page&sort&search',
+            data: {
+                authorities: ['ROLE_USER'],
+                pageTitle: 'smartLpcApp.workOrder.home.title'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/entities/work-order/work-order-processing-log.html',
+                    controller: 'WorkOrderProcessingController',
+                    controllerAs: 'vm'
                 }
-            });
+            },
+            params: {
+                page: {
+                    value: '1',
+                    squash: true
+                },
+                sort: {
+                    value: 'id,asc',
+                    squash: true
+                },
+                search: null
+            },
+            resolve: {
+                pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                    return {
+                        page: PaginationUtil.parsePage($stateParams.page),
+                        sort: $stateParams.sort,
+                        predicate: PaginationUtil.parsePredicate($stateParams.sort),
+                        ascending: PaginationUtil.parseAscending($stateParams.sort),
+                        search: $stateParams.search
+                    };
+                }],
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('workOrder');
+                    $translatePartialLoader.addPart('global');
+                    return $translate.refresh();
+                }]
+            }
+        });*/
+
     }
 
 })();

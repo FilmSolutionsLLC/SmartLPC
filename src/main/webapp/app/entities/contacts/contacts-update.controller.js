@@ -11,7 +11,7 @@
 	function ContactsUpdateController(entity, $state, $http, $uibModal, $scope,
 			$rootScope, $stateParams, Contacts, Lookups, Departments, User) {
 		console.log("Contact Update Controller");
-		
+
 		var vm = this;
 		vm.contactDTO = entity;
 		vm.contacts = [];
@@ -21,7 +21,7 @@
 		vm.contacts = vm.contactDTO.contacts;
 		vm.relatedContacts = vm.contactDTO.contactRelationships;
 
-	
+
 		vm.load = function(id) {
 			console.log("Contact Update Controller :  vm.load");
 			Contacts.get({
@@ -135,11 +135,15 @@
 									vm.contactDTO.contactRelationships.pop();
 									vm.contactDTO.contactRelationships.push({
 										"isPrimaryContact" : false,
-										"contact_b" : vm.currrentOBJ.data
+										"contact_b" : vm.currrentOBJ.data,
+                                        "relationshipType" : vm.currrentOBJ.data.typeValue
 									});
 									vm.count++;
 
+									console.log("Data : "+JSON.stringify(vm.contactDTO.contactRelationships));
+
 									console
+
 											.log("related Contacts size "
 													+ vm.contactDTO.contactRelationships.length);
 								} else {
@@ -154,7 +158,7 @@
 			console.log("updating contact");
 			/*
 			 * vm.contactDTOs = {
-			 * 
+			 *
 			 * "contacts": vm.contacts, "contactRelationships":
 			 * vm.relatedContacts };
 			 */
@@ -167,8 +171,23 @@
 
 		var onSaveSuccess = function(result) {
 			vm.isSaving = false;
-			$scope.$emit('smartLpcApp:contactsUpdate', result);
+			//$scope.$emit('smartLpcApp:contactsUpdate', result);
 			// $uibModalInstance.close(result);
+            $ngConfirm({
+                title: 'Success!',
+                content: "Contact : <strong>"+vm.contacts.fullName+"</strong> has been updated",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+                        }
+                    }
+                }
+            });
 			$state.go('contacts', {}, {
 				reload : true
 			});// use for redirecting ...
@@ -185,7 +204,7 @@
 						+ JSON.stringify(vm.relatedContact));
 		/*
 		 * for (var i = 0; i < vm.contactDTO.contactRelationships.length; i++) {
-		 * 
+		 *
 		 * $scope.related.push({'id': 'related' + i}); console.log("related
 		 * pushed . ." + $scope.related.length); }
 		 */
@@ -197,7 +216,8 @@
 			// $scope.related.push({'id': 'related' + newItemNo});
 			vm.contactDTO.contactRelationships.push({
 				"isPrimaryContact" : false,
-				"contact_b" : null
+				"contact_b" : null,
+                "relationshipType": null
 			});
 
 		};
@@ -218,7 +238,7 @@
 				controllerAs : 'vm',
 				size : 'md',
 				scope : $scope,
-				
+
 
 				resolve : {
 					id : function() {

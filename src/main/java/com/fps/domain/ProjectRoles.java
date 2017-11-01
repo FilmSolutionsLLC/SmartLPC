@@ -1,15 +1,14 @@
 package com.fps.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -29,7 +28,7 @@ public class ProjectRoles implements Serializable {
 
     @Column(name = "relationship_type")
     private String relationship_type;
-    
+
     @Column(name = "solo_kill_pct")
     private Float soloKillPct;
 
@@ -37,10 +36,10 @@ public class ProjectRoles implements Serializable {
     private Float groupKillPct;
 
     @Column(name = "mini_final_dt")
-    private LocalDate miniFullDt;
+    private ZonedDateTime miniFullDt;
 
     @Column(name = "full_final_dt")
-    private LocalDate fullFinalDt;
+    private ZonedDateTime fullFinalDt;
 
     @Column(name = "disabled")
     private Boolean disabled;
@@ -49,7 +48,7 @@ public class ProjectRoles implements Serializable {
     private String characterName;
 
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private ZonedDateTime startDate;
 
     @Column(name = "days_working")
     private Integer daysWorking;
@@ -67,18 +66,18 @@ public class ProjectRoles implements Serializable {
     private String hotkeyValue;
 
     @Column(name = "expire_date")
-    private LocalDate expireDate;
+    private ZonedDateTime expireDate;
 
     @Column(name = "tertiary_kill_pct")
     private Float tertiaryKillPct;
 
     @Column(name = "created_date")
     @JsonIgnore
-    private LocalDate createdDate;
+    private ZonedDateTime createdDate;
 
     @Column(name = "updated_date")
     @JsonIgnore
-    private LocalDate updatedDate;
+    private ZonedDateTime updatedDate;
 
     @Column(name = "welcome_message")
     String welcomeMessage;
@@ -88,8 +87,8 @@ public class ProjectRoles implements Serializable {
     private Projects project;
 
     @ManyToOne
-    private Contacts contact;
-    
+    private Contact contact;
+
     @ManyToOne
     @JsonIgnore
     private User createdByAdminUser;
@@ -122,19 +121,19 @@ public class ProjectRoles implements Serializable {
         this.groupKillPct = groupKillPct;
     }
 
-    public LocalDate getMiniFullDt() {
+    public ZonedDateTime getMiniFullDt() {
         return miniFullDt;
     }
 
-    public void setMiniFullDt(LocalDate miniFullDt) {
+    public void setMiniFullDt(ZonedDateTime miniFullDt) {
         this.miniFullDt = miniFullDt;
     }
 
-    public LocalDate getFullFinalDt() {
+    public ZonedDateTime getFullFinalDt() {
         return fullFinalDt;
     }
 
-    public void setFullFinalDt(LocalDate fullFinalDt) {
+    public void setFullFinalDt(ZonedDateTime fullFinalDt) {
         this.fullFinalDt = fullFinalDt;
     }
 
@@ -154,11 +153,11 @@ public class ProjectRoles implements Serializable {
         this.characterName = characterName;
     }
 
-    public LocalDate getStartDate() {
+    public ZonedDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(ZonedDateTime startDate) {
         this.startDate = startDate;
     }
 
@@ -202,11 +201,11 @@ public class ProjectRoles implements Serializable {
         this.hotkeyValue = hotkeyValue;
     }
 
-    public LocalDate getExpireDate() {
+    public ZonedDateTime getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(LocalDate expireDate) {
+    public void setExpireDate(ZonedDateTime expireDate) {
         this.expireDate = expireDate;
     }
 
@@ -218,19 +217,19 @@ public class ProjectRoles implements Serializable {
         this.tertiaryKillPct = tertiaryKillPct;
     }
 
-    public LocalDate getCreatedDate() {
+    public ZonedDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
+    public void setCreatedDate(ZonedDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
-    public LocalDate getUpdatedDate() {
+    public ZonedDateTime getUpdatedDate() {
         return updatedDate;
     }
 
-    public void setUpdatedDate(LocalDate updatedDate) {
+    public void setUpdatedDate(ZonedDateTime updatedDate) {
         this.updatedDate = updatedDate;
     }
 
@@ -242,11 +241,11 @@ public class ProjectRoles implements Serializable {
         this.project = projects;
     }
 
-    public Contacts getContact() {
+    public Contact getContact() {
         return contact;
     }
 
-    public void setContact(Contacts contacts) {
+    public void setContact(Contact contacts) {
         this.contact = contacts;
     }
 
@@ -334,7 +333,7 @@ public class ProjectRoles implements Serializable {
     public ProjectRoles() {
     }
 
-    public ProjectRoles(Projects project, String relationship_type, Float soloKillPct, Float groupKillPct, LocalDate miniFullDt, LocalDate fullFinalDt, Boolean disabled, String characterName, LocalDate startDate, Integer daysWorking, Boolean excSologroup, String notes, String tagName, String hotkeyValue, LocalDate expireDate, Float tertiaryKillPct, LocalDate createdDate, LocalDate updatedDate, String welcomeMessage, Contacts contact, User createdByAdminUser, User updatedByAdminUser) {
+    public ProjectRoles(Projects project, String relationship_type, Float soloKillPct, Float groupKillPct, ZonedDateTime miniFullDt, ZonedDateTime fullFinalDt, Boolean disabled, String characterName, ZonedDateTime startDate, Integer daysWorking, Boolean excSologroup, String notes, String tagName, String hotkeyValue, ZonedDateTime expireDate, Float tertiaryKillPct, ZonedDateTime createdDate, ZonedDateTime updatedDate, String welcomeMessage, Contact contact, User createdByAdminUser, User updatedByAdminUser) {
         this.project = project;
         this.relationship_type = relationship_type;
         this.soloKillPct = soloKillPct;

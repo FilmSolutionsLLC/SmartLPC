@@ -1,5 +1,6 @@
 package com.fps.repository;
 
+import com.fps.domain.Contact;
 import com.fps.domain.ContactRelationships;
 
 import com.fps.domain.Contacts;
@@ -22,7 +23,7 @@ public interface ContactRelationshipsRepository extends JpaRepository<ContactRel
 
 
     @Query("select contactRelationships from ContactRelationships contactRelationships where contactRelationships.contact_a= :contact")
-    List<ContactRelationships> findByContact_A(@Param("contact") Contacts contacts);
+    List<ContactRelationships> findByContact_A(@Param("contact") Contact contact);
 
     @Transactional
     @Modifying

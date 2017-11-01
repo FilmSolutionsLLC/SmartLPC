@@ -141,11 +141,7 @@ public class ElasticSearchUpdater {
 		try {
 			final List<WorkOrder> workOrderList = workOrderRepository.findAll();
 
-			//workOrderSearchRepository.save(workOrderList);
-			for(WorkOrder wo: workOrderList){
-            	System.out.println("Saving to ElasticSearch : "+wo.getId());
-            	workOrderSearchRepository.save(wo);
-			}
+			workOrderSearchRepository.save(workOrderList);
 			return new ResponseEntity<Authenticator.Success>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,10 +1,10 @@
 package com.fps.repository;
 
+import com.fps.domain.Contact;
 import com.fps.domain.ContactPrivileges;
-import com.fps.domain.Contacts;
 import com.fps.domain.Projects;
-
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -24,13 +24,13 @@ public interface ContactPrivilegesRepository extends JpaRepository<ContactPrivil
 
     List<ContactPrivileges> findByProject(Projects projects);
 
- 
+
     @Transactional
     void deleteByProject(Projects projects);
 
-    List<ContactPrivileges> findByContact(Contacts contact);
+    List<ContactPrivileges> findByContact(Contact contact);
 
     @Transactional
-    List<ContactPrivileges> removeByContact(Contacts contact);
+    List<ContactPrivileges> removeByContact(Contact contact);
 
 }

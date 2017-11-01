@@ -1,17 +1,17 @@
 package com.fps.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.springframework.data.elasticsearch.annotations.Document;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * A WorkOrder.
@@ -190,13 +190,15 @@ public class WorkOrder implements Serializable {
     private Lookups creditLocation;
 
     @ManyToOne
+    @NotFound(action = NotFoundAction.IGNORE)
     private Projects project;
 
     @ManyToOne
     private User assignedToUser;
 
     @ManyToOne
-    private Contacts requestor;
+    @NotFound(action = NotFoundAction.IGNORE)
+    private Contact requestor;
 
     @ManyToOne
     @JoinColumn(name = "created_by")
@@ -223,10 +225,11 @@ public class WorkOrder implements Serializable {
     @JoinColumn(name = "audited_by")
     private User auditedBy;
 
-  
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="workOrder",fetch = FetchType.EAGER) 
+
+   /* @OneToMany(cascade=CascadeType.PERSIST, mappedBy="workOrder",fetch = FetchType.EAGER)
+
     Set<WorkOrdersAdminRelation> workOrdersAdminRelations;
-    
+*/
     public Long getId() {
         return id;
     }
@@ -659,11 +662,11 @@ public class WorkOrder implements Serializable {
         this.assignedToUser = user;
     }
 
-    public Contacts getRequestor() {
+    public Contact getRequestor() {
         return requestor;
     }
 
-    public void setRequestor(Contacts contacts) {
+    public void setRequestor(Contact contacts) {
         this.requestor = contacts;
     }
 
@@ -715,13 +718,13 @@ public class WorkOrder implements Serializable {
         this.auditedBy = user;
     }
 
-    public Set<WorkOrdersAdminRelation> getWorkOrdersAdminRelations() {
+   /* public Set<WorkOrdersAdminRelation> getWorkOrdersAdminRelations() {
 		return workOrdersAdminRelations;
 	}
 
 	public void setWorkOrdersAdminRelations(Set<WorkOrdersAdminRelation> workOrdersAdminRelations) {
 		this.workOrdersAdminRelations = workOrdersAdminRelations;
-	}
+	}*/
 
 	@Override
     public boolean equals(Object o) {

@@ -38,11 +38,11 @@ public final class Constants {
 
     public static final String OPEN_WORK_ORDERS = "open_work_orders";
     public static final String OPEN_WORK_ORDERS_GROUPED = "open_work_orders_grouped";
-    public static final String PROCESSING_LOG = "open_work_orders_grouped";
+    public static final String PROCESSING_LOG = "processsing_log";
     public static final String ALL_WORK_ORDERS = "all_open_work_orders";
     public static final String TO_AUDIT = "to_audit";
     public static final String TO_INVOICE = "to_invoice";
-    public static final String INCLUDED_COMP = "included/comp";
+    public static final String INCLUDED_COMP = "included_comp";
     public static final String MY_OPEN_WORK_ORDERS = "my_open_work_orders";
 
 

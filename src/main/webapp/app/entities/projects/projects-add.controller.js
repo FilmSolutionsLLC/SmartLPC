@@ -4,16 +4,17 @@
 	angular.module('smartLpcApp').controller('ProjectsAddController',
 			ProjectsAddController);
 
-	ProjectsAddController.$inject = [ '$uibModal', '$rootScope', '$state',
+	ProjectsAddController.$inject = [ '$ngConfirm','$uibModal', '$rootScope', '$state',
 			'$scope', '$stateParams', 'entity', 'Projects', 'Lookups',
 			'Contacts', 'User', 'Departments', 'Storage_Disk', '$http' ];
 
-	function ProjectsAddController($uibModal, $rootScope, $state, $scope,
+	function ProjectsAddController($ngConfirm,$uibModal, $rootScope, $state, $scope,
 			$stateParams, entity, Projects, Lookups, Contacts, User,
 			Departments, Storage_Disk, $http) {
 
-		
+
 		console.log("Project Add Controller");
+
 		$scope.addImages = function() {
 			var f = document.getElementById('file').files[0], r = new FileReader();
 			$scope.logos = f;
@@ -44,7 +45,7 @@
 
 		vm.users = User.query();
 		vm.departmentss = Departments.query();
-		vm.storage_disks = Storage_Disk.query();
+
 		vm.load = function(id) {
 			Projects.get({
 				id : id
@@ -52,7 +53,10 @@
 				vm.projects = result;
 			});
 		};
+
+
 		vm.largestBrick = {};
+
 		console.log("Getting largest brick");
 		$http({
 			method : 'GET',
@@ -62,8 +66,9 @@
 			console.log("Largest Brick ", vm.largestBrick);
 			vm.projects.imageLocation = vm.largestBrick;
 		}, function errorCallback(response) {
-			
+
 		});
+
 
 		vm.status = {};
 		$http({
@@ -105,11 +110,26 @@
 
 		});
 
-		
+
 		var onSaveSuccess = function(result) {
 			console.log('saving project...');
-			$scope.$emit('smartLpcApp:projectsUpdate', result);
+			//$scope.$emit('smartLpcApp:projectsUpdate', result);
 			// $uibModalInstance.close(result);
+            $ngConfirm({
+                title: 'Success!',
+                content: "Project : <strong>"+vm.projects.fullName+"</strong> has been created",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+                        }
+                    }
+                }
+            });
 			vm.isSaving = false;
 			$state.go('projects', {}, {
 				reload : true
@@ -132,7 +152,7 @@
 		vm.projects.fullName = '';
 		vm.projects.alfrescoTitle1 = '';
 		vm.projects.alfrescoTitle2 = '';
-		
+
 		String.prototype.toCamelCase = function() {
 			return this.replace(/^([A-Z])|\s(\w)/g, function(match, p1, p2,
 					offset) {
@@ -255,10 +275,10 @@
 			$scope.related.splice(index, 1);
 		};
 
-		vm.alert = function() {
-			console.log("esdadasdas");
-			window.alert("Wake up !!!!");
-		};
+            vm.alert = function() {
+                console.log("esdadasdas");
+                window.alert("Wake up !!!!");
+            };
 
 		$scope.talents = [];
 		vm.addTalent = function() {
@@ -275,8 +295,8 @@
 			vm.talents.splice(index, 1);
 			$scope.talents.splice(index, 1)
 		};
-		
-		
+
+
 		$scope.execs = [];
 		vm.addExec = function() {
 			var exec = $scope.execs.length + 1;
@@ -290,9 +310,9 @@
 		}
 
 		vm.talents = [];
-		
+
 		vm.execss = [];
-	
+
 		vm.relatedContact = [];
 
 		$rootScope
@@ -348,28 +368,36 @@
 						'field_vm.projects.mainContact')) {
 					vm.projectRoles[0] = {
 						"contact" : vm.currrentOBJ.data,
-						"relationship_type" : "Main Contact"
+						"relationship_type" : "Main Contact",
+                        "disabled" : false,
+                        "excSologroup": false,
 					};
 
 				} else if (angular.equals(vm.currrentOBJ.elementID,
 						'field_vm.projects.unitPublicist')) {
 					vm.projectRoles[1] = {
 						"contact" : vm.currrentOBJ.data,
-						"relationship_type" : "Unit Publicist"
+						"relationship_type" : "Unit Publicist",
+                        "disabled" : false,
+                        "excSologroup": false,
 					};
 
 				} else if (angular.equals(vm.currrentOBJ.elementID,
 						'field_vm.projects.unitPhotographer')) {
 					vm.projectRoles[2] = {
 						"contact" : vm.currrentOBJ.data,
-						"relationship_type" : "Unit Photographer"
+						"relationship_type" : "Unit Photographer",
+                        "disabled" : false,
+                        "excSologroup": false,
 					};
 
 				} else if (angular.equals(vm.currrentOBJ.elementID,
 						'field_vm.projects.labInfo')) {
 					vm.projectRoles[3] = {
 						"contact" : vm.currrentOBJ.data,
-						"relationship_type" : "Lab"
+						"relationship_type" : "Lab",
+                        "disabled" : false,
+                        "excSologroup": false,
 					};
 
 				} else if (angular.equals(vm.currrentOBJ.elementID,
@@ -388,6 +416,7 @@
 						"groupKillPct" : 25,
 						"characterName" : "",
 						"disabled" : false,
+                        "excSologroup": false,
 						"welcomeMessage" : ""
 					});
 					// get related too.

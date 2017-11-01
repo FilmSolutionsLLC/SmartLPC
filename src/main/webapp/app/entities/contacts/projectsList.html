@@ -57,10 +57,12 @@
                         <td class="small"><input type="checkbox" ng-model="vm.lockApproveRestriction"
                                                  ng-init="vm.lockApproveRestriction=false"></td>
                         <td class="extra-small">Download Privilege :</td>
+
                         <td class="small">
-                            <select ng-model="vm.downloadType"
-                                    ng-options="download.value for download in vm.downloadType"></select>
+                            <select ng-model="vm.downloadType" ng-options="download.id as download.value for download in vm.downloadTypeList"><option>{{download.value}}</option></select>
                         </td>
+
+
                     </tr>
                     <tr>
                         <td class="extra-small">Has Watermark :</td>
@@ -94,7 +96,9 @@
                         <td class="extra-small">Exclusives Management :</td>
                         <td class="small">
                             <select ng-model="vm.exclusives"
-                                    ng-options="exclusives.value for exclusives in vm.exclusives"></select>
+                                    ng-options="excl.id as excl.value for excl in vm.exclusivesList">
+                                <option>{{excl.value}}</option>
+                            </select>
                         </td>
                         <td class="extra-small">Can See Unpublished/Hidden :</td>
                         <td class="small"><input type="checkbox" ng-model="vm.seesUntagged"

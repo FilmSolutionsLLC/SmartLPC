@@ -73,7 +73,8 @@
 					// vm.currrentOBJ.data;
 					vm.relatedContacts.push({
 						"isPrimaryContact" : false,
-						"contact_b" : vm.currrentOBJ.data
+						"contact_b" : vm.currrentOBJ.data,
+                        "relationshipType": vm.currrentOBJ.data.typeValue
 					});
 					vm.count++;
 				} else {
@@ -152,7 +153,10 @@
 			// $uibModalInstance.close(result);
 			// $state.go('contacts', {}, {reload: true});// use for redirecting
 			// ...
-			console.log("data saved : " + JSON.stringify(result.data));
+            console.log("Just Saving....");
+			console.log("data saved : " + JSON.stringify(result));
+			console.log("data id : "+result.id);
+			$scope.savedID  = result.id;
 			$rootScope.savedContact.push(result);
             //alert("Contact : " + vm.contacts.fullName + " has been saved");
             $ngConfirm({

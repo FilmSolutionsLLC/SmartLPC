@@ -173,6 +173,18 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td class="extra-small">Exclusives:</td>
+                                <td class="small">
+                                    <select ng-model="vm.exclusives" ng-init="vm.exclusives=0">
+                                        <option value="0" class="extra-small" selected>
+                                            NONE
+                                        </option>
+                                        <option value="1" class="extra-small">BASIC</option>
+                                        <option value="2" class="extra-small">MASTER</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="extra-small">User can Print:</td>
                                 <td class="extra-small"><input type="checkbox" ng-model="vm.print"
                                                                ng-init="vm.print=false"></td>

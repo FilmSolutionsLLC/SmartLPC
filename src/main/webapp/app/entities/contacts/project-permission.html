@@ -153,8 +153,7 @@
             <td class="small"><input type="checkbox"
                                      ng-model="project.viewSensitive"></td>
 
-            <td class="small"><select ng-model="project.exclusives"
-                                      ng-options="excl.id as excl.value for excl in vm.exclusives">
+            <td class="small"><select ng-model="project.exclusives" ng-options="excl.id as excl.value for excl in vm.exclusives">
                 <option>{{excl.value}}</option>
             </select></td>
             <td class="small"><input type="checkbox"

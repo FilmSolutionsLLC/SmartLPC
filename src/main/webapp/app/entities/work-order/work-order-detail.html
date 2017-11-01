@@ -1,6 +1,6 @@
 <div print-section>
     <div print-remove>
-        <div class="row">
+        <div class="row pull-right">
             <button type="submit" class="btn btn-xs btn btn-primary"
                     ui-sref="work-order.edit({id:workOrderDTO.workOrder.id})">
                 Edit
@@ -153,12 +153,18 @@
                            ng-model="vm.workOrderDTO.workOrder.processingProofShipped"
                            readonly>
                 </div>
+                <div ng-if="vm.workOrderDTO.workOrder.type.textValue == 'PKO'">
+                    <label class="col-md-1 control-label small" for="textinput">PKO</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control input-sm" value="Yes" readonly>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <label class="col-md-1 control-label small" for="textinput">Notes</label>
                 <div class="col-sm-2">
                     <input type="text" class="form-control input-sm"
-                           ng-model="vm.workOrderDTO.workOrder.processingNotes" readonly>
+                           ng-model="vm.workOrderDTO.workOrder.processingNote" readonly>
                 </div>
                 <label class="col-md-1 control-label small" for="textinput">Location</label>
                 <div class="col-sm-2">
@@ -196,7 +202,7 @@
                             </small><span class="input-group-addon input-sm"><small>{{$index}}</small></span>
 
                             <input type="text" class="form-control input-sm"
-                                   ng-model="labs.task_name.textValue" readonly>
+                                   ng-model="labs.textValue" readonly>
                         </div>
                     </div>
                 </div>
@@ -238,7 +244,7 @@
 
             <div class="col-sm-2">
                 <div
-                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder1'}}">
+                    ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder1'}}">
 
                     <input id="field_vm.workOrder.reminderMsg1.admin_user"
                            name="textinput" type="text" class="form-control input-sm"
@@ -261,7 +267,7 @@
             <div class="col-sm-2">
 
                 <div
-                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder2'}}">
+                    ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder2'}}">
 
                     <input id="field_vm.workOrder.reminderMsg2.admin_user"
                            name="textinput" type="text" class="form-control input-sm"
@@ -284,7 +290,7 @@
             </div>
             <div class="col-sm-2">
                 <div
-                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder3'}}">
+                    ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'reminder3'}}">
 
                     <input id="field_vm.workOrder.reminderMsg3.admin_user"
                            name="textinput" type="text" class="form-control input-sm"
@@ -380,7 +386,7 @@
             <label class="col-md-1 control-label small">Verified</label>
             <div class="col-sm-2">
                 <div
-                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_verified'}}">
+                    ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_verified'}}">
 
                     <input id="field_vm.workOrder.verified" name="textinput" type="text"
                            class="form-control input-sm" ng-model="wo.admin_user.fullName"
@@ -391,7 +397,7 @@
             <label class="col-md-1 control-label small" for="textinput">Processed</label>
             <div class="col-sm-2">
                 <div
-                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_processed'}}">
+                    ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_processed'}}">
 
                     <input id="field_vm.workOrder.processed" name="textinput"
                            type="text" class="form-control input-sm"
@@ -403,7 +409,7 @@
                 By</label>
             <div class="col-sm-2">
                 <div
-                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_ingestby'}}">
+                    ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_ingestby'}}">
 
                     <input id="field_vm.workOrder.ingestBy" name="textinput" type="text"
                            class="form-control input-sm" ng-model="wo.admin_user.fullName"
@@ -416,7 +422,7 @@
             <label class="col-md-1 control-label small" for="textinput">Print</label>
             <div class="col-sm-2">
                 <div
-                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_print'}}">
+                    ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_print'}}">
 
                     <input id="field_vm.workOrder.print" name="textinput" type="text"
                            class="form-control input-sm" ng-model="wo.admin_user.fullName"
@@ -429,7 +435,7 @@
                 Transfer</label>
             <div class="col-sm-2">
                 <div
-                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_upload'}}">
+                    ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_upload'}}">
 
                     <input id="field_vm.workOrder.hddTr" name="textinput" type="text"
                            class="form-control input-sm" ng-model="wo.admin_user.fullName"
@@ -440,7 +446,7 @@
             <label class="col-md-1 control-label small" for="textinput">Archived</label>
             <div class="col-sm-2">
                 <div
-                    ng-repeat="wo in vm.workOrderDTO.workOrder.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_archived'}}">
+                    ng-repeat="wo in vm.workOrderDTO.workOrdersAdminRelations | filter:{relation_type:{'relation':'lab_archived'}}">
 
                     <input id="field_vm.workOrder.archviewd" name="textinput"
                            type="text" class="form-control input-sm"
@@ -468,7 +474,7 @@
     </div>
     <div class="row">
         <div class="col-sm-9">
-			<textarea class="form-control input-sm" rows="5"
+			<textarea class="form-control input-sm" rows="10"
                       id="field_vm.workOrder.requestDescription"
                       ng-model="vm.workOrderDTO.workOrder.requestDescription" readonly></textarea>
         </div>
@@ -821,17 +827,14 @@
         <h4>Purchase Orders</h4>
 
         <div
-            ng-repeat="purchaseOrders in vm.purchaseOrders track by purchaseOrders.id">
+            ng-repeat="purchaseOrders in vm.purchaseOrders">
             <div class="row">
-                <div class="col-lg-2">
-                    <div class="input-group">
 
-                        </small><span class="input-group-addon input-sm"><small>PO
-								{{$index}}</small></span> <input type="text" class="form-control input-sm"
-                                                                 ng-model="purchaseOrders.po_number" readonly>
-                    </div>
+                <div class="col-sm-1">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="purchaseOrders.po_number" readonly>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-sm-3">
                     <input type="text" class="form-control input-sm"
                            ng-model="purchaseOrders.po_notes" readonly>
                 </div>
@@ -863,9 +866,19 @@
     <div class="row">
         <label class="col-md-1 control-label small" for="textinput">Invoiced</label>
         <div class="col-xs-2">
-            <input name="textinput" type="text" id="field_vm.workOrder.invoiced"
-                   ng-model="vm.workOrderDTO.workOrder.invoiced"
-                   class="form-control input-sm" readonly>
+            <div ng-if="vm.workOrderDTO.workOrder.invoiced == 105">
+                <input name="textinput" type="text" value="Yes" class="form-control input-sm" readonly>
+            </div>
+            <div ng-if="vm.workOrderDTO.workOrder.invoiced == 106">
+                <input name="textinput" type="text" value="Comp" class="form-control input-sm" readonly>
+            </div>
+            <div ng-if="vm.workOrderDTO.workOrder.invoiced == 107">
+                <input name="textinput" type="text" value="Included" class="form-control input-sm" readonly>
+            </div>
+            <div ng-if="vm.workOrderDTO.workOrder.invoiced == 108">
+                <input name="textinput" type="text" value="No" class="form-control input-sm" readonly>
+            </div>
+
         </div>
 
     </div>

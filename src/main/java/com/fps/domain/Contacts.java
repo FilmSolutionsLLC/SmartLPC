@@ -1,9 +1,6 @@
 package com.fps.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -31,7 +28,7 @@ public class Contacts implements Serializable {
 	@Column(name = "username")
 	private String username;
 
-	@Column(name = "password")
+	@Column(name = "password_smartlpc")
 	private String password;
 
 	@Column(name = "full_name")
@@ -157,12 +154,12 @@ public class Contacts implements Serializable {
 	private User updatedByAdmin;
 
 	@ManyToOne
-	private Contacts companyContact;
+	private Contact companyContact;
 
 	/*
 	 * @OneToMany(cascade=CascadeType.ALL, mappedBy="contact_a",fetch =
 	 * FetchType.EAGER)
-	 * 
+	 *
 	 * @JsonBackReference private List<ContactRelationships> relatedContact;
 	 */
 	public Long getId() {
@@ -186,9 +183,9 @@ public class Contacts implements Serializable {
 	}
 
 	public void setPassword(String password) {
-	
+
 			this.password = password;
-		
+
 	}
 
 	public String getFullName() {
@@ -495,18 +492,21 @@ public class Contacts implements Serializable {
 		this.updatedByAdmin = user;
 	}
 
-	public Contacts getCompanyContact() {
+
+
+	public Contact getCompanyContact() {
 		return companyContact;
 	}
 
-	public void setCompanyContact(Contacts contacts) {
+
+	public void setCompanyContact(Contact contacts) {
 		this.companyContact = contacts;
 	}
 
 	/*
 	 * public List<ContactRelationships> getContact_a() { return relatedContact;
 	 * }
-	 * 
+	 *
 	 * public void setContact_a(List<ContactRelationships> contact_a) {
 	 * this.relatedContact = contact_a; }
 	 */
@@ -529,6 +529,5 @@ public class Contacts implements Serializable {
 	public int hashCode() {
 		return Objects.hashCode(id);
 	}
-
 
 }

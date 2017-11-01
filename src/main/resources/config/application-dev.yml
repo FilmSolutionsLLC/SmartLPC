@@ -18,14 +18,14 @@ spring:
         livereload:
             enabled: false # we use gulp + BrowserSync for livereload
     datasource:
-        url: jdbc:mysql://127.0.0.1:3306/smartlpc_demo?useUnicode=true&characterEncoding=utf8&useSSL=false
-        url2: jdbc:mysql://127.0.0.1:3306/smartlpc_demo?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://54.193.72.222:3306/pko?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&useSSL=false
+        url2: jdbc:mysql://54.193.72.222:3306/pko?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&useSSL=false
 
         name:
-        username: root
-        password: root
-        username2: root
-        password2: root
+        username: alfresco
+        password: alfresco
+        username2: alfresco
+        password2: alfresco
         hikari:
             data-source-properties:
                 cachePrepStmts: true
@@ -123,4 +123,10 @@ project:
         path: /opt/logos/
 
 largest:
-  brick: /opt/scripts/LargestBrick
+  brick: /mnt/opt/scripts/LargestBrick
+
+javalocation:
+  #path: /usr/java/jdk1.8.0_45/bin/java
+  path: /usr/bin/java
+  #jarFile: /opt/scripts/LPCEncryptor.jar
+  jarFile: /mnt/opt/scripts/LPCEncryptor.jar

@@ -1,14 +1,13 @@
 package com.fps.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -48,10 +47,10 @@ public class Projects implements Serializable {
     private String alfrescoTitle2;
 
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private ZonedDateTime startDate;
 
     @Column(name = "end_date")
-    private LocalDate endDate;
+    private ZonedDateTime endDate;
 
     @Column(name = "actors_with_rights")
     private Long actorsWithRights;
@@ -113,11 +112,11 @@ public class Projects implements Serializable {
 
     @Column(name = "created_date")
     @JsonIgnore
-    private LocalDate createdDate;
+    private ZonedDateTime createdDate;
 
     @Column(name = "updated_date")
     @JsonIgnore
-    private LocalDate updatedDate;
+    private ZonedDateTime updatedDate;
 
     @Column(name = "legacy_director")
     private String legacyDirector;
@@ -159,7 +158,7 @@ public class Projects implements Serializable {
     private String photoCredit;
 
     @Column(name = "shoot_date")
-    private LocalDate shootDate;
+    private ZonedDateTime shootDate;
 
     @Column(name = "shoot_date_override")
     private Boolean shootDateOverride;
@@ -174,7 +173,7 @@ public class Projects implements Serializable {
     private Boolean useExif;
 
     @Column(name = "tag_date")
-    private LocalDate tagDate;
+    private ZonedDateTime tagDate;
 
     @Column(name = "tagreport_index")
     private Integer tagreportIndex;
@@ -210,7 +209,7 @@ public class Projects implements Serializable {
     private Boolean disabled;
 
     @Column(name = "reminder_date")
-    private LocalDate reminderDate;
+    private ZonedDateTime reminderDate;
 
     @Column(name = "photo_credit_override")
     private Boolean photoCreditOverride;
@@ -235,10 +234,10 @@ public class Projects implements Serializable {
     private Lookups type;
 
     @ManyToOne
-    private Contacts productionCompanyContact;
+    private Contact productionCompanyContact;
 
     @ManyToOne
-    private Contacts parentCompanyContact;
+    private Contact parentCompanyContact;
 
     @ManyToOne
     private Lookups processingOriginalFileType;
@@ -254,17 +253,24 @@ public class Projects implements Serializable {
     @ManyToOne
     private Departments department;
 
-    @ManyToOne
-    private Lookups projectType;
+    @Column(name = "project_type")
+    private String projectType;
 
     @ManyToOne
-    private Contacts owner;
+    private Contact owner;
 
-    @ManyToOne
+  /*  @ManyToOne
     private Storage_Disk imageLocation;
 
     @ManyToOne
-    private Storage_Disk imageLocationRemote;
+    private Storage_Disk imageLocationRemote;*/
+
+    @Column(name = "images_location")
+    private String imageLocation;
+
+    @Column(name = "images_location_remote")
+    private String imageLocationRemote;
+
 
     public Long getId() {
         return id;
@@ -330,19 +336,19 @@ public class Projects implements Serializable {
         this.alfrescoTitle2 = alfrescoTitle2;
     }
 
-    public LocalDate getStartDate() {
+    public ZonedDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(ZonedDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public ZonedDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(ZonedDateTime endDate) {
         this.endDate = endDate;
     }
 
@@ -498,19 +504,19 @@ public class Projects implements Serializable {
         this.projectInfoNotes = projectInfoNotes;
     }
 
-    public LocalDate getCreatedDate() {
+    public ZonedDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
+    public void setCreatedDate(ZonedDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
-    public LocalDate getUpdatedDate() {
+    public ZonedDateTime getUpdatedDate() {
         return updatedDate;
     }
 
-    public void setUpdatedDate(LocalDate updatedDate) {
+    public void setUpdatedDate(ZonedDateTime updatedDate) {
         this.updatedDate = updatedDate;
     }
 
@@ -618,11 +624,11 @@ public class Projects implements Serializable {
         this.photoCredit = photoCredit;
     }
 
-    public LocalDate getShootDate() {
+    public ZonedDateTime getShootDate() {
         return shootDate;
     }
 
-    public void setShootDate(LocalDate shootDate) {
+    public void setShootDate(ZonedDateTime shootDate) {
         this.shootDate = shootDate;
     }
 
@@ -658,11 +664,11 @@ public class Projects implements Serializable {
         this.useExif = useExif;
     }
 
-    public LocalDate getTagDate() {
+    public ZonedDateTime getTagDate() {
         return tagDate;
     }
 
-    public void setTagDate(LocalDate tagDate) {
+    public void setTagDate(ZonedDateTime tagDate) {
         this.tagDate = tagDate;
     }
 
@@ -754,11 +760,11 @@ public class Projects implements Serializable {
         this.disabled = disabled;
     }
 
-    public LocalDate getReminderDate() {
+    public ZonedDateTime getReminderDate() {
         return reminderDate;
     }
 
-    public void setReminderDate(LocalDate reminderDate) {
+    public void setReminderDate(ZonedDateTime reminderDate) {
         this.reminderDate = reminderDate;
     }
 
@@ -786,19 +792,19 @@ public class Projects implements Serializable {
         this.type = lookups;
     }
 
-    public Contacts getProductionCompanyContact() {
+    public Contact getProductionCompanyContact() {
         return productionCompanyContact;
     }
 
-    public void setProductionCompanyContact(Contacts contacts) {
+    public void setProductionCompanyContact(Contact contacts) {
         this.productionCompanyContact = contacts;
     }
 
-    public Contacts getParentCompanyContact() {
+    public Contact getParentCompanyContact() {
         return parentCompanyContact;
     }
 
-    public void setParentCompanyContact(Contacts contacts) {
+    public void setParentCompanyContact(Contact contacts) {
         this.parentCompanyContact = contacts;
     }
 
@@ -834,23 +840,24 @@ public class Projects implements Serializable {
         this.department = departments;
     }
 
-    public Lookups getProjectType() {
+
+    public String getProjectType() {
         return projectType;
     }
 
-    public void setProjectType(Lookups lookups) {
-        this.projectType = lookups;
+    public void setProjectType(String projectType) {
+        this.projectType = projectType;
     }
 
-    public Contacts getOwner() {
+    public Contact getOwner() {
         return owner;
     }
 
-    public void setOwner(Contacts contacts) {
+    public void setOwner(Contact contacts) {
         this.owner = contacts;
     }
 
-    public Storage_Disk getImageLocation() {
+    /*public Storage_Disk getImageLocation() {
         return imageLocation;
     }
 
@@ -864,6 +871,22 @@ public class Projects implements Serializable {
 
     public void setImageLocationRemote(Storage_Disk storage_Disk) {
         this.imageLocationRemote = storage_Disk;
+    }*/
+
+    public String getImageLocation() {
+        return imageLocation;
+    }
+
+    public void setImageLocation(String imageLocation) {
+        this.imageLocation = imageLocation;
+    }
+
+    public String getImageLocationRemote() {
+        return imageLocationRemote;
+    }
+
+    public void setImageLocationRemote(String imageLocationRemote) {
+        this.imageLocationRemote = imageLocationRemote;
     }
 
     public String getCurrentTagger2() {
@@ -918,88 +941,4 @@ public class Projects implements Serializable {
         return Objects.hashCode(id);
     }
 
-    @Override
-    public String toString() {
-        return "Projects{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", fullName='" + fullName + '\'' +
-            ", runOfShowFlag=" + runOfShowFlag +
-            ", template=" + template +
-            ", labFlag=" + labFlag +
-            ", alfrescoTitle1='" + alfrescoTitle1 + '\'' +
-            ", alfrescoTitle2='" + alfrescoTitle2 + '\'' +
-            ", startDate=" + startDate +
-            ", endDate=" + endDate +
-            ", actorsWithRights=" + actorsWithRights +
-            ", daysShooting=" + daysShooting +
-            ", weeksShooting=" + weeksShooting +
-            ", notes='" + notes + '\'' +
-            ", sensitiveViewing=" + sensitiveViewing +
-            ", productionCompanyNotes='" + productionCompanyNotes + '\'' +
-            ", productionCompanyShippingNumber='" + productionCompanyShippingNumber + '\'' +
-            ", processingDeliveries='" + processingDeliveries + '\'' +
-            ", processingSpecialInstructions='" + processingSpecialInstructions + '\'' +
-            ", processingWatermark='" + processingWatermark + '\'' +
-            ", processingCopyright='" + processingCopyright + '\'' +
-            ", labProofNotes='" + labProofNotes + '\'' +
-            ", labLastProofImageNumber='" + labLastProofImageNumber + '\'' +
-            ", labLastProofPageNumber='" + labLastProofPageNumber + '\'' +
-            ", labImageNumberSchema='" + labImageNumberSchema + '\'' +
-            ", labFolderBatchSchema='" + labFolderBatchSchema + '\'' +
-            ", photoLabInfo='" + photoLabInfo + '\'' +
-            ", projectUnitPhotoNotes='" + projectUnitPhotoNotes + '\'' +
-            ", projectInfoNotes='" + projectInfoNotes + '\'' +
-            ", createdDate=" + createdDate +
-            ", updatedDate=" + updatedDate +
-            ", legacyDirector='" + legacyDirector + '\'' +
-            ", legacyExecutiveProducer='" + legacyExecutiveProducer + '\'' +
-            ", legacyExecutiveProducer2='" + legacyExecutiveProducer2 + '\'' +
-            ", legacyExecutiveProducer3='" + legacyExecutiveProducer3 + '\'' +
-            ", legacyExecutiveProducer4='" + legacyExecutiveProducer4 + '\'' +
-            ", legacyProducer='" + legacyProducer + '\'' +
-            ", legacyProducer2='" + legacyProducer2 + '\'' +
-            ", legacyProducer3='" + legacyProducer3 + '\'' +
-            ", legacyProducer4='" + legacyProducer4 + '\'' +
-            ", legacyAdditionalTalent='" + legacyAdditionalTalent + '\'' +
-            ", themeId=" + themeId +
-            ", sptPhotoSubtype='" + sptPhotoSubtype + '\'' +
-            ", photoCredit='" + photoCredit + '\'' +
-            ", shootDate=" + shootDate +
-            ", shootDateOverride=" + shootDateOverride +
-            ", unitPhotographerOverride=" + unitPhotographerOverride +
-            ", useSetup=" + useSetup +
-            ", useExif=" + useExif +
-            ", tagDate=" + tagDate +
-            ", tagreportIndex=" + tagreportIndex +
-            ", loginMessage='" + loginMessage + '\'' +
-            ", loginMessageActive=" + loginMessageActive +
-            ", topLevelAlbums=" + topLevelAlbums +
-            ", enableTertiary=" + enableTertiary +
-            ", invoiceCreated=" + invoiceCreated +
-            ", price='" + price + '\'' +
-            ", foxTitle='" + foxTitle + '\'' +
-            ", isAsset=" + isAsset +
-            ", fullRejection=" + fullRejection +
-            ", disabled=" + disabled +
-            ", reminderDate=" + reminderDate +
-            ", photoCreditOverride=" + photoCreditOverride +
-            ", legacyNameNotes='" + legacyNameNotes + '\'' +
-            ", currentTagger='" + currentTagger + '\'' +
-            ", currentTagger1='" + currentTagger1 + '\'' +
-            ", currentTagger2='" + currentTagger2 + '\'' +
-            ", status=" + status +
-            ", type=" + type +
-            ", productionCompanyContact=" + productionCompanyContact +
-            ", parentCompanyContact=" + parentCompanyContact +
-            ", processingOriginalFileType=" + processingOriginalFileType +
-            ", createdByAdminUser=" + createdByAdminUser +
-            ", updatedByAdminUser=" + updatedByAdminUser +
-            ", department=" + department +
-            ", projectType=" + projectType +
-            ", owner=" + owner +
-            ", imageLocation=" + imageLocation +
-            ", imageLocationRemote=" + imageLocationRemote +
-            '}';
-    }
 }

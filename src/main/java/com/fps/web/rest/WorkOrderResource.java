@@ -11,6 +11,7 @@ import com.fps.service.WorkOrderService;
 import com.fps.web.rest.dto.ProjectInfoReportsDTO;
 import com.fps.web.rest.dto.WorkOrderDTO;
 import com.fps.web.rest.dto.WorkOrderListDTO;
+import com.fps.web.rest.dto.WorkOrderProcessingDTO;
 import com.fps.web.rest.util.HeaderUtil;
 import com.fps.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -91,7 +92,7 @@ public class WorkOrderResource {
 	@RequestMapping(value = "/work-orders", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<WorkOrder> createWorkOrder(@RequestBody WorkOrderDTO workOrderDTO) throws URISyntaxException {
-		log.debug("REST request to save WorkOrder : {}", workOrderDTO);
+		log.info("REST request to save WorkOrder : {}", workOrderDTO);
 		WorkOrder workOrder = workOrderDTO.getWorkOrder();
 
 		currentTenantIdentifierResolver.setTenant(SLAVE);
@@ -106,48 +107,7 @@ public class WorkOrderResource {
 					.body(null);
 		}
 		currentTenantIdentifierResolver.setTenant(MASTER);
-		WorkOrder result = workOrderService.save(workOrder);
-
-		if (workOrder.isIsAbc()) {
-			Set<WorkOrderAbcFile> workOrderAbcFiles = new HashSet<>();
-			Set<WorkOrderAbcHdd> workOrderAbcHdds = new HashSet<>();
-
-			log.info("Saving WorkOrderAbcFile ");
-			for (WorkOrderAbcFile workOrderAbcFile : workOrderDTO.getWorkOrderAbcFiles()) {
-				workOrderAbcFile.setWorkOrder(workOrder);
-				workOrderAbcFiles.add(workOrderAbcFile);
-				log.info(workOrderAbcFile.toString());
-			}
-			if (workOrderAbcFiles.size() > 0) {
-				workOrderAbcFileRepository.save(workOrderAbcFiles);
-			}
-
-			log.info("Saving WorkOrderAbcHdd ");
-			for (WorkOrderAbcHdd workOrderAbcHdd : workOrderDTO.getWorkOrderAbcHdds()) {
-				workOrderAbcHdd.setWorkOrder(workOrder);
-				log.info(workOrderAbcHdd.toString());
-				workOrderAbcHdds.add(workOrderAbcHdd);
-			}
-			if (workOrderAbcHdds.size() > 0) {
-				workOrderAbcHddRepository.save(workOrderAbcHdds);
-			}
-		}
-
-		Set<WorkOrdersAdminRelation> workOrdersAdminRelations = new HashSet<>();
-		log.info("Saving WorkOrdersAdminRelation ");
-
-		for (WorkOrdersAdminRelation workOrdersAdminRelation : workOrderDTO.getWorkOrdersAdminRelations()) {
-
-			if (workOrdersAdminRelation.getAdmin_user() != null) {
-
-				workOrdersAdminRelation.setWorkOrder(workOrder);
-				workOrdersAdminRelations.add(workOrdersAdminRelation);
-				log.info(workOrdersAdminRelation.toString());
-			}
-		}
-		if (workOrdersAdminRelations.size() > 0) {
-			workOrdersAdminRelationRepository.save(workOrdersAdminRelations);
-		}
+		WorkOrder result = workOrderService.save(workOrderDTO);
 
 		return ResponseEntity.created(new URI("/api/work-orders/" + result.getId()))
 				.headers(HeaderUtil.createEntityCreationAlert("workOrder", result.getId().toString())).body(result);
@@ -181,57 +141,16 @@ public class WorkOrderResource {
 		 *
 		 * WorkOrder result = workOrderService.save(workOrder);
 		 */
-		log.debug("REST request to update WorkOrder : {}", workOrderDTO);
+		log.info("REST request to update WorkOrder : {}", workOrderDTO);
 		WorkOrder workOrder = workOrderDTO.getWorkOrder();
+        currentTenantIdentifierResolver.setTenant(SLAVE);
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
 
-		currentTenantIdentifierResolver.setTenant(SLAVE);
-		User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
-
-		workOrder.setUpdatedBy(user);
+        workOrder.setUpdatedBy(user);
 		workOrder.setUpdatedDate(ZonedDateTime.now());
-
 		currentTenantIdentifierResolver.setTenant(MASTER);
-		WorkOrder result = workOrderService.save(workOrder);
+		WorkOrder result = workOrderService.save(workOrderDTO);
 
-		if (workOrder.isIsAbc()) {
-			Set<WorkOrderAbcFile> workOrderAbcFiles = new HashSet<>();
-			Set<WorkOrderAbcHdd> workOrderAbcHdds = new HashSet<>();
-
-			log.info("Saving WorkOrderAbcFile ");
-			for (WorkOrderAbcFile workOrderAbcFile : workOrderDTO.getWorkOrderAbcFiles()) {
-				workOrderAbcFile.setWorkOrder(workOrder);
-				workOrderAbcFiles.add(workOrderAbcFile);
-				log.info(workOrderAbcFile.toString());
-			}
-			if (workOrderAbcFiles.size() > 0) {
-				workOrderAbcFileRepository.save(workOrderAbcFiles);
-			}
-
-			log.info("Saving WorkOrderAbcHdd ");
-			for (WorkOrderAbcHdd workOrderAbcHdd : workOrderDTO.getWorkOrderAbcHdds()) {
-				workOrderAbcHdd.setWorkOrder(workOrder);
-				log.info(workOrderAbcHdd.toString());
-				workOrderAbcHdds.add(workOrderAbcHdd);
-			}
-			if (workOrderAbcHdds.size() > 0) {
-				workOrderAbcHddRepository.save(workOrderAbcHdds);
-			}
-		}
-
-		Set<WorkOrdersAdminRelation> workOrdersAdminRelations = new HashSet<>();
-		log.info("Saving WorkOrdersAdminRelation ");
-		if (workOrderDTO.getWorkOrdersAdminRelations() != null) {
-			for (WorkOrdersAdminRelation workOrdersAdminRelation : workOrderDTO.getWorkOrdersAdminRelations()) {
-
-				if (workOrdersAdminRelation.getAdmin_user() != null) {
-
-					workOrdersAdminRelation.setWorkOrder(workOrder);
-					workOrdersAdminRelations.add(workOrdersAdminRelation);
-					log.info(workOrdersAdminRelation.toString());
-				}
-			}
-			workOrdersAdminRelationRepository.save(workOrdersAdminRelations);
-		}
 		return ResponseEntity.ok()
 				.headers(HeaderUtil.createEntityUpdateAlert("workOrder", workOrder.getId().toString())).body(result);
 	}
@@ -249,7 +168,6 @@ public class WorkOrderResource {
 	@RequestMapping(value = "/work-orders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<List<WorkOrder>> getAllWorkOrders(Pageable pageable) throws URISyntaxException {
-		log.debug("RES</div> T request to get a page of WorkOrders");
 		Page<WorkOrder> page = workOrderService.findAll(pageable);
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/work-orders");
 		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
@@ -266,9 +184,9 @@ public class WorkOrderResource {
 	@RequestMapping(value = "/work-orders/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<WorkOrderDTO> getWorkOrder(@PathVariable Long id) {
-		log.debug("REST request to get WorkOrder : {}", id);
+		log.info("REST request to get WorkOrder : {}", id);
 		final WorkOrderDTO workOrderDTO = workOrderService.findOne(id);
-		log.info("workOrderDTO ====> " + workOrderDTO.toString());
+
 		return Optional.ofNullable(workOrderDTO).map(result -> new ResponseEntity<>(result, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
@@ -283,7 +201,7 @@ public class WorkOrderResource {
 	@RequestMapping(value = "/work-orders/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<Void> deleteWorkOrder(@PathVariable Long id) {
-		log.debug("REST request to delete WorkOrder : {}", id);
+		log.info("REST request to delete WorkOrder : {}", id);
 		workOrderService.delete(id);
 		return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("workOrder", id.toString())).build();
 	}
@@ -300,7 +218,7 @@ public class WorkOrderResource {
 	@Timed
 	public ResponseEntity<List<WorkOrder>> searchWorkOrders(@RequestParam String query, Pageable pageable)
 			throws URISyntaxException {
-		log.debug("REST request to search for a page of WorkOrders for query {}", query);
+		log.info("REST request to search for a page of WorkOrders for query {}", query);
 		Page<WorkOrder> page = workOrderService.search(query, pageable);
 		HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page,
 				"/api/_search/work-orders");
@@ -320,7 +238,7 @@ public class WorkOrderResource {
 	@Timed
 	public List<WorkOrder> searchWorkOrdersOnCriteria(@RequestParam String query, @RequestParam String filter)
 			throws URISyntaxException {
-		log.debug("REST request to search for a page of WorkOrders for query {}", query + " and filer :" + filter);
+		log.info("REST request to search for a page of WorkOrders for query {}", query + " and filer :" + filter);
 		List<WorkOrder> workOrders = new ArrayList<>();
 		if (filter.equals("project")) {
 			workOrders = (List<WorkOrder>) workOrderSearchRepository.findByProject(query);
@@ -347,7 +265,7 @@ public class WorkOrderResource {
 	@RequestMapping(value = "/reports/work-orders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public List<WorkOrderListDTO> workOrderReports(@RequestParam String reportType) throws URISyntaxException {
-		log.info("Request for work orders : " + reportType);
+
 		final List<WorkOrderListDTO> workOrderListDTOList = workOrderService.findWorkOrdersByReport(reportType);
 		log.info("Total Open Work Orders : " + workOrderListDTOList.size());
 		return workOrderListDTOList;
@@ -378,20 +296,27 @@ public class WorkOrderResource {
 	@RequestMapping(value = "/grouped/work-orders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public List<WorkOrderListDTO> openWorkOrdersGrouped() throws URISyntaxException {
-		log.info("Request for work orders :  OPENED and GROUPED");
 
-		final List<WorkOrderListDTO> workOrderListDTOList = workOrderService.findOpenWorkOrdersGrouped();
+		final List<WorkOrderListDTO> workOrderListDTOList = workOrderService.findOpenWorkOrdersGrouped("open_work_orders_grouped");
 		log.info("Total Open Grouped Work Orders : " + workOrderListDTOList.size());
-		log.info(" =  = = = = = = = = = == = = = = = = == = = = = == = = = == = = = ==  ");
-		for (WorkOrderListDTO groupWorkOrder : workOrderListDTOList) {
-			log.info(groupWorkOrder.toString());
-			log.info(" =  = = = = = = = = = == = = = = = = == = = = = == = = = == = = = ==  ");
-		}
+
 		return workOrderListDTOList;
 
 	}
 
-	/**
+    @RequestMapping(value = "/included/work-orders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<WorkOrderListDTO> includedComp() throws URISyntaxException {
+
+        final List<WorkOrderListDTO> workOrderListDTOList = workOrderService.findOpenWorkOrdersGrouped("included_comp");
+        log.info("Total Open Grouped Work Orders : " + workOrderListDTOList.size());
+
+        return workOrderListDTOList;
+
+    }
+
+
+    /**
 	 * WORK ORDERS TO AUDIT
 	 *
 	 * @return list of work orders TO AUDIT
@@ -461,11 +386,10 @@ public class WorkOrderResource {
 
 	@RequestMapping(value = "/processing/work-orders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	public ResponseEntity<List<WorkOrder>> processingWorkOrders(Pageable pageable) throws URISyntaxException {
-		log.debug("RES</div> T request to get a page of WorkOrders");
-		final Page<WorkOrder> page = workOrderRepository.findByProcessing_pko_flag(pageable);
-		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/processing/work-orders");
-		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+	public List<WorkOrderProcessingDTO> processingWorkOrders() throws URISyntaxException {
+		log.info("REST request to get a page of WorkOrders");
+		final List<WorkOrderProcessingDTO> workOrders = workOrderService.findWorkOrderProcessingDtos();
+		return workOrders;
 	}
 
 	// test work order
