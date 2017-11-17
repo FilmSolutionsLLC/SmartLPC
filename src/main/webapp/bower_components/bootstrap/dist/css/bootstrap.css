@@ -3432,6 +3432,7 @@ select.input-sm {
 textarea.input-sm,
 select[multiple].input-sm {
     height: auto;
+    resize: none;
 }
 
 .form-group-sm .form-control {

@@ -1,28 +1,30 @@
 (function () {
     'use strict';
 
-    angular.module('smartLpcApp').controller('ContactsUpdateController',
-        ContactsUpdateController);
+    angular.module('smartLpcApp').controller('ContactsModalUpdateController',
+        ContactsModalUpdateController);
 
-    ContactsUpdateController.$inject = ['$ngConfirm', 'entity', '$state', '$http',
+    ContactsModalUpdateController.$inject = ['$uibModalInstance','$ngConfirm', 'entity', '$state', '$http',
         '$uibModal', '$scope', '$rootScope', '$stateParams', 'Contacts',
         'Lookups', 'Departments', 'User'];
 
-    function ContactsUpdateController($ngConfirm, entity, $state, $http, $uibModal, $scope,
+    function ContactsModalUpdateController($uibModalInstance,$ngConfirm, entity, $state, $http, $uibModal, $scope,
                                       $rootScope, $stateParams, Contacts, Lookups, Departments, User) {
-        console.log("Contact Update Controller");
+        console.log("ContactsModalUpdateController");
 
         var vm = this;
+        console.log("Getting cont : "+entity.contacts.id)
         vm.contactDTO = entity;
         const originalData = entity;
         vm.contacts = [];
 
         vm.relatedContacts = [];
 
+        console.log(" == = > "+JSON.stringify(vm.contactDTO))
         vm.contacts = vm.contactDTO.contacts;
         vm.relatedContacts = vm.contactDTO.contactRelationships;
 
-        console.log(" == = > "+JSON.stringify(vm.contactDTO))
+
         vm.load = function (id) {
 
             Contacts.get({
@@ -144,7 +146,7 @@
                     }
                 }
             });
-            $state.go('contacts-detail', {'id':result.id}, {reload: true});
+            $uibModalInstance.dismiss('cancel');
 
         };
 
@@ -242,22 +244,13 @@
         };
 
         vm.close = function () {
-
-            if (_.isEqual(originalData, vm.contactDTO)) {
-                console.log("Equal Data");
-            } else {
-                console.log("Not Equal Data");
-            }
-            window.history.back();
-            console.log("==> " + JSON.stringify(originalData));
-            console.log("==> " + JSON.stringify(vm.contactDTO));
+            $uibModalInstance.dismiss('cancel');
         };
 
         vm.lookUpContact = function (id) {
-
             var modalInstance = $uibModal.open({
                 templateUrl: 'app/entities/contacts/contacts-update-modal.html',
-                controller: 'ContactsModalUpdateController',
+                controller: 'ContactsUpdateController',
                 controllerAs: 'vm',
                 backdrop: 'static',
                 size: 'xl',
@@ -280,7 +273,7 @@
                             // ($stateParams, Contacts) {
 
                             return Contacts.get({
-                                id: id
+                                id: $stateParams.id
                             }).$promise;
                         }]
                 }

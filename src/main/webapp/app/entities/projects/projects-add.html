@@ -78,7 +78,7 @@
 						<span class="glyphicon glyphicon-list-alt"></span>
 					</button>
 				</span> <input id="field_vm.projects.owner" type="text"
-					class="form-control input-sm" ng-model="vm.projects.owner.fullName">
+					class="form-control input-sm" ng-model="vm.projects.owner.fullName" ng-click="vm.lookUpContact(vm.projects.owner.id)">
 			</div>
 
 		</div>
@@ -248,8 +248,9 @@
 		<label class="col-md-1 control-label small" for="field_projectHistory">Project
 			History</label>
 		<div class="col-sm-11">
-			<input id="field_projectHistory" name="projectHistory" type="text"
-				ng-model="vm.projects.notes" class="form-control input-sm">
+                <textarea class="form-control input-sm" rows="4"
+                          id="field_projectHistory"
+                          ng-model="vm.projects.notes"></textarea>
 		</div>
 	</div>
 	<!--<div class="row">
@@ -347,7 +348,7 @@
 					<div class="input-group">
 
 						</small><span class="input-group-addon input-sm"><small>PO
-								{{$index}}</small></span> <input type="text" class="form-control input-sm"
+								{{$index+1}}</small></span> <input type="text" class="form-control input-sm"
 							ng-model="vm.projectPurchaseOrderses[$index].po_number">
 					</div>
 				</div>
@@ -429,14 +430,14 @@
 		<div id="labs">
 
 			<div class="row">
-				<div class="col-lg-9">
+				<div class="col-lg-5">
 					<fieldset data-ng-repeat="item in related">
 						<div class="row">
 
-							<div class="col-lg-7">
+							<div class="col-lg-10">
 								<div class="input-group">
 
-									<span class="input-group-addon input-sm" id="sizing-addon2">{{$index}}</span>
+									<span class="input-group-addon input-sm" id="sizing-addon2">{{$index+1}}</span>
 
 									<select class="form-control input-sm" id="field_task_name"
 										name="task_name"
@@ -508,7 +509,7 @@
 					</button>
 				</span> <input id="field_vm.projects.mainContact" type="text"
 					class="form-control input-sm"
-					ng-model="vm.projectRoles[0].contact.fullName" readonly>
+					ng-model="vm.projectRoles[0].contact.fullName" ng-click="vm.lookUpContact(vm.projectRoles[0].contact.id)">
 			</div>
 
 		</div>
@@ -577,7 +578,7 @@
 					</button>
 				</span> <input id="field_vm.projects.unitPublicist" type="text"
 					class="form-control input-sm"
-					ng-model="vm.projectRoles[1].contact.fullName" readonly>
+					ng-model="vm.projectRoles[1].contact.fullName" ng-click="vm.lookUpContact(vm.projectRoles[1].contact.id)" readonly>
 			</div>
 
 		</div>
@@ -646,7 +647,7 @@
 					</button>
 				</span> <input id="field_vm.projects.unitPhotographer" type="text"
 					class="form-control input-sm"
-					ng-model="vm.projectRoles[2].contact.fullName" readonly>
+					ng-model="vm.projectRoles[2].contact.fullName" ng-click="vm.lookUpContact(vm.projectRoles[2].contact.id)" readonly>
 			</div>
 
 		</div>
@@ -715,7 +716,7 @@
 					</button>
 				</span> <input id="field_vm.projects.labInfo" type="text"
 					class="form-control input-sm"
-					ng-model="vm.projectRoles[3].contact.fullName" readonly>
+					ng-model="vm.projectRoles[3].contact.fullName" ng-click="vm.lookUpContact(vm.projectRoles[3].contact.id)" readonly>
 			</div>
 
 		</div>
@@ -915,7 +916,7 @@
 					</button>
 				</span> <input id="field_vm.projects.productCompany" type="text"
 					class="form-control input-sm"
-					ng-model="vm.projects.productionCompanyContact.fullName" readonly>
+					ng-model="vm.projects.productionCompanyContact.fullName" ng-click="vm.lookUpContact(vm.projects.productionCompanyContact.id)" readonly>
 			</div>
 
 		</div>
@@ -1045,15 +1046,15 @@
 							<span class="glyphicon glyphicon-list-alt btn-xs"></span>
 						</button>
 					</span> <input type="text" id="field_vm.projects.talents" class="input-xs"
-						ng-model="vm.talents[$index].contact.fullName" />
+						ng-model="vm.talents[$index].contact.fullName" ng-click="vm.lookUpContact(vm.talents[$index].contact.id)" readonly />
 				</div>
 
 			</td>
 
 			<td><input class="input-xs" type="text"
-				ng-model="vm.talents[$index].contact.username"></td>
+				ng-model="vm.talents[$index].contact.username" readonly></td>
 			<td><input class="input-xs" type="text"
-				ng-model="vm.talents[$index].contact.password" /></td>
+				ng-model="vm.talents[$index].contact.password" readonly /></td>
 
 
 			<td class="col-xs-1"><input class="input-xs" style="width: 50px"
@@ -1132,14 +1133,14 @@
 							<span class="glyphicon glyphicon-list-alt btn-xs"></span>
 						</button>
 					</span> <input type="text" id="field_vm.projects.execs" class="input-xs"
-						ng-model="vm.execss[$index].contact.fullName" />
+						ng-model="vm.execss[$index].contact.fullName" ng-click="vm.lookUpContact(vm.execss[$index].contact.id)" readonly/>
 				</div>
 
 			</td>
 			<td><input type="text"
-				ng-model="vm.execss[$index].contact.username" /></td>
+				ng-model="vm.execss[$index].contact.username" readonly/></td>
 			<td><input type="text"
-				ng-model="vm.execss[$index].contact.password" /></td>
+				ng-model="vm.execss[$index].contact.password" readonly/></td>
 			<td><select ng-model="vm.execss[$index].downloadType">
 					<option value="0">NONE</option>
 					<option value="1">ALL</option>
@@ -1330,7 +1331,7 @@
 					</button>
 				</span> <input type="text" id="field_vm.projects.parentInfo"
 					class="form-control input-sm"
-					ng-model="vm.projects.parentCompanyContact.fullName">
+					ng-model="vm.projects.parentCompanyContact.fullName" ng-click="vm.lookUpContact(vm.projects.parentCompanyContact.id)">
 			</div>
 		</div>
 	</div>

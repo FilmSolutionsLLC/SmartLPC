@@ -88,7 +88,7 @@
                                 </span>
                 <input id="field_vm.contacts.contactCompany" name="companyContact"
                        ng-model="vm.contacts.companyContact.fullName"
-                       class="form-control input-sm" ui-sref="contacts.edit({id:vm.contacts.companyContact.id})" readonly>
+                       class="form-control input-sm" ng-click="vm.lookUpContact(vm.contacts.companyContact.id)" readonly>
             </div>
         </div>
 

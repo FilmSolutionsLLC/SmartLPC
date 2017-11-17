@@ -7,8 +7,8 @@
             <button type="submit" class="btn btn-xs btn btn-success" ng-disabled="editForm.$invalid || isSaving">Save
             </button>
 
-            <button  type="button" ng-click="vm.saveAndClose()"
-                     class="btn btn-xs btn btn-primary">Save and Close
+            <button type="button" ng-click="vm.saveAndClose()"
+                    class="btn btn-xs btn btn-primary">Save and Close
             </button>
 
             <a href="#" class="btn btn-xs btn btn-danger">Close</a>
@@ -84,7 +84,8 @@
                 </button>
                 </span>
                 <input id="field_vm.projects.owner" type="text" class="form-control input-sm"
-                       ng-model="vm.projectsDTO.projects.owner.fullName">
+                       ng-model="vm.projectsDTO.projects.owner.fullName"
+                       ng-click="vm.lookUpContact(vm.projectsDTO.projects.owner.id)">
             </div>
 
         </div>
@@ -134,19 +135,12 @@
 
         <label class="col-md-1 control-label small" for="field_defaultDepartment">Department</label>
         <div class="col-sm-2">
-            <div class="input-group">
 
-                <span class="input-group-btn">
-					<button href="#addDepartment" id="openBtn" data-toggle="modal"
-                            class="btn btn-success btn-sm" disabled>
-						<span class="glyphicon glyphicon-plus "></span>
-                </button>
-                </span>
-                <select class="form-control input-sm"
-                        ng-options="departments as departments.departmentName for departments in vm.departmentss track by departments.id"
-                        id="field_defaultDepartment" name="defaultDepartment"
-                        ng-model="vm.projectsDTO.projects.department"></select>
-            </div>
+            <select class="form-control input-sm"
+                    ng-options="departments as departments.departmentName for departments in vm.departmentss track by departments.id"
+                    id="field_defaultDepartment" name="defaultDepartment"
+                    ng-model="vm.projectsDTO.projects.department"></select>
+
 
         </div>
     </div>
@@ -158,10 +152,9 @@
             <div class="input-group">
 
                 <span class="input-group-btn">
-					<button href="#addDepartment" data-toggle="modal"
-                            class="btn btn-success btn-sm" disabled>
+					<button type="button" ng-click="vm.addStatus()" class="btn btn-success btn-sm">
 						<span class="glyphicon glyphicon-plus "></span>
-                </button>
+					</button>
                 </span>
                 <select class="form-control input-sm" name="status" id="field_status"
                         ng-model="vm.projectsDTO.projects.status"
@@ -170,20 +163,12 @@
         </div>
         <label class="col-md-1 control-label small" for="field_type">Type</label>
         <div class="col-sm-2">
-            <div class="input-group">
 
-                <span class="input-group-btn">
-					<button href="#addDepartment" data-toggle="modal"
-                            class="btn btn-success btn-sm" disabled>
-						<span class="glyphicon glyphicon-plus "></span>
-                </button>
-                </span>
-                <select class="form-control input-sm" name="type" id="field_type"
-                        ng-model="vm.projectsDTO.projects.type"
-                        ng-options="lookups as lookups.textValue for lookups in vm.projectType track by lookups.id"></select>
-            </div>
-
+            <select class="form-control input-sm" name="type" id="field_type"
+                    ng-model="vm.projectsDTO.projects.type"
+                    ng-options="lookups as lookups.textValue for lookups in vm.projectType track by lookups.id"></select>
         </div>
+
 
     </div>
 
@@ -337,7 +322,7 @@
                     <div class="input-group">
 
                         </small><span class="input-group-addon input-sm"><small>PO
-								{{$index}}</small></span>
+								{{$index+1}}</small></span>
                         <input type="text" class="form-control input-sm" ng-model="po.po_number">
                     </div>
                 </div>
@@ -411,14 +396,14 @@
         <div id="labs">
 
             <div class="row">
-                <div class="col-lg-9">
+                <div class="col-lg-5">
                     <div ng-repeat="labs in vm.projectsDTO.projectLabTaskses">
                         <div class="row">
 
-                            <div class="col-lg-7">
+                            <div class="col-lg-10">
                                 <div class="input-group">
 
-                                    <span class="input-group-addon input-sm" id="sizing-addon2">{{$index}}</span>
+                                    <span class="input-group-addon input-sm" id="sizing-addon2">{{$index+1}}</span>
 
                                     <select class="form-control input-sm" id="field_task_name" name="task_name"
                                             ng-model="labs.task_name"
@@ -487,6 +472,7 @@
 						</button>
 					</span> <input id="field_vm.projects.mainContact" type="text"
                                    class="form-control input-sm" ng-model="mainC.contact.fullName"
+                                   ng-click="vm.lookUpContact(mainC.contact.id)"
                                    readonly>
                 </div>
 
@@ -538,6 +524,7 @@
 						</button>
 					</span> <input id="field_vm.projects.unitPublicist" type="text"
                                    class="form-control input-sm" ng-model="uPub.contact.fullName"
+                                   ng-click="vm.lookUpContact(uPub.contact.id)"
                                    readonly>
                 </div>
 
@@ -608,6 +595,7 @@
 						</button>
 					</span> <input id="field_vm.projects.unitPhotographer" type="text"
                                    class="form-control input-sm" ng-model="uPhoto.contact.fullName"
+                                   ng-click="vm.lookUpContact(uPhoto.contact.id)"
                                    readonly>
                 </div>
 
@@ -678,7 +666,7 @@
 						</button>
 					</span> <input id="field_vm.projects.labInfo" type="text"
                                    class="form-control input-sm"
-                                   ng-model="lab.contact.fullName" readonly>
+                                   ng-model="lab.contact.fullName" ng-click="vm.lookUpContact(lab.contact.id)" readonly>
                 </div>
 
             </div>
@@ -869,7 +857,8 @@
                 </button>
                 </span>
                 <input id="field_vm.projects.productCompany" type="text" class="form-control input-sm"
-                       ng-model="vm.projectsDTO.projects.productionCompanyContact.fullName" readonly>
+                       ng-model="vm.projectsDTO.projects.productionCompanyContact.fullName"
+                       ng-click="vm.lookUpContact(vm.projectsDTO.projects.productionCompanyContact.id)" readonly>
             </div>
 
         </div>
@@ -1025,7 +1014,7 @@
                     </button>
                     </span>
                     <input type="text" id="field_vm.projects.talents" class="input-xs"
-                           ng-model="tags.contact.fullName"/>
+                           ng-model="tags.contact.fullName" ng-click="vm.lookUpContact(tags.contact.id)"/>
                 </div>
 
             </td>
@@ -1120,7 +1109,8 @@
 							<span class="glyphicon glyphicon-list-alt btn-xs"></span>
                     </button>
                     </span>
-                    <input type="text" id="field_vm.projects.execs" class="input-xs" ng-model="execs.contact.fullName"/>
+                    <input type="text" id="field_vm.projects.execs" class="input-xs" ng-model="execs.contact.fullName"
+                           ng-click="vm.lookUpContact(execs.contact.id)"/>
                 </div>
 
             </td>
@@ -1276,7 +1266,8 @@
                 </button>
                 </span>
                 <input type="text" id="field_vm.projects.parentInfo" class="form-control input-sm"
-                       ng-model="vm.projectsDTO.projects.parentCompanyContact.fullName">
+                       ng-model="vm.projectsDTO.projects.parentCompanyContact.fullName"
+                       ng-click="vm.lookUpContact(vm.projectsDTO.projects.parentCompanyContact.id)">
             </div>
         </div>
     </div>

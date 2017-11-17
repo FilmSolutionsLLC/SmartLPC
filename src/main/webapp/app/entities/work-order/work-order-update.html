@@ -89,14 +89,15 @@
                               </button>
                           </span>
             <input id="field_vm.workOrder.requestor" type="text" class="form-control input-sm"
-                   ng-model="vm.workOrderDTO.workOrder.requestor.fullName">
+                   ng-model="vm.workOrderDTO.workOrder.requestor.fullName"  ng-click="vm.lookUpContact(vm.workOrderDTO.workOrder.requestor.id)">
         </div>
 
     </div>
     <label class="col-md-1 control-label small" for="textinput">Company</label>
     <div class="col-sm-2">
         <input id="company.name" name="textinput" type="text"
-               class="form-control input-sm" ng-model="vm.workOrderDTO.workOrder.requestor.companyContact.fullName">
+               class="form-control input-sm" ng-model="vm.workOrderDTO.workOrder.requestor.companyContact.fullName"
+               ng-click="vm.lookUpContact(vm.workOrderDTO.workOrder.requestor.companyContact.id)">
     </div>
 </div>
 <div class="row">

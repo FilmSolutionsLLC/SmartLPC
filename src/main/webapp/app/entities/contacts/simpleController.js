@@ -20,7 +20,7 @@
         vm.clear = clear;
         vm.search = search;
 
-        vm.url = "api/contacts?page=0";
+        vm.url = "api/contacts?page=0&sort=id,asc";
         vm.searchUrl = "api/_search/contacts?query=";
 
         vm.selectedContact = selectedContact;
@@ -58,6 +58,7 @@
 
             function sort() {
 
+                console.log("Inside this ");
                 var result = [vm.predicate + ','
                 + (vm.reverse ? 'asc' : 'desc')];
                 if (vm.predicate !== 'id') {
@@ -305,5 +306,16 @@
             });
         };
 
+
+        vm.clearCurrent = function () {
+          console.log("Remove Current");
+            $scope.currentOBJ = {
+                "elementID": vm.elementID,
+                "data": null
+            };
+
+            $rootScope.relationships = $scope.currentOBJ;
+            $uibModalInstance.dismiss('cancel');
+        };
     }
 })();

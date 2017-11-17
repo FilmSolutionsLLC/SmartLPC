@@ -123,7 +123,7 @@
             &nbspABC &nbsp
         </label> <label class="small"> <input type="checkbox"
                                               ng-model="vm.workOrder.isTracking"
-                                              ng-init="vm.workOrder.isTracking=false" ng-click='vm.trackingCheck()'>
+                                              ng-init="vm.workOrder.isTracking=false">
             &nbspTracking &nbsp
         </label>
         </div>
@@ -195,7 +195,7 @@
 					</button>
 				</span> <input id="field_vm.workOrder.requestor" type="text"
                                class="form-control input-sm"
-                               ng-model="vm.workOrder.requestor.fullName" readonly>
+                               ng-model="vm.workOrder.requestor.fullName" ng-click="vm.lookUpContact(vm.workOrder.requestor.id)" readonly>
             </div>
 
         </div>
@@ -203,7 +203,7 @@
         <div class="col-sm-2">
             <input id="company.name" name="textinput" type="text"
                    class="form-control input-sm"
-                   ng-model="vm.workOrder.requestor.companyContact.fullName" readonly>
+                   ng-model="vm.workOrder.requestor.companyContact.fullName" ng-click="vm.lookUpContact(vm.workOrder.requestor.companyContact.id)" readonly>
         </div>
     </div>
     <div class="row">
@@ -626,7 +626,7 @@
     </div>
     <div class="row">
         <div class="col-sm-9">
-			<textarea class="form-control input-sm" rows="5"
+			<textarea class="form-control input-sm" rows="10"
                       id="field_vm.workOrder.requestDescription"
                       ng-model="vm.workOrder.requestDescription"></textarea>
         </div>
@@ -874,7 +874,7 @@
 
     </div>
 
-    <div ng-show="vm.workOrder.isPrint || vm.workOrder.type.textValue=='Print'">
+    <div ng-show="vm.workOrder.isPrint">
         <h4 class="text-primary">
             <strong><u>Printing</u></strong>
         </h4>

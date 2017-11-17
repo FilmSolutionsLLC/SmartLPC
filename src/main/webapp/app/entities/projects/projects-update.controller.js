@@ -7,7 +7,7 @@
 
     ProjectsUpdateController.$inject = ['ContactPrivileges', 'ProjectRoles', '$ngConfirm', '$anchorScroll', '$location', '$state', '$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'Projects', 'Lookups', 'Contacts', 'User', 'Departments', 'Storage_Disk'];
 
-    function ProjectsUpdateController( ContactPrivileges, ProjectRoles, $ngConfirm, $anchorScroll, $location, $state, $uibModal, $http, $scope, $rootScope, $stateParams, entity, Projects, Lookups, Contacts, User, Departments, Storage_Disk) {
+    function ProjectsUpdateController(ContactPrivileges, ProjectRoles, $ngConfirm, $anchorScroll, $location, $state, $uibModal, $http, $scope, $rootScope, $stateParams, entity, Projects, Lookups, Contacts, User, Departments, Storage_Disk) {
 
 
         var vm = this;
@@ -46,11 +46,11 @@
         vm.prevNext = {};
         $http({
             method: 'GET',
-            url: 'api/prev/next/'+vm.projectsDTO.projects.id
+            url: 'api/prev/next/' + vm.projectsDTO.projects.id
 
         }).then(function successCallback(response) {
             vm.prevNext = response.data;
-            console.log("Prev Next Projects : "+JSON.stringify(vm.prevNext));
+            console.log("Prev Next Projects : " + JSON.stringify(vm.prevNext));
         }, function errorCallback(response) {
 
         });
@@ -189,8 +189,8 @@
                 if (vm.projectsDTO.projectRoles[i].id == index) {
                     console.log(JSON.stringify(vm.projectsDTO.projectRoles[i]))
                     // remove it
-                    if(angular.equals(vm.projectsDTO.projectRoles[i].contact, null)){
-                       console.log("null");
+                    if (angular.equals(vm.projectsDTO.projectRoles[i].contact, null)) {
+                        console.log("null");
                         vm.projectsDTO.projectRoles.splice(i, 1);
                     }
                     else if (confirm('Are you sure you want to remove Talent : ' + vm.projectsDTO.projectRoles[i].contact.fullName)) {
@@ -216,30 +216,30 @@
         vm.addExec = function () {
             vm.projectsDTO.contactPrivileges.push({
                 "contact": null,
-                "exec" : true,
-                "downloadType" : 0,
-                "print" : false,
-                "email" : false,
-                "captioning" : false,
-                "talentManagement" : false,
-                "signoffManagement" : false,
-                "releaseExclude" : false,
-                "vendor" : false,
-                "lockApproveRestriction" : false,
-                "viewSensitive" : false,
-                "exclusives" : 0,
-                "seesUntagged" : false,
-                "hasVideo" : false,
-                "disabled" : false,
-                "datgeditManagement" : false,
-                "priorityPix" : false,
-                "readOnly" : false,
-                "restartColumns" : 2,
-                "restartImageSize" : 'Large',
-                "restartImagesPerPage" : 20,
-                "showFinalizations" : false,
-                "watermark" : false,
-                "internal" : false,
+                "exec": true,
+                "downloadType": 0,
+                "print": false,
+                "email": false,
+                "captioning": false,
+                "talentManagement": false,
+                "signoffManagement": false,
+                "releaseExclude": false,
+                "vendor": false,
+                "lockApproveRestriction": false,
+                "viewSensitive": false,
+                "exclusives": 0,
+                "seesUntagged": false,
+                "hasVideo": false,
+                "disabled": false,
+                "datgeditManagement": false,
+                "priorityPix": false,
+                "readOnly": false,
+                "restartColumns": 2,
+                "restartImageSize": 'Large',
+                "restartImagesPerPage": 20,
+                "showFinalizations": false,
+                "watermark": false,
+                "internal": false,
                 "globalAlbum": false,
                 "loginCount": 0,
                 "defaultAlbum": null,
@@ -305,7 +305,7 @@
                             "excSologroup": false,
                             "soloKillPct": 50,
                             "groupKillPct": 50,
-                            "tertiaryKillPct":50.0,
+                            "tertiaryKillPct": 50.0,
                             "disabled": true
                         });
                     } else {
@@ -325,7 +325,7 @@
                             "excSologroup": false,
                             "soloKillPct": 50,
                             "groupKillPct": 50,
-                            "tertiaryKillPct":50.0,
+                            "tertiaryKillPct": 50.0,
                             "disabled": true
                         });
                     } else {
@@ -344,7 +344,7 @@
                             "excSologroup": false,
                             "soloKillPct": 50,
                             "groupKillPct": 50,
-                            "tertiaryKillPct":50.0,
+                            "tertiaryKillPct": 50.0,
                             "disabled": true
                         });
                     } else {
@@ -364,7 +364,7 @@
                             "excSologroup": false,
                             "soloKillPct": 50,
                             "groupKillPct": 50,
-                            "tertiaryKillPct":50.0,
+                            "tertiaryKillPct": 50.0,
                             "disabled": true
                         });
                     } else {
@@ -394,30 +394,30 @@
 
                     vm.projectsDTO.contactPrivileges.push({
                         "contact": vm.currrentOBJ.data,
-                        "exec" : false,
-                        "downloadType" : 0,
-                        "print" : false,
-                        "email" : false,
-                        "captioning" : false,
-                        "talentManagement" : false,
-                        "signoffManagement" : false,
-                        "releaseExclude" : false,
-                        "vendor" : false,
-                        "lockApproveRestriction" : false,
-                        "viewSensitive" : false,
-                        "exclusives" : 0,
-                        "seesUntagged" : false,
-                        "hasVideo" : false,
-                        "disabled" : false,
-                        "datgeditManagement" : false,
-                        "priorityPix" : false,
-                        "readOnly" : false,
-                        "restartColumns" : 2,
-                        "restartImageSize" : 'Large',
-                        "restartImagesPerPage" : 20,
-                        "showFinalizations" : false,
-                        "watermark" : false,
-                        "internal" : false,
+                        "exec": false,
+                        "downloadType": 0,
+                        "print": false,
+                        "email": false,
+                        "captioning": false,
+                        "talentManagement": false,
+                        "signoffManagement": false,
+                        "releaseExclude": false,
+                        "vendor": false,
+                        "lockApproveRestriction": false,
+                        "viewSensitive": false,
+                        "exclusives": 0,
+                        "seesUntagged": false,
+                        "hasVideo": false,
+                        "disabled": false,
+                        "datgeditManagement": false,
+                        "priorityPix": false,
+                        "readOnly": false,
+                        "restartColumns": 2,
+                        "restartImageSize": 'Large',
+                        "restartImagesPerPage": 20,
+                        "showFinalizations": false,
+                        "watermark": false,
+                        "internal": false,
                         "globalAlbum": false,
                         "loginCount": 0,
                         "defaultAlbum": null,
@@ -445,30 +445,30 @@
                     vm.projectsDTO.contactPrivileges.pop();
                     vm.projectsDTO.contactPrivileges.push({
                         "contact": vm.currrentOBJ.data,
-                        "exec" : true,
-                        "downloadType" : 0,
-                        "print" : false,
-                        "email" : false,
-                        "captioning" : false,
-                        "talentManagement" : false,
-                        "signoffManagement" : false,
-                        "releaseExclude" : false,
-                        "vendor" : false,
-                        "lockApproveRestriction" : false,
-                        "viewSensitive" : false,
-                        "exclusives" : 0,
-                        "seesUntagged" : false,
-                        "hasVideo" : false,
-                        "disabled" : false,
-                        "datgeditManagement" : false,
-                        "priorityPix" : false,
-                        "readOnly" : false,
-                        "restartColumns" : 2,
-                        "restartImageSize" : 'Large',
-                        "restartImagesPerPage" : 20,
-                        "showFinalizations" : false,
-                        "watermark" : false,
-                        "internal" : false,
+                        "exec": true,
+                        "downloadType": 0,
+                        "print": false,
+                        "email": false,
+                        "captioning": false,
+                        "talentManagement": false,
+                        "signoffManagement": false,
+                        "releaseExclude": false,
+                        "vendor": false,
+                        "lockApproveRestriction": false,
+                        "viewSensitive": false,
+                        "exclusives": 0,
+                        "seesUntagged": false,
+                        "hasVideo": false,
+                        "disabled": false,
+                        "datgeditManagement": false,
+                        "priorityPix": false,
+                        "readOnly": false,
+                        "restartColumns": 2,
+                        "restartImageSize": 'Large',
+                        "restartImagesPerPage": 20,
+                        "showFinalizations": false,
+                        "watermark": false,
+                        "internal": false,
                         "globalAlbum": false,
                         "loginCount": 0,
                         "defaultAlbum": null,
@@ -557,15 +557,14 @@
             Projects.update(vm.projectsDTO, onSaveSuccess, onSaveError);
 
 
-
         };
         var onSaveSuccess = function (result) {
             console.log('saving project...');
-           // $scope.$emit('smartLpcApp:projectsUpdate', result);
+            // $scope.$emit('smartLpcApp:projectsUpdate', result);
             // $uibModalInstance.close(result);
             $ngConfirm({
                 title: 'Success!',
-                content: "Project : <strong>"+vm.projectsDTO.projects.fullName+"</strong> has been updated",
+                content: "Project : <strong>" + vm.projectsDTO.projects.fullName + "</strong> has been updated",
                 type: 'green',
                 typeAnimated: true,
                 theme: 'dark',
@@ -581,7 +580,7 @@
             vm.isSaving = false;
             $rootScope.relationships = null;
             $rootScope.execsContactMultiple = null;
-            $state.go('projects-detail', {id:vm.projectsDTO.projects.id}, {reload: true});
+            $state.go('projects-detail', {id: vm.projectsDTO.projects.id}, {reload: true});
             // ...
         };
 
@@ -1008,7 +1007,7 @@
                         return id;
                     },
                     project: function () {
-                      return vm.projectsDTO.projects.id;
+                        return vm.projectsDTO.projects.id;
                     },
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('contacts');
@@ -1045,10 +1044,10 @@
 
         vm.delete = function () {
             var password = prompt("Enter password: ", "");
-            console.log("Password : "+password);
-            if(password === "" ) {
+            console.log("Password : " + password);
+            if (password === "") {
                 alert("No Password Entered");
-            }else{
+            } else {
                 $http({
                     method: 'POST',
                     url: 'api/project/delete',
@@ -1238,7 +1237,6 @@
         vm.sortProjectRoles();
 
 
-
         vm.saveAndClose = function () {
 
             console.log("ProjectsDTO");
@@ -1261,7 +1259,6 @@
             Projects.update(vm.projectsDTO, onSaveSuccess2, onSaveError);
 
 
-
         };
         var onSaveSuccess2 = function (result) {
             console.log('saving project...');
@@ -1269,7 +1266,7 @@
             // $uibModalInstance.close(result);
             $ngConfirm({
                 title: 'Success!',
-                content: "Project : <strong>"+vm.projectsDTO.projects.fullName+"</strong> has been updated",
+                content: "Project : <strong>" + vm.projectsDTO.projects.fullName + "</strong> has been updated",
                 type: 'green',
                 typeAnimated: true,
                 theme: 'dark',
@@ -1311,7 +1308,6 @@
             Projects.update(vm.projectsDTO, onSaveSuccess3, onSaveError);
 
 
-
         };
 
         var onSaveSuccess3 = function (result) {
@@ -1320,7 +1316,7 @@
             // $uibModalInstance.close(result);
             $ngConfirm({
                 title: 'Success!',
-                content: "Project : <strong>"+vm.projectsDTO.projects.fullName+"</strong> has been updated",
+                content: "Project : <strong>" + vm.projectsDTO.projects.fullName + "</strong> has been updated",
                 type: 'green',
                 typeAnimated: true,
                 theme: 'dark',
@@ -1336,7 +1332,7 @@
             vm.isSaving = false;
             $rootScope.relationships = null;
             $rootScope.execsContactMultiple = null;
-            $state.go('projects.edit', {id:vm.prevNext.next}, {reload: true}); // use for redirecting
+            $state.go('projects.edit', {id: vm.prevNext.next}, {reload: true}); // use for redirecting
             // ...
         };
 
@@ -1345,7 +1341,7 @@
             $rootScope.execsContactMultiple = null;
             $ngConfirm({
                 title: 'Error!',
-                content: "Project : <strong>"+vm.projectsDTO.projects.fullName+"</strong> was not updated",
+                content: "Project : <strong>" + vm.projectsDTO.projects.fullName + "</strong> was not updated",
                 type: 'red',
                 typeAnimated: true,
                 theme: 'dark',
@@ -1441,10 +1437,10 @@
 
         vm.addStatus = function () {
             var status = prompt("Add New Option : ", "");
-            console.log("status : "+status);
-            if(status === "" ) {
+            console.log("status : " + status);
+            if (status === null) {
                 alert("No status Entered");
-            }else{
+            } else {
                 vm.newStatus = {
                     tableName: 'projects',
                     fieldName: 'status_id',
@@ -1459,12 +1455,45 @@
         };
         var onSaveSuccess10 = function (result) {
             vm.status.push(result);
-            console.log("GOT NEW STATUS : "+JSON.stringify(result));
+            console.log("GOT NEW STATUS : " + JSON.stringify(result));
             alert("New Status Created")
         };
 
         var onSaveError10 = function () {
 
+        };
+
+        vm.lookUpContact = function (id) {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/entities/contacts/contacts-update-modal.html',
+                controller: 'ContactsModalUpdateController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'xl',
+                resolve: {
+                    translatePartialLoader: [
+                        '$translate',
+                        '$translatePartialLoader',
+                        function ($translate,
+                                  $translatePartialLoader) {
+                            $translatePartialLoader
+                                .addPart('contacts');
+                            return $translate.refresh();
+                        }],
+
+
+                    entity: ['$stateParams', 'Contacts',
+                        function ($stateParams, Contacts) {
+                            // contactID: ['$stateParams',
+                            // 'Contacts', function
+                            // ($stateParams, Contacts) {
+
+                            return Contacts.get({
+                                id: id
+                            }).$promise;
+                        }]
+                }
+            })
         };
     }
 })();

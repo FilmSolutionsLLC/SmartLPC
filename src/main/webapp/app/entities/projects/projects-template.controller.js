@@ -82,5 +82,7 @@
             console.log("getTemplate executed");
             $state.go('contacts', {}, {reload: true});// use for redirecting ...
         };
+
+
     }
 })();

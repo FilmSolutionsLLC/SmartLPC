@@ -123,7 +123,7 @@ project:
         path: /opt/logos/
 
 largest:
-  brick: /mnt/opt/scripts/LargestBrick
+  brick: /opt/scripts/LargestBrick
 
 javalocation:
   #path: /usr/java/jdk1.8.0_45/bin/java

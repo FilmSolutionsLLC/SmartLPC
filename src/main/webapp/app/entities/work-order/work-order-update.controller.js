@@ -700,5 +700,38 @@
                 }
             });
         };
+
+        vm.lookUpContact = function (id) {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/entities/contacts/contacts-update-modal.html',
+                controller: 'ContactsModalUpdateController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'xl',
+                resolve: {
+                    translatePartialLoader: [
+                        '$translate',
+                        '$translatePartialLoader',
+                        function ($translate,
+                                  $translatePartialLoader) {
+                            $translatePartialLoader
+                                .addPart('contacts');
+                            return $translate.refresh();
+                        }],
+
+
+                    entity: ['$stateParams', 'Contacts',
+                        function ($stateParams, Contacts) {
+                            // contactID: ['$stateParams',
+                            // 'Contacts', function
+                            // ($stateParams, Contacts) {
+
+                            return Contacts.get({
+                                id: id
+                            }).$promise;
+                        }]
+                }
+            })
+        };
     }
 })();

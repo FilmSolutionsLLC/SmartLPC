@@ -184,7 +184,12 @@
 -->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-4 no-padding-left">
+			<div class="col-xs-6 no-padding-left">
+                <button class="btn btn-danger btn-sm" ng-click="vm.clearCurrent()">
+                    <span class="glyphicon glyphicon-minus"></span> <span
+                    class="hidden-xs"> Clear Current </span>
+                </button>
+
 				<button class="btn btn-primary btn-sm" ng-click="vm.addContact()">
 					<span class="glyphicon glyphicon-plus"></span> <span
 						class="hidden-xs"
@@ -194,7 +199,7 @@
 
 			</div>
 
-			<div class="col-xs-8 no-padding-right">
+			<div class="col-xs-6 no-padding-right">
 				<form name="searchForm" class="form-inline">
 					<div class="input-group pull-right">
 						<input type="text" class="form-control input-sm"

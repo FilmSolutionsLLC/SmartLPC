@@ -1049,5 +1049,58 @@
             console.log("op : ",result);
             vm.isSaving = false;
         };
+
+        vm.addStatus = function () {
+            var status = prompt("Add New Option : ", "");
+            console.log("status : "+status);
+            if (status === null) {
+                alert("No status Entered");
+            }else{
+                vm.newStatus = {
+                    tableName: 'projects',
+                    fieldName: 'status_id',
+                    textValue: status,
+                    id: null
+                };
+
+                Lookups.save(vm.newStatus, onSaveSuccess, onSaveError);
+
+
+            }
+        };
+
+
+        vm.lookUpContact = function (id) {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/entities/contacts/contacts-update-modal.html',
+                controller: 'ContactsModalUpdateController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'xl',
+                resolve: {
+                    translatePartialLoader: [
+                        '$translate',
+                        '$translatePartialLoader',
+                        function ($translate,
+                                  $translatePartialLoader) {
+                            $translatePartialLoader
+                                .addPart('contacts');
+                            return $translate.refresh();
+                        }],
+
+
+                    entity: ['$stateParams', 'Contacts',
+                        function ($stateParams, Contacts) {
+                            // contactID: ['$stateParams',
+                            // 'Contacts', function
+                            // ($stateParams, Contacts) {
+
+                            return Contacts.get({
+                                id: id
+                            }).$promise;
+                        }]
+                }
+            })
+        };
     }
 })();
