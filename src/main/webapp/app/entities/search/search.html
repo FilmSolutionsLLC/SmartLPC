@@ -34,9 +34,7 @@
             <tr ng-repeat="workOrder in vm.workOrders.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
 
                 <td class="extra-small"><a ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a></td>
-                <td class="extra-small">
-                    <a ui-sref="projects-detail({id:workOrder.project.id})">{{workOrder.project_name}}</a>
-                </td>
+                <td class="extra-small">{{workOrder.project_name}}</td>
                 <td class="extra-small">{{workOrder.po}}</td>
                 <td class="extra-small">{{workOrder.type}}</td>
                 <td class="extra-small">{{workOrder.date | date:'mediumDate'}}</td>
@@ -121,8 +119,7 @@
                             class="glyphicon glyphicon-sort"></span></small>
                     </th>
                     <th jh-sort-by="companyContact.fullName">
-                        <small><span translate="smartLpcApp.contacts.companyContact">companyContact</span>
-                            <span class="glyphicon glyphicon-sort"></span></small>
+                        <small>Company Contact <span class="glyphicon glyphicon-sort"></span></small>
                     </th>
                     <th></th>
                 </tr>
@@ -159,11 +156,18 @@
                     </td>
 
                     <td>
-                        <small><a ui-sref="contacts-detail({id:contacts.companyContact.id})">{{contacts.companyContact.fullName}}</a>
+                        <small><a ui-sref="contacts-detail({id:contacts.companyContactId})">{{contacts.companyContactFullName}}</a>
                         </small>
                     </td>
                     <td class="text-right small">
                         <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="contacts.project-permission({id:contacts.id})" ui-sref-opts="{reload: true, notify: true}"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-film"></span>
+                                <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
+                            </button>
+
                             <button type="submit"
                                     ui-sref="contacts-detail({id:contacts.id})"
                                     class="btn btn-info btn-sm">

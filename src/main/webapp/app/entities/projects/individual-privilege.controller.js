@@ -7,36 +7,36 @@
     angular
         .module('smartLpcApp')
         .controller('IndividualPrivilegesController', IndividualPrivilegesController);
-    IndividualPrivilegesController.$inject = ['$uibModal','id', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModalInstance', '$scope', '$state', 'Projects','ContactPrivileges'];
+    IndividualPrivilegesController.$inject = ['$uibModal', 'contact', 'project', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModalInstance', '$scope', '$state', 'Projects', 'ContactPrivileges'];
 
-    function IndividualPrivilegesController($uibModal,id, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModalInstance, $scope, $state, Projects,ContactPrivileges) {
-    	 var vm = this;
+    function IndividualPrivilegesController($uibModal, contact, project, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModalInstance, $scope, $state, Projects, ContactPrivileges) {
+        var vm = this;
 
-
-    	 console.log("Id got: "+id)
+        console.log(project);
+        console.log(contact);
         vm.downloadType = [{'id': 0, 'value': "NONE"}, {'id': 1, 'value': "ALL"}, {'id': 2, 'value': "Lock Approved"}];
         vm.exclusives = [{'id': 0, 'value': "NONE"}, {'id': 1, 'value': "BASIC"}, {'id': 2, 'value': "MASTER"}];
 
-         $http({
-             method: 'GET',
-             url: 'api/contact-privileges/'+id,
-         }).then(function successCallback(response) {
-        	 vm.contactPrivileges = response.data;
-        	 console.log("Got from Individual privileges controller : "+JSON.stringify(vm.contactPrivileges));
-         }, function errorCallback(response) {
+        $http({
+            method: 'GET',
+            //url: 'api/contact-privileges/'+id,
+            url: 'api/get/contact/project',
+            params: {
+                'projectID': project,
+                'contactID': contact
+            }
+        }).then(function successCallback(response) {
+            vm.contactPrivileges = response.data;
+        }, function errorCallback(response) {
 
-         });
-         vm.close = function () {
+        });
+        vm.close = function () {
 
-             $uibModalInstance.dismiss('cancel');
-         };
+            $uibModalInstance.dismiss('cancel');
+        };
 
 
         vm.openModal = function (elementID) {
-
-            console.log("id of textbox : " + elementID);
-            // var ctrl = angular.element(id).data('$ngModelController');
-
             var modalInstance = $uibModal.open({
 
                 templateUrl: 'app/entities/contacts/simpleModal.html',
@@ -63,28 +63,20 @@
             return $rootScope.relationships;
         }, function () {
             if ($rootScope.relationships == null) {
-                console.log("null rootscope");
 
             } else {
-                console.log("not null");
+
 
                 vm.currrentOBJ = $rootScope.relationships;
-                console.log("========> " + JSON.stringify(vm.currentOBJ));
+
                 if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.execs_change')) {
-                    console.log("found equal");
-
                     vm.contactPrivileges.contact = vm.currrentOBJ.data;
-
-                    console.log(vm.contactPrivileges.contact.fullName);
                 }
             }
         });
 
 
-
         vm.getAlbums = function (id) {
-            console.log("id of textbox : " + id);
-            // var ctrl = angular.element(id).data('$ngModelController');
 
             var modalInstance = $uibModal.open({
 
@@ -112,8 +104,6 @@
 
 
         vm.namedAlbum = function (id) {
-            console.log("id of textbox : " + id);
-            // var ctrl = angular.element(id).data('$ngModelController');
 
             var modalInstance = $uibModal.open({
 
@@ -140,8 +130,6 @@
         }
 
         vm.namedActor = function (id) {
-            console.log("id of textbox : " + id);
-            // var ctrl = angular.element(id).data('$ngModelController');
 
             var modalInstance = $uibModal.open({
 
@@ -167,106 +155,102 @@
             });
         };
 
-        vm.defaultAlbum = {};
+        vm.defaultAlbum = null;
         vm.namedAlbumList = [];
-        $rootScope.$watch(function() {
-            return $rootScope.selected;
-        }, function() {
-            if ($rootScope.selected == null) {
-                console.log("null rootscope");
+        $rootScope.$watch(function () {
+            return $rootScope.selectedAlbum;
+        }, function () {
+            if ($rootScope.selectedAlbum == null) {
 
+                console.log("selectedAlbum null ");
             } else {
-                vm.currrentOBJ = $rootScope.selected;
+                vm.currrentOBJ = $rootScope.selectedAlbum;
                 if (angular.equals(vm.currrentOBJ.elementID, 'defaultAlbum')) {
                     vm.defaultAlbum = vm.currrentOBJ.data;
-                    console.log("Saving inside default album list");
-                    console.log("default : "+JSON.stringify(vm.defaultAlbum))
-                }else if (angular.equals(vm.currrentOBJ.elementID, 'namedAlbum')) {
-                    console.log("Saving inside named album list")
+
+                } else if (angular.equals(vm.currrentOBJ.elementID, 'namedAlbum')) {
+
                     vm.namedAlbumList.push(vm.currrentOBJ.data);
-                    console.log("named : "+JSON.stringify(vm.namedAlbumList))
+
                 }
             }
         });
 
 
         vm.namedActorList = [];
-        $rootScope.$watch(function() {
+        $rootScope.$watch(function () {
             return $rootScope.selectedTalent;
-        }, function() {
+        }, function () {
             if ($rootScope.selectedTalent == null) {
-                console.log("null rootscope");
 
+                console.log("selectedTalent null ");
             } else {
                 vm.namedActorList.push($rootScope.selectedTalent);
-                console.log("talent : "+JSON.stringify(vm.namedActorList));
+
             }
         });
 
         vm.removeAlbums = function (index) {
-            vm.namedAlbumList.splice(index,1);
+            vm.namedAlbumList.splice(index, 1);
         };
         vm.removeActors = function (index) {
-            vm.namedActorList.splice(index,1);
+            vm.namedActorList.splice(index, 1);
         };
-
-
-
 
 
         vm.save = function () {
-            // save in album_permissions  Don't know what is 0 and 1 in permission column
-            // save in contact_privileges
-            console.log("=================================================================")
-            console.log("Saving Contact Privileges : "+JSON.stringify(vm.contactPrivileges));
 
-
-
-            console.log("Saving Default Album      : "+JSON.stringify(vm.defaultAlbum));
-            console.log("Saving Named Album        : "+JSON.stringify(vm.namedAlbumList));
-            console.log("Saving Named Actor        : "+JSON.stringify(vm.namedActorList));
-            console.log("=================================================================")
-
-            //making pojo to post
             vm.defaultAlbumPOST_LIST = [];
-            vm.defaultAlbumPOST = {
-                id :  null,
-                album_id : vm.defaultAlbum.id,
-                contact_id : vm.contactPrivileges.contact.id,
-                permission : 0,
-                name : vm.contactPrivileges.contact.username
-            };
-            vm.defaultAlbumPOST_LIST.push(vm.defaultAlbumPOST);
 
+            if (vm.defaultAlbum == null) {
 
-            for(var temp in vm.namedAlbumList){
-                vm.namedAlbumPOST = {
-                    id :  null,
-                    album_id : vm.namedAlbumList[temp].id,
-                    contact_id : vm.contactPrivileges.contact.id,
-                    permission : 1,
-                    name : vm.contactPrivileges.contact.username
+            } else {
+                vm.defaultAlbumPOST = {
+                    id: null,
+                    album_id: vm.defaultAlbum.id,
+                    contact_id: vm.contactPrivileges.contact.id,
+                    permission: 0,
+                    name: vm.contactPrivileges.contact.username
                 };
-                vm.defaultAlbumPOST_LIST.push(vm.namedAlbumPOST);
-            };
+                vm.defaultAlbumPOST_LIST.push(vm.defaultAlbumPOST);
+                console.log("defaultAlbumPOST " + JSON.stringify(vm.defaultAlbumPOST));
+                console.log("defaultAlbum " + JSON.stringify(vm.defaultAlbum));
 
-            console.log("======>  "+JSON.stringify(vm.defaultAlbumPOST_LIST));
-            $http({
-                method: 'POST',
-                url: 'api/album/permissions',
-                data: vm.defaultAlbumPOST_LIST
-            }).then(function successCallback(response) {
-                console.log("Saved Albums : "+response);
-            }, function errorCallback(response) {
-                console.log("Error Saving Albums")
-            });
+            }
+
+
+            //for(var temp in vm.namedAlbumList){
+            if (vm.namedAlbumList.length > 0) {
+                for (var i = 0; i < vm.namedAlbumList.length; i++) {
+                    vm.namedAlbumPOST = {
+                        id: null,
+                        album_id: vm.namedAlbumList[i].id,
+                        contact_id: vm.contactPrivileges.contact.id,
+                        permission: 1,
+                        name: vm.contactPrivileges.contact.username
+                    };
+                    vm.defaultAlbumPOST_LIST.push(vm.namedAlbumPOST);
+                }
+            }
+
+            console.log(JSON.stringify(vm.defaultAlbumPOST_LIST));
+            if (vm.defaultAlbumPOST_LIST.length > 0) {
+                $http({
+                    method: 'POST',
+                    url: 'api/album/permissions',
+                    data: vm.defaultAlbumPOST_LIST
+                }).then(function successCallback(response) {
+                }, function errorCallback(response) {
+                });
+            }
 
             ContactPrivileges.update(vm.contactPrivileges, onSaveSuccess, onSaveError);
         }
         var onSaveSuccess = function (result) {
-            console.log("Saved Contact Privileges...",result);
+
+            alert("Data Updated");
             $uibModalInstance.close(result);
-            vm.isSaving = false;
+
         };
 
         var onSaveError = function () {

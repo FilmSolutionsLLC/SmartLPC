@@ -33,4 +33,9 @@ public interface ContactPrivilegesRepository extends JpaRepository<ContactPrivil
     @Transactional
     List<ContactPrivileges> removeByContact(Contact contact);
 
+    @Transactional
+    List<ContactPrivileges> removeByProject(Projects projects);
+
+
+    ContactPrivileges findByProjectAndContact(Projects projects, Contact contacts);
 }

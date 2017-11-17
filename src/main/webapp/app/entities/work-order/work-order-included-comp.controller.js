@@ -23,7 +23,7 @@
 		}).then(function(response) {
 			vm.workOrders = response.data;
 			$scope.totalItems = vm.workOrders.length;
-
+            console.log("--> "+JSON.stringify(vm.workOrders));
 		});
 
 		$scope.viewby = 15;

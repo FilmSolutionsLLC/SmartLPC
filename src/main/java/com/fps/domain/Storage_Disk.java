@@ -36,9 +36,6 @@ public class Storage_Disk implements Serializable {
     @Column(name = "available")
     private Float available;
 
-    @Column(name = "use_percent")
-    private Integer usePercent;
-
     @Column(name = "last_updated")
     private LocalDate lastUpdated;
 
@@ -88,13 +85,6 @@ public class Storage_Disk implements Serializable {
         this.available = available;
     }
 
-    public Integer getUsePercent() {
-        return usePercent;
-    }
-
-    public void setUsePercent(Integer usePercent) {
-        this.usePercent = usePercent;
-    }
 
     public LocalDate getLastUpdated() {
         return lastUpdated;
@@ -148,7 +138,6 @@ public class Storage_Disk implements Serializable {
             ", size='" + size + "'" +
             ", used='" + used + "'" +
             ", available='" + available + "'" +
-            ", usePercent='" + usePercent + "'" +
             ", lastUpdated='" + lastUpdated + "'" +
             ", reserved='" + reserved + "'" +
             '}';

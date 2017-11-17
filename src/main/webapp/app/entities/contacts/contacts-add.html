@@ -1,6 +1,4 @@
 
-
-
 <h2 align="center">Contacts</h2>
 
 <form name="editForm" role="form" novalidate>
@@ -13,14 +11,14 @@
                     ng-disabled="editForm.$invalid || isSaving" ng-click="vm.save() ">Save
             </button>
 
-            <button type="submit" class="btn btn-xs btn btn-primary" ng-disabled="editForm.$invalid || isSaving"
+            <button type="button" class="btn btn-xs btn btn-primary" ng-disabled="editForm.$invalid || isSaving"
                     ng-click="vm.saveAndAdd()">Save
                 and Add
             </button>
 
             <button type="button" ui-sref="contacts.project-permission({id:savedID})" class="btn btn-xs btn btn-primary">Project Permissions</button>
 
-            <button type="submit" onclick="window.history.back()" class="btn btn-danger btn-xs">Close</button>
+            <a href="#" class="btn btn-xs btn btn-danger">Close</a>
         </div>
     </div>
 
@@ -34,7 +32,7 @@
 
 
                         <span class="input-group-btn">
-                             <button type="button" ui-sref="lookups.new" data-toggle="modal"
+                             <button type="button" ng-click="vm.addType()"
                                      class="btn btn-success btn-sm"><span
                                  class="glyphicon glyphicon-plus"></span></button>
                          </span>
@@ -90,25 +88,19 @@
                                 </span>
                 <input id="field_vm.contacts.contactCompany" name="companyContact"
                        ng-model="vm.contacts.companyContact.fullName"
-                       class="form-control input-sm">
+                       class="form-control input-sm" ui-sref="contacts.edit({id:vm.contacts.companyContact.id})" readonly>
             </div>
         </div>
 
 
         <label class="col-md-1 control-label small" for="field_defaultDepartment">Department</label>
         <div class="col-sm-2">
-            <div class="input-group">
 
-                        <span class="input-group-btn">
-                             <button type="button" ui-sref="departments.new" id="openBtn" data-toggle="modal"
-                                     class="btn btn-success btn-sm"><span
-                                 class="glyphicon glyphicon-plus"></span></button>
-                         </span>
                 <select class="form-control input-sm"
                         ng-options="departments as departments.departmentName for departments in vm.departmentss track by departments.id"
                         id="field_defaultDepartment" name="defaultDepartment"
                         ng-model="vm.contacts.defaultDepartment"></select>
-            </div>
+
         </div>
 
 
@@ -384,8 +376,7 @@
 
                 <div class="col-xs-2">
 
-                    <input type="text" id="field_contacts.company_contact" class="form-control input-sm"
-                           ng-model="vm.relatedContacts[$index].contact_b.companyContact.fullName" readonly>
+                    <input type="text" id="field_contacts.company_contact" class="form-control input-sm" ng-model="vm.relatedContacts[$index].contact_b.companyContact.fullName" ng-click="vm.viewContact()" readonly>
 
                 </div>
             </div>

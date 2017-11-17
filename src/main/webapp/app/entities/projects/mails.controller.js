@@ -26,7 +26,7 @@
 		vm.mailerList = [];
 		vm.relatedContact = [];
 		vm.keyCount = Object.keys(vm.talent[0]).length;
-		for (var i = 0; i < vm.talent.length; i++) {
+		/*for (var i = 0; i < vm.talent.length; i++) {
 			console.log("talent : " + vm.talent[i].contact.fullName);
 			console.log("===>id : " + vm.talent[i].contact.id)
 			$http({
@@ -36,11 +36,13 @@
 				// console.log("ADDING DATA FOR : "+
 				// vm.talent[i].contact.id);
 				vm.relatedContact.push(response.data);
-				// console.log("==> "+ JSON.stringify(response.data));
+
+				 console.log("Related Contact  ==> "+ JSON.stringify(response.data));
 			}, function errorCallback(response) {
 
 			});
-		}
+
+		}*/
 		// console.log(JSON.stringify(vm.talent))
 		// + JSON.stringify($scope.roles));
 		//

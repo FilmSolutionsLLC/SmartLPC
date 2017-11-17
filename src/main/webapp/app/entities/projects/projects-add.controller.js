@@ -111,35 +111,6 @@
 		});
 
 
-		var onSaveSuccess = function(result) {
-			console.log('saving project...');
-			//$scope.$emit('smartLpcApp:projectsUpdate', result);
-			// $uibModalInstance.close(result);
-            $ngConfirm({
-                title: 'Success!',
-                content: "Project : <strong>"+vm.projects.fullName+"</strong> has been created",
-                type: 'red',
-                typeAnimated: true,
-                theme: 'dark',
-                buttons: {
-                    confirm: {
-                        text: 'Okay',
-                        btnClass: 'btn-red',
-                        action: function () {
-                        }
-                    }
-                }
-            });
-			vm.isSaving = false;
-			$state.go('projects', {}, {
-				reload : true
-			});// use for redirecting ...
-		};
-
-		var onSaveError = function() {
-			vm.isSaving = false;
-		};
-
 		vm.projectPurchaseOrderses = [];
 		vm.projectRoles = [];
 		vm.projectLabTaskses = [];
@@ -230,7 +201,33 @@
 			}
 		};
 
-		vm.clear = function() {
+        var onSaveSuccess = function(result) {
+            console.log('saving project...');
+            //$scope.$emit('smartLpcApp:projectsUpdate', result);
+            // $uibModalInstance.close(result);
+            $ngConfirm({
+                title: 'Success!',
+                content: "Project : <strong>"+vm.projects.fullName+"</strong> has been created",
+                type: 'green',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-green',
+                        action: function () {
+                            $state.go('projects-detail', {id:result.id}, {reload: true});
+                        }
+                    }
+                }
+            });
+            vm.isSaving = false;
+
+        };
+
+
+
+        vm.clear = function() {
 			// $uibModalInstance.dismiss('cancel');
 		};
 
@@ -415,10 +412,47 @@
 						"soloKillPct" : 50,
 						"groupKillPct" : 25,
 						"characterName" : "",
-						"disabled" : false,
+						"disabled" : true,
                         "excSologroup": false,
 						"welcomeMessage" : ""
 					});
+
+                    vm.execss.push({
+                        "contact" : vm.currrentOBJ.data,
+                        "exec" : false,
+                        "downloadType" : 0,
+                        "print" : false,
+                        "email" : false,
+                        "captioning" : false,
+                        "talentManagement" : false,
+                        "signoffManagement" : false,
+                        "releaseExclude" : false,
+                        "vendor" : false,
+                        "lockApproveRestriction" : false,
+                        "viewSensitive" : false,
+                        "exclusives" : 0,
+                        "seesUntagged" : false,
+                        "hasVideo" : false,
+                        "disabled" : false,
+                        "datgeditManagement" : false,
+                        "priorityPix" : false,
+                        "readOnly" : false,
+                        "restartColumns" : 2,
+                        "restartImageSize" : 'Large',
+                        "restartImagesPerPage" : 20,
+                        "showFinalizations" : false,
+                        "watermark" : false,
+                        "internal" : false,
+                        "globalAlbum": false,
+                        "loginCount": 0,
+                        "defaultAlbum": null,
+                        "critiqueIt": false,
+                        "adhocLink": false,
+                        "retouch": false,
+                        "fileUpload": false,
+                        "deleteAssets": false
+                    });
+
 					// get related too.
 					console.log(" get releated  : ", vm.currrentOBJ.data.id);
 					$http({
@@ -459,8 +493,15 @@
 						"restartImagesPerPage" : 20,
 						"showFinalizations" : false,
 						"watermark" : false,
-						"internal" : false
-
+						"internal" : false,
+                        "globalAlbum": false,
+                        "loginCount": 0,
+                        "defaultAlbum": null,
+                        "critiqueIt": false,
+                        "adhocLink": false,
+                        "retouch": false,
+                        "fileUpload": false,
+                        "deleteAssets": false
 					});
 				} else if (angular.equals(vm.currrentOBJ.elementID,
 						'relatedContact')) {
@@ -538,5 +579,114 @@
 				}
 			})
 		};
-	}
+
+
+
+        vm.saveAndClose = function() {
+            console.log(vm.projects.name);
+            vm.projects.name = vm.projects.name.toUpperCase();
+            console.log(vm.projects.name);
+            console.log(" projectRoles : " + JSON.stringify(vm.projectRoles));
+            console.log(" talents : " + JSON.stringify(vm.talents));
+            for (var i = 0; i < vm.talents.length; i++) {
+                vm.projectRoles.push(vm.talents[i]);
+            }
+            for (var i = 0; i < vm.execss.length; i++) {
+                vm.contactPrivileges.push(vm.execss[i]);
+            }
+            // vm.projectRoles.concat(vm.talents);
+            console.log(" projectRoles : " + JSON.stringify(vm.projectRoles));
+            vm.projectsDTO = {
+                "projects" : vm.projects,
+                "projectPurchaseOrderses" : vm.projectPurchaseOrderses,
+                "projectRoles" : vm.projectRoles,
+                "projectLabTaskses" : vm.projectLabTaskses,
+                "contactPrivileges" : vm.contactPrivileges
+            };
+            vm.isSaving = true;
+            if (vm.projects.id !== null) {
+                Projects.update(vm.projects, onSaveSuccess2, onSaveError2);
+            } else {
+
+                console.log("==========================================");
+                console.log("==========================================");
+                console.log(JSON.stringify(vm.projectsDTO));
+                Projects.save(vm.projectsDTO, onSaveSuccess2, onSaveError);
+
+            }
+        };
+
+        var onSaveSuccess2 = function(result) {
+            console.log('saving project...');
+            //$scope.$emit('smartLpcApp:projectsUpdate', result);
+            // $uibModalInstance.close(result);
+            $ngConfirm({
+                title: 'Success!',
+                content: "Project : <strong>"+vm.projects.fullName+"</strong> has been created",
+                type: 'green',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-green',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+            vm.isSaving = false;
+            $state.go('projects', {}, {
+                reload : true
+            });// use for redirecting ...
+        };
+
+        var onSaveError = function() {
+            $ngConfirm({
+                title: 'Error!',
+                content: "Project : <strong>"+vm.projects.fullName+"</strong> was not created",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+            vm.isSaving = false;
+        };
+
+        vm.addStatus = function () {
+            var status = prompt("Add New Option : ", "");
+            console.log("status : "+status);
+            if(status === "" ) {
+                alert("No status Entered");
+            }else{
+                vm.newStatus = {
+                    tableName: 'projects',
+                    fieldName: 'status_id',
+                    textValue: status,
+                    id: null
+                };
+
+                Lookups.save(vm.newStatus, onSaveSuccess, onSaveError);
+
+
+            }
+        };
+        var onSaveSuccess = function (result) {
+            vm.status.push(result);
+            console.log("GOT NEW STATUS : "+JSON.stringify(result));
+            alert("New Status Created")
+        };
+
+        var onSaveError = function () {
+
+        };
+
+    }
 })();

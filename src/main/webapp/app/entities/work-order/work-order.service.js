@@ -33,7 +33,7 @@
             },
             'update': {
                 method: 'PUT',
-                cache:false,
+
                 transformRequest: function (data) {
                   /*  data.requestDate = DateUtils.convertLocalDateToServer(data.workOrder.requestDate);
                     data.reminderDate1 = DateUtils.convertLocalDateToServer(data.reminderDate1);
@@ -52,7 +52,7 @@
             },
             'save': {
                 method: 'POST',
-                cache:false,
+
                 transformRequest: function (data) {
 
                     data.requestDate = DateUtils.convertLocalDateToServer(data.requestDate);

@@ -61,10 +61,10 @@ public class WorkOrderServiceImpl implements WorkOrderService {
     private CurrentTenantIdentifierResolverImpl currentTenantIdentifierResolver;
 
     @Inject
+    private JdbcTemplate jdbcTemplate;
+    @Inject
     private ReportService reportService;
 
-    @Inject
-    private JdbcTemplate jdbcTemplate;
 
     final static private String MASTER = "master";
     final static private String SLAVE = "slave";
@@ -186,8 +186,16 @@ public class WorkOrderServiceImpl implements WorkOrderService {
     public void delete(Long id) {
         log.debug("Request to delete WorkOrder : {}", id);
         currentTenantIdentifierResolver.setTenant(MASTER);
-        workOrderRepository.delete(id);
-        workOrderSearchRepository.delete(id);
+        WorkOrder workOrder  = new WorkOrder();
+        workOrder.setId(id);
+        workOrdersAdminRelationRepository.deleteByWorkOrder(workOrder);
+        workOrderAbcFileRepository.deleteByWorkOrder(workOrder);
+        workOrderAbcHddRepository.deleteByWorkOrder(workOrder);
+        String sql = "delete from work_order where id ="+id;
+        jdbcTemplate.execute(sql);
+        //workOrderRepository.delete(id);
+
+        //workOrderSearchRepository.delete(id);
     }
 
     /**
@@ -511,7 +519,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
         return workOrderListDTOs;
     }
 
-    public List<WorkOrderProcessingDTO> findWorkOrderProcessingDtos() {
+    public List<WorkOrderProcessingDTO> findWorkOrderProcessingDtos(String order,String field) {
         List<WorkOrderProcessingDTO> workOrderProcessingDTOList = new ArrayList<>();
         currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
         String sql = "select query from reports where name = 'processing_log'";
@@ -519,7 +527,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
         String query = jdbcTemplate.queryForObject(sql, new Object[]{}, String.class);
         log.info("Report Query : " + query);
 
-        List<Map<String, Object>> workOrders = jdbcTemplate.queryForList(query);
+        List<Map<String, Object>> workOrders = jdbcTemplate.queryForList(query.concat(" ").concat(field).concat(" ").concat(order));
         for (Map workOrder : workOrders) {
             WorkOrderProcessingDTO workOrderProcessingDTO = new WorkOrderProcessingDTO();
             workOrderProcessingDTO.setId(((BigInteger) workOrder.get("Id")).longValue());

@@ -250,7 +250,7 @@
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'Projects', function ($stateParams, Projects) {
-                        return Projects.get({id: $stateParams.id});
+                        return Projects.get({id: $stateParams.id}).$promise;
                     }]
                 }
             })

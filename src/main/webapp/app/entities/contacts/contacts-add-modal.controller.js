@@ -4,15 +4,15 @@
 (function () {
     'use strict';
 
-    angular.module('smartLpcApp').controller('ContactsAddController',
-        ContactsAddController);
+    angular.module('smartLpcApp').controller('ContactsAddModalController',
+        ContactsAddModalController);
 
-    ContactsAddController.$inject = ['$ngConfirm', 'pagingParams', '$rootScope', '$state',
-        '$uibModal', '$scope', '$stateParams', 'entity', 'Contacts',
+    ContactsAddModalController.$inject = ['$uibModalStack','elementID','$uibModalInstance','$ngConfirm', '$rootScope', '$state',
+        '$uibModal', '$scope', 'entity', 'Contacts',
         'Lookups', 'Departments', 'User', '$http', 'ContactRelationships'];
 
-    function ContactsAddController($ngConfirm, pagingParams, $rootScope, $state, $uibModal,
-                                   $scope, $stateParams, entity, Contacts, Lookups, Departments, User,
+    function ContactsAddModalController($uibModalStack,elementID,$uibModalInstance,$ngConfirm,$rootScope, $state, $uibModal,
+                                   $scope, entity, Contacts, Lookups, Departments, User,
                                    $http, $mdDialog, ContactRelationships) {
 
 
@@ -121,6 +121,15 @@
                     }
                 }
             });
+            //$uibModalInstance.dismiss('cancel');
+            $scope.currentOBJ = {
+                "elementID": elementID,
+                "data": result
+            };
+            console.log("DAta in rootscope : "+JSON.stringify($scope.currentOBJ));
+
+            $rootScope.relationships = $scope.currentOBJ;
+            $uibModalStack.dismissAll('cancel')
         };
 
         vm.saveAndAdd = function () {
@@ -128,6 +137,7 @@
             Contacts.save(vm.contactsDTO, onSaveAddSuccess, onSaveError);
         };
 
+        $rootScope.relatedContacts = [];
 
         var onSaveAddSuccess = function (result) {
             vm.isSaving = false;
@@ -224,8 +234,9 @@
             })
         };
 
-        vm.viewContact = function () {
-          console.log("Viewign thos")
+
+        vm.close = function () {
+            $uibModalInstance.dismiss('cancel');
         };
 
         vm.addType = function () {
@@ -241,12 +252,12 @@
                     id: null
                 };
 
+
                 Lookups.save(vm.newStatus, onSaveSuccess10, onSaveError10);
 
 
             }
         };
-
         var onSaveSuccess10 = function (result) {
             vm.types.push(result);
             console.log("GOT NEW TYPES : "+JSON.stringify(result));
@@ -255,6 +266,49 @@
 
         var onSaveError10 = function () {
 
+        };
+
+        vm.editModal = function (id) {
+
+            // var ctrl = angular.element(id).data('$ngModelController');
+
+            var modalInstance = $uibModal.open({
+
+                templateUrl: 'app/entities/contacts/contacts-update-modal.html',
+                controller: 'ContactsUpdateController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'xl',
+                resolve : {
+                    translatePartialLoader : [
+                        '$translate',
+                        '$translatePartialLoader',
+                        function($translate,
+                                 $translatePartialLoader) {
+                            $translatePartialLoader
+                                .addPart('contacts');
+                            return $translate.refresh();
+                        } ],
+
+
+                    entity : [ '$stateParams', 'Contacts',
+                        function($stateParams, Contacts) {
+                            // contactID: ['$stateParams',
+                            // 'Contacts', function
+                            // ($stateParams, Contacts) {
+
+                            return Contacts.get({
+                                id : $stateParams.id
+                            }).$promise;
+                        } ]
+
+                }
+                /*resolve: {
+                    entity: ['ProjectRoles', function(ProjectRoles) {
+                        return ProjectRoles.get({id : $stateParams.id}).$promise;
+                    }]
+                }*/
+            });
         };
     }
 })();

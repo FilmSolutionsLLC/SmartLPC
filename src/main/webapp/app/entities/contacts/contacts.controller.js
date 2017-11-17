@@ -11,8 +11,9 @@
 	function ContactsController($rootScope, $scope, $state, Contacts,
 			ContactsSearch, ParseLinks, AlertService, pagingParams,
 			paginationConstants) {
-		console.log("ContactsController - Smart LPC");
+		console.log("Contacts Controller - Smart LPC");
 		var vm = this;
+
 		vm.loadAll = loadAll;
 		vm.loadPage = loadPage;
 		vm.predicate = pagingParams.predicate;
@@ -59,7 +60,7 @@
 				vm.queryCount = vm.totalItems;
 				vm.contacts = data;
 				vm.page = pagingParams.page;
-				console.log("Contacts ",vm.contacts);
+
 			}
 
 			function onError(error) {
@@ -68,13 +69,13 @@
 		}
 
 		function loadPage(page) {
-			console.log("page load called..");
+
 			vm.page = page;
 			vm.transition();
 		}
 
 		function transition() {
-			console.log("changing page now");
+
 			$state.transitionTo($state.$current, {
 				page : vm.page,
 				sort : vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
@@ -83,7 +84,7 @@
 		}
 
 		function search(searchQuery) {
-			console.log("search query called..");
+
 			if (!searchQuery) {
 				return vm.clear();
 			}
@@ -103,32 +104,5 @@
 			vm.currentSearch = null;
 			vm.transition();
 		}
-
-		/*
-		 * var options = []; $( '.dropdown-menu a' ).on( 'click', function(
-		 * event ) {
-		 *
-		 * var $target = $( event.currentTarget ), val = $target.attr(
-		 * 'data-value' ), $inp = $target.find( 'input' ), idx;
-		 *
-		 * if ( ( idx = options.indexOf( val ) ) > -1 ) { options.splice( idx, 1 );
-		 * setTimeout( function() { $inp.prop( 'checked', false ) }, 0); } else {
-		 * options.push( val ); setTimeout( function() { $inp.prop( 'checked',
-		 * true ) }, 0); } $( event.target ).blur();
-		 *
-		 * console.log( options ); return false; });
-		 */
-
-		/*
-		 * if (!('Notification' in window)) { console.log('Web Notification not
-		 * supported'); return; }
-		 *
-		 * Notification.requestPermission(function(permission) { var
-		 * notification = new Notification("Title", { body : 'HTML5 Web
-		 * Notification API', icon :
-		 * 'http://filmsolutions.com/wp-content/uploads/1Logo.png', dir : 'auto'
-		 * }); setTimeout(function() { notification.close(); }, 30000); });
-		 */
-
 	}
 })();

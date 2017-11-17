@@ -3,6 +3,7 @@ package com.fps.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.fps.config.util.CurrentTenantIdentifierResolverImpl;
 import com.fps.domain.*;
+import com.fps.elastics.search.ProjectRolesSearchRepository;
 import com.fps.repository.*;
 import com.fps.service.ProjectsService;
 import com.fps.web.rest.dto.ProjectsDTO;
@@ -45,6 +46,9 @@ public class ProjectsResource {
 
 	@Inject
 	private ProjectRolesRepository projectRolesRepository;
+
+	@Inject
+    private ProjectRolesSearchRepository projectRolesSearchRepository;
 
 	@Inject
 	private ProjectPurchaseOrdersRepository projectPurchaseOrdersRepository;
@@ -94,7 +98,7 @@ public class ProjectsResource {
 					.body(null);
 		}
 
-		Projects result = projectsService.save(projectsDTO);
+            Projects result = projectsService.save(projectsDTO);
 
 		return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
 				.headers(HeaderUtil.createEntityCreationAlert("projects", result.getId().toString())).body(result);
@@ -174,6 +178,7 @@ public class ProjectsResource {
 	public ResponseEntity<ProjectsDTO> getProjects(@PathVariable Long id) {
 		log.info("REST request to get Projects : {}", id);
 
+        long startTime = System.nanoTime();
 		final Projects projects = projectsService.findOne(id);
 
 		// final List<ProjectRoles> projectRoleses =
@@ -199,6 +204,7 @@ public class ProjectsResource {
 				projectRolesSet, contactPrivilegesSet);
 
 		log.info(projectsDTO.toString());
+        long elapsedTimeNs = System.nanoTime() - startTime;
 		return Optional.ofNullable(projectsDTO).map(result -> new ResponseEntity<>(result, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
@@ -213,8 +219,13 @@ public class ProjectsResource {
 	@RequestMapping(value = "/projects/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<Void> deleteProjects(@PathVariable Long id) {
+        long startTime = System.nanoTime();
 		log.debug("REST request to delete Projects : {}", id);
 		projectsService.delete(id);
+        long elapsedTimeNs = System.nanoTime() - startTime;
+        double seconds = (double)elapsedTimeNs / 1000000000.0;
+
+        log.info("Project Deleted in :"+seconds+" seconds");
 		return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("projects", id.toString())).build();
 	}
 
@@ -288,28 +299,42 @@ public class ProjectsResource {
 	@Timed
 	public ResponseEntity<List<ProjectsViewDTO>> getAllProjectsNew(Pageable pageable) throws URISyntaxException {
 		log.info("REST request to get all projects");
-		Page<Objects[]> page = projectsService.getAllProjects(pageable);
+        Page<Objects[]> page =null;
+        List<ProjectsViewDTO> projectsViewDTOs = new ArrayList<>();
+        try {
+             page = projectsService.getAllProjects(pageable);
 
-		// columns names same as pojo class
-		List<ProjectsViewDTO> projectsViewDTOs = new ArrayList<>();
-		for (Object[] objects : page.getContent()) {
+            // columns names same as pojo class
 
-			ProjectsViewDTO projectsViewDTO = new ProjectsViewDTO();
-			projectsViewDTO.setId(Long.valueOf(String.valueOf(objects[0])));
-			projectsViewDTO.setProjectName(String.valueOf(objects[1]));
-			projectsViewDTO.setProjectStatus(String.valueOf(objects[2]));
-			projectsViewDTO.setMainContactName(String.valueOf(objects[3]));
-			projectsViewDTO.setMainContactOffice(String.valueOf(objects[4]));
-			projectsViewDTO.setMainContactEmail(String.valueOf(objects[5]));
-			projectsViewDTO.setUnitPublicistName(String.valueOf(objects[6]));
-			projectsViewDTO.setUnitPublicistMobile(String.valueOf(objects[7]));
-			projectsViewDTO.setUnitPublicistOffice(String.valueOf(objects[8]));
-			projectsViewDTO.setUnitPublicistEmail(String.valueOf(objects[9]));
+            for (Object[] objects : page.getContent()) {
 
-			projectsViewDTOs.add(projectsViewDTO);
+                ProjectsViewDTO projectsViewDTO = new ProjectsViewDTO();
+                projectsViewDTO.setId(Long.valueOf(String.valueOf(objects[0])));
+                projectsViewDTO.setProjectName(String.valueOf(objects[1]));
+                projectsViewDTO.setProjectStatus(String.valueOf(objects[2]));
 
-		}
+                if (objects[3] != null) {
+                    projectsViewDTO.setMainContactID(Long.valueOf(String.valueOf(objects[3])));
+                }
+                projectsViewDTO.setMainContactName(String.valueOf(objects[4]));
+                projectsViewDTO.setMainContactOffice(String.valueOf(objects[5]));
+                projectsViewDTO.setMainContactEmail(String.valueOf(objects[6]));
 
+                if (objects[7] != null) {
+                    projectsViewDTO.setUnitPublicistID(Long.valueOf(String.valueOf(objects[7])));
+                }
+                projectsViewDTO.setUnitPublicistName(String.valueOf(objects[8]));
+                projectsViewDTO.setUnitPublicistMobile(String.valueOf(objects[9]));
+                projectsViewDTO.setUnitPublicistOffice(String.valueOf(objects[10]));
+                projectsViewDTO.setUnitPublicistEmail(String.valueOf(objects[11]));
+
+                projectsViewDTOs.add(projectsViewDTO);
+
+            }
+
+        }catch (Exception e){
+		    e.printStackTrace();
+        }
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/pro");
 		return new ResponseEntity<>(projectsViewDTOs, headers, HttpStatus.OK);
 	}
@@ -470,11 +495,11 @@ public class ProjectsResource {
      */
     @RequestMapping(value = "/album/permissions", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public String albumPermissions(@RequestBody List<AlbumPermissions> albumPermissionsList) {
+    public void albumPermissions(@RequestBody List<AlbumPermissions> albumPermissionsList) {
+
 
         albumPermissionsRepository.save(albumPermissionsList);
         log.info("Saved album permissions");
-	    return "saved";
     }
 
     /**
@@ -496,6 +521,43 @@ public class ProjectsResource {
             jdbcTemplate.update(sql);
             log.info("Enable success");
         }
+    }
+
+
+    /**
+     * Get All Projects in id,name form for Select Dropdown
+     * @return
+     * @throws URISyntaxException
+     */
+    @RequestMapping(value = "/template/projects", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Objects[]> getAllTemplateProjects() throws URISyntaxException {
+        log.info("REST request to get all template projects");
+        List<Objects[]> projects = projectsRepository.findTemplateProjects();
+        return projects;
+    }
+
+
+
+    /**
+     * Get All Projects in id,name form for Select Dropdown
+     * @return
+     * @throws URISyntaxException
+     */
+    @RequestMapping(value = "/prev/next/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public Map<String,Long> getPreviousNextID(@PathVariable Long id) throws URISyntaxException {
+        log.info("Get Previous and Next Project ID");
+        String next = "select id from projects where id = (select min(id) from projects where id > ?)";
+        String prev = "select id from projects where id = (select max(id) from projects where id < ?)";
+        Long nextID = jdbcTemplate.queryForObject(next,new Object[] {id},Long.class);
+        Long prevID = jdbcTemplate.queryForObject(prev,new Object[] {id},Long.class);
+
+        Map<String,Long> projects = new HashMap<>();
+        projects.put("next",nextID);
+        projects.put("prev",prevID);
+
+        return projects;
     }
 
 

@@ -68,7 +68,7 @@ public class ContactsServiceImpl implements ContactsService {
         currentTenantIdentifierResolver.setTenant(Constants.MASTER_DATABASE);
         Contacts result = contactsRepository.save(contacts);
         contactsSearchRepository.save(result);
-        try {
+       /* try {
             String command = javaLocation + " -jar " + encryptorJar + " '" + result.getId() + "' '" + result.getPassword() + "'";
             log.info("Password Encrypt : " + command);
 
@@ -83,7 +83,7 @@ public class ContactsServiceImpl implements ContactsService {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         return result;
     }
 
@@ -97,7 +97,8 @@ public class ContactsServiceImpl implements ContactsService {
     public Page<Contacts> findAll(Pageable pageable) {
         log.info("Request to get all Contacts");
         currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
-        Page<Contacts> result = contactsRepository.findAll(pageable);
+        Page<Contacts> result = contactsSearchRepository.findAll(pageable);
+       // Page<Contacts> result = contactsRepository.findAll(pageable);
 
         return result;
     }
@@ -114,7 +115,7 @@ public class ContactsServiceImpl implements ContactsService {
         currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
 
 
-        Contacts contacts = contactsRepository.findOne(id);
+        Contacts contacts = contactsSearchRepository.findOne(id);
 
 
         log.info(contacts.toString());

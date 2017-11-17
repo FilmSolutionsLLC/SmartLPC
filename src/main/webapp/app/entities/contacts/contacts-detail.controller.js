@@ -10,21 +10,19 @@
 
 	function ContactsDetailController($ngConfirm,$scope, $rootScope, $stateParams, entity,
 			Contacts, Lookups, Departments, User) {
-        console.log("ContactsDetailController ");
-        console.log("print entity: ");
+        console.log("Contacts Detail Controller ");
 
-        console.log(JSON.stringify(entity));
         var vm = this;
 
         vm.contacts = [];
         vm.relatedContacts = [];
         vm.contactDTO = entity;
-        console.log(JSON.stringify(vm.contactDTO));
+
         vm.load = function (id) {
             Contacts.get({
                 id: id
             }, function (result) {
-                console.log("ContactsDetailController :  vm.load");
+
                 vm.contactDTO = result.data;
 
             });
@@ -45,30 +43,5 @@
                     + printContents + '</body></html>');
             popupWin.document.close();
         }
-
-        // socket impl
-
-
-       /* vm.errorDialog = function () {
-
-
-            $ngConfirm({
-                title: 'Encountered an error!',
-                content: 'Something went downhill, this may be serious',
-                type: 'red',
-                typeAnimated: true,
-                buttons: {
-                    tryAgain: {
-                        text: 'Try again',
-                        btnClass: 'btn-red',
-                        action: function () {
-                        }
-                    },
-                    close: function () {
-                    }
-                }
-            });
-
-        }*/
     }
 })();

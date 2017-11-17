@@ -67,7 +67,7 @@ public interface WorkOrderService {
 
     List<WorkOrderListDTO> searchByVarious(String type,String query);
 
-    List<WorkOrderProcessingDTO> findWorkOrderProcessingDtos();
+    List<WorkOrderProcessingDTO> findWorkOrderProcessingDtos(String order,String field);
 }
 
 

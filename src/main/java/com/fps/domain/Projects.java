@@ -7,6 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
@@ -47,10 +48,10 @@ public class Projects implements Serializable {
     private String alfrescoTitle2;
 
     @Column(name = "start_date")
-    private ZonedDateTime startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date")
-    private ZonedDateTime endDate;
+    private LocalDate endDate;
 
     @Column(name = "actors_with_rights")
     private Long actorsWithRights;
@@ -209,7 +210,7 @@ public class Projects implements Serializable {
     private Boolean disabled;
 
     @Column(name = "reminder_date")
-    private ZonedDateTime reminderDate;
+    private LocalDate reminderDate;
 
     @Column(name = "photo_credit_override")
     private Boolean photoCreditOverride;
@@ -336,19 +337,19 @@ public class Projects implements Serializable {
         this.alfrescoTitle2 = alfrescoTitle2;
     }
 
-    public ZonedDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(ZonedDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public ZonedDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(ZonedDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -760,11 +761,11 @@ public class Projects implements Serializable {
         this.disabled = disabled;
     }
 
-    public ZonedDateTime getReminderDate() {
+    public LocalDate getReminderDate() {
         return reminderDate;
     }
 
-    public void setReminderDate(ZonedDateTime reminderDate) {
+    public void setReminderDate(LocalDate reminderDate) {
         this.reminderDate = reminderDate;
     }
 

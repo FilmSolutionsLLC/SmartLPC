@@ -27,8 +27,6 @@
 		vm.currentAccount = null;
 		Principal.identity().then(function(account) {
 			vm.currentAccount = account;
-
-			console.log("Current User : " + JSON.stringify(vm.currentAccount));
 		});
 		// vm.checkBOX = {};
 
@@ -48,15 +46,11 @@
 
 						vm.tempTO = vm.talent.contact.fullName;
 
-						vm.mailer.body = vm.mailer.body.replace(/XYZ/i,
-								vm.currentAccount.fullName);
-						vm.mailer.body = vm.mailer.body.replace(/XXXemail/i,
-								vm.currentAccount.email);
+						vm.mailer.body = vm.mailer.body.replace(/XYZ/i, vm.currentAccount.fullName);
+						vm.mailer.body = vm.mailer.body.replace(/XXXemail/i,vm.currentAccount.email);
 						console.log("body : " + responseBody);
-						vm.mailer.body = vm.mailer.body.replace("XXXXX",
-								vm.talent.contact.username);
-						vm.mailer.body = vm.mailer.body.replace("ZZZZZ",
-								vm.talent.contact.password);
+						vm.mailer.body = vm.mailer.body.replace("XXXXX", vm.talent.contact.username);
+						vm.mailer.body = vm.mailer.body.replace("ZZZZZ", vm.talent.contact.password);
 
 					}, function errorCallback(response) {
 

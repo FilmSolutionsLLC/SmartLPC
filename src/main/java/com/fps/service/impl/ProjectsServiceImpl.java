@@ -93,6 +93,13 @@ public class ProjectsServiceImpl implements ProjectsService {
     @Value("${project.logo.path}")
     private String LOGO_LOCATION;
 
+    @Inject
+    private AlbumRepository albumRepository;
+
+
+    @Inject
+    private BatchRepository batchRepository;
+
     /**
      * Save a projects.
      *
@@ -113,7 +120,7 @@ public class ProjectsServiceImpl implements ProjectsService {
 
         // save project in database
         Projects result = projectsRepository.save(projects);
-        log.info("Project Saved : "+result.getId());
+        log.info("Project Saved : " + result.getId());
         projectsSearchRepository.save(result);
 
         Set<ProjectRoles> projectRoleses = new HashSet<>();
@@ -151,6 +158,8 @@ public class ProjectsServiceImpl implements ProjectsService {
             projectLabTasksRepository.save(projectLabTaskses);
         }
 
+        List<ContactPrivileges> talentPrivilege = new ArrayList<>();
+
         // save tags( projects roles ) in database
         int index = 0;
         log.info("PROJECT ROLES");
@@ -163,10 +172,15 @@ public class ProjectsServiceImpl implements ProjectsService {
             if (projectRoles.getRelationship_type().equals(Constants.PKO_TAG)) {
                 projectRoles.setHotkeyValue(Constants.HOTKEYS[index]);
                 index++;
+                projectRoles.setTagName(projectRoles.getContact().getFullName());
+                projectRoles.setTertiaryKillPct((float) 0.00);
+                projectRoles.setDaysWorking(0);
+                projectRoles.setDisabled(true);
             }
             projectRoleses.add(projectRoles);
 
             log.info(projectRoles.toString());
+
         }
         // add default tags in PKO ROLES like
         // Sensitive,Misc,Unknown,Crew,Background,Ensemble,Equipement
@@ -211,6 +225,7 @@ public class ProjectsServiceImpl implements ProjectsService {
         contactPrivilegesRepository.save(contactPrivilegeses);
 
         return result;
+
     }
 
     /**
@@ -262,8 +277,8 @@ public class ProjectsServiceImpl implements ProjectsService {
 
         log.info("Saving into project elasticsearch repository : " + result.getId());
 
-        Projects existingElastic = projectsSearchRepository.findOne(result.getId());
-        log.info("Getting existing contact from elastic search: " + existingElastic.getId());
+        //Projects existingElastic = projectsSearchRepository.findOne(result.getId());
+        //log.info("Getting existing contact from elastic search: " + existingElastic.getId());
 
         Projects saveResult = projectsSearchRepository.save(projects);
         log.info("Saved or updated elasticsearch Repo : " + saveResult.getId());
@@ -303,28 +318,79 @@ public class ProjectsServiceImpl implements ProjectsService {
             }
         }
         log.info("PROJECT ROLES");
+        String getIndexSql = "select count(id) from project_roles where project_id = " + projects.getId() + " and relationship_type = 'PKO_Tag';";
+
+        int index = jdbcTemplate.queryForObject(getIndexSql, Integer.class) - 6;
+        log.info("Index: " + index);
         if (projectsDTO.getProjectRoles().size() > 0) {
             for (ProjectRoles projectRoles : projectsDTO.getProjectRoles()) {
+
                 projectRoles.setProject(result);
-                projectRoles.setUpdatedDate(ZonedDateTime.now());
-                projectRoles.setUpdatedByAdminUser(user);
-                projectRoleses.add(projectRoles);
-                log.info(projectRoles.toString());
+
+                if (projectRoles.getId() != null) {
+                    log.info("Existing Project Talent");
+                    projectRoles.setUpdatedDate(ZonedDateTime.now());
+                    projectRoles.setUpdatedByAdminUser(user);
+                }
+
+                if (projectRoles.getId() == null && projectRoles.getRelationship_type().equals(Constants.PKO_TAG) && projectRoles.getHotkeyValue() == null) {
+                    log.info("New Project Talent");
+
+                    projectRoles.setCreatedDate(ZonedDateTime.now());
+                    projectRoles.setCreatedByAdminUser(user);
+                    projectRoles.setTagName(projectRoles.getContact().getFullName());
+                    projectRoles.setTertiaryKillPct((float) 0.00);
+                    projectRoles.setDaysWorking(0);
+                    projectRoles.setDisabled(true);
+                    projectRoles.setHotkeyValue(Constants.HOTKEYS[index]);
+                    index++;
+                    log.info("New PR Talent: " + projectRoles.toString());
+                } else {
+                    projectRoles.setCreatedDate(ZonedDateTime.now());
+                    projectRoles.setCreatedByAdminUser(user);
+                    log.info("Existing PR: " + projectRoles.toString());
+                }
+                try {
+                    projectRoleses.add(projectRoles);
+                } catch (Exception e) {
+                    log.info("Error adding project roles");
+                    e.printStackTrace();
+                }
             }
             projectRolesRepository.save(projectRoleses);
+            log.info("Project Roles Saved");
         }
         log.info("PROJECT EXECS");
         if (projectsDTO.getContactPrivileges().size() > 0) {
             for (ContactPrivileges contactPrivileges : projectsDTO.getContactPrivileges()) {
-                contactPrivileges.setUpdatedByAdminUser(user);
-                contactPrivileges.setProject(result);
-                contactPrivileges.setUpdatedDate(ZonedDateTime.now());
-                contactPrivilegeses.add(contactPrivileges);
+
+
+                if (contactPrivileges.getId() != null) {
+                    log.info("Existing Contact Privilege");
+                    contactPrivileges.setUpdatedByAdminUser(user);
+                    contactPrivileges.setUpdatedDate(ZonedDateTime.now());
+
+                } else {
+                    log.info("New Contact Privilege");
+                    contactPrivileges.setCreatedByAdminUser(user);
+                    contactPrivileges.setCreatedDate(ZonedDateTime.now());
+                    contactPrivileges.setProject(result);
+
+                }
+                try {
+                    contactPrivilegeses.add(contactPrivileges);
+                } catch (Exception e) {
+                    log.info("Error adding contact privileges");
+                    e.printStackTrace();
+                }
+                log.info("CP : " + contactPrivileges.toString());
             }
             contactPrivilegesRepository.save(contactPrivilegeses);
+            log.info("Contact Privileges Saved");
         }
-
         return result;
+
+
     }
 
     /**
@@ -337,7 +403,9 @@ public class ProjectsServiceImpl implements ProjectsService {
     public Page<Projects> findAll(Pageable pageable) {
         log.info("Request to get all Projects");
         currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
-        Page<Projects> result = projectsRepository.findAll(pageable);
+
+        //Page<Projects> result = projectsRepository.findAll(pageable);
+        Page<Projects> result = projectsSearchRepository.findAll(pageable);
 
         /*for (int i = 0; i < result.getContent().size(); i++) {
             if (result.getContent().get(i).getOwner().getCompanyContact() != null) {
@@ -376,13 +444,53 @@ public class ProjectsServiceImpl implements ProjectsService {
      */
     public void delete(Long id) {
         log.info("Request to delete Projects : {}", id);
-        currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
-        Projects projects = projectsRepository.findOne(id);
-
+        //currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
+        //Projects projects = projectsRepository.findOne(id);
+        Projects projects = new Projects();
+        projects.setId(id);
         currentTenantIdentifierResolver.setTenant(Constants.MASTER_DATABASE);
+        //remove lab
         projectLabTasksRepository.deleteByProject(projects);
+        //remove purchase orders
         projectPurchaseOrdersRepository.deleteByProject(projects);
+        // remove talents/main/upub/lab
         projectRolesRepository.deleteByProject(projects);
+        //remove contact privilege
+        contactPrivilegesRepository.removeByProject(projects);
+
+        // remove albums
+        //albumRepository.removeByProject(projects);
+
+        // remove batch
+        // remove userimage
+        // remove images
+        // to delete from table
+        // batch
+        // images
+        // user_images
+        //uac_caption
+        //premilinarytag1
+        //premilinarytag2
+
+        String deleteFromUserImage = "";
+        String deleteFromUserCaptions = "";
+        // String deleteFromAlbum = "delete ";
+        String deleteFromImages = "";
+        String deleteFromBatch = "delete from batches";
+
+        // batchRepository.removeByProject(projects);
+
+        /*String sql = "select i.id from projects p inner join batch b on p.id = b.project_id inner join image i on b.id = i.batch_id where p.id = "+projects.getId();
+
+        List<Long> imageIDS = jdbcTemplate.queryForList(sql,Long.class);
+
+        log.info("Total images : "+imageIDS.size());
+        for(Long image_id : imageIDS){
+
+            String deleteUserImage = "delete from user_image where image_id = "+image_id;
+            int rows  =     jdbcTemplate.update(deleteUserImage);
+            log.info("Image ID : "+image_id+" ===> Rows Deleted : "+rows);
+        }*/
         projectsRepository.delete(id);
 
         projectsSearchRepository.delete(id);
@@ -594,9 +702,7 @@ public class ProjectsServiceImpl implements ProjectsService {
         log.info("INSERT ALBUM");
         final String sql = "insert into albums(album_owner,project_id,album_name,album_permissions,album_description,album_type,created_by,created_time) values (?,?,?,?,?,?,?,?)";
         log.info("SQL : " + sql);
-        jdbcTemplate.update(sql,
-            new Object[]{user.getLogin(), album.getId(), album.getType(), user.getLogin().concat(";RW"),
-                album.getValue(), 2, user.getLogin(), new Timestamp(System.currentTimeMillis())});
+        jdbcTemplate.update(sql, new Object[]{user.getLogin(), album.getId(), album.getType(), user.getLogin().concat(";RW"), album.getValue(), 2, user.getLogin(), new Timestamp(System.currentTimeMillis())});
         log.info("Album inserted for project with  ID : ");
     }
 
@@ -616,6 +722,11 @@ public class ProjectsServiceImpl implements ProjectsService {
         log.info("Alfresco Title 1 : " + alfrescoTitle1);
         log.info("Alfresco Title 2 : " + alfrescoTitle2);
 
+        String sql = "update projects set alfresco_title_1 ='" + alfrescoTitle1 + "' ,alfresco_title_2 ='" + alfrescoTitle2 + "' where id = " + id;
+        currentTenantIdentifierResolver.setTenant(Constants.MASTER_DATABASE);
+        jdbcTemplate.update(sql);
+        log.info("Rename Db : " + sql);
     }
+
 
 }

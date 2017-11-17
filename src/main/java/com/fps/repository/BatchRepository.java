@@ -2,6 +2,7 @@ package com.fps.repository;
 
 import com.fps.domain.Batch;
 
+import com.fps.domain.Projects;
 import org.springframework.data.jpa.repository.*;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface BatchRepository extends JpaRepository<Batch,Long> {
     @Query("select batch from Batch batch where batch.updatedByAdminUser.login = ?#{principal.username}")
     List<Batch> findByUpdatedByAdminUserIsCurrentUser();
 
+    List<Batch> removeByProject(Projects projects);
 }

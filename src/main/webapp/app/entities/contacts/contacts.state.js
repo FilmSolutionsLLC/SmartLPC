@@ -210,10 +210,50 @@
 
 											return Contacts.get({
 												id : $stateParams.id
-											});
+											}).$promise;
 										} ]
 							}
 						})
+            .state(
+                'contacts.similar',
+                {
+                    parent : 'contacts',
+                    url : '/{id}/similar',
+                    data : {
+                        authorities : [ 'ROLE_USER' ],
+                        pageTitle : 'smartLpcApp.contacts.detail.title'
+                    },
+                    views : {
+                        'content@' : {
+                            templateUrl : 'app/entities/contacts/contacts-add-similar.html',
+                            controller : 'ContactsSimilarController',
+                            controllerAs : 'vm'
+                        }
+                    },
+                    resolve : {
+                        translatePartialLoader : [
+                            '$translate',
+                            '$translatePartialLoader',
+                            function($translate,
+                                     $translatePartialLoader) {
+                                $translatePartialLoader
+                                    .addPart('contacts');
+                                return $translate.refresh();
+                            } ],
+
+
+                        entity : [ '$stateParams', 'Contacts',
+                            function($stateParams, Contacts) {
+                                // contactID: ['$stateParams',
+                                // 'Contacts', function
+                                // ($stateParams, Contacts) {
+
+                                return Contacts.get({
+                                    id : $stateParams.id
+                                }).$promise;
+                            } ]
+                    }
+                })
 				.state(
 						'contacts.delete',
 						{
@@ -555,7 +595,70 @@
 											return $translate.refresh();
 										} ]
 							}
-						});
+						})
+            .state('contacts.newSmall',
+            {
+                data : {
+                    authorities : [ 'ROLE_USER' ]
+                },
+                views : {
+                    'content@': {
+                        templateUrl: 'app/entities/contacts/contacts-add.html',
+                        controller: 'ContactsAddController',
+                        controllerAs: 'vm',
+                        // backdrop: 'static',
+                        // size: 'lg',
+                        resolve: {
+                            entity: function () {
+                                return {
+                                    // relatedContacts: null,
+                                    username: null,
+                                    password: null,
+                                    fullName: null,
+                                    title: null,
+                                    email: null,
+                                    email2: null,
+                                    phoneOffice: null,
+                                    phoneAlternate: null,
+                                    phoneMobile: null,
+                                    phoneFax: null,
+                                    streetAddress: null,
+                                    streetAddress2: null,
+                                    streetAddress3: null,
+                                    city: null,
+                                    state: null,
+                                    zipcode: null,
+                                    country: null,
+                                    website: null,
+                                    notes: null,
+                                    source_id: null,
+                                    createdDate: null,
+                                    updatedDate: null,
+                                    dashboard: null,
+                                    internalAccessOnly: null,
+                                    adhocExpiresIn: null,
+                                    adhocLimitViews: null,
+                                    adhocDownload: null,
+                                    adhocWatermarkText: null,
+                                    loginIp: null,
+                                    loginAttempt: null,
+                                    attemptBasedLogin: null,
+                                    ipBasedLogin: null,
+                                    resetpassword: null,
+                                    companyContact: null,
+                                    createdByAdmin: null,
+                                    updatedByAdmin: null,
+                                    globalRestartColumns: null,
+                                    globalRestartImagesPerPage: null,
+                                    globalRestartImageSize: null,
+                                    globalRestartTime: null,
+                                    id: null
+                                };
+                            }
+                        }
+                    }
+                }
+            });
 
 	}
 })();

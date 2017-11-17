@@ -1,6 +1,7 @@
 package com.fps.repository;
 
 import com.fps.domain.Contact;
+import com.fps.domain.ContactPrivileges;
 import com.fps.domain.ContactRelationships;
 
 import com.fps.domain.Contacts;

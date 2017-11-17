@@ -12,10 +12,9 @@
 	<div class="row">
 		<button type="submit" class="btn btn-xs btn btn-primary"
 			ng-disabled="editForm.$invalid || isSaving">Save</button>
-		<button ng-click="vm.alert()" type="button"
+		<button ng-click="vm.saveAndClose()" type="button"
 			class="btn btn-xs btn btn-primary">Save and Close</button>
-		<button type="button" class="btn btn-xs btn btn-primary">Save
-			and Add</button>
+
 		<a href="#" class="btn btn-xs btn btn-danger">Close</a>
 
 	</div>
@@ -132,18 +131,10 @@
 		<label class="col-md-1 control-label small"
 			for="field_defaultDepartment">Department</label>
 		<div class="col-sm-2">
-			<div class="input-group">
-
-				<span class="input-group-btn">
-					<button type="button" ui-sref="departments.new" id="openBtn"
-						data-toggle="modal" class="btn btn-success btn-sm">
-						<span class="glyphicon glyphicon-plus "></span>
-					</button>
-				</span> <select class="form-control input-sm"
+			<select class="form-control input-sm"
 					ng-options="departments as departments.departmentName for departments in vm.departmentss track by departments.id"
 					id="field_defaultDepartment" name="defaultDepartment"
-					ng-model="vm.projects.defaultDepartment"></select>
-			</div>
+					ng-model="vm.projects.department"></select>
 
 		</div>
 	</div>
@@ -156,8 +147,7 @@
 			<div class="input-group">
 
 				<span class="input-group-btn">
-					<button href="#addDepartment" type="button" id="openBtn"
-						data-toggle="modal" class="btn btn-success btn-sm">
+					<button type="button" ng-click="vm.addStatus()" class="btn btn-success btn-sm" >
 						<span class="glyphicon glyphicon-plus "></span>
 					</button>
 				</span> <select class="form-control input-sm" name="status"
@@ -167,17 +157,11 @@
 		</div>
 		<label class="col-md-1 control-label small" for="field_type">Type</label>
 		<div class="col-sm-2">
-			<div class="input-group">
 
-				<span class="input-group-btn">
-					<button href="#addDepartment" type="button" id="openBtn"
-						data-toggle="modal" class="btn btn-success btn-sm">
-						<span class="glyphicon glyphicon-plus "></span>
-					</button>
-				</span> <select class="form-control input-sm" name="type" id="field_type"
+
+                <select class="form-control input-sm" name="type" id="field_type"
 					ng-model="vm.projects.type"
 					ng-options="lookups as lookups.textValue for lookups in vm.projectType track by lookups.id"></select>
-			</div>
 
 		</div>
 
@@ -268,7 +252,7 @@
 				ng-model="vm.projects.notes" class="form-control input-sm">
 		</div>
 	</div>
-	<div class="row">
+	<!--<div class="row">
 		<label class="col-md-1 control-label small" for="file">Project
 			Logo</label>
 		<div class="col-sm-3">
@@ -285,7 +269,7 @@
 			</div>
 		</div>
 
-	</div>
+	</div>-->
 
 	<div class="row">
 
@@ -1007,7 +991,7 @@
 		<label class="col-md-1 control-label small">Notes</label>
 		<div class="col-xs-7">
 			<textarea class="form-control input-sm" rows="1"
-				ng-model="vm.projects.productionCompanyContact.notes"></textarea>
+				ng-model="vm.projects.productionCompanyNotes"></textarea>
 
 		</div>
 
@@ -1017,7 +1001,7 @@
 
 		<label class="col-md-1 control-label small">FEDEX</label>
 		<div class="col-xs-7">
-			<input type="text" class="form-control input-sm" />
+			<input type="text" class="form-control input-sm" ng-model="vm.projects.productionCompanyShippingNumber" />
 
 		</div>
 
@@ -1093,7 +1077,15 @@
 					class=" glyphicon glyphicon-trash small text-danger"></span></a></td>
 		</tr>
 	</table>
+    <div class="row">
 
+        <label class="col-md-1 control-label small">Additional</label>
+        <div class="col-xs-7">
+            <input type="text" class="form-control input-sm" ng-model="vm.projects.legacyAdditionalTalent" />
+
+        </div>
+
+    </div>
 
 	<hr>
 
@@ -1128,7 +1120,7 @@
 			<th class="small">Disabled</th>
 			<th class="small"></th>
 		</tr>
-		<tr data-ng-repeat="choice in execs">
+		<tr data-ng-repeat="choice in execs | filter: { exec:true}">
 			<td class="col-xs-1">
 
 				<div class="input-group">

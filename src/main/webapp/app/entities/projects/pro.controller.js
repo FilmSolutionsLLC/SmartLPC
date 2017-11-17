@@ -5,9 +5,9 @@
         .module('smartLpcApp')
         .controller('ProController', ProController);
 
-    ProController.$inject = ['$http', '$scope', '$state', 'Projects', 'ProjectsSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants'];
+    ProController.$inject = ['ProjectsList','$http', '$scope', '$state', 'Projects', 'ProjectsSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants'];
 
-    function ProController($http, $scope, $state, Projects, ProjectsSearch, ParseLinks, AlertService, pagingParams, paginationConstants) {
+    function ProController(ProjectsList,$http, $scope, $state, Projects, ProjectsSearch, ParseLinks, AlertService, pagingParams, paginationConstants) {
         var vm = this;
         vm.loadAll = loadAll;
         vm.loadPage = loadPage;
@@ -24,6 +24,7 @@
         vm.mainUnitPublicistFlag = false;
         vm.url = "api/getall/projects";
 
+/*
         $http({
             url: 'api/pro',
             method: 'GET',
@@ -45,6 +46,7 @@
         }).error(function (data,status, headers) {
             console.log("data not recieved");
         });
+*/
 
 
         function loadAll() {
@@ -57,7 +59,7 @@
                 }, onSuccess, onError);
             } else {
                 console.log("in else");
-                Projects.query({
+                ProjectsList.query({
                     page: pagingParams.page - 1,
                     size: paginationConstants.itemsPerPage,
                     sort: sort()
@@ -65,8 +67,8 @@
             }
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
-                if (vm.predicate !== 'id') {
-                    result.push('id');
+                if (vm.predicate !== '1') {
+                    result.push('1');
                 }
                 return result;
             }

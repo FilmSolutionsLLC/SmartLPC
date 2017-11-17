@@ -13,7 +13,7 @@
 			User, Departments, Storage_Disk) {
         var vm = this;
         vm.projectsDTO = entity;
-        //	console.log("projectsDTO " + JSON.stringify(vm.projectsDTO));
+        	console.log("projectsDTO " + JSON.stringify(vm.projectsDTO));
 
         $scope.isGeneric = function (tags) {
             return tags.contact.fullName !== 'generic pkotag';

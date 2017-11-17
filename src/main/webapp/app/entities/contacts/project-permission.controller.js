@@ -8,15 +8,12 @@
 
     function ProjectPermission($ngConfirm,DateUtils, $http, entity, ContactPrivileges, $rootScope, $uibModal, $scope, $state, Contacts, ContactsSearch, AlertService) {
         console.log("Project Permission Controller");
-        //  console.log(JSON.stringify(entity));
-
         var vm = this;
         vm.contactDTO = entity;
         vm.contacts = [];
         vm.relatedContacts = [];
         vm.contacts = vm.contactDTO.contacts;
-        //console.log("vm.contacts : " + JSON.stringify(vm.contacts));
-        //console.log(JSON.stringify(vm.contactDTO));
+
         $rootScope.savedContact = [];
         vm.selectedProjects = [];
 
@@ -51,7 +48,12 @@
                 controller: 'ProjectListController',
                 size: 'xl',
                 scope: $scope,
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    isMultiExecAdd: function () {
+                        return false;
+                    }
+                },
             });
         };
 
@@ -61,19 +63,12 @@
             return $rootScope.selectedProjects;
         }, function () {
             if ($rootScope.selectedProjects.length == 0) {
-                console.log("null or 0 rootscope selectedProjects");
 
             } else {
-                console.log("rootscope selectedProjects contains projects :"
-                    + $rootScope.selectedProjects.length);
-                console.log("vm.selectedProjects contains projects  : "
-                    + vm.selectedProjects.length);
-
                 for (var i = 0; i < $rootScope.selectedProjects.length; i++) {
                     vm.selectedProjects.push($rootScope.selectedProjects[i]);
                 }
-                console.log("push worked for rootscope:"
-                    + vm.selectedProjects.length);
+
             }
         });
 
@@ -85,22 +80,22 @@
 
         vm.save = function () {
             vm.isSaving = true;
+            console.log("Saving Contact Privilege : "+JSON.stringify(vm.selectedProjects));
             for (var i = 0; i < vm.selectedProjects.length; i++) {
-                console.log("Saving contact privilege id: " + vm.selectedProjects[i].id);
-                console.log("SAVED : " + JSON.stringify(vm.selectedProjects[i]));
+
                 ContactPrivileges.update(vm.selectedProjects[i], onSaveSuccess, onSaveError);
                 if (i == vm.selectedProjects.length - 1) {
-                    //alert("Projects and its Privileges have been added/updated to the Contact : " + vm.contacts.fullName);
+
                     $ngConfirm({
                         title: 'Success!',
                         content: "<small>Projects and its Privileges have been added/updated to the Contact </small>: <strong>"+vm.contacts.fullName+"</strong>",
-                        type: 'red',
+                        type: 'green',
                         typeAnimated: true,
                         theme: 'dark',
                         buttons: {
                             confirm: {
                                 text: 'Okay',
-                                btnClass: 'btn-red',
+                                btnClass: 'btn-green',
                                 action: function () {
                                 }
                             }
@@ -111,16 +106,42 @@
         };
 
         var onSaveSuccess = function (result) {
-            // $scope.$emit('smartLpcApp:contactPrivilegesUpdate', result);
-
-            // console.log("saved in db: " + result.data.id);
+          /*  $ngConfirm({
+                title: 'Success!',
+                content: "<small>Projects and its Privileges have been added/updated to the Contact </small>: <strong>"+vm.contacts.fullName+"</strong>",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+                        }
+                    }
+                }
+            });*/
             vm.isSaving = false;
 
 
         };
 
         var onSaveError = function () {
-            vm.isSaving = false;
+            $ngConfirm({
+                title: 'Error!',
+                content: "<small>Error in adding Projects to the Contact : </small>: <strong>"+vm.contacts.fullName+"</strong>",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+                        }
+                    }
+                }
+            });
             alert("Error in adding Projects to the Contact : " + vm.contacts.fullName);
         };
 
@@ -132,16 +153,13 @@
             function successCallback(response) {
                 response.data.expireDate = DateUtils.convertLocalDateToServer(response.data.expireDate);
                 vm.projects = response.data;
-                console.log("======>   ", vm.projects);
-                console.log("Total Projects Recieved : "
-                    + vm.projects.length);
+
 
                 for (var i = 0; i < vm.projects.length; i++) {
                     vm.selectedProjects.push(vm.projects[i]);
 
                 }
-                console.log("push worked for get:" + vm.selectedProjects.length);
-                console.log("vm.selectedProjects : " + JSON.stringify(vm.selectedProjects));
+
             }, function errorCallback(response) {
 
             });
@@ -151,9 +169,6 @@
 
         vm.clickedThis = function (type, value) {
 
-            console.log("changing all values..");
-            console.log("Type   : ", type)
-            console.log("Value  : ", value);
 
             for (var i = 0; i < vm.selectedProjects.length; i++) {
                 if (angular.equals(type, 'checkAllInternalUsers')) {
@@ -255,16 +270,15 @@
 
 
         vm.removeSelected = function (index) {
-            console.log("removing project : " + index);
+
             var r = confirm("Are you sure you want to remove Contact Privilege for Project : \n" + vm.selectedProjects[index].project.name);
 
             if (r == true) {
-                console.log("You pressed OK!");
-                console.log("Removing the vm.selectedProject with index  : " + index);
+
                 ContactPrivileges.delete({id: vm.selectedProjects[index].id});
                 vm.selectedProjects.splice(index, 1);
             } else {
-                console.log("You pressed Cancel!");
+
             }
         };
 

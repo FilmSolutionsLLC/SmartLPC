@@ -6,45 +6,45 @@
 
     angular.module('smartLpcApp').controller('ProjectListController',
         ProjectListController);
-    ProjectListController.$inject = ['ContactPrivileges', 'ProjectsSearch',
+    ProjectListController.$inject = ['isMultiExecAdd', '$ngConfirm', 'ContactPrivileges', 'ProjectsSearch',
         'Projects', '$http', '$rootScope', 'Contacts', 'Lookups',
         'Departments', 'User', 'ContactsSearch', 'AlertService',
         '$uibModalInstance', '$scope', '$state'];
 
-    function ProjectListController(ContactPrivileges, ProjectsSearch, Projects,
+    function ProjectListController(isMultiExecAdd, $ngConfirm, ContactPrivileges, ProjectsSearch, Projects,
                                    $http, $rootScope, Contacts, Lookups, Departments, User,
                                    ContactsSearch, AlertService, $uibModalInstance, $scope, $state) {
         console.log("Project Permission Controller");
+
+
         var vm = this;
 
-        vm.searchProject = function (query) {
-            console.log("search query  : " + query);
-            if (angular.isDefined(query)) {
-                console.log("Project SEARCH called");
+        vm.multiExecsFlag = isMultiExecAdd;
 
+        console.log("isMultiExecFlag : " + vm.multiExecsFlag);
+        vm.searchProject = function (query) {
+
+            if (angular.isDefined(query)) {
                 ProjectsSearch.query({
                     query: query,
                     size: 1000000
                 }, onSuccess, onError);
             } else {
                 $scope.showLoader = true;
-                console.log("Project GET called");
+
                 $http({
                     method: 'GET',
                     url: 'api/idname/projects'
                 }).then(
                     function (response) {
                         vm.projects = [];
-                        console.log("total projects : "
-                            + response.data.length);
                         vm.temp = response.data;
-                        //console.log("first project " + JSON.stringify(vm.temp[0][1]));
-                        // console.log("first id " + vm.temp[0][0]);
+
                         for (var i = 0; i < vm.temp.length; i++) {
                             $scope.tempObj = {
                                 "id": vm.temp[i][0],
                                 "name": vm.temp[i][1]
-                            }
+                            };
                             vm.projects.push($scope.tempObj);
                         }
                     })
@@ -55,12 +55,10 @@
             vm.projects = [];
             for (var i = 0; i < data.length; i++) {
                 vm.projects.push(data[i].projects);
-                // console.log("added" + i);
+
             }
             $scope.loading = false;
-            console.log("Total projects found : " + vm.projects.length);
-        }
-        ;
+        };
 
         function onError(error) {
             // AlertService.error(error.data.message);
@@ -83,12 +81,9 @@
             if (vm.selectedProjects.indexOf(project) == -1) {
                 vm.selectedProjects.push(project);
 
-                console.log("project selected : " + project.id);
             } else {
 
-                console.log("item already exists");
-                vm.selectedProjects.splice(
-                    vm.selectedProjects.indexOf(project), 1);
+                vm.selectedProjects.splice(vm.selectedProjects.indexOf(project), 1);
             }
         };
         vm.removeSelected = function (index) {
@@ -109,15 +104,10 @@
             return $rootScope.savedContact;
         }, function () {
             if ($rootScope.savedContact == null) {
-                console.log("null rootscope saved contact");
-                vm.con
+
             } else {
-                console.log("not null");
-                console.log("Saved contact  :  "
-                    + JSON.stringify($rootScope.savedContact.id));
                 $scope.name = $rootScope.savedContact.fullName;
                 vm.contacts = $rootScope.savedContact;
-                console.log("Saved Contact  ", vm.contacts);
             }
         });
 
@@ -125,7 +115,7 @@
 
         vm.tempExecs = [];
         vm.save = function () {
-            // $rootScope.selectedProjects = vm.selectedProjects;
+
             for (var j = 0; j < vm.contacts.length; j++) {
 
                 for (var i = 0; i < vm.selectedProjects.length; i++) {
@@ -159,7 +149,7 @@
                         "showFinalizations": vm.showFinalizations,
                         "readOnly": vm.readOnly,
                         "globalAlbum": vm.globalAlbum,
-                        "critiqueIt": vm.critique,
+                        "critiqueIt": vm.critiqueIt,
                         "hasVideo": vm.hasVideo,
                         "adhocLink": vm.adhocLink,
                         "retouch": vm.retouch,
@@ -186,35 +176,50 @@
                         "description": null,
                         "author": "",
                         id: null
-                    }
+                    };
                     vm.isSaving = true;
 
                     vm.tempExecs.push(vm.execs);
-                    ContactPrivileges.save(vm.execs, onSaveSuccess, onSaveError);
 
-                    console.log("vm.tempExecs length : "+vm.tempExecs.length);
-
-
-
+                    if (angular.equals(vm.multiExecsFlag, true)) {
+                        ContactPrivileges.save(vm.execs, onSaveSuccess, onSaveError);
+                        vm.message = "Project(s) have been added to the Contact(s)"
+                    }else {
+                        vm.message = "Projects have been added to list.<br>Don't forget to <strong>Save All</strong>";
+                    }
                 }
-                console.log("Ending here...")
-                console.log("final vm.tempExecs length : "+vm.tempExecs.length);
-                $rootScope.selectedProjects =  vm.tempExecs;
-                console.log("$rootScope.selectedProjects length :" +$rootScope.selectedProjects.length);
-                $uibModalInstance.dismiss('cancel');
+                $rootScope.selectedProjects = vm.tempExecs;
             }
+            $ngConfirm({
+                title: 'Success!',
+                content: vm.message,
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
 
+                        }
+                    }
+                }
+            });
+
+            $uibModalInstance.dismiss('cancel');
         };
 
         var onSaveSuccess = function (result) {
-            // $scope.$emit('smartLpcApp:contactPrivilegesUpdate', result);
-            console.log("save success...now closing the modal box");
+            vm.execs.id = result.id;
+            vm.tempExecs.push(vm.execs);
+            console.log("Result : " + JSON.stringify(result.id));
+            //console.log("Got from DB cont privi : "+JSON.stringify(vm.execs));
 
-            $rootScope.selectedProjects.push(vm.tempExecs);
-            console.log("rootscope selectedProjects length : "+$rootScope.selectedProjects.length);
+            //$rootScope.selectedProjects.push(vm.tempExecs)
+            // ;
 
-            // console.log("saved in db: " + result.data.id);
-            // vm.isSaving = false;
+
         };
 
         var onSaveError = function () {

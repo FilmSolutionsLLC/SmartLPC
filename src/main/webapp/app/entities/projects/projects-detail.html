@@ -1,4 +1,5 @@
 <div print-section>
+
     <div class="row">
         <div class="col-sm-3">
             <h4>
@@ -6,7 +7,10 @@
                 - {{vm.projectsDTO.projects.name}}</strong>
             </h4>
         </div>
-        <div class="col-sm-3 pull-right">
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-10">
             <button print-btn class="btn btn-xs btn btn-primary">Print</button>
             <button type="submit"
                     ui-sref="projects.edit({id:vm.projectsDTO.projects.id})"
@@ -48,13 +52,18 @@
             <h5>
                 <strong><span
                     translate="smartLpcApp.projects.runOfShowFlag">
-						RunOfShowFlag</span></strong> <span>{{vm.projectsDTO.projects.runOfShowFlag}}</span>
+						RunOfShowFlag</span></strong>
+                <span ng-if="vm.projectsDTO.projects.runOfShowFlag === true">Yes</span>
+                <span ng-if="vm.projectsDTO.projects.runOfShowFlag === false">No</span>
+
             </h5>
         </div>
         <div class="col-sm-3">
             <h5>
                 <strong><span translate="smartLpcApp.projects.labFlag">LabFlag</span></strong>
-                <span> {{vm.projectsDTO.projects.labFlag}}</span>
+
+                <span ng-if="vm.projectsDTO.projects.runOfShowFlag === true">Yes</span>
+                <span ng-if="vm.projectsDTO.projects.runOfShowFlag === false">No</span>
             </h5>
         </div>
     </div>
@@ -239,8 +248,7 @@
             <h5>
                 <strong><span
                     translate="smartLpcApp.projects.processingOriginalFileType">ProcessingOriginalFileType</span></strong>
-                <a
-                    ui-sref="lookups-detail({id:vm.projects.processingOriginalFileType.id})">{{vm.projectsDTO.projects.processingOriginalFileType.textValue}}</a>
+                {{vm.projectsDTO.projects.processingOriginalFileType.textValue}}
             </h5>
         </div>
     </div>
@@ -627,7 +635,7 @@
     <div class="row">
         <div class="col-sm-3">
             <h5>
-                <strong>FEDEX : </strong> {{vm.projectsDTO.projects.fedex}}
+                <strong>FEDEX : </strong> {{vm.projectsDTO.projects.productionCompanyShippingNumber}}
             </h5>
         </div>
     </div>
@@ -818,8 +826,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr
-                ng-repeat="execs in vm.projectsDTO.contactPrivileges track by execs.id">
+            <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges | filter:{exec:true}">
                 <td>
                     <h5 class="small">
                         <a href="" ng-click="vm.sendIndividualMail(execs)"><span

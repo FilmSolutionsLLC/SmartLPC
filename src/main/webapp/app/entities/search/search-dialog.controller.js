@@ -28,7 +28,19 @@
                 {id: 'desc',name: 'Work Description'},
                 {id: 'invoice',name: 'Invoice'},
         ];
+        vm.contactsProjectFilter = [ {id: 'contact',name: 'Contacts'}, {id: 'project',name: 'Projects'}, {id: 'all',name: 'All Tables'},]
 
+        vm.contactProjectSearch  = function () {
+
+            if(angular.equals(vm.typeCP.name,'Contacts')){
+                console.log("Searching contact : "+vm.search.query);
+                vm.searchContacts(vm.search.query);
+            } else if(angular.equals(vm.typeCP.name,'Projects')){
+                vm.searchProjects(vm.search.query);
+            } else{
+                vm.searchBoth(vm.search.query);
+            }
+        };
 
         vm.searchContacts = function (query) {
 
@@ -79,6 +91,7 @@
 
         vm.clear = function () {
             $uibModalInstance.dismiss('cancel');
+            window.history.back();
         };
 
 

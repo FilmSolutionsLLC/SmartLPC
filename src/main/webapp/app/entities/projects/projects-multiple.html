@@ -47,9 +47,7 @@
                     <table class="jh-table table table-striped">
                         <thead>
                         <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                            <th></th>
-                            <th jh-sort-by="id"><span translate="global.field.id" class="small">ID</span> <span
-                                class="glyphicon glyphicon-sort"></span></th>
+                            <th class="small"></th>
 
                             <th jh-sort-by="fullName"><span translate="smartLpcApp.contacts.fullName"
                                                             class="small">FullName</span> <span
@@ -82,9 +80,8 @@
                             <td class="small"><input type="checkbox" class="input-sm"
                                                      ng-click="vm.selectChecked(contacts)"
                                                      ng-model="vm.selectedCheckBox[contacts.id]"></td>
-                            <td class="small"><a ui-sref="contacts-detail({id:contacts.id})">{{contacts.id}}</a></td>
+                            <td class="small"><a ui-sref="contacts-detail({id:contacts.id})">{{contacts.fullName}}</a></td>
 
-                            <td class="small">{{contacts.fullName}}</td>
                             <td class="small">{{contacts.title}}</td>
                             <td class="small">{{contacts.email}}</td>
 
@@ -97,7 +94,7 @@
                             </td>
 
                             <td class="small">
-                                <a ui-sref="contacts-detail({id:contacts.companyContact.id})">{{contacts.companyContact.fullName}}</a>
+                                <a ui-sref="contacts-detail({id:contacts.companyContactId})">{{contacts.companyContactFullName}}</a>
                             </td>
 
                         </tr>
@@ -125,17 +122,28 @@
                     </div>-->
                     <div class="row">
 
-
-                        <div class="col-md-3">
+                      <!--  <td>
+                            <label class="extra-small">Project Name:</label>
+                        </td>-->
+                        <td>
+                            <input name="pn" type="text" class="small" ng-model="vm.filter" placeholder="Project Name"/>
+                        </td>
+                        <div class="col-lg-3">
+                            <button type="button" class="btn btn-xs btn btn-success pull-left" ng-click="vm.searchFilter()">Run Filter</button>
+                        </div>
+                       <!-- <div class="col-lg-3">
                             <label class="extra-small">Project Name:</label>
                         </div>
                         <div class="col-md-3">
-                            <input name="pn" type="text" class="extra-small"/>
+                            <input name="pn" type="text" class="small"/>
                         </div>
 
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-xs btn btn-success pull-left">Run Filter</button>
+                        </div>-->
 
                     </div>
-                    <div class="row">
+                    <!--<div class="row">
 
 
                         <div class="col-sm-3">
@@ -182,12 +190,12 @@
                         </div>
 
 
-                    </div>
+                    </div>-->
 
                     <hr>
                     <div class="row">
                         <td>
-                            <button type="button" class="btn btn-xs btn btn-success pull-left">Run Filter</button>
+
                         </td>
                         <td>
                             <button type="button" class="btn btn-xs btn btn-info pull-right"

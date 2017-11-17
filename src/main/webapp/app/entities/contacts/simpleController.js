@@ -7,9 +7,9 @@
     angular
         .module('smartLpcApp')
         .controller('SimpleController', SimpleController);
-    SimpleController.$inject = ['sendID', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModalInstance', '$scope', '$state'];
+    SimpleController.$inject = ['$uibModal','sendID', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModalInstance', '$scope', '$state'];
 
-    function SimpleController(sendID, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModalInstance, $scope, $state) {
+    function SimpleController($uibModal ,sendID, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModalInstance, $scope, $state) {
 
 
         $rootScope.owner = null;
@@ -22,92 +22,76 @@
 
         vm.url = "api/contacts?page=0";
         vm.searchUrl = "api/_search/contacts?query=";
-        console.log(" URL : " + vm.url);
-        //vm.selectChecked = selectChecked;
-        //vm.addSelected = addSelected;
-        //vm.removeSelected = removeSelected;
+
         vm.selectedContact = selectedContact;
         vm.elementID = sendID;
-        console.log("data got form contact : " + vm.elementID);
 
         vm.loadAll();
 
 
         function loadAll() {
-            // $scope.data = [];
+
             vm.contactsDTO = [];
             if (vm.currentSearch) {
-                console.log("search invoked");
-                console.log("current search : " + vm.currentSearch);
-                console.log("current search URL : " + vm.searchUrl);
+
                 $http({
                     method: 'GET',
                     url: vm.searchUrl
                 }).then(function successCallback(response) {
-
                     vm.contactsDTO = response.data;
-                    console.log("Http search called");
-
                     vm.totalItems = response.headers('X-Total-Count');
-                    console.log("length : " + vm.totalItems);
-
                 }, function errorCallback(response) {
-                    console.log("error in getting data.");
+
                 });
             } else {
                 $http({
                     method: 'GET',
                     url: vm.url
                 }).then(function successCallback(response) {
-
                     vm.contactsDTO = response.data;
-                    console.log("Http GET called");
-
                     vm.totalItems = response.headers('X-Total-Count');
-                    console.log("length : " + vm.totalItems);
 
                 }, function errorCallback(response) {
-                    console.log("error in getting data.");
+
                 });
             }
-            
+
             function sort() {
 
-				var result = [ vm.predicate + ','
-						+ (vm.reverse ? 'asc' : 'desc') ];
-				if (vm.predicate !== 'id') {
-					result.push('id');
-				}
-				return result;
-			}
+                var result = [vm.predicate + ','
+                + (vm.reverse ? 'asc' : 'desc')];
+                if (vm.predicate !== 'id') {
+                    result.push('id');
+                }
+                return result;
+            }
 
-			function onSuccess(data, headers) {
+            function onSuccess(data, headers) {
 
-				vm.links = ParseLinks.parse(headers('link'));
+                vm.links = ParseLinks.parse(headers('link'));
 
-				vm.totalItems = headers('X-Total-Count');
-				vm.queryCount = vm.totalItems;
-				vm.contacts = data;
-				vm.page = pagingParams.page;
-				console.log("Contacts ",vm.contacts);
-			}
+                vm.totalItems = headers('X-Total-Count');
+                vm.queryCount = vm.totalItems;
+                vm.contacts = data;
+                vm.page = pagingParams.page;
 
-			function onError(error) {
-				AlertService.error(error.data.message);
-			}
+            }
+
+            function onError(error) {
+                AlertService.error(error.data.message);
+            }
         }
 
 
         function transition() {
 
-            console.log("page Number : " + vm.page);
+
             vm.url = "api/contacts?page=" + vm.page;
-            console.log(" URL : " + vm.url);
             vm.loadAll();
         }
 
         function search(searchQuery) {
-            console.log("search query called..");
+
             if (!searchQuery) {
                 return vm.clear();
             }
@@ -127,8 +111,9 @@
         }
 
         $rootScope.relatedContacts = [];
-        function selectedContact(contacts){
-            console.log("contact selected : "+contacts.id);
+
+        function selectedContact(contacts) {
+
             $scope.currentOBJ = {
                 "elementID": vm.elementID,
                 "data": contacts
@@ -144,75 +129,6 @@
 
             $uibModalInstance.dismiss('cancel');
         };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         /*
@@ -312,6 +228,82 @@
                 };
 
         */
+
+        vm.addContact = function () {
+
+            // var ctrl = angular.element(id).data('$ngModelController');
+
+            var modalInstance = $uibModal.open({
+
+                templateUrl: 'app/entities/contacts/contacts-add-modal.html',
+                controller: 'ContactsAddModalController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'xl',
+                resolve: {
+                    elementID: function () {
+                        return vm.elementID;
+                    },
+                    entity: function () {
+                        return {
+                            // relatedContacts: null,
+                            username: null,
+                            password: null,
+                            fullName: null,
+                            title: null,
+                            email: null,
+                            email2: null,
+                            phoneOffice: null,
+                            phoneAlternate: null,
+                            phoneMobile: null,
+                            phoneFax: null,
+                            streetAddress: null,
+                            streetAddress2: null,
+                            streetAddress3: null,
+                            city: null,
+                            state: null,
+                            zipcode: null,
+                            country: null,
+                            website: null,
+                            notes: null,
+                            source_id: null,
+                            createdDate: null,
+                            updatedDate: null,
+                            dashboard: null,
+                            internalAccessOnly: null,
+                            adhocExpiresIn: null,
+                            adhocLimitViews: null,
+                            adhocDownload: null,
+                            adhocWatermarkText: null,
+                            loginIp: null,
+                            loginAttempt: null,
+                            attemptBasedLogin: null,
+                            ipBasedLogin: null,
+                            resetpassword: null,
+                            companyContact: null,
+                            createdByAdmin: null,
+                            updatedByAdmin: null,
+                            globalRestartColumns: null,
+                            globalRestartImagesPerPage: null,
+                            globalRestartImageSize: null,
+                            globalRestartTime: null,
+                            id: null
+                        };
+                    }/*,
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('contacts');
+                        $translatePartialLoader.addPart('projects');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]*/
+                }
+                /*resolve: {
+                    entity: ['ProjectRoles', function(ProjectRoles) {
+                        return ProjectRoles.get({id : $stateParams.id}).$promise;
+                    }]
+                }*/
+            });
+        };
 
     }
 })();

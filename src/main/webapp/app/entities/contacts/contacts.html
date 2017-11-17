@@ -1,7 +1,7 @@
 <div>
     <h3 translate="smartLpcApp.contacts.home.title" align="center">Contacts</h3>
 
-    <jhi-alert></jhi-alert>
+    <!--<jhi-alert></jhi-alert>-->
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
@@ -88,26 +88,28 @@
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 ui-sref="contacts.project-permission({id:contacts.id})" ui-sref-opts="{reload: true, notify: true}"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-film"></span>
+                                class="btn btn-primary btn-sm" uib-tooltip="Project Permissions">
+
+                                <span class="glyphicon glyphicon-film"></span>
+
                             <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
                         </button>
 
                         <button type="submit"
                                 ui-sref="contacts-detail({id:contacts.id})" ui-sref-opts="{reload: true, notify: true}"
-                                class="btn btn-info btn-sm">
+                                class="btn btn-info btn-sm" uib-tooltip="View">
                             <span class="glyphicon glyphicon-eye-open"></span>
                             <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
                         </button>
                         <button type="submit"
                                 ui-sref="contacts.edit({id:contacts.id})" ui-sref-opts=ur
-                                class="btn btn-primary btn-sm">
+                                class="btn btn-primary btn-sm" uib-tooltip="Edit">
                             <span class="glyphicon glyphicon-pencil"></span>
                             <!--<span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>-->
                         </button>
                         <button type="submit"
                                 ui-sref="contacts.delete({id:contacts.id})"
-                                class="btn btn-danger btn-sm">
+                                class="btn btn-danger btn-sm" uib-tooltip="Remove">
                             <span class="glyphicon glyphicon-remove-circle"></span>
                             <!--<span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>-->
                         </button>

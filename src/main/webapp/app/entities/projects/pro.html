@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary btn-sm" ui-sref="projects.new">
+                <button class="btn btn-primary btn-sm" ui-sref="projects.add">
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs" translate="smartLpcApp.projects.home.createLabel">
                         Create new Projects
@@ -32,11 +32,90 @@
         </div>
     </div>
     <br/>
-    <div ng-repeat="project in vm.projects track by project.id">
-        <h4>{{project.id}} - {{project.projectName}} </h4>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                <th jh-sort-by="id" class="extra-small"><span translate="global.field.id">ID</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="name" class="extra-small"><span translate="smartLpcApp.projects.name">Name</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+
+                <th jh-sort-by="status.textValue" class="extra-small"><span
+                    translate="smartLpcApp.projects.status">status</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+
+                <th jh-sort-by="name" class="extra-small">Main Contact<span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="name" class="extra-small">Office<span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="name" class="extra-small">Email<span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="name" class="extra-small">Unit Publicist<span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="name" class="extra-small">Unit Publicist Mobile<span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="name" class="extra-small">Unit Publicist Office<span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="name" class="extra-small">Unit Publicist Email<span
+                    class="glyphicon glyphicon-sort"></span></th>
+
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="projects in vm.projectsDTO track by projects.projects.id">
+                <td class="extra-small"><a ui-sref="projects-detail({id:projects.projects.id})" class="small">{{projects.projects.id}}</a>
+                </td>
+                <td class="extra-small">{{projects.projects.name}}</td>
+
+                <td class="extra-small">
+                    <a ui-sref="lookups-detail({id:projects.projects.status.id})">{{projects.projects.status.textValue}}</a>
+                </td>
+
+                <td class="extra-small">
+                    <a ui-sref="contacts-detail({id:projects.projectRoles[0].contact.id})">{{projects.projectRoles[0].contact.fullName}}</a>
+                </td>
+                <td class="extra-small">{{projects.projectRoles[0].contact.phoneOffice}}</td>
+                <td class="extra-small">{{projects.projectRoles[0].contact.email}}</td>
+
+                <td class="extra-small">
+                    <a ui-sref="contacts-detail({id:projects.projectRoles[1].contact.id})">{{projects.projectRoles[1].contact.fullName}}</a>
+                </td>
+                <td class="extra-small">{{projects.projectRoles[1].contact.phoneMobile}}
+                </td>
+                <td class="extra-small">{{projects.projectRoles[1].contact.phoneOffice}}</td>
+                <td class="extra-small">{{projects.projectRoles[1].contact.email}}</td>
+
+                <td class="text-right extra-small">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                ui-sref="projects-detail({id:projects.projects.id})"
+                                ui-sref-opts="{reload: true, notify: true}"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
+                        </button>
+                        <button type="submit"
+                                ui-sref="projects.edit({id:projects.projects.id})"
+                                ui-sref-opts="{reload: true, notify: true}"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>-->
+                        </button>
+                        <!--<button type="button"
+                                ng-click="vm.delete(projects.projects.id)"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            &lt;!&ndash;<span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>&ndash;&gt;
+                        </button>-->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
     </div>
-
     <div class="text-center">
         <jhi-item-count page="vm.page" total="vm.queryCount"></jhi-item-count>
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page"

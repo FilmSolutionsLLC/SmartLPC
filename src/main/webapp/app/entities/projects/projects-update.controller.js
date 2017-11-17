@@ -5,16 +5,16 @@
         .module('smartLpcApp')
         .controller('ProjectsUpdateController', ProjectsUpdateController);
 
-    ProjectsUpdateController.$inject = ['$ngConfirm', '$anchorScroll', '$location', '$state', '$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'Projects', 'Lookups', 'Contacts', 'User', 'Departments', 'Storage_Disk'];
+    ProjectsUpdateController.$inject = ['ContactPrivileges', 'ProjectRoles', '$ngConfirm', '$anchorScroll', '$location', '$state', '$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'Projects', 'Lookups', 'Contacts', 'User', 'Departments', 'Storage_Disk'];
 
-    function ProjectsUpdateController($ngConfirm, $anchorScroll, $location, $state, $uibModal, $http, $scope, $rootScope, $stateParams, entity, Projects, Lookups, Contacts, User, Departments, Storage_Disk) {
+    function ProjectsUpdateController( ContactPrivileges, ProjectRoles, $ngConfirm, $anchorScroll, $location, $state, $uibModal, $http, $scope, $rootScope, $stateParams, entity, Projects, Lookups, Contacts, User, Departments, Storage_Disk) {
 
 
         var vm = this;
         console.log("PROJECT UPDATE CONTROLLER");
 
         vm.projectsDTO = entity;
-        //console.log("ProjectsDTO : " + JSON.stringify(vm.projectsDTO));
+        console.log("ProjectsDTO : " + JSON.stringify(vm.projectsDTO));
 
 
         vm.users = User.query();
@@ -43,6 +43,17 @@
             'value': "MASTER"
         }];
 
+        vm.prevNext = {};
+        $http({
+            method: 'GET',
+            url: 'api/prev/next/'+vm.projectsDTO.projects.id
+
+        }).then(function successCallback(response) {
+            vm.prevNext = response.data;
+            console.log("Prev Next Projects : "+JSON.stringify(vm.prevNext));
+        }, function errorCallback(response) {
+
+        });
 
         vm.talents = [];
 
@@ -129,7 +140,7 @@
         vm.addTalent = function () {
             console.log("Adding new Talent");
             vm.projectsDTO.projectRoles.push({
-                'id': null,
+                "id": null,
                 "contact": {
                     'fullName': null
                 },
@@ -161,23 +172,30 @@
             method: 'GET', url: 'api/contacts/related/' + vm.projectsDTO.projects.id
         }).then(function successCallback(response) {
             vm.relatedContact = response.data;
-            console.log("Total Related Contact found  : "+vm.relatedContact.length);
+            console.log("Total Related Contact found  : " + vm.relatedContact.length);
         }, function
             errorCallback(response) {
 
         });
 
 
-
+        vm.deleteTalent = [];
         vm.removeTalent = function (index) {
             console.log("removing talent : " + index);
+
 
             for (var i = 0; i < vm.projectsDTO.projectRoles.length; i++) {
 
                 if (vm.projectsDTO.projectRoles[i].id == index) {
+                    console.log(JSON.stringify(vm.projectsDTO.projectRoles[i]))
                     // remove it
-                    if (confirm('Are you sure you want to remove Talent : ' + vm.projectsDTO.projectRoles[i].contact.fullName)) {
+                    if(angular.equals(vm.projectsDTO.projectRoles[i].contact, null)){
+                       console.log("null");
+                        vm.projectsDTO.projectRoles.splice(i, 1);
+                    }
+                    else if (confirm('Are you sure you want to remove Talent : ' + vm.projectsDTO.projectRoles[i].contact.fullName)) {
                         console.log("Removing project role:" + vm.projectsDTO.projectRoles[i].id);
+                        vm.deleteTalent.push(vm.projectsDTO.projectRoles[i].id);
                         vm.projectsDTO.projectRoles.splice(i, 1);
 
                     } else {
@@ -198,36 +216,45 @@
         vm.addExec = function () {
             vm.projectsDTO.contactPrivileges.push({
                 "contact": null,
-                "exec": true,
-                "downloadType": 0,
-                "print": false,
-                "email": false,
-                "captioning": false,
-                "talentManagement": false,
-                "signoffManagement": false,
-                "releaseExclude": false,
-                "vendor": false,
-                "lockApproveRestriction": false,
-                "viewSensitive": false,
-                "exclusives": 0,
-                "seesUntagged": false,
-                "hasVideo": false,
-                "disabled": false,
-                "datgeditManagement": false,
-                "priorityPix": false,
-                "readOnly": false,
-                "restartColumns": 2,
-                "restartImageSize": 'Large',
-                "restartImagesPerPage": 20,
-                "showFinalizations": false,
-                "watermark": false,
-                "internal": false
+                "exec" : true,
+                "downloadType" : 0,
+                "print" : false,
+                "email" : false,
+                "captioning" : false,
+                "talentManagement" : false,
+                "signoffManagement" : false,
+                "releaseExclude" : false,
+                "vendor" : false,
+                "lockApproveRestriction" : false,
+                "viewSensitive" : false,
+                "exclusives" : 0,
+                "seesUntagged" : false,
+                "hasVideo" : false,
+                "disabled" : false,
+                "datgeditManagement" : false,
+                "priorityPix" : false,
+                "readOnly" : false,
+                "restartColumns" : 2,
+                "restartImageSize" : 'Large',
+                "restartImagesPerPage" : 20,
+                "showFinalizations" : false,
+                "watermark" : false,
+                "internal" : false,
+                "globalAlbum": false,
+                "loginCount": 0,
+                "defaultAlbum": null,
+                "critiqueIt": false,
+                "adhocLink": false,
+                "retouch": false,
+                "fileUpload": false,
+                "deleteAssets": false
             })
 
             $location.hash('bottom');
             // call $anchorScroll()
             $anchorScroll();
         };
+        vm.deleteExec = [];
         vm.removeExec = function (index) {
             console.log("removing contact privilege :" + index);
 
@@ -236,7 +263,8 @@
                 if (vm.projectsDTO.contactPrivileges[i].id == index) {
                     console.log("found");
                     if (confirm('Are you sure you want to remove Exec : ' + vm.projectsDTO.contactPrivileges[i].contact.fullName)) {
-                        console.log("Removing project role:" + vm.projectsDTO.projectRoles[i].id);
+                        console.log("Removing contact privilege:" + vm.projectsDTO.contactPrivileges[i].id);
+                        vm.deleteExec.push(vm.projectsDTO.contactPrivileges[i].id);
                         vm.projectsDTO.contactPrivileges.splice(i, 1);
 
                     } else {
@@ -263,47 +291,93 @@
                 if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.owner')) {
                     console.log("found equal");
 
-                    vm.projects.owner = vm.currrentOBJ.data;
+                    vm.projectsDTO.projects.owner = vm.currrentOBJ.data;
 
-                    console.log(vm.projects.owner.fullName);
+                    console.log(vm.projectsDTO.projects.owner.fullName);
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.mainContact')) {
-                    vm.projectRoles[0] = {
-                        "contact": vm.currrentOBJ.data,
-                        "relationship_type": "Main Contact",
-                        "excSologroup": false,
-                        "disabled": false
-                    };
+
+                    if (vm.addContact('Main Contact', vm.currrentOBJ.data) == false) {
+                        console.log("Got False");
+                        console.log("Add new")
+                        vm.projectsDTO.projectRoles.push({
+                            "contact": vm.currrentOBJ.data,
+                            "relationship_type": "Main Contact",
+                            "excSologroup": false,
+                            "soloKillPct": 50,
+                            "groupKillPct": 50,
+                            "tertiaryKillPct":50.0,
+                            "disabled": true
+                        });
+                    } else {
+                        console.log("Got True");
+                        console.log("Dont Add")
+                    }
 
 
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.unitPublicist')) {
-                    vm.projectRoles[1] = {
-                        "contact": vm.currrentOBJ.data,
-                        "relationship_type": "Unit Publicist",
-                        "excSologroup": false,
-                        "disabled": false
-                    };
+
+                    if (vm.addContact('Unit Publicist', vm.currrentOBJ.data) == false) {
+                        console.log("Got False");
+                        console.log("Add new")
+                        vm.projectsDTO.projectRoles.push({
+                            "contact": vm.currrentOBJ.data,
+                            "relationship_type": "Unit Publicist",
+                            "excSologroup": false,
+                            "soloKillPct": 50,
+                            "groupKillPct": 50,
+                            "tertiaryKillPct":50.0,
+                            "disabled": true
+                        });
+                    } else {
+                        console.log("Got True");
+                        console.log("Dont Add")
+                    }
 
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.unitPhotographer')) {
-                    vm.projectRoles[2] = {
-                        "contact": vm.currrentOBJ.data,
-                        "relationship_type": "Unit Photographer",
-                        "excSologroup": false,
-                        "disabled": false
-                    };
+
+                    if (vm.addContact('Unit Photographer', vm.currrentOBJ.data) == false) {
+                        console.log("Got False");
+                        console.log("Add new")
+                        vm.projectsDTO.projectRoles.push({
+                            "contact": vm.currrentOBJ.data,
+                            "relationship_type": "Unit Photographer",
+                            "excSologroup": false,
+                            "soloKillPct": 50,
+                            "groupKillPct": 50,
+                            "tertiaryKillPct":50.0,
+                            "disabled": true
+                        });
+                    } else {
+                        console.log("Got True");
+                        console.log("Dont Add")
+                    }
+
 
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.labInfo')) {
-                    vm.projectRoles[3] = {
-                        "contact": vm.currrentOBJ.data,
-                        "relationship_type": "Lab",
-                        "excSologroup": false,
-                        "disabled": false
-                    };
+
+                    if (vm.addContact('Lab', vm.currrentOBJ.data) == false) {
+                        console.log("Got False");
+                        console.log("Add new")
+                        vm.projectsDTO.projectRoles.push({
+                            "contact": vm.currrentOBJ.data,
+                            "relationship_type": "Lab",
+                            "excSologroup": false,
+                            "soloKillPct": 50,
+                            "groupKillPct": 50,
+                            "tertiaryKillPct":50.0,
+                            "disabled": true
+                        });
+                    } else {
+                        console.log("Got True");
+                        console.log("Dont Add")
+                    }
+
 
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.productCompany')) {
-                    vm.projects.productionCompanyContact = vm.currrentOBJ.data;
+                    vm.projectsDTO.projects.productionCompanyContact = vm.currrentOBJ.data;
 
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.parentInfo')) {
-                    vm.projects.parentCompanyContact = vm.currrentOBJ.data;
+                    vm.projectsDTO.projects.parentCompanyContact = vm.currrentOBJ.data;
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.talents')) {
 
                     vm.projectsDTO.projectRoles.pop();
@@ -315,7 +389,43 @@
                         "groupKillPct": 25,
                         "characterName": "",
                         "excSologroup": false,
-                        "disabled": false
+                        "disabled": true
+                    });
+
+                    vm.projectsDTO.contactPrivileges.push({
+                        "contact": vm.currrentOBJ.data,
+                        "exec" : false,
+                        "downloadType" : 0,
+                        "print" : false,
+                        "email" : false,
+                        "captioning" : false,
+                        "talentManagement" : false,
+                        "signoffManagement" : false,
+                        "releaseExclude" : false,
+                        "vendor" : false,
+                        "lockApproveRestriction" : false,
+                        "viewSensitive" : false,
+                        "exclusives" : 0,
+                        "seesUntagged" : false,
+                        "hasVideo" : false,
+                        "disabled" : false,
+                        "datgeditManagement" : false,
+                        "priorityPix" : false,
+                        "readOnly" : false,
+                        "restartColumns" : 2,
+                        "restartImageSize" : 'Large',
+                        "restartImagesPerPage" : 20,
+                        "showFinalizations" : false,
+                        "watermark" : false,
+                        "internal" : false,
+                        "globalAlbum": false,
+                        "loginCount": 0,
+                        "defaultAlbum": null,
+                        "critiqueIt": false,
+                        "adhocLink": false,
+                        "retouch": false,
+                        "fileUpload": false,
+                        "deleteAssets": false
                     });
                     /*// get related too.
                     console.log(" get releated  : ", vm.currrentOBJ.data.id);
@@ -335,30 +445,38 @@
                     vm.projectsDTO.contactPrivileges.pop();
                     vm.projectsDTO.contactPrivileges.push({
                         "contact": vm.currrentOBJ.data,
-                        "exec": true,
-                        "downloadType": 0,
-                        "print": false,
-                        "email": false,
-                        "captioning": false,
-                        "talentManagement": false,
-                        "signoffManagement": false,
-                        "releaseExclude": false,
-                        "vendor": false,
-                        "lockApproveRestriction": false,
-                        "viewSensitive": false,
-                        "exclusives": 0,
-                        "seesUntagged": false,
-                        "hasVideo": false,
-                        "disabled": false,
-                        "datgeditManagement": false,
-                        "priorityPix": false,
-                        "readOnly": false,
-                        "restartColumns": 2,
-                        "restartImageSize": 'Large',
-                        "restartImagesPerPage": 20,
-                        "showFinalizations": false,
-                        "watermark": false,
-                        "internal": false
+                        "exec" : true,
+                        "downloadType" : 0,
+                        "print" : false,
+                        "email" : false,
+                        "captioning" : false,
+                        "talentManagement" : false,
+                        "signoffManagement" : false,
+                        "releaseExclude" : false,
+                        "vendor" : false,
+                        "lockApproveRestriction" : false,
+                        "viewSensitive" : false,
+                        "exclusives" : 0,
+                        "seesUntagged" : false,
+                        "hasVideo" : false,
+                        "disabled" : false,
+                        "datgeditManagement" : false,
+                        "priorityPix" : false,
+                        "readOnly" : false,
+                        "restartColumns" : 2,
+                        "restartImageSize" : 'Large',
+                        "restartImagesPerPage" : 20,
+                        "showFinalizations" : false,
+                        "watermark" : false,
+                        "internal" : false,
+                        "globalAlbum": false,
+                        "loginCount": 0,
+                        "defaultAlbum": null,
+                        "critiqueIt": false,
+                        "adhocLink": false,
+                        "retouch": false,
+                        "fileUpload": false,
+                        "deleteAssets": false
                     });
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'relatedContact')) {
                     console.log("count : " + vm.count);
@@ -375,10 +493,20 @@
                 } else {
                     console.log("not equal..");
                 }
+                vm.sortProjectRoles();
             }
         });
 
 
+        vm.addContact = function (contactType, contact) {
+            for (var i = 0; i < vm.projectsDTO.projectRoles.length; i++) {
+                if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, contactType)) {
+                    vm.projectsDTO.projectRoles[i].contact = contact;
+                    return true;
+                }
+            }
+            return false;
+        };
         vm.openModal = function (elementID) {
 
             console.log("id of textbox : " + elementID);
@@ -410,27 +538,51 @@
         vm.save = function () {
 
             console.log("ProjectsDTO");
-            //console.log(JSON.stringify(vm.projectsDTO));
+            console.log(JSON.stringify(vm.projectsDTO));
 
             vm.isSaving = true;
 
 
             console.log("UPDATING entity projectsDTO");
+            for (var i = 0; i < vm.deleteTalent.length; i++) {
+                console.log("removing project role " + vm.deleteTalent[i]);
+                ProjectRoles.delete({id: vm.deleteTalent[i]});
+            }
+
+            for (var i = 0; i < vm.deleteExec.length; i++) {
+                console.log("removing contact privilege " + vm.deleteExec[i]);
+                ContactPrivileges.delete({id: vm.deleteExec[i]});
+            }
+
             Projects.update(vm.projectsDTO, onSaveSuccess, onSaveError);
+
+
+
         };
         var onSaveSuccess = function (result) {
             console.log('saving project...');
-            $scope.$emit('smartLpcApp:projectsUpdate', result);
+           // $scope.$emit('smartLpcApp:projectsUpdate', result);
             // $uibModalInstance.close(result);
+            $ngConfirm({
+                title: 'Success!',
+                content: "Project : <strong>"+vm.projectsDTO.projects.fullName+"</strong> has been updated",
+                type: 'green',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-green',
+                        action: function () {
+                        }
+                    }
+                }
+            });
             vm.isSaving = false;
-            $state.go('projects', {}, {
-                reload: true
-            }); // use for redirecting
+            $rootScope.relationships = null;
+            $rootScope.execsContactMultiple = null;
+            $state.go('projects-detail', {id:vm.projectsDTO.projects.id}, {reload: true});
             // ...
-        };
-
-        var onSaveError = function () {
-            vm.isSaving = false;
         };
 
         // send multiple email
@@ -740,7 +892,7 @@
                 $ngConfirm({
                     title: 'Size of Project in GB',
                     //content: "<strong>"+vm.count+" Gb</strong> ",
-                    content: "<strong>100 Gb</strong> ",
+                    content: "<strong>100 Gb</strong> <br>(temporary since drives have not mounted)",
                     type: 'red',
                     typeAnimated: true,
                     theme: 'dark',
@@ -852,10 +1004,12 @@
                 scope: $scope,
                 controllerAs: 'vm',
                 resolve: {
-                    id: function () {
+                    contact: function () {
                         return id;
                     },
-
+                    project: function () {
+                      return vm.projectsDTO.projects.id;
+                    },
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('contacts');
                         $translatePartialLoader.addPart('projects');
@@ -891,22 +1045,29 @@
 
         vm.delete = function () {
             var password = prompt("Enter password: ", "");
-            $http({
-                method: 'POST',
-                url: 'api/project/delete',
-                data: password
-            }).then(function successCallback(response) {
+            console.log("Password : "+password);
+            if(password === "" ) {
+                alert("No Password Entered");
+            }else{
+                $http({
+                    method: 'POST',
+                    url: 'api/project/delete',
+                    data: password
+                }).then(function successCallback(response) {
 
-                vm.success = response.data;
-                if (angular.equals(vm.success, 1)) {
-                    alert("Project Delete Started : " + vm.projectsDTO.projects.id);
-                } else {
-                    alert("Incorrect Password...");
-                }
+                    vm.success = response.data;
+                    if (angular.equals(vm.success, 1)) {
+                        alert("Project Delete Started : " + vm.projectsDTO.projects.id);
+                        Projects.delete({id: vm.projectsDTO.projects.id});
+                        $state.go('projects', {}, {reload: true});
+                    } else {
+                        alert("Incorrect Password...");
+                    }
 
-            }, function errorCallback(response) {
+                }, function errorCallback(response) {
 
-            });
+                });
+            }
 
             /*
 			 * if(angular.equals(retVal,"abcd")){ alert("Password Correct :
@@ -974,7 +1135,6 @@
             });
 
 
-
         vm.enableDisableProject = function (action) {
             $ngConfirm({
                 title: 'Warning!',
@@ -1015,7 +1175,7 @@
             });
         };
 
-        $scope.isGeneric = function(tags) {
+        $scope.isGeneric = function (tags) {
             return tags.contact.fullName !== 'generic pkotag';
         }
 
@@ -1053,6 +1213,258 @@
                     }]
                 }*/
             });
+        };
+
+
+        vm.mainC = {};
+        vm.uPub = {};
+        vm.uPhoto = {};
+        vm.lab = {};
+
+        vm.sortProjectRoles = function () {
+            for (var i = 0; i < vm.projectsDTO.projectRoles.length; i++) {
+                console.log("Relationship " + i + "  --> " + vm.projectsDTO.projectRoles[i].relationship_type);
+                if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, 'Main Contact')) {
+                    vm.mainC = vm.projectsDTO.projectRoles[i];
+                } else if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, 'Unit Publicist')) {
+                    vm.uPub = vm.projectsDTO.projectRoles[i];
+                } else if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, 'Unit Photographer')) {
+                    vm.uPhoto = vm.projectsDTO.projectRoles[i];
+                } else if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, 'Lab')) {
+                    vm.lab = vm.projectsDTO.projectRoles[i];
+                }
+            }
+        };
+        vm.sortProjectRoles();
+
+
+
+        vm.saveAndClose = function () {
+
+            console.log("ProjectsDTO");
+            console.log(JSON.stringify(vm.projectsDTO));
+
+            vm.isSaving = true;
+
+
+            console.log("UPDATING entity projectsDTO");
+            for (var i = 0; i < vm.deleteTalent.length; i++) {
+                console.log("removing project role " + vm.deleteTalent[i]);
+                ProjectRoles.delete({id: vm.deleteTalent[i]});
+            }
+
+            for (var i = 0; i < vm.deleteExec.length; i++) {
+                console.log("removing contact privilege " + vm.deleteExec[i]);
+                ContactPrivileges.delete({id: vm.deleteExec[i]});
+            }
+
+            Projects.update(vm.projectsDTO, onSaveSuccess2, onSaveError);
+
+
+
+        };
+        var onSaveSuccess2 = function (result) {
+            console.log('saving project...');
+            // $scope.$emit('smartLpcApp:projectsUpdate', result);
+            // $uibModalInstance.close(result);
+            $ngConfirm({
+                title: 'Success!',
+                content: "Project : <strong>"+vm.projectsDTO.projects.fullName+"</strong> has been updated",
+                type: 'green',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-green',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+            vm.isSaving = false;
+            $rootScope.relationships = null;
+            $rootScope.execsContactMultiple = null;
+            $state.go('projects', {}, {reload: true}); // use for redirecting
+            // ...
+        };
+
+        vm.saveAndNext = function () {
+
+            console.log("ProjectsDTO");
+            console.log(JSON.stringify(vm.projectsDTO));
+
+            vm.isSaving = true;
+
+
+            console.log("UPDATING entity projectsDTO");
+            for (var i = 0; i < vm.deleteTalent.length; i++) {
+                console.log("removing project role " + vm.deleteTalent[i]);
+                ProjectRoles.delete({id: vm.deleteTalent[i]});
+            }
+
+            for (var i = 0; i < vm.deleteExec.length; i++) {
+                console.log("removing contact privilege " + vm.deleteExec[i]);
+                ContactPrivileges.delete({id: vm.deleteExec[i]});
+            }
+
+            Projects.update(vm.projectsDTO, onSaveSuccess3, onSaveError);
+
+
+
+        };
+
+        var onSaveSuccess3 = function (result) {
+            console.log('saving project...');
+            // $scope.$emit('smartLpcApp:projectsUpdate', result);
+            // $uibModalInstance.close(result);
+            $ngConfirm({
+                title: 'Success!',
+                content: "Project : <strong>"+vm.projectsDTO.projects.fullName+"</strong> has been updated",
+                type: 'green',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-green',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+            vm.isSaving = false;
+            $rootScope.relationships = null;
+            $rootScope.execsContactMultiple = null;
+            $state.go('projects.edit', {id:vm.prevNext.next}, {reload: true}); // use for redirecting
+            // ...
+        };
+
+        var onSaveError = function () {
+            $rootScope.relationships = null;
+            $rootScope.execsContactMultiple = null;
+            $ngConfirm({
+                title: 'Error!',
+                content: "Project : <strong>"+vm.projectsDTO.projects.fullName+"</strong> was not updated",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+            vm.isSaving = false;
+        };
+
+
+        vm.clearRestart = function () {
+            $ngConfirm({
+                title: 'Warning!',
+                content: "Restart Data for all users on this project will be deleted",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+
+                        }
+                    },
+                    cancel: {
+                        text: 'Cancel',
+                        btnClass: 'btn-green',
+                        action: function () {
+
+                        }
+                    }
+                }
+            });
+        };
+
+        vm.enableEXT = function () {
+            $ngConfirm({
+                title: 'Warning!',
+                content: "Are you sure you want to <strong>ENABLE</strong> ALL external users for this project?",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+
+                        }
+                    },
+                    cancel: {
+                        text: 'Cancel',
+                        btnClass: 'btn-green',
+                        action: function () {
+
+                        }
+                    }
+                }
+            });
+        };
+        vm.disableEXT = function () {
+            $ngConfirm({
+                title: 'Warning!',
+                content: "Are you sure you want to <strong>DISABLE</strong> ALL external users for this project?",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+
+                        }
+                    },
+                    cancel: {
+                        text: 'Cancel',
+                        btnClass: 'btn-green',
+                        action: function () {
+
+                        }
+                    }
+                }
+            });
+        };
+
+        vm.addStatus = function () {
+            var status = prompt("Add New Option : ", "");
+            console.log("status : "+status);
+            if(status === "" ) {
+                alert("No status Entered");
+            }else{
+                vm.newStatus = {
+                    tableName: 'projects',
+                    fieldName: 'status_id',
+                    textValue: status,
+                    id: null
+                };
+
+                Lookups.save(vm.newStatus, onSaveSuccess10, onSaveError10);
+
+
+            }
+        };
+        var onSaveSuccess10 = function (result) {
+            vm.status.push(result);
+            console.log("GOT NEW STATUS : "+JSON.stringify(result));
+            alert("New Status Created")
+        };
+
+        var onSaveError10 = function () {
+
         };
     }
 })();

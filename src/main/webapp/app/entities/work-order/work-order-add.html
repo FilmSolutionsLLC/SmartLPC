@@ -1,4 +1,3 @@
-
 <!-- working code
 <div class="col-xs-2 input-xs">
 <multiselect ng-model="selection" options="vm.shadow" show-select-all="true" show-unselect-all="true">
@@ -99,372 +98,375 @@
 <h2 align="center">Work-Order</h2>
 <!--working multiselect-->
 <form name="editForm" role="form" novalidate ng-submit="vm.save()">
-	<div class="row">
-		<button type="button" class="btn btn-xs btn btn-primary"
-			ng-click="vm.save()">Save</button>
-		<button type="button" class="btn btn-xs btn btn-primary">Save
-			and Close</button>
-		<button type="button" class="btn btn-xs btn btn-primary">Save
-			and Add</button>
-		<button type="button" onclick="window.history.back()"
-			class="btn btn-xs btn btn-danger">Cancel</button>
+    <div class="row">
+        <button type="button" class="btn btn-xs btn btn-primary"
+                ng-click="vm.save()">Save
+        </button>
+        <button type="button" class="btn btn-xs btn btn-primary" ng-click="vm.saveAndClose()">Save and Close</button>
+        <button type="button" onclick="window.history.back()"
+                class="btn btn-xs btn btn-danger">Cancel
+        </button>
 
-	</div>
-	<br>
+    </div>
+    <br>
 
-	<div class="row">
-		<div class="col-xs-4">
-			<label class="small"> <input type="checkbox" id="isPrint"
-				ng-model="vm.workOrder.isPrint" ng-init="vm.workOrder.isPrint=false">
-				&nbspPrint &nbsp
-			</label> <label class="small"> <input type="checkbox" id="isProof"
-				ng-model="vm.workOrder.isProof" ng-init="vm.workOrder.isProof=false">
-				&nbspProof &nbsp
-			</label> <label class="small"> <input type="checkbox"
-				ng-model="vm.workOrder.isAbc" ng-init="vm.workOrder.isAbc=false">
-				&nbspABC &nbsp
-			</label> <label class="small"> <input type="checkbox"
-				ng-model="vm.workOrder.isTracking"
-				ng-init="vm.workOrder.isTracking=false" ng-click='vm.trackingCheck()'> &nbspTracking &nbsp
-			</label>
-		</div>
-	</div>
-	<h4 class="text-primary">
-		<strong><u>Work Order</u></strong>
-	</h4>
-	<div class="row">
-		<label class="col-xs-2 control-label small">Project Name</label> <label
-			class="col-xs-2 control-label small">Type</label> <label
-			class="col-xs-2 control-label small">Assigned To</label> <label
-			class="col-xs-2 control-label small">Priority</label>
-	</div>
+    <div class="row">
+        <div class="col-xs-4">
+            <label class="small"> <input type="checkbox" id="isPrint"
+                                         ng-model="vm.workOrder.isPrint" ng-init="vm.workOrder.isPrint=false">
+                &nbspPrint &nbsp
+            </label> <label class="small"> <input type="checkbox" id="isProof"
+                                                  ng-model="vm.workOrder.isProof" ng-init="vm.workOrder.isProof=false">
+            &nbspProof &nbsp
+        </label> <label class="small"> <input type="checkbox"
+                                              ng-model="vm.workOrder.isAbc" ng-init="vm.workOrder.isAbc=false">
+            &nbspABC &nbsp
+        </label> <label class="small"> <input type="checkbox"
+                                              ng-model="vm.workOrder.isTracking"
+                                              ng-init="vm.workOrder.isTracking=false" ng-click='vm.trackingCheck()'>
+            &nbspTracking &nbsp
+        </label>
+        </div>
+    </div>
+    <h4 class="text-primary">
+        <strong><u>Work Order</u></strong>
+    </h4>
+    <div class="row">
+        <label class="col-xs-2 control-label small">Project Name</label> <label
+        class="col-xs-2 control-label small">Type</label> <label
+        class="col-xs-2 control-label small">Assigned To</label> <label
+        class="col-xs-2 control-label small">Priority</label>
+    </div>
 
-	<div class="row">
-		<div class="col-xs-2">
-			<select class="form-control input-sm" id="field_project"
-				name="project" ng-model="vm.workOrder.project"
-				ng-options="projects as projects.name for projects in vm.projectss | orderBy:'name' track by projects.id"
-				ng-change="vm.onProjectChange()">
-				<option value=""></option>
-			</select>
-		</div>
-		<div class="col-xs-2">
-			<select class="form-control input-sm" id="field_vm.workOrder.type"
-				name="status" ng-model="vm.workOrder.type"
-				ng-options="workOrderType as workOrderType.textValue for workOrderType in vm.workOrderType track by workOrderType.id"
-				ng-change="vm.onTypeChange()">
-				<option value=""></option>
-			</select>
-		</div>
-		<div class="col-xs-2">
-			<select class="form-control input-sm" id="field_assignedToUser"
-				name="assignedToUser" ng-model="vm.workOrder.assignedToUser"
-				ng-options="user as user.fullName for user in vm.assignedTo track by user.id">
-				<option value=""></option>
-			</select>
+    <div class="row">
+        <div class="col-xs-2">
+            <select class="form-control input-sm" id="field_project"
+                    name="project" ng-model="vm.workOrder.project"
+                    ng-options="projects as projects.name for projects in vm.projectss | orderBy:'name' track by projects.id"
+                    ng-change="vm.onProjectChange()">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="col-xs-2">
+            <select class="form-control input-sm" id="field_vm.workOrder.type"
+                    name="status" ng-model="vm.workOrder.type"
+                    ng-options="workOrderType as workOrderType.textValue for workOrderType in vm.workOrderType track by workOrderType.id"
+                    ng-change="vm.onTypeChange()">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="col-xs-2">
+            <select class="form-control input-sm" id="field_assignedToUser"
+                    name="assignedToUser" ng-model="vm.workOrder.assignedToUser"
+                    ng-options="user as user.fullName for user in vm.assignedTo track by user.id">
+                <option value=""></option>
+            </select>
 
-			<!-- <div ng-dropdown-multiselect="" options="vm.assignedTo" selected-model="example1model" extra-settings="example19settings"></div>
-			 -->
-		</div>
-		<div class="col-xs-2">
-			<select class="form-control input-sm"
-				id="field_vm.workOrder.priority" name="status"
-				ng-model="vm.workOrder.priority"
-				ng-options="workOrderPriority as workOrderPriority.textValue for workOrderPriority in vm.workOrderPriority track by workOrderPriority.id">
-				<option value=""></option>
-			</select>
-		</div>
-	</div>
+            <!-- <div ng-dropdown-multiselect="" options="vm.assignedTo" selected-model="example1model" extra-settings="example19settings"></div>
+             -->
+        </div>
+        <div class="col-xs-2">
+            <select class="form-control input-sm"
+                    id="field_vm.workOrder.priority" name="status"
+                    ng-model="vm.workOrder.priority"
+                    ng-options="workOrderPriority as workOrderPriority.textValue for workOrderPriority in vm.workOrderPriority track by workOrderPriority.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
 
-	<hr>
+    <hr>
 
-	<h4 class="text-primary">
-		<strong><u>Requestor</u></strong>
-	</h4>
-	</h4>
-	<div class="row">
-		<label class="col-md-1 control-label small" for="textinput">Name</label>
-		<div class="col-md-2">
-			<div class="input-group">
+    <h4 class="text-primary">
+        <strong><u>Requestor</u></strong>
+    </h4>
+    </h4>
+    <div class="row">
+        <label class="col-md-1 control-label small" for="textinput">Name</label>
+        <div class="col-md-2">
+            <div class="input-group">
 
 				<span class="input-group-btn">
 
 					<button type="button" id="openBtn"
-						ng-click="vm.openModal('field_vm.workOrder.requestor')"
-						class="btn btn-primary btn-sm">
+                            ng-click="vm.openModal('field_vm.workOrder.requestor')"
+                            class="btn btn-primary btn-sm">
 						<span class="glyphicon glyphicon-list-alt"></span>
 					</button>
 				</span> <input id="field_vm.workOrder.requestor" type="text"
-					class="form-control input-sm"
-					ng-model="vm.workOrder.requestor.fullName" readonly>
-			</div>
+                               class="form-control input-sm"
+                               ng-model="vm.workOrder.requestor.fullName" readonly>
+            </div>
 
-		</div>
-		<label class="col-md-1 control-label small" for="textinput">Company</label>
-		<div class="col-sm-2">
-			<input id="company.name" name="textinput" type="text"
-				class="form-control input-sm"
-				ng-model="vm.workOrder.requestor.companyContact.fullName" readonly>
-		</div>
-	</div>
-	<div class="row">
-		<label class="col-md-1 control-label small" for="textinput">Office
-			Phone </label>
-		<div class="col-sm-2">
-			<input id="company.phone" name="textinput" type="text"
-				ng-model="vm.workOrder.requestor.phoneOffice"
-				class="form-control input-sm" readonly>
-		</div>
-		<label class="col-md-1 control-label small" for="textinput">Email</label>
-		<div class="col-sm-2">
-			<input id="company.email" name="textinput" type="text"
-				ng-model="vm.workOrder.requestor.email"
-				class="form-control input-sm" readonly>
-		</div>
-	</div>
-	<hr>
-	<!--  <div ng-if="vm.showPKOFlag">-->
-	<div ng-if="vm.workOrder.type.textValue == 'PKO'">
+        </div>
+        <label class="col-md-1 control-label small" for="textinput">Company</label>
+        <div class="col-sm-2">
+            <input id="company.name" name="textinput" type="text"
+                   class="form-control input-sm"
+                   ng-model="vm.workOrder.requestor.companyContact.fullName" readonly>
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-md-1 control-label small" for="textinput">Office
+            Phone </label>
+        <div class="col-sm-2">
+            <input id="company.phone" name="textinput" type="text"
+                   ng-model="vm.workOrder.requestor.phoneOffice"
+                   class="form-control input-sm" readonly>
+        </div>
+        <label class="col-md-1 control-label small" for="textinput">Email</label>
+        <div class="col-sm-2">
+            <input id="company.email" name="textinput" type="text"
+                   ng-model="vm.workOrder.requestor.email"
+                   class="form-control input-sm" readonly>
+        </div>
+    </div>
+    <hr>
+    <!--  <div ng-if="vm.showPKOFlag">-->
+    <div ng-if="vm.workOrder.type.textValue == 'PKO'">
 
-		<div id="processing">
-			<h4 class="text-primary">
-				<strong><u>Processing</u></strong>
-			</h4>
+        <div id="processing">
+            <h4 class="text-primary">
+                <strong><u>Processing</u></strong>
+            </h4>
 
-			<div class="row">
-				<label class="col-md-1 control-label small" for="textinput">Date
-					Recieved </label>
-				<div class="col-sm-2">
-					<input type="date" class="form-control input-sm"
-						ng-model="vm.workOrder.processingDateRecieved">
-				</div>
-				<label class="col-md-1 control-label small" for="textinput">HDD
-					ID </label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control input-sm"
-						ng-model="vm.workOrder.processingHDDid">
-				</div>
-			</div>
+            <div class="row">
+                <label class="col-md-1 control-label small" for="textinput">Date
+                    Recieved </label>
+                <div class="col-sm-2">
+                    <input type="date" class="form-control input-sm"
+                           ng-model="vm.workOrder.processingDateRecieved">
+                </div>
+                <label class="col-md-1 control-label small" for="textinput">HDD
+                    ID </label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.workOrder.processingHDDid">
+                </div>
+            </div>
 
-			<div class="row">
-				<label class="col-md-1 control-label small" for="textinput">Date
-					Shipped </label>
-				<div class="col-sm-2">
-					<input type="date" class="form-control input-sm"
-						ng-model="vm.workOrder.processingDateShipped">
-				</div>
-				<label class="col-md-1 control-label small" for="textinput">Proof
-					Shipped </label>
-				<div class="col-sm-2">
-					<input type="date" class="form-control input-sm"
-						ng-model="vm.workOrder.processingProofShipped">
-				</div>
-			</div>
-			<div class="row">
-				<label class="col-md-1 control-label small" for="textinput">Notes</label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control input-sm"
-						ng-model="vm.workOrder.processingNotes">
-				</div>
-				<label class="col-md-1 control-label small" for="textinput">Location</label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control input-sm"
-						ng-model="vm.workOrder.processingLocation">
-				</div>
-			</div>
-			<div class="row">
-				<label class="col-md-1 control-label small" for="textinput">Image
-					Range </label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control input-sm"
-						ng-model="vm.workOrder.processingImageRange">
-				</div>
-				<label class="col-md-1 control-label small" for="textinput">Image
-					Qty </label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control input-sm"
-						ng-model="vm.workOrder.processingImageQty">
-				</div>
-			</div>
-			<hr>
+            <div class="row">
+                <label class="col-md-1 control-label small" for="textinput">Date
+                    Shipped </label>
+                <div class="col-sm-2">
+                    <input type="date" class="form-control input-sm"
+                           ng-model="vm.workOrder.processingDateShipped">
+                </div>
+                <label class="col-md-1 control-label small" for="textinput">Proof
+                    Shipped </label>
+                <div class="col-sm-2">
+                    <input type="date" class="form-control input-sm"
+                           ng-model="vm.workOrder.processingProofShipped">
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-1 control-label small" for="textinput">Notes</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.workOrder.processingNotes">
+                </div>
+                <label class="col-md-1 control-label small" for="textinput">Location</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.workOrder.processingLocation">
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-1 control-label small" for="textinput">Image
+                    Range </label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.workOrder.processingImageRange">
+                </div>
+                <label class="col-md-1 control-label small" for="textinput">Image
+                    Qty </label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.workOrder.processingImageQty">
+                </div>
+            </div>
+            <hr>
 
-			<h4 class="text-primary">
-				<strong><u>Lab</u></strong>
-			</h4>
-			<div class="row">
-				<label class="col-md-2 control-label small" for="textinput">Tasks</label>
-			</div>
-
-
-			<div ng-repeat="labs in vm.lab">
-				<div class="row">
-					<div class="col-lg-3">
-						<div class="input-group">
-
-							<span class="input-group-addon input-sm"><small>{{$index}}</small></span>
-
-							<input type="text" class="form-control input-sm"
-								ng-model="labs.textValue" readonly>
-						</div>
+            <h4 class="text-primary">
+                <strong><u>Lab</u></strong>
+            </h4>
+            <div class="row">
+                <label class="col-md-2 control-label small" for="textinput">Tasks</label>
+            </div>
 
 
-					</div>
+            <div ng-repeat="labs in vm.lab">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="input-group">
+
+                            <span class="input-group-addon input-sm"><small>{{$index}}</small></span>
+
+                            <input type="text" class="form-control input-sm"
+                                   ng-model="labs.textValue" readonly>
+                        </div>
 
 
-				</div>
-			</div>
-
-			<br>
-			<div class="row">
-				<div class="col-lg-3">
-					<input type="text" value="some text here"
-						class="form-control input-sm" readonly>
-				</div>
-				<div class="col-lg-3">
-					<input type="text" value="processing copyright"
-						class="form-control input-sm" readonly>
-				</div>
-			</div>
-		</div>
+                    </div>
 
 
-		<br>
+                </div>
+            </div>
 
-		<div class="row">
-
-			<label class="col-md-2 control-label small" for="textinput">Image
-				Number Schema</label>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<input type="text" class="form-control input-sm"
-					ng-model="vm.project.labImageNumberSchema" readonly>
-			</div>
-		</div>
-
-		<div class="row">
-			<label class="col-md-2 control-label small" for="textinput">
-				Folder/Batch Schema</label>
-		</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<input type="text" class="form-control input-sm"
-					ng-model="vm.project.labFolderBatchSchema" readonly>
-			</div>
-		</div>
+            <br>
+            <div class="row">
+                <div class="col-lg-3">
+                    <input type="text"
+                           class="form-control input-sm" readonly>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text"
+                           class="form-control input-sm" ng-model="vm.projects.processingCopyright" readonly>
+                </div>
+            </div>
+        </div>
 
 
-	</div>
+        <br>
 
-	<div id="tracking" ng-show="vm.workOrder.isTracking">
-		<h4 class="text-primary">
-			<strong><u>Tracking</u></strong>
-		</h4>
+        <div class="row">
 
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">Reminder1</label>
-			<div class="col-sm-2">
-				<input type="date" class="form-control input-sm"
-					ng-model="vm.workOrder.reminderDate1">
-			</div>
-			<div class="col-sm-2">
-				<input id="field_vm.workOrder.reminderMsg1" name="textinput"
-					type="text" placeholder="reminder message"
-					class="form-control input-sm" ng-model="vm.workOrder.reminderMsg1">
-			</div>
-			<div class="col-sm-2">
-				<!-- <select class="form-control input-sm"
-					id="field_vm.adminRelationDTOs[0].admin_user" name="assignedToUser"
-					ng-model="vm.workOrdersAdminRelations[5].admin_user"
-					ng-options="user as user.fullName for user in vm.dueMountReminder track by user.id">
-					<option value=""></option>
-				</select> -->
-				<!--  <multiselect class="form-control input-sm" ng-model="selection" id-prop="id"
+            <label class="col-md-3 control-label small" for="textinput">ImageNumber Schema</label>
+
+            <label class="col-md-2 control-label small" for="textinput">Folder/Batch Schema</label>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <input type="text" class="form-control input-sm"
+                       ng-model="vm.project.labImageNumberSchema" readonly>
+            </div>
+            <div class="col-sm-3">
+                <input type="text" class="form-control input-sm"
+                       ng-model="vm.project.labFolderBatchSchema" readonly>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="tracking" ng-show="vm.workOrder.isTracking">
+        <h4 class="text-primary">
+            <strong><u>Tracking</u></strong>
+        </h4>
+
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Reminder1</label>
+            <div class="col-sm-2">
+                <input type="date" class="form-control input-sm"
+                       ng-model="vm.workOrder.reminderDate1">
+            </div>
+            <div class="col-sm-2">
+                <input id="field_vm.workOrder.reminderMsg1" name="textinput"
+                       type="text" placeholder="reminder message"
+                       class="form-control input-sm" ng-model="vm.workOrder.reminderMsg1">
+            </div>
+            <div class="col-sm-2">
+                <!-- <select class="form-control input-sm"
+                    id="field_vm.adminRelationDTOs[0].admin_user" name="assignedToUser"
+                    ng-model="vm.workOrdersAdminRelations[5].admin_user"
+                    ng-options="user as user.fullName for user in vm.dueMountReminder track by user.id">
+                    <option value=""></option>
+                </select> -->
+                <!--  <multiselect class="form-control input-sm" ng-model="selection" id-prop="id"
                                display-prop="firstName"
                                options="vm.users"
                                show-select-all="true" show-unselect-all="true">
                   </multiselect>-->
-				<ui-select multiple ng-model="vm.selecteddueMountReminder"
-					theme="bootstrap" ng-disabled="ctrl.disabled"
-					close-on-select="false" style="width: 200px;"
-					title="Choose a color"> <ui-select-match
-					placeholder="Select reminder to...">{{$item.admin_user.fullName}}</ui-select-match>
-				<ui-select-choices
-					repeat="admin in vm.dueMountReminder | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
-				</ui-select>
+                <ui-select multiple ng-model="vm.selecteddueMountReminder"
+                           theme="bootstrap" ng-disabled="ctrl.disabled"
+                           close-on-select="false" style="width: 200px;"
+                           title="Choose a color">
+                    <ui-select-match
+                        placeholder="Select reminder to...">{{$item.admin_user.fullName}}
+                    </ui-select-match>
+                    <ui-select-choices
+                        repeat="admin in vm.dueMountReminder | filter:$select.search">{{admin.admin_user.fullName}}
+                    </ui-select-choices>
+                </ui-select>
 
-			</div>
-			<h5>(WO_DUE_MOUNT_REMINDER)</h5>
-		</div>
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">Reminder2</label>
-			<div class="col-sm-2">
-				<input type="date" class="form-control input-sm"
-					ng-model="vm.workOrder.reminderDate2">
-			</div>
-			<div class="col-sm-2">
-				<input id="textinput" name="textinput" type="text"
-					placeholder="reminder message" class="form-control input-sm"
-					ng-model="vm.workOrder.reminderMsg2">
-			</div>
-			<div class="col-sm-2">
-				<!-- <select class="form-control input-sm"
-					id="field_vm.adminRelationDTOs[1].admin_user" name="assignedToUser"
-					ng-model="vm.workOrdersAdminRelations[6].admin_user"
-					ng-options="user as user.fullName for user in vm.clientReminder track by user.id">
-					<option value=""></option>
-				</select> -->
-				<ui-select multiple ng-model="vm.selectedclientReminder"
-					theme="bootstrap" ng-disabled="ctrl.disabled"
-					close-on-select="false" style="width: 200px;"
-					title="Choose a color"> <ui-select-match
-					placeholder="Select reminder to...">{{$item.admin_user.fullName}}</ui-select-match>
-				<ui-select-choices
-					repeat="admin in vm.clientReminder | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
-				</ui-select>
-			</div>
-			<h5>(WO_TO_CLIENT_REMINDER)</h5>
-		</div>
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">Reminder3</label>
-			<div class="col-sm-2">
-				<input type="date" class="form-control input-sm"
-					ng-model="vm.workOrder.reminderDate3">
-			</div>
-			<div class="col-sm-2">
-				<input id="field_vm.workOrder.reminderMsg3" name="textinput"
-					type="text" placeholder="reminder message"
-					ng-model="vm.workOrder.reminderMsg3" class="form-control input-sm">
-			</div>
-			<div class="col-sm-2">
-				<!-- <select class="form-control input-sm"
-					id="field_vm.adminRelationDTOs[2].admin_user" name="assignedToUser"
-					ng-model="vm.workOrdersAdminRelations[7].admin_user"
-					ng-options="user as user.fullName for user in vm.dueMountReminder track by user.id">
-					<option value=""></option>
-				</select> -->
-				<ui-select multiple ng-model="vm.selectedtoMountReminder"
-					theme="bootstrap" ng-disabled="ctrl.disabled"
-					close-on-select="false" style="width: 200px;"
-					title="Choose a color"> <ui-select-match
-					placeholder="Select reminder to...">{{$item.admin_user.fullName}}</ui-select-match>
-				<ui-select-choices
-					repeat="admin in vm.toMountReminder | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
-				</ui-select>
-			</div>
-			<h5>(WO_TO_MOUNT_REMINDER)</h5>
-		</div>
-	</div>
-	<hr>
-	<h4 class="text-primary">
-		<strong><u>Completed Task</u></strong>
-	</h4>
+            </div>
+            <h5>(WO_DUE_MOUNT_REMINDER)</h5>
+        </div>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Reminder2</label>
+            <div class="col-sm-2">
+                <input type="date" class="form-control input-sm"
+                       ng-model="vm.workOrder.reminderDate2">
+            </div>
+            <div class="col-sm-2">
+                <input id="textinput" name="textinput" type="text"
+                       placeholder="reminder message" class="form-control input-sm"
+                       ng-model="vm.workOrder.reminderMsg2">
+            </div>
+            <div class="col-sm-2">
+                <!-- <select class="form-control input-sm"
+                    id="field_vm.adminRelationDTOs[1].admin_user" name="assignedToUser"
+                    ng-model="vm.workOrdersAdminRelations[6].admin_user"
+                    ng-options="user as user.fullName for user in vm.clientReminder track by user.id">
+                    <option value=""></option>
+                </select> -->
+                <ui-select multiple ng-model="vm.selectedclientReminder"
+                           theme="bootstrap" ng-disabled="ctrl.disabled"
+                           close-on-select="false" style="width: 200px;"
+                           title="Choose a color">
+                    <ui-select-match
+                        placeholder="Select reminder to...">{{$item.admin_user.fullName}}
+                    </ui-select-match>
+                    <ui-select-choices
+                        repeat="admin in vm.clientReminder | filter:$select.search">{{admin.admin_user.fullName}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <h5>(WO_TO_CLIENT_REMINDER)</h5>
+        </div>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Reminder3</label>
+            <div class="col-sm-2">
+                <input type="date" class="form-control input-sm"
+                       ng-model="vm.workOrder.reminderDate3">
+            </div>
+            <div class="col-sm-2">
+                <input id="field_vm.workOrder.reminderMsg3" name="textinput"
+                       type="text" placeholder="reminder message"
+                       ng-model="vm.workOrder.reminderMsg3" class="form-control input-sm">
+            </div>
+            <div class="col-sm-2">
+                <!-- <select class="form-control input-sm"
+                    id="field_vm.adminRelationDTOs[2].admin_user" name="assignedToUser"
+                    ng-model="vm.workOrdersAdminRelations[7].admin_user"
+                    ng-options="user as user.fullName for user in vm.dueMountReminder track by user.id">
+                    <option value=""></option>
+                </select> -->
+                <ui-select multiple ng-model="vm.selectedtoMountReminder"
+                           theme="bootstrap" ng-disabled="ctrl.disabled"
+                           close-on-select="false" style="width: 200px;"
+                           title="Choose a color">
+                    <ui-select-match
+                        placeholder="Select reminder to...">{{$item.admin_user.fullName}}
+                    </ui-select-match>
+                    <ui-select-choices
+                        repeat="admin in vm.toMountReminder | filter:$select.search">{{admin.admin_user.fullName}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <h5>(WO_TO_MOUNT_REMINDER)</h5>
+        </div>
+    </div>
+    <hr>
+    <h4 class="text-primary">
+        <strong><u>Completed Task</u></strong>
+    </h4>
 
 
-	<div class="row">
+    <div class="row">
 
-		<label class="col-md-1 control-label small" for="field_verifiedBy">Verified</label>
-		<!--  <div class="col-xs-2" style="height:100px;overflow:auto;" >
+        <label class="col-md-1 control-label small" for="field_verifiedBy">Verified</label>
+        <!--  <div class="col-xs-2" style="height:100px;overflow:auto;" >
             <div ng-click="toggle()">
                 <small>{{count}} admin users <span class="glyphicon glyphicon-list-alt" ></span></small>
             </div>
@@ -479,16 +481,16 @@
             </div>
         </div> -->
 
-		<div class="col-sm-2">
+        <div class="col-sm-2">
 
-			<!--
-			<select class="form-control input-sm"
-				id="field_vm.adminRelationDTOs[3].admin_user" name="assignedToUser"
-				ng-model="vm.workOrdersAdminRelations[0].admin_user"
-				ng-options="user as user.fullName for user in vm.verifiedBy track by user.id">
-				<option value=""></option>
-			</select> -->
-			<!--
+            <!--
+            <select class="form-control input-sm"
+                id="field_vm.adminRelationDTOs[3].admin_user" name="assignedToUser"
+                ng-model="vm.workOrdersAdminRelations[0].admin_user"
+                ng-options="user as user.fullName for user in vm.verifiedBy track by user.id">
+                <option value=""></option>
+            </select> -->
+            <!--
             <div class="dropdown" uib-dropdown auto-close="outsideClick" on-toggle="toggled(open)">
                 <a class="btn btn-primary btn-sm" uib-dropdown-toggle>Verified</a>
                 <ul class="dropdown-menu status-select" class="status-select" ng-if="$index == selectedFilterIndex" uib-dropdown-menu>
@@ -503,522 +505,536 @@
                 </ul>
             </div> -->
 
-			<ui-select multiple ng-model="vm.selectedverifiedBy"
-				theme="bootstrap" ng-disabled="ctrl.disabled"
-				close-on-select="false" style="width: 200px;" title="Choose a color">
-			<ui-select-match placeholder="Select verified by...">{{$item.admin_user.fullName}}</ui-select-match>
-			<ui-select-choices
-				repeat="admin in vm.verifiedBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
-			</ui-select>
+            <ui-select multiple ng-model="vm.selectedverifiedBy"
+                       theme="bootstrap" ng-disabled="ctrl.disabled"
+                       close-on-select="false" style="width: 200px;" title="Choose a color">
+                <ui-select-match placeholder="Select verified by...">{{$item.admin_user.fullName}}</ui-select-match>
+                <ui-select-choices
+                    repeat="admin in vm.verifiedBy | filter:$select.search">{{admin.admin_user.fullName}}
+                </ui-select-choices>
+            </ui-select>
 
-		</div>
+        </div>
 
-		<label class="col-md-1 control-label small" for="textinput">Processed</label>
-		<div class="col-sm-2">
-			<!--   <select class="form-control input-sm" id="field_vm.adminRelationDTOs[4].admin_user" name="assignedToUser" ng-model="vm.workOrdersAdminRelations[1].admin_user" ng-options="user as user.fullName for user in vm.processedBy track by user.id">
+        <label class="col-md-1 control-label small" for="textinput">Processed</label>
+        <div class="col-sm-2">
+            <!--   <select class="form-control input-sm" id="field_vm.adminRelationDTOs[4].admin_user" name="assignedToUser" ng-model="vm.workOrdersAdminRelations[1].admin_user" ng-options="user as user.fullName for user in vm.processedBy track by user.id">
                 <option value=""></option>
             </select>
  -->
-			<ui-select multiple ng-model="vm.selectedprocessedBy"
-				theme="bootstrap" ng-disabled="ctrl.disabled"
-				close-on-select="false" style="width: 200px;" title="Choose a color">
-			<ui-select-match placeholder="Select processed by...">{{$item.admin_user.fullName}}</ui-select-match>
-			<ui-select-choices
-				repeat="admin in vm.processedBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
-			</ui-select>
-		</div>
+            <ui-select multiple ng-model="vm.selectedprocessedBy"
+                       theme="bootstrap" ng-disabled="ctrl.disabled"
+                       close-on-select="false" style="width: 200px;" title="Choose a color">
+                <ui-select-match placeholder="Select processed by...">{{$item.admin_user.fullName}}</ui-select-match>
+                <ui-select-choices
+                    repeat="admin in vm.processedBy | filter:$select.search">{{admin.admin_user.fullName}}
+                </ui-select-choices>
+            </ui-select>
+        </div>
 
-		<label class="col-md-1 control-label small" for="textinput">Ingest
-			By </label>
-		<div class="col-sm-2">
-			<!-- <select class="form-control input-sm" id="field_vm.adminRelationDTOs[5].admin_user" name="assignedToUser" ng-model="vm.workOrdersAdminRelations[2].admin_user" ng-options="user as user.fullName for user in vm.ingestBy track by user.id">
+        <label class="col-md-1 control-label small" for="textinput">Ingest
+            By </label>
+        <div class="col-sm-2">
+            <!-- <select class="form-control input-sm" id="field_vm.adminRelationDTOs[5].admin_user" name="assignedToUser" ng-model="vm.workOrdersAdminRelations[2].admin_user" ng-options="user as user.fullName for user in vm.ingestBy track by user.id">
                 <option value=""></option>
             </select>
  -->
-			<ui-select multiple ng-model="vm.selectedingestBy" theme="bootstrap"
-				ng-disabled="ctrl.disabled" close-on-select="false"
-				style="width: 200px;" title="Choose a color"> <ui-select-match
-				placeholder="Select ingest by...">{{$item.admin_user.fullName}}</ui-select-match>
-			<ui-select-choices
-				repeat="admin in vm.ingestBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
-			</ui-select>
-		</div>
-	</div>
-	<br>
-	<div class="row">
-		<label class="col-md-1 control-label small" for="textinput">Print</label>
-		<div class="col-sm-2">
-			<!-- <select class="form-control input-sm" id="field_vm.adminRelationDTOs[6].admin_user" name="assignedToUser" ng-model="vm.workOrdersAdminRelations[3].admin_user" ng-options="user as user.fullName for user in vm.printBy track by user.id">
+            <ui-select multiple ng-model="vm.selectedingestBy" theme="bootstrap"
+                       ng-disabled="ctrl.disabled" close-on-select="false"
+                       style="width: 200px;" title="Choose a color">
+                <ui-select-match
+                    placeholder="Select ingest by...">{{$item.admin_user.fullName}}
+                </ui-select-match>
+                <ui-select-choices
+                    repeat="admin in vm.ingestBy | filter:$select.search">{{admin.admin_user.fullName}}
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <label class="col-md-1 control-label small" for="textinput">Print</label>
+        <div class="col-sm-2">
+            <!-- <select class="form-control input-sm" id="field_vm.adminRelationDTOs[6].admin_user" name="assignedToUser" ng-model="vm.workOrdersAdminRelations[3].admin_user" ng-options="user as user.fullName for user in vm.printBy track by user.id">
                 <option value=""></option>
             </select> -->
-			<ui-select multiple ng-model="vm.selectedprintBy" theme="bootstrap"
-				ng-disabled="ctrl.disabled" close-on-select="false"
-				style="width: 200px;" title="Choose a color"> <ui-select-match
-				placeholder="Select print by...">{{$item.admin_user.fullName}}</ui-select-match>
-			<ui-select-choices
-				repeat="admin in vm.printBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
-			</ui-select>
-		</div>
+            <ui-select multiple ng-model="vm.selectedprintBy" theme="bootstrap"
+                       ng-disabled="ctrl.disabled" close-on-select="false"
+                       style="width: 200px;" title="Choose a color">
+                <ui-select-match
+                    placeholder="Select print by...">{{$item.admin_user.fullName}}
+                </ui-select-match>
+                <ui-select-choices
+                    repeat="admin in vm.printBy | filter:$select.search">{{admin.admin_user.fullName}}
+                </ui-select-choices>
+            </ui-select>
+        </div>
 
-		<label class="col-md-1 control-label small" for="textinput">Upload/HDD
-			Transfer </label>
-		<div class="col-sm-2">
-			<!-- <select class="form-control input-sm" id="field_vm.adminRelationDTOs[7].admin_user" name="assignedToUser" ng-model="vm.workOrdersAdminRelations[4].admin_user" ng-options="user as user.fullName for user in vm.uploadBy track by user.id">
+        <label class="col-md-1 control-label small" for="textinput">Upload/HDD
+            Transfer </label>
+        <div class="col-sm-2">
+            <!-- <select class="form-control input-sm" id="field_vm.adminRelationDTOs[7].admin_user" name="assignedToUser" ng-model="vm.workOrdersAdminRelations[4].admin_user" ng-options="user as user.fullName for user in vm.uploadBy track by user.id">
                 <option value=""></option>
 
             </select> -->
-			<ui-select multiple ng-model="vm.selecteduploadBy" theme="bootstrap"
-				ng-disabled="ctrl.disabled" close-on-select="false"
-				style="width: 200px;" title="Choose a color"> <ui-select-match
-				placeholder="Select upload by...">{{$item.admin_user.fullName}}</ui-select-match>
-			<ui-select-choices
-				repeat="admin in vm.uploadBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
-			</ui-select>
-		</div>
+            <ui-select multiple ng-model="vm.selecteduploadBy" theme="bootstrap"
+                       ng-disabled="ctrl.disabled" close-on-select="false"
+                       style="width: 200px;" title="Choose a color">
+                <ui-select-match
+                    placeholder="Select upload by...">{{$item.admin_user.fullName}}
+                </ui-select-match>
+                <ui-select-choices
+                    repeat="admin in vm.uploadBy | filter:$select.search">{{admin.admin_user.fullName}}
+                </ui-select-choices>
+            </ui-select>
+        </div>
 
-		<label class="col-md-1 control-label small" for="textinput">Archived</label>
-		<div class="col-sm-2">
-			<!--    <select class="form-control input-sm" id="field_vm.adminRelationDTOs[8].admin_user" name="assignedToUser" ng-model="vm.workOrdersAdminRelations[8].admin_user" ng-options="user as user.fullName for user in vm.archivedBy track by user.id">
+        <label class="col-md-1 control-label small" for="textinput">Archived</label>
+        <div class="col-sm-2">
+            <!--    <select class="form-control input-sm" id="field_vm.adminRelationDTOs[8].admin_user" name="assignedToUser" ng-model="vm.workOrdersAdminRelations[8].admin_user" ng-options="user as user.fullName for user in vm.archivedBy track by user.id">
                 <option value=""></option>
             </select>
  -->
-			<ui-select multiple ng-model="vm.selectedarchivedBy"
-				theme="bootstrap" ng-disabled="ctrl.disabled"
-				close-on-select="false" style="width: 200px;" title="Choose a color">
-			<ui-select-match placeholder="Select archived by...">{{$item.admin_user.fullName}}</ui-select-match>
-			<ui-select-choices
-				repeat="admin in vm.archivedBy | filter:$select.search">{{admin.admin_user.fullName}}</ui-select-choices>
-			</ui-select>
-		</div>
-	</div>
+            <ui-select multiple ng-model="vm.selectedarchivedBy"
+                       theme="bootstrap" ng-disabled="ctrl.disabled"
+                       close-on-select="false" style="width: 200px;" title="Choose a color">
+                <ui-select-match placeholder="Select archived by...">{{$item.admin_user.fullName}}</ui-select-match>
+                <ui-select-choices
+                    repeat="admin in vm.archivedBy | filter:$select.search">{{admin.admin_user.fullName}}
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
 
 
+    <hr>
 
-
-	<hr>
-
-	<h4 class="text-primary">
-		<strong><u>Work</u></strong>
-	</h4>
-	<div class="row">
-		<label class="col-xs-3 control-label small">Request Date</label>
-	</div>
-	<div class="row">
-		<div class="col-sm-2">
-			<input name="startDate" type="date" id="field_requestDate"
-				ng-model="vm.workOrder.requestDate" class="form-control input-sm">
-		</div>
-	</div>
-	<div class="row">
-		<label class="col-xs-3 control-label small">Work Description</label>
-	</div>
-	<div class="row">
-		<div class="col-sm-9">
+    <h4 class="text-primary">
+        <strong><u>Work</u></strong>
+    </h4>
+    <div class="row">
+        <label class="col-xs-3 control-label small">Request Date</label>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <input name="startDate" type="date" id="field_requestDate"
+                   ng-model="vm.workOrder.requestDate" class="form-control input-sm">
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-xs-3 control-label small">Work Description</label>
+    </div>
+    <div class="row">
+        <div class="col-sm-9">
 			<textarea class="form-control input-sm" rows="5"
-				id="field_vm.workOrder.requestDescription"
-				ng-model="vm.workOrder.requestDescription"></textarea>
-		</div>
+                      id="field_vm.workOrder.requestDescription"
+                      ng-model="vm.workOrder.requestDescription"></textarea>
+        </div>
 
-	</div>
-	<hr>
+    </div>
+    <hr>
 
-	<div class="row">
-		<label class="col-md-1 control-label small" for="textinput">Status</label>
-		<div class="col-xs-2">
-			<select class="form-control input-sm" id="field_vm.workOrder.status"
-				name="status" ng-model="vm.workOrder.status"
-				ng-options="workOrderStatus as workOrderStatus.textValue for workOrderStatus in vm.workOrderStatus track by workOrderStatus.id">
-				<option value=""></option>
-			</select>
-		</div>
-		<label class="col-md-1 control-label small" for="textinput">Completed</label>
-		<div class="col-xs-2">
-			<input id="field_vm.workOrder.completionDate" name="textinput"
-				type="date" ng-model="vm.workOrder.completionDate"
-				class="form-control input-sm">
-		</div>
-		<label class="col-xs-1 control-label small" for="textinput">Duration
-			of Service</label>
-		<div class="col-xs-2">
-			<input id="field_vm.workOrder.durationOfService" name="textinput"
-				type="text" ng-model="vm.workOrder.durationOfService"
-				class="form-control input-sm">
-		</div>
-	</div>
+    <div class="row">
+        <label class="col-md-1 control-label small" for="textinput">Status</label>
+        <div class="col-xs-2">
+            <select class="form-control input-sm" id="field_vm.workOrder.status"
+                    name="status" ng-model="vm.workOrder.status"
+                    ng-options="workOrderStatus as workOrderStatus.textValue for workOrderStatus in vm.workOrderStatus track by workOrderStatus.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <label class="col-md-1 control-label small" for="textinput">Completed</label>
+        <div class="col-xs-2">
+            <input id="field_vm.workOrder.completionDate" name="textinput"
+                   type="date" ng-model="vm.workOrder.completionDate"
+                   class="form-control input-sm">
+        </div>
+        <label class="col-xs-1 control-label small" for="textinput">Duration
+            of Service</label>
+        <div class="col-xs-2">
+            <input id="field_vm.workOrder.durationOfService" name="textinput"
+                   type="text" ng-model="vm.workOrder.durationOfService"
+                   class="form-control input-sm">
+        </div>
+    </div>
 
-	<hr>
+    <hr>
 
-	<div ng-show="vm.workOrder.isAbc">
-		<h4 class="text-primary">
-			<strong><u>ABC</u></strong>
-		</h4>
-		<div class="row">
-			<label class="col-xs-3 control-label small">ABC Instructions</label>
-		</div>
-		<div class="row">
-			<div class="col-sm-9">
+    <div ng-show="vm.workOrder.isAbc">
+        <h4 class="text-primary">
+            <strong><u>ABC</u></strong>
+        </h4>
+        <div class="row">
+            <label class="col-xs-3 control-label small">ABC Instructions</label>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
 				<textarea class="form-control input-sm" rows="5"
-					ng-model="vm.workOrder.abcInstruction"></textarea>
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			<label class="col-xs-2 control-label small">File Count</label> <label
-				class="col-xs-2 control-label small">File Type</label> <label
-				class="col-xs-2 control-label small">File Size</label> <label
-				class="col-xs-2 control-label small">Total File Count</label>
-		</div>
-		<div class="row">
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderAbcFiles[0].file_count"
-					name="textinput" type="text"
-					ng-model="vm.workOrderAbcFiles[0].file_count"
-					class="form-control input-sm">
-			</div>
-			<div class="col-xs-2">
-				<select class="form-control input-sm" id="field_verifiedBy"
-					name="assignedToUser" ng-model="vm.workOrderAbcFiles[0].file_type"
-					ng-options="abcFileType as abcFileType.textValue for abcFileType in vm.workOrderAbcFileType track by abcFileType.id">
-					<option value=""></option>
-				</select>
-			</div>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderAbcFiles[0].file_size" name="textinput"
-					type="text" ng-model="vm.workOrderAbcFiles[0].file_size"
-					class="form-control input-sm">
-			</div>
-			<div class="col-xs-2">
-				<label class="col-xs-2 text-danger">{{vm.workOrderAbcFiles[0].file_count--vm.workOrderAbcFiles[1].file_count--vm.workOrderAbcFiles[2].file_count}}</label>
-			</div>
-		</div>
+                          ng-model="vm.workOrder.abcInstruction"></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <label class="col-xs-2 control-label small">File Count</label> <label
+            class="col-xs-2 control-label small">File Type</label> <label
+            class="col-xs-2 control-label small">File Size</label> <label
+            class="col-xs-2 control-label small">Total File Count</label>
+        </div>
 
-		<div class="row">
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderAbcFiles[1].file_count"
-					name="textinput" type="text"
-					ng-model="vm.workOrderAbcFiles[1].file_count"
-					class="form-control input-sm">
-			</div>
-			<div class="col-xs-2">
-				<select class="form-control input-sm"
-					id="field_vm.workOrderAbcFiles[1].file_type" name="assignedToUser"
-					ng-model="vm.workOrderAbcFiles[1].file_type"
-					ng-options="abcFileType as abcFileType.textValue for abcFileType in vm.workOrderAbcFileType track by abcFileType.id">
-					<option value=""></option>
-				</select>
-			</div>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderAbcFiles[1].file_size" name="textinput"
-					type="text" ng-model="vm.workOrderAbcFiles[1].file_size"
-					class="form-control input-sm">
-			</div>
-		</div>
 
-		<div class="row">
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderAbcFiles[2].file_count"
-					name="textinput" type="text"
-					ng-model="vm.workOrderAbcFiles[2].file_count"
-					class="form-control input-sm">
-			</div>
-			<div class="col-xs-2">
-				<select class="form-control input-sm"
-					id="field_vm.workOrderAbcFiles[2].file_type" name="assignedToUser"
-					ng-model="vm.workOrderAbcFiles[2].file_type"
-					ng-options="abcFileType as abcFileType.textValue for abcFileType in vm.workOrderAbcFileType track by abcFileType.id">
-					<option value=""></option>
-				</select>
-			</div>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderAbcFiles[2].file_size" name="textinput"
-					type="text" ng-model="vm.workOrderAbcFiles[2].file_size"
-					class="form-control input-sm">
-			</div>
-		</div>
-		<br>
+        <div class="row">
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderAbcFiles[0].file_count"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderAbcFiles[0].file_count"
+                       class="form-control input-sm">
+            </div>
+            <div class="col-xs-2">
+                <select class="form-control input-sm" id="field_verifiedBy"
+                        name="assignedToUser" ng-model="vm.workOrderAbcFiles[0].file_type"
+                        ng-options="abcFileType as abcFileType.textValue for abcFileType in vm.workOrderAbcFileType track by abcFileType.id">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderAbcFiles[0].file_size" name="textinput"
+                       type="text" ng-model="vm.workOrderAbcFiles[0].file_size"
+                       class="form-control input-sm">
+            </div>
+            <div class="col-xs-2">
+                <label class="col-xs-2 text-danger">{{vm.workOrderAbcFiles[0].file_count--vm.workOrderAbcFiles[1].file_count--vm.workOrderAbcFiles[2].file_count}}</label>
+            </div>
+        </div>
 
-		<div class="row">
-			<label class="col-xs-2 control-label small">Hard Drive To</label> <label
-				class="col-xs-2 control-label small">Size in GB</label> <label
-				class="col-xs-2 control-label small">Drive #</label> <label
-				class="col-xs-2 control-label small">Hard Drive To</label> <label
-				class="col-xs-2 control-label small">Size in GB</label> <label
-				class="col-xs-2 control-label small">Drive #</label>
-		</div>
-		<div class="row">
 
-			<div class="col-xs-2">
-				<select class="form-control input-sm"
-					id="field_vm.workOrderAbcHdds[0].hdd_to" name="status"
-					ng-model="vm.workOrderAbcHdds[0].hdd_to"
-					ng-options="abcHdd as abcHdd.textValue for abcHdd in vm.abcHdd track by abcHdd.id">
-					<option value=""></option>
-				</select>
-			</div>
 
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderAbcHdds[0].size" name="textinput"
-					type="text" ng-model="vm.workOrderAbcHdds[0].size"
-					class="form-control input-sm">
-			</div>
+        <div class="row">
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderAbcFiles[1].file_count"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderAbcFiles[1].file_count"
+                       class="form-control input-sm">
+            </div>
+            <div class="col-xs-2">
+                <select class="form-control input-sm"
+                        id="field_vm.workOrderAbcFiles[1].file_type" name="assignedToUser"
+                        ng-model="vm.workOrderAbcFiles[1].file_type"
+                        ng-options="abcFileType as abcFileType.textValue for abcFileType in vm.workOrderAbcFileType track by abcFileType.id">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderAbcFiles[1].file_size" name="textinput"
+                       type="text" ng-model="vm.workOrderAbcFiles[1].file_size"
+                       class="form-control input-sm">
+            </div>
+        </div>
 
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderAbcHdds[0].drive_number"
-					name="textinput" type="text"
-					ng-model="vm.workOrderAbcHdds[0].drive_number"
-					class="form-control input-sm">
-			</div>
+        <div class="row">
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderAbcFiles[2].file_count"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderAbcFiles[2].file_count"
+                       class="form-control input-sm">
+            </div>
+            <div class="col-xs-2">
+                <select class="form-control input-sm"
+                        id="field_vm.workOrderAbcFiles[2].file_type" name="assignedToUser"
+                        ng-model="vm.workOrderAbcFiles[2].file_type"
+                        ng-options="abcFileType as abcFileType.textValue for abcFileType in vm.workOrderAbcFileType track by abcFileType.id">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderAbcFiles[2].file_size" name="textinput"
+                       type="text" ng-model="vm.workOrderAbcFiles[2].file_size"
+                       class="form-control input-sm">
+            </div>
+        </div>
+        <br>
 
-			<div class="col-xs-2">
-				<select class="form-control input-sm"
-					id="field_vm.workOrderAbcHdds[1].hdd_to" name="status"
-					ng-model="vm.workOrderAbcHdds[1].hdd_to"
-					ng-options="abcHdd as abcHdd.textValue for abcHdd in vm.abcHdd track by abcHdd.id">
-					<option value=""></option>
-				</select>
-			</div>
+        <div class="row">
+            <label class="col-xs-2 control-label small">Hard Drive To</label> <label
+            class="col-xs-2 control-label small">Size in GB</label> <label
+            class="col-xs-2 control-label small">Drive #</label> <label
+            class="col-xs-2 control-label small">Hard Drive To</label> <label
+            class="col-xs-2 control-label small">Size in GB</label> <label
+            class="col-xs-2 control-label small">Drive #</label>
+        </div>
+        <div class="row">
 
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderAbcHdds[1].size" name="textinput"
-					type="text" ng-model="vm.workOrderAbcHdds[1].size"
-					class="form-control input-sm">
-			</div>
+            <div class="col-xs-2">
+                <select class="form-control input-sm"
+                        id="field_vm.workOrderAbcHdds[0].hdd_to" name="status"
+                        ng-model="vm.workOrderAbcHdds[0].hdd_to"
+                        ng-options="abcHdd as abcHdd.textValue for abcHdd in vm.abcHdd track by abcHdd.id">
+                    <option value=""></option>
+                </select>
+            </div>
 
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderAbcHdds[1].drive_number"
-					name="textinput" type="text"
-					ng-model="vm.workOrderAbcHdds[1].drive_number"
-					class="form-control input-sm">
-			</div>
-		</div>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderAbcHdds[0].size" name="textinput"
+                       type="text" ng-model="vm.workOrderAbcHdds[0].size"
+                       class="form-control input-sm" placeholder="Number Only">
+            </div>
 
-		<div class="row">
-			<div class="col-xs-2">
-				<select class="form-control input-sm"
-					id="field_vm.workOrderAbcHdds[2].hdd_to" name="status"
-					ng-model="vm.workOrderAbcHdds[2].hdd_to"
-					ng-options="abcHdd as abcHdd.textValue for abcHdd in vm.abcHdd track by abcHdd.id">
-					<option value=""></option>
-				</select>
-			</div>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderAbcHdds[0].drive_number"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderAbcHdds[0].drive_number"
+                       class="form-control input-sm">
+            </div>
 
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderAbcHdds[2].size" name="textinput"
-					type="text" ng-model="vm.workOrderAbcHdds[2].size"
-					class="form-control input-sm">
-			</div>
+            <div class="col-xs-2">
+                <select class="form-control input-sm"
+                        id="field_vm.workOrderAbcHdds[1].hdd_to" name="status"
+                        ng-model="vm.workOrderAbcHdds[1].hdd_to"
+                        ng-options="abcHdd as abcHdd.textValue for abcHdd in vm.abcHdd track by abcHdd.id">
+                    <option value=""></option>
+                </select>
+            </div>
 
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderAbcHdds[2].drive_number"
-					name="textinput" type="text"
-					ng-model="vm.workOrderAbcHdds[2].drive_number"
-					class="form-control input-sm">
-			</div>
-			<div class="col-xs-2">
-				<select class="form-control input-sm"
-					id="field_vm.workOrderAbcHdds[3].hdd_to" name="status"
-					ng-model="vm.workOrderAbcHdds[3].hdd_to"
-					ng-options="abcHdd as abcHdd.textValue for abcHdd in vm.abcHdd track by abcHdd.id">
-					<option value=""></option>
-				</select>
-			</div>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderAbcHdds[1].size" name="textinput"
+                       type="text" ng-model="vm.workOrderAbcHdds[1].size" placeholder="Number Only"
+                       class="form-control input-sm">
+            </div>
 
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderAbcHdds[3].size" name="textinput"
-					type="text" ng-model="vm.workOrderAbcHdds[3].size"
-					class="form-control input-sm">
-			</div>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderAbcHdds[1].drive_number"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderAbcHdds[1].drive_number"
+                       class="form-control input-sm">
+            </div>
+        </div>
 
-			<div class="col-xs-2">
-				<input id="field_vm.workOrderAbcHdds[3].drive_number"
-					name="textinput" type="text"
-					ng-model="vm.workOrderAbcHdds[3].drive_number"
-					class="form-control input-sm">
-			</div>
-		</div>
+        <div class="row">
+            <div class="col-xs-2">
+                <select class="form-control input-sm"
+                        id="field_vm.workOrderAbcHdds[2].hdd_to" name="status"
+                        ng-model="vm.workOrderAbcHdds[2].hdd_to"
+                        ng-options="abcHdd as abcHdd.textValue for abcHdd in vm.abcHdd track by abcHdd.id">
+                    <option value=""></option>
+                </select>
+            </div>
 
-		<br>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderAbcHdds[2].size" name="textinput"
+                       type="text" ng-model="vm.workOrderAbcHdds[2].size" placeholder="Number Only"
+                       class="form-control input-sm">
+            </div>
 
-		<div class="row">
-			<label class="col-xs-2 control-label small">Raw DVD</label> <label
-				class="col-xs-2 control-label small">Talent Count</label>
-		</div>
-		<div class="row">
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.abcRawDvd" name="textinput"
-					type="text" ng-model="vm.workOrder.abcRawDvd"
-					class="form-control input-sm">
-			</div>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.abcTalentCount" name="textinput"
-					type="text" ng-model="vm.workOrder.abcTalentCount"
-					class="form-control input-sm">
-			</div>
-		</div>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderAbcHdds[2].drive_number"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderAbcHdds[2].drive_number"
+                       class="form-control input-sm">
+            </div>
+            <div class="col-xs-2">
+                <select class="form-control input-sm"
+                        id="field_vm.workOrderAbcHdds[3].hdd_to" name="status"
+                        ng-model="vm.workOrderAbcHdds[3].hdd_to"
+                        ng-options="abcHdd as abcHdd.textValue for abcHdd in vm.abcHdd track by abcHdd.id">
+                    <option value=""></option>
+                </select>
+            </div>
 
-	</div>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderAbcHdds[3].size" name="textinput"
+                       type="text" ng-model="vm.workOrderAbcHdds[3].size" placeholder="Number Only"
+                       class="form-control input-sm">
+            </div>
 
-	<div ng-show="vm.workOrder.isPrint || vm.workOrder.type.textValue=='Print'">
-		<h4 class="text-primary">
-			<strong><u>Printing</u></strong>
-		</h4>
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">Size</label>
-			<div class="col-xs-2">
-				<select class="form-control input-sm"
-					id="field_vm.workOrder.printSize" name="assignedToUser"
-					ng-model="vm.workOrder.printSize"
-					ng-options="size  as size.textValue for size in vm.printSize track by size.id">
-					<option value=""></option>
-				</select>
-			</div>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrderAbcHdds[3].drive_number"
+                       name="textinput" type="text"
+                       ng-model="vm.workOrderAbcHdds[3].drive_number"
+                       class="form-control input-sm">
+            </div>
+        </div>
 
-			<label class="col-md-1 control-label small" for="textinput">Surface</label>
-			<div class="col-xs-2">
-				<select class="form-control input-sm"
-					id="field_vm.workOrder.printSurface" name="assignedToUser"
-					ng-model="vm.workOrder.printSurface"
-					ng-options="abc  as abc.textValue for abc in vm.printSurface track by abc.id">
-					<option value=""></option>
-				</select>
-			</div>
+        <br>
 
-			<label class="col-md-1 control-label small" for="textinput">Bleed</label>
-			<div class="col-xs-2">
-				<select class="form-control input-sm"
-					id="field_vm.workOrder.printBleed" name="assignedToUser"
-					ng-model="vm.workOrder.printBleed"
-					ng-options="abc  as abc.textValue for abc in vm.printBleed track by abc.id">
-					<option value=""></option>
-				</select>
-			</div>
-		</div>
+        <div class="row">
+            <label class="col-xs-2 control-label small">Raw DVD</label> <label
+            class="col-xs-2 control-label small">Talent Count</label>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.abcRawDvd" name="textinput"
+                       type="text" ng-model="vm.workOrder.abcRawDvd"
+                       class="form-control input-sm">
+            </div>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.abcTalentCount" name="textinput"
+                       type="text" ng-model="vm.workOrder.abcTalentCount"
+                       class="form-control input-sm">
+            </div>
+        </div>
 
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">File
-				Name </label>
-			<div class="col-xs-2">
-				<select class="form-control input-sm"
-					id="field_vm.workOrder.printFilename" name="assignedToUser"
-					ng-model="vm.workOrder.printFilename"
-					ng-options="abc  as abc.textValue for abc in vm.printFilename track by abc.id">
-					<option value=""></option>
-				</select>
-			</div>
+    </div>
 
-			<label class="col-md-1 control-label small" for="textinput">Photo
-				Credit </label>
-			<div class="col-xs-2">
-				<select class="form-control input-sm"
-					id="field_vm.workOrder.printPhotoCredi" name="assignedToUser"
-					ng-model="vm.workOrder.printPhotoCredit"
-					ng-options="abc  as abc.textValue for abc in vm.printPhotoCredit track by abc.id">
-					<option value=""></option>
-				</select>
-			</div>
+    <div ng-show="vm.workOrder.isPrint || vm.workOrder.type.textValue=='Print'">
+        <h4 class="text-primary">
+            <strong><u>Printing</u></strong>
+        </h4>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Size</label>
+            <div class="col-xs-2">
+                <select class="form-control input-sm"
+                        id="field_vm.workOrder.printSize" name="assignedToUser"
+                        ng-model="vm.workOrder.printSize"
+                        ng-options="size  as size.textValue for size in vm.printSize track by size.id">
+                    <option value=""></option>
+                </select>
+            </div>
 
-			<div ng-if="vm.workOrder.printPhotoCredit.textValue == 'Yes'">
-				<label class="col-md-1 control-label small" for="textinput">Credit
-					Location </label>
-				<div class="col-xs-2">
-					<select class="form-control input-sm" name="assignedToUser"
-						ng-model="vm.workOrder.printPhotoCredit"
-						ng-options="abc  as abc.textValue for abc in vm.printCreditLocation track by abc.id">
-						<option value=""></option>
-					</select>
-				</div>
-				<label class="col-md-1 control-label small" for="textinput">Credit</label>
-				<div class="col-xs-2"
-					ng-repeat="projectRoles in vm.projectRoles track by projectRoles.id">
+            <label class="col-md-1 control-label small" for="textinput">Surface</label>
+            <div class="col-xs-2">
+                <select class="form-control input-sm"
+                        id="field_vm.workOrder.printSurface" name="assignedToUser"
+                        ng-model="vm.workOrder.printSurface"
+                        ng-options="abc  as abc.textValue for abc in vm.printSurface track by abc.id">
+                    <option value=""></option>
+                </select>
+            </div>
 
-					<div ng-if="projectRoles.relationship_type == 'Unit Photographer'">
-						<input name="textinput" type="text"
-							ng-model="projectRoles.contact.fullName"
-							class="form-control input-sm" readonly>
-					</div>
-				</div>
-			</div>
-			<div ng-if="vm.workOrder.printPhotoCredit.textValue == 'Overwrite'">
-				<label class="col-md-1 control-label small" for="textinput">Credit
-					Location </label>
-				<div class="col-xs-2">
-					<select class="form-control input-sm" name="assignedToUser"
-						ng-model="vm.workOrder.printPhotoCredit"
-						ng-options="abc  as abc.textValue for abc in vm.printCreditLocation track by abc.id">
-						<option value=""></option>
-					</select>
-				</div>
-				<label class="col-md-1 control-label small" for="textinput">Credit</label>
-				<div class="col-xs-2"
-					ng-repeat="projectRoles in vm.projectRoles track by projectRoles.id">
+            <label class="col-md-1 control-label small" for="textinput">Bleed</label>
+            <div class="col-xs-2">
+                <select class="form-control input-sm"
+                        id="field_vm.workOrder.printBleed" name="assignedToUser"
+                        ng-model="vm.workOrder.printBleed"
+                        ng-options="abc  as abc.textValue for abc in vm.printBleed track by abc.id">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
 
-					<div ng-if="projectRoles.relationship_type == 'Unit Photographer'">
-						<input name="textinput" type="text"
-							ng-model="vm.workOrder.overwrite" class="form-control input-sm">
-					</div>
-				</div>
-			</div>
-		</div>
-		<hr>
-		<h4 class="text-primary">
-			<strong><u>Quantity</u></strong>
-		</h4>
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">Sets</label>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.printSet" name="textinput" type="text"
-					ng-model="vm.workOrder.printSet" class="form-control input-sm">
-			</div>
-			<label class="col-md-1 control-label small" for="textinput">Quantity</label>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.printQuantity" name="textinput"
-					type="text" ng-model="vm.workOrder.printQuantity"
-					class="form-control input-sm">
-			</div>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">File
+                Name </label>
+            <div class="col-xs-2">
+                <select class="form-control input-sm"
+                        id="field_vm.workOrder.printFilename" name="assignedToUser"
+                        ng-model="vm.workOrder.printFilename"
+                        ng-options="abc  as abc.textValue for abc in vm.printFilename track by abc.id">
+                    <option value=""></option>
+                </select>
+            </div>
 
-		</div>
-	</div>
-	<hr>
-	<div id="proof" ng-show="vm.workOrder.isProof">
-		<h4 class="text-primary">
-			<strong><u>Days/Pages</u></strong>
-		</h4>
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">Days</label>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.printDaysFrom" name="textinput"
-					type="text" ng-model="vm.workOrder.printDaysFrom"
-					class="form-control input-sm">
-			</div>
-			<label class="col-md-1 control-label small" for="textinput">To</label>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.printDaysTo" name="textinput"
-					type="text" ng-model="vm.workOrder.printDaysTo"
-					class="form-control input-sm">
-			</div>
-		</div>
-		<div class="row">
-			<label class="col-md-1 control-label small" for="textinput">Pages</label>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.printPagesFrom" name="textinput"
-					type="text" ng-model="vm.workOrder.printPagesFrom"
-					class="form-control input-sm">
-			</div>
-			<label class="col-md-1 control-label small" for="textinput">To</label>
-			<div class="col-xs-2">
-				<input id="field_vm.workOrder.printPagesTo" name="textinput"
-					type="text" ng-model="vm.workOrder.printPagesTo"
-					class="form-control input-sm">
-			</div>
-		</div>
+            <label class="col-md-1 control-label small" for="textinput">Photo
+                Credit </label>
+            <div class="col-xs-2">
+                <select class="form-control input-sm"
+                        id="field_vm.workOrder.printPhotoCredi" name="assignedToUser"
+                        ng-model="vm.workOrder.printPhotoCredit"
+                        ng-options="abc  as abc.textValue for abc in vm.printPhotoCredit track by abc.id">
+                    <option value=""></option>
+                </select>
+            </div>
 
-		<hr>
-		<h4 class="text-primary">
-			<strong><u>Purchase Orders</u></strong>
-		</h4>
+            <div ng-if="vm.workOrder.printPhotoCredit.textValue == 'Yes'">
+                <label class="col-md-1 control-label small" for="textinput">Credit
+                    Location </label>
+                <div class="col-xs-2">
+                    <select class="form-control input-sm" name="assignedToUser"
+                            ng-model="vm.workOrder.printPhotoCredit"
+                            ng-options="abc  as abc.textValue for abc in vm.printCreditLocation track by abc.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <label class="col-md-1 control-label small" for="textinput">Credit</label>
+                <div class="col-xs-2"
+                     ng-repeat="projectRoles in vm.projectRoles track by projectRoles.id">
 
-		<div ng-repeat="purchaseOrders in vm.purchaseOrders">
-			<div class="row">
+                    <div ng-if="projectRoles.relationship_type == 'Unit Photographer'">
+                        <input name="textinput" type="text"
+                               ng-model="projectRoles.contact.fullName"
+                               class="form-control input-sm" readonly>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="vm.workOrder.printPhotoCredit.textValue == 'Overwrite'">
+                <label class="col-md-1 control-label small" for="textinput">Credit
+                    Location </label>
+                <div class="col-xs-2">
+                    <select class="form-control input-sm" name="assignedToUser"
+                            ng-model="vm.workOrder.printPhotoCredit"
+                            ng-options="abc  as abc.textValue for abc in vm.printCreditLocation track by abc.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <label class="col-md-1 control-label small" for="textinput">Credit</label>
+                <div class="col-xs-2"
+                     ng-repeat="projectRoles in vm.projectRoles track by projectRoles.id">
+
+                    <div ng-if="projectRoles.relationship_type == 'Unit Photographer'">
+                        <input name="textinput" type="text"
+                               ng-model="vm.workOrder.overwrite" class="form-control input-sm">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h4 class="text-primary">
+            <strong><u>Quantity</u></strong>
+        </h4>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Sets</label>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.printSet" name="textinput" type="text"
+                       ng-model="vm.workOrder.printSet" class="form-control input-sm">
+            </div>
+            <label class="col-md-1 control-label small" for="textinput">Quantity</label>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.printQuantity" name="textinput"
+                       type="text" ng-model="vm.workOrder.printQuantity"
+                       class="form-control input-sm">
+            </div>
+
+        </div>
+    </div>
+    <hr>
+    <div id="proof" ng-show="vm.workOrder.isProof">
+        <h4 class="text-primary">
+            <strong><u>Days/Pages</u></strong>
+        </h4>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Days</label>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.printDaysFrom" name="textinput"
+                       type="text" ng-model="vm.workOrder.printDaysFrom"
+                       class="form-control input-sm">
+            </div>
+            <label class="col-md-1 control-label small" for="textinput">To</label>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.printDaysTo" name="textinput"
+                       type="text" ng-model="vm.workOrder.printDaysTo"
+                       class="form-control input-sm">
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-1 control-label small" for="textinput">Pages</label>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.printPagesFrom" name="textinput"
+                       type="text" ng-model="vm.workOrder.printPagesFrom"
+                       class="form-control input-sm">
+            </div>
+            <label class="col-md-1 control-label small" for="textinput">To</label>
+            <div class="col-xs-2">
+                <input id="field_vm.workOrder.printPagesTo" name="textinput"
+                       type="text" ng-model="vm.workOrder.printPagesTo"
+                       class="form-control input-sm">
+            </div>
+        </div>
+
+        <hr>
+        <h4 class="text-primary">
+            <strong><u>Purchase Orders</u></strong>
+        </h4>
+
+        <div ng-repeat="purchaseOrders in vm.purchaseOrders">
+            <div class="row">
                 <div class="row">
 
                     <div class="col-sm-1">
@@ -1030,55 +1046,66 @@
                                ng-model="purchaseOrders.po_notes" readonly>
                     </div>
                 </div>
-			</div>
-		</div>
+            </div>
+        </div>
 
-	</div>
-	<hr>
-	<br>
+    </div>
+    <hr>
+    <br>
 
-	<div class="row">
-		<label class="col-xs-3 control-label small">PO Record Field</label>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
+    <div class="row">
+        <label class="col-xs-3 control-label small">PO Record Field</label>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
 			<textarea class="form-control input-sm" rows="5"
-				id="field_vm.workOrder.poRecord" ng-model="vm.workOrder.poRecord"></textarea>
-		</div>
+                      id="field_vm.workOrder.poRecord" ng-model="vm.workOrder.poRecord"></textarea>
+        </div>
 
-	</div>
+    </div>
 
-	<hr>
-	<h4 class="text-primary">
-		<strong><u>Accounting</u></strong>
-	</h4>
+    <hr>
+    <h4 class="text-primary">
+        <strong><u>Accounting</u></strong>
+    </h4>
 
-	<div class="row">
-		<label class="col-md-1 control-label small" for="textinput">Invoiced</label>
-		<div class="col-xs-2">
+    <div class="row">
+        <label class="col-md-1 control-label small" for="textinput">Invoiced</label>
+        <div class="col-xs-2">
 
-            <select class="form-control input-sm"
+            <!--<select class="form-control input-sm"
 
                     ng-model="vm.workOrder.invoiced"
                     ng-options="invoice.id as invoice.name for invoice in vm.invoiced track by invoice.id">
                 <option value=""></option>
+            </select>-->
+           <!-- <select class="form-control input-sm" ng-model="vm.workOrder.invoiced">
+                <option value="105">Yes</option>
+                <option value="106">Comp</option>
+                <option value="107">Included</option>
+                <option value="108">No</option>
+            </select>-->
+
+            <select class="form-control input-sm" ng-model="vm.workOrder.invoiced" ng-init="vm.workOrder.invoiced = '108'">
+                <option ng-repeat="x in vm.invoiced" value="{{x.id}}">{{x.name}}</option>
             </select>
-		</div>
+        </div>
 
-	</div>
-	<div class="row">
-		<label class="col-xs-3 control-label small">PO.</label>
-	</div>
-	<div class="row">
-		<div class="col-sm-9">
+    </div>
+    <div class="row">
+        <label class="col-xs-3 control-label small">P.O.# - Invoice #</label>
+    </div>
+    <div class="row">
+        <div class="col-sm-9">
 			<textarea class="form-control input-sm" rows="5"
-				id="field_vm.workOrder.invoiceNumber"
-				ng-model="vm.workOrder.invoiceNumber"></textarea>
-		</div>
+                      id="field_vm.workOrder.invoiceNumber"
+                      ng-model="vm.workOrder.invoiceNumber"></textarea>
+        </div>
 
-	</div>
-	<hr>
+    </div>
+    <hr>
 
 </form>
+
 
 

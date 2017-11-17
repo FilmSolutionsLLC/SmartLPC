@@ -1,6 +1,5 @@
 package com.fps.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -72,11 +71,9 @@ public class ProjectRoles implements Serializable {
     private Float tertiaryKillPct;
 
     @Column(name = "created_date")
-    @JsonIgnore
     private ZonedDateTime createdDate;
 
     @Column(name = "updated_date")
-    @JsonIgnore
     private ZonedDateTime updatedDate;
 
     @Column(name = "welcome_message")
@@ -90,11 +87,9 @@ public class ProjectRoles implements Serializable {
     private Contact contact;
 
     @ManyToOne
-    @JsonIgnore
     private User createdByAdminUser;
 
     @ManyToOne
-    @JsonIgnore
     private User updatedByAdminUser;
 
     public Long getId() {

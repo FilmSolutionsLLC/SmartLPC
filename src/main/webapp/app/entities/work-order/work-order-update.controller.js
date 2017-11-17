@@ -8,9 +8,9 @@
         .module('smartLpcApp')
         .controller('WorkOrderUpdateController', WorkOrderUpdateController);
 
-    WorkOrderUpdateController.$inject = ['$ngConfirm','Principal', '$state', '$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'WorkOrder', 'Lookups', 'Projects', 'User', 'Contacts'];
+    WorkOrderUpdateController.$inject = ['$ngConfirm', 'Principal', '$state', '$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'WorkOrder', 'Lookups', 'Projects', 'User', 'Contacts'];
 
-    function WorkOrderUpdateController($ngConfirm,Principal, $state, $uibModal, $http, $scope, $rootScope, $stateParams, entity, WorkOrder, Lookups, Projects, User, Contacts) {
+    function WorkOrderUpdateController($ngConfirm, Principal, $state, $uibModal, $http, $scope, $rootScope, $stateParams, entity, WorkOrder, Lookups, Projects, User, Contacts) {
         var vm = this;
 
 
@@ -69,6 +69,13 @@
         vm.onTypeChange = function () {
             vm.showPKOFlag = true;
         };
+
+        vm.invoiced = [
+            {"id":105,"name":"Yes"},
+            {"id":106,"name":"Comp"},
+            {"id":107,"name":"Included"},
+            {"id":108,"name":"No"}
+        ];
 
         vm.workOrderType = {};
         $http({
@@ -231,13 +238,14 @@
         };
 
         vm.save = function () {
+            console.log(" vm.selectedverifiedBy : " + JSON.stringify(vm.selectedverifiedBy));
             vm.workOrdersAdminRelations = vm.selectedverifiedBy.concat(
                 vm.selectedingestBy).concat(vm.selectedprintBy).concat(
                 vm.selectedprocessedBy).concat(vm.selecteduploadBy).concat(
                 vm.selectedarchivedBy).concat(vm.selectedtoMountReminder).concat(vm.selectedclientReminder).concat(vm.selecteddueMountReminder);
-            console.log("Saving Admin Relation :  "+JSON.stringify(vm.workOrderAdminRelations));
+            console.log("Saving Admin Relation :  " + JSON.stringify(vm.workOrderAdminRelations));
 
-            vm.workOrderDTO.workOrdersAdminRelations = vm.workOrderAdminRelations;
+            vm.workOrderDTO.workOrdersAdminRelations = vm.workOrdersAdminRelations;
 
             vm.isSaving = true;
 
@@ -254,25 +262,26 @@
         };
 
         var onSaveSuccess = function (result) {
-            console.log("->"+JSON.stringify(result));
+            console.log("->" + JSON.stringify(result));
             //$scope.$emit('smartLpcApp:workOrderUpdate', result);
             $ngConfirm({
                 title: 'Success!',
-                content: "WorkOrder with id : <strong>"+result.id+"</strong> has been updated",
-                type: 'red',
+                content: "WorkOrder with id : <strong>" + result.id + "</strong> has been updated",
+                type: 'green',
                 typeAnimated: true,
                 theme: 'dark',
                 buttons: {
                     confirm: {
                         text: 'Okay',
-                        btnClass: 'btn-red',
+                        btnClass: 'btn-green',
                         action: function () {
                         }
                     }
                 }
             });
             vm.isSaving = false;
-            $state.go('work-order', {}, {reload: true});// use for redirecting ...
+            //$state.go('work-order', {}, {reload: true});// use for redirecting ...
+            $state.go('work-order-detail', {id: vm.workOrderDTO.workOrder.id}), {reload: true};
         };
 
         var onSaveError = function () {
@@ -316,7 +325,6 @@
                             + vm.admins[i].admin.fullName)
                         vm.auditedBy.push(vm.admins[i].admin);
                     }
-
 
 
                     else if (angular.equals(vm.admins[i].dropdownName,
@@ -401,7 +409,6 @@
                     }
 
 
-
                     else if (angular.equals(vm.admins[i].dropdownName,
                             'WO_UPLOAD_BY')) {
                         console.log("Addded user uploadBy: "
@@ -482,9 +489,9 @@
         vm.currentAccount = null;
         Principal.identity().then(function (account) {
             vm.currentAccount = account;
-           // vm.selecteddueMountReminder.push(vm.currentAccount);
-           // vm.selectedclientReminder.push(vm.currentAccount);
-           // vm.selectedtoMountReminder.push(vm.currentAccount);
+            // vm.selecteddueMountReminder.push(vm.currentAccount);
+            // vm.selectedclientReminder.push(vm.currentAccount);
+            // vm.selectedtoMountReminder.push(vm.currentAccount);
             console.log("Current User : " + JSON.stringify(vm.currentAccount));
         });
 
@@ -523,6 +530,8 @@
         vm.selectedarchivedBy = [];
 
         vm.adminClicked = function () {
+
+
             vm.selectedAdmins = vm.selectedverifiedBy.concat(
                 vm.selectedingestBy).concat(vm.selectedprintBy).concat(
                 vm.selectedprocessedBy).concat(vm.selecteduploadBy).concat(
@@ -532,11 +541,11 @@
                 + JSON.stringify(vm.selectedAdmins));
         };
 
-      // console.log("dssds d : " + JSON.stringify(vm.workOrderDTO.workOrdersAdminRelations[0]));
-      //  console.log("Length :" + vm.workOrderDTO.workOrdersAdminRelations.length);
+        // console.log("dssds d : " + JSON.stringify(vm.workOrderDTO.workOrdersAdminRelations[0]));
+        //  console.log("Length :" + vm.workOrderDTO.workOrdersAdminRelations.length);
         vm.workOrderAdminRelations = [];
 
-        if(angular.equals(vm.workOrderDTO.workOrdersAdminRelations,[])){
+        if (angular.equals(vm.workOrderDTO.workOrdersAdminRelations, [])) {
             console.log("NO Data");
         }
         for (var i = 0; i < vm.workOrderDTO.workOrdersAdminRelations.length; i++) {
@@ -594,5 +603,102 @@
                 }});
         };*/
 
+
+        vm.saveAndClose = function () {
+            console.log(" vm.selectedverifiedBy : " + JSON.stringify(vm.selectedverifiedBy));
+
+            vm.workOrdersAdminRelations = vm.selectedverifiedBy.concat(
+                vm.selectedingestBy).concat(vm.selectedprintBy).concat(
+                vm.selectedprocessedBy).concat(vm.selecteduploadBy).concat(
+                vm.selectedarchivedBy).concat(vm.selectedtoMountReminder).concat(vm.selectedclientReminder).concat(vm.selecteddueMountReminder);
+            console.log("Saving Admin Relation :  " + JSON.stringify(vm.workOrderAdminRelations));
+
+            vm.workOrderDTO.workOrdersAdminRelations = vm.workOrdersAdminRelations;
+
+            vm.isSaving = true;
+
+            if (vm.workOrderDTO.workOrder.id !== null) {
+                WorkOrder.update(vm.workOrderDTO, onSaveSuccess2, onSaveError2);
+                console.log("updating work order");
+                console.log(JSON.stringify(vm.workOrderDTO));
+            } else {
+                console.log("saving work order");
+                console.log(JSON.stringify(vm.workOrderDTO));
+                WorkOrder.save(vm.workOrderDTO, onSaveSuccess2, onSaveError2);
+            }
+
+        };
+
+        var onSaveSuccess2 = function (result) {
+            console.log("->" + JSON.stringify(result));
+            //$scope.$emit('smartLpcApp:workOrderUpdate', result);
+            $ngConfirm({
+                title: 'Success!',
+                content: "WorkOrder with id : <strong>" + result.id + "</strong> has been updated",
+                type: 'green',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-green',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+            vm.isSaving = false;
+            $state.go('work-order', {}, {reload: true});// use for redirecting ...
+        };
+
+        var onSaveError2 = function () {
+            $ngConfirm({
+                title: 'Error!',
+                content: "<strong>Error</strong> in updating work-order",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+            vm.isSaving = false;
+        };
+
+        vm.delete = function (id) {
+            $ngConfirm({
+                title: 'Delete!',
+                content: "Confirm Delete WorkOrder with id : <strong>" + id + "</strong>",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+                            WorkOrder.delete({id: id});
+                            alert("Work-Order Deleted");
+                            $state.go("work-order", {}, {reload: true})
+
+                        }
+                    },
+                    close: {
+                        text: 'Cancel',
+                        btnClass: 'btn-green',
+                        action: function () {
+                            // closes the modal
+                            console.log("YOU PRESSED CANCEL");
+                        }
+                    }
+
+                }
+            });
+        };
     }
 })();

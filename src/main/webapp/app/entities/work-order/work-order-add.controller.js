@@ -40,6 +40,8 @@
             console.log(JSON.stringify($scope.selected));
         }
 
+
+
         function isSelected(element) {
             return element;
         }
@@ -64,7 +66,19 @@
                     "relation": "reminder2"
                 }});
         };*/
+        vm.workOrderStatus = {};
+        $http({
+            method: 'GET',
+            url: 'api/lookups/get/work_order/status_id'
 
+        }).then(function successCallback(response) {
+            vm.workOrderStatus = response.data;
+            console.log("status_id");
+            console.log(JSON.stringify(vm.workOrderStatus))
+            console.log("===> "+JSON.stringify(vm.workOrderStatus[2]))
+            vm.workOrder.status = vm.workOrderStatus[2];
+        }, function errorCallback(response) {
+        });
 
         vm.workOrder = entity;
         vm.lookupss = Lookups.query();
@@ -77,8 +91,10 @@
             {"id":105,"name":"Yes"},
             {"id":106,"name":"Comp"},
             {"id":107,"name":"Included"},
-            {"id":108,"name":"No"},
-        ]
+            {"id":108,"name":"No"}
+        ];
+
+
         RelationType.query({
             size: 100
         }, onSuccess1);
@@ -332,35 +348,18 @@
 
         vm.purchaseOrders = [];
         vm.lab = [];
+        vm.schemas = [];
 
         vm.onProjectChange = function () {
 
             console.log(JSON.stringify(vm.workOrder.project));
             console.log(vm.workOrder.project.id);
 
-            $http(
-                {
-                    method: 'GET',
-                    url: 'api/project-purchase-orders/projects/'
-                    + vm.workOrder.project.id
-                }).then(
-                function (response) {
-                    vm.purchaseOrders = response.data;
-                    console.log("PURCHASE ORDERS : "
-                        + JSON.stringify(vm.purchaseOrders));
-                });
 
-            $http(
-                {
-                    method: 'GET',
-                    url: 'api/project-lab-tasks/projects/'
-                    + vm.workOrder.project.id
-                }).then(function (response) {
-                vm.lab = response.data;
-                console.log("PURCHASE LAB Tasks : " + JSON.stringify(vm.lab));
-            });
 
         };
+
+
 
         vm.onTypeChange = function () {
 
@@ -368,7 +367,42 @@
 
             console.log("WO Type : " + JSON.stringify(vm.workOrder.type));
             console.log("actual type : " + vm.workOrder.type.textValue);
+            if(angular.equals(vm.workOrder.type.textValue,'PKO')){
+                $http(
+                    {
+                        method: 'GET',
+                        url: 'api/project-purchase-orders/projects/'
+                        + vm.workOrder.project.id
+                    }).then(
+                    function (response) {
+                        vm.purchaseOrders = response.data;
+                        console.log("PURCHASE ORDERS : "
+                            + JSON.stringify(vm.purchaseOrders));
+                    });
+
+                $http(
+                    {
+                        method: 'GET',
+                        url: 'api/project-lab-tasks/projects/'
+                        + vm.workOrder.project.id
+                    }).then(function (response) {
+                    vm.lab = response.data;
+                    console.log("PURCHASE LAB Tasks : " + JSON.stringify(vm.lab));
+                });
+
+
+                $http(
+                    {
+                        method: 'GET',
+                        url: 'api/justproject/' + vm.workOrder.project.id
+                    }).then(function (response) {
+                    vm.project = response.data;
+                    console.log("PURCHASE : " + JSON.stringify(vm.project));
+                });
+
+            }
         };
+
 
         vm.workOrderType = {};
         $http({
@@ -400,16 +434,7 @@
         }, function errorCallback(response) {
         });
 
-        vm.workOrderStatus = {};
-        $http({
-            method: 'GET',
-            url: 'api/lookups/get/work_order/status_id'
 
-        }).then(function successCallback(response) {
-            vm.workOrderStatus = response.data;
-            console.log("status_id");
-        }, function errorCallback(response) {
-        });
 
         vm.workOrderAbcFileType = {};
         $http({
@@ -497,32 +522,42 @@
 
 
         vm.save = function () {
-            vm.workOrdersAdminRelations =
-                vm.selectedverifiedBy.
-                concat(vm.selectedtoMountReminder).
-                concat(vm.selectedclientReminder).
-                concat(vm.selecteddueMountReminder).
-                concat(vm.selectedingestBy).
-                concat(vm.selectedprintBy).
-                concat(vm.selectedprocessedBy).
-                concat(vm.selecteduploadBy).
-                concat(vm.selectedarchivedBy);
+            if(angular.equals(vm.workOrder.type,null)){
+                $ngConfirm({
+                    title: 'Error!',
+                    content: "<strong>Type </strong> cannot be empty",
+                    type: 'red',
+                    typeAnimated: true,
+                    theme: 'dark',
+                    buttons: {
+                        confirm: {
+                            text: 'Okay',
+                            btnClass: 'btn-red',
+                            action: function () {
+                            }
+                        }
+                    }
+                });
+            }else {
+                vm.workOrdersAdminRelations =
+                    vm.selectedverifiedBy.concat(vm.selectedtoMountReminder).concat(vm.selectedclientReminder).concat(vm.selecteddueMountReminder).concat(vm.selectedingestBy).concat(vm.selectedprintBy).concat(vm.selectedprocessedBy).concat(vm.selecteduploadBy).concat(vm.selectedarchivedBy);
 
-            vm.workOrderDTO = {
-                "workOrder": vm.workOrder,
-                "workOrdersAdminRelations": vm.workOrdersAdminRelations,
-                "workOrderAbcFiles": vm.workOrderAbcFiles,
-                "workOrderAbcHdds": vm.workOrderAbcHdds
-            };
-            vm.isSaving = true;
+                vm.workOrderDTO = {
+                    "workOrder": vm.workOrder,
+                    "workOrdersAdminRelations": vm.workOrdersAdminRelations,
+                    "workOrderAbcFiles": vm.workOrderAbcFiles,
+                    "workOrderAbcHdds": vm.workOrderAbcHdds
+                };
+                vm.isSaving = true;
 
-            if (vm.workOrderDTO.workOrder.id !== null) {
-                WorkOrder.update(vm.workOrderDTO, onSaveSuccess, onSaveError);
-                console.log("updating work order");
-            } else {
-                console.log("saving work order");
-                console.log(JSON.stringify(vm.workOrderDTO));
-                WorkOrder.save(vm.workOrderDTO, onSaveSuccess, onSaveError);
+                if (vm.workOrderDTO.workOrder.id !== null) {
+                    WorkOrder.update(vm.workOrderDTO, onSaveSuccess, onSaveError);
+                    console.log("updating work order");
+                } else {
+                    console.log("saving work order");
+                    console.log(JSON.stringify(vm.workOrderDTO));
+                    WorkOrder.save(vm.workOrderDTO, onSaveSuccess, onSaveError);
+                }
             }
 
         };
@@ -531,20 +566,21 @@
             $ngConfirm({
                 title: 'Success!',
                 content: "WorkOrder with id : <strong>" + result.id + "</strong> has been created",
-                type: 'red',
+                type: 'green',
                 typeAnimated: true,
                 theme: 'dark',
                 buttons: {
                     confirm: {
                         text: 'Okay',
-                        btnClass: 'btn-red',
+                        btnClass: 'btn-green',
                         action: function () {
                         }
                     }
                 }
             });
             vm.isSaving = false;
-            $state.go('work-order', {}, {reload: true});// use for redirecting ...
+           // $state.go('work-order', {}, {reload: true});// use for redirecting ...
+            $state.go('work-order-detail',{id:result.id}),{reload: true};
         };
 
         var onSaveError = function () {
@@ -627,5 +663,70 @@
             })
         };
 
+
+        vm.saveAndClose = function () {
+            if(angular.equals(vm.workOrder.type,null)){
+                $ngConfirm({
+                    title: 'Error!',
+                    content: "<strong>Type </strong> cannot be empty",
+                    type: 'red',
+                    typeAnimated: true,
+                    theme: 'dark',
+                    buttons: {
+                        confirm: {
+                            text: 'Okay',
+                            btnClass: 'btn-red',
+                            action: function () {
+                            }
+                        }
+                    }
+                });
+            }else {
+                vm.workOrdersAdminRelations =
+                    vm.selectedverifiedBy.concat(vm.selectedtoMountReminder).concat(vm.selectedclientReminder).concat(vm.selecteddueMountReminder).concat(vm.selectedingestBy).concat(vm.selectedprintBy).concat(vm.selectedprocessedBy).concat(vm.selecteduploadBy).concat(vm.selectedarchivedBy);
+
+                vm.workOrderDTO = {
+                    "workOrder": vm.workOrder,
+                    "workOrdersAdminRelations": vm.workOrdersAdminRelations,
+                    "workOrderAbcFiles": vm.workOrderAbcFiles,
+                    "workOrderAbcHdds": vm.workOrderAbcHdds
+                };
+                vm.isSaving = true;
+
+                if (vm.workOrderDTO.workOrder.id !== null) {
+                    WorkOrder.update(vm.workOrderDTO, onSaveSuccess2, onSaveError2);
+                    console.log("updating work order");
+                } else {
+                    console.log("saving work order");
+                    console.log(JSON.stringify(vm.workOrderDTO));
+                    WorkOrder.save(vm.workOrderDTO, onSaveSuccess2, onSaveError2);
+                }
+            }
+        };
+        var onSaveSuccess2 = function (result) {
+            //$scope.$emit('smartLpcApp:workOrderUpdate', result);
+            $ngConfirm({
+                title: 'Success!',
+                content: "WorkOrder with id : <strong>" + result.id + "</strong> has been created",
+                type: 'green',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-green',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+            vm.isSaving = false;
+             $state.go('work-order', {}, {reload: true});// use for redirecting ...
+            //$state.go('work-order-detail',{id:result.id}),{reload: true};
+        };
+
+        var onSaveError2 = function () {
+            vm.isSaving = false;
+        };
     }
 })();

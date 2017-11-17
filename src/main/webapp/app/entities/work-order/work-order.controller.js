@@ -12,7 +12,7 @@
         vm.loadAll = loadAll;
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
-        vm.reverse = pagingParams.ascending;
+        vm.reverse = pagingParams.descending;
         vm.transition = transition;
         vm.clear = clear;
         vm.search = search;

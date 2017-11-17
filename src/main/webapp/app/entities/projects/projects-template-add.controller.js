@@ -5,16 +5,16 @@
         .module('smartLpcApp')
         .controller('ProjectsTemplateAddController', ProjectsTemplateAddController);
 
-    ProjectsTemplateAddController.$inject = ['$location','$state', '$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'Projects', 'Lookups', 'Contacts', 'User', 'Departments', 'Storage_Disk'];
+    ProjectsTemplateAddController.$inject = ['$ngConfirm','$location','$state', '$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'Projects', 'Lookups', 'Contacts', 'User', 'Departments', 'Storage_Disk'];
 
-    function ProjectsTemplateAddController($location,$state, $uibModal, $http, $scope, $rootScope, $stateParams, entity, Projects, Lookups, Contacts, User, Departments, Storage_Disk) {
+    function ProjectsTemplateAddController($ngConfirm,$location,$state, $uibModal, $http, $scope, $rootScope, $stateParams, entity, Projects, Lookups, Contacts, User, Departments, Storage_Disk) {
 
 
     	var vm = this;
         console.log("ProjectsTemplateAddController");
 
         vm.projectsDTO = entity;
-        console.log(JSON.stringify(vm.projectsDTO));
+        console.log("----> "+JSON.stringify(entity));
 
 // GET ALL Related Entities
         vm.users = User.query();
@@ -46,17 +46,17 @@
 
 
         String.prototype.toCamelCase = function() {
-			return this.replace(/^([A-Z])|\s(\w)/g, function(match, p1, p2,
-					offset) {
-				if (p2)
-					return p2.toUpperCase();
-				return p1.toLowerCase();
-			});
-		};
+            return this.replace(/^([A-Z])|\s(\w)/g, function(match, p1, p2,
+                                                             offset) {
+                if (p2)
+                    return p2.toUpperCase();
+                return p1.toLowerCase();
+            });
+        };
 
-		String.prototype.capitalizeFirstLetter = function() {
-			return this.charAt(0).toUpperCase() + this.slice(1);
-		}
+        String.prototype.capitalizeFirstLetter = function() {
+            return this.charAt(0).toUpperCase() + this.slice(1);
+        };
 
 		vm.setProjectName = function() {
 
@@ -261,7 +261,10 @@
                     vm.projectRoles[0] = {
                         "contact": vm.currrentOBJ.data,
                         "relationship_type": "Main Contact",
-                        "disabled": false,
+                        "soloKillPct": 50,
+                        "groupKillPct": 50,
+                        "tertiaryKillPct":50.0,
+                        "disabled": true,
                         "excSologroup": false
                     };
 
@@ -271,7 +274,10 @@
                     vm.projectRoles[1] = {
                         "contact": vm.currrentOBJ.data,
                         "relationship_type": "Unit Publicist",
-                        "disabled": false,
+                        "soloKillPct": 50,
+                        "groupKillPct": 50,
+                        "tertiaryKillPct":50.0,
+                        "disabled": true,
                         "excSologroup": false
                     };
 
@@ -280,7 +286,10 @@
                     vm.projectRoles[2] = {
                         "contact": vm.currrentOBJ.data,
                         "relationship_type": "Unit Photographer",
-                        "disabled": false,
+                        "soloKillPct": 50,
+                        "groupKillPct": 50,
+                        "tertiaryKillPct":50.0,
+                        "disabled": true,
                         "excSologroup": false
                     };
 
@@ -289,7 +298,10 @@
                     vm.projectRoles[3] = {
                         "contact": vm.currrentOBJ.data,
                         "relationship_type": "Lab",
-                        "disabled": false,
+                        "soloKillPct": 50,
+                        "groupKillPct": 50,
+                        "tertiaryKillPct":50.0,
+                        "disabled": true,
                         "excSologroup": false
                     };
 
@@ -314,8 +326,44 @@
                         "disabled": false,
                         "excSologroup": false
                     });
+                    vm.projectsDTO.contactPrivileges.push({
+                        "contact": vm.currrentOBJ.data,
+                        "exec" : false,
+                        "downloadType" : 0,
+                        "print" : false,
+                        "email" : false,
+                        "captioning" : false,
+                        "talentManagement" : false,
+                        "signoffManagement" : false,
+                        "releaseExclude" : false,
+                        "vendor" : false,
+                        "lockApproveRestriction" : false,
+                        "viewSensitive" : false,
+                        "exclusives" : 0,
+                        "seesUntagged" : false,
+                        "hasVideo" : false,
+                        "disabled" : false,
+                        "datgeditManagement" : false,
+                        "priorityPix" : false,
+                        "readOnly" : false,
+                        "restartColumns" : 2,
+                        "restartImageSize" : 'Large',
+                        "restartImagesPerPage" : 20,
+                        "showFinalizations" : false,
+                        "watermark" : false,
+                        "internal" : false,
+                        "globalAlbum": false,
+                        "loginCount": 0,
+                        "defaultAlbum": null,
+                        "critiqueIt": false,
+                        "adhocLink": false,
+                        "retouch": false,
+                        "fileUpload": false,
+                        "deleteAssets": false
+                    });
+
                  // get related too.
-                    console.log(" get releated  : ", vm.currrentOBJ.data.id);
+                    /*console.log(" get releated  : ", vm.currrentOBJ.data.id);
 					$http({
 						method : 'GET',
 						url : 'api/contacts/related/' + vm.currrentOBJ.data.id
@@ -325,7 +373,7 @@
 
 					});
 
-					console.log("Related Contact Length : ",vm.relatedContact.length );
+					console.log("Related Contact Length : ",vm.relatedContact.length );*/
 
                 }
                 else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.execs')) {
@@ -403,28 +451,45 @@
 
         vm.save = function () {
 
-        	vm.projectsDTO.projects.name = vm.projects.name;
-    		vm.projectsDTO.projects.fullName = vm.projects.fullName;
-    		vm.projectsDTO.projects.alfrescoTitle1 = vm.projects.alfrescoTitle1;
-    		vm.projectsDTO.projects.alfrescoTitle2 = vm.projects.alfrescoTitle2;
-    		vm.projectsDTO.projects.imageLocation = vm.projects.imageLocation;
+            if(angular.equals(vm.projects.name,'')){
+                console.log("Blank")
+                alert("Project Name Cannot be blank");
+            }else {
+                vm.projectsDTO.projects.id = null;
+                vm.projectsDTO.projects.name = vm.projects.name;
+                vm.projectsDTO.projects.fullName = vm.projects.fullName;
+                vm.projectsDTO.projects.alfrescoTitle1 = vm.projects.alfrescoTitle1;
+                vm.projectsDTO.projects.alfrescoTitle2 = vm.projects.alfrescoTitle2;
+                vm.projectsDTO.projects.imageLocation = vm.projects.imageLocation;
 
-            console.log("ProjectsDTO");
-            console.log(JSON.stringify(vm.projectsDTO));
+                console.log("ProjectsDTO");
+                console.log(JSON.stringify(vm.projectsDTO));
 
-            vm.isSaving = true;
+                vm.isSaving = true;
 
 
-            console.log("UPDATING entity projectsDTO");
-            Projects.update(vm.projectsDTO, onSaveSuccess, onSaveError);
+                console.log("UPDATING entity projectsDTO");
+                Projects.save(vm.projectsDTO, onSaveSuccess, onSaveError);
+            }
         };
         var onSaveSuccess = function (result) {
-            console.log('saving project...');
-            $scope.$emit('smartLpcApp:projectsUpdate', result);
-            // $uibModalInstance.close(result);
+            $ngConfirm({
+                title: 'Success!',
+                content: "Project : <strong>"+vm.projects.fullName+"</strong> has been created from Template",
+                type: 'green',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-green',
+                        action: function () {
+                            $state.go('projects-detail', {id:result.id}, {reload: true});
+                        }
+                    }
+                }
+            });
             vm.isSaving = false;
-            $state.go('projects', {}, {reload: true});// use for redirecting
-														// ...
         };
 
         var onSaveError = function () {
@@ -740,7 +805,8 @@
 
             });
 
-        }
+        };
+
 
 
         vm.getTags = function (id) {
@@ -766,7 +832,43 @@
                     }]
                 }
             });
-        }
+        };
+        vm.editTags = function (id) {
+            console.log("id of project role : " + id);
+            // var ctrl = angular.element(id).data('$ngModelController');
+
+            var modalInstance = $uibModal.open({
+
+                templateUrl: 'app/entities/project-roles/project-roles-dialog.html',
+                controller: 'ProjectRolesDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'md',
+                resolve: {
+                    id: function () {
+                        return id;
+                    },
+                    entity: function () {
+                        return null;
+                    },
+                    projectID: function () {
+                        return vm.projectsDTO.projects.id;
+                    },
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('contacts');
+                        $translatePartialLoader.addPart('projects');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }
+                /*resolve: {
+                    entity: ['ProjectRoles', function(ProjectRoles) {
+                        return ProjectRoles.get({id : $stateParams.id}).$promise;
+                    }]
+                }*/
+            });
+        };
+
         vm.getPrivileges = function (id) {
             console.log("id of textbox : " + id);
             // var ctrl = angular.element(id).data('$ngModelController');
@@ -830,10 +932,12 @@
                 scope: $scope,
                 controllerAs: 'vm',
                 resolve: {
-                    id: function () {
+                    contact: function () {
                         return id;
                     },
-
+                    project: function () {
+                        return vm.projectsDTO.projects.id;
+                    },
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('contacts');
                         $translatePartialLoader.addPart('projects');
@@ -891,5 +995,59 @@
 			 * "+retVal); }else{ alert("Password Incorrect : "+retVal); }
 			 */
 		};
+
+        vm.saveAndClose = function () {
+            if(angular.equals(vm.projects.name,'')){
+                console.log("Blank")
+                alert("Project Name Cannot be blank");
+            }else {
+                vm.projectsDTO.projects.id = null;
+                vm.projectsDTO.projects.name = vm.projects.name;
+                vm.projectsDTO.projects.fullName = vm.projects.fullName;
+                vm.projectsDTO.projects.alfrescoTitle1 = vm.projects.alfrescoTitle1;
+                vm.projectsDTO.projects.alfrescoTitle2 = vm.projects.alfrescoTitle2;
+                vm.projectsDTO.projects.imageLocation = vm.projects.imageLocation;
+
+                console.log("ProjectsDTO");
+                console.log(JSON.stringify(vm.projectsDTO));
+
+                vm.isSaving = true;
+
+
+                console.log("UPDATING entity projectsDTO");
+
+                Projects.save(vm.projectsDTO, onSaveSuccess2, onSaveError2);
+
+            }
+
+        };
+        var onSaveSuccess2 = function (result) {
+            console.log('saving project...');
+            // $scope.$emit('smartLpcApp:projectsUpdate', result);
+            // $uibModalInstance.close(result);
+            $ngConfirm({
+                title: 'Success!',
+                content: "Project : <strong>"+vm.projectsDTO.projects.fullName+"</strong> has been created from Template",
+                type: 'green',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-green',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+            vm.isSaving = false;
+            $state.go('projects', {}, {reload: true}); // use for redirecting
+            // ...
+        };
+
+        var onSaveError2 = function (result) {
+            console.log("op : ",result);
+            vm.isSaving = false;
+        };
     }
 })();

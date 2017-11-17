@@ -74,7 +74,7 @@
                     }],
                     entity: ['$stateParams', 'WorkOrder', function ($stateParams, WorkOrder) {
                         return WorkOrder.get({id: $stateParams.id}).$promise;
-                        ;
+
                     }]
                 }
             })
@@ -255,6 +255,7 @@
                     }],
                     entity: ['$stateParams', 'WorkOrder', function ($stateParams, WorkOrder) {
                         return WorkOrder.get({id: $stateParams.id}).$promise;
+
                     }]
                 }
             })

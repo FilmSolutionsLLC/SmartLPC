@@ -128,5 +128,5 @@ largest:
 javalocation:
   #path: /usr/java/jdk1.8.0_45/bin/java
   path: /usr/bin/java
-  #jarFile: /opt/scripts/LPCEncryptor.jar
-  jarFile: /mnt/opt/scripts/LPCEncryptor.jar
+  jarFile: /opt/scripts/LPCEncryptor.jar
+  #jarFile: /mnt/opt/scripts/LPCEncryptor.jar

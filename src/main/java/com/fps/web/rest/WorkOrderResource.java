@@ -386,9 +386,9 @@ public class WorkOrderResource {
 
 	@RequestMapping(value = "/processing/work-orders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	public List<WorkOrderProcessingDTO> processingWorkOrders() throws URISyntaxException {
+	public List<WorkOrderProcessingDTO> processingWorkOrders(@RequestParam String order,@RequestParam String field) throws URISyntaxException {
 		log.info("REST request to get a page of WorkOrders");
-		final List<WorkOrderProcessingDTO> workOrders = workOrderService.findWorkOrderProcessingDtos();
+		final List<WorkOrderProcessingDTO> workOrders = workOrderService.findWorkOrderProcessingDtos(order,field);
 		return workOrders;
 	}
 

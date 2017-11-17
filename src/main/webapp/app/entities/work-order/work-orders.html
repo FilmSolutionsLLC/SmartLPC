@@ -1,6 +1,6 @@
 <div>
     <h3 translate="smartLpcApp.workOrder.home.title" align="center">WorkOrders</h3>
-    <jhi-alert></jhi-alert>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
@@ -11,7 +11,7 @@
                     </span>
                 </button>
             </div>
-            <div class="col-xs-8 no-padding-right">
+           <!-- <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right">
                         <input type="text" class="form-control input-sm" ng-model="vm.searchQuery" id="searchQuery"
@@ -28,7 +28,7 @@
                         </span>
                     </div>
                 </form>
-            </div>
+            </div>-->
         </div>
     </div>
     <br/>
@@ -108,12 +108,7 @@
                             <span class="glyphicon glyphicon-pencil"></span>
                             <!--<span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>-->
                         </button>
-                        <button type="submit"
-                                ui-sref="work-order.delete({id:workOrder.id})"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
-                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>-->
-                        </button>
+
                     </div>
                 </td>
             </tr>

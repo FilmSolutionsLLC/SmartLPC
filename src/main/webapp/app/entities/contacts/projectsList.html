@@ -59,7 +59,10 @@
                         <td class="extra-small">Download Privilege :</td>
 
                         <td class="small">
-                            <select ng-model="vm.downloadType" ng-options="download.id as download.value for download in vm.downloadTypeList"><option>{{download.value}}</option></select>
+                            <select ng-model="vm.downloadType"
+                                    ng-init="vm.downloadType = vm.downloadTypeList[0].id"
+                                    ng-options="download.id as download.value for download in vm.downloadTypeList">
+                                <option>{{download.value}}</option></select>
                         </td>
 
 
@@ -96,6 +99,7 @@
                         <td class="extra-small">Exclusives Management :</td>
                         <td class="small">
                             <select ng-model="vm.exclusives"
+                                    ng-init="vm.exclusives = vm.exclusivesList[0].id"
                                     ng-options="excl.id as excl.value for excl in vm.exclusivesList">
                                 <option>{{excl.value}}</option>
                             </select>
@@ -148,7 +152,7 @@
                     </tr>
                     <tr>
                         <td class="extra-small">Critique It :</td>
-                        <td class="small"><input type="checkbox" ng-model="vm.critique" ng-init="vm.critique=false">
+                        <td class="small"><input type="checkbox" ng-model="vm.critiqueIt" ng-init="vm.critiqueIt=false">
                         </td>
                     </tr>
                     <tr>

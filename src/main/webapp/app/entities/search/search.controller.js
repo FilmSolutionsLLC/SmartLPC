@@ -32,7 +32,9 @@
                 $scope.totalItems = vm.contacts.length;
 
                 // console.log("length : " + $scope.totalItems);
-
+                if(angular.equals(vm.contacts.length,0)){
+                    alert("No Contacts Found For Keyword : "+vm.search);
+                }
             }, function errorCallback(response) {
                 console.log("error in getting data.");
             });
@@ -72,7 +74,10 @@
                  // console.log(JSON.stringify(vm.projects));
 
                  }*/
-
+                if(angular.equals(vm.projectsDTO.length,0)){
+                    alert("No Projects Found For Keyword : "+vm.search);
+                }
+                console.log("Got Projects: " +vm.projectsDTO.length);
                 if (vm.contacts.length < vm.projectsDTO.length) {
                     console.log("GREATER projects length  : " + vm.projectsDTO.length);
                     console.log("contacts length  : " + vm.contacts.length);
@@ -114,9 +119,13 @@
                     vm.workOrders.push(response.data[i]);
                     console.log("added" + i);
                 }
+                if(angular.equals(vm.workOrders.length,0)){
+                    alert("No WorkOrders Found For Keyword : "+vm.search);
+                }
                 $scope.totalItemsWO = vm.workOrders.length;
 
                 console.log(" ==> "+JSON.stringify(vm.workOrders));
+
             }, function errorCallback(response) {
             });
         }

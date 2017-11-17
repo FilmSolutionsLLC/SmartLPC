@@ -63,7 +63,7 @@ public class LookupsServiceImpl implements LookupsService{
     public Page<Lookups> findAll(Pageable pageable) {
         log.debug("Request to get all Lookups");
         currentTenantIdentifierResolver.setTenant(SLAVE);
-        Page<Lookups> result = lookupsRepository.findAll(pageable);
+        Page<Lookups> result = lookupsSearchRepository.findAll(pageable);
         return result;
     }
 

@@ -128,6 +128,7 @@
             $rootScope.savedContact = vm.selectedContacts;
             openModalProject();
         };
+
         function openModalProject() {
             console.log("opening modal");
             var modalInstance = $uibModal.open({
@@ -136,9 +137,37 @@
                 controller: 'ProjectListController',
                 size: 'xl',
                 scope: $scope,
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    isMultiExecAdd: function () {
+                        return true;
+                    }
+                },
             });
         };
 
+
+        vm.searchFilter = function () {
+
+          console.log("Filter Query : "+vm.filter);
+            $http({
+                method: 'GET',
+                //url: 'api/disableproject/' + vm.projectsDTO.projects.id,
+                url: 'api/search/contact/project',
+                params: {
+                    query: vm.filter
+                }
+            }).then(function successCallback(response) {
+                vm.contactsDTO = response.data;
+                vm.totalItems = vm.contactsDTO.length;
+
+            }, function errorCallback(response) {
+
+            });
+        };
+
+        vm.selectAll = function () {
+            vm.selectedContacts.push(vm.contactsDTO);
+        };
     }
 })();

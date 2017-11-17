@@ -37,7 +37,7 @@
          */
         $http({
             method: 'GET',
-            url: 'api/idname/projects'
+            url: 'api/template/projects'
         }).then(function (response) {
             console.log("total projects : " + response.data.length);
             vm.temp = response.data;

@@ -54,10 +54,15 @@
 									<ui-select multiple ng-model="vm.mailerList" allow-clear="true"
 										theme="bootstrap" ng-disabled="ctrl.disabled"
 										close-on-select="false" style="width: 750px;"
-										title="Choose a contact"> <ui-select-match
-										placeholder="Select talents...">{{$item.contact.fullName}}</ui-select-match>
-									<ui-select-choices
-                                        repeat="tags in vm.talent |  filter: { relationship_type: 'PKO_Tag'} | filter:$select.search">{{tags.contact.fullName}} </ui-select-choices>
+										title="Choose a contact">
+                                        <ui-select-match placeholder="Select talents...">{{$item.contact.fullName}}&lt;{{$item.contact.email}}&gt;</ui-select-match>
+
+                                        <ui-select-choices repeat="tags in vm.talent |  filter: { relationship_type: 'PKO_Tag'} | filter:$select.search">
+                                            <div ng-bind-html="tags.contact.fullName"></div>
+                                            <small>email: {{tags.contact.email}}</small>
+                                            <!--{{tags.contact.fullName}}-->
+                                        </ui-select-choices>
+
 									</ui-select>
 								</div>
 								<div ng-show="vm.keyCount > 50">
@@ -65,9 +70,12 @@
 										theme="bootstrap" ng-disabled="ctrl.disabled"
 										close-on-select="false" style="width: 750px;"
 										title="Choose a contact"> <ui-select-match
-										placeholder="Select execs...">{{$item.contact.fullName}}</ui-select-match>
-									<ui-select-choices
-										repeat="tags in vm.talent | filter:$select.search">{{tags.contact.fullName}}</ui-select-choices>
+										placeholder="Select execs...">{{$item.contact.fullName}}&lt;{{$item.contact.email}}&gt;</ui-select-match>
+									    <ui-select-choices repeat="tags in vm.talent | filter:$select.search">
+                                            <div ng-bind-html="tags.contact.fullName"></div>
+                                            <small>email: {{tags.contact.email}}</small>
+                                            <!--{{tags.contact.fullName}}-->
+                                        </ui-select-choices>
 									</ui-select>
 								</div>
 							</div>

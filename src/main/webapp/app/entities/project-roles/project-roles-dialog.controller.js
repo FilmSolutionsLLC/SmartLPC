@@ -75,6 +75,7 @@
 
         vm.clear = function () {
             $uibModalInstance.dismiss('cancel');
+            $state.reload();
         };
 
         vm.datePickerOpenStatus = {};

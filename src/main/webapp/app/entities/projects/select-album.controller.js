@@ -30,6 +30,7 @@
             console.log(JSON.stringify(vm.albums));
             $scope.totalItems = vm.albums.length;
             console.log("Albums Length : " + $scope.totalItems);
+
         }, function errorCallback(response) {
 
         });
@@ -124,16 +125,20 @@
             }
         };
 
-        $rootScope.selected = {};
+        $rootScope.selectedAlbum = {};
         vm.selectAlbum = function (id) {
-            console.log("Selecting Album at " + id);
-            $scope.currentOBJ = {
-                "elementID": vm.type,
-                "data": vm.albums[id]
-            };
+            console.log("Selecting Album with id" + id);
+            for(var i=0;i<vm.albums.length;i++) {
+                if(vm.albums[i].id == id) {
+                    $scope.currentOBJ = {
+                        "elementID": vm.type,
+                        "data": vm.albums[i]
+                    };
+                }
+            }
 
-            $rootScope.selected = $scope.currentOBJ;
-            console.log("Selected albums : " + JSON.stringify($rootScope.selected));
+            $rootScope.selectedAlbum = $scope.currentOBJ;
+            console.log("Selected albums : " + JSON.stringify($rootScope.selectedAlbum));
             $uibModalInstance.dismiss('cancel');
 
         };

@@ -1,19 +1,20 @@
 (function () {
     'use strict';
 
-    angular.module('smartLpcApp').controller('ContactsUpdateController',
-        ContactsUpdateController);
+    angular.module('smartLpcApp').controller('ContactsSimilarController',
+        ContactsSimilarController);
 
-    ContactsUpdateController.$inject = ['$ngConfirm', 'entity', '$state', '$http',
+    ContactsSimilarController.$inject = ['$ngConfirm', 'entity', '$state', '$http',
         '$uibModal', '$scope', '$rootScope', '$stateParams', 'Contacts',
         'Lookups', 'Departments', 'User'];
 
-    function ContactsUpdateController($ngConfirm, entity, $state, $http, $uibModal, $scope,
+    function ContactsSimilarController($ngConfirm, entity, $state, $http, $uibModal, $scope,
                                       $rootScope, $stateParams, Contacts, Lookups, Departments, User) {
-        console.log("Contact Update Controller");
+        console.log("Contact Similar Controller");
 
         var vm = this;
         vm.contactDTO = entity;
+
         const originalData = entity;
         vm.contacts = [];
 
@@ -124,14 +125,17 @@
 
         vm.save = function () {
             vm.isSaving = true;
-            Contacts.update(vm.contactDTO, onSaveSuccess, onSaveError);
+
+            console.log("--> "+JSON.stringify(vm.contactDTO));
+
+            Contacts.save(vm.contactDTO, onSaveSuccess, onSaveError);
         };
 
         var onSaveSuccess = function (result) {
             vm.isSaving = false;
             $ngConfirm({
                 title: 'Success!',
-                content: "Contact : <strong>" + result.fullName + "</strong> has been updated",
+                content: "Contact : <strong>" + result.fullName + "</strong> has been created",
                 type: 'green',
                 typeAnimated: true,
                 theme: 'dark',
@@ -151,7 +155,8 @@
         vm.saveAndAdd = function () {
 
             vm.isSaving = true;
-            Contacts.update(vm.contactDTO, onSaveAddSuccess, onSaveError);
+
+            Contacts.save(vm.contactDTO, onSaveAddSuccess, onSaveError);
         };
 
 
@@ -159,7 +164,7 @@
             vm.isSaving = false;
             $ngConfirm({
                 title: 'Success!',
-                content: "Contact : <strong>" + result.fullName + "</strong> has been Updated",
+                content: "Contact : <strong>" + result.fullName + "</strong> has been created",
                 type: 'green',
                 typeAnimated: true,
                 theme: 'dark',
@@ -178,11 +183,12 @@
         };
 
 
-        var onSaveError = function () {
+        var onSaveError = function (result) {
+
             vm.isSaving = false;
             $ngConfirm({
                 title: 'Error!',
-                content: "Contact : <strong>" + result.fullName + "</strong> was not Updated.",
+                content: "Name : <strong>" + vm.contactDTO.contacts.fullName + "</strong> and Username <strong>" + vm.contactDTO.contacts.username + "</strong> Already Exists",
                 type: 'red',
                 typeAnimated: true,
                 theme: 'dark',
@@ -191,7 +197,6 @@
                         text: 'Okay',
                         btnClass: 'btn-red',
                         action: function () {
-                            $state.go("contacts", {}, {reload: true});
                         }
                     }
                 }

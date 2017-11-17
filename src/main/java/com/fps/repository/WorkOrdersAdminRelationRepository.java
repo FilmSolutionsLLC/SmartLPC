@@ -2,8 +2,9 @@ package com.fps.repository;
 
 import com.fps.domain.WorkOrder;
 import com.fps.domain.WorkOrdersAdminRelation;
-
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,4 +17,7 @@ public interface WorkOrdersAdminRelationRepository extends JpaRepository<WorkOrd
     List<WorkOrdersAdminRelation> findByAdmin_userIsCurrentUser();
 
     List<WorkOrdersAdminRelation> findByWorkOrder(WorkOrder workOrder);
+
+    @Transactional
+    void deleteByWorkOrder(WorkOrder workOrder);
 }

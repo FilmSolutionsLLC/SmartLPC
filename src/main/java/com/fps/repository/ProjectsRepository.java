@@ -1,16 +1,9 @@
 package com.fps.repository;
 
 import com.fps.domain.Projects;
-
-import com.fps.web.rest.dto.ProjectsListDTO;
-import com.fps.web.rest.dto.ProjectsViewDTO;
-import org.hibernate.annotations.NamedNativeQueries;
-import org.hibernate.annotations.NamedNativeQuery;
-import org.hibernate.annotations.NamedQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.annotations.*;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -34,9 +27,12 @@ public interface ProjectsRepository extends JpaRepository<Projects, Long> {
     List<Objects[]> findProjects();
 
 
-    String getallQuery = "SELECT pko.id 'id',pko.name 'projectName',pko.status_text 'projectStatus',main_c.full_name 'mainContactName',main_c.phone_office 'mainContactOffice',main_c.email 'mainContactEmail',c_upub.full_name 'unitPublicistName',c_upub.phone_mobile 'unitPublicistMobile',c_upub.phone_office 'unitPublicistOffice',c_upub.email 'unitPublicistEmail' from  (((  SELECT p.id id,  p.template template,  p.name name,  pr_main.contact_id main,  pr_upub.contact_id upub,  l.text_value status_text  FROM (((projects p  left join project_roles pr_main  on p.id = pr_main.project_id  and pr_main.relationship_type = 'Main Contact' )  left join project_roles pr_upub  on p.id = pr_upub.project_id  and pr_upub.relationship_type = 'Unit Publicist' )  left join lookups l  on p.status_id = l.id)  ) pko  left join pko.contacts main_c on main_c.id = pko.main)  left join contacts c_upub on c_upub.id = pko.upub)  where 1=1  \n#pageable\n";
+    String getallQuery = "SELECT pko.id 'id',pko.name 'projectName',pko.status_text 'projectStatus',main_c.id 'mainContactID',main_c.full_name 'mainContactName',main_c.phone_office 'mainContactOffice',main_c.email 'mainContactEmail',c_upub.id 'unitPublicistID',c_upub.full_name 'unitPublicistName',c_upub.phone_mobile 'unitPublicistMobile',c_upub.phone_office 'unitPublicistOffice',c_upub.email 'unitPublicistEmail' from  (((  SELECT p.id id,  p.template template,  p.name name,  pr_main.contact_id main,  pr_upub.contact_id upub,  l.text_value status_text  FROM (((projects p  left join project_roles pr_main  on p.id = pr_main.project_id  and pr_main.relationship_type = 'Main Contact' )  left join project_roles pr_upub  on p.id = pr_upub.project_id  and pr_upub.relationship_type = 'Unit Publicist' )  left join lookups l  on p.status_id = l.id)  ) pko  left join pko.contacts main_c on main_c.id = pko.main)  left join contacts c_upub on c_upub.id = pko.upub)  where 1=1  \n#pageable\n";
 
     @Query(value = getallQuery, nativeQuery = true)
     public Page<Objects[]> getAllProjects(Pageable pageable);
 
+
+    @Query("select p.id,p.name from Projects p where p.template = true order by p.name asc")
+    List<Objects[]> findTemplateProjects();
 }
