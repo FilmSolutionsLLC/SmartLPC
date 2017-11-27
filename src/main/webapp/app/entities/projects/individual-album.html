@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <button type="button" class="close danger" data-dismiss="modal"
+            aria-hidden="true" ng-click="vm.close()">&times;
+    </button>
+
+    <div class="btn-toolbar btn-toolbar-xs" role="toolbar">
+
+        <button type="button" class="btn btn-success btn-xs" ng-click="vm.edit(vm.data)">Save</button>
+        <button type="button" class="btn btn-danger btn-xs" ng-click="vm.remove(vm.data)">Delete</button>
+        <button type="button" class="btn btn-danger btn-xs" ng-click="vm.close()">Close</button>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="row">
+
+
+
+                    <table class="table table-striped">
+                        <tr>
+                            <td class="extra-small">Album Name</td>
+                            <td class="small"><input type="text" value="{{vm.data.type}}" ng-model="vm.data.type" class="input-xs"></td>
+                        </tr>
+                        <tr>
+                            <td class="extra-small">Description</td>
+                            <td class="small"><input type="text" value="{{vm.data.value}}" ng-model="vm.data.value" class="input-xs"></td>
+
+                        </tr>
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

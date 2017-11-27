@@ -111,7 +111,7 @@
             });
         $scope.$on('$destroy', unsubscribe);
 
-        vm.sendIndividualMail = function (talent) {
+      /*  vm.sendIndividualMail = function (talent) {
 
             var modalInstance = $uibModal.open({
 
@@ -167,7 +167,7 @@
                 }
             })
 
-        };
+        };*/
 
         vm.addSimilar = function (id) {
             console.log("similar to add id :", id);

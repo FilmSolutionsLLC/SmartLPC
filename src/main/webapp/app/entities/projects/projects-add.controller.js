@@ -296,9 +296,11 @@
 
 		$scope.execs = [];
 		vm.addExec = function() {
+		    console.log("Adding exec");
 			var exec = $scope.execs.length + 1;
 			$scope.execs.push({
-				'id' : 'execs' + exec
+				'id' : 'execs' + exec,
+                'exec': true
 			});
 		};
 		vm.removeExec = function(index) {

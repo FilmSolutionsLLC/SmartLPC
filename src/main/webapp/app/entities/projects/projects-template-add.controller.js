@@ -178,7 +178,7 @@
                 "excSologroup": false
             });
             // get related too.
-            console.log(" get releated  : ", vm.currrentOBJ.data.id);
+            /*console.log(" get releated  : ", vm.currrentOBJ.data.id);
 			$http({
 				method : 'GET',
 				url : 'api/contacts/related/' + vm.currrentOBJ.data.id
@@ -188,14 +188,33 @@
 
 			});
 
-			console.log("Related Contact Length : ",vm.relatedContact.length );
+			console.log("Related Contact Length : ",vm.relatedContact.length );*/
 
         };
 
         vm.removeTalent = function (index) {
             console.log("removing talent : " + index);
-            vm.projectsDTO.projectRoles.splice(index, 1);
 
+
+            for (var i = 0; i < vm.projectsDTO.projectRoles.length; i++) {
+
+                if (vm.projectsDTO.projectRoles[i].id == index) {
+                    console.log(JSON.stringify(vm.projectsDTO.projectRoles[i]))
+                    // remove it
+                    if (angular.equals(vm.projectsDTO.projectRoles[i].contact.fullName, null)) {
+                        console.log("null");
+                        vm.projectsDTO.projectRoles.splice(i, 1);
+                    }
+                    else if (confirm('Are you sure you want to remove Talent : ' + vm.projectsDTO.projectRoles[i].contact.fullName)) {
+                        console.log("Removing project role:" + vm.projectsDTO.projectRoles[i].id);
+                        vm.deleteTalent.push(vm.projectsDTO.projectRoles[i].id);
+                        vm.projectsDTO.projectRoles.splice(i, 1);
+
+                    } else {
+                        // Do nothing!
+                    }
+                }
+            }
         };
 
         vm.notify = function(talent) {
@@ -233,7 +252,26 @@
             })
         };
         vm.removeExec = function (index) {
-            vm.projectsDTO.contactPrivileges.splice(index, 1);
+            console.log("removing contact privilege :" + index);
+
+            for (var i = 0; i < vm.projectsDTO.contactPrivileges.length; i++) {
+                console.log("cp :" + vm.projectsDTO.contactPrivileges[i].id);
+                if (vm.projectsDTO.contactPrivileges[i].id == index) {
+                    console.log("found");
+                    if (angular.equals(vm.projectsDTO.contactPrivileges[i].contact, null)) {
+                        console.log("null");
+                        vm.projectsDTO.contactPrivileges.splice(i, 1);
+                    }else if (confirm('Are you sure you want to remove Exec : ' + vm.projectsDTO.contactPrivileges[i].contact.fullName)) {
+                        console.log("Removing contact privilege:" + vm.projectsDTO.contactPrivileges[i].id);
+                        vm.deleteExec.push(vm.projectsDTO.contactPrivileges[i].id);
+                        vm.projectsDTO.contactPrivileges.splice(i, 1);
+
+                    } else {
+                        // Do nothing!
+                    }
+
+                }
+            }
         }
 
         vm.count = 0;
@@ -258,53 +296,79 @@
 
 
                 else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.mainContact')) {
-                    vm.projectRoles[0] = {
-                        "contact": vm.currrentOBJ.data,
-                        "relationship_type": "Main Contact",
-                        "soloKillPct": 50,
-                        "groupKillPct": 50,
-                        "tertiaryKillPct":50.0,
-                        "disabled": true,
-                        "excSologroup": false
-                    };
-
-
+                    if (vm.addContact('Main Contact', vm.currrentOBJ.data) == false) {
+                        console.log("Got False");
+                        console.log("Add new")
+                        vm.projectsDTO.projectRoles.push({
+                            "contact": vm.currrentOBJ.data,
+                            "relationship_type": "Main Contact",
+                            "excSologroup": false,
+                            "soloKillPct": 50,
+                            "groupKillPct": 50,
+                            "tertiaryKillPct": 50.0,
+                            "disabled": true
+                        });
+                    } else {
+                        console.log("Got True");
+                        console.log("Dont Add")
+                    }
                 }
                 else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.unitPublicist')) {
-                    vm.projectRoles[1] = {
-                        "contact": vm.currrentOBJ.data,
-                        "relationship_type": "Unit Publicist",
-                        "soloKillPct": 50,
-                        "groupKillPct": 50,
-                        "tertiaryKillPct":50.0,
-                        "disabled": true,
-                        "excSologroup": false
-                    };
+                    if (vm.addContact('Unit Publicist', vm.currrentOBJ.data) == false) {
+                        console.log("Got False");
+                        console.log("Add new")
+                        vm.projectsDTO.projectRoles.push({
+                            "contact": vm.currrentOBJ.data,
+                            "relationship_type": "Unit Publicist",
+                            "excSologroup": false,
+                            "soloKillPct": 50,
+                            "groupKillPct": 50,
+                            "tertiaryKillPct": 50.0,
+                            "disabled": true
+                        });
+                    } else {
+                        console.log("Got True");
+                        console.log("Dont Add")
+                    }
 
                 }
                 else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.unitPhotographer')) {
-                    vm.projectRoles[2] = {
-                        "contact": vm.currrentOBJ.data,
-                        "relationship_type": "Unit Photographer",
-                        "soloKillPct": 50,
-                        "groupKillPct": 50,
-                        "tertiaryKillPct":50.0,
-                        "disabled": true,
-                        "excSologroup": false
-                    };
+                    if (vm.addContact('Unit Photographer', vm.currrentOBJ.data) == false) {
+                        console.log("Got False");
+                        console.log("Add new")
+                        vm.projectsDTO.projectRoles.push({
+                            "contact": vm.currrentOBJ.data,
+                            "relationship_type": "Unit Photographer",
+                            "excSologroup": false,
+                            "soloKillPct": 50,
+                            "groupKillPct": 50,
+                            "tertiaryKillPct": 50.0,
+                            "disabled": true
+                        });
+                    } else {
+                        console.log("Got True");
+                        console.log("Dont Add")
+                    }
+
 
                 }
                 else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.labInfo')) {
-                    vm.projectRoles[3] = {
-                        "contact": vm.currrentOBJ.data,
-                        "relationship_type": "Lab",
-                        "soloKillPct": 50,
-                        "groupKillPct": 50,
-                        "tertiaryKillPct":50.0,
-                        "disabled": true,
-                        "excSologroup": false
-                    };
-
+                    if (vm.addContact('Lab', vm.currrentOBJ.data) == false) {
+                        console.log("Got False");
+                        console.log("Add new")
+                        vm.projectsDTO.projectRoles.push({
+                            "contact": vm.currrentOBJ.data,
+                            "relationship_type": "Lab",
+                            "excSologroup": false,
+                            "soloKillPct": 50,
+                            "groupKillPct": 50,
+                            "tertiaryKillPct": 50.0,
+                            "disabled": true
+                        });
+                    } else {
+                        console.log("Got True");
+                        console.log("Dont Add")
+                    }
                 }
                 else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.productCompany')) {
                     vm.projects.productionCompanyContact = vm.currrentOBJ.data;
@@ -417,9 +481,21 @@
                 } else {
                     console.log("not equal..");
                 }
+
+
+                vm.sortProjectRoles();
             }
         });
 
+        vm.addContact = function (contactType, contact) {
+            for (var i = 0; i < vm.projectsDTO.projectRoles.length; i++) {
+                if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, contactType)) {
+                    vm.projectsDTO.projectRoles[i].contact = contact;
+                    return true;
+                }
+            }
+            return false;
+        };
 
         vm.openModal = function (elementID) {
 
@@ -824,6 +900,9 @@
                     id: function () {
                         return id;
                     },
+                    projectID: function () {
+                        return vm.projectsDTO.projects.id;
+                    },
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('contacts');
                         $translatePartialLoader.addPart('projects');
@@ -884,6 +963,9 @@
                     id: function () {
                         return id;
                     },
+                    projectID: function () {
+                        return vm.projectsDTO.projects.id;
+                    },
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('contacts');
                         $translatePartialLoader.addPart('projects');
@@ -924,13 +1006,14 @@
             console.log("id of textbox : " + id);
             // var ctrl = angular.element(id).data('$ngModelController');
 
+            console.log("Project : "+vm.projectsDTO.projects.id);
             var modalInstance = $uibModal.open({
 
                 templateUrl: 'app/entities/projects/individual-privilege.html',
                 controller: 'IndividualPrivilegesController',
                 size: 'md',
                 scope: $scope,
-                controllerAs: 'vm',
+                controllerAs:    'vm',
                 resolve: {
                     contact: function () {
                         return id;
@@ -1102,5 +1185,27 @@
                 }
             })
         };
+
+        vm.mainC = {};
+        vm.uPub = {};
+        vm.uPhoto = {};
+        vm.lab = {};
+
+        vm.sortProjectRoles = function () {
+            for (var i = 0; i < vm.projectsDTO.projectRoles.length; i++) {
+                console.log("Relationship " + i + "  --> " + vm.projectsDTO.projectRoles[i].relationship_type);
+                if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, 'Main Contact')) {
+                    vm.mainC = vm.projectsDTO.projectRoles[i];
+                } else if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, 'Unit Publicist')) {
+                    vm.uPub = vm.projectsDTO.projectRoles[i];
+                } else if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, 'Unit Photographer')) {
+                    vm.uPhoto = vm.projectsDTO.projectRoles[i];
+                } else if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, 'Lab')) {
+                    vm.lab = vm.projectsDTO.projectRoles[i];
+                }
+            }
+        };
+        vm.sortProjectRoles();
+
     }
 })();

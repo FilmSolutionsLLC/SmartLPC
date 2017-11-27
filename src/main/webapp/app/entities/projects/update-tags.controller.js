@@ -42,7 +42,7 @@
             $uibModalInstance.dismiss('cancel');
         };
 
-        $scope.viewby = 10;
+        $scope.viewby = 20;
         //$scope.totalItems = null;
         $scope.currentPage = 1;
         $scope.itemsPerPage = $scope.viewby;

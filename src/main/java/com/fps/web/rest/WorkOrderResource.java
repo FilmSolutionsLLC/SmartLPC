@@ -421,4 +421,24 @@ public class WorkOrderResource {
 
     }
 
+    /**
+     * Get All Work Orders in id,name form for Select Dropdown
+     * @return
+     * @throws URISyntaxException
+     */
+    @RequestMapping(value = "/prev/next/work-orders/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public Map<String,Long> getPreviousNextID(@PathVariable Long id) throws URISyntaxException {
+        log.info("Get Previous and Next WorkOrders ID");
+        String next = "select id from work_order where id = (select min(id) from work_order where id > ?)";
+        String prev = "select id from work_order where id = (select max(id) from work_order where id < ?)";
+        Long nextID = jdbcTemplate.queryForObject(next,new Object[] {id},Long.class);
+        Long prevID = jdbcTemplate.queryForObject(prev,new Object[] {id},Long.class);
+
+        Map<String,Long>    projects = new HashMap<>();
+        projects.put("next",nextID);
+        projects.put("prev",prevID);
+
+        return projects;
+    }
 }

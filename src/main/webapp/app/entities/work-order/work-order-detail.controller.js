@@ -33,6 +33,19 @@
             });
         }
 
+        vm.prevNext = {};
+        $http({
+            method: 'GET',
+            url: 'api/prev/next/work-orders/' + vm.workOrderDTO.workOrder.id
+
+        }).then(function successCallback(response) {
+            vm.prevNext = response.data;
+            console.log("Prev Next workOrders : " + JSON.stringify(vm.prevNext));
+        }, function errorCallback(response) {
+
+        });
+
+
         /*console.log(JSON.stringify(vm.workOrderDTO));
         vm.workOrder = vm.workOrderDTO.workOrder;
         vm.workOrderAbcFiles = vm.workOrderDTO.workOrderAbcFiles;

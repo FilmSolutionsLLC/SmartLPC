@@ -7,9 +7,9 @@
     angular
         .module('smartLpcApp')
         .controller('UpdateAlbumsController', UpdateAlbumsController);
-    UpdateAlbumsController.$inject = ['id', 'projectID', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModalInstance', '$scope', '$state', 'Projects'];
+    UpdateAlbumsController.$inject = ['$uibModal','id', 'projectID', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModalInstance', '$scope', '$state', 'Projects'];
 
-    function UpdateAlbumsController(id, projectID, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModalInstance, $scope, $state, Projects) {
+    function UpdateAlbumsController($uibModal,id, projectID, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModalInstance, $scope, $state, Projects) {
 
 
         var vm = this;
@@ -62,7 +62,8 @@
 
         vm.add = function () {
             vm.tempRecord = {id: null, type: '', value: ''};
-            vm.albums.unshift(vm.tempRecord);
+            vm.select(vm.tempRecord);
+            //vm.albums.unshift(vm.tempRecord);
         };
 
         vm.edit = function (tags) {
@@ -120,6 +121,36 @@
             } else {
                 console.log("u pressed cancel");
             }
+        };
+
+        vm.select = function (data) {
+
+                console.log("id of textbox : " + id);
+                // var ctrl = angular.element(id).data('$ngModelController');
+
+                var modalInstance = $uibModal.open({
+
+                    templateUrl: 'app/entities/projects/individual-album.html',
+                    controller: 'IndividualALbumController',
+                    size: 'md',
+                    scope: $scope,
+                    controllerAs: 'vm',
+                    resolve: {
+                        data: function () {
+                            return data;
+                        },
+                        projectID: function () {
+                          return projectID;
+                        },
+                        translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                            $translatePartialLoader.addPart('contacts');
+                            $translatePartialLoader.addPart('projects');
+                            $translatePartialLoader.addPart('global');
+                            return $translate.refresh();
+                        }]
+                    }
+                });
+
         };
 
 

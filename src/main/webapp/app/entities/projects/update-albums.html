@@ -13,7 +13,7 @@
 <div class="modal-body">
     <table class="jh-table table table-striped">
         <tr>
-
+            <th></th>
             <th class="small">Album Name</th>
             <th class="small">Album Description</th>
             <th class="small"></th>
@@ -21,9 +21,10 @@
 
         <tr ng-repeat="tags in vm.albums.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy : 'type'">
 
-            <td class="small"><input type="text" value="{{tags.type}}" ng-model="tags.type" class="input-xs"></td>
-            <td class="small"><input type="text" value="{{tags.value}}" ng-model="tags.value" class="input-xs"></td>
-            <td class="text-right small">
+            <td class="small"><button type="button" class="btn btn-primary btn-xs" ng-click="vm.select(tags)">Select</button></td>
+            <td class="small"><input type="text" value="{{tags.type}}" ng-model="tags.type" class="input-xs" readonly></td>
+            <td class="small"><input type="text" value="{{tags.value}}" ng-model="tags.value" class="input-xs" readonly></td>
+            <!--<td class="text-right small">
                 <div class="btn-group flex-btn-group-container">
 
                     <button type="button" class="btn btn-primary btn-xs" ng-click="vm.edit(tags)">
@@ -35,7 +36,7 @@
                     </button>
 
                 </div>
-            </td>
+            </td>-->
         </tr>
     </table>
     <div class="text-center">
@@ -44,4 +45,7 @@
                         boundary-links="true" rotate="false" num-pages="numPages"
                         items-per-page="itemsPerPage"></uib-pagination>
     </div>
+
+
+
 </div>

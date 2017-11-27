@@ -250,4 +250,25 @@ public class ContactPrivilegesResource {
         return contactPrivileges;
     }
 
+    @RequestMapping(value = "/disable/execs/{project}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public void disableExecutives(@PathVariable Long project) throws URISyntaxException{
+        log.info("disable contact privilege from Project");
+        currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
+        String sql = "update contact_privileges set disabled = true where internal = 0 and project_id="+project;
+        jdbcTemplate.execute(sql);
+
+    }
+
+    @RequestMapping(value = "/enable/execs/{project}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public void enableExecutives(@PathVariable Long project) throws URISyntaxException{
+        log.info("enable contact privilege from Project");
+        currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
+        String sql = "update contact_privileges set disabled = false where internal = 0 and project_id="+project;
+        jdbcTemplate.execute(sql);
+
+    }
+
+
 }

@@ -189,7 +189,7 @@
                 if (vm.projectsDTO.projectRoles[i].id == index) {
                     console.log(JSON.stringify(vm.projectsDTO.projectRoles[i]))
                     // remove it
-                    if (angular.equals(vm.projectsDTO.projectRoles[i].contact, null)) {
+                    if (angular.equals(vm.projectsDTO.projectRoles[i].contact.fullName, null)) {
                         console.log("null");
                         vm.projectsDTO.projectRoles.splice(i, 1);
                     }
@@ -248,7 +248,7 @@
                 "retouch": false,
                 "fileUpload": false,
                 "deleteAssets": false
-            })
+            });
 
             $location.hash('bottom');
             // call $anchorScroll()
@@ -262,7 +262,10 @@
                 console.log("cp :" + vm.projectsDTO.contactPrivileges[i].id);
                 if (vm.projectsDTO.contactPrivileges[i].id == index) {
                     console.log("found");
-                    if (confirm('Are you sure you want to remove Exec : ' + vm.projectsDTO.contactPrivileges[i].contact.fullName)) {
+                    if (angular.equals(vm.projectsDTO.contactPrivileges[i].contact, null)) {
+                        console.log("null");
+                        vm.projectsDTO.contactPrivileges.splice(i, 1);
+                    }else if (confirm('Are you sure you want to remove Exec : ' + vm.projectsDTO.contactPrivileges[i].contact.fullName)) {
                         console.log("Removing contact privilege:" + vm.projectsDTO.contactPrivileges[i].id);
                         vm.deleteExec.push(vm.projectsDTO.contactPrivileges[i].id);
                         vm.projectsDTO.contactPrivileges.splice(i, 1);
@@ -273,7 +276,7 @@
 
                 }
             }
-        }
+        };
 
 
         vm.count = 0;
@@ -939,7 +942,7 @@
                     }]
                 }
             });
-        }
+        };
         vm.getPrivileges = function (id) {
             console.log("id of textbox : " + id);
             // var ctrl = angular.element(id).data('$ngModelController');
@@ -954,6 +957,9 @@
                 resolve: {
                     id: function () {
                         return id;
+                    },
+                    projectID: function () {
+                        return vm.projectsDTO.projects.id;
                     },
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('contacts');
@@ -994,6 +1000,7 @@
         vm.editPrivilege = function (id) {
             console.log("id of textbox : " + id);
             // var ctrl = angular.element(id).data('$ngModelController');
+            console.log("Project : "+vm.projectsDTO.projects.id);
 
             var modalInstance = $uibModal.open({
 
@@ -1387,7 +1394,7 @@
         vm.enableEXT = function () {
             $ngConfirm({
                 title: 'Warning!',
-                content: "Are you sure you want to <strong>ENABLE</strong> ALL external users for this project?",
+                content: "Are you sure you want to <strong>ENABLE</strong> ALL Executive users for this project?",
                 type: 'red',
                 typeAnimated: true,
                 theme: 'dark',
@@ -1396,7 +1403,20 @@
                         text: 'Okay',
                         btnClass: 'btn-red',
                         action: function () {
-
+                            // enable
+                            $http({
+                                method: 'GET',
+                                url: 'api/enable/execs/'+vm.projectsDTO.projects.id,
+                            }).then(function successCallback(response) {
+                                for(var i=0;i<vm.projectsDTO.contactPrivileges.length;i++){
+                                    if(vm.projectsDTO.contactPrivileges[i].internal === false){
+                                        vm.projectsDTO.contactPrivileges[i].disabled = false;
+                                    }
+                                }
+                                alert("Successfully Enabled All Execs");
+                            }, function errorCallback(response) {
+                                alert("Error in Enabling Execs");
+                            });
                         }
                     },
                     cancel: {
@@ -1412,7 +1432,7 @@
         vm.disableEXT = function () {
             $ngConfirm({
                 title: 'Warning!',
-                content: "Are you sure you want to <strong>DISABLE</strong> ALL external users for this project?",
+                content: "Are you sure you want to <strong>DISABLE</strong> ALL Executive Users for this project?",
                 type: 'red',
                 typeAnimated: true,
                 theme: 'dark',
@@ -1421,7 +1441,19 @@
                         text: 'Okay',
                         btnClass: 'btn-red',
                         action: function () {
-
+                            $http({
+                                method: 'GET',
+                                url: 'api/disable/execs/'+vm.projectsDTO.projects.id,
+                            }).then(function successCallback(response) {
+                                for(var i=0;i<vm.projectsDTO.contactPrivileges.length;i++){
+                                    if(vm.projectsDTO.contactPrivileges[i].internal === false){
+                                        vm.projectsDTO.contactPrivileges[i].disabled = true;
+                                    }
+                                }
+                                alert("Successfully Disabled All Execs");
+                            }, function errorCallback(response) {
+                                alert("Error in Disabling Execs");
+                            });
                         }
                     },
                     cancel: {

@@ -7,12 +7,13 @@
     angular
         .module('smartLpcApp')
         .controller('UpdatePrivilegesController', UpdatePrivilegesController);
-    UpdatePrivilegesController.$inject = ['id', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModal', '$scope', '$state', 'Projects','$uibModalInstance'];
+    UpdatePrivilegesController.$inject = ['projectID','id', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModal', '$scope', '$state', 'Projects','$uibModalInstance'];
 
-    function UpdatePrivilegesController(id, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModal, $scope, $state, Projects,$uibModalInstance) {
+    function UpdatePrivilegesController(projectID,id, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModal, $scope, $state, Projects,$uibModalInstance) {
 
         var vm = this;
 
+        vm.projectID = id;
         $http({
             method: 'GET',
             url: 'api/talents',
@@ -70,8 +71,11 @@
                 scope: $scope,
                 controllerAs: 'vm',
                 resolve: {
-                    id: function () {
+                    contact: function () {
                         return id;
+                    },
+                    project: function () {
+                        return projectID;
                     },
 
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
@@ -83,6 +87,5 @@
                 }
             });
         };
-
     }
 })();

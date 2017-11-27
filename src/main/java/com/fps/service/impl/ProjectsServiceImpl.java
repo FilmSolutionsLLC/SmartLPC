@@ -623,7 +623,7 @@ public class ProjectsServiceImpl implements ProjectsService {
 
         } else if (type.equals("privileges")) {
             log.info("PRIVILEGES");
-            final String sql = "select cp.id,c.full_name as type,c.username as value from `contact_privileges` cp  inner join contacts c on cp.contact_id = c.id where project_id="
+            final String sql = "select c.id,c.full_name as type,c.username as value from `contact_privileges` cp  inner join contacts c on cp.contact_id = c.id where project_id="
                 + id;
             log.info("SQL : " + sql);
             talentInfo = jdbcTemplate.query(sql, new BeanPropertyRowMapper<TalentInfoDTO>(TalentInfoDTO.class));

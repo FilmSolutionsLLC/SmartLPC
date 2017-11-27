@@ -653,11 +653,11 @@
             <tr>
 
                 <th>
-                    <h5>
+                   <!-- <h5>
                         <a href ng-click="vm.sendMail(vm.projectsDTO.projectRoles)"> <strong>Mail
                             All</strong>
                         </a>
-                    </h5>
+                    </h5>-->
                 </th>
                 <th>
                     <h5>
@@ -696,14 +696,15 @@
 
                 <td>
                     <h5 class="small">
-                        <a href="" ng-click="vm.sendIndividualMail(tags)"><span
-                            class=" glyphicon glyphicon-envelope small text-success"></span></a>
+                        <!--<a href="" ng-click="vm.sendIndividualMail(tags)"><span
+                            class=" glyphicon glyphicon-envelope small text-success"></span></a>-->
                         Talent {{$index+1}}
                     </h5>
                 </td>
                 <td>
                     <h5 class="small">
-                        <a ui-sref="contacts-detail({id:tags.contact.id})">{{tags.contact.fullName}}</a>
+                        {{tags.contact.fullName}}
+                        <!--<a ui-sref="contacts-detail({id:tags.contact.id})">{{tags.contact.fullName}}</a>-->
                     </h5>
                 </td>
                 <td>
@@ -735,7 +736,6 @@
             </h5>
         </div>
     </div>
-    <hr>
     <div class="row">
         <div class="col-sm-3">
             <h4>
@@ -743,16 +743,19 @@
             </h4>
         </div>
     </div>
+
     <div class="table-responsive">
         <table
             class="jh-table table table-condensed table-striped header-fixed">
             <thead>
             <tr>
-                <th><h5>
+                <th>
+                    <!--<h5>
                     <a href ng-click="vm.sendMail(vm.projectsDTO.contactPrivileges)">
                         <strong>Mail All</strong>
                     </a>
-                </h5></th>
+                </h5>-->
+                </th>
                 <th>
                     <h5>
                         <strong>Exec Name</strong>
@@ -829,14 +832,15 @@
             <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges | filter:{exec:true}">
                 <td>
                     <h5 class="small">
-                        <a href="" ng-click="vm.sendIndividualMail(execs)"><span
-                            class=" glyphicon glyphicon-envelope small text-success"></span></a>
+                        <!--<a href="" ng-click="vm.sendIndividualMail(execs)"><span
+                            class=" glyphicon glyphicon-envelope small text-success"></span></a>-->
                         Exec {{$index+1}}
                     </h5>
                 </td>
                 <td>
                     <h5 class="small">
-                        <a ui-sref="contacts-detail({id:execs.contact.id})">{{execs.contact.fullName}}</a>
+                        {{execs.contact.fullName}}
+                        <!--<a ui-sref="contacts-detail({id:execs.contact.id})">{{execs.contact.fullName}}</a>-->
                     </h5>
                 </td>
                 <td>

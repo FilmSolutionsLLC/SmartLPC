@@ -336,9 +336,9 @@
 	<div id="runOfShow" ng-show="vm.projects.runOfShowFlag">
 
 		<h4>
-			Run of Show Purchase Orders &nbsp; &nbsp; <a
+            <strong>Run of Show Purchase Orders</strong> &nbsp; &nbsp; <a
 				ng-click="vm.runShowAdd()"><span
-				class=" glyphicon glyphicon-plus-sign small text-primary "></span></a>
+				class=" glyphicon glyphicon-plus-sign text-success"></span></a>
 		</h4>
 
 
@@ -358,7 +358,7 @@
 				</div>
 
 				<div class="col-lg-1">
-					<span class="glyphicon glyphicon-trash text-danger small"
+					<span class="glyphicon glyphicon-remove-circle text-danger"
 						ng-click="vm.runShowRemove()"></span>
 				</div>
 			</div>
@@ -424,8 +424,8 @@
 
 
 		<h4>
-			Lab Tasks &nbsp; &nbsp; <a href="" ng-click="vm.addlab()"><span
-				class=" glyphicon glyphicon-plus-sign small text-primary "></span></a>
+            <strong>Lab Tasks</strong> &nbsp; &nbsp; <a href="" ng-click="vm.addlab()"><span
+				class=" glyphicon glyphicon-plus-sign text-success"></span></a>
 		</h4>
 		<div id="labs">
 
@@ -449,7 +449,7 @@
 							</div>
 							<div class="col-lg-1">
 								<a href="" ng-click="vm.removelab($index)"><span
-									class=" glyphicon glyphicon-trash text-danger"></span></a>
+									class="glyphicon glyphicon-remove-circle text-danger"></span></a>
 							</div>
 
 
@@ -1017,8 +1017,8 @@
 
 
 	<h5>
-		TALENTS <a href="" ng-click="vm.addTalent()"><span
-			class=" glyphicon glyphicon-plus-sign text-danger small"></span></a>
+        <strong>TALENTS</strong> <a href="" ng-click="vm.addTalent()"><span
+			class=" glyphicon glyphicon-plus-sign text-success"></span></a>
 	</h5>
 
 	<table class="jh-table table table-striped">
@@ -1075,7 +1075,7 @@
 				ng-model="vm.talents[$index].disabled"></td>
 
 			<td><a href="" ng-click="vm.removeTalent($index)"><span
-					class=" glyphicon glyphicon-trash small text-danger"></span></a></td>
+					class=" glyphicon glyphicon-remove-circle small text-danger"></span></a></td>
 		</tr>
 	</table>
     <div class="row">
@@ -1092,8 +1092,8 @@
 
 
 	<h5>
-		EXECS <a href="" ng-click="vm.addExec()"><span
-			class=" glyphicon glyphicon-plus-sign text-danger small"></span></a>
+        <strong>EXECS</strong> <a href="" ng-click="vm.addExec()"><span
+			class=" glyphicon glyphicon-plus-sign text-success"></span></a>
 	</h5>
 
 
@@ -1175,10 +1175,19 @@
 			<td><input type="checkbox" ng-model="vm.execss[$index].disabled" /></td>
 
 			<td><a href="" ng-click="vm.removeExec($index)"><span
-					class=" glyphicon glyphicon-trash text-danger"></span></a></td>
+					class=" glyphicon glyphicon-remove-circle text-danger"></span></a></td>
 		</tr>
 
 	</table>
+    <div class="row">
+
+        <label class="col-md-1 control-label small">Additional</label>
+        <div class="col-xs-7">
+            <input type="text" class="form-control input-sm" ng-model="vm.projects.legacyNameNotes" />
+
+        </div>
+
+    </div>
 	<hr>
 
 	EXPANDED TALENT INFORMATION
