@@ -2,6 +2,7 @@ package com.fps.domain;
 
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "albums")
@@ -20,14 +21,23 @@ public class Album {
     @Column(name = "album_permissions")
     private String album_permissions;
 
-    @Column(name = "album_descriptions")
+    @Column(name = "album_description")
     private String album_descriptions;
 
     @Column(name = "album_type")
     private Integer album_type;
 
-    @Column(name = "parent_id")
+    @Column(name = "album_parent_id")
     private Long parent_id;
+
+    @Column(name = "created_by")
+    private String createdBy;
+
+    @Column(name = "created_time")
+    private ZonedDateTime createdTime;
+
+    @Column(name = "updated_time")
+    private ZonedDateTime updatedTime;
 
     @ManyToOne
     private Projects project;
@@ -94,5 +104,29 @@ public class Album {
 
     public void setProject(Projects project) {
         this.project = project;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public ZonedDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(ZonedDateTime createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public ZonedDateTime getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(ZonedDateTime updatedTime) {
+        this.updatedTime = updatedTime;
     }
 }

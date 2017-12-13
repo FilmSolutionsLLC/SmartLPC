@@ -15,7 +15,7 @@
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right">
                         <input type="text" class="form-control input-sm" ng-model="vm.searchQuery" id="searchQuery"
-                               placeholder="{{ 'smartLpcApp.projects.home.search' | translate }}">
+                               placeholder="{{ 'smartLpcApp.projects.home.search' | translate }}" autofocus="autofocus">
                         <span class="input-group-btn width-min">
                             <button class="btn btn-info btn-sm" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -35,9 +35,10 @@
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
+
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                <th jh-sort-by="id" class="extra-small"><span translate="global.field.id">ID</span> <span
-                    class="glyphicon glyphicon-sort"></span></th>
+                <th></th>
+
                 <th jh-sort-by="name" class="extra-small"><span translate="smartLpcApp.projects.name">Name</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
 
@@ -60,49 +61,28 @@
                 <th jh-sort-by="name" class="extra-small">Unit Publicist Email<span
                     class="glyphicon glyphicon-sort"></span></th>
 
-                <th></th>
+
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="projects in vm.projectsDTO track by projects.projects.id">
-                <td class="extra-small"><a ui-sref="projects-detail({id:projects.projects.id})" class="small">{{projects.projects.id}}</a>
-                </td>
-                <td class="extra-small">{{projects.projects.name}}</td>
-
-                <td class="extra-small">
-                    <a ui-sref="lookups-detail({id:projects.projects.status.id})">{{projects.projects.status.textValue}}</a>
-                </td>
-
-                <td class="extra-small">
-                    <a ui-sref="contacts-detail({id:projects.projectRoles[0].contact.id})">{{projects.projectRoles[0].contact.fullName}}</a>
-                </td>
-                <td class="extra-small">{{projects.projectRoles[0].contact.phoneOffice}}</td>
-                <td class="extra-small">{{projects.projectRoles[0].contact.email}}</td>
-
-                <td class="extra-small">
-                    <a ui-sref="contacts-detail({id:projects.projectRoles[1].contact.id})">{{projects.projectRoles[1].contact.fullName}}</a>
-                </td>
-                <td class="extra-small">{{projects.projectRoles[1].contact.phoneMobile}}
-                </td>
-                <td class="extra-small">{{projects.projectRoles[1].contact.phoneOffice}}</td>
-                <td class="extra-small">{{projects.projectRoles[1].contact.email}}</td>
-
-                <td class="text-right extra-small">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                ui-sref="projects-detail({id:projects.projects.id})"
-                                ui-sref-opts="{reload: true, notify: true}"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
-                        </button>
+                <td class="text-left extra-small">
+                    <div class="btn-group  pull-left flex-btn-group-container">
                         <button type="submit"
                                 ui-sref="projects.edit({id:projects.projects.id})"
                                 ui-sref-opts="{reload: true, notify: true}"
                                 class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="glyphicon glyphicon-pencil"></span> Edit
                             <!--<span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>-->
                         </button>
+                        <button type="submit"
+                                ui-sref="projects-detail({id:projects.projects.id})"
+                                ui-sref-opts="{reload: true, notify: true}"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span> View
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
+                        </button>
+
                         <!--<button type="button"
                                 ng-click="vm.delete(projects.projects.id)"
                                 class="btn btn-danger btn-sm">
@@ -111,6 +91,18 @@
                         </button>-->
                     </div>
                 </td>
+
+                <td class="extra-small">{{projects.projects.name}}</td>
+                <td class="extra-small">{{projects.projects.status.textValue}}</td>
+                <td class="extra-small">{{projects.projectRoles[0].contact.fullName}}</td>
+                <td class="extra-small">{{projects.projectRoles[0].contact.phoneOffice}}</td>
+                <td class="extra-small">{{projects.projectRoles[0].contact.email}}</td>
+                <td class="extra-small">{{projects.projectRoles[1].contact.fullName}}</td>
+                <td class="extra-small">{{projects.projectRoles[1].contact.phoneMobile}}</td>
+                <td class="extra-small">{{projects.projectRoles[1].contact.phoneOffice}}</td>
+                <td class="extra-small">{{projects.projectRoles[1].contact.email}}</td>
+
+
             </tr>
             </tbody>
         </table>

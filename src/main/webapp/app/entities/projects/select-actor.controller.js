@@ -41,7 +41,7 @@
         };
 
 
-        $scope.viewby = 10;
+        $scope.viewby = 20;
         //$scope.totalItems = null;
         $scope.currentPage = 1;
         $scope.itemsPerPage = $scope.viewby;
@@ -124,13 +124,13 @@
             }
         };
 
-        $rootScope.selectedTalent = {};
+        $rootScope.selectedTalent = null;
         vm.selectTalent = function (id) {
             console.log("Selecting Talent at " + id);
 
-            $rootScope.selectedTalent = vm.tagss[id];
-            console.log("Selected Talent : " + JSON.stringify($rootScope.selectedTalent));
-            $uibModalInstance.dismiss('cancel');
+           // $rootScope.selectedTalent = vm.tagss[id];
+            console.log("Selected Talent : " + JSON.stringify(vm.tagss[id]));
+            $uibModalInstance.close(vm.tagss[id]);
 
         };
 

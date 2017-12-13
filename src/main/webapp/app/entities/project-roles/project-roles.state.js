@@ -71,7 +71,7 @@
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'ProjectRoles', function($stateParams, ProjectRoles) {
-                    return ProjectRoles.get({id : $stateParams.id});
+                    return ProjectRoles.get({id : $stateParams.id}).$promise;
                 }]
             }
         })
@@ -133,7 +133,7 @@
                     size: 'lg',
                     resolve: {
                         entity: ['ProjectRoles', function(ProjectRoles) {
-                            return ProjectRoles.get({id : $stateParams.id});
+                            return ProjectRoles.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -157,7 +157,7 @@
                     size: 'md',
                     resolve: {
                         entity: ['ProjectRoles', function(ProjectRoles) {
-                            return ProjectRoles.get({id : $stateParams.id});
+                            return ProjectRoles.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {

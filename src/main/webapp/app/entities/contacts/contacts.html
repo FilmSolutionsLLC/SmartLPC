@@ -2,7 +2,7 @@
     <h3 translate="smartLpcApp.contacts.home.title" align="center">Contacts</h3>
 
     <!--<jhi-alert></jhi-alert>-->
-    <div class="container-fluid">
+    <div class="container-fluid" >
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary btn-sm" ui-sref="contacts.add">
@@ -17,7 +17,7 @@
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right">
                         <input type="text" class="form-control input-sm" ng-model="vm.searchQuery" id="searchQuery"
-                               placeholder="{{ 'smartLpcApp.contacts.home.search' | translate }}">
+                               placeholder="{{ 'smartLpcApp.contacts.home.search' | translate }}" autofocus="autofocus">
                         <span class="input-group-btn width-min">
                             <button class="btn btn-info btn-sm" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -38,19 +38,23 @@
     </div>
     <br>
     <br/>
+
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                <th jh-sort-by="id"><span translate="global.field.id" class="extra-small">ID</span> <span
-                    class="glyphicon glyphicon-sort"></span></th>
+                <th></th>
 
                 <th jh-sort-by="fullName"><span translate="smartLpcApp.contacts.fullName" class="extra-small">FullName</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="title"><span translate="smartLpcApp.contacts.title" class="extra-small">Title</span> <span
-                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="companyContact.fullName"><span translate="smartLpcApp.contacts.companyContact"
+                                                               class="extra-small">companyContact</span>
+                    <span class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="email"><span translate="smartLpcApp.contacts.email" class="extra-small">Email</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="title"><span translate="smartLpcApp.contacts.title" class="extra-small">Title</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+
 
                 <th jh-sort-by="phoneOffice"><span translate="smartLpcApp.contacts.phoneOffice" class="extra-small">PhoneOffice</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
@@ -59,17 +63,49 @@
                 <th jh-sort-by="type.textValue"><span translate="smartLpcApp.contacts.type"
                                                       class="extra-small">type</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="companyContact.fullName"><span translate="smartLpcApp.contacts.companyContact"
-                                                               class="extra-small">companyContact</span>
-                    <span class="glyphicon glyphicon-sort"></span></th>
-                <th></th>
+
+
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="contacts in vm.contacts track by contacts.id">
-                <td class="extra-small"><a ui-sref="contacts-detail({id:contacts.id})">{{contacts.id}}</a></td>
+                <td class="text-left extra-small">
+                    <div class="btn-group pull-left flex-btn-group-container">
+                        <!--<button type="submit"
+                                ui-sref="contacts.project-permission({id:contacts.id})" ui-sref-opts="{reload: true, notify: true}"
+                                class="btn btn-primary btn-sm" uib-tooltip="Project Permissions">
+
+                                <span class="glyphicon glyphicon-film"></span>
+
+                            &lt;!&ndash;<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>&ndash;&gt;
+                        </button>
+--><button type="submit"
+           ui-sref="contacts.edit({id:contacts.id})" ui-sref-opts=ur
+           class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                        <!--<span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>-->
+                    </button>
+                        <button type="submit"
+                                ui-sref="contacts-detail({id:contacts.id})" ui-sref-opts="{reload: true, notify: true}"
+                                class="btn btn-info btn-sm" >
+                            <span class="glyphicon glyphicon-eye-open"></span> View
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
+                        </button>
+
+                        <!--<button type="submit"
+                                ui-sref="contacts.delete({id:contacts.id})"
+                                class="btn btn-danger btn-sm" uib-tooltip="Remove">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            &lt;!&ndash;<span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>&ndash;&gt;
+                        </button>-->
+                    </div>
+                </td>
+
 
                 <td class="extra-small">{{contacts.fullName}}</td>
+                <td class="extra-small">
+                    {{contacts.companyContactFullName}}
+                </td>
                 <td class="extra-small">{{contacts.title}}</td>
                 <td class="extra-small">{{contacts.email}}</td>
 
@@ -78,43 +114,11 @@
                 <td class="extra-small">{{contacts.phoneMobile}}</td>
 
                 <td class="extra-small">
-                    <a ui-sref="lookups-detail({id:contacts.typeId})">{{contacts.typeValue}}</a>
+                    {{contacts.typeValue}}
                 </td>
 
-                <td class="extra-small">
-                    <a ui-sref="contacts-detail({id:contacts.companyContactId})">{{contacts.companyContactFullName}}</a>
-                </td>
-                <td class="text-right extra-small">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                ui-sref="contacts.project-permission({id:contacts.id})" ui-sref-opts="{reload: true, notify: true}"
-                                class="btn btn-primary btn-sm" uib-tooltip="Project Permissions">
 
-                                <span class="glyphicon glyphicon-film"></span>
 
-                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
-                        </button>
-
-                        <button type="submit"
-                                ui-sref="contacts-detail({id:contacts.id})" ui-sref-opts="{reload: true, notify: true}"
-                                class="btn btn-info btn-sm" uib-tooltip="View">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
-                        </button>
-                        <button type="submit"
-                                ui-sref="contacts.edit({id:contacts.id})" ui-sref-opts=ur
-                                class="btn btn-primary btn-sm" uib-tooltip="Edit">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>-->
-                        </button>
-                        <button type="submit"
-                                ui-sref="contacts.delete({id:contacts.id})"
-                                class="btn btn-danger btn-sm" uib-tooltip="Remove">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
-                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>-->
-                        </button>
-                    </div>
-                </td>
             </tr>
             </tbody>
         </table>

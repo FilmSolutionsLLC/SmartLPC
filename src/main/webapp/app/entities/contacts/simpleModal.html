@@ -204,7 +204,7 @@
 					<div class="input-group pull-right">
 						<input type="text" class="form-control input-sm"
 							ng-model="vm.searchQuery" id="searchQuery"
-							placeholder="{{ 'smartLpcApp.contacts.home.search' | translate }}">
+							placeholder="{{ 'smartLpcApp.contacts.home.search' | translate }}" autofocus="autofocus">
 						<span class="input-group-btn width-min">
 							<button class="btn btn-info btn-sm"
 								ng-click="vm.search(vm.searchQuery)">
@@ -241,29 +241,28 @@
 							<tr jh-sort="vm.predicate" ascending="vm.reverse"
 								callback="vm.transition()">
 								<th></th>
-								<th jh-sort-by="id"><span translate="global.field.id"
-									class="extra-small">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
 
-								<th jh-sort-by="fullName"><span
+
+								<th jh-sort-by="fullName" ng-click="vm.setSortOrder('fullName')"><span
 									translate="smartLpcApp.contacts.fullName" class="extra-small">FullName</span>
 									<span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="title"><span
+								<th jh-sort-by="title" ng-click="vm.setSortOrder('title')"><span
 									translate="smartLpcApp.contacts.title" class="extra-small">Title</span>
 									<span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="email"><span
+								<th jh-sort-by="email" ng-click="vm.setSortOrder('email')"><span
 									translate="smartLpcApp.contacts.email" class="extra-small">Email</span>
 									<span class="glyphicon glyphicon-sort"></span></th>
 
-								<th jh-sort-by="phoneOffice"><span
+								<th jh-sort-by="phoneOffice" ng-click="vm.setSortOrder('phoneOffice')"><span
 									translate="smartLpcApp.contacts.phoneOffice" class="extra-small">PhoneOffice</span>
 									<span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="phoneMobile"><span
+								<th jh-sort-by="phoneMobile" ng-click="vm.setSortOrder('phoneMobile')"><span
 									translate="smartLpcApp.contacts.phoneMobile" class="extra-small">PhoneMobile</span>
 									<span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="type.textValue"><span
+								<th jh-sort-by="type.textValue" ng-click="vm.setSortOrder('type.textValue')"><span
 									translate="smartLpcApp.contacts.type" class="extra-small">type</span>
 									<span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="companyContact.fullName"><span
+								<th jh-sort-by="companyContact.fullName" ng-click="vm.setSortOrder('companyContact.fullName')"><span
 									translate="smartLpcApp.contacts.companyContact" class="extra-small">companyContact</span>
 									<span class="glyphicon glyphicon-sort"></span></th>
 
@@ -281,9 +280,7 @@
 										</button>
 									</div>
 								</td>
-								<td class="extra-small"><a
-									ui-sref="contacts-detail({id:contacts.id})">{{contacts.id}}</a>
-								</td>
+
 
 								<td class="extra-small">{{contacts.fullName}}</td>
 								<td class="extra-small">{{contacts.title}}</td>

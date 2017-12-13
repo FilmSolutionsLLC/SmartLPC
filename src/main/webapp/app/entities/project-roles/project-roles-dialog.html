@@ -202,11 +202,13 @@
 
 <form name="editForm" role="form" novalidate ng-submit="vm.save()">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="vm.clear()">&times;
-        </button>
-        <h4 class="modal-title" id="myProjectRolesLabel">
-            Create or edit a ProjectRoles</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button>
+
+        <button type="submit" class="btn btn-xs btn btn-primary">Save</button>
+        <button type="button" class="btn btn-xs btn btn-default" ng-click="vm.previous(vm.prevNext.prev)">Previous</button>
+        <button type="button" class="btn btn-xs btn btn-default" ng-click="vm.next(vm.prevNext.next)">Next</button>
+        <button type="button" class="btn btn-xs btn btn-danger"  ng-click="vm.delete(vm.projectRoles.id)">Delete</button>
+        <button type="button" class="btn btn-xs btn btn-default" data-dismiss="modal" ng-click="vm.clear()">Close</button>
     </div>
 
     <div class="modal-body">
@@ -223,7 +225,7 @@
                 <input type="text" ng-model="vm.projectRoles.hotkeyValue" ng-change="vm.setHotkey()"
                        class="form-control input-sm">
                 <div ng-if="vm.flag == true">
-                    <small><h5 class="text-danger">HotKey already in use.Avoid Z and X</h5></small>
+                    <small><h5 class="text-danger">HotKey already in use.<br>Avoid Z and X</h5></small>
                 </div>
             </div>
         </div>
@@ -265,7 +267,7 @@
         </div>
         <br>
         <div class="row">
-            <label class="col-sm-5 control-label small">Last Full-Finalization Date</label>
+            <label class="col-sm-5 control-label small">Last Partial-Finalization Date</label>
             <div class="col-sm-5">
                 <div class="input-group">
                     <input type="text" class="form-control input-sm" name="fullFinalDt"
@@ -289,18 +291,18 @@
         <br>
         <div class="row">
             <label class="col-sm-5 control-label small">Exclude From Solo/Group Calculations</label>
-            <div class="col-sm-5">
-                <input type="checkbox" class="form-control" name="excSologroup"
-                       ng-model="vm.projectRoles.excSologroup"/>
+            <div class="col-xs-1">
+                <input type="checkbox" class="form-control input-sm" name="excSologroup"
+                       ng-model="vm.projectRoles.excSologroup" ng-init="vm.projectRoles.excSologroup = false"/>
             </div>
         </div>
         <br>
-        <div class="row">
+        <!--<div class="row">
             <label class="col-sm-5 control-label small">Notes</label>
             <div class="col-sm-5">
                 <input type="text" ng-model="vm.projectRoles.notes" class="form-control input-sm">
             </div>
-        </div>
+        </div>-->
 
 
         <!--
@@ -381,8 +383,8 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" ng-click="vm.clear()">Cancel</button>
-        <button type="submit"  class="btn btn-primary btn-sm">Save</button>
+       <!-- <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" ng-click="vm.clear()">Cancel</button>
+        <button type="submit"  class="btn btn-primary btn-sm">Save</button>-->
     </div>
 
 </form>

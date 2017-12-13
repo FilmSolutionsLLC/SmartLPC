@@ -24,11 +24,16 @@
         vm.downloadType = [{'id': 0, 'value': "NONE"}, {'id': 1, 'value': "ALL"}, {'id': 2, 'value': "Lock Approved"}];
         vm.exclusives = [{'id': 0, 'value': "NONE"}, {'id': 1, 'value': "BASIC"}, {'id': 2, 'value': "MASTER"}];
 
+
         vm.projects = {};
         vm.projects.name = '';
 		vm.projects.fullName = '';
 		vm.projects.alfrescoTitle1 = '';
+
 		vm.projects.alfrescoTitle2 = '';
+
+
+		console.log("Is this a template add  : "+vm.projectsDTO.projects.template);
 
 
 		vm.largestBrick = {};
@@ -78,23 +83,14 @@
 				vm.projects.alfrescoTitle2 = alfrescoTitle2;
 
 			} else {
+
 				vm.projects.fullName = vm.projects.name.capitalizeFirstLetter();
-				vm.projects.alfrescoTitle1 = vm.projects.name
-						.capitalizeFirstLetter().concat("_Proj");
-				vm.projects.alfrescoTitle2 = vm.projects.name
-						.capitalizeFirstLetter();
+				vm.projects.alfrescoTitle1 = vm.projects.name.capitalizeFirstLetter().concat("_Proj");
+				vm.projects.alfrescoTitle2 = vm.projects.name.capitalizeFirstLetter();
 
 			}
 
 		};
-
-
-
-
-
-
-
-
 
 
         vm.talents = [];
@@ -248,7 +244,18 @@
                 "restartImagesPerPage": 20,
                 "showFinalizations": false,
                 "watermark": false,
-                "internal": false
+                "internal": false,
+                "globalAlbum": false,
+                "loginCount": 0,
+                "defaultAlbum": null,
+                "critiqueIt": false,
+                "adhocLink": false,
+                "retouch": false,
+                "fileUpload": false,
+                "deleteAssets": false,
+                "watermarkInnerTransparency": 0.00,
+                "watermarkOuterTransparency": 0.00,
+                "restartRole": "EXEC"
             })
         };
         vm.removeExec = function (index) {
@@ -423,7 +430,10 @@
                         "adhocLink": false,
                         "retouch": false,
                         "fileUpload": false,
-                        "deleteAssets": false
+                        "deleteAssets": false,
+                        "watermarkInnerTransparency": 0.00,
+                        "watermarkOuterTransparency": 0.00,
+                        "restartRole": 'REVIEWER'
                     });
 
                  // get related too.
@@ -467,7 +477,18 @@
                         "restartImagesPerPage": 20,
                         "showFinalizations": false,
                         "watermark": false,
-                        "internal": false
+                        "internal": false,
+                        "globalAlbum": false,
+                        "loginCount": 0,
+                        "defaultAlbum": null,
+                        "critiqueIt": false,
+                        "adhocLink": false,
+                        "retouch": false,
+                        "fileUpload": false,
+                        "deleteAssets": false,
+                        "watermarkInnerTransparency": 0.00,
+                        "watermarkOuterTransparency": 0.00,
+                        "restartRole": 'EXEC'
                     });
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'relatedContact')) {
                     console.log("count : " + vm.count);
@@ -1206,6 +1227,7 @@
             }
         };
         vm.sortProjectRoles();
+
 
     }
 })();

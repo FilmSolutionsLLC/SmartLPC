@@ -23,6 +23,18 @@
         vm.relatedContacts = vm.contactDTO.contactRelationships;
 
         console.log(" == = > "+JSON.stringify(vm.contactDTO))
+        vm.prevNext = {};0
+        $http({
+            method: 'GET',
+            url: 'api/contact/prev/next/' + vm.contactDTO.contacts.id
+
+        }).then(function successCallback(response) {
+            vm.prevNext = response.data;
+            console.log("Prev Next Contacts : " + JSON.stringify(vm.prevNext));
+        }, function errorCallback(response) {
+
+        });
+
         vm.load = function (id) {
 
             Contacts.get({
@@ -148,7 +160,7 @@
 
         };
 
-        vm.saveAndAdd = function () {
+        vm.saveAndNext = function () {
 
             vm.isSaving = true;
             Contacts.update(vm.contactDTO, onSaveAddSuccess, onSaveError);
@@ -168,7 +180,7 @@
                         text: 'Okay',
                         btnClass: 'btn-green',
                         action: function () {
-                            $state.go("contacts", {}, {reload: true});
+                            $state.go("contacts.edit", {id:vm.prevNext.next}, {reload: true, notify: true});
                         }
                     }
                 }
@@ -285,6 +297,43 @@
                         }]
                 }
             })
+        };
+
+
+        vm.blockUser = function () {
+            console.log("Block User : "+vm.block);
+            if(vm.block === true) {
+                vm.contacts.loginAttempt = 4;
+            }else{
+                vm.contacts.loginAttempt = 0;
+            }
+        };
+
+        vm.delete  = function () {
+            $ngConfirm({
+                title: 'Warning!',
+                content: "Are you sure you want to delete Contact: <strong>"+vm.contactDTO.contacts.fullName+"</strong>",
+                type: 'red',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+                            Contacts.delete({id: vm.contactDTO.contacts.id});
+                            window.history.back();
+                        }
+                    },
+                    cancel: {
+                        text: 'Cancel',
+                        btnClass: 'btn-green',
+                        action: function () {
+
+                        }
+                    }
+                }
+            });
         };
 
     }

@@ -18,7 +18,7 @@
 
         $http({
             method: 'GET',
-            url: '/api/filesystem/progress/' + sendIngestID
+            url: 'api/filesystem/progress/' + sendIngestID
         }).then(function successCallback(response) {
             vm.currentIngest = response.data;
         }, function errorCallback(response) {

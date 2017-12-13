@@ -61,6 +61,7 @@
                    readonly>
         </div>
         <div class="col-xs-2">
+
             <input id="field_vm.workOrder.priority" type="text"
                    class="form-control input-sm"
                    ng-model="vm.workOrderDTO.workOrder.priority.textValue" readonly>
@@ -110,9 +111,10 @@
             </div>
             <label class="col-md-1 control-label small" for="textinput">Email</label>
             <div class="col-sm-2">
+                <a href={{vm.mailTo}} target="_top">
                 <input id="company.email" name="textinput" type="text"
                        ng-model="vm.workOrderDTO.workOrder.requestor.email"
-                       class="form-control input-sm" readonly>
+                       class="form-control input-sm" readonly></a>
             </div>
         </div>
     </div>

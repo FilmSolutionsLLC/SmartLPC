@@ -144,6 +144,7 @@
                         text: 'Okay',
                         btnClass: 'btn-green',
                         action: function () {
+                            $state.go('contacts-detail', {id:result.id}, {reload: true});
                         }
                     }
                 }
@@ -256,7 +257,6 @@
             window.history.back();
             console.log("==> " + JSON.stringify(originalData));
             console.log("==> " + JSON.stringify(vm.contactDTO));
-        }
-
+        };
     }
 })();

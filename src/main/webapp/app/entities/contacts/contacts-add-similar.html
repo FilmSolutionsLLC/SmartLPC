@@ -3,19 +3,20 @@
 <form name="editForm" role="form" novalidate ng-submit="vm.save()">
 
     <div class="row">
-        <div class="col-xs-12">
+        <div id="sticky-anchor"></div>
+        <div class="col-xs-12" sticky >
 
             <button type="submit" class="btn btn-xs btn btn-primary"
                     ng-disabled="editForm.$invalid || isSaving">Save
             </button>
 
-            <button type="button" class="btn btn-xs btn btn-primary" ng-click="vm.saveAndAdd()">Save and Close</button>
+            <button type="button" class="btn btn-xs btn btn-primary" ng-click="vm.saveAndAdd()">Save and Add</button>
 
-            <button type="button" ui-sref="contacts.project-permission({id:vm.contactDTO.contacts.id})" ui-sref-opts="{reload: true}"  class="btn btn-xs btn btn-primary">Project
+         <!--   <button type="button" ui-sref="contacts.project-permission({id:vm.contactDTO.contacts.id})" ui-sref-opts="{reload: true}"  class="btn btn-xs btn btn-primary">Project
                 Permissions
-            </button>
+            </button>-->
             <!-- <a href="#" class="btn btn-xs btn btn-danger">Close</a> -->
-            <a type="button" class="btn btn-xs btn btn-danger" ng-click="vm.close()">Close</a>
+            <a type="button" class="btn btn-xs btn btn-primary" ng-click="vm.close()">Close</a>
         </div>
     </div>
 
@@ -51,7 +52,7 @@
 
 
                 <input type="text" class="form-control input-sm" name="fullName" id="field_fullName"
-                       ng-model="vm.contactDTO.contacts.fullName"
+                       ng-model="vm.contactDTO.contacts.fullName" autofocus="autofocus"
                 />
             </div>
 
@@ -320,7 +321,7 @@
 
         </div>
         <label class="small"> <input type="checkbox">
-            &nbspBlock / Unblock Users &nbsp</label>
+            &nbspBlock / Unblock Users &nbsp  <span ng-init="vm.contacts.loginAttempt = 0"></span></label>
     </div>
 
     <hr>
@@ -440,6 +441,4 @@
         class="btn btn-info btn-sm">
     <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
 </button>
-
-
 

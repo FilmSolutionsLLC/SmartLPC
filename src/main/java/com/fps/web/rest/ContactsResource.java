@@ -20,6 +20,7 @@ import com.fps.web.rest.util.HeaderUtil;
 import com.fps.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,11 +29,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -99,11 +103,16 @@ public class ContactsResource {
         contact_a.setId(contacts.getId());
         if (contactsDTO.getContactRelationships().size() > 0) {
 
+            Contact contactqbrid = new Contact();
+            contactqbrid.setId(Long.valueOf(0));
             Set<ContactRelationships> contactRelationshipses = new HashSet<>();
             for (ContactRelationships contactRelationships : contactsDTO.getContactRelationships()) {
                 contactRelationships.setContact_a(contact_a);
                 contactRelationships.setCreatedByAdminUser(user);
                 contactRelationships.setCreatedDate(LocalDate.now());
+                contactRelationships.setContact_a_qb_rid(contactqbrid);
+                contactRelationships.setContact_b_qb_rid(contactqbrid);
+
                 contactRelationshipses.add(contactRelationships);
             }
             currentTenantIdentifierResolver.setTenant(MASTER);
@@ -141,12 +150,17 @@ public class ContactsResource {
         Contact contact_a = new Contact();
         contact_a.setId(result.getId());
         if (contactsDTO.getContactRelationships().size() > 0) {
+            Contact contactqbrid = new Contact();
+            contactqbrid.setId(Long.valueOf(0));
+
             Set<ContactRelationships> contactRelationshipses = new HashSet<>();
             for (ContactRelationships contactRelationships : contactsDTO.getContactRelationships()) {
                 contactRelationships.setUpdatedByAdminUser(user);
                 contactRelationships.setUpdatedDate(LocalDate.now());
                 contactRelationships.setContact_a(contact_a);
                 //contactRelationships.setRelationshipType(contactRelationships.getContact_b().getType().getTextValue());
+                contactRelationships.setContact_a_qb_rid(contactqbrid);
+                contactRelationships.setContact_b_qb_rid(contactqbrid);
                 contactRelationshipses.add(contactRelationships);
 
             }
@@ -403,6 +417,45 @@ public class ContactsResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+
+    /**
+     * Get prev and next contacts id
+     * @return
+     * @throws URISyntaxException
+     */
+    @RequestMapping(value = "/contact/prev/next/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public Map<String,Long> getPreviousNextTalentID(@PathVariable Long id) throws URISyntaxException {
+        log.info("Get Previous and Next Talent ID");
+        String next = "select id from contacts where id = (select min(id) from contacts where id > "+id+")";
+        String prev = "select id from contacts where id = (select max(id) from contacts where id < "+id+")";
+
+        Long nextID = jdbcTemplate.query(next, new ResultSetExtractor<Long>() {
+            @Override
+            public Long extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                return resultSet.next() ? resultSet.getLong("id") : null;
+            }
+        });
+
+
+        //Long prevID = jdbcTemplate.queryForObject(prev,new Object[] {id,projectID},Long.class);
+        Long prevID = jdbcTemplate.query(prev, new ResultSetExtractor<Long>() {
+            @Override
+            public Long extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                return resultSet.next() ? resultSet.getLong("id") : null;
+            }
+        });
+        Map<String,Long> contacts = new HashMap<>();
+        contacts.put("next",nextID);
+        contacts.put("prev",prevID);
+
+        return contacts;
+    }
+
+
+
+
 
 
 

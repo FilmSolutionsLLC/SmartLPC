@@ -156,8 +156,9 @@ public class ContactPrivileges implements Serializable {
     @Column(name = "exclusives")
     private Integer exclusives;
 
-    @Column(name = "default_album")
-    private Long defaultAlbum;
+    @JoinColumn(name = "default_album")
+    @ManyToOne
+    private Album defaultAlbum;
 
     @Column(name = "critique_it")
     private Boolean critiqueIt;
@@ -546,11 +547,11 @@ public class ContactPrivileges implements Serializable {
         this.exclusives = exclusives;
     }
 
-    public Long getDefaultAlbum() {
+    public Album getDefaultAlbum() {
         return defaultAlbum;
     }
 
-    public void setDefaultAlbum(Long defaultAlbum) {
+    public void setDefaultAlbum(Album defaultAlbum) {
         this.defaultAlbum = defaultAlbum;
     }
 

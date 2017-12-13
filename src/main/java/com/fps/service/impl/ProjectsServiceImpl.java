@@ -28,6 +28,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.*;
 
@@ -100,6 +101,8 @@ public class ProjectsServiceImpl implements ProjectsService {
     @Inject
     private BatchRepository batchRepository;
 
+    @Inject
+    private ContactPrivilegeReviewersRepository contactPrivilegeReviewersRepository;
     /**
      * Save a projects.
      *
@@ -121,7 +124,7 @@ public class ProjectsServiceImpl implements ProjectsService {
         // save project in database
         Projects result = projectsRepository.save(projects);
         log.info("Project Saved : " + result.getId());
-        projectsSearchRepository.save(result);
+
 
         Set<ProjectRoles> projectRoleses = new HashSet<>();
         Set<ProjectPurchaseOrders> projectPurchaseOrderses = new HashSet<>();
@@ -220,9 +223,110 @@ public class ProjectsServiceImpl implements ProjectsService {
             contactPrivileges.setCreatedByAdminUser(user);
             contactPrivileges.setProject(projects);
             contactPrivileges.setCreatedDate(ZonedDateTime.now());
+
+            if(contactPrivileges.isExec()==false){
+                log.info("=====> Saving Talent as Exec "+contactPrivileges.toString());
+                ContactPrivileges resultCP = contactPrivilegesRepository.save(contactPrivileges);
+                ContactPrivilegeReviewers contactPrivilegeReviewers  =  new ContactPrivilegeReviewers();
+                contactPrivilegeReviewers.setContactPrivilegeID(resultCP.getId());
+
+                contactPrivilegeReviewers.setCreatedDate(LocalDateTime.now());
+                contactPrivilegeReviewers.setReviewer(contactPrivileges.getContact().getFullName());
+
+                final Long tagID  = jdbcTemplate.queryForObject("select id from project_roles where project_id  = ? and contact_id = ?",new Object[]{result.getId(),contactPrivileges.getContact().getId()},Long.class);
+                log.info("Got id : "+tagID);
+                contactPrivilegeReviewers.setTagID(tagID);
+
+                contactPrivilegeReviewersRepository.save(contactPrivilegeReviewers);
+                log.info("Saved contactPrivilegeReviewers");
+
+            }else {
+                contactPrivilegeses.add(contactPrivileges);
+            }
+
+        }
+        //Add all admins
+        log.info("Adding PKO Owners to Project");
+        Lookups pkoOwner = new Lookups();
+        pkoOwner.setId(Long.valueOf(161));
+
+        final List<Contact> admins  = contactRepository.findByType(pkoOwner);
+        for(Contact contact : admins){
+            ContactPrivileges contactPrivileges = new ContactPrivileges();
+            contactPrivileges.setContact(contact);
+            contactPrivileges.setName(contact.getUsername());
+            contactPrivileges.setProject(projects);
+            contactPrivileges.setCreatedByAdminUser(user);
+            contactPrivileges.setCreatedDate(ZonedDateTime.now());
+            contactPrivileges.setExec(true);
+            contactPrivileges.setCaptioning(true);
+            contactPrivileges.setLockApproveRestriction(false);
+            contactPrivileges.setPriorityPix(true);
+            contactPrivileges.setReleaseExclude(true);
+            contactPrivileges.setViewSensitive(true);
+            contactPrivileges.setWatermark(false);
+            contactPrivileges.setInternal(true);
+            contactPrivileges.setVendor(false);
+            contactPrivileges.setRestartPage(Long.valueOf(0));
+            contactPrivileges.setTalentManagement(false);
+            contactPrivileges.setSignoffManagement(false);
+            contactPrivileges.setDatgeditManagement(false);
+            contactPrivileges.setRestartColumns(2);
+            contactPrivileges.setRestartImagesPerPage(20);
+            contactPrivileges.setRestartImageSize("Large");
+            contactPrivileges.setShowFinalizations(false);
+            contactPrivileges.setReadOnly(false);
+            contactPrivileges.setGlobalAlbum(false);
+            contactPrivileges.setSeesUntagged(true);
+            contactPrivileges.setLoginCount(0);
+            contactPrivileges.setExclusives(1);
+            contactPrivileges.setCritiqueIt(false);
+            contactPrivileges.setAdhocLink(false);
+            contactPrivileges.setRetouch(false);
+            contactPrivileges.setFileUpload(false);
+            contactPrivileges.setDeleteAssets(false);
+
+
+            //taggers
+            if(contact.isInternalAccessOnly()){
+                contactPrivileges.setDownloadType(0);
+                contactPrivileges.setEmail(false);
+                contactPrivileges.setPrint(false);
+                contactPrivileges.setHasVideo(false);
+            }
+            //ops team
+            else{
+                contactPrivileges.setDownloadType(1);
+                contactPrivileges.setEmail(true);
+                contactPrivileges.setPrint(true);
+                contactPrivileges.setHasVideo(true);
+            }
+
             contactPrivilegeses.add(contactPrivileges);
         }
+
+
+
+
         contactPrivilegesRepository.save(contactPrivilegeses);
+
+
+        List<Album> albums = new ArrayList<>();
+        for (int i = 0; i < Constants.ALBUM_NAME.length; i++) {
+
+            Album album = new Album();
+            album.setAlbum_owner("admin");
+            album.setAlbum_name(Constants.ALBUM_NAME[i]);
+            album.setAlbum_descriptions(Constants.ALBUM_DESCRIPTION[i]);
+            album.setAlbum_type(1);
+            album.setProject(projects);
+            album.setCreatedBy("admin");
+            album.setCreatedTime(ZonedDateTime.now());
+            albums.add(album);
+        }
+        albumRepository.save(albums);
+
+        projectsSearchRepository.save(result);
 
         return result;
 
@@ -365,25 +469,44 @@ public class ProjectsServiceImpl implements ProjectsService {
             for (ContactPrivileges contactPrivileges : projectsDTO.getContactPrivileges()) {
 
 
-                if (contactPrivileges.getId() != null) {
-                    log.info("Existing Contact Privilege");
-                    contactPrivileges.setUpdatedByAdminUser(user);
-                    contactPrivileges.setUpdatedDate(ZonedDateTime.now());
 
-                } else {
-                    log.info("New Contact Privilege");
-                    contactPrivileges.setCreatedByAdminUser(user);
-                    contactPrivileges.setCreatedDate(ZonedDateTime.now());
-                    contactPrivileges.setProject(result);
 
-                }
-                try {
-                    contactPrivilegeses.add(contactPrivileges);
-                } catch (Exception e) {
-                    log.info("Error adding contact privileges");
-                    e.printStackTrace();
-                }
-                log.info("CP : " + contactPrivileges.toString());
+                    if (contactPrivileges.getId() != null) {
+                        log.info("Existing Contact Privilege");
+                        contactPrivileges.setUpdatedByAdminUser(user);
+                        contactPrivileges.setUpdatedDate(ZonedDateTime.now());
+                        contactPrivilegeses.add(contactPrivileges);
+
+                    } else {
+                        log.info("New Contact Privilege");
+                        contactPrivileges.setCreatedByAdminUser(user);
+                        contactPrivileges.setCreatedDate(ZonedDateTime.now());
+                        contactPrivileges.setProject(result);
+                        if(contactPrivileges.isExec() == false){
+                            log.info("--> Saving Talent as Exec " + contactPrivileges.toString());
+                            ContactPrivileges resultCP = contactPrivilegesRepository.save(contactPrivileges);
+                            ContactPrivilegeReviewers contactPrivilegeReviewers = new ContactPrivilegeReviewers();
+                            contactPrivilegeReviewers.setContactPrivilegeID(resultCP.getId());
+
+                            contactPrivilegeReviewers.setCreatedDate(LocalDateTime.now());
+                            contactPrivilegeReviewers.setReviewer(contactPrivileges.getContact().getFullName());
+
+                            final Long tagID = jdbcTemplate.queryForObject("select id from project_roles where project_id  = ? and contact_id = ?", new Object[]{result.getId(), contactPrivileges.getContact().getId()}, Long.class);
+                            log.info("Got id : " + tagID);
+                            contactPrivilegeReviewers.setTagID(tagID);
+
+                            contactPrivilegeReviewersRepository.save(contactPrivilegeReviewers);
+                            log.info("Saved contactPrivilegeReviewers");
+                        }else{
+                            contactPrivilegeses.add(contactPrivileges);
+                        }
+                    }
+
+
+
+
+                    log.info("CP : " + contactPrivileges.toString());
+
             }
             contactPrivilegesRepository.save(contactPrivilegeses);
             log.info("Contact Privileges Saved");
@@ -404,8 +527,8 @@ public class ProjectsServiceImpl implements ProjectsService {
         log.info("Request to get all Projects");
         currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
 
-        //Page<Projects> result = projectsRepository.findAll(pageable);
-        Page<Projects> result = projectsSearchRepository.findAll(pageable);
+        Page<Projects> result = projectsRepository.findAll(pageable);
+        //Page<Projects> result = projectsSearchRepository.findAll(pageable);
 
         /*for (int i = 0; i < result.getContent().size(); i++) {
             if (result.getContent().get(i).getOwner().getCompanyContact() != null) {

@@ -1,24 +1,33 @@
-<h2 align="center">Contacts</h2>
+
 
 <form name="editForm" role="form" novalidate ng-submit="vm.save()">
 
-    <div class="row">
-        <div class="col-xs-12">
+    <div class="row fixed">
 
+        <div class="col-xs-12" >
+<br>
             <button type="submit" class="btn btn-xs btn btn-primary"
                     ng-disabled="editForm.$invalid || isSaving">Save
             </button>
 
-            <button type="button" class="btn btn-xs btn btn-primary" ng-click="vm.saveAndAdd()">Save and Close</button>
+            <button type="button" class="btn btn-xs btn btn-primary" ng-click="vm.saveAndNext()">Save and Next</button>
+
+            <button type="button" ng-disabled="vm.prevNext.prev === null" ui-sref="contacts.edit({id:vm.prevNext.prev})" ui-sref-opts="{reload: true, notify: true}" class="btn btn-xs btn btn-primary">Previous
+            </button>
+            <button type="button" ng-disabled="vm.prevNext.next === null" ui-sref="contacts.edit({id:vm.prevNext.next})" ui-sref-opts="{reload: true, notify: true}" class="btn btn-xs btn btn-primary">Next
+            </button>
+
+            <button type="button" class="btn btn-xs btn btn-primary" ng-click="vm.delete()">Delete</button>
+            <button type="button" class="btn btn-xs btn btn-primary" ui-sref="contacts-detail({id:vm.contactDTO.contacts.id})">View</button>
 
             <button type="button" ui-sref="contacts.project-permission({id:vm.contactDTO.contacts.id})" ui-sref-opts="{reload: true}"  class="btn btn-xs btn btn-primary">Project
                 Permissions
             </button>
             <!-- <a href="#" class="btn btn-xs btn btn-danger">Close</a> -->
-            <a type="button" class="btn btn-xs btn btn-danger" ng-click="vm.close()">Close</a>
+            <a type="button" class="btn btn-xs btn btn-primary" ng-click="vm.close()">Close</a>
         </div>
     </div>
-
+    <h2 align="center">Contacts</h2>
     <br>
 
     <div class="row">
@@ -273,6 +282,9 @@
     </div>
     <hr>
     <h4>Exclusives</h4>
+    <span ng-if="vm.contactDTO.contacts.globalRestartColumns === null"><input type="hidden" ng-init="vm.contactDTO.contacts.globalRestartColumns=0"></span>
+    <span ng-if="vm.contactDTO.contacts.globalRestartImagesPerPage === null"><input type="hidden" ng-init="vm.contactDTO.contacts.globalRestartImagesPerPage=0"></span>
+
     <div class="row">
         <label class="col-xs-3 control-label small">Global Restart Columns
         </label>
@@ -281,10 +293,10 @@
 
             <input type="number" class="form-control input-sm" name="globalRestartColumns"
                    id="field_globalRestartColumns"
-                   ng-model="vm.contactDTO.contacts.globalRestartColumns"
+                   ng-model="vm.contactDTO.contacts.globalRestartColumns" readonly
             />
         </div>
-        <label class="small"> <input type="checkbox" ng-model="vm.contacts.dashboard">
+        <label class="small"> <input type="checkbox" ng-model="vm.contactDTO.contacts.dashboard">
             &nbspDashboard &nbsp </label>
 
 
@@ -297,10 +309,10 @@
 
             <input type="text" class="form-control input-sm" name="globalRestartImageSize"
                    id="field_globalRestartImageSize"
-                   ng-model="vm.contactDTO.contacts.globalRestartImageSize"
+                   ng-model="vm.contactDTO.contacts.globalRestartImageSize" readonly
             />
         </div>
-        <label class="small"> <input type="checkbox" ng-model="vm.contacts.internalAccessOnly">
+        <label class="small"> <input type="checkbox" ng-model="vm.contactDTO.contacts.internalAccessOnly">
             &nbspIn-house access only &nbsp </label>
         <!-- <label><input type="checkbox" class="form-control" name="internalAccessOnly"
                        id="field_internalAccessOnly"
@@ -315,17 +327,22 @@
 
             <input type="number" class="form-control input-sm" name="globalRestartImagesPerPage"
                    id="field_globalRestartImagesPerPage"
-                   ng-model="vm.contacts.globalRestartImagesPerPage"
+                   ng-model="vm.contactDTO.contacts.globalRestartImagesPerPage" readonly
             />
 
         </div>
-        <label class="small"> <input type="checkbox">
+        <label class="small"> <input type="checkbox" ng-model="vm.block" ng-click="vm.blocked()">
             &nbspBlock / Unblock Users &nbsp</label>
+        <span ng-if="vm.contactDTO.contacts.loginAttempt === 4"><div ng-init="vm.block = true"></div> </span>
+        <span ng-if="vm.contactDTO.contacts.loginAttempt === 0"><div ng-init="vm.block = false"></div> </span>
+        <span ng-if="vm.contactDTO.contacts.loginAttempt === 1"><div ng-init="vm.block = false"></div> </span>
+        <span ng-if="vm.contactDTO.contacts.loginAttempt === 2"><div ng-init="vm.block = false"></div> </span>
+        <span ng-if="vm.contactDTO.contacts.loginAttempt === 3"><div ng-init="vm.block = false"></div> </span>
     </div>
 
     <hr>
     <h4>Related Contacts &nbsp; &nbsp; <a href="" ng-click="vm.addRelated()"><span
-        class=" glyphicon glyphicon-plus-sign small text-primary "></span></a></h4>
+        class=" glyphicon glyphicon-plus-sign text-success "></span></a></h4>
     <div id="relatedContact">
         <!--<fieldset data-ng-repeat="item in related">-->
         <div

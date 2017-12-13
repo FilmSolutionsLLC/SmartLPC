@@ -5,9 +5,11 @@ import com.fps.domain.ContactPrivileges;
 import com.fps.domain.Projects;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Spring Data JPA repository for the ContactPrivileges entity.
@@ -38,4 +40,7 @@ public interface ContactPrivilegesRepository extends JpaRepository<ContactPrivil
 
 
     ContactPrivileges findByProjectAndContact(Projects projects, Contact contacts);
+
+    @Query("select contact from ContactPrivileges contactPrivileges where contactPrivileges.project.name like CONCAT('%',:project,'%') order by contactPrivileges.contact.fullName ASC ")
+    Set<Contact> findByProject(@Param("project") String project);
 }

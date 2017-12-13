@@ -370,7 +370,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
             workOrderListDTO.setType((String) workOrder.get("Type"));
             workOrderListDTO.setWorkDesc((String) workOrder.get("Work Description"));
             workOrderListDTO.setStatus((String) workOrder.get("Status"));
-            workOrderListDTO.setTime((Float) workOrder.get("Time(Hours)"));
+            workOrderListDTO.setTime(Float.parseFloat((String) workOrder.get("Time (Hours)")));
             workOrderListDTO.setAssignedTo((String) workOrder.get("Assigned To"));
             workOrderListDTO.setColor((String) workOrder.get("color"));
             // get only audit,invoice

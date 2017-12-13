@@ -12,6 +12,7 @@
         vm.workOrderDTO = entity;
         console.log(JSON.stringify(vm.workOrderDTO));
         vm.purchaseOrders = [];
+        vm.mailTo = "mailto:"+vm.workOrderDTO.workOrder.requestor.email;
         if(angular.equals(vm.workOrderDTO.workOrder.project,null)) {
 
         }else{

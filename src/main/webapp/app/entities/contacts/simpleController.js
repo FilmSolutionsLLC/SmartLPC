@@ -7,9 +7,9 @@
     angular
         .module('smartLpcApp')
         .controller('SimpleController', SimpleController);
-    SimpleController.$inject = ['$uibModal','sendID', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModalInstance', '$scope', '$state'];
+    SimpleController.$inject = ['$uibModal', 'sendID', '$http', '$rootScope', 'Contacts', 'Lookups', 'Departments', 'User', 'ContactsSearch', 'AlertService', '$uibModalInstance', '$scope', '$state'];
 
-    function SimpleController($uibModal ,sendID, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModalInstance, $scope, $state) {
+    function SimpleController($uibModal, sendID, $http, $rootScope, Contacts, Lookups, Departments, User, ContactsSearch, AlertService, $uibModalInstance, $scope, $state) {
 
 
         $rootScope.owner = null;
@@ -20,14 +20,39 @@
         vm.clear = clear;
         vm.search = search;
 
-        vm.url = "api/contacts?page=0&sort=id,asc";
+        vm.page = 0;
+        vm.url = "api/contacts?page=0&sort=fullName,asc";
         vm.searchUrl = "api/_search/contacts?query=";
 
         vm.selectedContact = selectedContact;
         vm.elementID = sendID;
-
+        vm.order = "asc";
+        vm.sortBy = "fullName"
         vm.loadAll();
 
+
+        vm.setSortOrder = function (field) {
+            console.log("Sorting by : " + field);
+            if (field === vm.sortBy) {
+                if (vm.order === 'asc') {
+                    vm.order = 'desc';
+                } else {
+                    vm.order = "asc";
+                }
+
+            } else {
+                vm.order;
+
+            }
+            vm.sortBy = field;
+
+
+            vm.url = "api/contacts?page=0&sort=".concat(field).concat(",").concat(vm.order);
+            console.log("URL : " + vm.url);
+            vm.searchUrl = "api/_search/contacts?query=";
+            vm.loadAll();
+
+        };
 
         function loadAll() {
 
@@ -47,11 +72,19 @@
                 $http({
                     method: 'GET',
                     url: vm.url
-                }).then(function successCallback(response) {
+                }).then(function mySuccess(response) {
                     vm.contactsDTO = response.data;
-                    vm.totalItems = response.headers('X-Total-Count');
+                    vm.totalItems =  response.headers('X-Total-Count');
+                    vm.queryCount = vm.totalItems;
 
-                }, function errorCallback(response) {
+                    console.log("Headers: "+JSON.stringify(response));
+
+
+                    console.log("vm.totalItems: "+(vm.totalItems));
+                    console.log("queryCount: "+(vm.queryCount));
+                    console.log("vm.page: "+(vm.page));
+
+                }, function myError(response) {
 
                 });
             }
@@ -68,6 +101,7 @@
             }
 
             function onSuccess(data, headers) {
+
 
                 vm.links = ParseLinks.parse(headers('link'));
 
@@ -87,7 +121,9 @@
         function transition() {
 
 
-            vm.url = "api/contacts?page=" + vm.page;
+            console.log("Page: ", vm.page-1);
+            vm.url = "api/contacts?page=" + (vm.page-1) + ("&sort=") + (vm.sortBy) + (',') + (vm.order);
+            console.log("transition url : " + vm.url);
             vm.loadAll();
         }
 
@@ -133,12 +169,9 @@
 
 
         /*
-
-
                 vm.search = function (searchQuery) {
                     console.log("search query : " + searchQuery);
                     $scope.data = [];
-
                     $http({
                         method: 'GET',
                         url: '/api/_search/contacts',
@@ -148,17 +181,13 @@
                         console.log("got data");
                         console.log(JSON.stringify($scope.contacts));
                         $scope.totalItems = $scope.data.length;
-
                         console.log("length : " + $scope.totalItems);
-
                     }, function errorCallback(response) {
                         console.log("error in getting data.");
                     });
                 };
-
                 vm.elementID = sendID;
                 console.log("data got form contact : " + vm.elementID);
-
                 $scope.data = [];
                 $http({
                     method: 'GET',
@@ -168,39 +197,30 @@
                     console.log("got data");
                     //console.log(JSON.stringify($scope.data));
                     $scope.totalItems = $scope.data.length;
-
                     console.log("length : " + $scope.totalItems);
-
                 }, function errorCallback(response) {
                     console.log("error in getting data.");
                 });
-
                 $scope.viewby = 5;
                 $scope.totalItems = $scope.data.length;
                 $scope.currentPage = 1;
                 $scope.itemsPerPage = $scope.viewby;
                 $scope.maxSize = 5; //Number of pager buttons to show
-
                 $scope.setPage = function (pageNo) {
                     $scope.currentPage = pageNo;
                 };
                 vm.clear = function () {
                     $uibModalInstance.dismiss('cancel');
                 };
-
                 $scope.pageChanged = function () {
                     console.log('Page changed to: ' + $scope.currentPage);
                 };
-
                 $scope.setItemsPerPage = function (num) {
                     $scope.itemsPerPage = num;
                     $scope.currentPage = 1; //reset to first paghe
                 };
-
-
                 $rootScope.relatedContacts = [];
                 vm.selectedContact = function (id) {
-
                     Contacts.get({id: id.id}, function (result) {
                         vm.companies = result.contacts;
                         $scope.currentOBJ = {
@@ -211,23 +231,14 @@
                         //$rootScope.relatedContacts.push(vm.companies);
                         //$rootScope.relatedContact = vm.relatedContacts;
                         //$rootScope.owner = vm.companies.fullName;
-
                         $rootScope.relationships = $scope.currentOBJ;
-
                         //console.log(JSON.stringify(vm.companies));
-
                         // console.log("....total related contacts : " + $rootScope.relatedContacts.length);
-
                         // console.log("owner : " + JSON.stringify($rootScope.owner));
-
-
                     });
                     $uibModalInstance.dismiss('cancel');
-
-
                     //$uibModalInstance.close({xxx: 'rohan'});
                 };
-
         */
 
         vm.addContact = function () {
@@ -308,7 +319,7 @@
 
 
         vm.clearCurrent = function () {
-          console.log("Remove Current");
+            console.log("Remove Current");
             $scope.currentOBJ = {
                 "elementID": vm.elementID,
                 "data": null
@@ -319,3 +330,7 @@
         };
     }
 })();
+
+
+
+

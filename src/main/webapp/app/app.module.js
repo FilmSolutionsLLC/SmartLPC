@@ -23,7 +23,8 @@
             'ui.select',
             'ngSanitize',
             'AngularPrint',
-            'cp.ngConfirm'
+            'cp.ngConfirm',
+            'sticky'
         ])
         .run(run);
 

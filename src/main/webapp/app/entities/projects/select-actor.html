@@ -12,18 +12,18 @@
     <table class="jh-table table table-striped">
         <tr>
 
-            <th class="small">Talent</th>
+            <th class="extra-small">Talent</th>
 
-            <th class="small"></th>
+            <th class="extra-small"></th>
         </tr>
 
         <tr ng-repeat="tags in vm.tagss.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy : 'tags.value'">
 
             <!--<td class="small"><input type="text" value="{{tags.type}}" ng-model="tags.type" class="input-xs"></td>
             <td class="small"><input type="text" value="{{tags.value}}" ng-model="tags.value" class="input-xs"></td>-->
-            <td class="small"><h5>{{tags.type}}</h5></td>
+            <td class="extra-small">{{tags.type}}</td>
 
-            <td class="text-right small">
+            <td class="text-right extra-small">
                 <div class="btn-group flex-btn-group-container">
 
                     <button type="button" class="btn btn-primary btn-xs" ng-click="vm.selectTalent($index)">

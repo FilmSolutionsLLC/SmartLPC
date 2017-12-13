@@ -14,7 +14,7 @@
         vm.lookupss = {};
         $http({
             method: 'GET',
-            url: '/api/lookups/projects/serverTasks'
+            url: 'api/lookups/projects/serverTasks'
         }).then(function successCallback(response) {
             vm.lookupss = response.data;
         }, function errorCallback(response) {

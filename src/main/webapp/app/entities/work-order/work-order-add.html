@@ -95,19 +95,23 @@
 </div>
 <p></p>-->
 
-<h2 align="center">Work-Order</h2>
+
 <!--working multiselect-->
 <form name="editForm" role="form" novalidate ng-submit="vm.save()">
-    <div class="row">
+    <div class="row fixed">
+
+
         <button type="button" class="btn btn-xs btn btn-primary"
                 ng-click="vm.save()">Save
         </button>
         <button type="button" class="btn btn-xs btn btn-primary" ng-click="vm.saveAndClose()">Save and Close</button>
         <button type="button" onclick="window.history.back()"
-                class="btn btn-xs btn btn-danger">Cancel
+                class="btn btn-xs btn btn-primary">Cancel
         </button>
 
     </div>
+
+    <h2 align="center">Work-Order</h2>
     <br>
 
     <div class="row">

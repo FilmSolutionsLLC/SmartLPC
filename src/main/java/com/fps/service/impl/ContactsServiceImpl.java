@@ -97,8 +97,8 @@ public class ContactsServiceImpl implements ContactsService {
     public Page<Contacts> findAll(Pageable pageable) {
         log.info("Request to get all Contacts");
         currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
-        Page<Contacts> result = contactsSearchRepository.findAll(pageable);
-       // Page<Contacts> result = contactsRepository.findAll(pageable);
+        //Page<Contacts> result = contactsSearchRepository.findAll(pageable);
+        Page<Contacts> result = contactsRepository.findAll(pageable);
 
         return result;
     }
@@ -115,7 +115,7 @@ public class ContactsServiceImpl implements ContactsService {
         currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
 
 
-        Contacts contacts = contactsSearchRepository.findOne(id);
+        Contacts contacts = contactsRepository.findOne(id);
 
 
         log.info(contacts.toString());

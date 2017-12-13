@@ -22,7 +22,7 @@
         $scope.reload = function () {
             $http({
                 method: 'GET',
-                url: '/api/running/ingest'
+                url: 'api/running/ingest'
             }).then(function successCallback(response) {
                 response.data.ingestStartTime = DateUtils.convertDateTimeFromServer(response.data.ingestStartTime);
                 vm.runningIngests = response.data;
@@ -31,10 +31,10 @@
             }, function errorCallback(response) {
 
             });
-            $timeout(function () {
+            /*$timeout(function () {
                 $scope.reload();
                 console.log("reloaded");
-            }, 5000)
+            }, 5000)*/
         };
         $scope.reload();
 

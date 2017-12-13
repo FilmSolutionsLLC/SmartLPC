@@ -26,6 +26,7 @@ Developement Ribbon
     background-position: center center;
     background-repeat: no-repeat;
     pointer-events: none;
+    opacity: 0.5;
 }
 
 /* ==========================================================================
@@ -71,7 +72,7 @@ Browser Upgrade Prompt
 .hipster {
     display: inline-block;
      width: 347px;
-    height: 497px; 
+    height: 497px;
     background: url("../images/logotest.png") no-repeat center top;
     background-size: contain;
 }

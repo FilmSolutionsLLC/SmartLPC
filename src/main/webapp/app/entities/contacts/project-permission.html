@@ -1,17 +1,25 @@
 <div class="container-full">
-    <h3 class="" align="center"><strong>Project(s) Permission(s)</strong></h3>
-    <div class="row">
-        <div class="col-sm-4"><h5><strong>{{vm.contactDTO.contacts.fullName}}</strong></h5></div>
-        <div class="col-sm-3 pull-right">
+    <div class="row fixed">
+        <div class="col-sm-3 ">
+
             <button class="btn btn-xs btn-primary"
                     ng-click="vm.openModalProject()">Add New Projects
             </button>
-            <button class="btn btn-xs btn-success" ng-click="vm.save()">Save
+            <button class="btn btn-xs btn-primary" ng-click="vm.save()">Save
                 All
             </button>
-            <button class="btn btn-xs btn-danger" onclick="window.history.back()">Close</button>
+            <button class="btn btn-xs btn-primary" onclick="window.history.back()">Close</button>
         </div>
+
+
+
     </div>
+
+    <h3 class="" align="center"><strong>Project(s) Permission(s)</strong></h3>
+    <div class="row">
+        <div class="col-sm-2"><h5><strong>{{vm.contactDTO.contacts.fullName}}</strong></h5></div>
+    </div>
+
     <br>
 
     <table class="table table-striped">

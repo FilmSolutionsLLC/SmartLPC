@@ -295,18 +295,62 @@
 
 
 		$scope.execs = [];
+
 		vm.addExec = function() {
-		    console.log("Adding exec");
+		    /*console.log("Adding exec");
 			var exec = $scope.execs.length + 1;
 			$scope.execs.push({
 				'id' : 'execs' + exec,
                 'exec': true
-			});
-		};
+			});*/
+
+            vm.execss.push({
+                "contact": null,
+                "exec": true,
+                "downloadType": 0,
+                "print": false,
+                "email": false,
+                "captioning": false,
+                "talentManagement": false,
+                "signoffManagement": false,
+                "releaseExclude": false,
+                "vendor": false,
+                "lockApproveRestriction": false,
+                "viewSensitive": false,
+                "exclusives": 0,
+                "seesUntagged": false,
+                "hasVideo": false,
+                "disabled": false,
+                "datgeditManagement": false,
+                "priorityPix": false,
+                "readOnly": false,
+                "restartColumns": 2,
+                "restartImageSize": 'Large',
+                "restartImagesPerPage": 20,
+                "showFinalizations": false,
+                "watermark": false,
+                "internal": false,
+                "globalAlbum": false,
+                "loginCount": 0,
+                "defaultAlbum": null,
+                "critiqueIt": false,
+                "adhocLink": false,
+                "retouch": false,
+                "fileUpload": false,
+                "deleteAssets": false,
+                "watermarkInnerTransparency": 0.00,
+                "watermarkOuterTransparency": 0.00,
+                "restartRole": 'EXEC'
+            });
+
+        };
+
 		vm.removeExec = function(index) {
 			vm.execss.splice(index, 1);
-			$scope.execs.splice(index, 1);
-		}
+			//$scope.execs.splice(index, 1);
+
+
+		};
 
 		vm.talents = [];
 
@@ -329,6 +373,7 @@
 										.log(" $rootScope.execsContactMultiple added to execss");
 
 								for (var i = 0; i < $rootScope.execsContactMultiple.length; i++) {
+
 									vm.execss
 											.push($rootScope.execsContactMultiple[i]);
 									console.log("added execss " + i);
@@ -419,6 +464,7 @@
 						"welcomeMessage" : ""
 					});
 
+
                     vm.execss.push({
                         "contact" : vm.currrentOBJ.data,
                         "exec" : false,
@@ -452,8 +498,12 @@
                         "adhocLink": false,
                         "retouch": false,
                         "fileUpload": false,
-                        "deleteAssets": false
+                        "deleteAssets": false,
+                        "watermarkInnerTransparency": 0.00,
+                        "watermarkOuterTransparency": 0.00,
+                        "restartRole": 'REVIEWER'
                     });
+
 
 					// get related too.
 					console.log(" get releated  : ", vm.currrentOBJ.data.id);
@@ -470,6 +520,7 @@
 							vm.relatedContact.length);
 				} else if (angular.equals(vm.currrentOBJ.elementID,
 						'field_vm.projects.execs')) {
+				    vm.execss.pop();
 					vm.execss.push({
 						"contact" : vm.currrentOBJ.data,
 						"exec" : true,
@@ -503,7 +554,10 @@
                         "adhocLink": false,
                         "retouch": false,
                         "fileUpload": false,
-                        "deleteAssets": false
+                        "deleteAssets": false,
+                        "watermarkInnerTransparency": 0.00,
+                        "watermarkOuterTransparency": 0.00,
+                        "restartRole": 'EXEC'
 					});
 				} else if (angular.equals(vm.currrentOBJ.elementID,
 						'relatedContact')) {
@@ -598,6 +652,7 @@
             }
             // vm.projectRoles.concat(vm.talents);
             console.log(" projectRoles : " + JSON.stringify(vm.projectRoles));
+
             vm.projectsDTO = {
                 "projects" : vm.projects,
                 "projectPurchaseOrderses" : vm.projectPurchaseOrderses,
@@ -605,9 +660,11 @@
                 "projectLabTaskses" : vm.projectLabTaskses,
                 "contactPrivileges" : vm.contactPrivileges
             };
+
+
             vm.isSaving = true;
             if (vm.projects.id !== null) {
-                Projects.update(vm.projects, onSaveSuccess2, onSaveError2);
+                Projects.update(vm.projects, onSaveSuccess2, onSaveError);
             } else {
 
                 console.log("==========================================");
@@ -675,12 +732,12 @@
                     id: null
                 };
 
-                Lookups.save(vm.newStatus, onSaveSuccess, onSaveError);
+                Lookups.save(vm.newStatus, onSaveSuccesss, onSaveError);
 
 
             }
         };
-        var onSaveSuccess = function (result) {
+        var onSaveSuccesss = function (result) {
             vm.status.push(result);
             console.log("GOT NEW STATUS : "+JSON.stringify(result));
             alert("New Status Created")
@@ -722,6 +779,7 @@
                 }
             })
         };
+
 
     }
 })();

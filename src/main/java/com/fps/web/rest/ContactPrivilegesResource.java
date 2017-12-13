@@ -3,16 +3,12 @@ package com.fps.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.fps.config.Constants;
 import com.fps.config.util.CurrentTenantIdentifierResolverImpl;
-import com.fps.domain.Contact;
-import com.fps.domain.ContactPrivileges;
-import com.fps.domain.Projects;
-import com.fps.domain.User;
+import com.fps.domain.*;
 import com.fps.elastics.search.ContactPrivilegesSearchRepository;
-import com.fps.repository.ContactPrivilegesRepository;
-import com.fps.repository.ContactRepository;
-import com.fps.repository.UserRepository;
+import com.fps.repository.*;
 import com.fps.security.SecurityUtils;
 import com.fps.web.rest.dto.ContactDTO;
+import com.fps.web.rest.dto.ContactPrivilegeDTO;
 import com.fps.web.rest.util.HeaderUtil;
 import com.fps.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -32,10 +28,7 @@ import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
@@ -64,6 +57,13 @@ public class ContactPrivilegesResource {
     private CurrentTenantIdentifierResolverImpl currentTenantIdentifierResolver;
 
     @Inject
+    private ContactPrivilegeAlbumsRepository contactPrivilegeAlbumsRepository;
+
+    @Inject
+    private ContactPrivilegeReviewersRepository contactPrivilegeReviewersRepository;
+
+
+    @Inject
     private JdbcTemplate jdbcTemplate;
 
     /**
@@ -90,7 +90,7 @@ public class ContactPrivilegesResource {
         contactPrivileges.setCreatedByAdminUser(user);
         ContactPrivileges result = contactPrivilegesRepository.save(contactPrivileges);
 
-        contactPrivilegesSearchRepository.save(result);
+        //contactPrivilegesSearchRepository.save(result);
 
         return ResponseEntity.created(new URI("/api/contact-privileges/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("contactPrivileges", result.getId().toString()))
@@ -145,7 +145,7 @@ public class ContactPrivilegesResource {
     }
 
     /**
-     * GET /contact-privileges/:id : get the "id" contactPrivileges.
+     * GET /contact-privileges/:id : get the "id" contactPrivilegeDTO.
      *
      * @param id the id of the contactPrivileges to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the
@@ -153,10 +153,19 @@ public class ContactPrivilegesResource {
      */
     @RequestMapping(value = "/contact-privileges/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<ContactPrivileges> getContactPrivileges(@PathVariable Long id) {
+    public ResponseEntity<ContactPrivilegeDTO> getContactPrivileges(@PathVariable Long id) {
         log.debug("REST request to get ContactPrivileges : {}", id);
         ContactPrivileges contactPrivileges = contactPrivilegesRepository.findOne(id);
-        return Optional.ofNullable(contactPrivileges).map(result -> new ResponseEntity<>(result, HttpStatus.OK))
+
+        final List<ContactPrivilegeAlbums> contactPrivilegeAlbums = contactPrivilegeAlbumsRepository.findByContactPrivilegeID(id);
+        final List<ContactPrivilegeReviewers> contactPrivilegeReviewers = contactPrivilegeReviewersRepository.findByContactPrivilegeID(id);
+
+        ContactPrivilegeDTO contactPrivilegeDTO = new ContactPrivilegeDTO();
+        contactPrivilegeDTO.setContactPrivileges(contactPrivileges);
+        contactPrivilegeDTO.setContactPrivilegeAlbums(contactPrivilegeAlbums);
+        contactPrivilegeDTO.setContactPrivilegeReviewers(contactPrivilegeReviewers);
+
+        return Optional.ofNullable(contactPrivilegeDTO).map(result -> new ResponseEntity<>(result, HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
@@ -219,7 +228,7 @@ public class ContactPrivilegesResource {
             "where p.name like '%" + query + "%' group by c.id order by c.full_name asc";
 
 
-        log.info("SQL Query: "+sql);
+        log.info("SQL Query: " + sql);
         List<ContactDTO> contactDTOS = new ArrayList<>();
         List<Map<String, Object>> contacts = jdbcTemplate.queryForList(sql);
         for (Map contact : contacts) {
@@ -239,35 +248,146 @@ public class ContactPrivilegesResource {
 
     @RequestMapping(value = "/get/contact/project", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ContactPrivileges getByContactAndProject(@RequestParam Long projectID,@RequestParam Long contactID) throws URISyntaxException{
+    public ContactPrivilegeDTO getByContactAndProject(@RequestParam Long projectID, @RequestParam Long contactID) throws URISyntaxException {
         log.info("Getting contact privilege from Contact and Project");
         currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
         Projects projects = new Projects();
         projects.setId(projectID);
         Contact contacts = new Contact();
         contacts.setId(contactID);
-        ContactPrivileges contactPrivileges = contactPrivilegesRepository.findByProjectAndContact(projects,contacts);
-        return contactPrivileges;
+        ContactPrivileges contactPrivileges = contactPrivilegesRepository.findByProjectAndContact(projects, contacts);
+
+
+        final List<ContactPrivilegeAlbums> contactPrivilegeAlbums = contactPrivilegeAlbumsRepository.findByContactPrivilegeID(contactPrivileges.getId());
+        final List<ContactPrivilegeReviewers> contactPrivilegeReviewers = contactPrivilegeReviewersRepository.findByContactPrivilegeID(contactPrivileges.getId());
+
+        ContactPrivilegeDTO contactPrivilegeDTO = new ContactPrivilegeDTO();
+        contactPrivilegeDTO.setContactPrivileges(contactPrivileges);
+        contactPrivilegeDTO.setContactPrivilegeAlbums(contactPrivilegeAlbums);
+        contactPrivilegeDTO.setContactPrivilegeReviewers(contactPrivilegeReviewers);
+
+        return contactPrivilegeDTO;
     }
 
     @RequestMapping(value = "/disable/execs/{project}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public void disableExecutives(@PathVariable Long project) throws URISyntaxException{
+    public void disableExecutives(@PathVariable Long project) throws URISyntaxException {
         log.info("disable contact privilege from Project");
         currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
-        String sql = "update contact_privileges set disabled = true where internal = 0 and project_id="+project;
+        String sql = "update contact_privileges set disabled = true where internal = 0 and project_id=" + project;
         jdbcTemplate.execute(sql);
 
     }
 
     @RequestMapping(value = "/enable/execs/{project}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public void enableExecutives(@PathVariable Long project) throws URISyntaxException{
+    public void enableExecutives(@PathVariable Long project) throws URISyntaxException {
         log.info("enable contact privilege from Project");
         currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
-        String sql = "update contact_privileges set disabled = false where internal = 0 and project_id="+project;
+        String sql = "update contact_privileges set disabled = false where internal = 0 and project_id=" + project;
         jdbcTemplate.execute(sql);
 
+    }
+
+
+    @RequestMapping(value = "/cp/projects/{type}/{query}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public Set<Contact> findContactByProjects(@PathVariable String type, @PathVariable String query) throws URISyntaxException {
+        log.info("enable contact privilege from Project");
+        currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
+        Set<Contact> contactList = contactPrivilegesRepository.findByProject(query);
+
+        return contactList;
+    }
+
+
+    /**
+     * POST /contact-privileges : Create a new contactPrivilegesDTO.
+     *
+     * @param contactPrivilegeDTO the contactPrivileges to create
+     * @return the ResponseEntity with status 201 (Created) and with body the
+     * new contactPrivileges, or with status 400 (Bad Request) if the
+     * contactPrivileges has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @RequestMapping(value = "/dto/contact-privileges", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<ContactPrivileges> updateContactPrivilegesDTO(@RequestBody ContactPrivilegeDTO contactPrivilegeDTO)
+        throws URISyntaxException {
+        log.debug("REST request to update ContactPrivileges : {}", contactPrivilegeDTO);
+        ContactPrivileges contactPrivileges = contactPrivilegeDTO.getContactPrivileges();
+        List<ContactPrivilegeAlbums> contactPrivilegeAlbums = contactPrivilegeDTO.getContactPrivilegeAlbums();
+        List<ContactPrivilegeReviewers> contactPrivilegeReviewers = contactPrivilegeDTO.getContactPrivilegeReviewers();
+
+        final User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        contactPrivileges.setUpdatedDate(ZonedDateTime.now());
+        contactPrivileges.setUpdatedByAdminUser(user);
+        ContactPrivileges result = contactPrivilegesRepository.save(contactPrivileges);
+        if (contactPrivilegeAlbums.size() > 0) {
+            contactPrivilegeAlbumsRepository.save(contactPrivilegeAlbums);
+        }
+        if (contactPrivilegeReviewers.size() > 0) {
+            contactPrivilegeReviewersRepository.save(contactPrivilegeReviewers);
+        }
+
+
+        log.info("Saved Contact Privilege");
+        log.info("Saved Contact Privilege Albums");
+        log.info("Saved Contact Privilege Reviewers");
+
+        //contactPrivilegesSearchRepository.save(result);
+
+        return ResponseEntity.created(new URI("/api/contact-privileges/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert("contactPrivileges", result.getId().toString()))
+            .body(result);
+    }
+
+
+    @RequestMapping(value = "/delete/contact-privileges/albums", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public void deleteAlbums(@RequestBody List<ContactPrivilegeAlbums> contactPrivilegeAlbums)
+        throws URISyntaxException {
+        log.info("Rest Request to remove albums associated with Exec");
+        for (ContactPrivilegeAlbums contactPrivilegeAlbum : contactPrivilegeAlbums) {
+            contactPrivilegeAlbumsRepository.deleteContactPrivilegeAlbumsByContactPrivilegeIDAndAlbumNodeID(contactPrivilegeAlbum.getContactPrivilegeID(), contactPrivilegeAlbum.getAlbumNodeID());
+        }
+        log.info("Albums Removed");
+    }
+
+    @RequestMapping(value = "/delete/contact-privileges/reviewers", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public void deleteReviewers(@RequestBody List<ContactPrivilegeReviewers> contactPrivilegeReviewers)
+        throws URISyntaxException {
+        log.info("Rest Request to remove actors associated with Exec");
+        for (ContactPrivilegeReviewers contactPrivilegeReviewer : contactPrivilegeReviewers) {
+            contactPrivilegeReviewersRepository.deleteContactPrivilegeReviewersByContactPrivilegeIDAndTagID(contactPrivilegeReviewer.getContactPrivilegeID(), contactPrivilegeReviewer.getTagID());
+        }
+        log.info("Reviewers Removed");
+    }
+
+
+    @RequestMapping(value = "/restart/clear", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public void restartClear(@RequestParam Long id, @RequestParam Boolean isAll) throws URISyntaxException {
+        log.info("clear restart data");
+        String sql = "";
+        sql += " UPDATE contact_privileges ";
+        sql += " SET  ";
+        sql += " last_login_dt=null, ";
+        sql += " restart_role='', ";
+        sql += " restart_image='', ";
+        sql += " restart_page=0, ";
+        sql += " restart_filter='', ";
+        sql += " login_count=0 ";
+        sql += " WHERE ";
+        if (isAll) {
+            sql += " project_id = ? ";
+        } else {
+            sql += " id = ?";
+        }
+
+        currentTenantIdentifierResolver.setTenant(Constants.MASTER_DATABASE);
+        jdbcTemplate.update(sql,id );
     }
 
 

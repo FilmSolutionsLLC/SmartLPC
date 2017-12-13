@@ -128,15 +128,12 @@ public class Contacts implements Serializable {
 	private String loginIp;
 
 	@Column(name = "login_attempt")
-	@JsonIgnore
 	private Integer loginAttempt;
 
 	@Column(name = "attempt_based_login")
-	@JsonIgnore
 	private Boolean attemptBasedLogin;
 
 	@Column(name = "ip_based_login")
-	@JsonIgnore
 	private Boolean ipBasedLogin;
 
 	@ManyToOne

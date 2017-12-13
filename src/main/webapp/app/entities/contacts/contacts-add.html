@@ -1,11 +1,11 @@
 
-<h2 align="center">Contacts</h2>
 
 <form name="editForm" role="form" novalidate>
 
 
-    <div class="row">
-        <div class="col-xs-12">
+    <div class="row fixed">
+        <br>
+        <div class="col-xs-12"  >
 
             <button type="submit" class="btn btn-xs btn btn-primary"
                     ng-disabled="editForm.$invalid || isSaving" ng-click="vm.save() ">Save
@@ -18,9 +18,11 @@
 
             <button type="button" ui-sref="contacts.project-permission({id:savedID})" class="btn btn-xs btn btn-primary">Project Permissions</button>
 
-            <a href="#" class="btn btn-xs btn btn-danger">Close</a>
+            <a href="#" class="btn btn-xs btn btn-primary">Close</a>
         </div>
     </div>
+
+    <h2 align="center">Contacts</h2>
 
     <br>
 
@@ -54,7 +56,7 @@
 
 
                 <input type="text" class="form-control input-sm" name="fullName" id="field_fullName"
-                       ng-model="vm.contacts.fullName"
+                       ng-model="vm.contacts.fullName" autofocus="autofocus"
                 />
             </div>
 
@@ -316,7 +318,7 @@
             />
 
         </div>
-        <label class="small"> <input type="checkbox">
+        <label class="small"> <input type="checkbox" ng-model="vm.block" ng-click="vm.blockUser()">
             &nbspBlock / Unblock Users &nbsp</label>
     </div>
 

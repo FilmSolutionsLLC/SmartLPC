@@ -1,37 +1,43 @@
 <div print-section>
 
-    <div class="row">
-        <div class="col-sm-3">
-            <h4>
-                <span translate="smartLpcApp.projects.detail.title">Project</span> <strong>#{{vm.projectsDTO.projects.id}}
-                - {{vm.projectsDTO.projects.name}}</strong>
-            </h4>
+    <div class="fixed">
+        <div class="row">
+            <div class="col-sm-3">
+                <h4>
+                    <span translate="smartLpcApp.projects.detail.title">Project</span> <strong>#{{vm.projectsDTO.projects.id}}
+                    - {{vm.projectsDTO.projects.name}}</strong>
+                </h4>
+            </div>
         </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-sm-10">
-            <button print-btn class="btn btn-xs btn btn-primary">Print</button>
-            <button type="submit"
+
+        <div class="row ">
+            <div id="sticky-anchor"></div>
+
+            <div class="col-sm-10">
+                <button print-btn class="btn btn-xs btn btn-primary">Print</button>
+                <button type="submit"
+                        ui-sref="projects.edit({id:vm.projectsDTO.projects.id})"
+                        ui-sref-opts="{reload: true, notify: true}"
+                        class="btn btn-xs btn btn-primary">Edit
+                </button>
+
+                <!-- <button type="submit"
                     ui-sref="projects.edit({id:vm.projectsDTO.projects.id})"
                     ui-sref-opts="{reload: true, notify: true}"
-                    class="btn btn-xs btn btn-primary">Edit
-            </button>
+                    class="btn btn-xs btn btn-primary">Add Similar</button>
+                     -->
+                <button type="button"
+                        ng-click="vm.addSimilar(vm.projectsDTO.projects.id)"
+                        class="btn btn-xs btn btn-primary">Add Similar
+                </button>
 
-            <!-- <button type="submit"
-                ui-sref="projects.edit({id:vm.projectsDTO.projects.id})"
-                ui-sref-opts="{reload: true, notify: true}"
-                class="btn btn-xs btn btn-primary">Add Similar</button>
-                 -->
-            <button type="button"
-                    ng-click="vm.addSimilar(vm.projectsDTO.projects.id)"
-                    class="btn btn-xs btn btn-primary">Add Similar
-            </button>
+                <button type="button" onclick="window.history.back()"
+                        class="btn btn-xs btn btn-primary">Cancel
+                </button>
+            </div>
 
-            <button type="button" onclick="window.history.back()"
-                    class="btn btn-xs btn btn-danger">Cancel
-            </button>
         </div>
+
     </div>
     <hr>
     <div class="row">
@@ -62,8 +68,8 @@
             <h5>
                 <strong><span translate="smartLpcApp.projects.labFlag">LabFlag</span></strong>
 
-                <span ng-if="vm.projectsDTO.projects.runOfShowFlag === true">Yes</span>
-                <span ng-if="vm.projectsDTO.projects.runOfShowFlag === false">No</span>
+                <span ng-if="vm.projectsDTO.projects.labFlag === true">Yes</span>
+                <span ng-if="vm.projectsDTO.projects.labFlag === false">No</span>
             </h5>
         </div>
     </div>
@@ -167,7 +173,9 @@
             <h5>
                 <strong><span
                     translate="smartLpcApp.projects.unitPhotographerOverride">UnitPhotographerOverride</span></strong>
-                <span>{{vm.projectsDTO.projects.unitPhotographerOverride}}</span>
+
+                <span ng-if="vm.projectsDTO.projects.unitPhotographerOverride === true">Yes</span>
+                <span ng-if="vm.projectsDTO.projects.unitPhotographerOverride === false">No</span>
             </h5>
         </div>
     </div>
@@ -181,121 +189,127 @@
         </div>
     </div>
     <hr>
-    <div class="row">
-        <div class="col-sm-3">
-            <h4>
-                <strong>RUN OF SHOW PURCHASE ORDERS</strong>
-            </h4>
+    <div ng-if="vm.projectsDTO.projects.runOfShowFlag === true">
+        <div class="row">
+            <div class="col-sm-3">
+                <h4>
+                    <strong>RUN OF SHOW PURCHASE ORDERS</strong>
+                </h4>
+            </div>
         </div>
+        <div
+            ng-repeat="po in vm.projectsDTO.projectPurchaseOrderses track by po.id">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h5>
+                        <strong>PO{{$index + 1}} : </strong>{{po.po_number}} <strong>
+                        | </strong> {{ po.po_notes}}
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+        <hr>
     </div>
-    <div
-        ng-repeat="po in vm.projectsDTO.projectPurchaseOrderses track by po.id">
+    <div ng-if="vm.projectsDTO.projects.labFlag === true">
+        <div class="row">
+            <div class="col-sm-3">
+                <h4>
+                    <strong>PROJECT PROCESSING PROFILE</strong>
+                </h4>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-8">
                 <h5>
-                    <strong>PO{{$index + 1}} : </strong>{{po.po_number}} <strong>
-                    | </strong> {{ po.po_notes}}
+                    <strong><span
+                        translate="smartLpcApp.projects.processingDeliveries">ProcessingDeliveries</span></strong>
+                    <span>{{vm.projectsDTO.projects.processingDeliveries}}</span>
                 </h5>
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-sm-3">
-            <h4>
-                <strong>PROJECT PROCESSING PROFILE</strong>
-            </h4>
+        <div class="row">
+            <div class="col-sm-8">
+                <h5>
+                    <strong><span
+                        translate="smartLpcApp.projects.processingSpecialInstructions">ProcessingSpecialInstructions</span></strong>
+                    <span>{{vm.projectsDTO.projects.processingSpecialInstructions}}</span>
+                </h5>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-8">
-            <h5>
-                <strong><span
-                    translate="smartLpcApp.projects.processingDeliveries">ProcessingDeliveries</span></strong>
-                <span>{{vm.projectsDTO.projects.processingDeliveries}}</span>
-            </h5>
+        <div class="row">
+            <div class="col-sm-8">
+                <h5>
+                    <strong><span
+                        translate="smartLpcApp.projects.processingWatermark">ProcessingWatermark</span></strong>
+                    <span>{{vm.projectsDTO.projects.processingWatermark}}</span>
+                </h5>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-8">
-            <h5>
-                <strong><span
-                    translate="smartLpcApp.projects.processingSpecialInstructions">ProcessingSpecialInstructions</span></strong>
-                <span>{{vm.projectsDTO.projects.processingSpecialInstructions}}</span>
-            </h5>
+        <div class="row">
+            <div class="col-sm-8">
+                <h5>
+                    <strong><span
+                        translate="smartLpcApp.projects.processingCopyright">ProcessingCopyright</span></strong>
+                    <span>{{vm.projectsDTO.projects.processingCopyright}}</span>
+                </h5>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-8">
-            <h5>
-                <strong><span
-                    translate="smartLpcApp.projects.processingWatermark">ProcessingWatermark</span></strong>
-                <span>{{vm.projectsDTO.projects.processingWatermark}}</span>
-            </h5>
+        <div class="row">
+            <div class="col-sm-8">
+                <h5>
+                    <strong><span
+                        translate="smartLpcApp.projects.processingOriginalFileType">ProcessingOriginalFileType</span></strong>
+                    {{vm.projectsDTO.projects.processingOriginalFileType.textValue}}
+                </h5>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-8">
-            <h5>
-                <strong><span
-                    translate="smartLpcApp.projects.processingCopyright">ProcessingCopyright</span></strong>
-                <span>{{vm.projectsDTO.projects.processingCopyright}}</span>
-            </h5>
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <h4>
+                    <strong>LAB TASKS</strong>
+                </h4>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-8">
-            <h5>
-                <strong><span
-                    translate="smartLpcApp.projects.processingOriginalFileType">ProcessingOriginalFileType</span></strong>
-                {{vm.projectsDTO.projects.processingOriginalFileType.textValue}}
-            </h5>
+        <div
+            ng-repeat="labs in vm.projectsDTO.projectLabTaskses track by labs.id">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>{{$index+1}} : </strong>{{labs.task_name.textValue}}
+                    </h5>
+                </div>
+            </div>
         </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-sm-3">
-            <h4>
-                <strong>LAB TASKS</strong>
-            </h4>
-        </div>
-    </div>
-    <div
-        ng-repeat="labs in vm.projectsDTO.projectLabTaskses track by labs.id">
         <div class="row">
             <div class="col-sm-3">
                 <h5>
-                    <strong>{{$index}} : </strong>{{labs.task_name.textValue}}
+                    <strong><span
+                        translate="smartLpcApp.projects.labProofNotes">LabProofNotes</span></strong>
+                    <span>{{vm.projectsDTO.projects.labProofNotes}}</span>
                 </h5>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <h5>
-                <strong><span
-                    translate="smartLpcApp.projects.labProofNotes">LabProofNotes</span></strong>
-                <span>{{vm.projectsDTO.projects.labProofNotes}}</span>
-            </h5>
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>
+                    <strong><span
+                        translate="smartLpcApp.projects.labLastProofImageNumber">LabLastProofImageNumber</span></strong>
+                    <span>{{vm.projectsDTO.projects.labLastProofImageNumber}}</span>
+                </h5>
+            </div>
+            <div class="col-sm-3">
+                <h5>
+                    <strong><span
+                        translate="smartLpcApp.projects.labLastProofPageNumber">LabLastProofPageNumber</span></strong>
+                    <span>{{vm.projectsDTO.projects.labLastProofPageNumber}}</span>
+                </h5>
+            </div>
         </div>
+        <hr>
     </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <h5>
-                <strong><span
-                    translate="smartLpcApp.projects.labLastProofImageNumber">LabLastProofImageNumber</span></strong>
-                <span>{{vm.projectsDTO.projects.labLastProofImageNumber}}</span>
-            </h5>
-        </div>
-        <div class="col-sm-3">
-            <h5>
-                <strong><span
-                    translate="smartLpcApp.projects.labLastProofPageNumber">LabLastProofPageNumber</span></strong>
-                <span>{{vm.projectsDTO.projects.labLastProofPageNumber}}</span>
-            </h5>
-        </div>
-    </div>
-    <hr>
     <div class="row">
         <div class="col-sm-3">
             <h4>
@@ -556,9 +570,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-8">
             <h5>
-                <strong>Notes : </strong> <span>{{vm.projectsDTO.projects.legacyNameNotes}}</span>
+                <strong>Notes : </strong> <span>{{vm.projectsDTO.projects.projectInfoNotes}}</span>
             </h5>
         </div>
     </div>
@@ -648,16 +662,17 @@
             </h4>
         </div>
     </div>
+
     <div class="table-responsive">
         <table class="jh-table table table-condensed table-striped">
             <tr>
 
                 <th>
-                   <!-- <h5>
-                        <a href ng-click="vm.sendMail(vm.projectsDTO.projectRoles)"> <strong>Mail
-                            All</strong>
-                        </a>
-                    </h5>-->
+                    <!-- <h5>
+                         <a href ng-click="vm.sendMail(vm.projectsDTO.projectRoles)"> <strong>Mail
+                             All</strong>
+                         </a>
+                     </h5>-->
                 </th>
                 <th>
                     <h5>
@@ -703,7 +718,10 @@
                 </td>
                 <td>
                     <h5 class="small">
-                        {{tags.contact.fullName}}
+                        <span ng-repeat="execs in vm.projectsDTO.contactPrivileges | filter:{contact:tags.contact}">
+                        <span ng-if="execs.disabled == true"><span class="text-danger">{{tags.contact.fullName}}</span> </span>
+                        <span ng-if="execs.disabled == false">{{tags.contact.fullName}}</span>
+                        </span>
                         <!--<a ui-sref="contacts-detail({id:tags.contact.id})">{{tags.contact.fullName}}</a>-->
                     </h5>
                 </td>
@@ -720,11 +738,14 @@
                     <h5 class="small">{{tags.groupKillPct}}</h5>
                 </td>
                 <td>
-                    <div ng-if="tags.disabled == true">
+
+                    <span ng-repeat="execs in vm.projectsDTO.contactPrivileges | filter:{contact:tags.contact}">
+                    <div ng-if="execs.disabled == true">
                         <h5 class="small">
                             <strong>X</strong>
                         </h5>
                     </div>
+                    </span>
                 </td>
             </tr>
         </table>
@@ -736,6 +757,7 @@
             </h5>
         </div>
     </div>
+    <hr>
     <div class="row">
         <div class="col-sm-3">
             <h4>
@@ -746,7 +768,7 @@
 
     <div class="table-responsive">
         <table
-            class="jh-table table table-condensed table-striped header-fixed">
+            class="jh-table table table-condensed table-striped">
             <thead>
             <tr>
                 <th>
@@ -829,8 +851,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges | filter:{exec:true}">
-                <td>
+            <!--<tr ng-repeat="execs in vm.projectsDTO.contactPrivileges | filter:{exec:true}">-->
+            <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges" ng-if="execs.exec === true || execs.restartRole ==='ALBUMVIEWER'">
+               <td>
                     <h5 class="small">
                         <!--<a href="" ng-click="vm.sendIndividualMail(execs)"><span
                             class=" glyphicon glyphicon-envelope small text-success"></span></a>-->
@@ -839,7 +862,9 @@
                 </td>
                 <td>
                     <h5 class="small">
-                        {{execs.contact.fullName}}
+                        <span ng-if="execs.disabled == true"><span class="text-danger">{{execs.contact.fullName}}</span> </span>
+                        <span ng-if="execs.disabled == false">{{execs.contact.fullName}}</span>
+
                         <!--<a ui-sref="contacts-detail({id:execs.contact.id})">{{execs.contact.fullName}}</a>-->
                     </h5>
                 </td>
@@ -1060,8 +1085,7 @@
                                              <strong>Mobile: </strong> {{related.contact_b.phoneMobile}}
                                          </h5>
                                      </div>
-                                 </div>
-                                 <div class="row">
+                                 </div>rer                                 <div class="row">
                                      <div class="col-sm-3">
                                          <h5>
                                              <strong>Asst Notes/Notes: </strong> {{related.contact_b.notes}}

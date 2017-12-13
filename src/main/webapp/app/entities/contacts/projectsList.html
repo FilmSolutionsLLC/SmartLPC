@@ -3,9 +3,12 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
             ng-click="vm.clear()">&times;
     </button>
+
     <div class="row">
-        <button type="button" class="btn btn-xs btn-primary" ng-click="vm.save()">Save</button>
-        <button type="button" class="btn btn-xs btn-danger" ng-click="vm.clear()">Cancel</button>
+        <div sticky>
+            <button type="button" class="btn btn-xs btn-primary" ng-click="vm.save()">Save</button>
+            <button type="button" class="btn btn-xs btn-primary" ng-click="vm.clear()">Cancel</button>
+        </div>
     </div>
 
 
@@ -62,7 +65,8 @@
                             <select ng-model="vm.downloadType"
                                     ng-init="vm.downloadType = vm.downloadTypeList[0].id"
                                     ng-options="download.id as download.value for download in vm.downloadTypeList">
-                                <option>{{download.value}}</option></select>
+                                <option>{{download.value}}</option>
+                            </select>
                         </td>
 
 
@@ -198,7 +202,8 @@
                             class="glyphicon glyphicon-plus-sign text-danger small"></span></a></h5>
                     </div>-->
                     <div class="col-sm-9">
-                        <small><input type="text" class="input-xs" ng-model="vm.searchQuery"></small>
+                        <small><input type="text" class="input-xs" ng-model="vm.searchQuery" autofocus="autofocus">
+                        </small>
 
                         <button type="submit" class="btn btn-xs btn-primary"
                                 ng-click="vm.searchProject(vm.searchQuery)">

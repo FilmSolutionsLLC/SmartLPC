@@ -2,6 +2,7 @@ package com.fps.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.fps.config.util.CurrentTenantIdentifierResolverImpl;
+import com.fps.domain.Contact;
 import com.fps.domain.ProjectRoles;
 import com.fps.domain.User;
 import com.fps.elastics.search.ProjectRolesSearchRepository;
@@ -82,11 +83,13 @@ public class ProjectRolesResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("projectRoles", "idexists", "A new projectRoles cannot already have an ID")).body(null);
         }
         currentTenantIdentifierResolver.setTenant(MASTER);
-       /* if (projectRoles.getContact() == null) {
-            Contacts contacts = contactsRepository.findOne((long) 5181);
-            projectRoles.setContact(contacts);
+        if (projectRoles.getContact() == null) {
+            Contact contact = new Contact();
+            contact.setId((long)5181);
+            projectRoles.setContact(contact);
             projectRoles.setRelationship_type("PKO_Tag");
-        }*/
+            projectRoles.setDisabled(true);
+        }
         User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
 
         projectRoles.setCreatedByAdminUser(user);

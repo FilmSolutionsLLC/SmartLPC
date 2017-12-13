@@ -139,7 +139,7 @@
 
             $rootScope.selectedAlbum = $scope.currentOBJ;
             console.log("Selected albums : " + JSON.stringify($rootScope.selectedAlbum));
-            $uibModalInstance.dismiss('cancel');
+            $uibModalInstance.close($scope.currentOBJ);
 
         };
 

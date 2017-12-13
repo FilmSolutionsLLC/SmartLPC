@@ -97,6 +97,12 @@ public final class Constants {
     public static final String LOW = "LOW";
 
 
+    public static final String[] ALBUM_NAME = {"Custom_1_Album", "Custom_2_Album", "Custom_3_Album", "Custom_4_Album", "Custom_5_Album",
+        "Custom_6_Album", "Custom_7_Album", "Custom_8_Album", "Custom_9_Album",};
+
+    public static final String[] ALBUM_DESCRIPTION = {"Filmmaker Selects", "Publicity", "Creative Advertising", "Internet Marketing",
+        "Product Placement", "Promotions", "Int'l Publicity", "Int'l Advertising", "Unit Publicist Selects"};
+
     private Constants() {
     }
 }

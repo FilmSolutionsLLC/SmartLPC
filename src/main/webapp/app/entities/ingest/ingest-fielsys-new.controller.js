@@ -19,6 +19,7 @@
             method: 'GET',
             url: 'api/filesystem/ingest'
         }).then(function successCallback(response) {
+            console.log("Gettting all ingests")
             vm.newIngests = response.data;
             console.log(JSON.stringify(vm.newIngests));
             $scope.totalItems = vm.newIngests.length;
@@ -26,12 +27,11 @@
 
         });
 
-
-        vm.logos = [];
         $http({
             method: 'GET',
-            url: '/api/logos/ingest'
+            url: 'api/logos/ingest'
         }).then(function successCallback(response) {
+            console.log("Getting all logos");
             vm.logos = response.data;
             vm.logos.splice(0, 0, "NONE");
             console.log(JSON.stringify(vm.logos));
@@ -39,7 +39,6 @@
         }, function errorCallback(response) {
 
         });
-
 
         $scope.viewby = 10;
 
@@ -99,7 +98,7 @@
             }
             $http({
                 method: 'POST',
-                url: '/api/filesystem/ingest',
+                url: 'api/filesystem/ingest',
                 data: ingests
             }).then(function successCallback(response) {
                 console.log("POST successful");

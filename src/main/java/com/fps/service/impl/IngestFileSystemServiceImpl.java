@@ -79,6 +79,7 @@ public class IngestFileSystemServiceImpl implements IngestFileSystemService {
 	 */
 	public Set<IngestFileSystem> newIngests() {
 
+	    log.info("Scanning for new ingests");
 		Set<IngestFileSystem> allNewIngest = new HashSet<>();
 		// final List<Lookups> scratchServers =
 		// lookupsRepository.findByTableNameAndFieldName(Constants.CONFIG,
@@ -290,6 +291,7 @@ public class IngestFileSystemServiceImpl implements IngestFileSystemService {
 
 		final String createFileCommand = "ssh " + username.getTextValue() + "@" + ingestTouchFileServer.getTextValue()
 				+ " touch -a " + ingestTouchFileLocation.getTextValue() + "/" + tokenFile;
+
 		log.info("createFileCommand command : " + createFileCommand);
 		try {
 			final Integer fileCreated = shellCommandRunner.executeForStatusCode(createFileCommand);
@@ -319,7 +321,7 @@ public class IngestFileSystemServiceImpl implements IngestFileSystemService {
 
 	// ssh $ingestprocessorIP kill -TSTP $PID_OF_PROCESS
 	/**
-	 * 
+	 *
 	 */
 	public void pause(Ingests ingests) {
 		ingests.setStatus(Constants.PAUSED);

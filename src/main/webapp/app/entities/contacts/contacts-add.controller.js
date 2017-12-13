@@ -117,6 +117,7 @@
                         text: 'Okay',
                         btnClass: 'btn-green',
                         action: function () {
+                            $state.go('contacts-detail', {id:result.id}, {reload: true});
                         }
                     }
                 }
@@ -142,7 +143,7 @@
                         text: 'Okay',
                         btnClass: 'btn-green',
                         action: function () {
-                            $state.reload();
+                            $state.go("contact");
                             vm.contactsDTO = null;
                         }
                     }
@@ -290,5 +291,16 @@
                 }
             })
         };
+
+
+        vm.blockUser = function () {
+            console.log("Block User : "+vm.block);
+            if(vm.block === true) {
+                vm.contacts.loginAttempt = 4;
+            }else{
+                vm.contacts.loginAttempt = 0;
+            }
+        };
+
     }
 })();

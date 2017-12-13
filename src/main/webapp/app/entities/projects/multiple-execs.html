@@ -172,7 +172,7 @@
                                     </select>
                                 </td>
                             </tr>
-                            <tr>
+                            <!--<tr>
                                 <td class="extra-small">Exclusives:</td>
                                 <td class="small">
                                     <select ng-model="vm.exclusives" ng-init="vm.exclusives=0">
@@ -183,7 +183,7 @@
                                         <option value="2" class="extra-small">MASTER</option>
                                     </select>
                                 </td>
-                            </tr>
+                            </tr>-->
                             <tr>
                                 <td class="extra-small">User can Print:</td>
                                 <td class="extra-small"><input type="checkbox" ng-model="vm.print"
@@ -255,7 +255,7 @@
                         <table>
                             <tr>
                                 <td class="extra-small">Project Name:</td>
-                                <td><input type="text" class="input-xs"></td>
+                                <td><input type="text" class="input-xs" ng-model="vm.filterQuery"></td>
                             </tr>
                             <tr>
                                 <td class="extra-small">Contact Company:</td>
@@ -274,7 +274,7 @@
                                 <td><input type="text" class="input-xs"></td>
                             </tr>
                         </table>
-                        <button type="button" class="btn btn-primary btn-xs">Add Filter</button>
+                        <button type="button" class="btn btn-primary btn-xs" ng-click="vm.runFilter()">Run Filter</button>
                     </div>
                 </div>
 

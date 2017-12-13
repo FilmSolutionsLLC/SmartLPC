@@ -1,0 +1,41 @@
+{
+  "name": "kissui.position",
+  "description": "Track element(s) on the page like a boss.",
+  "main": "position.js",
+  "authors": [
+    "Afshin Mehrabani"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "html5",
+    "html",
+    "track",
+    "css",
+    "position",
+    "kissui",
+    "tracking"
+  ],
+  "homepage": "https://github.com/usablica/kissui.position",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "0.5.0",
+  "_release": "0.5.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.5.0",
+    "commit": "2aec2fe52aea4bcc688d1b4d89a27480a5ec3270"
+  },
+  "_source": "https://github.com/usablica/kissui.position.git",
+  "_target": "^0.5.0",
+  "_originalSource": "kissui.position",
+  "_direct": true
+}

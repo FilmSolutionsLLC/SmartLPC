@@ -1,19 +1,22 @@
-<h2 align="center">Project</h2>
+
 
 <form name="editForm" role="form" novalidate ng-submit="vm.save()">
 
-    <div class="row">
-        <div class="col-xs-4">
-            <button type="submit" class="btn btn-xs btn btn-success" ng-disabled="editForm.$invalid || isSaving">Save</button>
+    <div class="row fi">
+        <div class="col-xs-4" >
+
+        <button type="submit" class="btn btn-xs btn btn-primary" ng-disabled="editForm.$invalid || isSaving">Save</button>
             <button type="button" ng-click="vm.saveAndClose()" class="btn btn-xs btn btn-primary">Save and Close</button>
             <button type="button" ng-click="vm.saveAndClose()" class="btn btn-xs btn btn-primary">Save and Add</button>
             <button type="button" class="btn btn-xs btn btn-primary">Disable</button>
-            <a href="#" class="btn btn-xs btn btn-danger">Close</a>
+            <a href="#" class="btn btn-xs btn btn-primary">Close</a>
             <button type="button" class="btn btn-xs btn btn-primary" ng-click="vm.getCount(vm.projectsDTO.projects)">GBCount</button>
 
         </div>
 
     </div>
+    <br>
+    <h2 align="center">Project</h2>
     <br>
 
     <div class="row">
@@ -55,7 +58,7 @@
         </label>
         <div class="col-sm-2">
             <input id="field_fullName" type="text" placeholder="" ng-model="vm.projects.fullName"
-                   class="form-control input-sm">
+                   class="form-control input-sm" autofocus="autofocus">
         </div>
 
         <label class="col-md-1 control-label small" for="field_vm.projects.owner">Owner</label>
@@ -233,8 +236,8 @@
         <label class="col-md-1 control-label small" for="field_projectHistory">Project History
         </label>
         <div class="col-sm-11">
-            <input id="field_projectHistory" name="projectHistory" type="text"
-                   ng-model="vm.projectsDTO.projects.projectHistory" class="form-control input-sm">
+            <textarea id="field_projectHistory" name="projectHistory"  rows="2"
+                      ng-model="vm.projectsDTO.projects.notes" class="form-control input-sm"></textarea>
         </div>
     </div>
 
@@ -1142,7 +1145,7 @@
 
         <label class="col-md-1 control-label small" for="textinput">Notes</label>
         <div class="col-xs-7">
-            <textarea class="form-control input-sm" rows="1" id="textinput"></textarea>
+            <textarea class="form-control input-sm" rows="1" ng-model="vm.projectsDTO.projects.projectInfoNotes" id="textinput"></textarea>
 
         </div>
     </div>
@@ -1234,7 +1237,7 @@
         <label class="col-md-1 control-label small">Notes</label>
         <div class="col-xs-7">
             <textarea class="form-control input-sm" rows="1"
-                      ng-model="vm.projectsDTO.projects.productionCompanyContact.notes"></textarea>
+                      ng-model="vm.projectsDTO.projects.productionCompanyNotes"></textarea>
 
         </div>
 
@@ -1244,7 +1247,7 @@
 
         <label class="col-md-1 control-label small">FEDEX</label>
         <div class="col-xs-7">
-            <input type="text" class="form-control input-sm"/>
+            <input type="text" class="form-control input-sm" ng-model="vm.projectsDTO.projects.productionCompanyShippingNumber"/>
 
         </div>
 
@@ -1351,7 +1354,10 @@
             </td>
 
             <td>
-                <input class="input-xs" type="checkbox" ng-model="tags.disabled">
+                 <span ng-repeat="execs in vm.projectsDTO.contactPrivileges | filter:{contact:tags.contact}">
+                      <input class="input-xs" type="checkbox"
+                             ng-model="execs.disabled">
+                </span>
             </td>
 
             <td><!--<a href="" ng-click="vm.editPrivilege(execs.id)"><span
@@ -1411,8 +1417,9 @@
             <th class="small">Disabled</th>
             <th class="small"></th>
         </tr>
-        <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges | filter:{exec:true}" >
-            <td class="small">{{$index + 1}}</td>
+        <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges" ng-if="execs.exec === true || execs.restartRole ==='ALBUMVIEWER'">
+
+        <td class="small">{{$index + 1}}</td>
             <td class="col-xs-1">
 
                 <div class="input-group">
@@ -1507,10 +1514,11 @@
     </div>
     <hr>
     EXPANDED TALENT INFORMATION
+    <br>
     <div ng-repeat="tags in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'PKO_Tag'} | filter: isGeneric">
 
         <div class="row">
-            <label class="col-md-1 control-label small">Talent {{$index}}</label>
+            <label class="col-md-1 control-label small">Talent {{$index+1}}</label>
             <div class="col-sm-2">
                 <input type="text" class="form-control input-sm" readonly ng-model="tags.contact.fullName">
             </div>

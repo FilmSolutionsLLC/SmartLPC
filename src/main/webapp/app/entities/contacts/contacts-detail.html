@@ -1,31 +1,34 @@
 <div print-section>
+    <div print-hide class="row fixed">
+        <div class="col-sm-3 pull-left ">
+            <br>
+
+            <button print-btn class="btn btn-xs btn btn-primary">Print</button>
+            <button type="submit" class="btn btn-xs btn btn-primary"
+                    ui-sref="contacts.edit({id:vm.contactDTO.contacts.id})">Edit
+            </button>
+            <button type="submit"
+                    ui-sref="contacts.similar({id:vm.contactDTO.contacts.id})"
+                    class="btn btn-xs btn btn-primary">Add Similar
+            </button>
+            <button type="button" onclick="window.history.back()"
+                    class="btn btn-xs btn btn-danger">Cancel
+            </button>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-3">
             <h3>{{vm.contactDTO.contacts.fullName}}</h3>
         </div>
-        <div print-hide>
-            <div class="col-sm-3 pull-right">
-                <button print-btn class="btn btn-xs btn btn-primary">Print</button>
-                <button type="submit" class="btn btn-xs btn btn-primary"
-                        ui-sref="contacts.edit({id:vm.contactDTO.contacts.id})">Edit
-                </button>
-                <button type="submit"
-                        ui-sref="contacts.similar({id:vm.contactDTO.contacts.id})"
-                        class="btn btn-xs btn btn-primary">Add Similar
-                </button>
-                <button type="button" onclick="window.history.back()"
-                        class="btn btn-xs btn btn-danger">Cancel
-                </button>
-            </div>
-        </div>
     </div>
+
     <hr>
     <div id="printContents">
         <div class="row">
             <div class="col-sm-3">
                 <h5>
                     <strong><span translate="smartLpcApp.contacts.type">type</span>
-                        : </strong><a ui-sref="lookups-detail({id:vm.contactDTO.contacts.type.id})">{{vm.contactDTO.contacts.type.textValue}}</a>
+                        : </strong>{{vm.contactDTO.contacts.type.textValue}}
                 </h5>
             </div>
         </div>
@@ -178,14 +181,20 @@
                     <strong> <span
                         translate="smartLpcApp.contacts.globalRestartColumns">globalRestartColumns</span>
                         :
-                    </strong> <span>{{vm.contactDTO.contacts.globalRestartColumns}}</span>
+                    </strong> <span>{{}}</span>
+                    <span ng-if="vm.contactDTO.contacts.globalRestartColumns === null">0</span>
+                    <span ng-if="vm.contactDTO.contacts.globalRestartColumns !== null">{{vm.contactDTO.contacts.globalRestartColumns}}</span>
+
                 </h5>
             </div>
             <div class="col-sm-3">
                 <h5>
                     <strong> <span translate="smartLpcApp.contacts.dashboard">dashboard</span>
-                        :
-                    </strong> <span>{{vm.contactDTO.contacts.dashboard}}</span>
+                        :</strong>
+                        <span ng-if="vm.contactDTO.contacts.dashboard === true">Enabled</span>
+                        <span ng-if="vm.contactDTO.contacts.dashboard === false">Disabled</span>
+                        <span ng-if="vm.contactDTO.contacts.dashboard === null">Disabled</span>
+
                 </h5>
             </div>
         </div>
@@ -195,7 +204,8 @@
                     <strong> <span
                         translate="smartLpcApp.contacts.globalRestartImageSize">globalRestartImageSize</span>
                         :
-                    </strong> <span>{{vm.contactDTO.contacts.globalRestartImageSize}}</span>
+                    </strong>
+                    <span>{{vm.contactDTO.contacts.globalRestartImageSize}}</span>
                 </h5>
             </div>
             <div class="col-sm-3">
@@ -203,7 +213,11 @@
                     <strong> <span
                         translate="smartLpcApp.contacts.internalAccessOnly">internalAccessOnly</span>
                         :
-                    </strong> <span>{{vm.contactDTO.contacts.internalAccessOnly}}</span>
+                    </strong>
+                    <span ng-if="vm.contactDTO.contacts.internalAccessOnly === true">Yes</span>
+                    <span ng-if="vm.contactDTO.contacts.internalAccessOnly === false">No</span>
+                    <span ng-if="vm.contactDTO.contacts.internalAccessOnly === null">No</span>
+
                 </h5>
             </div>
         </div>
@@ -213,12 +227,20 @@
                     <strong> <span
                         translate="smartLpcApp.contacts.globalRestartImagesPerPage">globalRestartImagesPerPage</span>
                         :
-                    </strong> <span>{{vm.contactDTO.contacts.globalRestartImagesPerPage}}</span>
+                    </strong>
+                    <span ng-if="vm.contactDTO.contacts.globalRestartImagesPerPage === null">0</span>
+                    <span ng-if="vm.contactDTO.contacts.globalRestartImagesPerPage !== null">{{vm.contactDTO.contacts.globalRestartImagesPerPage}}</span>
                 </h5>
             </div>
             <div class="col-sm-3">
                 <h5>
-                    <strong> Blocked : </strong> <span>{{vm.contactDTO.contacts.dashboard}}</span>
+                    <strong> Blocked : </strong>
+                    <span ng-if="vm.contactDTO.contacts.loginAttempt === 4">Yes</span>
+                    <span ng-if="vm.contactDTO.contacts.loginAttempt === 0">No</span>
+                    <span ng-if="vm.contactDTO.contacts.loginAttempt === 1">No</span>
+                    <span ng-if="vm.contactDTO.contacts.loginAttempt === 2">No</span>
+                    <span ng-if="vm.contactDTO.contacts.loginAttempt === 3">No</span>
+
                 </h5>
             </div>
         </div>

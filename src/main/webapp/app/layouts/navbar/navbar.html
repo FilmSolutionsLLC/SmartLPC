@@ -1,5 +1,6 @@
-<nav class="navbar navbar-default" role="navigation">
-	<div class="container">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" >
+    <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak></div>
+	<div class="container" >
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle"
 				ng-click="vm.navCollapsed = !vm.navCollapsed">
@@ -15,7 +16,7 @@
 
 
 		<div class="collapse navbar-collapse" id="navbar-collapse"
-			uib-collapse="vm.navCollapsed" ng-switch="vm.isAuthenticated()">
+			uib-collapse="vm.navCollapsed" ng-switch="vm.isAuthenticated()" >
 
 			<ul class="nav navbar-nav navbar-right">
 

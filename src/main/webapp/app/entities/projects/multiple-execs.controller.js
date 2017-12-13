@@ -266,7 +266,7 @@
                     "vendor": vm.vendor,
                     "lockApproveRestriction": vm.lockApproveRestriction,
                     "viewSensitive": vm.viewSensitive,
-                    "exclusives": vm.exclusives,
+                    "exclusives": 0,
                     "seesUntagged": false,
                     "hasVideo": vm.hasVideo,
                     "disabled": vm.disabled,
@@ -286,6 +286,25 @@
 
        vm.save = function () {
 
+       };
+
+       vm.filterQuery = '';
+       vm.runFilter = function (type) {
+         console.log("Search based on Project");
+
+           $http({
+               method : 'GET',
+               url : 'api/cp/projects/'+type+"/"+vm.filterQuery
+           }).then(
+               function successCallback(response) {
+
+                   vm.contactsDTO = response.data;
+                   console.log("Http GET called");
+
+                   console.log("length : " + vm.totalItems);
+               }, function errorCallback(response) {
+
+               });
        };
     }
 })();

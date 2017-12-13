@@ -247,7 +247,9 @@
                 "adhocLink": false,
                 "retouch": false,
                 "fileUpload": false,
-                "deleteAssets": false
+                "deleteAssets": false,
+                "watermarkInnerTransparency": 0.00,
+                "watermarkOuterTransparency": 0.00
             });
 
             $location.hash('bottom');
@@ -428,7 +430,9 @@
                         "adhocLink": false,
                         "retouch": false,
                         "fileUpload": false,
-                        "deleteAssets": false
+                        "deleteAssets": false,
+                        "watermarkInnerTransparency": 0.00,
+                        "watermarkOuterTransparency": 0.00
                     });
                     /*// get related too.
                     console.log(" get releated  : ", vm.currrentOBJ.data.id);
@@ -479,7 +483,9 @@
                         "adhocLink": false,
                         "retouch": false,
                         "fileUpload": false,
-                        "deleteAssets": false
+                        "deleteAssets": false,
+                        "watermarkInnerTransparency": 0.00,
+                        "watermarkOuterTransparency": 0.00
                     });
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'relatedContact')) {
                     console.log("count : " + vm.count);
@@ -951,7 +957,7 @@
 
                 templateUrl: 'app/entities/projects/update-privileges.html',
                 controller: 'UpdatePrivilegesController',
-                size: 'md',
+                size: 'lg',
                 scope: $scope,
                 controllerAs: 'vm',
                 resolve: {
@@ -1527,5 +1533,7 @@
                 }
             })
         };
+
+
     }
 })();

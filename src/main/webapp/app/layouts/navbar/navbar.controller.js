@@ -19,26 +19,27 @@
 
 
         function login () {
-        	
+
             LoginService.open();
-            
+
         }
 
         function logout () {
             Auth.logout();
             $state.go('home');
         }
-        
+
         console.log("Navbar Controller")
+
 //        vm.currentAccount = null;
 //		Principal.identity().then(function(account) {
 //			vm.currentAccount = account;
 //
 //			console.log("Current User : " + JSON.stringify(vm.currentAccount));
 //		});
-//		
-//		
-//		
+//
+//
+//
 //		$rootScope.$watch(function() {
 //			return $rootScope.currentUserGlobal;
 //		}, function() {

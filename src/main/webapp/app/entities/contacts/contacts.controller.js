@@ -54,12 +54,21 @@
 
 			function onSuccess(data, headers) {
 
+
+
 				vm.links = ParseLinks.parse(headers('link'));
 
 				vm.totalItems = headers('X-Total-Count');
 				vm.queryCount = vm.totalItems;
 				vm.contacts = data;
 				vm.page = pagingParams.page;
+
+
+                console.log("headers: "+(headers));
+                console.log("vm.totalItems: "+(vm.totalItems));
+                console.log("queryCount: "+(vm.queryCount));
+                console.log("vm.page: "+(vm.page));
+
 
 			}
 
