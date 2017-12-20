@@ -2,8 +2,7 @@
 
 <form name="editForm" role="form" novalidate ng-submit="vm.save()">
 
-    <div class="row fixed">
-        <br>
+    <div class="row fi">
         <div class="col-xs-4" >
 
         <button type="submit" class="btn btn-xs btn btn-primary" ng-disabled="editForm.$invalid || isSaving">Save</button>
@@ -28,7 +27,7 @@
         <div class="col-xs-2">
             <input id="field_name" name="textinput" type="text" placeholder=""
                    class="form-control input-sm text-uppercase"
-                   ng-model="vm.projects.name" ng-change="vm.setProjectName()">
+                   ng-model="vm.projects.name" autofocus="autofocus">
         </div>
 
         <div class="col-md-8">
@@ -58,8 +57,8 @@
         <label class="col-md-1 control-label small" for="field_fullName">FullName/New Name
         </label>
         <div class="col-sm-2">
-            <input id="field_fullName" type="text" placeholder="" ng-model="vm.projects.fullName"
-                   class="form-control input-sm" autofocus="autofocus">
+            <input id="field_fullName" type="text" placeholder="" ng-model="vm.projectsDTO.projects.fullName"
+                   class="form-control input-sm" >
         </div>
 
         <label class="col-md-1 control-label small" for="field_vm.projects.owner">Owner</label>
@@ -89,14 +88,14 @@
             Title 1</label>
         <div class="col-sm-2">
             <input id="field_alfrescoTitle1" name="textinput" type="text"
-                   ng-model="vm.projects.alfrescoTitle1" class="form-control input-sm">
+                   ng-model="vm.projectsDTO.projects.alfrescoTitle1" class="form-control input-sm">
         </div>
 
         <label class="col-md-1 control-label small" for="field_alfrescoTitle2">Alfresco
             Title 2</label>
         <div class="col-sm-2">
             <input id="field_alfrescoTitle2" name="textinput" type="text"
-                   ng-model="vm.projects.alfrescoTitle2"
+                   ng-model="vm.projectsDTO.projects.alfrescoTitle2"
                    class="form-control input-sm text-capitalize">
         </div>
 
@@ -106,20 +105,9 @@
         <label class="col-md-1 control-label small" for="field_imageLocation">Image Location
         </label>
         <div class="col-sm-2">
-            <!-- <div class="input-group">
 
-                <span class="input-group-btn">
-					<button href="#addDepartment" id="openBtn" data-toggle="modal"
-						class="btn btn-success btn-sm" disabled>
-						<span class="glyphicon glyphicon-plus "></span>
-                </button>
-                </span>
-                <select class="form-control input-sm" id="field_imageLocation" name="imageLocation" ng-model="vm.projectsDTO.projects.imageLocation" ng-options="storage_Disk as storage_Disk.name for storage_Disk in vm.storage_disks track by storage_Disk.id">
-                    <option value=""></option>
-                </select>
-            </div> -->
             <input id="field_imageLocation" name="textinput" type="text"
-                   ng-model="vm.projects.imageLocation"
+                   ng-model="vm.projectsDTO.projects.imageLocation"
                    class="form-control input-sm" readonly>
 
         </div>
@@ -1288,6 +1276,7 @@
                 <button type="button" class="btn btn-primary btn-xs">Enable Ext. Users</button>
 
                 <button type="button" class="btn btn-primary btn-xs">Clear All Restart</button>
+
             </div>
         </div>
     </div>
@@ -1551,7 +1540,7 @@
         <div class="row">
             <label class="col-md-1 control-label small">Phone</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" ng-model="vm.relatedContact[$index].phoneCompany"
+                <input type="text" class="form-control input-sm" ng-model="vm.relatedContact[$index].phoneOffice"
                        readonly>
             </div>
             <label class="col-md-1 control-label small">Email</label>
@@ -1568,13 +1557,13 @@
         <div class="row">
             <label class="col-md-1 control-label small">Asst/Notes</label>
             <div class="col-sm-11">
-                <input type="text" class="form-control input-xs" ng-model="vm.relatedContact[$index].notes" readonly>
+                <input type="text" class="form-control input-sm" ng-model="vm.relatedContact[$index].notes" readonly>
             </div>
         </div>
         <div class="row">
             <label class="col-md-1 control-label small">Notes</label>
             <div class="col-sm-11">
-                <input type="text" class="form-control input-sm">
+                <input type="text" class="form-control input-sm" ng-model="tags.notes">
             </div>
         </div>
         <br>

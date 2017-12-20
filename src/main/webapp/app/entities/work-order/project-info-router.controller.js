@@ -20,9 +20,15 @@
 			console.log("original length :" + response.data.length)
 			vm.reports = response.data;
 			console.log(JSON.stringify(vm.reports));
+
 			if (vm.reports.length > 1) {
-				console.log("multiple reports here :" + vm.reports.length)
-			} else {
+				console.log("multiple reports here :" + vm.reports.length);
+
+
+                console.log("reports include : "+JSON.stringify(vm.reports));
+                $state.go('multiple-workorder-reports',{user:vm.reports});
+
+            } else {
 				console.log("single report here : " + vm.reports.length)
 				var reportType = vm.reports[0].report_id;
 				console.log("reportType : " + reportType);

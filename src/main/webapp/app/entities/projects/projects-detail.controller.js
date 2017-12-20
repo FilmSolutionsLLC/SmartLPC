@@ -11,13 +11,24 @@
 	function ProjectsDetailController($http, $state, $uibModal, $scope,
 			$rootScope, $stateParams, entity, Projects, Lookups, Contacts,
 			User, Departments, Storage_Disk) {
-        var vm = this;
+
+        $(document).ready(function(){
+            $(this).scrollTop(0);
+        });
+
+	    var vm = this;
         vm.projectsDTO = entity;
         	console.log("projectsDTO " + JSON.stringify(vm.projectsDTO));
 
         $scope.isGeneric = function (tags) {
             return tags.contact.fullName !== 'generic pkotag';
         }
+
+        $scope.isExecORAlbumViewer = function (execs) {
+          return  execs.exec === true || execs.restartRole === 'ALBUMVIEWER';
+        };
+
+        vm.noExec = true;
         /*
          * console.log("projectsDTO : " + JSON.stringify(vm.projectsDTO));
          * vm.tags = []; vm.projectRoles = vm.projectsDTO.projectRoles;
@@ -171,7 +182,7 @@
 
         vm.addSimilar = function (id) {
             console.log("similar to add id :", id);
-            $state.go('projects.template-add', {
+            $state.go('projects.similar-add', {
                 id: id
             }, {
                 reload: true

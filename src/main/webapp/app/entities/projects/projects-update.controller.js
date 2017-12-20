@@ -148,22 +148,22 @@
                 "soloKillPct": 50,
                 "groupKillPct": 25,
                 "characterName": "",
-                "disabled": false,
+                "disabled": true,
                 "excSologroup": false
             });
             // get related too.
             /*console.log(" get releated : ", vm.currrentOBJ.data.id);
             $http({
-                method: 'GET', url: 'api/contacts/related/' +
-                vm.currrentOBJ.data.id
+                method: 'GET',
+                url: 'api/contacts/related/' + vm.currrentOBJ.data.id
             }).then(function successCallback(response) {
                 vm.relatedContact.push(response.data);
             }, function
                 errorCallback(response) {
 
-            });
+            });*/
 
-            console.log("Related Contact Length : ", vm.relatedContact.length);*/
+            console.log("Related Contact Length : ", vm.relatedContact.length);
 
         };
 
@@ -249,7 +249,8 @@
                 "fileUpload": false,
                 "deleteAssets": false,
                 "watermarkInnerTransparency": 0.00,
-                "watermarkOuterTransparency": 0.00
+                "watermarkOuterTransparency": 0.00,
+                "restartRole": 'EXEC'
             });
 
             $location.hash('bottom');
@@ -432,7 +433,8 @@
                         "fileUpload": false,
                         "deleteAssets": false,
                         "watermarkInnerTransparency": 0.00,
-                        "watermarkOuterTransparency": 0.00
+                        "watermarkOuterTransparency": 0.00,
+                        "restartRole": 'REVIEWER'
                     });
                     /*// get related too.
                     console.log(" get releated  : ", vm.currrentOBJ.data.id);
@@ -485,7 +487,8 @@
                         "fileUpload": false,
                         "deleteAssets": false,
                         "watermarkInnerTransparency": 0.00,
-                        "watermarkOuterTransparency": 0.00
+                        "watermarkOuterTransparency": 0.00,
+                        "restartRole": 'EXEC'
                     });
                 } else if (angular.equals(vm.currrentOBJ.elementID, 'relatedContact')) {
                     console.log("count : " + vm.count);
@@ -558,10 +561,19 @@
                 ProjectRoles.delete({id: vm.deleteTalent[i]});
             }
 
+
             for (var i = 0; i < vm.deleteExec.length; i++) {
                 console.log("removing contact privilege " + vm.deleteExec[i]);
                 ContactPrivileges.delete({id: vm.deleteExec[i]});
             }
+
+            //get actors with right count
+            var count = 0;
+            for(var i = 0;i<vm.projectsDTO.projectRoles.length;i++){
+                if(vm.projectsDTO.projectRoles[i].relationship_type === 'PKO_Tag');
+                count++;
+            }
+            vm.projectsDTO.projects.actorsWithRights = count;
 
             Projects.update(vm.projectsDTO, onSaveSuccess, onSaveError);
 
@@ -1012,7 +1024,7 @@
 
                 templateUrl: 'app/entities/projects/individual-privilege.html',
                 controller: 'IndividualPrivilegesController',
-                size: 'md',
+                size: 'lg',
                 scope: $scope,
                 controllerAs: 'vm',
                 resolve: {
@@ -1269,6 +1281,14 @@
                 ContactPrivileges.delete({id: vm.deleteExec[i]});
             }
 
+            //get actors with right count
+            var count = 0;
+            for(var i = 0;i<vm.projectsDTO.projectRoles.length;i++){
+                if(vm.projectsDTO.projectRoles[i].relationship_type === 'PKO_Tag');
+                count++;
+            }
+            vm.projectsDTO.projects.actorsWithRights = count;
+
             Projects.update(vm.projectsDTO, onSaveSuccess2, onSaveError);
 
 
@@ -1317,7 +1337,13 @@
                 console.log("removing contact privilege " + vm.deleteExec[i]);
                 ContactPrivileges.delete({id: vm.deleteExec[i]});
             }
-
+//get actors with right count
+            var count = 0;
+            for(var i = 0;i<vm.projectsDTO.projectRoles.length;i++){
+                if(vm.projectsDTO.projectRoles[i].relationship_type === 'PKO_Tag');
+                count++;
+            }
+            vm.projectsDTO.projects.actorsWithRights = count;
             Projects.update(vm.projectsDTO, onSaveSuccess3, onSaveError);
 
 

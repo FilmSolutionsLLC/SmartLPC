@@ -104,15 +104,21 @@
 
         vm.workOrders = [];
 
-        vm.sort = function (type,field) {
+        vm.sort = function (type) {
             console.log("Sorting according to : " + type);
+            if(vm.defaultSortType === "desc"){
+                vm.defaultSortType = 'asc';
+            }else{
+                vm.defaultSortType = "desc";
+            }
+
 
             $http({
                 method: 'GET',
                 url: 'api/processing/work-orders',
                 params: {
-                    'order': type,
-                    'field': field
+                    'order': vm.defaultSortType,
+                    'field': type
                 }
             }).then(function (response) {
                 vm.workOrders = response.data;
@@ -122,31 +128,32 @@
 
             });
 
-        }
+            $scope.viewby = 15;
 
-        vm.defaultSortType = 'DESC';
+            $scope.currentPage = 1;
+            $scope.itemsPerPage = $scope.viewby;
+            $scope.maxSize = 5; // Number of pager buttons to show
+
+            console.log("total items : " + $scope.totalItems);
+            $scope.setPage = function (pageNo) {
+                $scope.currentPage = pageNo;
+            };
+
+            $scope.pageChanged = function () {
+                console.log('Page changed to: ' + $scope.currentPage);
+            };
+
+            $scope.setItemsPerPage = function (num) {
+                $scope.itemsPerPage = num;
+                $scope.currentPage = 1; // reset to first paghe
+            };
+        };
+
+        vm.defaultSortType = 'asc';
         vm.defaultSortField = '1';
 
-        vm.sort(vm.defaultSortType,vm.defaultSortField);
-        $scope.viewby = 15;
+        vm.sort(vm.defaultSortField);
 
-        $scope.currentPage = 1;
-        $scope.itemsPerPage = $scope.viewby;
-        $scope.maxSize = 5; // Number of pager buttons to show
-
-        console.log("total items : " + $scope.totalItems);
-        $scope.setPage = function (pageNo) {
-            $scope.currentPage = pageNo;
-        };
-
-        $scope.pageChanged = function () {
-            console.log('Page changed to: ' + $scope.currentPage);
-        };
-
-        $scope.setItemsPerPage = function (num) {
-            $scope.itemsPerPage = num;
-            $scope.currentPage = 1; // reset to first paghe
-        };
 
 
     }

@@ -226,5 +226,10 @@ stickyC {
 }
 
 
+table.table-fixed-head .table-fixed-head-thead {
+    border-bottom: 1px solid #dddddd;
+    background: #fafafa;
+    color: #222;
+}
 
 

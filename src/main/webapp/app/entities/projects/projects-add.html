@@ -936,7 +936,13 @@
             </td>
 
             <td>
-                <input class="input-xs" type="checkbox" ng-model="vm.talents[$index].disabled">
+
+                <span ng-repeat="execs in vm.execss | filter:{contact:vm.talents[$index].contact}">
+                      <input class="input-xs" type="checkbox"
+                             ng-model="execs.disabled">
+                </span>
+
+                <!--<input class="input-xs" type="checkbox" ng-model="vm.talents[$index].disabled">-->
             </td>
 
             <td><a href="" ng-click="vm.removeTalent($index)"><span

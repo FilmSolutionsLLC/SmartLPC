@@ -36,7 +36,7 @@
         <table class="jh-table table table-hover">
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-
+                <th></th>
                 <th jh-sort-by="id" class="extra-small">ID </th>
                 <th jh-sort-by="requestDate" class="extra-small">Project Name
                 </th>
@@ -49,7 +49,7 @@
 
                 <th jh-sort-by="project.name" class="extra-small">Assigned To </th>
 
-                <th></th>
+
             </tr>
             </thead>
             <tbody>
@@ -62,7 +62,26 @@
                 owners: workOrder.color == 'LightBlue'
                 }">
 
+                <td class="text-right extra-small">
+                    <div ng-if="workOrder.id != HIDE">
 
+
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="work-order.edit({id:workOrder.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"> Edit</span>
+
+                            </button>
+                            <button type="submit"
+                                    ui-sref="work-order-detail({id:workOrder.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"> View</span>
+                            </button>
+
+                        </div>
+                    </div>
+                </td>
                 <td class="col-xs-1 extra-small">
                     <div ng-if="workOrder.id != HIDE">
                         <a ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a>
@@ -89,30 +108,7 @@
                 <td class="extra-small">{{workOrder.assignedTo}}</td>
 
 
-                <td class="text-right extra-small">
-                    <div ng-if="workOrder.id != HIDE">
 
-
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="work-order-detail({id:workOrder.id})"
-                                    class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="work-order.edit({id:workOrder.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-
-                            </button>
-                            <button type="submit"
-                                    ui-sref="work-order.delete({id:workOrder.id})"
-                                    class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                            </button>
-                        </div>
-                    </div>
-                </td>
             </tr>
             </tbody>
         </table>

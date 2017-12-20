@@ -26,8 +26,13 @@
                     ui-sref-opts="{reload: true, notify: true}"
                     class="btn btn-xs btn btn-primary">Add Similar</button>
                      -->
-                <button type="button"
+               <!-- <button type="button"
                         ng-click="vm.addSimilar(vm.projectsDTO.projects.id)"
+                        class="btn btn-xs btn btn-primary">Add Similar
+                </button> -->
+                <button type="button"
+                        ui-sref="projects.similar-add({id:vm.projectsDTO.projects.id})"
+                        ui-sref-opts="{reload: true, notify: true}"
                         class="btn btn-xs btn btn-primary">Add Similar
                 </button>
 
@@ -211,7 +216,7 @@
 
         <hr>
     </div>
-    <div ng-if="vm.projectsDTO.projects.labFlag === true">
+
         <div class="row">
             <div class="col-sm-3">
                 <h4>
@@ -265,7 +270,7 @@
             </div>
         </div>
         <hr>
-
+    <div ng-if="vm.projectsDTO.projects.labFlag === true">
         <div class="row">
             <div class="col-sm-3">
                 <h4>
@@ -639,15 +644,15 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-8">
             <h5>
                 <strong>Contact/Notes : </strong>
-                {{vm.projectsDTO.projects.productionCompanyContact.notes}}
+                {{vm.projectsDTO.projects.productionCompanyNotes}}
             </h5>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-8">
             <h5>
                 <strong>FEDEX : </strong> {{vm.projectsDTO.projects.productionCompanyShippingNumber}}
             </h5>
@@ -719,9 +724,17 @@
                 <td>
                     <h5 class="small">
                         <span ng-repeat="execs in vm.projectsDTO.contactPrivileges | filter:{contact:tags.contact}">
-                        <span ng-if="execs.disabled == true"><span class="text-danger">{{tags.contact.fullName}}</span> </span>
-                        <span ng-if="execs.disabled == false">{{tags.contact.fullName}}</span>
+                            <span ng-if="execs.disabled == true">
+                                <span class="text-danger">{{tags.contact.fullName}}</span>
+                                <input type="hidden" ng-model="vm.noExec" ng-value="false">
+                            </span>
+                            <span ng-if="execs.disabled == false">
+                                <input type="hidden" ng-model="vm.noExec" ng-value="false">
+                                {{tags.contact.fullName}}
+                            </span>
+
                         </span>
+
                         <!--<a ui-sref="contacts-detail({id:tags.contact.id})">{{tags.contact.fullName}}</a>-->
                     </h5>
                 </td>
@@ -845,15 +858,20 @@
                 </th>
                 <th>
                     <h5>
+                        <strong>Vid</strong>
+                    </h5>
+                </th>
+                <th>
+                    <h5>
                         <strong>Disabled</strong>
                     </h5>
                 </th>
             </tr>
             </thead>
             <tbody>
-            <!--<tr ng-repeat="execs in vm.projectsDTO.contactPrivileges | filter:{exec:true}">-->
-            <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges" ng-if="execs.exec === true || execs.restartRole ==='ALBUMVIEWER'">
-               <td>
+            <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges | filter:isExecORAlbumViewer" >
+           <!-- <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges" ng-if="execs.exec === true || execs.restartRole ==='ALBUMVIEWER'">
+            -->   <td>
                     <h5 class="small">
                         <!--<a href="" ng-click="vm.sendIndividualMail(execs)"><span
                             class=" glyphicon glyphicon-envelope small text-success"></span></a>-->
@@ -940,6 +958,13 @@
                 <td>
                     <h5 class="small">
                         <div ng-if="execs.viewSensitive == true">
+                            <strong>X</strong>
+                        </div>
+                    </h5>
+                </td>
+                <td>
+                    <h5 class="small">
+                        <div ng-if="execs.hasVideo == true">
                             <strong>X</strong>
                         </div>
                     </h5>

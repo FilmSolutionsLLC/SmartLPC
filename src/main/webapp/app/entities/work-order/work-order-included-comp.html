@@ -36,7 +36,7 @@
         <table class="jh-table table table-striped">
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-
+                <th></th>
                 <th jh-sort-by="id" class="extra-small"><span translate="global.field.id">ID</span> </th>
                 <th jh-sort-by="id" class="extra-small">Project Name </th>
 
@@ -55,10 +55,9 @@
                 <th jh-sort-by="status.textValue" class="extra-small"><span translate="smartLpcApp.workOrder.status">status</span> </th>
 
 
-                <th jh-sort-by="assignedToUser.firstName" class="extra-small"><span translate="smartLpcApp.workOrder.assignedToUser">assignedToUser</span>
-                    </th>
+                <th jh-sort-by="assignedToUser.firstName" class="extra-small"><span translate="smartLpcApp.workOrder.assignedToUser">assignedToUser</span></th>
 
-                <th></th>
+
             </tr>
             </thead>
             <tbody>
@@ -71,8 +70,26 @@
                 owners: workOrder.color == 'LightBlue'
                 }">
 
+                <td class="text-right extra-small">
+                    <div ng-if="workOrder.po != 'HIDE'">
 
 
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="work-order.edit({id:workOrder.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"> Edit</span>
+
+                            </button>
+                            <button type="submit"
+                                    ui-sref="work-order-detail({id:workOrder.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"> View</span>
+                            </button>
+
+                        </div>
+                    </div>
+                </td>
                 <td class="col-xs-1 extra-small">
 
                     <a ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a>
@@ -98,25 +115,7 @@
                 <td class="extra-small">{{workOrder.assignedTo}}</td>
 
 
-                <td class="text-right extra-small">
-                    <div ng-if="workOrder.po != 'HIDE'">
 
-
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="work-order-detail({id:workOrder.id})"
-                                    class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="work-order.edit({id:workOrder.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-
-                            </button>
-                        </div>
-                    </div>
-                </td>
             </tr>
             </tbody>
         </table>

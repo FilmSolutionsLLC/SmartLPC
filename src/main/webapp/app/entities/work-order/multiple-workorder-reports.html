@@ -1,0 +1,229 @@
+<div>
+    <div ng-show=true>
+        <h3><strong>My Open Work Orders</strong></h3>
+        <div class="table-responsive">
+            <table class="jh-table table table-hover">
+                <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+
+                    <th jh-sort-by="id" class="extra-small">ID</th>
+                    <th jh-sort-by="requestDate" class="extra-small">Project Name
+                    </th>
+                    <th jh-sort-by="requestDescription" class="extra-small">PO#</th>
+                    <th jh-sort-by="poRecord" class="extra-small">Date</th>
+                    <th jh-sort-by="invoiced" class="extra-small">Type</th>
+                    <th jh-sort-by="durationOfService" class="extra-small">Work Description</th>
+                    <th jh-sort-by="type.textValue" class="extra-small">Status</th>
+                    <th jh-sort-by="status.textValue" class="extra-small">Time(Hours)</th>
+
+                    <th jh-sort-by="project.name" class="extra-small">Assigned To</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="workOrder in vm.workOrders9.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"
+                    ng-class="{
+                verify: workOrder.color == 'Orange',
+                notstarted: workOrder.color == 'Yellow',
+                rush: workOrder.color == 'Red',
+                kickback: workOrder.color == 'Blue'
+                }">
+
+
+                    <td class="extra-small">
+                        <a ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a>
+                    </td>
+
+                    <td class="extra-small">
+                        <a ui-sref="projects-detail({id:workOrder.project.id})">{{workOrder.project.name}}</a>
+                    </td>
+
+
+                    <td class="extra-small">{{workOrder.poRecord}}</td>
+
+                    <td class="col-xs-1 extra-small">{{workOrder.requestDate | date:'mediumDate'}}</td>
+                    <td class="extra-small">
+                        <a ui-sref="lookups-detail({id:workOrder.type.id})">{{workOrder.type.textValue}}</a>
+                    </td>
+
+                    <td class="extra-small">{{workOrder.requestDescription}}</td>
+
+                    <td class="extra-small">
+                        <a ui-sref="lookups-detail({id:workOrder.status.id})">{{workOrder.status.textValue}}</a>
+                    </td>
+
+                    <td class="extra-small">{{workOrder.durationOfService}}</td>
+                    <td class="extra-small">
+                        {{workOrder.assignedToUser.firstName}}
+                    </td>
+
+                    <td class="text-right extra-small">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="work-order.edit({id:workOrder.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"> Edit</span>
+
+                            </button>
+                            <button type="submit"
+                                    ui-sref="work-order-detail({id:workOrder.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"> View</span>
+                            </button>
+
+                        </div>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+
+            <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="currentPage" max-size="maxSize"
+                            boundary-links="true" rotate="false" num-pages="numPages"
+                            items-per-page="itemsPerPage"></uib-pagination>
+            <pre>Page: {{currentPage}} / {{numPages}}</pre>
+        </div>
+    </div>
+    <hr>
+    <hr>
+    <div ng-show=true>
+        <h3><strong>Processing Log</strong></h3>
+        <div class="table-responsive">
+            <table class="jh-table table table-hover">
+                <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse"
+                    callback="vm.transition()">
+                    <th></th>
+
+
+                    <th class="extra-small" ng-click="vm.sort('1')"><span translate="global.field.id">ID</span> <span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('2')">Project<span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('3')">Date Recieved<span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('5')">HDD ID<span class="glyphicon glyphicon-sort"></span>
+                    </th>
+                    <th class="extra-small" ng-click="vm.sort('6')">Proofs Shipped<span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('7')">Drive Shipped<span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('8')">Image Range<span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('9')">Image Qty.<span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('10')">Pages 1<span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('11')">Pages 2<span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('12')">Notes<span class="glyphicon glyphicon-sort"></span>
+                    </th>
+                    <th class="extra-small" ng-click="vm.sort('13')">Location<span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('14')">PKO<span class="glyphicon glyphicon-sort"></span>
+                    </th>
+                    <th class="extra-small" ng-click="vm.sort('15')">Status<span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('16')">Audited<span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('17')">Assigned To<span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('18')">Processed By<span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('19')">Ingested By<span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th class="extra-small" ng-click="vm.sort('20')">Completion Date<span
+                        class="glyphicon glyphicon-sort"></span></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr
+                    ng-repeat="workOrder in vm.workOrders4.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"
+                    ng-class="{
+                verify: workOrder.color == 'Orange',
+                notstarted: workOrder.color == 'Yellow',
+                rush: workOrder.color == 'Red',
+                kickback: workOrder.color == 'Blue'
+                }">
+                    <td class="text-right extra-small">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="work-order.edit({id:workOrder.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"> Edit</span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="work-order-detail({id:workOrder.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"> View</span>
+                            </button>
+
+
+                        </div>
+                    </td>
+
+                    <td class="extra-small"><a
+                        ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a></td>
+                    <td class="extra-small"><a
+                        ui-sref="projects-detail({id:workOrder.project.id})">{{workOrder.projectName}}</a>
+                    </td>
+
+                    <td class="extra-small">{{workOrder.dateRecieved |
+                        date:'mediumDate'}}
+                    </td>
+
+                    <td class="extra-small">{{workOrder.hddID}}</td>
+
+                    <td class="extra-small">{{workOrder.proofShipped}}</td>
+
+                    <td class="extra-small">{{workOrder.driveShipped}}</td>
+
+
+                    <td class="extra-small">{{workOrder.imageRange}}</td>
+
+                    <td class="extra-small">{{workOrder.imageQty}}</td>
+
+
+                    <td class="extra-small">{{workOrder.page1}}</td>
+
+
+                    <td class="extra-small">{{workOrder.page2}}</td>
+
+
+                    <td class="extra-small">{{workOrder.notes}}</td>
+
+                    <td class="extra-small">{{workOrder.location}}</td>
+
+                    <td class="extra-small">{{workOrder.isPko}}</td>
+
+
+                    <td class="extra-small">{{workOrder.status}}</td>
+
+
+                    <td class="extra-small">{{workOrder.audited}}</td>
+
+                    <td class="extra-small">{{workOrder.assignedTo}}</td>
+
+                    <td class="extra-small">{{workOrder.processedBy}}</td>
+                    <td class="extra-small">{{workOrder.ingestedBy}}</td>
+
+                    <td class="extra-small">{{workOrder.completion | date:'mediumDate'}}</td>
+
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+
+           <!-- <uib-pagination class="pagination-sm" total-items="totalItems2"
+                            ng-model="currentPage2" max-size="maxSize2" boundary-links="true"
+                            rotate="false" num-pages="numPages2" items-per-page="itemsPerPage2"></uib-pagination>
+            <pre>Page: {{currentPage2}} / {{numPages2}}</pre>-->
+            <dir-pagination-controls pagination-id="list.id"></dir-pagination-controls>
+        </div>
+    </div>
+</div>

@@ -168,11 +168,9 @@
 		};
 
 		vm.save = function() {
-			console.log(vm.projects.name);
+
 			vm.projects.name = vm.projects.name.toUpperCase();
-			console.log(vm.projects.name);
-			console.log(" projectRoles : " + JSON.stringify(vm.projectRoles));
-			console.log(" talents : " + JSON.stringify(vm.talents));
+
 			for (var i = 0; i < vm.talents.length; i++) {
 				vm.projectRoles.push(vm.talents[i]);
 			}
@@ -180,7 +178,9 @@
 				vm.contactPrivileges.push(vm.execss[i]);
 			}
 			// vm.projectRoles.concat(vm.talents);
-			console.log(" projectRoles : " + JSON.stringify(vm.projectRoles));
+            vm.projects.actorsWithRights   = vm.talents.length;
+
+
 			vm.projectsDTO = {
 				"projects" : vm.projects,
 				"projectPurchaseOrderses" : vm.projectPurchaseOrderses,
@@ -413,7 +413,10 @@
 					vm.projectRoles[0] = {
 						"contact" : vm.currrentOBJ.data,
 						"relationship_type" : "Main Contact",
-                        "disabled" : false,
+                        "disabled" : true,
+                        "soloKillPct": 50,
+                        "groupKillPct": 50,
+                        "tertiaryKillPct": 50.0,
                         "excSologroup": false,
 					};
 
@@ -422,7 +425,10 @@
 					vm.projectRoles[1] = {
 						"contact" : vm.currrentOBJ.data,
 						"relationship_type" : "Unit Publicist",
-                        "disabled" : false,
+                        "disabled" : true,
+                        "soloKillPct": 50,
+                        "groupKillPct": 50,
+                        "tertiaryKillPct": 50.0,
                         "excSologroup": false,
 					};
 
@@ -431,7 +437,10 @@
 					vm.projectRoles[2] = {
 						"contact" : vm.currrentOBJ.data,
 						"relationship_type" : "Unit Photographer",
-                        "disabled" : false,
+                        "disabled" : true,
+                        "soloKillPct": 50,
+                        "groupKillPct": 50,
+                        "tertiaryKillPct": 50.0,
                         "excSologroup": false,
 					};
 
@@ -440,7 +449,10 @@
 					vm.projectRoles[3] = {
 						"contact" : vm.currrentOBJ.data,
 						"relationship_type" : "Lab",
-                        "disabled" : false,
+                        "disabled" : true,
+                        "soloKillPct": 50,
+                        "groupKillPct": 50,
+                        "tertiaryKillPct": 50.0,
                         "excSologroup": false,
 					};
 
@@ -639,19 +651,18 @@
 
 
         vm.saveAndClose = function() {
-            console.log(vm.projects.name);
+
             vm.projects.name = vm.projects.name.toUpperCase();
-            console.log(vm.projects.name);
-            console.log(" projectRoles : " + JSON.stringify(vm.projectRoles));
-            console.log(" talents : " + JSON.stringify(vm.talents));
+
+
             for (var i = 0; i < vm.talents.length; i++) {
                 vm.projectRoles.push(vm.talents[i]);
             }
             for (var i = 0; i < vm.execss.length; i++) {
                 vm.contactPrivileges.push(vm.execss[i]);
             }
-            // vm.projectRoles.concat(vm.talents);
-            console.log(" projectRoles : " + JSON.stringify(vm.projectRoles));
+            // set actors with rights
+            vm.projects.actorsWithRights   = vm.talents.length;
 
             vm.projectsDTO = {
                 "projects" : vm.projects,
@@ -699,6 +710,70 @@
                 reload : true
             });// use for redirecting ...
         };
+
+
+        vm.saveAndNext = function() {
+
+            vm.projects.name = vm.projects.name.toUpperCase();
+
+
+            for (var i = 0; i < vm.talents.length; i++) {
+                vm.projectRoles.push(vm.talents[i]);
+            }
+            for (var i = 0; i < vm.execss.length; i++) {
+                vm.contactPrivileges.push(vm.execss[i]);
+            }
+            // set actors with rights
+            vm.projects.actorsWithRights   = vm.talents.length;
+
+            vm.projectsDTO = {
+                "projects" : vm.projects,
+                "projectPurchaseOrderses" : vm.projectPurchaseOrderses,
+                "projectRoles" : vm.projectRoles,
+                "projectLabTaskses" : vm.projectLabTaskses,
+                "contactPrivileges" : vm.contactPrivileges
+            };
+
+
+            vm.isSaving = true;
+            if (vm.projects.id !== null) {
+                Projects.update(vm.projects, onSaveSuccess2, onSaveError);
+            } else {
+
+                console.log("==========================================");
+                console.log("==========================================");
+                console.log(JSON.stringify(vm.projectsDTO));
+                Projects.save(vm.projectsDTO, onSaveSuccess3, onSaveError);
+
+            }
+        };
+
+        var onSaveSuccess3 = function(result) {
+            console.log('saving project...');
+            //$scope.$emit('smartLpcApp:projectsUpdate', result);
+            // $uibModalInstance.close(result);
+            $ngConfirm({
+                title: 'Success!',
+                content: "Project : <strong>"+vm.projects.fullName+"</strong> has been created",
+                type: 'green',
+                typeAnimated: true,
+                theme: 'dark',
+                buttons: {
+                    confirm: {
+                        text: 'Okay',
+                        btnClass: 'btn-green',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+            vm.isSaving = false;
+            $state.go('projects', {}, {
+                reload : true
+            });// use for redirecting ...
+        };
+
+
 
         var onSaveError = function() {
             $ngConfirm({

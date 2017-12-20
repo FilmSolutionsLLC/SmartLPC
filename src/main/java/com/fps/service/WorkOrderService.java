@@ -61,7 +61,7 @@ public interface WorkOrderService {
 
     List<WorkOrderListDTO> findToAudit();
 
-    List<WorkOrderListDTO> findWorkOrdersByReport(String reportType);
+    List<WorkOrderListDTO> findWorkOrdersByReport(String reportType,String sortType,String sortOrder);
 
     List<WorkOrder> findMyOpenWorkOrders(User user);
 

@@ -36,23 +36,22 @@
         <table class="jh-table table table-hover">
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-
-                <th jh-sort-by="id" class="extra-small">ID </th>
-                <th jh-sort-by="requestDate" class="extra-small">Project Name
-                </th>
-                <th jh-sort-by="requestDescription" class="extra-small">PO#</th>
-                <th jh-sort-by="poRecord" class="extra-small">Date </th>
-                <th jh-sort-by="invoiced" class="extra-small">Type </th>
-                <th jh-sort-by="invoiced" class="extra-small">PKO </th>
-                <th jh-sort-by="durationOfService" class="extra-small">Work Description</th>
-                <th jh-sort-by="type.textValue" class="extra-small">Status</th>
-                <th jh-sort-by="status.textValue" class="extra-small">Time(Hours)</th>
-
-                <th jh-sort-by="project.name" class="extra-small">Assigned To </th>
-                <th jh-sort-by="project.name" class="extra-small">Audited </th>
-                <th jh-sort-by="project.name" class="extra-small">Audited By </th>
-                <th jh-sort-by="project.name" class="extra-small">Invoiced </th>
                 <th></th>
+                <th jh-sort-by="id" class="extra-small" ng-click="vm.getData('1')">ID <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="requestDate" class="extra-small" ng-click="vm.getData('2')">Project Name <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="requestDescription" class="extra-small" ng-click="vm.getData('4')">PO# <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="poRecord" class="extra-small" ng-click="vm.getData('5')">Date <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="invoiced" class="extra-small" ng-click="vm.getData('6')">Type <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="company" class="extra-small" ng-click="vm.getData('7')">Contacts Company <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="durationOfService" class="extra-small" ng-click="vm.getData('8')">Work Description <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="type.textValue" class="extra-small" ng-click="vm.getData('9')">Status <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="status.textValue" class="extra-small" ng-click="vm.getData('10')">Time(Hours) <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="project.name" class="extra-small" ng-click="vm.getData('11')">Invoiced <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="project.name" class="extra-small" ng-click="vm.getData('12')">Assigned To <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="project.name" class="extra-small" ng-click="vm.getData('13')">Audited <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="project.name" class="extra-small" ng-click="vm.getData('14')">Audited By <span class="glyphicon glyphicon-sort"></span></th>
+
+
             </tr>
             </thead>
             <tbody>
@@ -65,41 +64,39 @@
                 }">
 
 
+                <td class="text-right extra-small">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                ui-sref="work-order.edit({id:workOrder.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"> Edit</span>
+
+                        </button>
+                        <button type="submit"
+                                ui-sref="work-order-detail({id:workOrder.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"> View</span>
+                        </button>
+
+                    </div>
+                </td>
                 <td class="extra-small"><a ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a></td>
                 <td class="col-xs-2 extra-small">{{workOrder.project_name}}</td>
                 <td class="col-xs-1 extra-small">{{workOrder.po}}</td>
                 <td class="col-xs-1 extra-small">{{workOrder.date}}</td>
                 <td class="extra-small">{{workOrder.type}}</td>
-                <td class="extra-small">{{workOrder.pko}}</td>
+                <td class="extra-small">{{workOrder.contactsCompany}}</td>
                 <td class="extra-small">{{workOrder.workDesc}}</td>
                 <td class="col-xs-1 extra-small">{{workOrder.status}}</td>
                 <td class="extra-small">{{workOrder.time}}</td>
+                <td class="extra-small">{{workOrder.invoiced}}</td>
                 <td class="extra-small">{{workOrder.assignedTo}}</td>
                 <td class="extra-small">{{workOrder.audited}}</td>
                 <td class="extra-small">{{workOrder.auditedBy}}</td>
-                <td class="extra-small">{{workOrder.invoiced}}</td>
 
 
-                <td class="text-right extra-small">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                ui-sref="work-order-detail({id:workOrder.id})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="work-order.edit({id:workOrder.id})"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>
 
-                        </button>
-                        <button type="submit"
-                                ui-sref="work-order.delete({id:workOrder.id})"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
-                        </button>
-                    </div>
-                </td>
+
             </tr>
             </tbody>
         </table>

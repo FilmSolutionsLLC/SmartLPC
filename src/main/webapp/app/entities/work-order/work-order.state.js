@@ -476,6 +476,35 @@
                 }
             })
 
+            .state('multiple-workorder-reports', {
+                parent: 'entity',
+                url: '/multiple-workorder-reports',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'smartLpcApp.projectinfo.home.title'
+                },
+                params: {
+                    user: null
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'app/entities/work-order/multiple-workorder-reports.html',
+                        controller: 'MultipleWorkOrderReports',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('workOrder');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }],
+                    user: ['$stateParams',function ($stateParams) {
+                        console.log("---> "+JSON.stringify($stateParams.user))
+                       return $stateParams.user;
+                    }]
+                }
+            })
 
         /*.state('work-order-invoice', {
             parent: 'entity',

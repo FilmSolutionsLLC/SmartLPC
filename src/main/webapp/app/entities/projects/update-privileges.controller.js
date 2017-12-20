@@ -67,7 +67,7 @@
 
                 templateUrl: 'app/entities/projects/individual-privilege.html',
                 controller: 'IndividualPrivilegesController',
-                size: 'md',
+                size: 'lg',
                 scope: $scope,
                 controllerAs: 'vm',
                 resolve: {

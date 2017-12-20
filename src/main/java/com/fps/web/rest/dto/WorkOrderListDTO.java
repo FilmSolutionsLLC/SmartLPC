@@ -14,12 +14,14 @@ public class WorkOrderListDTO {
     private String workDesc;
     private String status;
     private Float time;
+    private String contactsCompany;
     private String assignedTo;
     private String pko;
     private String audited;
     private String auditedBy;
     private String invoiced;
     private String color;
+
 
 
     public Long getId() {
@@ -140,6 +142,14 @@ public class WorkOrderListDTO {
 
     public void setInvoiced(String invoiced) {
         this.invoiced = invoiced;
+    }
+
+    public String getContactsCompany() {
+        return contactsCompany;
+    }
+
+    public void setContactsCompany(String contactsCompany) {
+        this.contactsCompany = contactsCompany;
     }
 
     @Override

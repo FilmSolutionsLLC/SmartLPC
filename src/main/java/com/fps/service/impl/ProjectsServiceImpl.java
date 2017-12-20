@@ -103,6 +103,7 @@ public class ProjectsServiceImpl implements ProjectsService {
 
     @Inject
     private ContactPrivilegeReviewersRepository contactPrivilegeReviewersRepository;
+
     /**
      * Save a projects.
      *
@@ -121,6 +122,7 @@ public class ProjectsServiceImpl implements ProjectsService {
 
         currentTenantIdentifierResolver.setTenant(Constants.MASTER_DATABASE);
 
+
         // save project in database
         Projects result = projectsRepository.save(projects);
         log.info("Project Saved : " + result.getId());
@@ -136,8 +138,8 @@ public class ProjectsServiceImpl implements ProjectsService {
             log.info("PROJECT PURCHASE ORDERS");
 
             for (ProjectPurchaseOrders projectPurchaseOrders : projectsDTO.getProjectPurchaseOrderses()) {
-
-                projectPurchaseOrders.setProject(projects);
+                projectPurchaseOrders.setId(null);
+                projectPurchaseOrders.setProject(result);
                 projectPurchaseOrders.setCreated_by_admin_user(user);
                 projectPurchaseOrders.setCreated_date(ZonedDateTime.now());
                 projectPurchaseOrderses.add(projectPurchaseOrders);
@@ -152,7 +154,8 @@ public class ProjectsServiceImpl implements ProjectsService {
             log.info("PROJECT LAB TASKS");
 
             for (ProjectLabTasks projectLabTasks : projectsDTO.getProjectLabTaskses()) {
-                projectLabTasks.setProject(projects);
+                projectLabTasks.setId(null);
+                projectLabTasks.setProject(result);
                 projectLabTasks.setCreated_by_admin_user(user);
                 projectLabTasks.setCreatedDate(ZonedDateTime.now());
                 log.info(projectLabTasks.toString());
@@ -167,9 +170,11 @@ public class ProjectsServiceImpl implements ProjectsService {
         int index = 0;
         log.info("PROJECT ROLES");
         for (ProjectRoles projectRoles : projectsDTO.getProjectRoles()) {
-            projectRoles.setProject(projects);
+            projectRoles.setId(null);
+            projectRoles.setProject(result);
             projectRoles.setCreatedDate(ZonedDateTime.now());
             projectRoles.setCreatedByAdminUser(user);
+
 
             // addd hotkeys to tags
             if (projectRoles.getRelationship_type().equals(Constants.PKO_TAG)) {
@@ -191,23 +196,23 @@ public class ProjectsServiceImpl implements ProjectsService {
 
         final Contact fixedContact = contactRepository.findOne(Long.valueOf(5181));
 
-        final ProjectRoles sensitive = new ProjectRoles(projects, Constants.PKO_TAG, Float.valueOf("0.00"),
-            Float.valueOf("0.00"), null, null, false, null, null, 0, false, null, Constants.SENSITIVE, "0", null,
+        final ProjectRoles sensitive = new ProjectRoles(result, Constants.PKO_TAG, Float.valueOf("0.00"),
+            Float.valueOf("0.00"), null, null, true, null, null, 0, false, null, Constants.SENSITIVE, "0", null,
             Float.valueOf("0.00"), ZonedDateTime.now(), null, null, fixedContact, user, null);
-        final ProjectRoles misc = new ProjectRoles(projects, Constants.PKO_TAG, Float.valueOf("0.00"),
-            Float.valueOf("0.00"), null, null, false, null, null, 0, false, null, Constants.MISC_UNKOWN, "1", null,
+        final ProjectRoles misc = new ProjectRoles(result, Constants.PKO_TAG, Float.valueOf("0.00"),
+            Float.valueOf("0.00"), null, null, true, null, null, 0, false, null, Constants.MISC_UNKOWN, "1", null,
             Float.valueOf("0.00"), ZonedDateTime.now(), null, null, fixedContact, user, null);
-        final ProjectRoles background = new ProjectRoles(projects, Constants.PKO_TAG, Float.valueOf("0.00"),
-            Float.valueOf("0.00"), null, null, false, null, null, 0, false, null, Constants.BACKGROUND, "2", null,
+        final ProjectRoles background = new ProjectRoles(result, Constants.PKO_TAG, Float.valueOf("0.00"),
+            Float.valueOf("0.00"), null, null, true, null, null, 0, false, null, Constants.BACKGROUND, "2", null,
             Float.valueOf("0.00"), ZonedDateTime.now(), null, null, fixedContact, user, null);
-        final ProjectRoles crew = new ProjectRoles(projects, Constants.PKO_TAG, Float.valueOf("0.00"),
-            Float.valueOf("0.00"), null, null, false, null, null, 0, false, null, Constants.CREW, "3", null,
+        final ProjectRoles crew = new ProjectRoles(result, Constants.PKO_TAG, Float.valueOf("0.00"),
+            Float.valueOf("0.00"), null, null, true, null, null, 0, false, null, Constants.CREW, "3", null,
             Float.valueOf("0.00"), ZonedDateTime.now(), null, null, fixedContact, user, null);
-        final ProjectRoles ensemble = new ProjectRoles(projects, Constants.PKO_TAG, Float.valueOf("0.00"),
-            Float.valueOf("0.00"), null, null, false, null, null, 0, false, null, Constants.ENSEMBLE, "4", null,
+        final ProjectRoles ensemble = new ProjectRoles(result, Constants.PKO_TAG, Float.valueOf("0.00"),
+            Float.valueOf("0.00"), null, null, true, null, null, 0, false, null, Constants.ENSEMBLE, "4", null,
             Float.valueOf("0.00"), ZonedDateTime.now(), null, null, fixedContact, user, null);
-        final ProjectRoles equipment = new ProjectRoles(projects, Constants.PKO_TAG, Float.valueOf("0.00"),
-            Float.valueOf("0.00"), null, null, false, null, null, 0, false, null, Constants.EQUIPMENT, "5", null,
+        final ProjectRoles equipment = new ProjectRoles(result, Constants.PKO_TAG, Float.valueOf("0.00"),
+            Float.valueOf("0.00"), null, null, true, null, null, 0, false, null, Constants.EQUIPMENT, "5", null,
             Float.valueOf("0.00"), ZonedDateTime.now(), null, null, fixedContact, user, null);
 
         projectRoleses.add(sensitive);
@@ -220,20 +225,26 @@ public class ProjectsServiceImpl implements ProjectsService {
         projectRolesRepository.save(projectRoleses);
         log.info("PROJECT EXECS");
         for (ContactPrivileges contactPrivileges : projectsDTO.getContactPrivileges()) {
+            contactPrivileges.setId(null);
             contactPrivileges.setCreatedByAdminUser(user);
-            contactPrivileges.setProject(projects);
+            contactPrivileges.setProject(result);
             contactPrivileges.setCreatedDate(ZonedDateTime.now());
+            contactPrivileges.setName(contactPrivileges.getContact().getUsername());
+            contactPrivileges.setRestartPage(Long.valueOf(0));
 
             if(contactPrivileges.isExec()==false){
                 log.info("=====> Saving Talent as Exec "+contactPrivileges.toString());
                 ContactPrivileges resultCP = contactPrivilegesRepository.save(contactPrivileges);
+
                 ContactPrivilegeReviewers contactPrivilegeReviewers  =  new ContactPrivilegeReviewers();
                 contactPrivilegeReviewers.setContactPrivilegeID(resultCP.getId());
 
                 contactPrivilegeReviewers.setCreatedDate(LocalDateTime.now());
                 contactPrivilegeReviewers.setReviewer(contactPrivileges.getContact().getFullName());
 
-                final Long tagID  = jdbcTemplate.queryForObject("select id from project_roles where project_id  = ? and contact_id = ?",new Object[]{result.getId(),contactPrivileges.getContact().getId()},Long.class);
+                String getCPIDsql = "select id from project_roles where project_id  = "+result.getId()+" and contact_id = "+resultCP.getContact().getId();
+                log.info("======>  TAG ID "+getCPIDsql);
+                final Long tagID = jdbcTemplate.queryForObject("select id from project_roles where project_id  = ? and contact_id = ?", new Object[]{result.getId(), contactPrivileges.getContact().getId()}, Long.class);
                 log.info("Got id : "+tagID);
                 contactPrivilegeReviewers.setTagID(tagID);
 
@@ -255,7 +266,7 @@ public class ProjectsServiceImpl implements ProjectsService {
             ContactPrivileges contactPrivileges = new ContactPrivileges();
             contactPrivileges.setContact(contact);
             contactPrivileges.setName(contact.getUsername());
-            contactPrivileges.setProject(projects);
+            contactPrivileges.setProject(result);
             contactPrivileges.setCreatedByAdminUser(user);
             contactPrivileges.setCreatedDate(ZonedDateTime.now());
             contactPrivileges.setExec(true);
@@ -285,6 +296,7 @@ public class ProjectsServiceImpl implements ProjectsService {
             contactPrivileges.setRetouch(false);
             contactPrivileges.setFileUpload(false);
             contactPrivileges.setDeleteAssets(false);
+            contactPrivileges.setRestartPage(Long.valueOf(0));
 
 
             //taggers
@@ -319,12 +331,14 @@ public class ProjectsServiceImpl implements ProjectsService {
             album.setAlbum_name(Constants.ALBUM_NAME[i]);
             album.setAlbum_descriptions(Constants.ALBUM_DESCRIPTION[i]);
             album.setAlbum_type(1);
-            album.setProject(projects);
+            album.setProject(result);
             album.setCreatedBy("admin");
             album.setCreatedTime(ZonedDateTime.now());
             albums.add(album);
         }
         albumRepository.save(albums);
+
+
 
         projectsSearchRepository.save(result);
 
@@ -468,7 +482,8 @@ public class ProjectsServiceImpl implements ProjectsService {
         if (projectsDTO.getContactPrivileges().size() > 0) {
             for (ContactPrivileges contactPrivileges : projectsDTO.getContactPrivileges()) {
 
-
+                contactPrivileges.setName(contactPrivileges.getContact().getUsername());
+                contactPrivileges.setRestartPage(Long.valueOf(0));
 
 
                     if (contactPrivileges.getId() != null) {
@@ -482,6 +497,7 @@ public class ProjectsServiceImpl implements ProjectsService {
                         contactPrivileges.setCreatedByAdminUser(user);
                         contactPrivileges.setCreatedDate(ZonedDateTime.now());
                         contactPrivileges.setProject(result);
+
                         if(contactPrivileges.isExec() == false){
                             log.info("--> Saving Talent as Exec " + contactPrivileges.toString());
                             ContactPrivileges resultCP = contactPrivilegesRepository.save(contactPrivileges);

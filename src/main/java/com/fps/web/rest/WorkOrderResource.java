@@ -264,9 +264,9 @@ public class WorkOrderResource {
 	 */
 	@RequestMapping(value = "/reports/work-orders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	public List<WorkOrderListDTO> workOrderReports(@RequestParam String reportType) throws URISyntaxException {
+	public List<WorkOrderListDTO> workOrderReports(@RequestParam String reportType,@RequestParam String sortType,@RequestParam String sortOrder) throws URISyntaxException {
 
-		final List<WorkOrderListDTO> workOrderListDTOList = workOrderService.findWorkOrdersByReport(reportType);
+		final List<WorkOrderListDTO> workOrderListDTOList = workOrderService.findWorkOrdersByReport(reportType,sortType,sortOrder);
 		log.info("Total Open Work Orders : " + workOrderListDTOList.size());
 		return workOrderListDTOList;
 	}
@@ -379,6 +379,7 @@ public class WorkOrderResource {
 		final String sqlQuery = "select * from admin_default_reports where admin_id=" + user.getId();
 		System.out.println(sqlQuery);
 		@SuppressWarnings({ "unchecked", "rawtypes" })
+
 		final List<ProjectInfoReportsDTO> reportsDTOs = jdbcTemplate.query(sqlQuery,
 				new BeanPropertyRowMapper(ProjectInfoReportsDTO.class));
 		return reportsDTOs;

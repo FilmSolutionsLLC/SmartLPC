@@ -38,30 +38,29 @@
 			<thead>
 				<tr jh-sort="vm.predicate" ascending="vm.reverse"
 					callback="vm.transition()">
+                    <th></th>
 
 
+					<th class="extra-small" ng-click="vm.sort('1')"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"  ></span></th>
+					<th class="extra-small" ng-click="vm.sort('2')">Project<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('3')">Date Recieved<span class="glyphicon glyphicon-sort"></span></th>
+					<th class="extra-small" ng-click="vm.sort('5')">HDD ID<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('6')">Proofs Shipped<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('7')">Drive Shipped<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('8')">Image Range<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('9')">Image Qty.<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('10')">Pages 1<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('11')">Pages 2<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('12')">Notes<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('13')">Location<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('14')">PKO<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('15')">Status<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('16')">Audited<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('17')">Assigned To<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('18')">Processed By<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('19')">Ingested By<span class="glyphicon glyphicon-sort" ></span></th>
+					<th class="extra-small" ng-click="vm.sort('20')">Completion Date<span class="glyphicon glyphicon-sort" ></span></th>
 
-					<th jh-sort-by="id" class="extra-small"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','1')" ></span></th>
-
-					<th jh-sort-by="project.name" class="extra-small">Project<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','2')"></span></th>
-					<th class="extra-small">Date Recieved<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','2')"></span></th>
-					<th class="extra-small">HDD ID<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','3')"></span></th>
-					<th class="extra-small">Proofs Shipped<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','4')"></span></th>
-					<th class="extra-small">Drive Shipped<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','5')"></span></th>
-					<th class="extra-small">Image Range<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','6')"></span></th>
-					<th class="extra-small">Image Qty.<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','7')"></span></th>
-					<th class="extra-small">Pages 1<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','8')"></span></th>
-					<th class="extra-small">Pages 2<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','9')"></span></th>
-					<th class="extra-small">Notes<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','10')"></span></th>
-					<th class="extra-small">Location<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','11')"></span></th>
-					<th class="extra-small">PKO<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','12')"></span></th>
-					<th class="extra-small">Status<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','13')"></span></th>
-					<th class="extra-small">Audited<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','14')"></span></th>
-					<th class="extra-small">Assigned To<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','15')"></span></th>
-					<th class="extra-small">Processed By<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','16')"></span></th>
-					<th class="extra-small">Ingested By<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','17')"></span></th>
-					<th class="extra-small">Completion Date<span class="glyphicon glyphicon-sort" ng-click="vm.sort('DESC','18')"></span></th>
-					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -73,6 +72,23 @@
                 rush: workOrder.color == 'Red',
                 kickback: workOrder.color == 'Blue'
                 }">
+                <td class="text-right extra-small">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                ui-sref="work-order.edit({id:workOrder.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="work-order-detail({id:workOrder.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"> View</span>
+                        </button>
+
+
+                    </div>
+                </td>
+
 					<td class="extra-small"><a
 						ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a></td>
 					<td class="extra-small"><a
@@ -119,25 +135,7 @@
 
 					<td class="extra-small">{{workOrder.completion | date:'mediumDate'}}</td>
 
-					<td class="text-right extra-small">
-						<div class="btn-group flex-btn-group-container">
-							<button type="submit"
-								ui-sref="work-order-detail({id:workOrder.id})"
-								class="btn btn-info btn-sm">
-								<span class="glyphicon glyphicon-eye-open"></span>
-							</button>
-							<button type="submit"
-								ui-sref="work-order.edit({id:workOrder.id})"
-								class="btn btn-primary btn-sm">
-								<span class="glyphicon glyphicon-pencil"></span>
-							</button>
-							<button type="submit"
-								ui-sref="work-order.delete({id:workOrder.id})"
-								class="btn btn-danger btn-sm">
-								<span class="glyphicon glyphicon-remove-circle"></span>
-							</button>
-						</div>
-					</td>
+
 				</tr>
 			</tbody>
 		</table>

@@ -12,7 +12,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-4 no-padding-left">
-                            <button class="btn btn-primary btn-sm" ui-sref="contacts.new">
+                            <button class="btn btn-primary btn-sm" ng-click="vm.addContact()">
                                 <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs" translate="smartLpcApp.contacts.home.createLabel">
                         Create new Contacts
@@ -32,7 +32,7 @@
                                            placeholder="{{ 'smartLpcApp.contacts.home.search' | translate }}">
 
                                 <span class="input-group-btn width-min">
-                                <button class="btn btn-info btn-sm" ng-click="vm.search(vm.searchQuery)">
+                                <button  type="submit" class="btn btn-info btn-sm" ng-click="vm.search(vm.searchQuery)">
                                     <span class="glyphicon glyphicon-search"></span>
                                 </button>
                                 </span>
@@ -51,76 +51,63 @@
                 </div>
                 <br/>
                 <div class="table-responsive">
-                    <table class="jh-table table table-hover">
+                    <table id="myTable" class="table fix-head responsive table-striped">
                         <thead>
-                        <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                        <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()" id="pp">
                             <th></th>
-                            <th jh-sort-by="id">
-                                <small><span translate="global.field.id">ID</span> <span
-                                    class="glyphicon glyphicon-sort"></span></small>
-                            </th>
-
-                            <th jh-sort-by="fullName">
+                            <th jh-sort-by="fullName" ng-click="vm.setSortOrder('fullName')">
                                 <small><span translate="smartLpcApp.contacts.fullName">FullName</span> <span
                                     class="glyphicon glyphicon-sort"></span></small>
                             </th>
-                            <th jh-sort-by="title">
-                                <small><span translate="smartLpcApp.contacts.title">Title</span> <span
-                                    class="glyphicon glyphicon-sort"></span></small>
+                            <th jh-sort-by="companyContact.fullName" ng-click="vm.setSortOrder('companyContact.fullName')">
+                                <small><span translate="smartLpcApp.contacts.companyContact">companyContact</span>
+                                    <span class="glyphicon glyphicon-sort"></span></small>
                             </th>
-                            <th jh-sort-by="email">
+                            <th jh-sort-by="email" ng-click="vm.setSortOrder('email')">
                                 <small><span translate="smartLpcApp.contacts.email">Email</span> <span
                                     class="glyphicon glyphicon-sort"></span></small>
                             </th>
+                            <th jh-sort-by="title" ng-click="vm.setSortOrder('title')">
+                                <small><span translate="smartLpcApp.contacts.title">Title</span> <span
+                                    class="glyphicon glyphicon-sort"></span></small>
+                            </th>
 
-                            <th jh-sort-by="phoneOffice">
+
+                            <th jh-sort-by="phoneOffice" ng-click="vm.setSortOrder('phoneOffice')">
                                 <small><span translate="smartLpcApp.contacts.phoneOffice">PhoneOffice</span>
                                     <span class="glyphicon glyphicon-sort"></span>
                                 </small>
                             </th>
-                            <th jh-sort-by="phoneMobile">
+                            <th jh-sort-by="phoneMobile" ng-click="vm.setSortOrder('phoneMobile')">
                                 <small><span translate="smartLpcApp.contacts.phoneMobile">PhoneMobile</span>
                                     <span class="glyphicon glyphicon-sort"></span></small>
                             </th>
-                            <th jh-sort-by="type.textValue">
+                            <th jh-sort-by="type.textValue" ng-click="vm.setSortOrder('type.textValue')">
                                 <small><span translate="smartLpcApp.contacts.type">type</span> <span
                                     class="glyphicon glyphicon-sort"></span></small>
                             </th>
-                            <th jh-sort-by="companyContact.fullName">
-                                <small><span translate="smartLpcApp.contacts.companyContact">companyContact</span>
-                                    <span class="glyphicon glyphicon-sort"></span></small>
-                            </th>
+
                             <th></th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="height:500px">
                         <tr ng-repeat="contacts in vm.contactsDTO track by contacts.id">
 
-                            <!--<td class="text-right">
-                                    <div class="btn-group flex-btn-group-container">
-                                        <button type="submit"
-                                                ng-click="vm.selectedContact({id:contacts.id})"
-                                                class="btn btn-success btn-xs">
-
-                                            <span class="hidden-xs hidden-sm"></span>Select
-                                        </button>
-                                    </div>
-                                </td>-->
                             <td><input type="checkbox" ng-click="vm.selectContact(contacts)"
                                        ng-model="vm.selectedCheckBox[contacts.id]"></td>
-                            <td>
-                                <small><a ui-sref="contacts-detail({id:contacts.id})">{{contacts.id}}</a></small>
-                            </td>
-
                             <td>
                                 <small>{{contacts.fullName}}</small>
                             </td>
                             <td>
-                                <small>{{contacts.title}}</small>
+                                <small>{{contacts.companyContact.fullName}}</small>
                             </td>
                             <td>
                                 <small>{{contacts.email}}</small>
                             </td>
+                            <td>
+                                <small>{{contacts.title}}</small>
+                            </td>
+
 
                             <td>
                                 <small>{{contacts.phoneOffice}}</small>
@@ -131,15 +118,10 @@
                             </td>
 
                             <td>
-                                <small><a
-                                    ui-sref="lookups-detail({id:contacts.type.id})">{{contacts.type.textValue}}</a>
-                                </small>
+                                <small>{{contacts.type.textValue}}</small>
                             </td>
 
-                            <td>
-                                <small><a ui-sref="contacts-detail({id:contacts.companyContact.id})">{{contacts.companyContact.fullName}}</a>
-                                </small>
-                            </td>
+
 
 
                         </tr>

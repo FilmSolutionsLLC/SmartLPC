@@ -88,27 +88,23 @@
                     {{workOrder.assignedToUser.firstName}}
                 </td>
 
-
                 <td class="text-right extra-small">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                ui-sref="work-order-detail({id:workOrder.id})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                        </button>
-                        <button type="submit"
                                 ui-sref="work-order.edit({id:workOrder.id})"
                                 class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="glyphicon glyphicon-pencil"> Edit</span>
 
                         </button>
                         <button type="submit"
-                                ui-sref="work-order.delete({id:workOrder.id})"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
+                                ui-sref="work-order-detail({id:workOrder.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"> View</span>
                         </button>
+
                     </div>
                 </td>
+
             </tr>
             </tbody>
         </table>

@@ -193,13 +193,13 @@
             $ngConfirm({
                 title: 'Success!',
                 content: vm.message,
-                type: 'red',
+                type: 'green',
                 typeAnimated: true,
                 theme: 'dark',
                 buttons: {
                     confirm: {
                         text: 'Okay',
-                        btnClass: 'btn-red',
+                        btnClass: 'btn-green',
                         action: function () {
 
                         }

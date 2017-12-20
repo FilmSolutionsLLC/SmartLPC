@@ -254,6 +254,30 @@
                     }]
                 }
             })
+            .state('projects.similar-add', {
+                parent: 'projects',
+                url: '/{id}/similar',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'smartLpcApp.projects.detail.title'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'app/entities/projects/projects-similar-add.html',
+                        controller: 'ProjectsSimilarAddController',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('projects');
+                        return $translate.refresh();
+                    }],
+                    entity: ['$stateParams', 'Projects', function ($stateParams, Projects) {
+                        return Projects.get({id: $stateParams.id}).$promise;
+                    }]
+                }
+            })
             .state('projects.delete', {
                 parent: 'projects',
                 url: '/{id}/delete',

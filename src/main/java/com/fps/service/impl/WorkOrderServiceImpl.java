@@ -350,11 +350,16 @@ public class WorkOrderServiceImpl implements WorkOrderService {
         return workOrderListDTOs;
     }
 
-    public List<WorkOrderListDTO> findWorkOrdersByReport(String reportType) {
+    public List<WorkOrderListDTO> findWorkOrdersByReport(String reportType,String sortType,String sortOrder) {
         currentTenantIdentifierResolver.setTenant(Constants.SLAVE_DATABASE);
         String sql = "select query from reports where name = '" + reportType + "'";
         log.info(sql);
-        String query = jdbcTemplate.queryForObject(sql, new Object[]{}, String.class);
+
+
+
+
+        String query = jdbcTemplate.queryForObject(sql, new Object[]{}, String.class).concat(" order by "+sortType+" "+sortOrder);
+
         log.info("Report Query : " + query);
 
         List<Map<String, Object>> workOrders = jdbcTemplate.queryForList(query);
@@ -363,14 +368,21 @@ public class WorkOrderServiceImpl implements WorkOrderService {
         for (Map workOrder : workOrders) {
             WorkOrderListDTO workOrderListDTO = new WorkOrderListDTO();
             workOrderListDTO.setId(((BigInteger) workOrder.get("Id")).longValue());
-            workOrderListDTO.setProject_name((String) workOrder.get("Project Name"));
+            workOrderListDTO.setProject_name((String) workOrder.get("Project_Name"));
             workOrderListDTO.setWorkOrderId(((BigInteger) workOrder.get("Work Order ID")).longValue());
             workOrderListDTO.setPo((String) workOrder.get("PO#"));
             workOrderListDTO.setDate((String) workOrder.get("Date"));
             workOrderListDTO.setType((String) workOrder.get("Type"));
             workOrderListDTO.setWorkDesc((String) workOrder.get("Work Description"));
             workOrderListDTO.setStatus((String) workOrder.get("Status"));
-            workOrderListDTO.setTime(Float.parseFloat((String) workOrder.get("Time (Hours)")));
+
+            if(workOrder.get("Time (Hours)") == null){
+                log.info("Null Time Hours");
+                //workOrderListDTO.setTime(Float.parseFloat((String) workOrder.get("Time (Hours)")));
+            }else{
+                workOrderListDTO.setTime(Float.parseFloat((String) workOrder.get("Time (Hours)")));
+            }
+
             workOrderListDTO.setAssignedTo((String) workOrder.get("Assigned To"));
             workOrderListDTO.setColor((String) workOrder.get("color"));
             // get only audit,invoice
@@ -381,6 +393,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
                 workOrderListDTO.setAudited((String) workOrder.get("Audited"));
                 workOrderListDTO.setAuditedBy((String) workOrder.get("Audited By"));
                 workOrderListDTO.setInvoiced((String) workOrder.get("Invoiced"));
+                workOrderListDTO.setContactsCompany((String) workOrder.get("Contacts Company"));
             }
             workOrderListDTOs.add(workOrderListDTO);
         }

@@ -101,11 +101,6 @@
                 <div class="col-sm-2">
                     <div class="input-group">
 
-                        <span class="input-group-btn">
-                             <button type="button" ui-sref="departments.new" id="openBtn" data-toggle="modal"
-                                     class="btn btn-success btn-sm"><span
-                                 class="glyphicon glyphicon-plus"></span></button>
-                         </span>
                         <select class="form-control input-sm"
                                 ng-options="departments as departments.departmentName for departments in vm.departmentss track by departments.id"
                                 id="field_defaultDepartment" name="defaultDepartment"

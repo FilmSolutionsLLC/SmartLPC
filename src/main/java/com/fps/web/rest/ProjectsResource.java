@@ -94,6 +94,7 @@ public class ProjectsResource {
 	 */
 	@RequestMapping(value = "/projects", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
+    @Transactional
 	public ResponseEntity<Projects> createProjects(@RequestBody ProjectsDTO projectsDTO) throws URISyntaxException {
 
 		if (projectsDTO.getProjects().getId() != null) {

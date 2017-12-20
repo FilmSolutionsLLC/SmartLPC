@@ -3,17 +3,18 @@
 
     angular
         .module('smartLpcApp')
-        .controller('ProjectsTemplateAddController', ProjectsTemplateAddController);
+        .controller('ProjectsSimilarAddController', ProjectsSimilarAddController);
 
-    ProjectsTemplateAddController.$inject = ['$ngConfirm','$location','$state', '$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'Projects', 'Lookups', 'Contacts', 'User', 'Departments', 'Storage_Disk'];
+    ProjectsSimilarAddController.$inject = ['$ngConfirm','$location','$state', '$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'Projects', 'Lookups', 'Contacts', 'User', 'Departments', 'Storage_Disk'];
 
-    function ProjectsTemplateAddController($ngConfirm,$location,$state, $uibModal, $http, $scope, $rootScope, $stateParams, entity, Projects, Lookups, Contacts, User, Departments, Storage_Disk) {
+    function ProjectsSimilarAddController($ngConfirm,$location,$state, $uibModal, $http, $scope, $rootScope, $stateParams, entity, Projects, Lookups, Contacts, User, Departments, Storage_Disk) {
 
 
     	var vm = this;
-        console.log("ProjectsTemplateAddController");
+        console.log("ProjectsSimilarAddController");
 
         vm.projectsDTO = entity;
+        console.log("----> "+JSON.stringify(entity));
 
 
 // GET ALL Related Entities
@@ -25,27 +26,10 @@
         vm.exclusives = [{'id': 0, 'value': "NONE"}, {'id': 1, 'value': "BASIC"}, {'id': 2, 'value': "MASTER"}];
         vm.invoiceCreated = [{'id': 387,'value':'YES'},{'id': 388,'value':'NO'},{'id': 389,'value':'N/A'},{'id': 0,'value':''}]
 
-
-
         vm.projects = {};
+
         vm.projects.name = '';
-		vm.projects.fullName = '';
-		vm.projects.alfrescoTitle1 = '';
-
-		vm.projects.alfrescoTitle2 = '';
-        var i  =  vm.projectsDTO.projectRoles.length;
-        while (i--) {
-           if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, 'PKO_Tag')) {
-               console.log("Relationship " + i + "  --> " + vm.projectsDTO.projectRoles[i].relationship_type);
-               vm.projectsDTO.projectRoles.splice(i,1);
-           }
-        }
-        console.log("----> "+JSON.stringify(entity));
-
-
-		console.log("Is this a template add  : "+vm.projectsDTO.projects.template);
-
-
+        vm.projects.invoiceCreated = 388;
 		vm.largestBrick = {};
 		console.log("Getting largest brick");
 		$http({
@@ -58,49 +42,6 @@
 		}, function errorCallback(response) {
 
 		});
-
-
-        String.prototype.toCamelCase = function() {
-            return this.replace(/^([A-Z])|\s(\w)/g, function(match, p1, p2,
-                                                             offset) {
-                if (p2)
-                    return p2.toUpperCase();
-                return p1.toLowerCase();
-            });
-        };
-
-        String.prototype.capitalizeFirstLetter = function() {
-            return this.charAt(0).toUpperCase() + this.slice(1);
-        };
-
-		vm.setProjectName = function() {
-
-			var z = vm.projects.name.split(/[ ,]+/);
-
-			var y = [];
-			if (z.length > 1) {
-				for (var i = 0; i < z.length; i++) {
-					y.push(z[i].capitalizeFirstLetter());
-
-				}
-
-				var fullName = y.join(" ");
-				var alfrescoTitle1 = y.join("_").concat("_Proj");
-				var alfrescoTitle2 = y.join("_");
-
-				vm.projects.fullName = fullName;
-				vm.projects.alfrescoTitle1 = alfrescoTitle1;
-				vm.projects.alfrescoTitle2 = alfrescoTitle2;
-
-			} else {
-
-				vm.projects.fullName = vm.projects.name.capitalizeFirstLetter();
-				vm.projects.alfrescoTitle1 = vm.projects.name.capitalizeFirstLetter().concat("_Proj");
-				vm.projects.alfrescoTitle2 = vm.projects.name.capitalizeFirstLetter();
-
-			}
-
-		};
 
 
         vm.talents = [];
@@ -145,6 +86,7 @@
         }, function errorCallback(response) {
 
         });
+
 
 
         //GET RELATED CONTACTS
@@ -577,13 +519,10 @@
                 console.log("Blank")
                 alert("Project Name Cannot be blank");
             }else {
+
                 vm.projectsDTO.projects.id = null;
                 vm.projects.name = vm.projects.name.toUpperCase();
                 vm.projectsDTO.projects.name = vm.projects.name;
-                vm.projectsDTO.projects.fullName = vm.projects.fullName;
-                vm.projectsDTO.projects.alfrescoTitle1 = vm.projects.alfrescoTitle1;
-                vm.projectsDTO.projects.alfrescoTitle2 = vm.projects.alfrescoTitle2;
-                vm.projectsDTO.projects.imageLocation = vm.projects.imageLocation;
                 vm.projectsDTO.projects.invoiceCreated = vm.projects.invoiceCreated;
 
                 console.log("ProjectsDTO");
@@ -592,21 +531,20 @@
                 vm.isSaving = true;
 
 
-                console.log("UPDATING entity projectsDTO");
+                console.log("Creating Similar   projectsDTO");
                 var count = 0;
                 for(var i = 0;i<vm.projectsDTO.projectRoles.length;i++){
                     if(vm.projectsDTO.projectRoles[i].relationship_type === 'PKO_Tag');
                     count++;
                 }
                 vm.projectsDTO.projects.actorsWithRights = count;
-
                 Projects.save(vm.projectsDTO, onSaveSuccess, onSaveError);
             }
         };
         var onSaveSuccess = function (result) {
             $ngConfirm({
                 title: 'Success!',
-                content: "Project : <strong>"+vm.projects.fullName+"</strong> has been created from Template",
+                content: "Project : <strong>"+vm.projects.name+"</strong> has been created",
                 type: 'green',
                 typeAnimated: true,
                 theme: 'dark',
@@ -627,60 +565,7 @@
             vm.isSaving = false;
         };
 
-        // send multiple email
-        vm.sendMail = function(talents) {
 
-            var modalInstance = $uibModal.open({
-
-                templateUrl: 'app/entities/projects/mails.html',
-                controller: 'MailsController',
-                size: 'lg',
-                scope: $scope,
-                controllerAs: 'vm',
-                backdrop: 'static',
-                resolve: {
-
-
-                	talents: function () {
-
-                        return talents;
-                    },
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('contacts');
-                        $translatePartialLoader.addPart('projects');
-                        $translatePartialLoader.addPart('global');
-                        return $translate.refresh();
-                    }]
-                }
-            })
-		};
-		 // send single email
-        vm.sendIndividualMail = function(talent) {
-
-            var modalInstance = $uibModal.open({
-
-                templateUrl: 'app/entities/projects/mails.html',
-                controller: 'MailsIndividualController',
-                size: 'lg',
-                scope: $scope,
-                controllerAs: 'vm',
-                backdrop: 'static',
-                resolve: {
-
-
-                	talent: function () {
-
-                        return talent;
-                    },
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('contacts');
-                        $translatePartialLoader.addPart('projects');
-                        $translatePartialLoader.addPart('global');
-                        return $translate.refresh();
-                    }]
-                }
-            })
-		};
 
         vm.getCount = function (projects) {
             // console.log("Drive ID : " + JSON.stringify(diskID));
@@ -904,11 +789,8 @@
                 vm.projectsDTO.projects.id = null;
                 vm.projects.name = vm.projects.name.toUpperCase();
                 vm.projectsDTO.projects.name = vm.projects.name;
-                vm.projectsDTO.projects.fullName = vm.projects.fullName;
-                vm.projectsDTO.projects.alfrescoTitle1 = vm.projects.alfrescoTitle1;
-                vm.projectsDTO.projects.alfrescoTitle2 = vm.projects.alfrescoTitle2;
-                vm.projectsDTO.projects.imageLocation = vm.projects.imageLocation;
                 vm.projectsDTO.projects.invoiceCreated = vm.projects.invoiceCreated;
+
 
                 console.log("ProjectsDTO");
                 console.log(JSON.stringify(vm.projectsDTO));
@@ -917,7 +799,12 @@
 
 
                 console.log("UPDATING entity projectsDTO");
-
+                var count = 0;
+                for(var i = 0;i<vm.projectsDTO.projectRoles.length;i++){
+                    if(vm.projectsDTO.projectRoles[i].relationship_type === 'PKO_Tag');
+                    count++;
+                }
+                vm.projectsDTO.projects.actorsWithRights = count;
                 Projects.save(vm.projectsDTO, onSaveSuccess2, onSaveError2);
 
             }
@@ -929,7 +816,7 @@
             // $uibModalInstance.close(result);
             $ngConfirm({
                 title: 'Success!',
-                content: "Project : <strong>"+vm.projectsDTO.projects.fullName+"</strong> has been created from Template",
+                content: "Project : <strong>"+vm.projects.name+"</strong> has been created",
                 type: 'green',
                 typeAnimated: true,
                 theme: 'dark',
