@@ -68,14 +68,28 @@
 
         vm.onTypeChange = function () {
             vm.showPKOFlag = true;
+
+
+
         };
 
         vm.invoiced = [
-            {"id":105,"name":"Yes"},
-            {"id":106,"name":"Comp"},
-            {"id":107,"name":"Included"},
-            {"id":108,"name":"No"}
+            {"id": 105, "name": "Yes"},
+            {"id": 106, "name": "Comp"},
+            {"id": 107, "name": "Included"},
+            {"id": 108, "name": "No"}
         ];
+
+        vm.processingPKOFlag = {};
+        $http({
+            method: 'GET',
+            url: 'api/lookups/get/work_order/processing_pko_flag'
+        }).then(function successCallback(response) {
+            vm.processingPKOFlag = response.data;
+            console.log(JSON.stringify(vm.processingPKOFlag));
+        }, function errorCallback(response) {
+        });
+
 
         vm.workOrderType = {};
         $http({
@@ -199,11 +213,13 @@
                 console.log("not null");
 
                 vm.currrentOBJ = $rootScope.relationships;
-                console.log("========> " + JSON.stringify(vm.currentOBJ));
+                //console.log("========> " + JSON.stringify(vm.currentOBJ));
                 if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.workOrder.requestor')) {
                     console.log("found equal");
 
                     vm.workOrderDTO.workOrder.requestor = vm.currrentOBJ.data;
+
+                    console.log("--> " + JSON.stringify(vm.workOrderDTO.workOrder.requestor));
 
                 } else {
                 }

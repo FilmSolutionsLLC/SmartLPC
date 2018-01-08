@@ -232,8 +232,8 @@
         vm.addType = function () {
             var type = prompt("Add New Option : ", "");
             console.log("type : "+type);
-            if(status === "" ) {
-                alert("No status Entered");
+            if(type === null ) {
+                alert("No Type Entered");
             }else{
                 vm.newType = {
                     tableName: 'contacts',
@@ -242,16 +242,18 @@
                     id: null
                 };
 
-                Lookups.save(vm.newStatus, onSaveSuccess10, onSaveError10);
+                console.log("Saving Type : "+JSON.stringify(vm.newType));
+                Lookups.save(vm.newType, onSaveSuccess10, onSaveError10);
 
 
             }
         };
 
         var onSaveSuccess10 = function (result) {
-            vm.types.push(result);
             console.log("GOT NEW TYPES : "+JSON.stringify(result));
-            alert("New types Created")
+            vm.lookupss.push(result);
+
+            alert("New TYPE Created");
         };
 
         var onSaveError10 = function () {

@@ -1,6 +1,5 @@
 package com.fps.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NotFound;
@@ -202,12 +201,10 @@ public class WorkOrder implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "created_by")
-    @JsonIgnore
     private User createdBy;
 
     @ManyToOne
     @JoinColumn(name = "updated_by")
-    @JsonIgnore
     private User updatedBy;
 
     @ManyToOne

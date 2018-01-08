@@ -36,9 +36,9 @@
 
 
                         <span class="input-group-btn">
-                             <button type="button" ui-sref="lookups.new" data-toggle="modal"
-                                     class="btn btn-success btn-sm"><span
-                                 class="glyphicon glyphicon-plus"></span></button>
+                              <button type="button" ng-click="vm.addType()"
+                                      class="btn btn-success btn-sm"><span
+                                  class="glyphicon glyphicon-plus"></span></button>
                          </span>
                             <select class="form-control input-sm" id="field_type" name="type"
                                     ng-model="vm.contactDTO.contacts.type"
@@ -98,18 +98,14 @@
 
                 <label class="col-md-1 control-label small" for="field_defaultDepartment">Department</label>
                 <div class="col-sm-2">
-                    <div class="input-group">
 
-                        <span class="input-group-btn">
-                             <button type="button" ui-sref="departments.new" id="openBtn" data-toggle="modal"
-                                     class="btn btn-success btn-sm"><span
-                                 class="glyphicon glyphicon-plus"></span></button>
-                         </span>
+
+
                         <select class="form-control input-sm"
                                 ng-options="departments as departments.departmentName for departments in vm.departmentss track by departments.id"
                                 id="field_defaultDepartment" name="defaultDepartment"
                                 ng-model="vm.contactDTO.contacts.defaultDepartment"></select>
-                    </div>
+
                 </div>
 
 

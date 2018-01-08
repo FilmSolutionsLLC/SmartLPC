@@ -136,6 +136,7 @@
 
         vm.save = function () {
             vm.isSaving = true;
+            console.log("Saving : "+JSON.stringify(vm.contactDTO));
             Contacts.update(vm.contactDTO, onSaveSuccess, onSaveError);
         };
 
@@ -143,7 +144,7 @@
             vm.isSaving = false;
             $ngConfirm({
                 title: 'Success!',
-                content: "Contact : <strong>" + result.fullName + "</strong> has been updated",
+                content: "Contact : <strong>" +  vm.contactDTO.contacts.fullName + "</strong> has been updated",
                 type: 'green',
                 typeAnimated: true,
                 theme: 'dark',
@@ -152,6 +153,7 @@
                         text: 'Okay',
                         btnClass: 'btn-green',
                         action: function () {
+
                         }
                     }
                 }
@@ -260,7 +262,7 @@
             } else {
                 console.log("Not Equal Data");
             }
-            window.history.back();
+            $state.go("contacts");
             console.log("==> " + JSON.stringify(originalData));
             console.log("==> " + JSON.stringify(vm.contactDTO));
         };
@@ -335,6 +337,33 @@
                 }
             });
         };
+
+        vm.addType = function () {
+            var type = prompt("Add New Option : ", "");
+            console.log("type : "+type);
+            if(type === null ) {
+                alert("No Type Entered");
+            }else{
+                vm.newType = {
+                    tableName: 'contacts',
+                    fieldName: 'type_id',
+                    textValue: type,
+                    id: null
+                };
+
+                Lookups.save(vm.newType, onSaveSuccess10, onSaveError10);
+            }
+        };
+        var onSaveSuccess10 = function (result) {
+            vm.lookupss.push(result);
+            console.log("GOT NEW TYPES : "+JSON.stringify(result));
+            alert("New types Created")
+        };
+
+        var onSaveError10 = function () {
+
+        };
+
 
     }
 })();

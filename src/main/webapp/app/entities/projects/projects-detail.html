@@ -26,10 +26,10 @@
                     ui-sref-opts="{reload: true, notify: true}"
                     class="btn btn-xs btn btn-primary">Add Similar</button>
                      -->
-               <!-- <button type="button"
-                        ng-click="vm.addSimilar(vm.projectsDTO.projects.id)"
-                        class="btn btn-xs btn btn-primary">Add Similar
-                </button> -->
+                <!-- <button type="button"
+                         ng-click="vm.addSimilar(vm.projectsDTO.projects.id)"
+                         class="btn btn-xs btn btn-primary">Add Similar
+                 </button> -->
                 <button type="button"
                         ui-sref="projects.similar-add({id:vm.projectsDTO.projects.id})"
                         ui-sref-opts="{reload: true, notify: true}"
@@ -217,59 +217,59 @@
         <hr>
     </div>
 
-        <div class="row">
-            <div class="col-sm-3">
-                <h4>
-                    <strong>PROJECT PROCESSING PROFILE</strong>
-                </h4>
-            </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>
+                <strong>PROJECT PROCESSING PROFILE</strong>
+            </h4>
         </div>
-        <div class="row">
-            <div class="col-sm-8">
-                <h5>
-                    <strong><span
-                        translate="smartLpcApp.projects.processingDeliveries">ProcessingDeliveries</span></strong>
-                    <span>{{vm.projectsDTO.projects.processingDeliveries}}</span>
-                </h5>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.processingDeliveries">ProcessingDeliveries</span></strong>
+                <span>{{vm.projectsDTO.projects.processingDeliveries}}</span>
+            </h5>
         </div>
-        <div class="row">
-            <div class="col-sm-8">
-                <h5>
-                    <strong><span
-                        translate="smartLpcApp.projects.processingSpecialInstructions">ProcessingSpecialInstructions</span></strong>
-                    <span>{{vm.projectsDTO.projects.processingSpecialInstructions}}</span>
-                </h5>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.processingSpecialInstructions">ProcessingSpecialInstructions</span></strong>
+                <span>{{vm.projectsDTO.projects.processingSpecialInstructions}}</span>
+            </h5>
         </div>
-        <div class="row">
-            <div class="col-sm-8">
-                <h5>
-                    <strong><span
-                        translate="smartLpcApp.projects.processingWatermark">ProcessingWatermark</span></strong>
-                    <span>{{vm.projectsDTO.projects.processingWatermark}}</span>
-                </h5>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.processingWatermark">ProcessingWatermark</span></strong>
+                <span>{{vm.projectsDTO.projects.processingWatermark}}</span>
+            </h5>
         </div>
-        <div class="row">
-            <div class="col-sm-8">
-                <h5>
-                    <strong><span
-                        translate="smartLpcApp.projects.processingCopyright">ProcessingCopyright</span></strong>
-                    <span>{{vm.projectsDTO.projects.processingCopyright}}</span>
-                </h5>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.processingCopyright">ProcessingCopyright</span></strong>
+                <span>{{vm.projectsDTO.projects.processingCopyright}}</span>
+            </h5>
         </div>
-        <div class="row">
-            <div class="col-sm-8">
-                <h5>
-                    <strong><span
-                        translate="smartLpcApp.projects.processingOriginalFileType">ProcessingOriginalFileType</span></strong>
-                    {{vm.projectsDTO.projects.processingOriginalFileType.textValue}}
-                </h5>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h5>
+                <strong><span
+                    translate="smartLpcApp.projects.processingOriginalFileType">ProcessingOriginalFileType</span></strong>
+                {{vm.projectsDTO.projects.processingOriginalFileType.textValue}}
+            </h5>
         </div>
-        <hr>
+    </div>
+    <hr>
     <div ng-if="vm.projectsDTO.projects.labFlag === true">
         <div class="row">
             <div class="col-sm-3">
@@ -313,8 +313,9 @@
                 </h5>
             </div>
         </div>
-        <hr>
+
     </div>
+    <hr>
     <div class="row">
         <div class="col-sm-3">
             <h4>
@@ -322,202 +323,198 @@
             </h4>
         </div>
     </div>
-    <div
-        ng-repeat="mainC in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Main Contact'}">
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Main Contact : </strong> {{mainC.contact.fullName}}
-                </h5>
-            </div>
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Title : </strong> {{mainC.contact.title}}
-                </h5>
-            </div>
+    <!--    <div ng-repeat="mainC in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Main Contact'}">-->
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Main Contact : </strong> {{vm.mainC.contact.fullName}}
+            </h5>
         </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Office Phone : </strong> {{mainC.contact.phoneOffice}}
-                </h5>
-            </div>
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Mobile : </strong> {{mainC.contact.phoneMobile}}
-                </h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Email : </strong> {{mainC.contact.email}}
-                </h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-8">
-                <h5>
-                    <strong>Notes : </strong> {{mainC.contact.notes}}
-                </h5>
-            </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong>Title : </strong> {{vm.mainC.contact.title}}
+            </h5>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Office Phone : </strong> {{vm.mainC.contact.phoneOffice}}
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong>Mobile : </strong> {{vm.mainC.contact.phoneMobile}}
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Email : </strong> {{vm.mainC.contact.email}}
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h5>
+                <strong>Notes : </strong> {{vm.mainC.contact.notes}}
+            </h5>
+        </div>
+    </div>
+    <!--  </div>-->
     <br>
-    <div
-        ng-repeat="uPub in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Unit Publicist'}">
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Unit Publicist : </strong> {{uPub.contact.fullName}}
-                </h5>
-            </div>
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Title : </strong> {{uPub.contact.title}}
-                </h5>
-            </div>
+    <!--    <div ng-repeat="uPub in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Unit Publicist'}">-->
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Unit Publicist : </strong> {{vm.uPub.contact.fullName}}
+            </h5>
         </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Office Phone : </strong> {{uPub.contact.phoneOffice}}
-                </h5>
-            </div>
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Mobile : </strong> {{mainC.uPub.phoneMobile}}
-                </h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Email : </strong> {{uPub.contact.email}}
-                </h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Notes : </strong> {{uPub.contact.notes}}
-                </h5>
-            </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong>Title : </strong> {{vm.uPub.contact.title}}
+            </h5>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Office Phone : </strong> {{vm.uPub.contact.phoneOffice}}
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong>Mobile : </strong> {{vm.mainC.uPub.phoneMobile}}
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Email : </strong> {{vm.uPub.contact.email}}
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Notes : </strong> {{vm.uPub.contact.notes}}
+            </h5>
+        </div>
+    </div>
+    <!--  </div>-->
     <br>
-    <div
-        ng-repeat="uPhoto in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Unit Photographer'}">
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Unit Photographer : </strong> {{uPhoto.contact.fullName}}
-                </h5>
-            </div>
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Title : </strong> {{uPhoto.contact.title}}
-                </h5>
-            </div>
+    <!--    <div ng-repeat="uPhoto in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Unit Photographer'}">-->
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Unit Photographer : </strong> {{vm.uPhoto.contact.fullName}}
+            </h5>
         </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Office Phone : </strong> {{uPhoto.contact.phoneOffice}}
-                </h5>
-            </div>
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Mobile : </strong> {{uPhoto.contact.phoneMobile}}
-                </h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Email : </strong> {{uPhoto.contact.email}}
-                </h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Notes : </strong> {{uPhoto.contact.notes}}
-                </h5>
-            </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong>Title : </strong> {{vm.uPhoto.contact.title}}
+            </h5>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Office Phone : </strong> {{vm.uPhoto.contact.phoneOffice}}
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong>Mobile : </strong> {{vm.uPhoto.contact.phoneMobile}}
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Email : </strong> {{vm.uPhoto.contact.email}}
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Notes : </strong> {{vm.uPhoto.contact.notes}}
+            </h5>
+        </div>
+    </div>
+    <!-- </div>-->
     <br>
-    <div
-        ng-repeat="lab in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Lab'}">
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Lab Information : </strong> {{lab.contact.fullName}}
-                </h5>
-            </div>
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Title : </strong> {{lab.contact.title}}
-                </h5>
-            </div>
+    <!--<div ng-repeat="lab in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'Lab'}">-->
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Lab Information : </strong> {{vm.lab.contact.fullName}}
+            </h5>
         </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Office Phone : </strong> {{lab.contact.phoneOffice}}
-                </h5>
-            </div>
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Email : </strong> {{lab.contact.email}}
-                </h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Address : </strong> {{lab.contact.streetAdress}}
-                </h5>
-            </div>
-            <div class="col-sm-2">
-                <h5>
-                    <strong>City : </strong> {{lab.contact.city}}
-                </h5>
-            </div>
-            <div class="col-sm-1">
-                <h5>
-                    <strong>State : </strong> {{lab.contact.state}}
-                </h5>
-            </div>
-            <div class="col-sm-2">
-                <h5>
-                    <strong>Zip : </strong> {{lab.contact.zipcode}}
-                </h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Contact/Notes : </strong> {{lab.contact.notes}}
-                </h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Photo Lab Info : </strong> {{lab.notes}}
-                </h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Notes : </strong> {{lab.notes}}
-                </h5>
-            </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong>Title : </strong> {{vm.lab.contact.title}}
+            </h5>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Office Phone : </strong> {{vm.lab.contact.phoneOffice}}
+            </h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>
+                <strong>Email : </strong> {{vm.lab.contact.email}}
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Address : </strong> {{vm.lab.contact.streetAddress}}
+            </h5>
+        </div>
+        <div class="col-sm-2">
+            <h5>
+                <strong>City : </strong> {{vm.lab.contact.city}}
+            </h5>
+        </div>
+        <div class="col-sm-1">
+            <h5>
+                <strong>State : </strong> {{vm.lab.contact.state}}
+            </h5>
+        </div>
+        <div class="col-sm-2">
+            <h5>
+                <strong>Zip : </strong> {{vm.lab.contact.zipcode}}
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Contact/Notes : </strong> {{vm.lab.contact.notes}}
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Photo Lab Info : </strong> {{vm.lab.notes}}
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>
+                <strong>Notes : </strong> {{lab.notes}}
+            </h5>
+        </div>
+    </div>
+    <!--</div>-->
     <br>
     <div class="row">
         <div class="col-sm-3">
@@ -721,6 +718,7 @@
                         Talent {{$index+1}}
                     </h5>
                 </td>
+
                 <td>
                     <h5 class="small">
                         <span ng-repeat="execs in vm.projectsDTO.contactPrivileges | filter:{contact:tags.contact}">
@@ -732,12 +730,12 @@
                                 <input type="hidden" ng-model="vm.noExec" ng-value="false">
                                 {{tags.contact.fullName}}
                             </span>
-
                         </span>
 
-                        <!--<a ui-sref="contacts-detail({id:tags.contact.id})">{{tags.contact.fullName}}</a>-->
                     </h5>
                 </td>
+
+
                 <td>
                     <h5 class="small">{{tags.contact.username}}</h5>
                 </td>
@@ -869,9 +867,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges | filter:isExecORAlbumViewer" >
-           <!-- <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges" ng-if="execs.exec === true || execs.restartRole ==='ALBUMVIEWER'">
-            -->   <td>
+            <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges | filter:isExecORAlbumViewer">
+                <!-- <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges" ng-if="execs.exec === true || execs.restartRole ==='ALBUMVIEWER'">
+                 -->
+                <td>
                     <h5 class="small">
                         <!--<a href="" ng-click="vm.sendIndividualMail(execs)"><span
                             class=" glyphicon glyphicon-envelope small text-success"></span></a>-->
@@ -1021,56 +1020,110 @@
             </div>
         </div>
 
+        <div ng-if="tags.contact.fullName !== vm.relatedContacts[$index].fullName">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Contact: </strong> {{vm.relatedContacts[$index].fullName}}
+                    </h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Type: </strong> {{vm.relatedContacts[$index].type.textValue}}
+                    </h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Company: </strong> {{vm.relatedContacts[$index].companyContact.fullName}}
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Phone: </strong> {{vm.relatedContacts[$index].phoneOffice}}
+                    </h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Email: </strong> {{vm.relatedContacts[$index].email}}
+                    </h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Mobile: </strong> {{vm.relatedContacts[$index].phoneMobile}}
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h5>
+                        <strong>Asst Notes/Notes: </strong> {{vm.relatedContacts[$index].notes}}
+                    </h5>
+                </div>
 
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Contact: </strong> {{vm.relatedContacts[$index].fullName}}
-                </h5>
             </div>
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Type: </strong> {{vm.relatedContacts[$index].type.textValue}}
-                </h5>
-            </div>
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Company: </strong> {{vm.relatedContacts[$index].companyContact.fullName}}
-                </h5>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h5>
+                        <strong>Notes: </strong> {{tags.notes}}
+                    </h5>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Phone: </strong> {{vm.relatedContacts[$index].phoneOffice}}
-                </h5>
-            </div>
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Email: </strong> {{vm.relatedContacts[$index].email}}
-                </h5>
-            </div>
-            <div class="col-sm-3">
-                <h5>
-                    <strong>Mobile: </strong> {{vm.relatedContacts[$index].phoneMobile}}
-                </h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <h5>
-                    <strong>Asst Notes/Notes: </strong> {{vm.relatedContacts[$index].notes}}
-                </h5>
-            </div>
 
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <h5>
-                    <strong>Notes: </strong> {{tags.notes}}
-                </h5>
+        <div ng-else>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Contact: </strong>
+                    </h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Type: </strong>
+                    </h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Company: </strong>
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Phone: </strong>
+                    </h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Email: </strong>
+                    </h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5>
+                        <strong>Mobile: </strong>
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h5>
+                        <strong>Asst Notes/Notes: </strong>
+                    </h5>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h5>
+                        <strong>Notes: </strong> {{tags.notes}}
+                    </h5>
+                </div>
             </div>
         </div>
+
         <hr>
     </div>
 

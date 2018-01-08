@@ -14,20 +14,25 @@
 
         var vm = this;
 
+
         vm.contacts = [];
         vm.relatedContacts = [];
         vm.contactDTO = entity;
 
         vm.load = function (id) {
+
             Contacts.get({
                 id: id
             }, function (result) {
 
-                vm.contactDTO = result.data;
+
+                vm.contactDTO = result;
 
             });
 
         };
+        vm.load(vm.contactDTO.contacts.id);
+
         var unsubscribe = $rootScope.$on('smartLpcApp:contactsUpdate',
             function (event, result) {
                 vm.contacts = result;

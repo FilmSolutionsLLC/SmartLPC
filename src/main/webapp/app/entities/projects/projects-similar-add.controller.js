@@ -104,6 +104,11 @@
 
 
         // ADD PO / LAB / TALENTS / EXECS
+        vm.deletePurchaseOrder = [];
+        vm.deleteLabTask = [];
+        vm.deleteTalent = [];
+        vm.deleteExec = [];
+
 
         // PURCHASE ORDERS
         vm.runShowAdd = function () {
@@ -152,7 +157,7 @@
 			});
 
 			console.log("Related Contact Length : ",vm.relatedContact.length );*/
-
+            vm.projectsDTO.projects.actorsWithRights = vm.projectsDTO.projects.actorsWithRights + 1;
         };
 
         vm.removeTalent = function (index) {
@@ -178,11 +183,12 @@
                     }
                 }
             }
+            vm.projectsDTO.projects.actorsWithRights = vm.projectsDTO.projects.actorsWithRights - 1;
         };
 
         vm.notify = function(talent) {
 			alert("Notification Email sent to : "+talent.contact.fullName);
-		}
+		};
         // EXECS
 
         vm.addExec = function () {
@@ -403,18 +409,22 @@
                         "restartRole": 'REVIEWER'
                     });
 
-                 // get related too.
-                    /*console.log(" get releated  : ", vm.currrentOBJ.data.id);
-					$http({
-						method : 'GET',
-						url : 'api/contacts/related/' + vm.currrentOBJ.data.id
-					}).then(function successCallback(response) {
-						vm.relatedContact.push(response.data);
-					}, function errorCallback(response) {
+                    // get related too.
+                    console.log("Before adding new Talent..related length : "+vm.relatedContact.length);
+                    console.log("==> "+JSON.stringify(vm.relatedContact));
+                    console.log(" get releated  : ", vm.currrentOBJ.data.id);
+                    $http({
+                        method: 'GET',
+                        url: 'api/talent/related/' + vm.currrentOBJ.data.id
+                    }).then(function successCallback(response) {
+                        vm.relatedContact.push(response.data);
+                        console.log("Related Contact added..");
+                        console.log("After Adding length : "+vm.relatedContact.length);
+                        console.log("==> "+JSON.stringify(vm.relatedContact));
+                    }, function errorCallback(response) {
 
-					});
+                    });
 
-					console.log("Related Contact Length : ",vm.relatedContact.length );*/
 
                 }
                 else if (angular.equals(vm.currrentOBJ.elementID, 'field_vm.projects.execs')) {
@@ -532,12 +542,7 @@
 
 
                 console.log("Creating Similar   projectsDTO");
-                var count = 0;
-                for(var i = 0;i<vm.projectsDTO.projectRoles.length;i++){
-                    if(vm.projectsDTO.projectRoles[i].relationship_type === 'PKO_Tag');
-                    count++;
-                }
-                vm.projectsDTO.projects.actorsWithRights = count;
+
                 Projects.save(vm.projectsDTO, onSaveSuccess, onSaveError);
             }
         };
@@ -799,12 +804,7 @@
 
 
                 console.log("UPDATING entity projectsDTO");
-                var count = 0;
-                for(var i = 0;i<vm.projectsDTO.projectRoles.length;i++){
-                    if(vm.projectsDTO.projectRoles[i].relationship_type === 'PKO_Tag');
-                    count++;
-                }
-                vm.projectsDTO.projects.actorsWithRights = count;
+
                 Projects.save(vm.projectsDTO, onSaveSuccess2, onSaveError2);
 
             }

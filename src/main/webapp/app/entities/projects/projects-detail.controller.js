@@ -12,20 +12,32 @@
 			$rootScope, $stateParams, entity, Projects, Lookups, Contacts,
 			User, Departments, Storage_Disk) {
 
+	    console.log('Project Detail Controller');
         $(document).ready(function(){
             $(this).scrollTop(0);
         });
 
+
+
 	    var vm = this;
+
+        vm.load = function (id) {
+            Projects.get({id: id}, function(result) {
+                vm.projectsDTO = result;
+               // console.log("FROM LOAD : "+JSON.stringify(vm.projectsDTO))
+            });
+        };
+        vm.load(entity.projects.id);
+
         vm.projectsDTO = entity;
-        	console.log("projectsDTO " + JSON.stringify(vm.projectsDTO));
+        	//console.log("projectsDTO " + JSON.stringify(vm.projectsDTO));
 
         $scope.isGeneric = function (tags) {
             return tags.contact.fullName !== 'generic pkotag';
-        }
+        };
 
         $scope.isExecORAlbumViewer = function (execs) {
-          return  execs.exec === true || execs.restartRole === 'ALBUMVIEWER';
+          return  (execs.exec === true || execs.restartRole === 'ALBUMVIEWER') && (execs.internal === false) ;
         };
 
         vm.noExec = true;
@@ -187,7 +199,7 @@
             }, {
                 reload: true
             });
-        }
+        };
         vm.relatedContacts = [];
 
         $http({
@@ -199,6 +211,24 @@
             errorCallback(response) {
 
         });
+
+
+        vm.sortProjectRoles = function () {
+            for (var i = 0; i < vm.projectsDTO.projectRoles.length; i++) {
+                console.log("Relationship " + i + "  --> " + vm.projectsDTO.projectRoles[i].relationship_type);
+                if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, 'Main Contact')) {
+
+                    vm.mainC = vm.projectsDTO.projectRoles[i];
+                } else if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, 'Unit Publicist')) {
+                    vm.uPub = vm.projectsDTO.projectRoles[i];
+                } else if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, 'Unit Photographer')) {
+                    vm.uPhoto = vm.projectsDTO.projectRoles[i];
+                } else if (angular.equals(vm.projectsDTO.projectRoles[i].relationship_type, 'Lab')) {
+                    vm.lab = vm.projectsDTO.projectRoles[i];
+                }
+            }
+        };
+        vm.sortProjectRoles();
 
     }
 

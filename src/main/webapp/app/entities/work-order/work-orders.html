@@ -36,13 +36,15 @@
         <table class="jh-table table table-striped">
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                <th></th>
 
-
-                <th jh-sort-by="id" class="extra-small"><span translate="global.field.id">ID</span> <span
-                    class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="project.name" class="extra-small"><span
                     translate="smartLpcApp.workOrder.project">project</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
+
+                <th jh-sort-by="id" class="extra-small"><span translate="global.field.id">ID</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+
                 <th jh-sort-by="poRecord" class="extra-small"><span translate="smartLpcApp.workOrder.poRecord">PoRecord</span> <span
                     class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="requestDate" class="extra-small"><span translate="smartLpcApp.workOrder.requestDate">RequestDate</span>
@@ -66,7 +68,7 @@
                     <span class="glyphicon glyphicon-sort"></span></th>
 
 
-                <th></th>
+
             </tr>
             </thead>
             <tbody>
@@ -74,43 +76,44 @@
             <tr ng-repeat="workOrder in vm.workOrders track by workOrder.id"
                 ng-class="{verify: workOrder.status.id == 104, notstarted: workOrder.status.id == 103}">
 
-                <td class="extra-small"><a ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a></td>
-                <td class="extra-small">
-                    <a ui-sref="projects-detail({id:workOrder.project.id})">{{workOrder.project.name}}</a>
-                </td>
-                <td class="extra-small">{{workOrder.poRecord}}</td>
-                <td class="extra-small">{{workOrder.requestDate | date:'mediumDate'}}</td>
-                <td class="extra-small">
-                    <a ui-sref="lookups-detail({id:workOrder.type.id})">{{workOrder.type.textValue}}</a>
-                </td>
-                <td class="extra-small">{{workOrder.requestDescription}}</td>
-                <td class="extra-small">
-                    <a ui-sref="lookups-detail({id:workOrder.status.id})">{{workOrder.status.textValue}}</a>
-                </td>
-                <td class="extra-small">{{workOrder.durationOfService}}</td>
-                <td class="extra-small">{{workOrder.invoiced}}</td>
-                <td class="extra-small">
-                    {{workOrder.assignedToUser.fullName}}
-                </td>
-
-
                 <td class="text-right extra-small">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                ui-sref="work-order-detail({id:workOrder.id})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
-                        </button>
-                        <button type="submit"
                                 ui-sref="work-order.edit({id:workOrder.id})"
                                 class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="glyphicon glyphicon-pencil"></span> Edit
                             <!--<span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>-->
                         </button>
+                        <button type="submit"
+                                ui-sref="work-order-detail({id:workOrder.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span> View
+                            <!--<span class="hidden-xs hidden-sm" translate="entity.action.view"></span>-->
+                        </button>
+
 
                     </div>
                 </td>
+                <td class="extra-small">{{workOrder.project.name}}</td>
+                <td class="extra-small">{{workOrder.id}}</td>
+
+                <td class="extra-small">{{workOrder.poRecord}}</td>
+                <td class="extra-small">{{workOrder.requestDate | date:'mediumDate'}}</td>
+                <td class="extra-small">{{workOrder.type.textValue}}</td>
+                <td class="extra-small">{{workOrder.requestDescription}}</td>
+                <td class="extra-small">{{workOrder.status.textValue}}</td>
+                <td class="extra-small">{{workOrder.durationOfService}}</td>
+                <td class="extra-small">
+                    <div ng-if="workOrder.invoiced === 105">Yes</div>
+                    <div ng-if="workOrder.invoiced === 106">Comp</div>
+                    <div ng-if="workOrder.invoiced === 107">Included</div>
+                    <div ng-if="workOrder.invoiced === 108">No</div>
+                    <div ng-if="workOrder.invoiced === null"></div>
+                </td>
+                <td class="extra-small">{{workOrder.assignedToUser.fullName}}</td>
+
+
+
             </tr>
             </tbody>
         </table>

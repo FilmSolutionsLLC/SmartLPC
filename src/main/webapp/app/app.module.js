@@ -24,7 +24,8 @@
             'ngSanitize',
             'AngularPrint',
             'cp.ngConfirm',
-            'sticky'
+            'sticky',
+            'elif'
         ])
         .run(run);
 

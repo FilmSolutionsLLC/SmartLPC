@@ -6,9 +6,9 @@
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
 
+                    <th></th>
+                    <th jh-sort-by="requestDate" class="extra-small">Project Name</th>
                     <th jh-sort-by="id" class="extra-small">ID</th>
-                    <th jh-sort-by="requestDate" class="extra-small">Project Name
-                    </th>
                     <th jh-sort-by="requestDescription" class="extra-small">PO#</th>
                     <th jh-sort-by="poRecord" class="extra-small">Date</th>
                     <th jh-sort-by="invoiced" class="extra-small">Type</th>
@@ -17,7 +17,7 @@
                     <th jh-sort-by="status.textValue" class="extra-small">Time(Hours)</th>
 
                     <th jh-sort-by="project.name" class="extra-small">Assigned To</th>
-                    <th></th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -28,35 +28,6 @@
                 rush: workOrder.color == 'Red',
                 kickback: workOrder.color == 'Blue'
                 }">
-
-
-                    <td class="extra-small">
-                        <a ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a>
-                    </td>
-
-                    <td class="extra-small">
-                        <a ui-sref="projects-detail({id:workOrder.project.id})">{{workOrder.project.name}}</a>
-                    </td>
-
-
-                    <td class="extra-small">{{workOrder.poRecord}}</td>
-
-                    <td class="col-xs-1 extra-small">{{workOrder.requestDate | date:'mediumDate'}}</td>
-                    <td class="extra-small">
-                        <a ui-sref="lookups-detail({id:workOrder.type.id})">{{workOrder.type.textValue}}</a>
-                    </td>
-
-                    <td class="extra-small">{{workOrder.requestDescription}}</td>
-
-                    <td class="extra-small">
-                        <a ui-sref="lookups-detail({id:workOrder.status.id})">{{workOrder.status.textValue}}</a>
-                    </td>
-
-                    <td class="extra-small">{{workOrder.durationOfService}}</td>
-                    <td class="extra-small">
-                        {{workOrder.assignedToUser.firstName}}
-                    </td>
-
                     <td class="text-right extra-small">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
@@ -73,6 +44,33 @@
 
                         </div>
                     </td>
+
+                    <td class="extra-small">{{workOrder.project.name}}</td>
+
+                    <td class="extra-small">{{workOrder.id}}</td>
+
+
+
+
+                    <td class="extra-small">{{workOrder.poRecord}}</td>
+
+                    <td class="col-xs-1 extra-small">{{workOrder.requestDate | date:'mediumDate'}}</td>
+                    <td class="extra-small">
+                        {{workOrder.type.textValue}}
+                    </td>
+
+                    <td class="extra-small">{{workOrder.requestDescription}}</td>
+
+                    <td class="extra-small">
+                        {{workOrder.status.textValue}}
+                    </td>
+
+                    <td class="extra-small">{{workOrder.durationOfService}}</td>
+                    <td class="extra-small">
+                        {{workOrder.assignedToUser.firstName}}
+                    </td>
+
+
 
                 </tr>
                 </tbody>
@@ -98,10 +96,12 @@
                     <th></th>
 
 
-                    <th class="extra-small" ng-click="vm.sort('1')"><span translate="global.field.id">ID</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
                     <th class="extra-small" ng-click="vm.sort('2')">Project<span
                         class="glyphicon glyphicon-sort"></span></th>
+
+                    <th class="extra-small" ng-click="vm.sort('1')"><span translate="global.field.id">ID</span> <span
+                        class="glyphicon glyphicon-sort"></span></th>
+
                     <th class="extra-small" ng-click="vm.sort('3')">Date Recieved<span
                         class="glyphicon glyphicon-sort"></span></th>
                     <th class="extra-small" ng-click="vm.sort('5')">HDD ID<span class="glyphicon glyphicon-sort"></span>
@@ -165,15 +165,12 @@
                         </div>
                     </td>
 
-                    <td class="extra-small"><a
-                        ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a></td>
-                    <td class="extra-small"><a
-                        ui-sref="projects-detail({id:workOrder.project.id})">{{workOrder.projectName}}</a>
-                    </td>
+                    <td class="extra-small">{workOrder.projectName}}</td>
 
-                    <td class="extra-small">{{workOrder.dateRecieved |
-                        date:'mediumDate'}}
-                    </td>
+                    <td class="extra-small">{{workOrder.id}}</td>
+
+
+                    <td class="extra-small">{{workOrder.dateRecieved | date:'mediumDate'}}</td>
 
                     <td class="extra-small">{{workOrder.hddID}}</td>
 

@@ -258,5 +258,35 @@
             console.log("==> " + JSON.stringify(originalData));
             console.log("==> " + JSON.stringify(vm.contactDTO));
         };
+
+        vm.addType = function () {
+            var type = prompt("Add New Option : ", "");
+            console.log("type : "+type);
+            if(type === null ) {
+                alert("No status Entered");
+            }else{
+                vm.newType = {
+                    tableName: 'contacts',
+                    fieldName: 'type_id',
+                    textValue: type,
+                    id: null
+                };
+
+
+                Lookups.save(vm.newType, onSaveSuccess10, onSaveError10);
+
+
+            }
+        };
+        var onSaveSuccess10 = function (result) {
+            vm.lookupss.push(result);
+            console.log("GOT NEW TYPES : "+JSON.stringify(result));
+            alert("New types Created")
+        };
+
+        var onSaveError10 = function () {
+
+        };
+
     }
 })();

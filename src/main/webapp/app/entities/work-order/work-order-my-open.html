@@ -37,9 +37,8 @@
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
 
+                <th jh-sort-by="requestDate" class="extra-small">Project Name</th>
                 <th jh-sort-by="id" class="extra-small">ID </th>
-                <th jh-sort-by="requestDate" class="extra-small">Project Name
-                </th>
                 <th jh-sort-by="requestDescription" class="extra-small">PO#</th>
                 <th jh-sort-by="poRecord" class="extra-small">Date </th>
                 <th jh-sort-by="invoiced" class="extra-small">Type </th>
@@ -61,14 +60,12 @@
                 }">
 
 
-                <td class="extra-small">
-                    <a ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a>
-                </td>
 
                 <td class="extra-small">
-                    <a ui-sref="projects-detail({id:workOrder.project.id})">{{workOrder.project.name}}</a>
+                    {{workOrder.project.name}}
                 </td>
 
+                <td class="extra-small">{{workOrder.id}}</td>
 
                 <td class="extra-small">{{workOrder.poRecord}}</td>
 

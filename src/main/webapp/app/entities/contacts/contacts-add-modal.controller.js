@@ -242,7 +242,7 @@
         vm.addType = function () {
             var type = prompt("Add New Option : ", "");
             console.log("type : "+type);
-            if(status === "" ) {
+            if(type === null ) {
                 alert("No status Entered");
             }else{
                 vm.newType = {
@@ -253,13 +253,13 @@
                 };
 
 
-                Lookups.save(vm.newStatus, onSaveSuccess10, onSaveError10);
+                Lookups.save(vm.newType, onSaveSuccess10, onSaveError10);
 
 
             }
         };
         var onSaveSuccess10 = function (result) {
-            vm.types.push(result);
+            vm.lookupss.push(result);
             console.log("GOT NEW TYPES : "+JSON.stringify(result));
             alert("New types Created")
         };

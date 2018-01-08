@@ -145,12 +145,9 @@
                             <tr>
                                 <td class="extra-small">Download Privilege:</td>
                                 <td class="small">
-                                    <select ng-model="vm.downloadType" ng-init="vm.downloadType=0">
-                                        <option value="0" class="extra-small" selected>
-                                            NONE
-                                        </option>
-                                        <option value="1" class="extra-small">ALL</option>
-                                        <option value="2" class="extra-small">LOCKAPPROVED</option>
+                                    <select ng-model="vm.downloadType"
+                                            ng-options="excl.id as excl.value for excl in vm.downloadTypeList">
+                                        <option>{{excl.value}}</option>
                                     </select>
                                 </td>
                             </tr>
@@ -239,7 +236,7 @@
                                 <td class="extra-small">Project Name:</td>
                                 <td><input type="text" class="input-xs" ng-model="vm.filterQuery"></td>
                             </tr>
-                            <tr>
+                           <!-- <tr>
                                 <td class="extra-small">Contact Company:</td>
                                 <td><input type="text" class="input-xs"></td>
                             </tr>
@@ -254,7 +251,7 @@
                             <tr>
                                 <td class="extra-small">Contact Email:</td>
                                 <td><input type="text" class="input-xs"></td>
-                            </tr>
+                            </tr>-->
                         </table>
                         <button type="button" class="btn btn-primary btn-xs" ng-click="vm.runFilter()">Run Filter</button>
                     </div>

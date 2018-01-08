@@ -5,23 +5,34 @@
         .module('smartLpcApp')
         .controller('ProjectsUpdateController', ProjectsUpdateController);
 
-    ProjectsUpdateController.$inject = ['ContactPrivileges', 'ProjectRoles', '$ngConfirm', '$anchorScroll', '$location', '$state', '$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'Projects', 'Lookups', 'Contacts', 'User', 'Departments', 'Storage_Disk'];
+    ProjectsUpdateController.$inject = ['ProjectLabTasks','ProjectPurchaseOrders','ContactPrivileges', 'ProjectRoles', '$ngConfirm', '$anchorScroll', '$location', '$state', '$uibModal', '$http', '$scope', '$rootScope', '$stateParams', 'entity', 'Projects', 'Lookups', 'Contacts', 'User', 'Departments', 'Storage_Disk'];
 
-    function ProjectsUpdateController(ContactPrivileges, ProjectRoles, $ngConfirm, $anchorScroll, $location, $state, $uibModal, $http, $scope, $rootScope, $stateParams, entity, Projects, Lookups, Contacts, User, Departments, Storage_Disk) {
+    function ProjectsUpdateController(ProjectLabTasks,ProjectPurchaseOrders,ContactPrivileges, ProjectRoles, $ngConfirm, $anchorScroll, $location, $state, $uibModal, $http, $scope, $rootScope, $stateParams, entity, Projects, Lookups, Contacts, User, Departments, Storage_Disk) {
 
 
         var vm = this;
         console.log("PROJECT UPDATE CONTROLLER");
+        vm.load = function (id) {
+            Projects.get({id: id}, function(result) {
+                vm.projectsDTO = result;
+                // console.log("FROM LOAD : "+JSON.stringify(vm.projectsDTO))
+            });
+        };
+        vm.load(entity.projects.id);
 
         vm.projectsDTO = entity;
         console.log("ProjectsDTO : " + JSON.stringify(vm.projectsDTO));
 
 
+        $scope.isExecORAlbumViewer = function (execs) {
+            return  (execs.exec === true || execs.restartRole === 'ALBUMVIEWER') && (execs.internal === false) ;
+        };
+
         vm.users = User.query();
         vm.departmentss = Departments.query();
 
         vm.relatedContact = [];
-
+        vm.invoiceCreated =   [{'id': 387, 'value': "Yes"}, {'id': 388, 'value': "No"}, {'id': 389, 'value': "N/A"}];
         vm.downloadType = [{
             'id': 0,
             'value': "NONE"
@@ -43,6 +54,7 @@
             'value': "MASTER"
         }];
 
+        vm.execIndex = 0;
         vm.prevNext = {};
         $http({
             method: 'GET',
@@ -100,6 +112,10 @@
 
         // ADD PO / LAB / TALENTS / EXECS
 
+        vm.deletePurchaseOrder = [];
+        vm.deleteLabTask = [];
+
+
         // PURCHASE ORDERS
         vm.runShowAdd = function () {
             console.log(" Run of Show added ..");
@@ -111,11 +127,13 @@
         };
 
         vm.runShowRemove = function (index) {
-            console.log(" Run of Show removed : " + index);
-            for (var i = 0; i < vm.projectsDTO.projectRoles.length; i++) {
+            console.log(" Run of Show removed at index: " + index);
+            console.log(" Run of Show removed with id : " + JSON.stringify(vm.projectsDTO.projectPurchaseOrderses[index]));
 
-            }
+            vm.deletePurchaseOrder.push(vm.projectsDTO.projectPurchaseOrderses[index].id);
+
             vm.projectsDTO.projectPurchaseOrderses.splice(index, 1);
+
         };
 
         // LABS
@@ -129,6 +147,8 @@
 
         vm.removelab = function (index) {
             console.log("lab tasks index : " + index);
+            console.log("lab tasks removed with id : " + JSON.stringify(vm.projectsDTO.projectLabTaskses[index]));
+            vm.deleteLabTask.push(vm.projectsDTO.projectLabTaskses[index].id);
             vm.projectsDTO.projectLabTaskses.splice(index, 1);
         };
 
@@ -164,7 +184,7 @@
             });*/
 
             console.log("Related Contact Length : ", vm.relatedContact.length);
-
+            vm.projectsDTO.projects.actorsWithRights = vm.projectsDTO.projects.actorsWithRights + 1;
         };
 
         //GET RELATED CONTACTS
@@ -183,7 +203,7 @@
         vm.removeTalent = function (index) {
             console.log("removing talent : " + index);
 
-
+            vm.projectsDTO.projects.actorsWithRights = vm.projectsDTO.projects.actorsWithRights - 1;
             for (var i = 0; i < vm.projectsDTO.projectRoles.length; i++) {
 
                 if (vm.projectsDTO.projectRoles[i].id == index) {
@@ -210,7 +230,7 @@
 
         vm.notify = function (talent) {
             alert("Notification Email sent to : " + talent.contact.fullName);
-        }
+        };
         // EXECS
 
         vm.addExec = function () {
@@ -436,17 +456,21 @@
                         "watermarkOuterTransparency": 0.00,
                         "restartRole": 'REVIEWER'
                     });
-                    /*// get related too.
+                    // get related too.
+                    console.log("Before adding new Talent..related length : "+vm.relatedContact.length);
+                    console.log("==> "+JSON.stringify(vm.relatedContact));
                     console.log(" get releated  : ", vm.currrentOBJ.data.id);
                     $http({
                         method: 'GET',
-                        url: 'api/contacts/related/' + vm.currrentOBJ.data.id
+                        url: 'api/talent/related/' + vm.currrentOBJ.data.id
                     }).then(function successCallback(response) {
                         vm.relatedContact.push(response.data);
                         console.log("Related Contact added..");
+                        console.log("After Adding length : "+vm.relatedContact.length);
+                        console.log("==> "+JSON.stringify(vm.relatedContact));
                     }, function errorCallback(response) {
 
-                    });*/
+                    });
 
                     //console.log("Related Contact Length :", vm.relatedContact.length);
 
@@ -567,13 +591,21 @@
                 ContactPrivileges.delete({id: vm.deleteExec[i]});
             }
 
+            for (var i = 0; i < vm.deletePurchaseOrder.length; i++) {
+                console.log("removing PurchaseOrder" + vm.deletePurchaseOrder[i]);
+                ProjectPurchaseOrders.delete({id: vm.deletePurchaseOrder[i]});
+            }
+            for (var i = 0; i < vm.deleteLabTask.length; i++) {
+                console.log("removing LabTask" + vm.deleteLabTask[i]);
+                ProjectLabTasks.delete({id: vm.deleteLabTask[i]});
+            }
             //get actors with right count
-            var count = 0;
+            /*var count = 0;
             for(var i = 0;i<vm.projectsDTO.projectRoles.length;i++){
                 if(vm.projectsDTO.projectRoles[i].relationship_type === 'PKO_Tag');
                 count++;
             }
-            vm.projectsDTO.projects.actorsWithRights = count;
+            vm.projectsDTO.projects.actorsWithRights = count;*/
 
             Projects.update(vm.projectsDTO, onSaveSuccess, onSaveError);
 
@@ -601,7 +633,7 @@
             vm.isSaving = false;
             $rootScope.relationships = null;
             $rootScope.execsContactMultiple = null;
-            $state.go('projects-detail', {id: vm.projectsDTO.projects.id}, {reload: true});
+            $state.go('projects-detail', {id: vm.projectsDTO.projects.id}, {reload: true,inherit: false,notify: true});
             // ...
         };
 
@@ -1281,13 +1313,14 @@
                 ContactPrivileges.delete({id: vm.deleteExec[i]});
             }
 
-            //get actors with right count
-            var count = 0;
-            for(var i = 0;i<vm.projectsDTO.projectRoles.length;i++){
-                if(vm.projectsDTO.projectRoles[i].relationship_type === 'PKO_Tag');
-                count++;
+            for (var i = 0; i < vm.deletePurchaseOrder.length; i++) {
+                console.log("removing PurchaseOrder" + vm.deletePurchaseOrder[i]);
+                ProjectPurchaseOrders.delete({id: vm.deletePurchaseOrder[i]});
             }
-            vm.projectsDTO.projects.actorsWithRights = count;
+            for (var i = 0; i < vm.deleteLabTask.length; i++) {
+                console.log("removing LabTask" + vm.deleteLabTask[i]);
+                ProjectLabTasks.delete({id: vm.deleteLabTask[i]});
+            }
 
             Projects.update(vm.projectsDTO, onSaveSuccess2, onSaveError);
 
@@ -1337,13 +1370,16 @@
                 console.log("removing contact privilege " + vm.deleteExec[i]);
                 ContactPrivileges.delete({id: vm.deleteExec[i]});
             }
-//get actors with right count
-            var count = 0;
-            for(var i = 0;i<vm.projectsDTO.projectRoles.length;i++){
-                if(vm.projectsDTO.projectRoles[i].relationship_type === 'PKO_Tag');
-                count++;
+
+            for (var i = 0; i < vm.deletePurchaseOrder.length; i++) {
+                console.log("removing PurchaseOrder" + vm.deletePurchaseOrder[i]);
+                ProjectPurchaseOrders.delete({id: vm.deletePurchaseOrder[i]});
             }
-            vm.projectsDTO.projects.actorsWithRights = count;
+            for (var i = 0; i < vm.deleteLabTask.length; i++) {
+                console.log("removing LabTask" + vm.deleteLabTask[i]);
+                ProjectLabTasks.delete({id: vm.deleteLabTask[i]});
+            }
+
             Projects.update(vm.projectsDTO, onSaveSuccess3, onSaveError);
 
 
@@ -1560,6 +1596,29 @@
             })
         };
 
+
+        vm.topLevel = function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/entities/projects/toplevelalbums.html',
+                controller: 'TopLevelAlbumsController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'xl',
+                resolve: {
+
+                    projectID: function () {
+                        return vm.projectsDTO.projects.id;
+                    },
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('contacts');
+                        $translatePartialLoader.addPart('projects');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }
+
+            })
+        };
 
     }
 })();

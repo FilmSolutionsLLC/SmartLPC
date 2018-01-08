@@ -35,7 +35,7 @@
             }).then(function (response) {
                 vm.workOrders9 = response.data;
                 console.log("total my open workOrders : " + vm.workOrders9.length);
-                $scope.totalItems = vm.workOrders9.length;
+                $scope.totalItems1 = vm.workOrders9.length;
             });
 
             $scope.viewby = 5; //number of elements to show
@@ -82,7 +82,11 @@
                 console.log("total processing workOrders : " + vm.workOrders4.length);
                 console.log(JSON.stringify(vm.workOrders4[0]));
                 $scope.totalItems2 = vm.workOrders4.length;
-
+                if($scope.totalItems1 > $scope.totalItems2){
+                    $scope.totalItems = $scope.totalItems1;
+                }else{
+                    $scope.totalItems = $scope.totalItems2;
+                }
             });
 
             $scope.viewby2 = 5; //number of elements to show

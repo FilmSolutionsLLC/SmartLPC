@@ -9,4 +9,6 @@ import java.util.List;
 public interface AlbumRepository  extends JpaRepository<Album,Long> {
 
     List<Album> removeByProject(Projects projects);
+
+    List<Album> findByProject(Projects projects);
 }

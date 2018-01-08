@@ -38,6 +38,7 @@
 			console.log("Images added : " + r.readAsBinaryString);
 		}
 
+
 		console.log("root scope : " + $rootScope.xyz);
 		var vm = this;
 		vm.projects = entity;
@@ -45,6 +46,9 @@
 
 		vm.users = User.query();
 		vm.departmentss = Departments.query();
+
+		vm.invoiceCreated =   [{'id': 387, 'value': "Yes"}, {'id': 388, 'value': "No"}, {'id': 389, 'value': "N/A"}];
+        vm.projects.invoiceCreated = 388;
 
 		vm.load = function(id) {
 			Projects.get({
@@ -54,6 +58,27 @@
 			});
 		};
 
+
+        vm.downloadType = [{
+            'id': 0,
+            'value': "NONE"
+        }, {
+            'id': 1,
+            'value': "ALL"
+        }, {
+            'id': 2,
+            'value': "Lock Approved"
+        }];
+        vm.exclusives = [{
+            'id': 0,
+            'value': "NONE"
+        }, {
+            'id': 1,
+            'value': "BASIC"
+        }, {
+            'id': 2,
+            'value': "MASTER"
+        }];
 
 		vm.largestBrick = {};
 
@@ -277,6 +302,7 @@
                 window.alert("Wake up !!!!");
             };
 
+        vm.projects.actorsWithRights = 0;
 		$scope.talents = [];
 		vm.addTalent = function() {
 			var talent = $scope.talents.length + 1;
@@ -285,12 +311,14 @@
 			});
 			console.log("-------");
 			console.log(JSON.stringify($scope.talents));
+            vm.projects.actorsWithRights = vm.projects.actorsWithRights + 1;
 		};
 
 		vm.removeTalent = function(index) {
 			console.log("removing talent : " + index);
 			vm.talents.splice(index, 1);
 			$scope.talents.splice(index, 1)
+            vm.projects.actorsWithRights = vm.projects.actorsWithRights - 1;
 		};
 
 
@@ -521,7 +549,7 @@
 					console.log(" get releated  : ", vm.currrentOBJ.data.id);
 					$http({
 						method : 'GET',
-						url : 'api/contacts/related/' + vm.currrentOBJ.data.id
+						url : 'api/talent/related/' + vm.currrentOBJ.data.id
 					}).then(function successCallback(response) {
 						vm.relatedContact.push(response.data);
 					}, function errorCallback(response) {
@@ -571,6 +599,8 @@
                         "watermarkOuterTransparency": 0.00,
                         "restartRole": 'EXEC'
 					});
+
+					console.log("Exec Added : "+JSON.stringify(vm.execss));
 				} else if (angular.equals(vm.currrentOBJ.elementID,
 						'relatedContact')) {
 					console.log("count : " + vm.count);
@@ -662,7 +692,7 @@
                 vm.contactPrivileges.push(vm.execss[i]);
             }
             // set actors with rights
-            vm.projects.actorsWithRights   = vm.talents.length;
+            //vm.projects.actorsWithRights   = vm.talents.length;
 
             vm.projectsDTO = {
                 "projects" : vm.projects,
@@ -724,7 +754,7 @@
                 vm.contactPrivileges.push(vm.execss[i]);
             }
             // set actors with rights
-            vm.projects.actorsWithRights   = vm.talents.length;
+            //vm.projects.actorsWithRights   = vm.talents.length;
 
             vm.projectsDTO = {
                 "projects" : vm.projects,

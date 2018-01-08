@@ -1,4 +1,5 @@
-<div print-section>
+
+<div print-section id="printIT">
     <div print-remove>
         <div class="row pull-left">
             <button type="submit" class="btn btn-xs btn btn-primary"
@@ -6,7 +7,7 @@
                 Edit
             </button>
 
-            <button print-btn class="btn btn-xs btn btn-primary">Print</button>
+            <button class="btn btn-xs btn btn-primary" ng-click="vm.printDiv()">Print</button>
             <!--<button type="button" class="btn btn-xs btn btn-primary" onclick="window.print()">Print Window</button>-->
             <button type="button" onclick="window.history.back()"
                     class="btn btn-xs btn btn-danger">Cancel
@@ -15,6 +16,7 @@
         </div>
         <br>
     </div>
+    <br>
     <div class="row">
         <div class="col-xs-4">
             <h3>
@@ -23,7 +25,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-4 col-xs-offset-8">
+        <div class="col-xs-4 col-xs-offset-8 ">
             <label class="small"><input type="checkbox" id="isPrint"
                                         ng-model="vm.workOrderDTO.workOrder.isPrint" disabled>
                 &nbspPrint &nbsp </label> <label class="small"><input
@@ -97,7 +99,7 @@
             <div class="col-sm-2">
                 <input id="company.name" name="textinput" type="text"
                        class="form-control input-sm"
-                       ng-model="vm.workOrderDTO.workOrder.requestor.companyContact.fullName"
+                       ng-model="vm.workOrderDTO.workOrder.requestor.companyContactFullName"
                        readonly>
             </div>
         </div>
@@ -201,7 +203,7 @@
                     <div class="col-lg-3">
                         <div class="input-group">
 
-                            </small><span class="input-group-addon input-sm"><small>{{$index}}</small></span>
+                            </small><span class="input-group-addon input-sm"><small>{{$index+1}}</small></span>
 
                             <input type="text" class="form-control input-sm"
                                    ng-model="labs.textValue" readonly>
@@ -217,13 +219,13 @@
                     Number Schema</label>
                 <div class="col-sm-2">
                     <input type="text" class="form-control input-sm"
-                           ng-model="vm.workOrderDTO.projects.labImageNumberSchema" readonly>
+                           ng-model="vm.workOrderDTO.workOrder.project.labImageNumberSchema" readonly>
                 </div>
                 <label class="col-md-2 control-label small" for="textinput">
                     Folder/Batch Schema</label>
                 <div class="col-sm-2">
                     <input type="text" class="form-control input-sm"
-                           ng-model="vm.workOrderDTO.projects.labFolderBatchSchema" readonly>
+                           ng-model="vm.workOrderDTO.workOrder.project.labFolderBatchSchema" readonly>
                 </div>
             </div>
         </div>

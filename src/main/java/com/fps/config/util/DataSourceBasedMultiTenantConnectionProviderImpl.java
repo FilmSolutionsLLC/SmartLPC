@@ -27,6 +27,10 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDa
     @Autowired
     private DataSource slave;
 
+    @Autowired
+    private DataSource archive;
+
+
     private Map<String, DataSource> map;
     private final Logger log = LoggerFactory.getLogger(DataSourceBasedMultiTenantConnectionProviderImpl.class);
 
@@ -35,7 +39,7 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDa
         map = new HashMap<>();
         map.put("master", master);
         map.put("slave", slave);
-
+        //map.put("archive",archive);
     }
 
     @Override
@@ -51,6 +55,7 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDa
         }else{
             log.debug("Reading from Slave Database");
         }
+
 
         return map.get(tenantIdentifier);
     }

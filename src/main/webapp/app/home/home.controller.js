@@ -5,9 +5,9 @@
         .module('smartLpcApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$rootScope','$scope', 'Principal', 'LoginService'];
+    HomeController.$inject = ['$http','$rootScope','$scope', 'Principal', 'LoginService'];
 
-    function HomeController ($rootScope,$scope, Principal, LoginService) {
+    function HomeController ($http,$rootScope,$scope, Principal, LoginService) {
         console.log("Home Controller");
     	var vm = this;
 
@@ -37,6 +37,7 @@
 
             });
         }
+
 
     }
 })();

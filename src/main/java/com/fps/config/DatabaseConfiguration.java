@@ -46,6 +46,11 @@ public class DatabaseConfiguration {
     @Value("${spring.datasource.url2}")
     String slaveurl;
 
+    @Value("${spring.datasource.urlArchive}")
+    String archiveurl;
+
+
+
     @Value("${spring.datasource.username2}")
     String slaveUsername;
 
@@ -112,6 +117,36 @@ public class DatabaseConfiguration {
 
         return hikariDataSource;
     }
+
+    /*@Bean(name = "archive")
+    @ConditionalOnExpression("#{!environment.acceptsProfiles('" + Constants.SPRING_PROFILE_CLOUD + "') && !environment.acceptsProfiles('" + Constants.SPRING_PROFILE_HEROKU + "')}")
+    @ConfigurationProperties(prefix = "spring.datasource.hikari")
+    public DataSource archive(DataSourceProperties dataSourceProperties) {
+        log.debug("Configuring Archive Datasource");
+        if (dataSourceProperties.getUrl() == null) {
+            log.error("Your  archive database connection pool configuration is incorrect! The application" +
+                    " cannot start. Please check your Spring profile, current profiles are: {}",
+                Arrays.toString(env.getActiveProfiles()));
+
+            throw new ApplicationContextException(" Archive Database connection pool is not configured correctly");
+        }
+        HikariDataSource hikariDataSource = (HikariDataSource) DataSourceBuilder
+            .create(dataSourceProperties.getClassLoader())
+            .type(HikariDataSource.class)
+            .driverClassName(dataSourceProperties.getDriverClassName())
+            .url(archiveurl)
+            .username(slaveUsername)
+            .password(slavePassword)
+            .build();
+
+        if (metricRegistry != null) {
+            hikariDataSource.setMetricRegistry(metricRegistry);
+        }
+        log.debug("Configuring Slave Datasource Successfully : " + archiveurl);
+
+        return hikariDataSource;
+    }*/
+
 
     @Bean
     public Hibernate4Module hibernate4Module() {

@@ -1,6 +1,7 @@
 package com.fps.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.fps.config.util.CurrentTenantIdentifierResolverImpl;
 import com.fps.domain.Contacts;
 import com.fps.domain.Lookups;
 import com.fps.repository.ContactsRepository;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -37,6 +39,12 @@ public class LookupsResource {
 
     @Inject
     private ContactsRepository contactsRepository;
+
+    @Inject
+    private CurrentTenantIdentifierResolverImpl currentTenantIdentifierResolver;
+
+    @Inject
+    private JdbcTemplate jdbcTemplate;
 
     /**
      * POST  /lookups : Create a new lookups.
@@ -274,6 +282,26 @@ public class LookupsResource {
         final List<Contacts> contactses = contactsRepository.findAll();
         return contactses;
     }
+
+
+/*
+
+
+    @RequestMapping(value = "/test/archive",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<String> testArchive()
+        throws URISyntaxException {
+
+        log.info("Testing archive database");
+        currentTenantIdentifierResolver.setTenant(Constants.ARCHIVE_DATABASE);
+
+        String sql = "select name from projects";
+        List<String> projectNames = jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(String.class));
+        return projectNames;
+    }
+*/
 
 
 }

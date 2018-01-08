@@ -44,6 +44,12 @@
 
 
 
+        vm.downloadTypeList = [{'id': 0, 'value': "NONE"}, {'id': 1, 'value': "ALL"}, {'id': 2, 'value': "Lock Approved"}];
+        vm.exclusivesList = [{'id': 0, 'value': "NONE"}, {'id': 1, 'value': "BASIC"}, {'id': 2, 'value': "MASTER"}];
+
+        vm.downloadType = 0;
+        vm.exclusives = 0;
+
 
         vm.page = 0;
         vm.url = "api/contacts?page=0&sort=fullName,asc";

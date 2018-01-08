@@ -94,7 +94,6 @@ public class ProjectsResource {
 	 */
 	@RequestMapping(value = "/projects", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-    @Transactional
 	public ResponseEntity<Projects> createProjects(@RequestBody ProjectsDTO projectsDTO) throws URISyntaxException {
 
 		if (projectsDTO.getProjects().getId() != null) {
@@ -192,8 +191,10 @@ public class ProjectsResource {
 				.findByProject(projects);
 
 		final List<ProjectLabTasks> projectLabTaskses = projectLabTasksRepository.findByProject(projects);
-		final List<ContactPrivileges> contactPrivilegeses = contactPrivilegesRepository
-				.findByProjectAndInternal(projects, false);
+		/*final List<ContactPrivileges> contactPrivilegeses = contactPrivilegesRepository
+				.findByProjectAndInternal(projects, false);*/
+        final List<ContactPrivileges> contactPrivilegeses = contactPrivilegesRepository
+            .findByProject(projects);
 
 		// final Set<ProjectRoles> projectRolesSet = new
 		// HashSet<>(projectRoleses);
@@ -612,5 +613,11 @@ public class ProjectsResource {
 
         return projects;
     }
+
+
+
+
+
+
 
 }

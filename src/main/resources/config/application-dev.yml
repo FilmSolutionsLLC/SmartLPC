@@ -19,7 +19,8 @@ spring:
             enabled: false # we use gulp + BrowserSync for livereload
     datasource:
         url: jdbc:mysql://54.193.72.222:3306/pko?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&useSSL=false
-        url2: jdbc:mysql://54.193.72.222:3306/pko?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&useSSL=false
+        url2: jdbc:mysql://54.193.72.222:3306/pko??zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&useSSL=false
+        urlArchive: jdbc:mysql://54.193.72.222:3306/pko_archive2?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&useSSL=false
 
         name:
         username: alfresco

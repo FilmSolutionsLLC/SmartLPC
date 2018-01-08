@@ -1402,7 +1402,7 @@
             <th class="small">Disabled</th>
             <th class="small"></th>
         </tr>
-        <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges" ng-if="execs.exec === true || execs.restartRole ==='ALBUMVIEWER'">
+        <tr ng-repeat="execs in vm.projectsDTO.contactPrivileges" ng-if="(execs.exec === true && execs.internal === false) || execs.restartRole ==='ALBUMVIEWER'">
 
         <td class="small">{{$index + 1}}</td>
             <td class="col-xs-1">
@@ -1503,70 +1503,132 @@
     <div ng-repeat="tags in vm.projectsDTO.projectRoles |  filter: { relationship_type: 'PKO_Tag'} | filter: isGeneric">
 
         <div class="row">
-            <label class="col-md-1 control-label small">Talent {{$index+1}}</label>
+            <label class="col-md-1 control-label small">Talent
+                {{$index+1}}</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" readonly ng-model="tags.contact.fullName">
+                <input type="text" class="form-control input-sm" readonly
+                       ng-model="tags.contact.fullName">
             </div>
             <label class="col-md-1 control-label small">Character</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" readonly>
+                <input type="text" class="form-control input-sm" readonly
+                       ng-model="tags.characterName">
             </div>
             <label class="col-md-1 control-label small">StartDate</label>
             <div class="col-sm-2">
-                <input type="date" class="form-control input-sm">
+                <input type="date" class="form-control input-sm" readonly
+                       ng-model="tags.startDate">
             </div>
             <label class="col-md-1 control-label small">Days</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control input-sm">
+                <input type="text" class="form-control input-sm" readonly
+                       ng-model="tags.daysWorking">
             </div>
         </div>
-        <div class="row">
-            <label class="col-md-1 control-label small">Contact</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" ng-model="vm.relatedContact[$index].fullName" readonly>
+        <!--Display Primary Contact-->
+        <div ng-if="tags.contact.fullName !== vm.relatedContact[$index].fullName">
+
+            <div class="row">
+                <label class="col-md-1 control-label small">Contact</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.relatedContact[$index].fullName" readonly>
+                </div>
+                <label class="col-md-1 control-label small">Type</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.relatedContact[$index].type.textValue" readonly>
+                </div>
+                <label class="col-md-1 control-label small">Company</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.relatedContact[$index].companyContact.fullName"
+                           readonly>
+                </div>
+
             </div>
-            <label class="col-md-1 control-label small">Type</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" ng-model="vm.relatedContact[$index].type.textValue"
-                       readonly>
+            <div class="row">
+                <label class="col-md-1 control-label small">Phone</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.relatedContact[$index].phoneCompany" readonly>
+                </div>
+                <label class="col-md-1 control-label small">Email</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.relatedContact[$index].email" readonly>
+                </div>
+                <label class="col-md-1 control-label small">Mobile</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm"
+                           ng-model="vm.relatedContact[$index].phoneMobile" readonly>
+                </div>
+
             </div>
-            <label class="col-md-1 control-label small">Company</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm"
-                       ng-model="vm.relatedContact[$index].companyContact.fullName" readonly>
+            <div class="row">
+                <label class="col-md-1 control-label small">Asst/Notes</label>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control input-xs"
+                           ng-model="vm.relatedContact[$index].notes" readonly>
+                </div>
             </div>
+            <div class="row">
+                <label class="col-md-1 control-label small">Notes</label>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control input-sm" ng-model="tags.notes">
+                </div>
+            </div>
+            <br>
 
         </div>
-        <div class="row">
-            <label class="col-md-1 control-label small">Phone</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" ng-model="vm.relatedContact[$index].phoneOffice"
-                       readonly>
+
+        <div ng-else>
+
+            <div class="row">
+                <label class="col-md-1 control-label small">Contact</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm" readonly>
+                </div>
+                <label class="col-md-1 control-label small">Type</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm" readonly>
+                </div>
+                <label class="col-md-1 control-label small">Company</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm" readonly>
+                </div>
+
             </div>
-            <label class="col-md-1 control-label small">Email</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" ng-model="vm.relatedContact[$index].email" readonly>
+            <div class="row">
+                <label class="col-md-1 control-label small">Phone</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm" readonly>
+                </div>
+                <label class="col-md-1 control-label small">Email</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm" readonly>
+                </div>
+                <label class="col-md-1 control-label small">Mobile</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm" readonly>
+                </div>
+
             </div>
-            <label class="col-md-1 control-label small">Mobile</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control input-sm" ng-model="vm.relatedContact[$index].phoneMobile"
-                       readonly>
+            <div class="row">
+                <label class="col-md-1 control-label small">Asst/Notes</label>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control input-xs" readonly>
+                </div>
             </div>
+            <div class="row">
+                <label class="col-md-1 control-label small">Notes</label>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control input-sm" ng-model="tags.notes">
+                </div>
+            </div>
+            <br>
 
         </div>
-        <div class="row">
-            <label class="col-md-1 control-label small">Asst/Notes</label>
-            <div class="col-sm-11">
-                <input type="text" class="form-control input-sm" ng-model="vm.relatedContact[$index].notes" readonly>
-            </div>
-        </div>
-        <div class="row">
-            <label class="col-md-1 control-label small">Notes</label>
-            <div class="col-sm-11">
-                <input type="text" class="form-control input-sm" ng-model="tags.notes">
-            </div>
-        </div>
-        <br>
     </div>
     <hr>
     <h4>Parent Company Information</h4>

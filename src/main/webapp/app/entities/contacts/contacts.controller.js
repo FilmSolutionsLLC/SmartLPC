@@ -25,6 +25,7 @@
 		vm.currentSearch = pagingParams.search;
 		vm.loadAll();
 
+        var popupWin;
 
 		function loadAll() {
 			if (pagingParams.search) {
@@ -114,4 +115,10 @@
 			vm.transition();
 		}
 	}
+
+
+
+
+
+
 })();

@@ -37,8 +37,9 @@
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                 <th></th>
-                <th jh-sort-by="id" class="extra-small" ng-click="vm.getData('1')">ID <span class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="requestDate" class="extra-small" ng-click="vm.getData('2')">Project Name <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="id" class="extra-small" ng-click="vm.getData('1')">ID <span class="glyphicon glyphicon-sort"></span></th>
+
                 <th jh-sort-by="requestDescription" class="extra-small" ng-click="vm.getData('4')">PO# <span class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="poRecord" class="extra-small" ng-click="vm.getData('5')">Date <span class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="invoiced" class="extra-small" ng-click="vm.getData('6')">Type <span class="glyphicon glyphicon-sort"></span></th>
@@ -80,8 +81,9 @@
 
                     </div>
                 </td>
-                <td class="extra-small"><a ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a></td>
+
                 <td class="col-xs-2 extra-small">{{workOrder.project_name}}</td>
+                <td class="extra-small">{{workOrder.id}}</td>
                 <td class="col-xs-1 extra-small">{{workOrder.po}}</td>
                 <td class="col-xs-1 extra-small">{{workOrder.date}}</td>
                 <td class="extra-small">{{workOrder.type}}</td>

@@ -37,9 +37,9 @@
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                 <th></th>
-                <th jh-sort-by="id" class="extra-small"><span translate="global.field.id">ID</span> </th>
-                <th jh-sort-by="id" class="extra-small">Project Name </th>
 
+                <th jh-sort-by="id" class="extra-small">Project Name </th>
+                <th jh-sort-by="id" class="extra-small"><span translate="global.field.id">ID</span> </th>
                 <th jh-sort-by="requestDate" class="extra-small"><span translate="smartLpcApp.workOrder.requestDate">RequestDate</span>
                     </th>
                 <th jh-sort-by="requestDescription" class="extra-small"><span translate="smartLpcApp.workOrder.requestDescription">RequestDescription</span>
@@ -90,10 +90,6 @@
                         </div>
                     </div>
                 </td>
-                <td class="col-xs-1 extra-small">
-
-                    <a ui-sref="work-order-detail({id:workOrder.id})">{{workOrder.id}}</a>
-                </td>
                 <td class="col-xs-2 extra-small">
                     <div ng-if="workOrder.po == 'HIDE'">
                         <strong>{{workOrder.project_name}}</strong>
@@ -102,6 +98,10 @@
                         {{workOrder.project_name}}
                     </div>
                 </td>
+                <td class="col-xs-1 extra-small">
+                    {{workOrder.id}}
+                </td>
+
                 <td class="col-xs-1 extra-small">
                     <div ng-if="workOrder.po != 'HIDE'">
                         {{workOrder.po}}

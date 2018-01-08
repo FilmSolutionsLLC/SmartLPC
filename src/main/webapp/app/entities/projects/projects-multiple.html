@@ -124,12 +124,14 @@
                       <!--  <td>
                             <label class="extra-small">Project Name:</label>
                         </td>-->
+                        <form>
                         <td>
                             <input name="pn" type="text" class="small" ng-model="vm.filter" placeholder="Project Name"/>
                         </td>
                         <div class="col-lg-3">
-                            <button type="button" class="btn btn-xs btn btn-success pull-left" ng-click="vm.searchFilter()">Run Filter</button>
+                            <button type="submit" class="btn btn-xs btn btn-success pull-left" ng-click="vm.searchFilter()">Run Filter</button>
                         </div>
+                        </form>
                        <!-- <div class="col-lg-3">
                             <label class="extra-small">Project Name:</label>
                         </div>

@@ -154,7 +154,7 @@ public class ProjectsServiceImpl implements ProjectsService {
             log.info("PROJECT LAB TASKS");
 
             for (ProjectLabTasks projectLabTasks : projectsDTO.getProjectLabTaskses()) {
-                projectLabTasks.setId(null);
+               // projectLabTasks.setId(null);
                 projectLabTasks.setProject(result);
                 projectLabTasks.setCreated_by_admin_user(user);
                 projectLabTasks.setCreatedDate(ZonedDateTime.now());
@@ -170,24 +170,26 @@ public class ProjectsServiceImpl implements ProjectsService {
         int index = 0;
         log.info("PROJECT ROLES");
         for (ProjectRoles projectRoles : projectsDTO.getProjectRoles()) {
-            projectRoles.setId(null);
-            projectRoles.setProject(result);
-            projectRoles.setCreatedDate(ZonedDateTime.now());
-            projectRoles.setCreatedByAdminUser(user);
+            if(projectRoles != null) {
+                // projectRoles.setId(null);
+                projectRoles.setProject(result);
+                projectRoles.setCreatedDate(ZonedDateTime.now());
+                projectRoles.setCreatedByAdminUser(user);
 
 
-            // addd hotkeys to tags
-            if (projectRoles.getRelationship_type().equals(Constants.PKO_TAG)) {
-                projectRoles.setHotkeyValue(Constants.HOTKEYS[index]);
-                index++;
-                projectRoles.setTagName(projectRoles.getContact().getFullName());
-                projectRoles.setTertiaryKillPct((float) 0.00);
-                projectRoles.setDaysWorking(0);
-                projectRoles.setDisabled(true);
+                // addd hotkeys to tags
+                if (projectRoles.getRelationship_type().equals(Constants.PKO_TAG)) {
+                    projectRoles.setHotkeyValue(Constants.HOTKEYS[index]);
+                    index++;
+                    projectRoles.setTagName(projectRoles.getContact().getFullName());
+                    projectRoles.setTertiaryKillPct((float) 0.00);
+                    projectRoles.setDaysWorking(0);
+                    projectRoles.setDisabled(true);
+                }
+                projectRoleses.add(projectRoles);
+
+                log.info(projectRoles.toString());
             }
-            projectRoleses.add(projectRoles);
-
-            log.info(projectRoles.toString());
 
         }
         // add default tags in PKO ROLES like
@@ -225,7 +227,7 @@ public class ProjectsServiceImpl implements ProjectsService {
         projectRolesRepository.save(projectRoleses);
         log.info("PROJECT EXECS");
         for (ContactPrivileges contactPrivileges : projectsDTO.getContactPrivileges()) {
-            contactPrivileges.setId(null);
+            //contactPrivileges.setId(null);
             contactPrivileges.setCreatedByAdminUser(user);
             contactPrivileges.setProject(result);
             contactPrivileges.setCreatedDate(ZonedDateTime.now());

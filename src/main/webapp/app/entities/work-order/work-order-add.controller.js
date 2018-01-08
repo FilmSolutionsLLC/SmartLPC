@@ -38,8 +38,7 @@
             $scope.count = $scope.selected.filter(isSelected).length
             console.log($scope.selected.filter(isSelected));
             console.log(JSON.stringify($scope.selected));
-        }
-
+        };
 
 
         function isSelected(element) {
@@ -75,7 +74,7 @@
             vm.workOrderStatus = response.data;
             console.log("status_id");
             console.log(JSON.stringify(vm.workOrderStatus))
-            console.log("===> "+JSON.stringify(vm.workOrderStatus[2]))
+            console.log("===> " + JSON.stringify(vm.workOrderStatus[2]))
             vm.workOrder.status = vm.workOrderStatus[2];
         }, function errorCallback(response) {
         });
@@ -88,12 +87,18 @@
         vm.workOrdersAdminRelations = [];
 
         vm.invoiced = [
-            {"id":105,"name":"Yes"},
-            {"id":106,"name":"Comp"},
-            {"id":107,"name":"Included"},
-            {"id":108,"name":"No"}
+            {"id": 105, "name": "Yes"},
+            {"id": 106, "name": "Comp"},
+            {"id": 107, "name": "Included"},
+            {"id": 108, "name": "No"}
         ];
 
+        vm.workOrder.processing_pko_flag = {
+            "id": 219,
+            "tableName": "work_order",
+            "fieldName": "processing_pko_flag",
+            "textValue": "No"
+        };
 
         RelationType.query({
             size: 100
@@ -354,55 +359,66 @@
 
             console.log(JSON.stringify(vm.workOrder.project));
             console.log(vm.workOrder.project.id);
-
-
+            vm.onTypeChange();
 
         };
-
 
 
         vm.onTypeChange = function () {
 
             vm.showPKOFlag = true;
 
-            console.log("WO Type : " + JSON.stringify(vm.workOrder.type));
-            console.log("actual type : " + vm.workOrder.type.textValue);
-            if(angular.equals(vm.workOrder.type.textValue,'PKO')){
-                $http(
-                    {
-                        method: 'GET',
-                        url: 'api/project-purchase-orders/projects/'
-                        + vm.workOrder.project.id
-                    }).then(
-                    function (response) {
-                        vm.purchaseOrders = response.data;
-                        console.log("PURCHASE ORDERS : "
-                            + JSON.stringify(vm.purchaseOrders));
+            if ((vm.workOrder.project !== null) && (vm.workOrder.type !== null)) {
+                console.log("WO Type : " + JSON.stringify(vm.workOrder.type));
+                console.log("actual type : " + vm.workOrder.type.textValue);
+                if (angular.equals(vm.workOrder.type.textValue, 'PKO')) {
+                    $http(
+                        {
+                            method: 'GET',
+                            url: 'api/project-purchase-orders/projects/'
+                            + vm.workOrder.project.id
+                        }).then(
+                        function (response) {
+                            vm.purchaseOrders = response.data;
+                            console.log("PURCHASE ORDERS : "
+                                + JSON.stringify(vm.purchaseOrders));
+                        });
+
+                    $http(
+                        {
+                            method: 'GET',
+                            url: 'api/project-lab-tasks/projects/'
+                            + vm.workOrder.project.id
+                        }).then(function (response) {
+                        vm.lab = response.data;
+                        console.log("PURCHASE LAB Tasks : " + JSON.stringify(vm.lab));
                     });
 
-                $http(
-                    {
-                        method: 'GET',
-                        url: 'api/project-lab-tasks/projects/'
-                        + vm.workOrder.project.id
-                    }).then(function (response) {
-                    vm.lab = response.data;
-                    console.log("PURCHASE LAB Tasks : " + JSON.stringify(vm.lab));
-                });
 
+                    $http(
+                        {
+                            method: 'GET',
+                            url: 'api/justproject/' + vm.workOrder.project.id
+                        }).then(function (response) {
+                        vm.project = response.data;
+                        console.log("PURCHASE : " + JSON.stringify(vm.project));
+                    });
 
-                $http(
-                    {
-                        method: 'GET',
-                        url: 'api/justproject/' + vm.workOrder.project.id
-                    }).then(function (response) {
-                    vm.project = response.data;
-                    console.log("PURCHASE : " + JSON.stringify(vm.project));
-                });
-
+                }
+            }else{
+                console.log("Null Project or Null Type");
             }
         };
 
+        vm.processingPKOFlag = {};
+        $http({
+            method: 'GET',
+            url: 'api/lookups/get/work_order/processing_pko_flag'
+        }).then(function successCallback(response) {
+            vm.processingPKOFlag = response.data;
+            console.log(JSON.stringify(vm.processingPKOFlag));
+        }, function errorCallback(response) {
+        });
 
         vm.workOrderType = {};
         $http({
@@ -433,7 +449,6 @@
             console.log('abc_hdd_to');
         }, function errorCallback(response) {
         });
-
 
 
         vm.workOrderAbcFileType = {};
@@ -522,7 +537,7 @@
 
 
         vm.save = function () {
-            if(angular.equals(vm.workOrder.type,null)){
+            if (angular.equals(vm.workOrder.type, null)) {
                 $ngConfirm({
                     title: 'Error!',
                     content: "<strong>Type </strong> cannot be empty",
@@ -538,7 +553,7 @@
                         }
                     }
                 });
-            }else {
+            } else {
                 vm.workOrdersAdminRelations =
                     vm.selectedverifiedBy.concat(vm.selectedtoMountReminder).concat(vm.selectedclientReminder).concat(vm.selecteddueMountReminder).concat(vm.selectedingestBy).concat(vm.selectedprintBy).concat(vm.selectedprocessedBy).concat(vm.selecteduploadBy).concat(vm.selectedarchivedBy);
 
@@ -579,8 +594,8 @@
                 }
             });
             vm.isSaving = false;
-           // $state.go('work-order', {}, {reload: true});// use for redirecting ...
-            $state.go('work-order-detail',{id:result.id}),{reload: true};
+            // $state.go('work-order', {}, {reload: true});// use for redirecting ...
+            $state.go('work-order-detail', {id: result.id}), {reload: true};
         };
 
         var onSaveError = function () {
@@ -665,7 +680,7 @@
 
 
         vm.saveAndClose = function () {
-            if(angular.equals(vm.workOrder.type,null)){
+            if (angular.equals(vm.workOrder.type, null)) {
                 $ngConfirm({
                     title: 'Error!',
                     content: "<strong>Type </strong> cannot be empty",
@@ -681,7 +696,7 @@
                         }
                     }
                 });
-            }else {
+            } else {
                 vm.workOrdersAdminRelations =
                     vm.selectedverifiedBy.concat(vm.selectedtoMountReminder).concat(vm.selectedclientReminder).concat(vm.selecteddueMountReminder).concat(vm.selectedingestBy).concat(vm.selectedprintBy).concat(vm.selectedprocessedBy).concat(vm.selecteduploadBy).concat(vm.selectedarchivedBy);
 
@@ -721,7 +736,7 @@
                 }
             });
             vm.isSaving = false;
-             $state.go('work-order', {}, {reload: true});// use for redirecting ...
+            $state.go('work-order', {}, {reload: true});// use for redirecting ...
             //$state.go('work-order-detail',{id:result.id}),{reload: true};
         };
 

@@ -24,6 +24,8 @@ public final class Constants {
     public static final String MASTER_DATABASE = "master";
     // Slave Database Call
     public static final String SLAVE_DATABASE = "slave";
+    // Archive Database
+    public static final String ARCHIVE_DATABASE = "archive";
 
     public static final String PKO_TAG = "PKO_Tag";
     public static final String SENSITIVE = "Sensitive";
